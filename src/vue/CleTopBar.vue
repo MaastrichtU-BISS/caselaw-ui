@@ -16,6 +16,7 @@
           {{ link.label }}
         </a>
       </nav>
+      <slot />
     </div>
   </header>
 </template>

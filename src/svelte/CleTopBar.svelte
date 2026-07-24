@@ -22,5 +22,6 @@
         {/each}
       </nav>
     {/if}
+    <slot />
   </div>
 </header>
