@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "allowArbitraryExtensions": true,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "noEmit": true,
+    "strict": true,
+    "target": "ES2022",
+    "types": [
+      "svelte"
+    ]
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.vue",
+    "src/**/*.svelte",
+    "src/**/*.d.ts"
+  ]
+}

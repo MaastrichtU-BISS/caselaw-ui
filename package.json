@@ -1,0 +1,47 @@
+{
+  "name": "@caselawexplorer/ui",
+  "version": "0.1.0",
+  "description": "Shared Case Law Explorer design tokens and Vue/Svelte UI primitives.",
+  "type": "module",
+  "license": "MIT",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "files": [
+    "src",
+    "README.md",
+    "docs"
+  ],
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    },
+    "./styles.css": "./src/styles/index.css",
+    "./tokens": {
+      "types": "./src/tokens.ts",
+      "default": "./src/tokens.ts"
+    },
+    "./svelte": {
+      "types": "./src/svelte/index.ts",
+      "default": "./src/svelte/index.ts"
+    },
+    "./vue": {
+      "types": "./src/vue/index.ts",
+      "default": "./src/vue/index.ts"
+    }
+  },
+  "scripts": {
+    "check": "tsc --noEmit",
+    "pack:dry": "npm pack --dry-run"
+  },
+  "peerDependencies": {
+    "svelte": "^5.0.0",
+    "vue": "^3.5.0"
+  },
+  "devDependencies": {
+    "svelte": "^5.0.0",
+    "typescript": "^5.6.3",
+    "vue": "^3.5.0"
+  }
+}
