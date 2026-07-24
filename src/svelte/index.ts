@@ -1,5 +1,10 @@
 export { default as CleBottomBar } from "./CleBottomBar.svelte";
 export { default as CleButton } from "./CleButton.svelte";
 export { default as CleCard } from "./CleCard.svelte";
+export { default as CleDataTable } from "./CleDataTable.svelte";
+export { default as CleEmptyState } from "./CleEmptyState.svelte";
 export { default as CleGridShell } from "./CleGridShell.svelte";
+export { default as CleKpiCard } from "./CleKpiCard.svelte";
+export { default as ClePageHeader } from "./ClePageHeader.svelte";
 export { default as CleTopBar } from "./CleTopBar.svelte";
+export type { CleTableColumn } from "../types";
