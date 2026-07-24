@@ -1,18 +1,50 @@
 <script lang="ts">
+  import { onMount } from "svelte";
+  import { setCleFavicon, type CleServiceIconName } from "../icons";
   import type { CleLink } from "../tokens";
   import CleBottomBar from "./CleBottomBar.svelte";
   import CleTopBar from "./CleTopBar.svelte";
 
   export let brand = "Case Law Explorer";
   export let mark = "CLE";
+  export let icon: CleServiceIconName | undefined = undefined;
+  export let iconLabel: string | undefined = undefined;
+  export let favicon = true;
   export let href = "/";
   export let topLinks: CleLink[] = [];
   export let footerText = "Managed by BISS Institute.";
   export let footerLinks: CleLink[] = [];
+
+  let mounted = false;
+
+  function syncFavicon() {
+    if (favicon && icon) setCleFavicon(icon);
+  }
+
+  onMount(() => {
+    mounted = true;
+    syncFavicon();
+  });
+
+  $: if (mounted) syncFavicon();
 </script>
 
 <div class="cle-grid-shell">
-  <CleTopBar {brand} {mark} {href} links={topLinks} />
+  <CleTopBar {brand} {mark} {icon} {iconLabel} {href} links={topLinks}>
+    {#if $$slots.icon}
+      <svelte:fragment slot="icon">
+        <slot name="icon" />
+      </svelte:fragment>
+    {/if}
+    {#if $$slots["topbar-actions"]}
+      <svelte:fragment slot="actions">
+        <slot name="topbar-actions" />
+      </svelte:fragment>
+    {/if}
+    {#if $$slots.topbar}
+      <slot name="topbar" />
+    {/if}
+  </CleTopBar>
   <main class="cle-page">
     <slot />
   </main>

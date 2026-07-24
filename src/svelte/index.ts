@@ -6,5 +6,6 @@ export { default as CleEmptyState } from "./CleEmptyState.svelte";
 export { default as CleGridShell } from "./CleGridShell.svelte";
 export { default as CleKpiCard } from "./CleKpiCard.svelte";
 export { default as ClePageHeader } from "./ClePageHeader.svelte";
+export { default as CleServiceIcon } from "./CleServiceIcon.svelte";
 export { default as CleTopBar } from "./CleTopBar.svelte";
 export type { CleTableColumn } from "../types";

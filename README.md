@@ -7,6 +7,7 @@ The package keeps the common visual language in one place:
 - White institutional canvas with a fixed 32px square grid.
 - Primary blue matched to the shared Keycloak login flow: `#2f63ee`.
 - Fixed top and bottom bars.
+- Service icons for the shared top bar and favicon.
 - 8px cards, 6px controls, restrained shadows, and consistent type sizing.
 - Equivalent Vue and Svelte components with the same props.
 
@@ -49,7 +50,7 @@ For Vue/Nuxt, put it in `main.ts`, `app.vue`, or the Nuxt CSS config.
   ];
 </script>
 
-<CleGridShell brand="Case Law Explorer" mark="CLE" footerLinks={footerLinks}>
+  <CleGridShell brand="Case Law Explorer" mark="CLE" icon="explorer" footerLinks={footerLinks}>
   <section>
     <p class="cle-eyebrow">Research workspace</p>
     <h1>Case Law Explorer</h1>
@@ -62,7 +63,7 @@ For Vue/Nuxt, put it in `main.ts`, `app.vue`, or the Nuxt CSS config.
 
 ```vue
 <template>
-  <CleGridShell brand="Caselaw DB" mark="DB" :footer-links="footerLinks">
+  <CleGridShell brand="Caselaw DB" mark="DB" icon="database" :footer-links="footerLinks">
     <section>
       <p class="cle-eyebrow">Admin only</p>
       <h1>Database workbench</h1>
@@ -86,16 +87,38 @@ const footerLinks = [
 
 - `@caselawexplorer/ui/styles.css`: tokens and reusable classes.
 - `@caselawexplorer/ui/tokens`: TypeScript token object.
+- `@caselawexplorer/ui`: design tokens plus service icon and favicon helpers.
 - `@caselawexplorer/ui/svelte`: Svelte primitives.
 - `@caselawexplorer/ui/vue`: Vue primitives.
 
 ## Current Components
 
 - `CleGridShell`: fixed top bar, fixed bottom bar, grid background, main page container.
-- `CleTopBar`: brand mark/title and external/internal nav links.
+- `CleTopBar`: service icon/brand title, consistent right-aligned nav, and action slots.
 - `CleBottomBar`: managed-by text and footer links.
 - `CleButton`: primary and secondary buttons/links.
 - `CleCard`: standard card surface.
+- `CleServiceIcon`: semantic service mark for top bars, panels, and favicons.
+
+## Service Icons
+
+Use the same semantic icon name everywhere a service identifies itself. `CleGridShell` passes it to `CleTopBar` and, by default, installs an SVG favicon in the browser.
+
+```ts
+type CleServiceIconName = "explorer" | "database" | "access" | "api" | "auth" | "rate-limit";
+```
+
+Recommended mapping:
+
+| Service | `brand` | `mark` fallback | `icon` |
+| --- | --- | --- | --- |
+| Case Law Explorer | `Case Law Explorer` | `CLE` | `explorer` |
+| Database Workbench | `Caselaw DB` | `DB` | `database` |
+| Access / Rate Limit Admin | `Caselaw Access` | `ACL` | `access` |
+| Citations API | `Citations API` | `API` | `api` |
+| Shared Auth | `Caselaw Auth` | `AUTH` | `auth` |
+
+If an app cannot use `CleGridShell`, call `setCleFavicon("api")` from `@caselawexplorer/ui` on client mount and render `CleTopBar` directly with the same `icon` prop.
 
 ## Versioning
 

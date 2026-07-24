@@ -25,6 +25,30 @@ The shell gives each page:
 - Fixed bottom bar.
 - Square grid background matching the shared auth service.
 - Main content padding that prevents overlap with fixed bars.
+- A consistent service icon and brand treatment when `icon` is supplied.
+
+## App Bars
+
+Every product should use the same top bar structure:
+
+- Left: service icon tile plus product name.
+- Right: cross-service links first, account or page actions second.
+- No center navigation unless a service genuinely needs a persistent section switcher.
+- No duplicate links that point to the current page.
+
+Use `CleGridShell` when possible. It forwards `topLinks`, `topbar-actions`, and a custom `icon` slot to `CleTopBar`. Use `CleTopBar` directly only for highly custom layouts.
+
+Service identity should be passed with a semantic icon name, not hand-built per app:
+
+| Service | Icon |
+| --- | --- |
+| Case Law Explorer | `explorer` |
+| Database Workbench | `database` |
+| Access / Rate Limit Admin | `access` |
+| Citations API | `api` |
+| Shared Auth | `auth` |
+
+`CleGridShell` sets the favicon from the same `icon` value. Apps that do not use the shell should call `setCleFavicon(icon)` on client mount.
 
 ## Component Rules
 
@@ -33,6 +57,7 @@ The shell gives each page:
 - Letter spacing stays at `0`, except small uppercase eyebrow labels.
 - Do not add same-page nav links unless the page is long enough that they are useful.
 - Prefer plain product links in the bars and keep service-specific actions in the main content.
+- Use `CleServiceIcon` or the `icon` prop rather than creating one-off logo tiles.
 
 ## Suggested Footer Links
 
