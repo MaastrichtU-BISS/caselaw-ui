@@ -12,14 +12,23 @@ import { computed } from "vue";
 
 const props = withDefaults(defineProps<{
   href?: string;
-  variant?: "primary" | "secondary";
+  variant?: "primary" | "secondary" | "ghost" | "danger" | "danger-quiet";
+  size?: "md" | "sm";
   type?: "button" | "submit" | "reset";
   disabled?: boolean;
+  block?: boolean;
 }>(), {
   variant: "primary",
+  size: "md",
   type: "button",
   disabled: false,
+  block: false,
 });
 
-const classes = computed(() => props.variant === "secondary" ? "cle-button cle-button-secondary" : "cle-button");
+const classes = computed(() => [
+  "cle-button",
+  props.variant === "primary" ? "" : `cle-button-${props.variant}`,
+  props.size === "sm" ? "cle-button-sm" : "",
+  props.block ? "cle-button-block" : "",
+].filter(Boolean));
 </script>

@@ -55,6 +55,49 @@ Service identity should be passed with a semantic icon name, not hand-built per 
 
 `CleGridShell` sets the favicon from the same `icon` value. Apps that do not use the shell should call `setCleFavicon(icon)` on client mount.
 
+## Two Surfaces: Entry Pages and Consoles
+
+The library covers two page families, and they deliberately look different.
+
+**Entry pages** — public front doors, sign-in, service landing. Use `CleGridShell`.
+Expressive: display-scale `--cle-text-h1`, the 32px grid backdrop, generous
+whitespace, one clear action. Constrained to `--cle-page-max`.
+
+**Consoles** — admin tooling used repeatedly by signed-in staff. Use `CleAppShell`.
+Dense and quiet: fixed sidebar navigation, `--cle-console-title` (1.5rem) page
+titles, flat `--cle-shadow-sm` cards, no grid backdrop, width up to
+`--cle-console-max`. A console must never open with a marketing hero; the
+first screenful belongs to data and controls.
+
+Do not mix the two. A hero headline inside a console wastes the fold, and a
+sidebar on a landing page reads as a leaked internal tool.
+
+## Console Structure
+
+- One navigation system only. `CleAppShell`'s sidebar holds both the record
+  switcher (projects, datasets) and the section nav. Never duplicate the same
+  destinations as sidebar entries *and* tabs.
+- Sections are routes, not local state, so URLs are linkable and Back works.
+  `CleNavItem` and `CleTab` take an `as` prop for framework link components
+  (`:as="NuxtLink"`); remaining attributes forward to it.
+- Creation and editing belong in `CleModal`, not in a form permanently parked
+  beside the table it feeds.
+- Destructive actions go through `CleConfirmDialog`, never `window.confirm`.
+- Outcomes report through `useCleToasts`, not inline banners that shift layout.
+  Reserve `CleCallout` for persistent state (misconfiguration, empty setup),
+  not transient results.
+- Tables use `loading` for skeleton rows, `numeric` for counts, and `actions`
+  for the trailing button column.
+
+## Forms
+
+Wrap every control in `CleField` for the label, hint, and error slot. Use
+`CleInput`, `CleSelect`, `CleTextarea`, `CleSwitch`, and `CleTagInput`.
+
+`CleTagInput` replaces comma-separated text areas for scope and endpoint
+lists — it shows what is committed, offers `suggestions`, and removes the
+"did my spacing matter?" question entirely.
+
 ## Component Rules
 
 - Cards use 8px radius.

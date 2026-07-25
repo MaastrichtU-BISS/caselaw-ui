@@ -22,4 +22,38 @@
   --cle-text-lead: clamp(1.05rem, 1.8vw, 1.35rem);
   --cle-text-h1: clamp(3rem, 7vw, 6.75rem);
   --cle-text-h2: clamp(1.45rem, 2vw, 2rem);
+
+  /* Console scale. Admin tools are dense and utilitarian, so they use a
+     flatter, tighter type and surface scale than the entry pages above. */
+  --cle-surface-subtle: #f8fafc;
+  --cle-surface-muted: #f1f5f9;
+  --cle-border-subtle: #e6ecf4;
+  --cle-border-strong: #c3cedd;
+  --cle-radius-lg: 12px;
+  --cle-mono: "SFMono-Regular", "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+
+  --cle-success: #067647;
+  --cle-success-bg: #ecfdf3;
+  --cle-success-border: #abefc6;
+  --cle-danger-bg: #fef3f2;
+  --cle-danger-border: #fecdca;
+  --cle-danger-hover: #a5131a;
+  --cle-warning: #b54708;
+  --cle-warning-bg: #fffaeb;
+  --cle-warning-border: #fedf89;
+  --cle-info: #1849a9;
+  --cle-info-bg: #eff8ff;
+  --cle-info-border: #b2ddff;
+
+  --cle-shadow-sm: 0 1px 2px rgba(16, 24, 40, 0.06);
+  --cle-shadow-md: 0 4px 12px rgba(16, 24, 40, 0.08);
+  --cle-shadow-lg: 0 24px 48px -12px rgba(16, 24, 40, 0.18);
+
+  --cle-sidebar-width: 268px;
+  --cle-console-max: 1440px;
+
+  --cle-text-xs: 0.76rem;
+  --cle-text-sm: 0.86rem;
+  --cle-text-md: 0.94rem;
+  --cle-console-title: 1.5rem;
 }
