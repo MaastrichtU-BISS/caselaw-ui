@@ -27,6 +27,11 @@ The shell gives each page:
 - Main content padding that prevents overlap with fixed bars.
 - A consistent service icon and brand treatment when `icon` is supplied.
 
+Top bars are full-width app chrome by default. Page bodies remain constrained with
+`--cle-page-max`, while the header uses `--cle-bar-max: 100%` and 24px viewport
+padding. Only override `--cle-bar-max` for embedded or deliberately narrow app
+surfaces.
+
 ## App Bars
 
 Every product should use the same top bar structure:

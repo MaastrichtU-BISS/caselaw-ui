@@ -43,7 +43,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  width: min(var(--cle-page-max), calc(100% - 32px));
+  width: min(var(--cle-bar-max), calc(100% - 48px));
   min-height: var(--cle-topbar-height);
   margin: 0 auto;
 }
@@ -141,7 +141,7 @@
 
 @media (max-width: 720px) {
   .cle-bar-inner {
-    width: min(var(--cle-page-max), calc(100% - 20px));
+    width: min(var(--cle-bar-max), calc(100% - 20px));
     gap: 10px;
   }
 

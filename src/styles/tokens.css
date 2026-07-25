@@ -14,6 +14,7 @@
   --cle-radius-md: 8px;
   --cle-topbar-height: 68px;
   --cle-bottombar-height: 58px;
+  --cle-bar-max: 100%;
   --cle-page-max: 1180px;
   --cle-font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --cle-text-eyebrow: 0.74rem;
