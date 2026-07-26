@@ -23,7 +23,9 @@ const emit = defineEmits<{ confirm: [] }>();
   <CleModal v-model="open" :title="title" size="sm" :busy="busy">
     <slot />
     <template #footer>
-      <CleButton variant="secondary" :disabled="busy" @click="open = false">{{ cancelLabel }}</CleButton>
+      <CleButton variant="secondary" data-cle-autofocus :disabled="busy" @click="open = false">
+        {{ cancelLabel }}
+      </CleButton>
       <CleButton :variant="tone === 'danger' ? 'danger' : 'primary'" :disabled="busy" @click="emit('confirm')">
         {{ busy ? "Working..." : confirmLabel }}
       </CleButton>

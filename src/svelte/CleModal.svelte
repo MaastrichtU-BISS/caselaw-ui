@@ -52,9 +52,15 @@
       lastFocused = document.activeElement as HTMLElement | null;
       document.body.style.overflow = "hidden";
       await tick();
-      const target = panel?.querySelector<HTMLElement>(
-        'input:not([type="checkbox"]):not([disabled]), textarea:not([disabled]), select:not([disabled]), button:not([disabled])',
-      );
+      // An explicit target first. Falling back to "first focusable in DOM
+      // order" lands on the close button in any dialog without a form field,
+      // which for a destructive confirmation means the dismiss control is
+      // highlighted instead of the safe one.
+      const target =
+        panel?.querySelector<HTMLElement>("[data-cle-autofocus]") ||
+        panel?.querySelector<HTMLElement>(
+          'input:not([type="checkbox"]):not([disabled]), textarea:not([disabled]), select:not([disabled]), button:not([disabled])',
+        );
       (target || panel)?.focus();
     } else {
       document.body.style.overflow = "";

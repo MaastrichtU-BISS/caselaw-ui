@@ -16,7 +16,7 @@
 <CleModal bind:open {title} size="sm" {busy} footer={true}>
   <slot />
   <svelte:fragment slot="footer">
-    <CleButton variant="secondary" disabled={busy} on:click={() => (open = false)}>
+    <CleButton variant="secondary" data-cle-autofocus disabled={busy} on:click={() => (open = false)}>
       {cancelLabel}
     </CleButton>
     <CleButton variant={tone === "danger" ? "danger" : "primary"} disabled={busy} on:click={() => dispatch("confirm")}>
