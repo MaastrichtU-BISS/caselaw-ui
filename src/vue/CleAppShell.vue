@@ -71,8 +71,16 @@ defineExpose({ closeSidebar: () => (sidebarOpen.value = false) });
           aria-label="Close navigation"
           @click="sidebarOpen = false"
         />
-        <aside class="cle-app-sidebar" :class="{ 'is-open': sidebarOpen }" @click="sidebarOpen = false">
-          <slot name="sidebar" />
+        <aside class="cle-app-sidebar" :class="{ 'is-open': sidebarOpen }">
+          <!-- Closing on click is what dismisses the mobile drawer after a nav
+               link is followed. Scoped to the scrolling body so the account
+               block's own buttons do not inherit it. -->
+          <div class="cle-sidebar-body" @click="sidebarOpen = false">
+            <slot name="sidebar" />
+          </div>
+          <div v-if="$slots['sidebar-footer']" class="cle-sidebar-footer">
+            <slot name="sidebar-footer" />
+          </div>
         </aside>
       </template>
       <main class="cle-app-main">

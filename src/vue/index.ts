@@ -6,6 +6,8 @@ export { default as CleButton } from "./CleButton.vue";
 export { default as CleCallout } from "./CleCallout.vue";
 export { default as CleCard } from "./CleCard.vue";
 export { default as CleConfirmDialog } from "./CleConfirmDialog.vue";
+export { default as CleConsoleLayout } from "./CleConsoleLayout.vue";
+export { default as CleSidebarUser } from "./CleSidebarUser.vue";
 export { default as CleConsoleHeader } from "./CleConsoleHeader.vue";
 export { default as CleCopyField } from "./CleCopyField.vue";
 export { default as CleDataTable } from "./CleDataTable.vue";

@@ -1,3 +1,10 @@
+export { default as CleAppShell } from "./CleAppShell.svelte";
+export { default as CleConsoleHeader } from "./CleConsoleHeader.svelte";
+export { default as CleConsoleLayout } from "./CleConsoleLayout.svelte";
+export { default as CleNavItem } from "./CleNavItem.svelte";
+export { default as CleNavSection } from "./CleNavSection.svelte";
+export { default as CleSidebarUser } from "./CleSidebarUser.svelte";
+export { default as CleTab } from "./CleTab.svelte";
 export { default as CleBottomBar } from "./CleBottomBar.svelte";
 export { default as CleButton } from "./CleButton.svelte";
 export { default as CleCard } from "./CleCard.svelte";
@@ -8,4 +15,4 @@ export { default as CleKpiCard } from "./CleKpiCard.svelte";
 export { default as ClePageHeader } from "./ClePageHeader.svelte";
 export { default as CleServiceIcon } from "./CleServiceIcon.svelte";
 export { default as CleTopBar } from "./CleTopBar.svelte";
-export type { CleTableColumn } from "../types";
+export type { CleConsoleUser, CleCrumb, CleTableColumn } from "../types";

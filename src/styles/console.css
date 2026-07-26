@@ -26,15 +26,112 @@
 }
 
 .cle-app-sidebar {
+  /* A column rather than a scroll box, so the account block can sit against
+     the bottom edge while the navigation above it scrolls independently. */
   position: sticky;
   top: var(--cle-topbar-height);
+  display: flex;
   flex: 0 0 var(--cle-sidebar-width);
-  overflow-y: auto;
+  flex-direction: column;
   width: var(--cle-sidebar-width);
   height: calc(100vh - var(--cle-topbar-height));
-  padding: 20px 14px 28px;
   border-right: 1px solid var(--cle-border);
   background: var(--cle-card);
+}
+
+.cle-sidebar-body {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  min-height: 0;
+  padding: 20px 14px 28px;
+}
+
+.cle-sidebar-footer {
+  flex: 0 0 auto;
+  padding: 12px 14px;
+  border-top: 1px solid var(--cle-border);
+}
+
+/* ---------------------------------------------------------------------------
+   The account block.
+
+   Lives at the foot of the sidebar rather than in the top bar: on a console
+   the bar is chrome you stop reading, while the sidebar is where you already
+   look to know where you are. Keeping identity next to navigation also means
+   "which account am I in" and "which project am I in" answer in one glance.
+--------------------------------------------------------------------------- */
+
+/* The fallback when a page has no sidebar to hold the account block. */
+.cle-topbar-account {
+  overflow: hidden;
+  max-width: 220px;
+  color: var(--cle-muted);
+  font-size: var(--cle-text-sm);
+  font-weight: 750;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 720px) {
+  .cle-topbar-account {
+    display: none;
+  }
+}
+
+.cle-sidebar-user {
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr);
+  align-items: center;
+  gap: 9px;
+}
+
+.cle-sidebar-user-avatar {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--cle-accent-soft, var(--cle-surface-muted));
+  color: var(--cle-accent, var(--cle-text));
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+}
+
+.cle-sidebar-user-text {
+  min-width: 0;
+}
+
+.cle-sidebar-user-name,
+.cle-sidebar-user-email {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cle-sidebar-user-name {
+  color: var(--cle-text);
+  font-size: var(--cle-text-sm);
+  font-weight: 850;
+}
+
+.cle-sidebar-user-email {
+  color: var(--cle-muted);
+  font-size: var(--cle-text-xs);
+}
+
+.cle-sidebar-user-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+/* Buttons share the row evenly instead of one stretching to fill it. */
+.cle-sidebar-user-actions > * {
+  flex: 1 1 auto;
+  justify-content: center;
 }
 
 .cle-app-main {

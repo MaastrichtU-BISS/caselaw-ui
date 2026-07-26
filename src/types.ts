@@ -39,3 +39,11 @@ export type CleMeterItem = {
   /** Overrides the printed value when it needs formatting. */
   display?: string;
 };
+
+/** The signed-in account shown at the foot of a console sidebar. */
+export interface CleConsoleUser {
+  name: string;
+  email?: string;
+  /** Two letters at most. Derived from the name when not given. */
+  initials?: string;
+}
