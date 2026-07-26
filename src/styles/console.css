@@ -146,6 +146,14 @@
    system turns into a clipart library.
 --------------------------------------------------------------------------- */
 
+/* Body copy inside a dialog, which otherwise inherits nothing. */
+.cle-modal-copy {
+  margin: 0;
+  color: var(--cle-muted);
+  font-size: var(--cle-text-sm);
+  line-height: 1.6;
+}
+
 .cle-icon-button {
   display: inline-grid;
   place-items: center;
