@@ -54,7 +54,16 @@ const props = withDefaults(defineProps<{
   signOutCopy?: string;
   busy?: boolean;
 }>(), {
+  // Declared here, not left to CleSidebarUser's own defaults: binding a prop
+  // the wrapper never sets passes `undefined` down, and the child's default
+  // does not reliably win against an explicitly-passed undefined. Relying on
+  // it turned the sign-out confirmation off in every console that used the
+  // layout, while working fine for anyone using CleSidebarUser directly.
   signOut: false,
+  signOutLabel: "Sign out",
+  confirmSignOut: true,
+  signOutTitle: "Sign out?",
+  busy: false,
   brand: "Case Law Explorer",
   mark: "CLE",
   favicon: true,
