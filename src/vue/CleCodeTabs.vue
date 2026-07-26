@@ -6,7 +6,7 @@
  * pairing is always the same and getting it wrong — copy that copies the
  * inactive sample, tabs that do not survive a re-render — is easy and quiet.
  */
-import { computed, ref } from "vue";
+import { computed } from "vue";
 
 export interface CleCodeSample {
   label: string;
@@ -15,7 +15,13 @@ export interface CleCodeSample {
 
 const props = defineProps<{ samples: CleCodeSample[] }>();
 
-const activeIndex = ref(0);
+/**
+ * Optional, so a page showing the same choice in several blocks — install
+ * here, guard there — can keep them in step. Picking a language twice to read
+ * one set of instructions is the kind of small friction documentation is
+ * supposed to remove.
+ */
+const activeIndex = defineModel<number>("activeIndex", { default: 0 });
 const active = computed(() => props.samples[activeIndex.value] || props.samples[0]);
 
 const copied = ref(false);

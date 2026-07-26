@@ -9,8 +9,11 @@
   import type { CleCodeSample } from "../types";
 
   export let samples: CleCodeSample[] = [];
-
-  let activeIndex = 0;
+  /**
+   * Bindable, so a page showing the same choice in several blocks — install
+   * here, guard there — can keep them in step.
+   */
+  export let activeIndex = 0;
   $: active = samples[activeIndex] ?? samples[0];
 
   let copied = false;
