@@ -115,3 +115,41 @@ If an app cannot use `CleGridShell`, call `setCleFavicon("api")` from `caselaw-u
 ## Versioning
 
 Treat this as a shared product dependency. Changes to token names, component props, or class semantics should be released as a new minor or major version depending on breakage.
+
+Consumers pin a caret range (`caselaw-ui@^0.2.2`), so a patch or minor release
+reaches them on their next install without any change on their side. A breaking
+change needs a major bump and a coordinated update.
+
+## Releasing
+
+Released by GitHub Actions via npm trusted publishing. Nobody publishes from a
+laptop, and there is no npm token stored anywhere — the workflow's OIDC
+identity is the credential, which is also why releases no longer prompt for
+2FA.
+
+**1. Bump `version` in `package.json`.** The workflow refuses to publish if the
+tag and the manifest disagree, so this cannot be skipped silently.
+
+**2. Commit and push to `main`.**
+
+```bash
+git add package.json
+git commit -m "Release 0.2.4"
+git push
+```
+
+**3. Tag and push the tag.** Pushing the tag is what publishes.
+
+```bash
+git tag v0.2.4 && git push origin v0.2.4
+```
+
+The workflow typechecks and runs `npm pack --dry-run` before publishing, so a
+mistake in `files` or `exports` is caught before consumers see it.
+
+To rehearse without spending a version, run the workflow manually from the
+Actions tab with `dry_run` left ticked.
+
+npm will not accept the same version twice, so if a release fails check whether
+it actually landed before retrying — a genuine partial failure needs a patch
+bump rather than a re-run.
