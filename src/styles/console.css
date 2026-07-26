@@ -1468,3 +1468,109 @@
   font-family: var(--cle-mono);
   font-size: 0.88em;
 }
+
+/* ---------------------------------------------------------------------------
+   Vertical stepper.
+
+   For a setup that has to be followed in order, where each step carries real
+   instructions rather than a label. The connector line is what makes it read
+   as a sequence instead of a checklist: a checklist says what is missing, a
+   sequence says what to do next.
+--------------------------------------------------------------------------- */
+
+.cle-steps {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: cle-step;
+}
+
+.cle-step {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 14px;
+  padding-bottom: 22px;
+}
+
+.cle-step:last-child {
+  padding-bottom: 0;
+}
+
+.cle-step-rail {
+  display: grid;
+  grid-template-rows: 28px 1fr;
+  justify-items: center;
+}
+
+/* Drawn on the rail rather than between markers, so it stretches with however
+   much content a step happens to carry. */
+.cle-step-line {
+  width: 2px;
+  margin-top: 6px;
+  border-radius: 1px;
+  background: var(--cle-border);
+}
+
+.cle-step:last-child .cle-step-line {
+  display: none;
+}
+
+.cle-step-marker {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--cle-border-strong);
+  border-radius: 50%;
+  background: var(--cle-card);
+  color: var(--cle-muted);
+  font-size: 0.75rem;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+}
+
+.cle-step.is-done .cle-step-marker {
+  border-color: var(--cle-success-border);
+  background: var(--cle-success-bg);
+  color: var(--cle-success);
+}
+
+.cle-step.is-done .cle-step-line {
+  background: var(--cle-success-border);
+}
+
+/* The step being worked on, so the eye lands on it rather than on step 1. */
+.cle-step.is-current .cle-step-marker {
+  border-color: var(--cle-accent, var(--cle-text));
+  color: var(--cle-accent, var(--cle-text));
+  box-shadow: 0 0 0 3px var(--cle-accent-soft, transparent);
+}
+
+.cle-step-body {
+  min-width: 0;
+  padding-top: 3px;
+}
+
+.cle-step-title {
+  margin: 0;
+  color: var(--cle-text);
+  font-size: var(--cle-text-md);
+  font-weight: 850;
+}
+
+.cle-step-copy {
+  margin: 5px 0 0;
+  color: var(--cle-muted);
+  font-size: var(--cle-text-sm);
+  line-height: 1.6;
+}
+
+.cle-step-content {
+  margin-top: 12px;
+}
+
+.cle-step-content:empty {
+  display: none;
+}

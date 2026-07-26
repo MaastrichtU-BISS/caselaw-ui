@@ -15,6 +15,8 @@ export { default as CleNavSection } from "./CleNavSection.svelte";
 export { default as ClePageHeader } from "./ClePageHeader.svelte";
 export { default as CleServiceIcon } from "./CleServiceIcon.svelte";
 export { default as CleSidebarUser } from "./CleSidebarUser.svelte";
+export { default as CleStep } from "./CleStep.svelte";
+export { default as CleSteps } from "./CleSteps.svelte";
 export { default as CleTab } from "./CleTab.svelte";
 export { default as CleTopBar } from "./CleTopBar.svelte";
 export type { CleConsoleUser, CleCrumb, CleTableColumn } from "../types";

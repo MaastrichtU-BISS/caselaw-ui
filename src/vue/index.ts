@@ -44,3 +44,5 @@ export type {
   CleTableColumn,
   CleTone,
 } from "../types";
+export { default as CleStep } from "./CleStep.vue";
+export { default as CleSteps } from "./CleSteps.vue";
