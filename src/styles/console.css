@@ -830,6 +830,11 @@
   background: var(--cle-surface-muted);
 }
 
+.cle-copy-field-multiline .cle-copy-value {
+  overflow-x: auto;
+  white-space: pre;
+}
+
 .cle-copy-value {
   overflow-x: auto;
   flex: 1 1 auto;
