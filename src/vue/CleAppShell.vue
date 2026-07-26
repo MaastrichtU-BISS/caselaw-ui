@@ -48,6 +48,7 @@ defineExpose({ closeSidebar: () => (sidebarOpen.value = false) });
       </template>
       <template #actions>
         <button
+          v-if="$slots.sidebar"
           type="button"
           class="cle-button cle-button-secondary cle-button-sm cle-sidebar-toggle"
           :aria-expanded="sidebarOpen"
@@ -60,16 +61,20 @@ defineExpose({ closeSidebar: () => (sidebarOpen.value = false) });
     </CleTopBar>
 
     <div class="cle-app-body">
-      <button
-        v-if="sidebarOpen"
-        type="button"
-        class="cle-sidebar-scrim"
-        aria-label="Close navigation"
-        @click="sidebarOpen = false"
-      />
-      <aside class="cle-app-sidebar" :class="{ 'is-open': sidebarOpen }" @click="sidebarOpen = false">
-        <slot name="sidebar" />
-      </aside>
+      <!-- Consoles without a record switcher (a self-service account page,
+           say) omit the slot and get the full width. -->
+      <template v-if="$slots.sidebar">
+        <button
+          v-if="sidebarOpen"
+          type="button"
+          class="cle-sidebar-scrim"
+          aria-label="Close navigation"
+          @click="sidebarOpen = false"
+        />
+        <aside class="cle-app-sidebar" :class="{ 'is-open': sidebarOpen }" @click="sidebarOpen = false">
+          <slot name="sidebar" />
+        </aside>
+      </template>
       <main class="cle-app-main">
         <div class="cle-app-main-inner">
           <slot />

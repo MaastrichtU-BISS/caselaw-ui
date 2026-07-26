@@ -13,16 +13,8 @@ The package keeps the common visual language in one place:
 
 ## Install
 
-Until the package is published to npm, install it from GitHub:
-
 ```bash
-npm install github:davidwickerhf/caselaw-ui
-```
-
-After npm publication:
-
-```bash
-npm install @caselawexplorer/ui
+npm install caselaw-ui
 ```
 
 ## Global Styles
@@ -30,7 +22,7 @@ npm install @caselawexplorer/ui
 Import the shared CSS once in the client app root:
 
 ```ts
-import "@caselawexplorer/ui/styles.css";
+import "caselaw-ui/styles.css";
 ```
 
 For SvelteKit, put it in `src/routes/+layout.svelte` or `src/app.css`.
@@ -41,8 +33,8 @@ For Vue/Nuxt, put it in `main.ts`, `app.vue`, or the Nuxt CSS config.
 
 ```svelte
 <script lang="ts">
-  import "@caselawexplorer/ui/styles.css";
-  import { CleButton, CleGridShell } from "@caselawexplorer/ui/svelte";
+  import "caselaw-ui/styles.css";
+  import { CleButton, CleGridShell } from "caselaw-ui/svelte";
 
   const footerLinks = [
     { label: "BISS Institute", href: "https://www.maastrichtuniversity.nl/research/biss-institute", external: true },
@@ -73,8 +65,8 @@ For Vue/Nuxt, put it in `main.ts`, `app.vue`, or the Nuxt CSS config.
 </template>
 
 <script setup lang="ts">
-import "@caselawexplorer/ui/styles.css";
-import { CleButton, CleGridShell } from "@caselawexplorer/ui/vue";
+import "caselaw-ui/styles.css";
+import { CleButton, CleGridShell } from "caselaw-ui/vue";
 
 const footerLinks = [
   { label: "BISS Institute", href: "https://www.maastrichtuniversity.nl/research/biss-institute", external: true },
@@ -85,11 +77,11 @@ const footerLinks = [
 
 ## Exports
 
-- `@caselawexplorer/ui/styles.css`: tokens and reusable classes.
-- `@caselawexplorer/ui/tokens`: TypeScript token object.
-- `@caselawexplorer/ui`: design tokens plus service icon and favicon helpers.
-- `@caselawexplorer/ui/svelte`: Svelte primitives.
-- `@caselawexplorer/ui/vue`: Vue primitives.
+- `caselaw-ui/styles.css`: tokens and reusable classes.
+- `caselaw-ui/tokens`: TypeScript token object.
+- `caselaw-ui`: design tokens plus service icon and favicon helpers.
+- `caselaw-ui/svelte`: Svelte primitives.
+- `caselaw-ui/vue`: Vue primitives.
 
 ## Current Components
 
@@ -118,7 +110,7 @@ Recommended mapping:
 | Citations API | `Citations API` | `API` | `api` |
 | Shared Auth | `Caselaw Auth` | `AUTH` | `auth` |
 
-If an app cannot use `CleGridShell`, call `setCleFavicon("api")` from `@caselawexplorer/ui` on client mount and render `CleTopBar` directly with the same `icon` prop.
+If an app cannot use `CleGridShell`, call `setCleFavicon("api")` from `caselaw-ui` on client mount and render `CleTopBar` directly with the same `icon` prop.
 
 ## Versioning
 
