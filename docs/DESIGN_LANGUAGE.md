@@ -74,9 +74,10 @@ sidebar on a landing page reads as a leaked internal tool.
 
 ## Console Structure
 
-- One navigation system only. `CleAppShell`'s sidebar holds both the record
-  switcher (projects, datasets) and the section nav. Never duplicate the same
-  destinations as sidebar entries *and* tabs.
+- One control per navigation axis. The sidebar answers *which record* (which
+  project, which dataset) and holds top-level destinations; tabs answer *which
+  section of that record*. Never render the same destinations as both sidebar
+  entries and tabs — that is the duplication to avoid, not the two axes.
 - Sections are routes, not local state, so URLs are linkable and Back works.
   `CleNavItem` and `CleTab` take an `as` prop for framework link components
   (`:as="NuxtLink"`); remaining attributes forward to it.

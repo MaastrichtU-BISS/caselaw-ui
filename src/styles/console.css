@@ -49,8 +49,18 @@
   margin: 0 auto;
 }
 
-.cle-sidebar-toggle {
+.cle-app-shell .cle-sidebar-toggle {
   display: none;
+}
+
+/* The entry-page bar stacks below 700px. A console bar must not: its height is
+   fixed by --cle-topbar-height, which the body's top padding depends on. */
+@media (max-width: 700px) {
+  .cle-app-shell .cle-bar-inner {
+    align-items: center;
+    flex-direction: row;
+    padding: 0;
+  }
 }
 
 @media (max-width: 960px) {
@@ -70,7 +80,7 @@
     padding: 20px 18px 56px;
   }
 
-  .cle-sidebar-toggle {
+  .cle-app-shell .cle-sidebar-toggle {
     display: inline-flex;
   }
 
@@ -372,6 +382,7 @@
 
 .cle-field {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 6px;
 }
 
@@ -469,6 +480,7 @@
 
 .cle-form-grid {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 16px;
 }
 
@@ -658,6 +670,7 @@
   display: flex;
   align-items: stretch;
   gap: 0;
+  min-width: 0;
   border: 1px solid var(--cle-border);
   border-radius: var(--cle-radius-sm);
   background: var(--cle-surface-muted);
@@ -1032,20 +1045,25 @@
   min-width: 4px;
   align-items: flex-end;
   height: 100%;
-  border-radius: 3px 3px 0 0;
+}
+
+.cle-chart-bar:hover {
   background: var(--cle-surface-muted);
 }
 
 .cle-chart-bar-fill {
+  display: flex;
   width: 100%;
   min-height: 2px;
+  /* Denials stack at the base of the total so the bar reads bottom-up. */
+  align-items: flex-end;
   border-radius: 3px 3px 0 0;
   background: var(--cle-primary);
 }
 
 .cle-chart-bar-denied {
   width: 100%;
-  min-height: 0;
+  min-height: 2px;
   border-radius: 0;
   background: var(--cle-danger);
 }
@@ -1152,6 +1170,13 @@
   gap: 8px;
 }
 
+/* Controls sit inline in a toolbar; only inside a form do they fill the row. */
+.cle-toolbar .cle-select,
+.cle-toolbar .cle-input {
+  width: auto;
+  min-width: 150px;
+}
+
 .cle-search {
   position: relative;
   display: flex;
@@ -1174,12 +1199,14 @@
 
 /* Table refinements ----------------------------------------------------- */
 
-.cle-table-numeric {
+/* Scoped to .cle-table so these beat the base `.cle-table th, .cle-table td`
+   rule, which is one element more specific than a bare class. */
+.cle-table .cle-table-numeric {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-.cle-table-actions {
+.cle-table .cle-table-actions {
   width: 1%;
   text-align: right;
   white-space: nowrap;
@@ -1227,21 +1254,25 @@
   font-size: 0.7rem;
 }
 
-.cle-table-empty {
-  padding: 34px 14px !important;
+.cle-table .cle-table-empty {
+  padding: 34px 14px;
   color: var(--cle-muted);
   text-align: center;
 }
 
 /* Layout helpers -------------------------------------------------------- */
 
+/* minmax(0, 1fr) stops a nowrap child (code blocks, wide tables) from sizing
+   the track to its min-content and blowing the layout past the viewport. */
 .cle-stack {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 18px;
 }
 
 .cle-stack-sm {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 10px;
 }
 
@@ -1258,11 +1289,13 @@
   }
 }
 
-.cle-card-flat {
+/* Doubled class beats CleCard's own component style, whose injection order
+   relative to this sheet is not guaranteed. */
+.cle-card.cle-card-flat {
   box-shadow: var(--cle-shadow-sm);
 }
 
-.cle-card-pad-sm {
+.cle-card.cle-card-pad-sm {
   padding: 18px;
 }
 

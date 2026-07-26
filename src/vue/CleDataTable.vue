@@ -4,7 +4,9 @@ import type { CleTableColumn } from "../types";
 
 const props = withDefaults(defineProps<{
   columns: CleTableColumn[];
-  rows: Record<string, unknown>[];
+  /* Rows are arbitrary records, so cell values stay untyped by design.
+     `unknown` here would reject every plain interface passed in. */
+  rows: Record<string, any>[];
   empty?: string;
   loading?: boolean;
   /** Skeleton rows drawn while loading. */
