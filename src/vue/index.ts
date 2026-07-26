@@ -46,3 +46,6 @@ export type {
 } from "../types";
 export { default as CleStep } from "./CleStep.vue";
 export { default as CleSteps } from "./CleSteps.vue";
+export { default as CleCodeBlock } from "./CleCodeBlock.vue";
+export { default as CleCodeTabs } from "./CleCodeTabs.vue";
+export type { CleCodeSample } from "../types";

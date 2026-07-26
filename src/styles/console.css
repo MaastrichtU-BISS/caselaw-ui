@@ -1579,3 +1579,124 @@
 .cle-step-content:empty {
   display: none;
 }
+
+/* ---------------------------------------------------------------------------
+   Code block.
+
+   Chrome on top — what this is on the left, copy on the right — because a bare
+   <pre> makes the reader work out for themselves which language they are
+   looking at and whether it is copyable.
+--------------------------------------------------------------------------- */
+
+.cle-code {
+  overflow: hidden;
+  border: 1px solid var(--cle-border);
+  border-radius: var(--cle-radius-sm);
+  background: var(--cle-surface-muted);
+}
+
+.cle-code-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-height: 36px;
+  padding: 0 6px 0 12px;
+  border-bottom: 1px solid var(--cle-border);
+  background: var(--cle-card);
+}
+
+.cle-code-label {
+  color: var(--cle-muted);
+  font-size: var(--cle-text-xs);
+  font-weight: 850;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.cle-code-tablist {
+  display: flex;
+  gap: 1px;
+  margin: 0;
+  padding: 0;
+}
+
+.cle-code-tab {
+  padding: 5px 10px;
+  border: 0;
+  border-radius: var(--cle-radius-sm);
+  background: transparent;
+  color: var(--cle-muted);
+  font: inherit;
+  font-size: var(--cle-text-xs);
+  font-weight: 850;
+  cursor: pointer;
+}
+
+.cle-code-tab:hover {
+  color: var(--cle-text);
+}
+
+.cle-code-tab.is-active {
+  background: var(--cle-surface-muted);
+  color: var(--cle-text);
+}
+
+.cle-code-tab:focus-visible {
+  outline: 2px solid var(--cle-accent, currentColor);
+  outline-offset: -2px;
+}
+
+.cle-code-copy {
+  flex: 0 0 auto;
+  padding: 5px 9px;
+  border: 1px solid transparent;
+  border-radius: var(--cle-radius-sm);
+  background: transparent;
+  color: var(--cle-muted);
+  font: inherit;
+  font-size: var(--cle-text-xs);
+  font-weight: 850;
+  cursor: pointer;
+}
+
+.cle-code-copy:hover {
+  border-color: var(--cle-border);
+  color: var(--cle-text);
+}
+
+.cle-code-copy:focus-visible {
+  outline: 2px solid var(--cle-accent, currentColor);
+  outline-offset: 1px;
+}
+
+.cle-code-body {
+  overflow-x: auto;
+  margin: 0;
+  padding: 13px 14px;
+  color: var(--cle-text);
+  font-family: var(--cle-mono);
+  font-size: var(--cle-text-sm);
+  line-height: 1.65;
+  tab-size: 2;
+}
+
+/* Tightened: the steps carry real instructions now, and the original spacing
+   was tuned for one-line labels. */
+.cle-step {
+  padding-bottom: 26px;
+}
+
+.cle-step-title {
+  font-size: var(--cle-text-md);
+  font-weight: 900;
+  letter-spacing: -0.005em;
+}
+
+.cle-step-copy {
+  max-width: 68ch;
+}
+
+.cle-step-content > * + * {
+  margin-top: 10px;
+}

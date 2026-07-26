@@ -1,0 +1,60 @@
+<script setup lang="ts">
+/**
+ * The same instruction in several languages.
+ *
+ * One component rather than tabs-plus-code assembled per page, because the
+ * pairing is always the same and getting it wrong — copy that copies the
+ * inactive sample, tabs that do not survive a re-render — is easy and quiet.
+ */
+import { computed, ref } from "vue";
+
+export interface CleCodeSample {
+  label: string;
+  code: string;
+}
+
+const props = defineProps<{ samples: CleCodeSample[] }>();
+
+const activeIndex = ref(0);
+const active = computed(() => props.samples[activeIndex.value] || props.samples[0]);
+
+const copied = ref(false);
+let timer: ReturnType<typeof setTimeout> | undefined;
+
+async function copy() {
+  try {
+    // Reads through `active`, so it can never copy a sample that is not shown.
+    await navigator.clipboard.writeText(active.value?.code || "");
+  } catch {
+    return;
+  }
+  copied.value = true;
+  clearTimeout(timer);
+  timer = setTimeout(() => (copied.value = false), 1800);
+}
+</script>
+
+<template>
+  <div class="cle-code">
+    <div class="cle-code-header">
+      <div class="cle-code-tablist" role="tablist">
+        <button
+          v-for="(sample, index) in samples"
+          :key="sample.label"
+          type="button"
+          role="tab"
+          class="cle-code-tab"
+          :class="{ 'is-active': index === activeIndex }"
+          :aria-selected="index === activeIndex"
+          @click="activeIndex = index"
+        >
+          {{ sample.label }}
+        </button>
+      </div>
+      <button type="button" class="cle-code-copy" @click="copy">
+        {{ copied ? "Copied" : "Copy" }}
+      </button>
+    </div>
+    <pre class="cle-code-body">{{ active?.code }}</pre>
+  </div>
+</template>

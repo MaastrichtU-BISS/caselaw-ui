@@ -47,3 +47,9 @@ export interface CleConsoleUser {
   /** Two letters at most. Derived from the name when not given. */
   initials?: string;
 }
+
+/** One language's version of a code sample. */
+export interface CleCodeSample {
+  label: string;
+  code: string;
+}
