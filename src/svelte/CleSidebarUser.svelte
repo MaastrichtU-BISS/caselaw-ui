@@ -3,8 +3,8 @@
    * Who is signed in, shown at the foot of a console sidebar.
    *
    * Deliberately not a dropdown. A console sidebar is already a click target
-   * for navigation, and hiding the account behind a menu buys nothing when
-   * there are only ever two or three actions — they fit in the row below.
+   * for navigation, and hiding one or two actions behind a menu costs a click
+   * to save nothing — they fit on the row itself, trailing the name.
    */
   export let name: string;
   export let email: string | undefined = undefined;
@@ -24,19 +24,17 @@
   $: badge = initials ? initials.slice(0, 2).toUpperCase() : derive(name || email || "");
 </script>
 
-<div>
-  <div class="cle-sidebar-user">
-    <span class="cle-sidebar-user-avatar" aria-hidden="true">{badge}</span>
-    <span class="cle-sidebar-user-text">
-      <span class="cle-sidebar-user-name">{name}</span>
-      {#if email && email !== name}
-        <span class="cle-sidebar-user-email">{email}</span>
-      {/if}
-    </span>
-  </div>
+<div class="cle-sidebar-user">
+  <span class="cle-sidebar-user-avatar" aria-hidden="true">{badge}</span>
+  <span class="cle-sidebar-user-text">
+    <span class="cle-sidebar-user-name">{name}</span>
+    {#if email && email !== name}
+      <span class="cle-sidebar-user-email">{email}</span>
+    {/if}
+  </span>
   {#if $$slots.actions}
-    <div class="cle-sidebar-user-actions">
+    <span class="cle-sidebar-user-actions">
       <slot name="actions" />
-    </div>
+    </span>
   {/if}
 </div>

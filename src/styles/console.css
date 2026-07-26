@@ -79,10 +79,21 @@
 }
 
 .cle-sidebar-user {
+  /* Actions sit on the row rather than under it. A block of buttons below the
+     name reads as a form; a trailing control reads as part of the identity,
+     which is what it is. */
   display: grid;
-  grid-template-columns: 30px minmax(0, 1fr);
+  grid-template-columns: 30px minmax(0, 1fr) auto;
   align-items: center;
   gap: 9px;
+  padding: 6px 4px;
+  border-radius: var(--cle-radius-sm);
+  transition: background 0.14s ease;
+}
+
+.cle-sidebar-user:hover,
+.cle-sidebar-user:focus-within {
+  background: var(--cle-surface-muted);
 }
 
 .cle-sidebar-user-avatar {
@@ -123,15 +134,53 @@
 
 .cle-sidebar-user-actions {
   display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 10px;
+  align-items: center;
+  gap: 2px;
 }
 
-/* Buttons share the row evenly instead of one stretching to fill it. */
-.cle-sidebar-user-actions > * {
-  flex: 1 1 auto;
-  justify-content: center;
+/* ---------------------------------------------------------------------------
+   Compact icon control.
+
+   A utility rather than a component: the icon itself is always
+   application-specific, and shipping one button per glyph is how a design
+   system turns into a clipart library.
+--------------------------------------------------------------------------- */
+
+.cle-icon-button {
+  display: inline-grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: var(--cle-radius-sm);
+  background: transparent;
+  /* Muted until wanted: it is a destructive action sitting permanently on
+     screen, so it should not compete with the navigation above it. */
+  color: var(--cle-muted);
+  cursor: pointer;
+  transition: color 0.14s ease, background 0.14s ease, border-color 0.14s ease;
+}
+
+.cle-icon-button svg {
+  width: 16px;
+  height: 16px;
+}
+
+.cle-icon-button:hover {
+  border-color: var(--cle-border);
+  background: var(--cle-card);
+  color: var(--cle-text);
+}
+
+.cle-icon-button:focus-visible {
+  outline: 2px solid var(--cle-accent, currentColor);
+  outline-offset: 1px;
+}
+
+.cle-icon-button-danger:hover {
+  border-color: var(--cle-danger-border);
+  color: var(--cle-danger);
 }
 
 .cle-app-main {

@@ -3,8 +3,8 @@
  * Who is signed in, shown at the foot of a console sidebar.
  *
  * Deliberately not a dropdown. A console sidebar is already a click target for
- * navigation, and hiding the account behind a menu buys nothing when there are
- * only ever two or three actions — they fit in the row below the name.
+ * navigation, and hiding one or two actions behind a menu costs a click to
+ * save nothing — they fit on the row itself, trailing the name.
  */
 import { computed } from "vue";
 
@@ -28,16 +28,14 @@ const derived = computed(() => {
 </script>
 
 <template>
-  <div>
-    <div class="cle-sidebar-user">
-      <span class="cle-sidebar-user-avatar" aria-hidden="true">{{ derived }}</span>
-      <span class="cle-sidebar-user-text">
-        <span class="cle-sidebar-user-name">{{ name }}</span>
-        <span v-if="email && email !== name" class="cle-sidebar-user-email">{{ email }}</span>
-      </span>
-    </div>
-    <div v-if="$slots.actions" class="cle-sidebar-user-actions">
+  <div class="cle-sidebar-user">
+    <span class="cle-sidebar-user-avatar" aria-hidden="true">{{ derived }}</span>
+    <span class="cle-sidebar-user-text">
+      <span class="cle-sidebar-user-name">{{ name }}</span>
+      <span v-if="email && email !== name" class="cle-sidebar-user-email">{{ email }}</span>
+    </span>
+    <span v-if="$slots.actions" class="cle-sidebar-user-actions">
       <slot name="actions" />
-    </div>
+    </span>
   </div>
 </template>
