@@ -6,7 +6,7 @@
  * pairing is always the same and getting it wrong — copy that copies the
  * inactive sample, tabs that do not survive a re-render — is easy and quiet.
  */
-import { computed } from "vue";
+import { computed, ref } from "vue";
 
 export interface CleCodeSample {
   label: string;
