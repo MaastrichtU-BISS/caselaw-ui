@@ -46,7 +46,15 @@ const props = withDefaults(defineProps<{
   subtitle?: string;
   crumbs?: CleCrumb[];
   user?: CleConsoleUser;
+  /** Render the sign-out control in the account block. */
+  signOut?: boolean;
+  signOutLabel?: string;
+  confirmSignOut?: boolean;
+  signOutTitle?: string;
+  signOutCopy?: string;
+  busy?: boolean;
 }>(), {
+  signOut: false,
   brand: "Case Law Explorer",
   mark: "CLE",
   favicon: true,
@@ -54,6 +62,7 @@ const props = withDefaults(defineProps<{
   topLinks: () => [],
 });
 
+const emit = defineEmits<{ signOut: [] }>();
 const slots = useSlots();
 const hasSidebar = computed(() => Boolean(slots.nav || slots["nav-footer"]));
 const showHeader = computed(() => Boolean(props.title || props.crumbs?.length || slots.actions));
@@ -83,8 +92,18 @@ const showHeader = computed(() => Boolean(props.title || props.crumbs?.length ||
       <slot name="nav-footer" />
     </template>
 
-    <template v-if="hasSidebar && (user || $slots['user-actions'])" #sidebar-footer>
-      <CleSidebarUser v-if="user" v-bind="user">
+    <template v-if="hasSidebar && (user || signOut || $slots['user-actions'])" #sidebar-footer>
+      <CleSidebarUser
+        v-if="user"
+        v-bind="user"
+        :sign-out="signOut"
+        :sign-out-label="signOutLabel"
+        :confirm-sign-out="confirmSignOut"
+        :sign-out-title="signOutTitle"
+        :sign-out-copy="signOutCopy"
+        :busy="busy"
+        @sign-out="emit('signOut')"
+      >
         <template v-if="$slots['user-actions']" #actions><slot name="user-actions" /></template>
       </CleSidebarUser>
       <div v-else class="cle-sidebar-user-actions"><slot name="user-actions" /></div>

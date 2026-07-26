@@ -35,6 +35,13 @@
   export let subtitle: string | undefined = undefined;
   export let crumbs: CleCrumb[] = [];
   export let user: CleConsoleUser | undefined = undefined;
+  /** Render the sign-out control in the account block. */
+  export let signOut = false;
+  export let signOutLabel = "Sign out";
+  export let confirmSignOut = true;
+  export let signOutTitle = "Sign out?";
+  export let signOutCopy: string | undefined = undefined;
+  export let busy = false;
 
   $: hasSidebar = Boolean($$slots.nav || $$slots["nav-footer"]);
   $: showHeader = Boolean(title || crumbs.length || $$slots.actions);
@@ -51,7 +58,7 @@
   {href}
   {topLinks}
   sidebar={hasSidebar}
-  sidebarFooter={hasSidebar && Boolean(user || $$slots["user-actions"])}
+  sidebarFooter={hasSidebar && Boolean(user || signOut || $$slots["user-actions"])}
 >
   <svelte:fragment slot="icon">
     {#if $$slots.icon}
