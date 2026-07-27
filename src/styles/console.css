@@ -1360,9 +1360,16 @@
   down a long result table scrolled the query panel away, and the panel is
   the thing you are reading the table against.
 */
+/*
+  flex: none, not flex: 1. Growing to fill the parent is what has to stop:
+  the shells this sits in size themselves to their content, so a layout that
+  stretched would inherit the height of whichever column was longest, which
+  is the whole problem. A fixed height wins only if nothing is also telling
+  it to grow.
+*/
 .cle-dock-layout {
   display: flex;
-  flex: 1;
+  flex: none;
   align-items: stretch;
   height: calc(100vh - var(--cle-topbar-height));
   min-height: 0;
