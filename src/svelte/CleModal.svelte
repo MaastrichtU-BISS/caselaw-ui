@@ -71,15 +71,41 @@
 
   $: void sync(open);
 
+  /**
+   * Moves the backdrop to the end of <body>.
+   *
+   * Fixed positioning covers the viewport wherever the node is mounted, which
+   * is why this seemed unnecessary, but z-index is resolved inside the nearest
+   * ancestor stacking context, not against the page. Mounted inside anything
+   * that opens one, and a sticky sidebar or a transformed panel is enough, the
+   * dialog is confined to that ancestor's layer: it paints under the fixed top
+   * and bottom bars, which then stay bright while everything else dims, and
+   * under whatever content the page paints after it.
+   *
+   * At the end of body there is no ancestor left to be trapped by.
+   */
+  function portal(node: HTMLElement) {
+    document.body.appendChild(node);
+    return {
+      destroy() {
+        node.parentNode?.removeChild(node);
+      },
+    };
+  }
+
   onDestroy(() => {
     if (typeof document !== "undefined") document.body.style.overflow = "";
   });
 </script>
 
 {#if open}
-  <!-- No Teleport in Svelte; the backdrop is fixed-position, so it covers the
-       viewport wherever it is mounted. -->
-  <div class="cle-modal-backdrop" on:keydown={onKeydown} on:mousedown={onBackdrop} role="presentation">
+  <div
+    use:portal
+    class="cle-modal-backdrop"
+    on:keydown={onKeydown}
+    on:mousedown={onBackdrop}
+    role="presentation"
+  >
     <div
       bind:this={panel}
       class="cle-modal {size === 'md' ? '' : `cle-modal-${size}`}"
