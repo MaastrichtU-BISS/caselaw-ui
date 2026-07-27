@@ -12,7 +12,16 @@ const props = withDefaults(defineProps<{
   favicon?: boolean;
   href?: string;
   topLinks?: CleLink[];
+  /**
+   * Let the content own the whole area: no page padding, no measure.
+   *
+   * The default is a document surface, where a line of prose past 1440px is
+   * unreadable and 32px of breathing room is right. A workspace is the other
+   * thing entirely, a graph canvas or a docked panel, and it wants the pixels.
+   */
+  fluid?: boolean;
 }>(), {
+  fluid: false,
   brand: "Case Law Explorer",
   mark: "CLE",
   favicon: true,
@@ -83,7 +92,7 @@ defineExpose({ closeSidebar: () => (sidebarOpen.value = false) });
           </div>
         </aside>
       </template>
-      <main class="cle-app-main">
+      <main class="cle-app-main" :class="{ 'is-fluid': fluid }">
         <div class="cle-app-main-inner">
           <slot />
         </div>

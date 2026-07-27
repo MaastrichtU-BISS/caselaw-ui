@@ -203,6 +203,24 @@
   margin: 0 auto;
 }
 
+/* A workspace surface: the content is the page, so it gets the whole area and
+   the full height. Height matters as much as width here, because a graph
+   canvas sized to its content collapses to nothing. */
+.cle-app-main.is-fluid {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  padding: 0;
+}
+
+.cle-app-main.is-fluid > .cle-app-main-inner {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  min-height: 0;
+  max-width: none;
+}
+
 .cle-app-shell .cle-sidebar-toggle {
   display: none;
 }

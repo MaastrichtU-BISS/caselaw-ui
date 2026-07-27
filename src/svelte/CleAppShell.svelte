@@ -19,6 +19,16 @@
    */
   export let sidebar: boolean | undefined = undefined;
   export let sidebarFooter: boolean | undefined = undefined;
+  /**
+   * Let the content own the whole area: no page padding, no measure.
+   *
+   * The default is a document surface, where a line of prose past 1440px is
+   * unreadable and 32px of breathing room is right. A workspace is the other
+   * thing entirely — a graph canvas, a results table, a docked panel — and it
+   * wants the pixels. Without this each one reaches for a negative-margin
+   * override, and they all reach differently.
+   */
+  export let fluid = false;
 
   /** Sidebar is a drawer below 960px; the toggle only renders there. */
   let sidebarOpen = false;
@@ -97,7 +107,7 @@
         {/if}
       </aside>
     {/if}
-    <main class="cle-app-main">
+    <main class="cle-app-main" class:is-fluid={fluid}>
       <div class="cle-app-main-inner">
         <slot />
       </div>

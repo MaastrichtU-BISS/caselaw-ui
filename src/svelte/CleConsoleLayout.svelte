@@ -30,6 +30,8 @@
   export let favicon = true;
   export let href = "/";
   export let topLinks: CleLink[] = [];
+  /** Hand the content area the whole surface. See CleAppShell. */
+  export let fluid = false;
   /** Heading. Omit to render content with no header at all. */
   export let title: string | undefined = undefined;
   export let subtitle: string | undefined = undefined;
@@ -57,6 +59,7 @@
   {favicon}
   {href}
   {topLinks}
+  {fluid}
   sidebar={hasSidebar}
   sidebarFooter={hasSidebar && Boolean(user || signOut || $$slots["user-actions"])}
 >

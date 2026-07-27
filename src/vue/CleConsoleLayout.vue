@@ -41,6 +41,8 @@ const props = withDefaults(defineProps<{
   favicon?: boolean;
   href?: string;
   topLinks?: CleLink[];
+  /** Hand the content area the whole surface. See CleAppShell. */
+  fluid?: boolean;
   /** Heading. Omit to render content with no header at all. */
   title?: string;
   subtitle?: string;
@@ -69,6 +71,7 @@ const props = withDefaults(defineProps<{
   favicon: true,
   href: "/",
   topLinks: () => [],
+  fluid: false,
 });
 
 const emit = defineEmits<{ signOut: [] }>();
@@ -86,6 +89,7 @@ const showHeader = computed(() => Boolean(props.title || props.crumbs?.length ||
     :favicon="favicon"
     :href="href"
     :top-links="topLinks"
+    :fluid="fluid"
   >
     <template v-if="$slots.icon" #icon><slot name="icon" /></template>
 
