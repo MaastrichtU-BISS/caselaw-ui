@@ -131,10 +131,18 @@
   min-width: 0;
 }
 
-.cle-link-row a,
-.cle-footer-inner a {
+/* Matched to the Case Law Explorer front page, which is the reference for how
+   these bars look. Both were bold and both were grey here, which read as a
+   different product beside it: navigation is quiet regular text, and a footer
+   link is the only coloured thing down there. */
+.cle-link-row a {
   color: var(--cle-muted);
-  font-weight: 700;
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+.cle-footer-inner a {
+  color: var(--cle-primary);
   text-decoration: none;
 }
 
@@ -164,7 +172,10 @@
   }
 }
 
-.cle-link-row a:hover,
+.cle-link-row a:hover {
+  color: var(--cle-text);
+}
+
 .cle-footer-inner a:hover {
   color: var(--cle-primary-hover);
 }
