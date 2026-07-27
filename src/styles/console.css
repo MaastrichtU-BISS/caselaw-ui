@@ -1343,6 +1343,87 @@
   padding-top: 2px;
 }
 
+/* Prose ----------------------------------------------------------------- */
+
+/*
+  Long-form text that is read rather than scanned. Everything else in a
+  console is a label, a value or a control, and is set to be picked out at a
+  glance; a judgment is read start to finish, so it gets the looser leading
+  and the measure that makes that bearable. Capped in characters rather than
+  pixels because the limit is about how far the eye travels back to find the
+  next line, which is a property of the text, not the panel.
+*/
+.cle-prose {
+  max-width: 68ch;
+  margin: 0;
+  color: var(--cle-text-body);
+  font-size: var(--cle-text-sm);
+  line-height: 1.65;
+}
+
+.cle-prose-lg {
+  font-size: var(--cle-text-md);
+  line-height: 1.7;
+}
+
+/* Preserves the source's own line breaks, for text that arrives pre-wrapped. */
+.cle-prose-raw {
+  white-space: pre-wrap;
+}
+
+/* Choice set ------------------------------------------------------------ */
+
+/*
+  A segmented control that wraps. Segments share one row and shrink to fit,
+  which stops working somewhere around six; this is for the cases where the
+  options are too many to sit in a row and too few to deserve a select, such
+  as the two dozen languages a Court of Justice judgment can exist in.
+*/
+.cle-choice-set {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.cle-choice {
+  padding: 4px 10px;
+  border: 1px solid var(--cle-border);
+  border-radius: 999px;
+  background: var(--cle-card);
+  color: var(--cle-muted);
+  font: inherit;
+  font-family: var(--cle-mono);
+  font-size: var(--cle-text-xs);
+  font-weight: 650;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    background 0.12s ease,
+    color 0.12s ease,
+    border-color 0.12s ease;
+}
+
+.cle-choice:hover {
+  border-color: var(--cle-border-strong);
+  color: var(--cle-text);
+}
+
+.cle-choice:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--cle-focus);
+}
+
+.cle-choice.is-active {
+  border-color: var(--cle-primary);
+  background: var(--cle-primary);
+  color: #ffffff;
+}
+
+.cle-choice:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 /* Dock ------------------------------------------------------------------ */
 
 /*

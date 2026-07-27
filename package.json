@@ -1,6 +1,6 @@
 {
   "name": "caselaw-ui",
-  "version": "0.9.18",
+  "version": "0.9.19",
   "description": "Shared Case Law Explorer design tokens and Vue/Svelte UI primitives.",
   "type": "module",
   "license": "MIT",
