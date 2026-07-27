@@ -1761,3 +1761,48 @@
     --cle-code-key: #79c0ff;
   }
 }
+
+
+/* ---------------------------------------------------------------------------
+   Table paging and sort affordances.
+--------------------------------------------------------------------------- */
+
+.cle-table-pager {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px;
+  border-top: 1px solid var(--cle-border);
+}
+
+.cle-table-pager-range,
+.cle-table-pager-page {
+  color: var(--cle-muted);
+  font-size: var(--cle-text-sm);
+  font-variant-numeric: tabular-nums;
+}
+
+.cle-table-pager-buttons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Every sortable header shows its caret, faint until it is the active sort —
+   so the column reads as sortable before it is clicked, rather than looking
+   inert until something happens. */
+.cle-table-sort-caret {
+  margin-left: 4px;
+  opacity: 0;
+  font-size: 0.62rem;
+  transition: opacity 0.12s ease;
+}
+
+.cle-table-sort:hover .cle-table-sort-caret {
+  opacity: 0.45;
+}
+
+.cle-table-sort-caret.is-active {
+  opacity: 1;
+}

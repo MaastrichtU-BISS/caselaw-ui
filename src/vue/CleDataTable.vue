@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed, ref, watch } from "vue";
 import type { CleTableColumn } from "../types";
 
 const props = withDefaults(defineProps<{
@@ -11,13 +11,29 @@ const props = withDefaults(defineProps<{
   loading?: boolean;
   /** Skeleton rows drawn while loading. */
   loadingRows?: number;
+  /** Rows per page. 0 shows everything. */
+  pageSize?: number;
 }>(), {
   loading: false,
   loadingRows: 4,
+  pageSize: 0,
 });
 
 const sortKey = ref("");
 const sortDesc = ref(false);
+const page = ref(1);
+
+/**
+ * Every column sorts unless it opts out.
+ *
+ * `sortable: true` had to be set per column, so most tables shipped with a
+ * couple of sortable headers and the rest inert — which reads as broken
+ * rather than as deliberate. Action columns hold buttons, not values, so
+ * those stay out.
+ */
+function isSortable(column: CleTableColumn) {
+  return column.sortable !== false && !column.actions;
+}
 
 function cellClass(column: CleTableColumn) {
   return [
@@ -26,14 +42,19 @@ function cellClass(column: CleTableColumn) {
   ].filter(Boolean);
 }
 
+/** Ascending, then descending, then back to the original order. */
 function toggleSort(column: CleTableColumn) {
-  if (!column.sortable) return;
-  if (sortKey.value === column.key) {
-    sortDesc.value = !sortDesc.value;
-    return;
+  if (!isSortable(column)) return;
+  if (sortKey.value !== column.key) {
+    sortKey.value = column.key;
+    sortDesc.value = false;
+  } else if (!sortDesc.value) {
+    sortDesc.value = true;
+  } else {
+    sortKey.value = "";
+    sortDesc.value = false;
   }
-  sortKey.value = column.key;
-  sortDesc.value = true;
+  page.value = 1;
 }
 
 const sortedRows = computed(() => {
@@ -51,6 +72,29 @@ const sortedRows = computed(() => {
     return sortDesc.value ? -compared : compared;
   });
 });
+
+const pageCount = computed(() =>
+  props.pageSize > 0 ? Math.max(1, Math.ceil(sortedRows.value.length / props.pageSize)) : 1,
+);
+
+// Clamped rather than reset: deleting the last row of the last page should
+// land on the new last page, not send you back to the beginning.
+watch([pageCount, () => props.pageSize], () => {
+  if (page.value > pageCount.value) page.value = pageCount.value;
+});
+
+const visibleRows = computed(() => {
+  if (props.pageSize <= 0) return sortedRows.value;
+  const start = (page.value - 1) * props.pageSize;
+  return sortedRows.value.slice(start, start + props.pageSize);
+});
+
+const rangeStart = computed(() =>
+  sortedRows.value.length === 0 ? 0 : (page.value - 1) * props.pageSize + 1,
+);
+const rangeEnd = computed(() =>
+  Math.min(page.value * props.pageSize, sortedRows.value.length),
+);
 </script>
 
 <template>
@@ -65,9 +109,16 @@ const sortedRows = computed(() => {
             :style="column.width ? { width: column.width } : undefined"
             :aria-sort="sortKey === column.key ? (sortDesc ? 'descending' : 'ascending') : undefined"
           >
-            <button v-if="column.sortable" type="button" class="cle-table-sort" @click="toggleSort(column)">
+            <button
+              v-if="isSortable(column) && column.label"
+              type="button"
+              class="cle-table-sort"
+              @click="toggleSort(column)"
+            >
               {{ column.label }}
-              <span v-if="sortKey === column.key" class="cle-table-sort-caret">{{ sortDesc ? "▼" : "▲" }}</span>
+              <span class="cle-table-sort-caret" :class="{ 'is-active': sortKey === column.key }">
+                {{ sortKey === column.key && sortDesc ? "▼" : "▲" }}
+              </span>
             </button>
             <template v-else>{{ column.label }}</template>
           </th>
@@ -87,7 +138,7 @@ const sortedRows = computed(() => {
           </td>
         </tr>
         <template v-else>
-          <tr v-for="(row, index) in sortedRows" :key="String(row.id ?? row.key_id ?? index)">
+          <tr v-for="(row, index) in visibleRows" :key="String(row.id ?? row.key_id ?? index)">
             <td v-for="column in columns" :key="column.key" :class="cellClass(column)">
               <slot :name="`cell-${column.key}`" :row="row" :value="row[column.key]">
                 {{ row[column.key] ?? "" }}
@@ -97,5 +148,30 @@ const sortedRows = computed(() => {
         </template>
       </tbody>
     </table>
+
+    <div v-if="pageSize > 0 && !loading && sortedRows.length > pageSize" class="cle-table-pager">
+      <span class="cle-table-pager-range">
+        {{ rangeStart }}–{{ rangeEnd }} of {{ sortedRows.length }}
+      </span>
+      <div class="cle-table-pager-buttons">
+        <button
+          type="button"
+          class="cle-button cle-button-secondary cle-button-sm"
+          :disabled="page <= 1"
+          @click="page -= 1"
+        >
+          Previous
+        </button>
+        <span class="cle-table-pager-page">{{ page }} / {{ pageCount }}</span>
+        <button
+          type="button"
+          class="cle-button cle-button-secondary cle-button-sm"
+          :disabled="page >= pageCount"
+          @click="page += 1"
+        >
+          Next
+        </button>
+      </div>
+    </div>
   </div>
 </template>

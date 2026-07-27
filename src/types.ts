@@ -5,6 +5,7 @@ export type CleTableColumn = {
   numeric?: boolean;
   /** Collapses the column to its content and right-aligns it. Use for row actions. */
   actions?: boolean;
+  /** Columns sort by default; set false to opt out. */
   sortable?: boolean;
   width?: string;
 };
