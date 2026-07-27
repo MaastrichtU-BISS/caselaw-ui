@@ -33,5 +33,15 @@ export type CaselawTheme = typeof caselawTheme;
 export type CleLink = {
   label: string;
   href: string;
+  /** A different origin. Affects `rel`, not where the link opens. */
   external?: boolean;
+  /**
+   * Open in a new tab.
+   *
+   * Off by default, including for `external`. Moving between Case Law Explorer
+   * products is ordinary navigation, and opening each one in its own tab left
+   * people managing tabs they never asked for. Reserve this for third-party
+   * destinations someone is unlikely to want to leave the page for.
+   */
+  newTab?: boolean;
 };

@@ -1,155 +1,222 @@
-# Caselaw UI
+# caselaw-ui
 
-Shared Case Law Explorer design tokens and framework primitives for Vue and Svelte services.
-
-The package keeps the common visual language in one place:
-
-- White institutional canvas with a fixed 32px square grid.
-- Primary blue matched to the shared Keycloak login flow: `#2f63ee`.
-- Fixed top and bottom bars.
-- Service icons for the shared top bar and favicon.
-- 8px cards, 6px controls, restrained shadows, and consistent type sizing.
-- Equivalent Vue and Svelte components with the same props.
-
-## Install
+The shared interface layer for the Case Law Explorer products. Design tokens, page
+furniture, tables, forms and code blocks, in both Vue and Svelte, so the products look
+like one product.
 
 ```bash
 npm install caselaw-ui
 ```
 
-## Global Styles
+## Using it
 
-Import the shared CSS once in the client app root:
+Import the stylesheet once, anywhere in your application entry point:
 
-```ts
+```js
 import "caselaw-ui/styles.css";
 ```
 
-For SvelteKit, put it in `src/routes/+layout.svelte` or `src/app.css`.
+Every rule in it is `.cle-` prefixed, so it cannot reach your own styling. Adding it to
+an existing app changes nothing until you use a component.
 
-For Vue/Nuxt, put it in `main.ts`, `app.vue`, or the Nuxt CSS config.
+Then import components from the entry point for your framework.
 
-## Svelte
-
-```svelte
-<script lang="ts">
-  import "caselaw-ui/styles.css";
-  import { CleButton, CleGridShell } from "caselaw-ui/svelte";
-
-  const footerLinks = [
-    { label: "BISS Institute", href: "https://www.maastrichtuniversity.nl/research/biss-institute", external: true },
-    { label: "Citations API", href: "https://demo-api.caselawexplorer.tech", external: true },
-  ];
-</script>
-
-  <CleGridShell brand="Case Law Explorer" mark="CLE" icon="explorer" footerLinks={footerLinks}>
-  <section>
-    <p class="cle-eyebrow">Research workspace</p>
-    <h1>Case Law Explorer</h1>
-    <CleButton>Sign in</CleButton>
-  </section>
-</CleGridShell>
-```
-
-## Vue
+### Vue
 
 ```vue
+<script setup>
+import { CleGridShell, CleHero, CleButton, CleFeatureCard } from "caselaw-ui/vue";
+</script>
+
 <template>
-  <CleGridShell brand="Caselaw DB" mark="DB" icon="database" :footer-links="footerLinks">
-    <section>
-      <p class="cle-eyebrow">Admin only</p>
-      <h1>Database workbench</h1>
-      <CleButton>Sign in with shared account</CleButton>
+  <CleGridShell brand="My Product" mark="MP" icon="api">
+    <CleHero
+      title="My Product"
+      subtitle="What it does, in one sentence."
+      :pills="['Fast', 'Documented']"
+    >
+      <template #actions>
+        <CleButton href="/docs">Read the docs</CleButton>
+      </template>
+    </CleHero>
+
+    <section class="cle-feature-grid">
+      <CleFeatureCard icon="api" title="Search" copy="Query everything at once." />
     </section>
   </CleGridShell>
 </template>
+```
 
-<script setup lang="ts">
-import "caselaw-ui/styles.css";
-import { CleButton, CleGridShell } from "caselaw-ui/vue";
+### Svelte
 
-const footerLinks = [
-  { label: "BISS Institute", href: "https://www.maastrichtuniversity.nl/research/biss-institute", external: true },
-  { label: "Citations API", href: "https://demo-api.caselawexplorer.tech", external: true },
-];
+```svelte
+<script>
+  import { CleGridShell, CleHero, CleButton } from "caselaw-ui/svelte";
+  import "caselaw-ui/styles.css";
 </script>
+
+<CleGridShell brand="My Product" mark="MP" icon="api">
+  <CleHero title="My Product" subtitle="What it does." pills={["Fast", "Documented"]}>
+    <svelte:fragment slot="actions">
+      <CleButton href="/docs">Read the docs</CleButton>
+    </svelte:fragment>
+  </CleHero>
+</CleGridShell>
 ```
 
-## Exports
+## Two page shapes
 
-- `caselaw-ui/styles.css`: tokens and reusable classes.
-- `caselaw-ui/tokens`: TypeScript token object.
-- `caselaw-ui`: design tokens plus service icon and favicon helpers.
-- `caselaw-ui/svelte`: Svelte primitives.
-- `caselaw-ui/vue`: Vue primitives.
+**`CleGridShell`** is the public face: grid background, fixed top bar, fixed footer,
+and your content between them. Entry pages and marketing pages use it.
 
-## Current Components
-
-- `CleGridShell`: fixed top bar, fixed bottom bar, grid background, main page container.
-- `CleTopBar`: service icon/brand title, consistent right-aligned nav, and action slots.
-- `CleBottomBar`: managed-by text and footer links.
-- `CleButton`: primary and secondary buttons/links.
-- `CleCard`: standard card surface.
-- `CleServiceIcon`: semantic service mark for top bars, panels, and favicons.
-
-## Service Icons
-
-Use the same semantic icon name everywhere a service identifies itself. `CleGridShell` passes it to `CleTopBar` and, by default, installs an SVG favicon in the browser.
-
-```ts
-type CleServiceIconName = "explorer" | "database" | "access" | "api" | "auth" | "rate-limit";
+```vue
+<CleGridShell
+  brand="Caselaw Access"
+  mark="ACL"
+  icon="access"
+  :top-links="[{ label: 'Docs', href: '/docs' }]"
+  footer-text="Managed by BISS Institute."
+  :footer-links="[{ label: 'BISS Institute', href: '...', external: true }]"
+>
+  ...
+</CleGridShell>
 ```
 
-Recommended mapping:
+**`CleConsoleLayout`** is the signed-in face: the same top bar, plus a sidebar, a
+breadcrumb trail, a page header and an account block.
 
-| Service | `brand` | `mark` fallback | `icon` |
-| --- | --- | --- | --- |
-| Case Law Explorer | `Case Law Explorer` | `CLE` | `explorer` |
-| Database Workbench | `Caselaw DB` | `DB` | `database` |
-| Access / Rate Limit Admin | `Caselaw Access` | `ACL` | `access` |
-| Citations API | `Citations API` | `API` | `api` |
-| Shared Auth | `Caselaw Auth` | `AUTH` | `auth` |
+```vue
+<CleConsoleLayout
+  brand="Citations API"
+  icon="api"
+  title="API reference"
+  subtitle="The live API surface."
+  :crumbs="[{ label: 'Citations API', href: '/' }, { label: 'Docs' }]"
+>
+  <template #nav>
+    <CleNavSection heading="Endpoints">
+      <CleNavItem href="/docs/echr" label="ECHR" meta="POST" :active="true" />
+    </CleNavSection>
+  </template>
 
-If an app cannot use `CleGridShell`, call `setCleFavicon("api")` from `caselaw-ui` on client mount and render `CleTopBar` directly with the same `icon` prop.
+  ...content...
+</CleConsoleLayout>
+```
 
-## Versioning
+## Components
 
-Treat this as a shared product dependency. Changes to token names, component props, or class semantics should be released as a new minor or major version depending on breakage.
+| Group | Components |
+|---|---|
+| Page shape | `CleGridShell`, `CleConsoleLayout`, `CleAppShell`, `CleTopBar`, `CleBottomBar` |
+| Headings | `CleHero`, `ClePageHeader`, `CleSectionHeader`, `CleHeroPill` |
+| Content | `CleCard`, `CleFeatureCard`, `CleKpiCard`, `CleCallout`, `CleBadge`, `CleEmptyState` |
+| Data | `CleDataTable`, `CleStatList`, `CleMeterList`, `CleBarChart`, `CleSkeleton` |
+| Forms | `CleField`, `CleInput`, `CleTextarea`, `CleSelect`, `CleSwitch`, `CleTagInput`, `CleSearchInput`, `CleCopyField` |
+| Actions | `CleButton`, `CleModal`, `CleConfirmDialog`, `CleToastStack` |
+| Code | `CleCodeBlock`, `CleCodeTabs` |
+| Navigation | `CleNavSection`, `CleNavItem`, `CleTab`, `CleStep`, `CleSteps` |
+| Identity | `CleServiceIcon`, `CleSidebarUser` |
 
-Consumers pin a caret range (`caselaw-ui@^0.2.2`), so a patch or minor release
-reaches them on their next install without any change on their side. A breaking
-change needs a major bump and a coordinated update.
+Svelte covers the subset the SvelteKit products need. Vue covers everything. A shape
+only one framework can draw is how the products drift apart, so new components should
+land in both.
 
-## Releasing
+## Tables
 
-Released by GitHub Actions via npm trusted publishing. Nobody publishes from a
-laptop, and there is no npm token stored anywhere — the workflow's OIDC
-identity is the credential, which is also why releases no longer prompt for
-2FA.
+`CleDataTable` sorts every column by default and paginates when given a page size.
 
-**1. Bump `version` in `package.json`.** The workflow refuses to publish if the
-tag and the manifest disagree, so this cannot be skipped silently.
+```vue
+<CleDataTable
+  :columns="[
+    { key: 'name', label: 'Name' },
+    { key: 'plan', label: 'Plan' },
+    { key: 'actions', label: '', actions: true },
+  ]"
+  :rows="rows"
+  :page-size="25"
+  empty="No keys yet."
+>
+  <template #cell-plan="{ value }">
+    <CleBadge tone="success">{{ value }}</CleBadge>
+  </template>
+</CleDataTable>
+```
 
-**2. Commit and push to `main`.**
+Clicking a header cycles ascending, descending, unsorted. Columns marked `actions` are
+excluded from sorting.
+
+## Code blocks
+
+Syntax highlighting with no dependency, covering JSON, Python, JavaScript, TypeScript,
+bash and SQL.
+
+```vue
+<CleCodeBlock language="python" :code="snippet" label="server.py" />
+
+<CleCodeTabs :samples="[
+  { label: 'Python', language: 'python', code: pythonSnippet },
+  { label: 'Node', language: 'js', code: nodeSnippet },
+]" />
+```
+
+Pass `language="plain"` to turn highlighting off.
+
+## Service icons
+
+Six marks identify the products: `explorer`, `database`, `access`, `api`, `auth`,
+`rate-limit`.
+
+```js
+import { setCleFavicon, getCleFaviconHref } from "caselaw-ui";
+
+setCleFavicon("api");                 // sets the tab icon
+getCleFaviconHref("explorer");        // a data URI, for a static file
+```
+
+`CleGridShell` and `CleConsoleLayout` set the favicon from their `icon` prop. Pass
+`:favicon="false"` when the page owns its own.
+
+## Theming
+
+Everything reads from CSS custom properties on `:root`. Override them after importing
+the stylesheet:
+
+```css
+:root {
+  --cle-primary: #2f63ee;
+  --cle-bg: #f8fafc;
+  --cle-text: #172033;
+  --cle-muted: #667085;
+  --cle-border: #d9e1ec;
+  --cle-radius-md: 8px;
+  --cle-topbar-height: 68px;
+}
+```
+
+## Development
 
 ```bash
-git add package.json
-git commit -m "Release 0.2.4"
-git push
+npm install
+npm run check        # Vue typecheck, Svelte compile check, unit tests
+npm run check:vue
+npm run check:svelte
+npm test
 ```
 
-**3. Tag and push the tag.** Pushing the tag is what publishes.
+Vue components are checked with `vue-tsc`, because `tsc --noEmit` does not read
+`.vue` files and a broken template will otherwise publish cleanly.
+
+## Publishing
+
+Tag the commit and the workflow publishes to npm through OIDC trusted publishing.
 
 ```bash
-git tag v0.2.4 && git push origin v0.2.4
+npm version patch
+git push origin main --tags
 ```
 
-The workflow typechecks and runs `npm pack --dry-run` before publishing, so a
-mistake in `files` or `exports` is caught before consumers see it.
+## Related repositories
 
-To rehearse without spending a version, run the workflow manually from the
-Actions tab with `dry_run` left ticked.
-
-npm will not accept the same version twice, so if a release fails check whether
-it actually landed before retrying — a genuine partial failure needs a patch
-bump rather than a re-run.
+- [caselaw-access](https://github.com/davidwickerhf/caselaw-access), whose console is built from this
+- [caselaw-auth](https://github.com/davidwickerhf/caselaw-auth), the shared sign-in
+- [caselaw-coolify](https://github.com/davidwickerhf/caselaw-coolify), the deployment bundle

@@ -59,11 +59,11 @@ Service identity should be passed with a semantic icon name, not hand-built per 
 
 The library covers two page families, and they deliberately look different.
 
-**Entry pages** — public front doors, sign-in, service landing. Use `CleGridShell`.
+**Entry pages**: public front doors, sign-in, service landing. Use `CleGridShell`.
 Expressive: display-scale `--cle-text-h1`, the 32px grid backdrop, generous
 whitespace, one clear action. Constrained to `--cle-page-max`.
 
-**Consoles** — admin tooling used repeatedly by signed-in staff. Use `CleAppShell`.
+**Consoles**: admin tooling used repeatedly by signed-in staff. Use `CleAppShell`.
 Dense and quiet: fixed sidebar navigation, `--cle-console-title` (1.5rem) page
 titles, flat `--cle-shadow-sm` cards, no grid backdrop, width up to
 `--cle-console-max`. A console must never open with a marketing hero; the
@@ -77,7 +77,7 @@ sidebar on a landing page reads as a leaked internal tool.
 - One control per navigation axis. The sidebar answers *which record* (which
   project, which dataset) and holds top-level destinations; tabs answer *which
   section of that record*. Never render the same destinations as both sidebar
-  entries and tabs — that is the duplication to avoid, not the two axes.
+  entries and tabs, that is the duplication to avoid, not the two axes.
 - Sections are routes, not local state, so URLs are linkable and Back works.
   `CleNavItem` and `CleTab` take an `as` prop for framework link components
   (`:as="NuxtLink"`); remaining attributes forward to it.
@@ -96,7 +96,7 @@ Wrap every control in `CleField` for the label, hint, and error slot. Use
 `CleInput`, `CleSelect`, `CleTextarea`, `CleSwitch`, and `CleTagInput`.
 
 `CleTagInput` replaces comma-separated text areas for scope and endpoint
-lists — it shows what is committed, offers `suggestions`, and removes the
+lists, it shows what is committed, offers `suggestions`, and removes the
 "did my spacing matter?" question entirely.
 
 ## Component Rules
