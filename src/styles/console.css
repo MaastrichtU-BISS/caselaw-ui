@@ -1886,3 +1886,72 @@
 .cle-table-sort-caret.is-active {
   opacity: 1;
 }
+
+/* Action cards ---------------------------------------------------------- */
+/* A grid of choices where the card is the target. Sized by its content, not
+   to a fixed square: the copy is what differs between them, so letting it set
+   the height keeps a row of three from being mostly empty space. */
+
+.cle-action-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 22px;
+  border: 1px solid var(--cle-border);
+  border-radius: var(--cle-radius-lg);
+  background: var(--cle-card);
+  color: var(--cle-text);
+  text-decoration: none;
+  box-shadow: var(--cle-shadow-sm);
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    transform 0.15s ease;
+}
+
+.cle-action-card:hover {
+  border-color: var(--cle-primary);
+  box-shadow: var(--cle-shadow-md);
+  transform: translateY(-2px);
+}
+
+.cle-action-card:focus-visible {
+  outline: 3px solid var(--cle-focus);
+  outline-offset: 2px;
+}
+
+.cle-action-card.is-active {
+  border-color: var(--cle-primary);
+}
+
+.cle-action-card-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  margin-bottom: 4px;
+  border-radius: var(--cle-radius-md);
+  background: var(--cle-info-bg);
+  color: var(--cle-primary);
+}
+
+.cle-action-card-title {
+  font-size: 1rem;
+  font-weight: 900;
+  letter-spacing: 0;
+}
+
+.cle-action-card-copy {
+  color: var(--cle-muted);
+  font-size: var(--cle-text-sm);
+  line-height: 1.6;
+}
+
+/* The set itself. Wrapping by measure rather than by count keeps three cards
+   and five cards both looking deliberate. */
+.cle-action-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px;
+}
