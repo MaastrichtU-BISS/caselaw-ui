@@ -10,7 +10,8 @@
     "target": "ES2022",
     "types": [
       "svelte"
-    ]
+    ],
+    "noUncheckedIndexedAccess": true
   },
   "include": [
     "src/**/*.ts",

@@ -34,7 +34,7 @@ export interface CleCodeToken {
   kind: CleTokenKind;
 }
 
-const KEYWORDS: Record<string, readonly string[]> = {
+const KEYWORDS: Record<CleCodeLanguage, readonly string[]> = {
   python: [
     "and", "as", "assert", "async", "await", "break", "class", "continue", "def", "del",
     "elif", "else", "except", "finally", "for", "from", "global", "if", "import", "in",
@@ -53,7 +53,7 @@ const KEYWORDS: Record<string, readonly string[]> = {
   plain: [],
 };
 
-const BUILTINS: Record<string, readonly string[]> = {
+const BUILTINS: Record<CleCodeLanguage, readonly string[]> = {
   python: ["False", "None", "True", "self", "cls", "print", "dict", "list", "str", "int"],
   ts: ["console", "null", "true", "false", "undefined", "this", "Response", "Request"],
   bash: ["npm", "pip", "node", "python", "python3", "git", "curl", "docker", "uv", "pnpm", "yarn"],
@@ -62,7 +62,7 @@ const BUILTINS: Record<string, readonly string[]> = {
   plain: [],
 };
 
-const LINE_COMMENT: Record<string, string | null> = {
+const LINE_COMMENT: Record<CleCodeLanguage, string | null> = {
   python: "#",
   bash: "#",
   env: "#",
@@ -125,9 +125,9 @@ export function highlight(code: string, language: CleCodeLanguage): CleCodeToken
   if (language === "plain") return [{ text: code, kind: "plain" }];
 
   const tokens: CleCodeToken[] = [];
-  const keywords = new Set(KEYWORDS[language] ?? []);
-  const builtins = new Set(BUILTINS[language] ?? []);
-  const comment = LINE_COMMENT[language] ?? null;
+  const keywords = new Set(KEYWORDS[language]);
+  const builtins = new Set(BUILTINS[language]);
+  const comment = LINE_COMMENT[language];
   let plain = "";
 
   const flush = () => {
