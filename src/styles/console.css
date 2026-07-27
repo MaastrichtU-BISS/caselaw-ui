@@ -1343,6 +1343,34 @@
   padding-top: 2px;
 }
 
+/* Pickers --------------------------------------------------------------- */
+
+.cle-picker {
+  border: 1px solid var(--cle-border);
+  border-radius: var(--cle-radius-sm);
+  background: var(--cle-card);
+}
+
+.cle-picker:focus-within {
+  border-color: var(--cle-primary);
+  box-shadow: 0 0 0 3px var(--cle-focus);
+}
+
+.cle-picker-status {
+  display: block;
+  margin: 0 12px 8px;
+  color: var(--cle-muted);
+  font-size: var(--cle-text-sm);
+}
+
+.cle-picker-count {
+  margin-left: auto;
+  color: var(--cle-muted);
+  font-family: var(--cle-mono);
+  font-size: var(--cle-text-xs);
+  font-variant-numeric: tabular-nums;
+}
+
 /* Skeletons ------------------------------------------------------------- */
 
 .cle-skeleton {
