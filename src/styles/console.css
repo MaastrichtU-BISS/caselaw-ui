@@ -1366,6 +1366,15 @@
   stretched would inherit the height of whichever column was longest, which
   is the whole problem. A fixed height wins only if nothing is also telling
   it to grow.
+
+  The height subtracts the same bars .cle-app-sidebar does, and for the same
+  reason: both are fixed, so both are already covering the window before this
+  gets any of it. Miss one and the shell ends up exactly that bar's height
+  taller than the window, which is enough to give the page a scrollbar it
+  should not have. That scroll is not a cosmetic problem: it slides the
+  content up behind a top bar that is deliberately translucent, and pushes
+  the dock's own footer underneath the bottom bar, so the submit button for
+  the query you are writing ends up behind the site credits.
 */
 .cle-dock-layout {
   display: flex;
@@ -1373,6 +1382,10 @@
   align-items: stretch;
   height: calc(100vh - var(--cle-topbar-height));
   min-height: 0;
+}
+
+.cle-app-shell.has-footer .cle-dock-layout {
+  height: calc(100vh - var(--cle-topbar-height) - var(--cle-bottombar-height));
 }
 
 .cle-dock-content {
