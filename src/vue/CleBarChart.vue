@@ -23,11 +23,23 @@ const bars = computed(() => props.points.map((point) => ({
 })));
 
 const firstLabel = computed(() => props.points[0]?.label || "");
+const midLabel = computed(() => props.points[Math.floor(props.points.length / 2)]?.label || "");
 const lastLabel = computed(() => props.points[props.points.length - 1]?.label || "");
+
+/* The peak, so the bars mean a number rather than a shape. Without it a chart
+   of one request and a chart of ten thousand are the same picture. */
+const peak = computed(() => Math.max(...props.points.map((point) => point.value), 0));
+const total = computed(() => props.points.reduce((sum, point) => sum + point.value, 0));
+const empty = computed(() => total.value === 0);
 </script>
 
 <template>
   <figure class="cle-chart" style="margin: 0">
+    <div class="cle-chart-scale">
+      <span>{{ peak }}</span>
+      <span>0</span>
+    </div>
+
     <div class="cle-chart-plot" role="img" :aria-label="`${seriesLabel} over ${points.length} buckets`">
       <div
         v-for="(bar, index) in bars"
@@ -40,8 +52,11 @@ const lastLabel = computed(() => props.points[props.points.length - 1]?.label ||
         </div>
       </div>
     </div>
+    <p v-if="empty" class="cle-chart-empty">No requests in this window.</p>
+
     <div v-if="points.length" class="cle-chart-axis">
       <span>{{ firstLabel }}</span>
+      <span>{{ midLabel }}</span>
       <span>{{ lastLabel }}</span>
     </div>
     <figcaption class="cle-chart-legend">

@@ -1197,11 +1197,34 @@
 }
 
 .cle-chart-plot {
+  position: relative;
   display: flex;
   align-items: flex-end;
   gap: 3px;
   height: 148px;
   padding-top: 6px;
+  /* Quarter gridlines, so a bar's height can be read rather than compared. */
+  background-image: repeating-linear-gradient(
+    to top,
+    var(--cle-border-subtle) 0 1px,
+    transparent 1px 25%
+  );
+}
+
+/* The scale sits above the plot rather than beside it: a left gutter would
+   misalign these bars with every other full-width card on the page. */
+.cle-chart-scale {
+  display: flex;
+  justify-content: space-between;
+  color: var(--cle-muted);
+  font-size: var(--cle-text-xs);
+  font-variant-numeric: tabular-nums;
+}
+
+.cle-chart-empty {
+  margin: 0;
+  color: var(--cle-muted);
+  font-size: var(--cle-text-sm);
 }
 
 .cle-chart-bar {
@@ -1235,6 +1258,7 @@
 }
 
 .cle-chart-axis {
+  font-variant-numeric: tabular-nums;
   display: flex;
   justify-content: space-between;
   color: var(--cle-muted);
