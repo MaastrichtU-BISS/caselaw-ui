@@ -4,16 +4,25 @@
  * right. A bare <pre> leaves the reader working out which language they are
  * looking at and whether it can be copied.
  */
-import { ref } from "vue";
+import { computed, ref } from "vue";
+import { highlight, inferLanguage, type CleCodeLanguage } from "../highlight";
 
 const props = withDefaults(defineProps<{
   code: string;
   /** Shown top-left. A language, a filename, or "Terminal". */
   label?: string;
   copyable?: boolean;
+  /** Overrides detection. `plain` turns highlighting off. */
+  language?: CleCodeLanguage | string;
 }>(), {
   copyable: true,
 });
+
+// Detected from the code's own shape first, then the label — an install
+// sample is labelled with its framework but is a shell command.
+const tokens = computed(() =>
+  highlight(props.code, inferLanguage(props.code, props.language ?? props.label)),
+);
 
 const copied = ref(false);
 let timer: ReturnType<typeof setTimeout> | undefined;
@@ -38,6 +47,10 @@ async function copy() {
         {{ copied ? "Copied" : "Copy" }}
       </button>
     </div>
-    <pre class="cle-code-body">{{ code }}</pre>
+    <pre class="cle-code-body"><span
+      v-for="(token, index) in tokens"
+      :key="index"
+      :class="`cle-tok-${token.kind}`"
+    >{{ token.text }}</span></pre>
   </div>
 </template>

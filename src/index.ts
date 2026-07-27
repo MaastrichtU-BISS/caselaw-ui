@@ -8,3 +8,5 @@ export {
   setCleFavicon,
 } from "./icons";
 export type { CleServiceIconName } from "./icons";
+export { highlight, inferLanguage } from "./highlight";
+export type { CleCodeLanguage, CleCodeToken, CleTokenKind } from "./highlight";

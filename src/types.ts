@@ -52,4 +52,6 @@ export interface CleConsoleUser {
 export interface CleCodeSample {
   label: string;
   code: string;
+  /** Overrides detection, which normally reads the code then the label. */
+  language?: string;
 }

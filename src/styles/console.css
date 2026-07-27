@@ -1708,3 +1708,56 @@
 .cle-step-content > * + * {
   margin-top: 10px;
 }
+
+/* ---------------------------------------------------------------------------
+   Syntax tokens.
+
+   Muted rather than a full rainbow: these are eight-line setup samples read
+   once, not a file being worked in. Comments recede, the two things worth
+   finding — what you import and what you pass — come forward.
+--------------------------------------------------------------------------- */
+
+.cle-tok-comment {
+  color: var(--cle-code-comment, #7a8699);
+  font-style: italic;
+}
+
+.cle-tok-string {
+  color: var(--cle-code-string, #0f7b6c);
+}
+
+.cle-tok-keyword {
+  color: var(--cle-code-keyword, #8250df);
+  font-weight: 800;
+}
+
+.cle-tok-builtin {
+  color: var(--cle-code-builtin, #0550ae);
+}
+
+.cle-tok-number {
+  color: var(--cle-code-number, #b3541e);
+}
+
+.cle-tok-decorator {
+  color: var(--cle-code-decorator, #953800);
+  font-weight: 800;
+}
+
+/* The name in KEY=value, which is the part you check against the console. */
+.cle-tok-key {
+  color: var(--cle-code-key, #0550ae);
+  font-weight: 800;
+}
+
+@media (prefers-color-scheme: dark) {
+  .cle-code {
+    --cle-code-comment: #8b98a9;
+    --cle-code-string: #7ee2c8;
+    --cle-code-keyword: #d2a8ff;
+    --cle-code-builtin: #79c0ff;
+    --cle-code-number: #ffa657;
+    --cle-code-decorator: #ffa657;
+    --cle-code-key: #79c0ff;
+  }
+}

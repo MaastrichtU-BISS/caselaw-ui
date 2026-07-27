@@ -6,6 +6,7 @@
    * pairing is always the same and getting it wrong — copy that copies the
    * inactive sample, tabs that do not survive a re-render — is easy and quiet.
    */
+  import { highlight, inferLanguage } from "../highlight";
   import type { CleCodeSample } from "../types";
 
   export let samples: CleCodeSample[] = [];
@@ -15,6 +16,9 @@
    */
   export let activeIndex = 0;
   $: active = samples[activeIndex] ?? samples[0];
+  $: tokens = active
+    ? highlight(active.code, inferLanguage(active.code, active.language ?? active.label))
+    : [];
 
   let copied = false;
   let timer: ReturnType<typeof setTimeout> | undefined;
@@ -52,5 +56,5 @@
       {copied ? "Copied" : "Copy"}
     </button>
   </div>
-  <pre class="cle-code-body">{active?.code ?? ""}</pre>
+  <pre class="cle-code-body">{#each tokens as token}<span class="cle-tok-{token.kind}">{token.text}</span>{/each}</pre>
 </div>
