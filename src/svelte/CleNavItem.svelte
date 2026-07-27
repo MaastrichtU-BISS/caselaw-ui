@@ -9,7 +9,22 @@
   export let active = false;
 </script>
 
-<a class="cle-nav-item" class:is-active={active} {href} {...$$restProps}>
+<!--
+  Events are forwarded explicitly. $$restProps carries attributes but not
+  listeners, so without these a caller's on:click is accepted silently and
+  never fires — the nav item still navigates via href, which makes the
+  dropped handler look like it ran. The Vue mirror forwards listeners through
+  $attrs already, so this only closes the gap on the Svelte side.
+-->
+<a
+  class="cle-nav-item"
+  class:is-active={active}
+  {href}
+  {...$$restProps}
+  on:click
+  on:keydown
+  on:focus
+  on:blur>
   {#if $$slots.icon}
     <span class="cle-nav-item-icon"><slot name="icon" /></span>
   {/if}
