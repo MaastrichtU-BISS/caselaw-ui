@@ -1368,13 +1368,23 @@
   min-height: 0;
 }
 
+/*
+  The mirror of .cle-app-sidebar, and sticky for the same reason: the shell
+  grows with its content, so a panel that merely filled its parent would run
+  past the bottom of the window and take its submit button with it. Pinned
+  under the top bar it keeps its own header and footer in view and scrolls
+  only its middle, however long the form inside gets.
+*/
 .cle-dock {
+  position: sticky;
+  top: var(--cle-topbar-height);
   display: flex;
   flex: 0 0 var(--cle-dock-width, 420px);
   flex-direction: column;
+  align-self: flex-start;
   width: var(--cle-dock-width, 420px);
   max-width: 100%;
-  min-height: 0;
+  height: calc(100vh - var(--cle-topbar-height));
   border-left: 1px solid var(--cle-border);
   background: var(--cle-card);
 }
@@ -1421,6 +1431,7 @@
     bottom: 0;
     z-index: 50;
     width: min(var(--cle-dock-width, 420px), 100%);
+    height: auto;
     box-shadow: var(--cle-shadow-lg);
   }
 
