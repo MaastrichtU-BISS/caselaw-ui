@@ -49,3 +49,6 @@ export { default as CleSteps } from "./CleSteps.vue";
 export { default as CleCodeBlock } from "./CleCodeBlock.vue";
 export { default as CleCodeTabs } from "./CleCodeTabs.vue";
 export type { CleCodeSample } from "../types";
+export { default as CleHero } from "./CleHero.vue";
+export { default as CleHeroPill } from "./CleHeroPill.vue";
+export { default as CleFeatureCard } from "./CleFeatureCard.vue";

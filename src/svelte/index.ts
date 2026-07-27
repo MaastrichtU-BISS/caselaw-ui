@@ -21,4 +21,7 @@ export { default as CleStep } from "./CleStep.svelte";
 export { default as CleSteps } from "./CleSteps.svelte";
 export { default as CleTab } from "./CleTab.svelte";
 export { default as CleTopBar } from "./CleTopBar.svelte";
+export { default as CleHero } from "./CleHero.svelte";
+export { default as CleHeroPill } from "./CleHeroPill.svelte";
+export { default as CleFeatureCard } from "./CleFeatureCard.svelte";
 export type { CleCodeSample, CleConsoleUser, CleCrumb, CleTableColumn } from "../types";
