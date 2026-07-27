@@ -433,6 +433,23 @@
   font-size: var(--cle-text-sm);
 }
 
+/* A button whose whole label is one glyph. Square and input-height, so it can
+   sit beside a field without the two disagreeing about where the row is. */
+.cle-button-icon {
+  width: 40px;
+  min-height: 40px;
+  padding: 0;
+}
+
+.cle-button-icon.cle-button-sm {
+  width: 34px;
+}
+
+.cle-button-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
 .cle-button-ghost {
   border-color: transparent;
   background: none;
@@ -871,6 +888,11 @@
   align-items: flex-start;
   justify-content: space-between;
   gap: 14px;
+  /* A callout interrupts a column of content, so it carries its own breathing
+     room instead of every caller having to remember. None of them did, and the
+     result was warnings welded to the element above and the one below.
+     Margins collapse in block flow, so two in a row still sit 16px apart. */
+  margin-block: 16px;
   padding: 13px 15px;
   border: 1px solid var(--cle-info-border);
   border-radius: var(--cle-radius-md);
@@ -878,6 +900,22 @@
   color: var(--cle-info);
   font-size: var(--cle-text-sm);
   line-height: 1.55;
+}
+
+/* A gap-based container already spaces its children, and margin adds to gap
+   rather than collapsing into it. */
+:where(.cle-stack, .cle-stack-sm, .cle-split, .cle-form, .cle-modal-footer)
+  > .cle-callout {
+  margin-block: 0;
+}
+
+/* The padding of a card or a modal body is the spacing at the edges. */
+.cle-callout:first-child {
+  margin-block-start: 0;
+}
+
+.cle-callout:last-child {
+  margin-block-end: 0;
 }
 
 .cle-callout-success {

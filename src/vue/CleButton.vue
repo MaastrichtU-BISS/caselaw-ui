@@ -17,12 +17,15 @@ const props = withDefaults(defineProps<{
   type?: "button" | "submit" | "reset";
   disabled?: boolean;
   block?: boolean;
+  /** Square, sized to a field rather than to text. Needs an aria-label. */
+  icon?: boolean;
 }>(), {
   variant: "primary",
   size: "md",
   type: "button",
   disabled: false,
   block: false,
+  icon: false,
 });
 
 const classes = computed(() => [
@@ -30,5 +33,6 @@ const classes = computed(() => [
   props.variant === "primary" ? "" : `cle-button-${props.variant}`,
   props.size === "sm" ? "cle-button-sm" : "",
   props.block ? "cle-button-block" : "",
+  props.icon ? "cle-button-icon" : "",
 ].filter(Boolean));
 </script>
