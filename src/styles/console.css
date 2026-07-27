@@ -1484,6 +1484,7 @@
   however long the form inside gets.
 */
 .cle-dock {
+  position: relative;
   display: flex;
   flex: 0 0 var(--cle-dock-width, 420px);
   flex-direction: column;
@@ -1494,6 +1495,57 @@
   min-height: 0;
   border-left: 1px solid var(--cle-border);
   background: var(--cle-card);
+}
+
+/*
+  Drag the dock's inner edge to trade width with the content beside it. How
+  much room a panel deserves depends on what is in it, and the one fixed
+  width that suits a short form does not suit a judgment, so the reader sets
+  it. It straddles the border rather than sitting inside the panel, because
+  the border is what looks draggable, and it is wider than it looks so the
+  target is hittable without being visible.
+*/
+.cle-dock-resizer {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -4px;
+  z-index: 2;
+  width: 9px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: col-resize;
+  touch-action: none;
+}
+
+.cle-dock-resizer::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 4px;
+  width: 1px;
+  background: var(--cle-primary);
+  opacity: 0;
+  transition: opacity 0.12s ease;
+}
+
+.cle-dock-resizer:hover::after,
+.cle-dock-resizer:focus-visible::after,
+.cle-dock-resizer.is-dragging::after {
+  opacity: 1;
+}
+
+.cle-dock-resizer:focus-visible {
+  outline: none;
+}
+
+/* Nothing to trade width with once the dock is covering the content. */
+@media (max-width: 1023px) {
+  .cle-dock-resizer {
+    display: none;
+  }
 }
 
 .cle-dock-header {
