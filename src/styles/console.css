@@ -1955,3 +1955,15 @@
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 18px;
 }
+
+/* A shell that closes with the site footer. The bar is fixed, so the body has
+   to reserve its height and the sidebar has to stop short of it, or the last
+   navigation item and the account block sit underneath it. */
+
+.cle-app-shell.has-footer .cle-app-body {
+  padding-bottom: var(--cle-bottombar-height);
+}
+
+.cle-app-shell.has-footer .cle-app-sidebar {
+  height: calc(100vh - var(--cle-topbar-height) - var(--cle-bottombar-height));
+}

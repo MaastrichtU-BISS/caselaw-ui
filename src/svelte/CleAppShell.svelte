@@ -3,6 +3,7 @@
   import { setCleFavicon, type CleServiceIconName } from "../icons";
   import type { CleLink } from "../tokens";
   import CleServiceIcon from "./CleServiceIcon.svelte";
+  import CleBottomBar from "./CleBottomBar.svelte";
   import CleTopBar from "./CleTopBar.svelte";
 
   export let brand = "Case Law Explorer";
@@ -29,6 +30,17 @@
    * override, and they all reach differently.
    */
   export let fluid = false;
+  /**
+   * Close the page with the same footer the public pages carry.
+   *
+   * A console is a place you stay, so it did without one. A workspace is
+   * still a page of a site, and a product whose signed-in half has no
+   * footer reads as somewhere else entirely. Off unless asked for, so no
+   * existing console grows one by surprise.
+   */
+  export let footer = false;
+  export let footerText = "Managed by BISS Institute.";
+  export let footerLinks: CleLink[] = [];
 
   /** Sidebar is a drawer below 960px; the toggle only renders there. */
   let sidebarOpen = false;
@@ -49,7 +61,7 @@
   $: showSidebarFooter = sidebarFooter ?? Boolean($$slots["sidebar-footer"]);
 </script>
 
-<div class="cle-app-shell">
+<div class="cle-app-shell" class:has-footer={footer}>
   <CleTopBar {brand} {mark} {icon} {iconLabel} {href} links={topLinks}>
     <!-- A <svelte:fragment> must be a direct child of the component, so the
          "was it provided" test goes inside it. Providing a slot at all
@@ -113,4 +125,8 @@
       </div>
     </main>
   </div>
+
+  {#if footer}
+    <CleBottomBar managedBy={footerText} links={footerLinks} />
+  {/if}
 </div>
