@@ -333,7 +333,9 @@
   padding: 13px 14px;
   border-bottom: 1px solid var(--cle-border);
   text-align: left;
-  vertical-align: top;
+  /* Middle, not top: a row whose tallest cell is a button or a badge left
+     every plain text cell floating above it. */
+  vertical-align: middle;
 }
 
 .cle-table th {
