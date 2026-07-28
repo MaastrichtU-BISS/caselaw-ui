@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, ref, useSlots, watch } from "vue";
+import { computed, onBeforeUnmount, onMounted, ref, useSlots, watch } from "vue";
 import { setCleFavicon, type CleServiceIconName } from "../icons";
 import type { CleLink } from "../tokens";
 import CleBottomBar from "./CleBottomBar.vue";
@@ -41,6 +41,83 @@ const props = withDefaults(defineProps<{
 const sidebarOpen = ref(false);
 const slots = useSlots();
 const showFooter = computed(() => props.footer || Boolean(slots.footer));
+
+/**
+ * Widens or narrows the rail.
+ *
+ * Pointer events rather than mouse events so a trackpad, a touchscreen and a
+ * pen all work, and pointer capture keeps the drag alive when the cursor
+ * outruns the handle, which at speed it always does. Arrow keys do the same
+ * thing, since a drag cannot be tabbed to.
+ *
+ * Ported from the Svelte mirror, where it had been the whole time.
+ */
+const SIDEBAR_MIN = 200;
+const SIDEBAR_MAX = 460;
+
+const resizer = ref<HTMLElement | null>(null);
+let startX = 0;
+let startWidth = 0;
+
+function railAndShell() {
+  const node = resizer.value;
+  return {
+    rail: node?.closest<HTMLElement>(".cle-app-sidebar") || null,
+    shell: node?.closest<HTMLElement>(".cle-app-shell") || null,
+  };
+}
+
+function applyWidth(width: number) {
+  const { shell } = railAndShell();
+  if (!shell) return;
+  const next = Math.min(SIDEBAR_MAX, Math.max(SIDEBAR_MIN, width));
+  shell.style.setProperty("--cle-sidebar-width", `${Math.round(next)}px`);
+}
+
+function onPointerMove(event: PointerEvent) {
+  applyWidth(startWidth + (event.clientX - startX));
+}
+
+function onPointerUp(event: PointerEvent) {
+  resizer.value?.releasePointerCapture?.(event.pointerId);
+  resizer.value?.classList.remove("is-dragging");
+  document.body.style.userSelect = "";
+  window.removeEventListener("pointermove", onPointerMove);
+  window.removeEventListener("pointerup", onPointerUp);
+}
+
+function onResizeStart(event: PointerEvent) {
+  if (event.button !== 0) return;
+  const { rail } = railAndShell();
+  if (!rail) return;
+  event.preventDefault();
+  startX = event.clientX;
+  startWidth = rail.getBoundingClientRect().width;
+  resizer.value?.setPointerCapture?.(event.pointerId);
+  resizer.value?.classList.add("is-dragging");
+  document.body.style.userSelect = "none";
+  window.addEventListener("pointermove", onPointerMove);
+  window.addEventListener("pointerup", onPointerUp);
+}
+
+function onResizeKey(event: KeyboardEvent) {
+  const { rail } = railAndShell();
+  if (!rail) return;
+  const step = event.shiftKey ? 64 : 16;
+  if (event.key === "ArrowRight") {
+    event.preventDefault();
+    applyWidth(rail.getBoundingClientRect().width + step);
+  } else if (event.key === "ArrowLeft") {
+    event.preventDefault();
+    applyWidth(rail.getBoundingClientRect().width - step);
+  }
+}
+
+onBeforeUnmount(() => {
+  window.removeEventListener("pointermove", onPointerMove);
+  window.removeEventListener("pointerup", onPointerUp);
+  document.body.style.userSelect = "";
+});
 
 function syncFavicon() {
   if (props.favicon && props.icon) setCleFavicon(props.icon);
@@ -100,6 +177,26 @@ defineExpose({ closeSidebar: () => (sidebarOpen.value = false) });
           <div v-if="$slots['sidebar-footer']" class="cle-sidebar-footer">
             <slot name="sidebar-footer" />
           </div>
+          <!--
+            The rail's width is the user's to set. Product names run as long as
+            the product's own vocabulary makes them, and a table name is chosen
+            by whoever created the table, so one fixed width truncates somebody.
+            Writes the variable the sidebar already sizes from, so nothing
+            downstream needs to know a drag happened.
+
+            This existed only in the Svelte mirror. The Vue consoles set
+            --cle-sidebar-width and listened for the drag to finish, but there
+            was no handle to drag: the workbench looked resizable and was not.
+          -->
+          <button
+            ref="resizer"
+            type="button"
+            class="cle-sidebar-resizer"
+            aria-label="Resize the sidebar"
+            title="Drag to resize"
+            @pointerdown="onResizeStart"
+            @keydown="onResizeKey"
+          />
         </aside>
       </template>
       <main class="cle-app-main" :class="{ 'is-fluid': fluid }">
