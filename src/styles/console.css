@@ -39,6 +39,55 @@
   background: var(--cle-card);
 }
 
+/*
+  The rail's own drag handle. Mirrors .cle-dock-resizer on the other side of
+  the screen: straddling the border, because the border is the part that looks
+  draggable, and wider than it draws so it can be hit without being seen.
+*/
+.cle-sidebar-resizer {
+  position: absolute;
+  top: 0;
+  right: -4px;
+  bottom: 0;
+  z-index: 2;
+  width: 9px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: col-resize;
+  touch-action: none;
+}
+
+.cle-sidebar-resizer::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 4px;
+  width: 1px;
+  background: var(--cle-primary);
+  opacity: 0;
+  transition: opacity 0.12s ease;
+}
+
+.cle-sidebar-resizer:hover::after,
+.cle-sidebar-resizer:focus-visible::after,
+.cle-sidebar-resizer.is-dragging::after {
+  opacity: 1;
+}
+
+.cle-sidebar-resizer:focus-visible {
+  outline: none;
+}
+
+/* Matches the width at which the rail becomes a drawer: once it slides over
+   the content there is nothing left to trade width with. */
+@media (max-width: 960px) {
+  .cle-sidebar-resizer {
+    display: none;
+  }
+}
+
 .cle-sidebar-body {
   flex: 1 1 auto;
   overflow-y: auto;

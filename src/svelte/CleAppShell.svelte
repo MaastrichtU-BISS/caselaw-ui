@@ -59,6 +59,79 @@
 
   $: showSidebar = sidebar ?? Boolean($$slots.sidebar);
   $: showSidebarFooter = sidebarFooter ?? Boolean($$slots["sidebar-footer"]);
+
+  /**
+   * Widens or narrows the rail.
+   *
+   * Pointer events rather than mouse events so a trackpad, a touchscreen and a
+   * pen all work, and pointer capture keeps the drag alive when the cursor
+   * outruns the handle, which at speed it always does. Arrow keys do the same
+   * thing, since a drag cannot be tabbed to.
+   */
+  const SIDEBAR_MIN = 200;
+  const SIDEBAR_MAX = 460;
+
+  function sidebarResize(node: HTMLElement) {
+    const shell = node.closest<HTMLElement>(".cle-app-shell");
+    const rail = node.closest<HTMLElement>(".cle-app-sidebar");
+    if (!shell || !rail) return {};
+
+    let startX = 0;
+    let startWidth = 0;
+
+    function apply(width: number) {
+      const next = Math.min(SIDEBAR_MAX, Math.max(SIDEBAR_MIN, width));
+      shell!.style.setProperty("--cle-sidebar-width", `${Math.round(next)}px`);
+    }
+
+    function onPointerMove(event: PointerEvent) {
+      apply(startWidth + (event.clientX - startX));
+    }
+
+    function onPointerUp(event: PointerEvent) {
+      node.releasePointerCapture?.(event.pointerId);
+      node.classList.remove("is-dragging");
+      document.body.style.userSelect = "";
+      window.removeEventListener("pointermove", onPointerMove);
+      window.removeEventListener("pointerup", onPointerUp);
+    }
+
+    function onPointerDown(event: PointerEvent) {
+      if (event.button !== 0) return;
+      event.preventDefault();
+      startX = event.clientX;
+      startWidth = rail!.getBoundingClientRect().width;
+      node.setPointerCapture?.(event.pointerId);
+      node.classList.add("is-dragging");
+      document.body.style.userSelect = "none";
+      window.addEventListener("pointermove", onPointerMove);
+      window.addEventListener("pointerup", onPointerUp);
+    }
+
+    function onKeydown(event: KeyboardEvent) {
+      const step = event.shiftKey ? 64 : 16;
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        apply(rail!.getBoundingClientRect().width + step);
+      } else if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        apply(rail!.getBoundingClientRect().width - step);
+      }
+    }
+
+    node.addEventListener("pointerdown", onPointerDown);
+    node.addEventListener("keydown", onKeydown);
+
+    return {
+      destroy() {
+        node.removeEventListener("pointerdown", onPointerDown);
+        node.removeEventListener("keydown", onKeydown);
+        window.removeEventListener("pointermove", onPointerMove);
+        window.removeEventListener("pointerup", onPointerUp);
+        document.body.style.userSelect = "";
+      },
+    };
+  }
 </script>
 
 <div class="cle-app-shell" class:has-footer={footer}>
@@ -117,6 +190,20 @@
             <slot name="sidebar-footer" />
           </div>
         {/if}
+        <!--
+          Drag the rail's outer edge to widen it. Navigation labels are as long
+          as the product's own vocabulary makes them, and a saved query is named
+          by whoever saved it, so one fixed width truncates somebody. Writes the
+          variable the sidebar already sizes from, so nothing downstream needs
+          to know a drag happened.
+        -->
+        <button
+          type="button"
+          class="cle-sidebar-resizer"
+          aria-label="Resize the sidebar"
+          title="Drag to resize"
+          use:sidebarResize
+        ></button>
       </aside>
     {/if}
     <main class="cle-app-main" class:is-fluid={fluid}>
