@@ -13,6 +13,16 @@
   export let email: string | undefined = undefined;
   /** Two letters at most. Derived from the name when not given. */
   export let initials: string | undefined = undefined;
+  /**
+   * Where the account lives. Set it and the identity becomes a link.
+   *
+   * The block already names who you are, which makes it the thing people
+   * reach for when they want to do something about that, and until now it
+   * did nothing when clicked. Every console shows this widget, so pointing
+   * it at one account page is what stops each product growing its own.
+   */
+  export let accountHref: string | undefined = undefined;
+  export let accountLabel = "Your account";
   /** Render the sign-out control. */
   export let signOut = false;
   export let signOutLabel = "Sign out";
@@ -57,13 +67,27 @@
 </script>
 
 <div class="cle-sidebar-user">
-  <span class="cle-sidebar-user-avatar" aria-hidden="true">{badge}</span>
-  <span class="cle-sidebar-user-text">
-    <span class="cle-sidebar-user-name">{name}</span>
-    {#if email && email !== name}
-      <span class="cle-sidebar-user-email">{email}</span>
-    {/if}
-  </span>
+  {#if accountHref}
+    <a class="cle-sidebar-user-identity is-linked" href={accountHref} title={accountLabel}>
+      <span class="cle-sidebar-user-avatar" aria-hidden="true">{badge}</span>
+      <span class="cle-sidebar-user-text">
+        <span class="cle-sidebar-user-name">{name}</span>
+        {#if email && email !== name}
+          <span class="cle-sidebar-user-email">{email}</span>
+        {/if}
+      </span>
+    </a>
+  {:else}
+    <span class="cle-sidebar-user-identity">
+      <span class="cle-sidebar-user-avatar" aria-hidden="true">{badge}</span>
+      <span class="cle-sidebar-user-text">
+        <span class="cle-sidebar-user-name">{name}</span>
+        {#if email && email !== name}
+          <span class="cle-sidebar-user-email">{email}</span>
+        {/if}
+      </span>
+    </span>
+  {/if}
   {#if $$slots.actions || signOut}
     <span class="cle-sidebar-user-actions">
       <slot name="actions" />

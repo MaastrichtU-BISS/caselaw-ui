@@ -14,6 +14,16 @@ const props = withDefaults(defineProps<{
   email?: string;
   /** Two letters at most. Derived from the name when not given. */
   initials?: string;
+  /**
+   * Where the account lives. Set it and the identity becomes a link.
+   *
+   * The block already names who you are, which makes it the thing people
+   * reach for when they want to do something about that, and until now it
+   * did nothing when clicked. Every console shows this widget, so pointing
+   * it at one account page is what stops each product growing its own.
+   */
+  accountHref?: string;
+  accountLabel?: string;
   /** Render the sign-out control. */
   signOut?: boolean;
   signOutLabel?: string;
@@ -65,11 +75,18 @@ const derived = computed(() => {
 
 <template>
   <div class="cle-sidebar-user">
-    <span class="cle-sidebar-user-avatar" aria-hidden="true">{{ derived }}</span>
-    <span class="cle-sidebar-user-text">
-      <span class="cle-sidebar-user-name">{{ name }}</span>
-      <span v-if="email && email !== name" class="cle-sidebar-user-email">{{ email }}</span>
-    </span>
+    <component
+      :is="accountHref ? 'a' : 'span'"
+      v-bind="accountHref ? { href: accountHref, title: accountLabel || 'Your account' } : {}"
+      class="cle-sidebar-user-identity"
+      :class="{ 'is-linked': Boolean(accountHref) }"
+    >
+      <span class="cle-sidebar-user-avatar" aria-hidden="true">{{ derived }}</span>
+      <span class="cle-sidebar-user-text">
+        <span class="cle-sidebar-user-name">{{ name }}</span>
+        <span v-if="email && email !== name" class="cle-sidebar-user-email">{{ email }}</span>
+      </span>
+    </component>
     <span v-if="$slots.actions || signOut" class="cle-sidebar-user-actions">
       <slot name="actions" />
       <button

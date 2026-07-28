@@ -52,6 +52,8 @@ const props = withDefaults(defineProps<{
   subtitle?: string;
   crumbs?: CleCrumb[];
   user?: CleConsoleUser;
+  /** Passed through to the account block, making the identity a link. */
+  accountHref?: string;
   /** Render the sign-out control in the account block. */
   signOut?: boolean;
   signOutLabel?: string;
@@ -117,6 +119,7 @@ const showHeader = computed(() => Boolean(props.title || props.crumbs?.length ||
 
     <template v-if="hasSidebar && (user || signOut || $slots['user-actions'])" #sidebar-footer>
       <CleSidebarUser
+        :account-href="accountHref"
         v-if="user"
         v-bind="user"
         :sign-out="signOut"
