@@ -1,5 +1,7 @@
 # caselaw-ui
 
+[![npm](https://img.shields.io/npm/v/caselaw-ui?logo=npm&label=npm&color=%23181849)](https://www.npmjs.com/package/caselaw-ui)
+
 The shared interface layer for the Case Law Explorer products. Design tokens, page
 furniture, tables, forms and code blocks, in both Vue and Svelte, so the products look
 like one product.
