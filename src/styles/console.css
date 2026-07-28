@@ -184,9 +184,122 @@
   text-decoration: underline;
 }
 
-.cle-sidebar-user-identity.is-linked:focus-visible {
+.cle-sidebar-user-identity.is-linked:focus-visible,
+.cle-sidebar-user-identity.is-menu:focus-visible {
   outline: 2px solid var(--cle-accent, currentColor);
   outline-offset: 2px;
+}
+
+/* The menu trigger. A button rather than a link, so it carries no button
+   chrome of its own: the row is the target, and it should look like the row. */
+.cle-sidebar-user-identity.is-menu {
+  grid-template-columns: 30px minmax(0, 1fr) 16px;
+  width: 100%;
+  padding: 5px 6px;
+  border: 0;
+  border-radius: var(--cle-radius-sm);
+  background: none;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.cle-sidebar-user-identity.is-menu:hover {
+  background: var(--cle-surface-muted);
+}
+
+.cle-sidebar-user-chevron {
+  width: 16px;
+  height: 16px;
+  color: var(--cle-muted);
+  transition: transform 0.12s ease;
+}
+
+.cle-sidebar-user-identity.is-menu[aria-expanded="true"] .cle-sidebar-user-chevron {
+  transform: rotate(180deg);
+}
+
+/* ---------------------------------------------------------------------------
+   The account menu.
+
+   Fixed rather than absolute, and mounted on <body>, because it opens upward
+   out of the last row of a scroll container that owns its own stacking
+   context. Positioned from the trigger's rectangle by the component.
+   --------------------------------------------------------------------------- */
+.cle-user-menu {
+  position: fixed;
+  z-index: 60;
+  display: grid;
+  gap: 1px;
+  padding: 6px;
+  border: 1px solid var(--cle-border);
+  border-radius: var(--cle-radius-md);
+  background: var(--cle-card);
+  box-shadow: 0 12px 32px rgba(16, 24, 40, 0.14);
+}
+
+/* The address, which is what the row used to truncate. Selectable, because the
+   reason to look at it is usually to check or copy which account you are in. */
+.cle-user-menu-email {
+  margin: 0;
+  padding: 6px 10px 8px;
+  overflow: hidden;
+  color: var(--cle-muted);
+  font-size: var(--cle-text-sm);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  user-select: text;
+}
+
+.cle-user-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  padding: 8px 10px;
+  border: 0;
+  border-radius: var(--cle-radius-sm);
+  background: none;
+  color: var(--cle-text-body);
+  font: inherit;
+  font-size: var(--cle-text-sm);
+  font-weight: 750;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.cle-user-menu-item svg {
+  width: 16px;
+  height: 16px;
+  flex: none;
+  color: var(--cle-muted);
+}
+
+.cle-user-menu-item:hover {
+  background: var(--cle-surface-muted);
+  color: var(--cle-text);
+}
+
+.cle-user-menu-item:focus-visible {
+  outline: 2px solid var(--cle-primary);
+  outline-offset: -2px;
+}
+
+.cle-user-menu-item.is-danger,
+.cle-user-menu-item.is-danger svg {
+  color: var(--cle-danger);
+}
+
+.cle-user-menu-item.is-danger:hover {
+  background: var(--cle-danger-surface, rgba(196, 22, 28, 0.08));
+}
+
+.cle-user-menu-separator {
+  height: 1px;
+  margin: 5px 6px;
+  border: 0;
+  background: var(--cle-border-subtle);
 }
 
 .cle-sidebar-user-text {
