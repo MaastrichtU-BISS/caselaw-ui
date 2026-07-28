@@ -85,7 +85,8 @@ and your content between them. Entry pages and marketing pages use it.
 ```
 
 **`CleConsoleLayout`** is the signed-in face: the same top bar, plus a sidebar, a
-breadcrumb trail, a page header and an account block.
+breadcrumb trail, a page header and an account block. Set `footer` to close a
+workspace with the shared bottom bar; its body and sidebar automatically leave room.
 
 ```vue
 <CleConsoleLayout
@@ -94,6 +95,9 @@ breadcrumb trail, a page header and an account block.
   title="API reference"
   subtitle="The live API surface."
   :crumbs="[{ label: 'Citations API', href: '/' }, { label: 'Docs' }]"
+  footer
+  footer-text="Managed by BISS Institute."
+  :footer-links="[{ label: 'BISS Institute', href: '...', external: true }]"
 >
   <template #nav>
     <CleNavSection heading="Endpoints">

@@ -30,6 +30,10 @@
   export let favicon = true;
   export let href = "/";
   export let topLinks: CleLink[] = [];
+  /** Close the console with the shared site footer. */
+  export let footer = false;
+  export let footerText = "Managed by BISS Institute.";
+  export let footerLinks: CleLink[] = [];
   /** Hand the content area the whole surface. See CleAppShell. */
   export let fluid = false;
   /** Heading. Omit to render content with no header at all. */
@@ -59,6 +63,9 @@
   {favicon}
   {href}
   {topLinks}
+  {footer}
+  {footerText}
+  {footerLinks}
   {fluid}
   sidebar={hasSidebar}
   sidebarFooter={hasSidebar && Boolean(user || signOut || $$slots["user-actions"])}

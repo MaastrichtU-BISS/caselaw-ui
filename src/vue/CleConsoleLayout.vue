@@ -41,6 +41,10 @@ const props = withDefaults(defineProps<{
   favicon?: boolean;
   href?: string;
   topLinks?: CleLink[];
+  /** Close the console with the shared site footer. */
+  footer?: boolean;
+  footerText?: string;
+  footerLinks?: CleLink[];
   /** Hand the content area the whole surface. See CleAppShell. */
   fluid?: boolean;
   /** Heading. Omit to render content with no header at all. */
@@ -71,6 +75,9 @@ const props = withDefaults(defineProps<{
   favicon: true,
   href: "/",
   topLinks: () => [],
+  footer: false,
+  footerText: "Managed by BISS Institute.",
+  footerLinks: () => [],
   fluid: false,
 });
 
@@ -89,6 +96,9 @@ const showHeader = computed(() => Boolean(props.title || props.crumbs?.length ||
     :favicon="favicon"
     :href="href"
     :top-links="topLinks"
+    :footer="footer"
+    :footer-text="footerText"
+    :footer-links="footerLinks"
     :fluid="fluid"
   >
     <template v-if="$slots.icon" #icon><slot name="icon" /></template>
@@ -121,6 +131,8 @@ const showHeader = computed(() => Boolean(props.title || props.crumbs?.length ||
       </CleSidebarUser>
       <div v-else class="cle-sidebar-user-actions"><slot name="user-actions" /></div>
     </template>
+
+    <template v-if="$slots.footer" #footer><slot name="footer" /></template>
 
     <CleConsoleHeader
       v-if="showHeader"

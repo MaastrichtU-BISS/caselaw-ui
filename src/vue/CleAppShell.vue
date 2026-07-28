@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { onMounted, ref, watch } from "vue";
+import { computed, onMounted, ref, useSlots, watch } from "vue";
 import { setCleFavicon, type CleServiceIconName } from "../icons";
 import type { CleLink } from "../tokens";
+import CleBottomBar from "./CleBottomBar.vue";
 import CleTopBar from "./CleTopBar.vue";
 
 const props = withDefaults(defineProps<{
@@ -12,6 +13,10 @@ const props = withDefaults(defineProps<{
   favicon?: boolean;
   href?: string;
   topLinks?: CleLink[];
+  /** Close the console with the shared site footer. */
+  footer?: boolean;
+  footerText?: string;
+  footerLinks?: CleLink[];
   /**
    * Let the content own the whole area: no page padding, no measure.
    *
@@ -27,10 +32,15 @@ const props = withDefaults(defineProps<{
   favicon: true,
   href: "/",
   topLinks: () => [],
+  footer: false,
+  footerText: "Managed by BISS Institute.",
+  footerLinks: () => [],
 });
 
 /** Sidebar is a drawer below 960px; the toggle only renders there. */
 const sidebarOpen = ref(false);
+const slots = useSlots();
+const showFooter = computed(() => props.footer || Boolean(slots.footer));
 
 function syncFavicon() {
   if (props.favicon && props.icon) setCleFavicon(props.icon);
@@ -43,7 +53,7 @@ defineExpose({ closeSidebar: () => (sidebarOpen.value = false) });
 </script>
 
 <template>
-  <div class="cle-app-shell">
+  <div class="cle-app-shell" :class="{ 'has-footer': showFooter }">
     <CleTopBar
       :brand="brand"
       :mark="mark"
@@ -98,5 +108,9 @@ defineExpose({ closeSidebar: () => (sidebarOpen.value = false) });
         </div>
       </main>
     </div>
+
+    <CleBottomBar v-if="showFooter" :managed-by="footerText" :links="footerLinks">
+      <slot v-if="$slots.footer" name="footer" />
+    </CleBottomBar>
   </div>
 </template>
