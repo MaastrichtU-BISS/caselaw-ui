@@ -223,6 +223,6 @@ git push origin main --tags
 
 ## Related repositories
 
-- [caselaw-access](https://github.com/davidwickerhf/caselaw-access), whose console is built from this
-- [caselaw-auth](https://github.com/davidwickerhf/caselaw-auth), the shared sign-in
-- [caselaw-coolify](https://github.com/davidwickerhf/caselaw-coolify), the deployment bundle
+- [caselaw-access](https://github.com/MaastrichtU-BISS/caselaw-access), whose console is built from this
+- [caselaw-auth](https://github.com/MaastrichtU-BISS/caselaw-auth), the shared sign-in
+- [caselaw-coolify](https://github.com/MaastrichtU-BISS/caselaw-coolify), the deployment bundle
