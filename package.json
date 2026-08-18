@@ -2,6 +2,14 @@
   "name": "caselaw-ui",
   "version": "0.9.26",
   "description": "Shared Case Law Explorer design tokens and Vue/Svelte UI primitives.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MaastrichtU-BISS/caselaw-ui.git"
+  },
+  "homepage": "https://github.com/MaastrichtU-BISS/caselaw-ui#readme",
+  "bugs": {
+    "url": "https://github.com/MaastrichtU-BISS/caselaw-ui/issues"
+  },
   "type": "module",
   "license": "MIT",
   "sideEffects": [
