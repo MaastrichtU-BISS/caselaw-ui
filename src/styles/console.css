@@ -1776,15 +1776,29 @@
   is the honest option.
 */
 @media (max-width: 1023px) {
+  /*
+    Pinned to the band .cle-dock-layout bounds, not to the window.
+
+    Going fixed takes the panel out of that layout, so its height stops being
+    the layout's and becomes the viewport's. Anchoring it to the window instead
+    puts the header behind the top bar and the submit button behind the site
+    credits -- the exact failure the layout above is written to avoid, brought
+    back at the one width where the panel is the whole screen and there is
+    nothing else to scroll to reach it.
+  */
   .cle-dock {
     position: fixed;
-    top: 0;
+    top: var(--cle-topbar-height);
     right: 0;
     bottom: 0;
     z-index: 50;
     width: min(var(--cle-dock-width, 420px), 100%);
     height: auto;
     box-shadow: var(--cle-shadow-lg);
+  }
+
+  .cle-app-shell.has-footer .cle-dock {
+    bottom: var(--cle-bottombar-height);
   }
 
   .cle-dock-scrim {
