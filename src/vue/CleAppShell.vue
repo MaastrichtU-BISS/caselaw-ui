@@ -39,6 +39,32 @@ const props = withDefaults(defineProps<{
 
 /** Sidebar is a drawer below 960px; the toggle only renders there. */
 const sidebarOpen = ref(false);
+
+/**
+ * Above 960px the rail folds down to a strip instead. A workspace (a graph,
+ * a results table) wants the width back, and a sidebar that can only be
+ * narrowed to 200px does not give enough of it. Remembered per browser,
+ * since whoever folds it away once wants it folded on the next page too.
+ */
+const COLLAPSED_KEY = "cle-sidebar-collapsed";
+const sidebarCollapsed = ref(false);
+
+function setCollapsed(next: boolean) {
+  sidebarCollapsed.value = next;
+  try {
+    localStorage.setItem(COLLAPSED_KEY, next ? "1" : "0");
+  } catch {
+    // Storage can be blocked; the rail still folds, it just forgets.
+  }
+}
+
+onMounted(() => {
+  try {
+    sidebarCollapsed.value = localStorage.getItem(COLLAPSED_KEY) === "1";
+  } catch {
+    sidebarCollapsed.value = false;
+  }
+});
 const slots = useSlots();
 const showFooter = computed(() => props.footer || Boolean(slots.footer));
 
@@ -130,7 +156,13 @@ defineExpose({ closeSidebar: () => (sidebarOpen.value = false) });
 </script>
 
 <template>
-  <div class="cle-app-shell" :class="{ 'has-footer': showFooter }">
+  <div
+    class="cle-app-shell"
+    :class="{
+      'has-footer': showFooter,
+      'is-sidebar-collapsed': Boolean($slots.sidebar) && sidebarCollapsed,
+    }"
+  >
     <CleTopBar
       :brand="brand"
       :mark="mark"
@@ -168,6 +200,20 @@ defineExpose({ closeSidebar: () => (sidebarOpen.value = false) });
           @click="sidebarOpen = false"
         />
         <aside class="cle-app-sidebar" :class="{ 'is-open': sidebarOpen }">
+          <!-- Sits on the rail's border so it is still there, and in the same
+               place, once the rail has folded down to a strip. -->
+          <button
+            type="button"
+            class="cle-sidebar-collapse"
+            :aria-expanded="!sidebarCollapsed"
+            :aria-label="sidebarCollapsed ? 'Expand the sidebar' : 'Collapse the sidebar'"
+            :title="sidebarCollapsed ? 'Expand the sidebar' : 'Collapse the sidebar'"
+            @click="setCollapsed(!sidebarCollapsed)"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="m15 18-6-6 6-6" />
+            </svg>
+          </button>
           <!-- Closing on click is what dismisses the mobile drawer after a nav
                link is followed. Scoped to the scrolling body so the account
                block's own buttons do not inherit it. -->

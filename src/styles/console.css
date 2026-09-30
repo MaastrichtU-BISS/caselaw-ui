@@ -88,6 +88,77 @@
   }
 }
 
+/*
+  Folds the rail to a strip on desktop. The strip keeps the border and the
+  button that brings the rail back; everything else is hidden rather than
+  squeezed, since navigation at 16px wide is not navigation.
+*/
+.cle-sidebar-collapse {
+  position: absolute;
+  top: 14px;
+  right: -12px;
+  z-index: 3;
+  display: inline-grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 1px solid var(--cle-border);
+  border-radius: 999px;
+  background: var(--cle-card);
+  color: var(--cle-muted);
+  box-shadow: var(--cle-shadow-sm);
+  cursor: pointer;
+  transition: color 0.12s ease, border-color 0.12s ease;
+}
+
+.cle-sidebar-collapse svg {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.18s ease;
+}
+
+.cle-sidebar-collapse:hover,
+.cle-sidebar-collapse:focus-visible {
+  border-color: var(--cle-primary);
+  color: var(--cle-primary);
+}
+
+.cle-sidebar-collapse:focus-visible {
+  outline: 2px solid var(--cle-primary);
+  outline-offset: 2px;
+}
+
+@media (min-width: 961px) {
+  /* Above the content that follows it, so the button on its border is not
+     painted over by a positioned canvas in the main area. */
+  .cle-app-sidebar {
+    z-index: 4;
+  }
+
+  .cle-app-shell.is-sidebar-collapsed .cle-app-sidebar {
+    flex-basis: 16px;
+    width: 16px;
+  }
+
+  .cle-app-shell.is-sidebar-collapsed .cle-sidebar-body,
+  .cle-app-shell.is-sidebar-collapsed .cle-sidebar-footer,
+  .cle-app-shell.is-sidebar-collapsed .cle-sidebar-resizer {
+    display: none;
+  }
+
+  .cle-app-shell.is-sidebar-collapsed .cle-sidebar-collapse svg {
+    transform: rotate(180deg);
+  }
+}
+
+/* The drawer has its own Menu toggle and scrim. */
+@media (max-width: 960px) {
+  .cle-sidebar-collapse {
+    display: none;
+  }
+}
+
 .cle-sidebar-body {
   flex: 1 1 auto;
   overflow-y: auto;

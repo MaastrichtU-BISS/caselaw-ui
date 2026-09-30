@@ -46,6 +46,24 @@
   let sidebarOpen = false;
   let mounted = false;
 
+  /**
+   * Above 960px the rail folds down to a strip instead. A workspace (a graph,
+   * a results table) wants the width back, and a sidebar that can only be
+   * narrowed to 200px does not give enough of it. Remembered per browser,
+   * since whoever folds it away once wants it folded on the next page too.
+   */
+  const COLLAPSED_KEY = "cle-sidebar-collapsed";
+  let sidebarCollapsed = false;
+
+  function setCollapsed(next: boolean) {
+    sidebarCollapsed = next;
+    try {
+      localStorage.setItem(COLLAPSED_KEY, next ? "1" : "0");
+    } catch {
+      // Storage can be blocked; the rail still folds, it just forgets.
+    }
+  }
+
   function syncFavicon() {
     if (favicon && icon) setCleFavicon(icon);
   }
@@ -53,6 +71,11 @@
   onMount(() => {
     mounted = true;
     syncFavicon();
+    try {
+      sidebarCollapsed = localStorage.getItem(COLLAPSED_KEY) === "1";
+    } catch {
+      sidebarCollapsed = false;
+    }
   });
 
   $: if (mounted) syncFavicon();
@@ -134,7 +157,11 @@
   }
 </script>
 
-<div class="cle-app-shell" class:has-footer={footer}>
+<div
+  class="cle-app-shell"
+  class:has-footer={footer}
+  class:is-sidebar-collapsed={showSidebar && sidebarCollapsed}
+>
   <CleTopBar {brand} {mark} {icon} {iconLabel} {href} links={topLinks}>
     <!-- A <svelte:fragment> must be a direct child of the component, so the
          "was it provided" test goes inside it. Providing a slot at all
@@ -175,6 +202,20 @@
         ></button>
       {/if}
       <aside class="cle-app-sidebar" class:is-open={sidebarOpen}>
+        <!-- Sits on the rail's border so it is still there, and in the same
+             place, once the rail has folded down to a strip. -->
+        <button
+          type="button"
+          class="cle-sidebar-collapse"
+          aria-expanded={!sidebarCollapsed}
+          aria-label={sidebarCollapsed ? "Expand the sidebar" : "Collapse the sidebar"}
+          title={sidebarCollapsed ? "Expand the sidebar" : "Collapse the sidebar"}
+          on:click={() => setCollapsed(!sidebarCollapsed)}
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="m15 18-6-6 6-6" />
+          </svg>
+        </button>
         <!-- Closing on click is what dismisses the mobile drawer after a nav
              link is followed. Scoped to the scrolling body so the account
              block's own buttons do not inherit it. -->
