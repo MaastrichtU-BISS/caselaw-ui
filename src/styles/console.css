@@ -89,9 +89,8 @@
 }
 
 /*
-  Folds the rail to a strip on desktop. The strip keeps the border and the
-  button that brings the rail back; everything else is hidden rather than
-  squeezed, since navigation at 16px wide is not navigation.
+  Folds the rail away on desktop. The button sits on the rail's border while
+  it is open and becomes a tab on the window edge once it is folded.
 */
 .cle-sidebar-collapse {
   position: absolute;
@@ -136,9 +135,21 @@
     z-index: 4;
   }
 
+  /* Gone entirely, border included: an empty strip with a rule down it is
+     a sidebar that looks broken, not one that was put away. */
   .cle-app-shell.is-sidebar-collapsed .cle-app-sidebar {
-    flex-basis: 16px;
-    width: 16px;
+    flex-basis: 0;
+    width: 0;
+    border-right: 0;
+  }
+
+  /* What is left is a tab on the window edge that pulls the rail back. */
+  .cle-app-shell.is-sidebar-collapsed .cle-sidebar-collapse {
+    right: auto;
+    left: 0;
+    width: 20px;
+    border-left: 0;
+    border-radius: 0 999px 999px 0;
   }
 
   .cle-app-shell.is-sidebar-collapsed .cle-sidebar-body,
