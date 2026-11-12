@@ -46,7 +46,7 @@ export async function testExpanded(page, width) {
   const dialog = page.getByRole('dialog', { name: 'Edit research project' });
   await expect(dialog).toBeVisible();
   await expect(dialog.getByRole('textbox')).toBeFocused();
-  await accessibility('dialog:modal', 'dialog');
+  await accessibility('[role=dialog]', 'dialog:modal');
   await dialog.getByRole('button', { name: 'Nested dialog actions' }).click();
   await page
     .locator('.biss-floating:popover-open')

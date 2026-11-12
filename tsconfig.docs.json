@@ -1,1 +1,28 @@
-{"extends":"./tsconfig.json","compilerOptions":{"resolveJsonModule":true,"allowSyntheticDefaultImports":true,"types":["svelte","vite/client"]},"include":["docs-site/**/*.vue","docs-site/**/*.ts","examples/catalog-data.ts","src/**/*.ts","src/**/*.vue","src/**/*.d.ts"]}
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "types": [
+      "svelte",
+      "vite/client"
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "biss-ui/vue": [
+        "src/vue/index.ts"
+      ],
+      "biss-ui/svelte": [
+        "src/svelte/index.ts"
+      ]
+    }
+  },
+  "include": [
+    "docs-site/**/*.vue",
+    "docs-site/**/*.ts",
+    "examples/catalog-data.ts",
+    "src/**/*.ts",
+    "src/**/*.vue",
+    "src/**/*.d.ts"
+  ]
+}

@@ -116,7 +116,7 @@ const groups = {
 const descriptions = {
   Button: 'A clear action with an explicit visual priority.',
   Menu: 'Searchable actions, checked choices and nested groups in a floating panel.',
-  Dialog: 'A focused task with native modal behavior, a title and an action row.',
+  Dialog: 'Connected dialog parts with managed focus, nested layers and a shared visual recipe.',
   Modal: 'The modal API, for consumers migrating an existing dialog.',
   ConfirmDialog: 'An explicit confirmation before a consequential action.',
   SidePanel: 'Keep a record’s details in view without leaving the surrounding work.',

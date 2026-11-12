@@ -249,3 +249,5 @@ export { default as BissPresenceCursor } from './BissPresenceCursor.svelte';
 export { default as BissDeadlineList } from './BissDeadlineList.svelte';
 
 export { default as BissStackedBar } from './BissStackedBar.svelte';
+
+export * as Dialog from './dialog';

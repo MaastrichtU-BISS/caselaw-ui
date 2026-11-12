@@ -7,6 +7,7 @@ import catalog from './generated/components.json';
 import { guides } from './content';
 import { example } from './examples';
 import Workbench from './Workbench.vue';
+import DialogDocumentation from './DialogDocumentation.vue';
 import { fixtures } from './fixtures';
 const route = ref(location.hash.slice(1).split('?')[0] || '/getting-started'),
   query = ref(''),
@@ -72,7 +73,7 @@ function resizePreview(event: Event) {
 }
 const sections = computed(() =>
   current.value
-    ? ['Preview', 'Usage', 'Props', 'Events and composition', 'Guidance']
+    ? current.value.name==='BissDialog'?['Preview','Installation','Anatomy','State','Customization','API','Accessibility']:['Preview', 'Usage', 'Props', 'Events and composition', 'Guidance']
     : (guide.value?.sections.map((s) => s.title) ?? []),
 );
 const anchor = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-');
@@ -270,6 +271,8 @@ onBeforeUnmount(() => {
                 : 'Svelte only'
           }}</span>
         </div>
+        <DialogDocumentation v-if="current.name==='BissDialog'" :framework="framework"/>
+        <template v-else>
         <section id="preview" class="docs-section">
           <h2>Preview</h2>
           <div class="preview-toolbar">
@@ -444,6 +447,7 @@ onBeforeUnmount(() => {
             >{{ label(c.short) }}<BissIcon name="chev"
           /></a>
         </nav>
+        </template>
       </template>
       <template v-else-if="route === '/playground'"
         ><div class="breadcrumbs">BISS UI in use</div>

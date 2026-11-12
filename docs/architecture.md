@@ -13,6 +13,29 @@ entry point; the root entry point has no framework dependency.
 | `biss-ui/styles.css` | One shared visual system, imported once by the host |
 | `biss-ui/tokens` | Generated token values and theme types |
 
+| `biss-ui/vue/dialog` | Connected Vue Dialog parts, backed by Reka UI |
+| `biss-ui/svelte/dialog` | Connected Svelte Dialog parts, backed by Bits UI |
+
+## Dialog reference implementation
+
+Dialog is the first family using the reference architecture. Framework primitives
+provide context, focus management, presence, nesting and dismissal. Styled adapters
+in `src/vue/dialog/` and `src/svelte/dialog/` forward their public props, callbacks
+and composition mechanisms. `src/theme/dialog.ts` defines the shared sizes and
+part classes; `src/styles/dialog.css` supplies the Bizzy recipe. `BissDialog`,
+Modal and ConfirmDialog compose these parts. Other overlay families retain their
+existing implementations until their migration.
+
+The optional peers `reka-ui` and `bits-ui` belong to their respective framework
+entry points. The core entry remains framework independent. Consumers can import
+Dialog parts directly without the full framework entry. Package tests exercise
+these subpaths from the installed tarball.
+
+`docs-site/examples/dialog/manifest.ts` connects authored paired files to the
+preview runner and raw source view. Interaction tests reuse those exact examples
+at desktop and phone widths, including validation and nested focus restoration.
+This pattern replaces fixture serialization family by family.
+
 ## Boundaries
 
 `src/core/` owns portable data contracts and pure behavior. It cannot import a
@@ -120,3 +143,11 @@ host styles override the library without selector escalation. A wrapper can sele
 The docs render actual selected-framework components in an isolated frame, and the
 [playground](https://bissui.wicker.life/#/playground) demonstrates composition. See
 [the quality audit](library-audit.md) for changes and outstanding architectural work.
+
+### Upstream declaration checking
+
+Type checking skips upstream declaration internals (`skipLibCheck`) because the
+foundations include optional browser globals and Svelte utility declarations that
+do not compile in this mixed-framework environment. Library source remains strict,
+and the installed consumer test checks valid and rejected public props explicitly.
+This does not replace upstream type checks when upgrading either foundation.

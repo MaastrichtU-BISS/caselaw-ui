@@ -1,1 +1,24 @@
-{"extends":"./tsconfig.svelte.json","compilerOptions":{"resolveJsonModule":true,"allowSyntheticDefaultImports":true},"include":["docs-site/SveltePreview.svelte","docs-site/fixtures.ts","docs-site/new-fixtures.ts","examples/catalog-data.ts","src/svelte/**/*.svelte","src/core/**/*.ts"],"exclude":[]}
+{
+  "extends": "./tsconfig.svelte.json",
+  "compilerOptions": {
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "paths": {
+      "biss-ui/svelte": [
+        "src/svelte/index.ts"
+      ]
+    }
+  },
+  "include": [
+    "docs-site/SveltePreview.svelte",
+    "docs-site/fixtures.ts",
+    "docs-site/new-fixtures.ts",
+    "examples/catalog-data.ts",
+    "src/svelte/**/*.svelte",
+    "src/core/**/*.ts",
+    "docs-site/examples/**/*.svelte",
+    "docs-site/examples/**/*.ts"
+  ],
+  "exclude": []
+}

@@ -1199,7 +1199,7 @@ Callbacks:
 
 ## BissDialog
 
-A focused task with native modal behavior, a title and an action row.
+Connected dialog parts with managed focus, nested layers and a shared visual recipe.
 
 [Vue source](../src/vue/BissDialog.vue) · [Svelte source](../src/svelte/BissDialog.svelte)
 
@@ -1209,14 +1209,18 @@ A focused task with native modal behavior, a title and an action row.
 |---|---|---|---|
 | `open` | `boolean` | No | `false` |
 | `title` | `string` | Yes | — |
-| `description` | `string \| undefined` | No | `undefined` |
-| `width` | `number` | No | `520` |
+| `description` | `string` | No | — |
+| `width` | `number` | No | — |
+| `size` | `BissDialogSize` | No | `'md'` |
 | `closeLabel` | `string` | No | `'Close'` |
 | `busy` | `boolean` | No | `false` |
+| `portal` | `boolean` | No | `false` |
+| `ui` | `BissDialogUi` | No | — |
 
 Events:
 
 - `close`: `[]`
+- `update:open`: `[open: boolean]`
 
 Slots: `default`, `actions`.
 
@@ -1226,17 +1230,22 @@ Slots: `default`, `actions`.
 |---|---|---|---|
 | `open` | `boolean` | No | `$bindable(false)` |
 | `title` | `string` | Yes | — |
-| `description` | `string \| undefined` | No | `undefined` |
-| `width` | `number` | No | `520` |
+| `description` | `string` | No | — |
+| `width` | `number` | No | — |
+| `size` | `BissDialogSize` | No | `'md'` |
 | `closeLabel` | `string` | No | `'Close'` |
 | `busy` | `boolean` | No | `false` |
+| `portal` | `boolean` | No | `false` |
+| `ui` | `BissDialogUi` | No | — |
 | `onclose` | `() => void` | No | — |
+| `onOpenChange` | `(open: boolean) => void` | No | — |
 | `children` | `Snippet` | No | — |
 | `actions` | `Snippet` | No | — |
 
 Callbacks:
 
 - `onclose`: `() => void`
+- `onOpenChange`: `(open: boolean) => void`
 
 Snippets: `children`, `actions`.
 

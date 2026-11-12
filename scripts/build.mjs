@@ -2,6 +2,7 @@
 import { execFileSync } from 'node:child_process';
 import { rm, mkdir, cp, readdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
+import { existsSync } from 'node:fs';
 const run = (file, args) => execFileSync(process.execPath, [file, ...args], { stdio: 'inherit' });
 await rm('dist', { recursive: true, force: true });
 await mkdir('dist', { recursive: true });
@@ -28,7 +29,15 @@ async function normalize(dir) {
       let s = await readFile(file, 'utf8');
       s = s.replace(
         /(from\s*['"]|import\(['"]|import\s*['"])(\.[^'"]+)(['"])/g,
-        (_, prefix, spec, quote) => prefix + (path.extname(spec) ? spec : spec + '.js') + quote,
+        (_, prefix, spec, quote) =>
+          prefix +
+          (path.extname(spec)
+            ? spec
+            : existsSync(path.resolve(path.dirname(file), spec, 'index.js')) ||
+                existsSync(path.resolve(path.dirname(file), spec, 'index.d.ts'))
+              ? spec + '/index.js'
+              : spec + '.js') +
+          quote,
       );
       await writeFile(file, s);
     }

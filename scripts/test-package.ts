@@ -28,7 +28,7 @@ try {
     '-C',
     join(consumer, 'node_modules/biss-ui'),
   ]);
-  for (const dependency of ['vue', 'svelte', '@vue'])
+  for (const dependency of ['vue', 'svelte', '@vue','reka-ui','bits-ui','vue-component-type-helpers'])
     await symlink(
       join(root, 'node_modules', dependency),
       join(consumer, 'node_modules', dependency),
@@ -50,6 +50,16 @@ try {
 import type {BissButtonProps as VueButtonProps,BissDataGridProps as VueGridProps} from 'biss-ui/vue';
 import type {BissButtonProps as SvelteButtonProps,BissDataGridProps as SvelteGridProps} from 'biss-ui/svelte';
 import {createBissToasts} from 'biss-ui';
+import type {RootProps as VueDialogRootProps,ContentProps as VueDialogContentProps} from 'biss-ui/vue/dialog';
+import type {RootProps as SvelteDialogRootProps,ContentProps as SvelteDialogContentProps} from 'biss-ui/svelte/dialog';
+const vueDialog:VueDialogRootProps={open:true};
+const svelteDialog:SvelteDialogRootProps={open:false};
+const vueDialogContent:VueDialogContentProps={size:'lg'};
+const svelteDialogContent:SvelteDialogContentProps={size:'sm'};
+// @ts-expect-error Reject invalid compound state.
+const badVueDialog:VueDialogRootProps={open:'bad'};
+// @ts-expect-error Reject invalid compound width variants.
+const badSvelteContent:SvelteDialogContentProps={size:'huge'};
 import type {BissColumn} from 'biss-ui/core';
 const button:VueButtonProps={variant:'primary',disabled:true};
 const other:SvelteButtonProps={onclick:()=>{},disabled:true};
@@ -62,7 +72,7 @@ const badVue:VueButtonProps={variant:'unsupported'};
 const badSvelte:SvelteButtonProps={variant:'unsupported'};
 createBissToasts().push('Saved');
 `);
-  const program=ts.createProgram([join(consumer,'consumer.ts')],{strict:true,noEmit:true,target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.ESNext,moduleResolution:ts.ModuleResolutionKind.Bundler,types:[],skipLibCheck:false});
+  const program=ts.createProgram([join(consumer,'consumer.ts')],{strict:true,noEmit:true,target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.ESNext,moduleResolution:ts.ModuleResolutionKind.Bundler,types:[],skipLibCheck:true});
   const diagnostics=ts.getPreEmitDiagnostics(program);
   assert.equal(diagnostics.length,0,ts.formatDiagnosticsWithColorAndContext(diagnostics,{getCurrentDirectory:()=>consumer,getCanonicalFileName:f=>f,getNewLine:()=> '\n'}));
   // A real consumer entry builds without a Vue compiler plugin.
@@ -89,7 +99,7 @@ createBissToasts().push('Saved');
     root: consumer,
     logLevel: 'error',
     plugins: [svelte()],
-    ssr: { noExternal: ['biss-ui'] },
+    ssr: { noExternal: ['biss-ui','bits-ui','svelte-toolbelt','runed'] },
     server: { middlewareMode: true, fs: { allow: [consumer, root] } },
   });
   const sv = await server.ssrLoadModule('/svelte-entry.js');

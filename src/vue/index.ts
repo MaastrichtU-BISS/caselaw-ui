@@ -246,3 +246,5 @@ export { default as BissDeadlineList } from './BissDeadlineList.vue';
 export { default as BissStackedBar } from './BissStackedBar.vue';
 
 export { createBissUI, provideBissToasts } from './toasts';
+
+export * as Dialog from './dialog';

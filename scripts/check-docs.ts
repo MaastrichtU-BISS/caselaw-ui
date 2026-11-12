@@ -1,3 +1,4 @@
+import {testDialogExamples} from './test-dialog.mjs';
 import { mkdir } from 'node:fs/promises';
 import { chromium, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
@@ -83,6 +84,7 @@ try {
       path: `artifacts/docs/${width === 390 ? 'phone' : 'desktop'}-kanban.png`,
       fullPage: true,
     });
+    await testDialogExamples(page,'http://127.0.0.1:4189',width);
     await context.close();
   }
   // Verify each generated route and default image, including framework-only components.

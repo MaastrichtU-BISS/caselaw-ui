@@ -212,3 +212,14 @@ Then migrate Button/Field, Popover/Menu/Select, Tabs and data-display foundation
 rebuild application blocks on those foundations; migrate the docs catalogue through
 its example manifest. A source-copy registry/CLI can follow if consumers need code
 ownership. It is not a prerequisite for a usable npm library.
+
+## Implemented reference slice
+
+Dialog now implements the connected parts above in both frameworks, with optional
+Reka/Bits peer dependencies, direct Dialog subpaths and a shared size/part recipe.
+The convenient wrapper supports native open binding and `ui` overrides. Four paired
+authored examples run unchanged in the docs: basic, controlled validation, nested
+layers and the wrapper. Their source view reads the same files. Browser checks
+cover keyboard composition, focus trapping/restoration, outside dismissal, nested
+Escape, validation and accessibility at 1440px and 390px. Installed-artifact tests
+check SSR and public part types. The remaining families still need migration.

@@ -9,6 +9,9 @@ This branch is a release candidate. Nothing has been published to npm.
 ```sh
 # After the first preview publication
 npm install biss-ui@next
+# Add the foundation for your framework
+npm install reka-ui # Vue
+# npm install bits-ui # Svelte
 ```
 
 ```vue
@@ -57,6 +60,19 @@ Fonts are supplied by the host; the package makes no font network requests.
 Components inherit CSS tokens, support documented slots, and expose native
 attributes where their framework implementation allows them. There is no global
 HTML reset. Dark themes require supplying the full semantic token palette.
+
+## Connected component architecture
+
+Dialog is the first migrated family: `Dialog.Root`, `Trigger`, `Portal`,
+`Overlay`, `Content`, `Title`, `Description` and `Close` share scoped state,
+keyboard behavior and a Bizzy styling recipe. Use `biss-ui/vue/dialog` or
+`biss-ui/svelte/dialog` for part-level imports. `BissDialog` remains the convenient
+wrapper with framework-native open binding, sizing and per-part `ui` classes.
+
+Vue uses Reka UI 2.11+; Svelte uses Bits UI 2.21+ and Svelte 5.33+. Install only
+the provider for your framework. Other families are still being migrated; the
+[reference architecture](docs/reference-architecture.md) records the sequence.
+[Try the paired Dialog examples](https://bissui.wicker.life/#/components/dialog).
 
 ## Quality and composition
 

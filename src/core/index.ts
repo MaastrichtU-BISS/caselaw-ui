@@ -9,3 +9,5 @@ export * from './toasts';
 export { fieldControl, type BissFieldContext } from './field';
 
 export { dataGridModel } from './data-grid';
+
+export {bissDialogTheme,type BissDialogSize,type BissDialogUi} from '../theme/dialog';

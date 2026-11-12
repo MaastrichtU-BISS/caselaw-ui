@@ -27,3 +27,15 @@ The new package ships built artifacts. Vue consumers load compiled ESM;
 Svelte consumers load standard preprocessed Svelte components. See
 [architecture](architecture.md) for SSR, entry points and lifecycle ownership,
 and [independent releases](biss-migration.md) for the publication boundary.
+
+## Dialog foundation migration
+
+BissDialog retains `open`, `title`, `description`, `width`, `busy`, `portal`,
+`closeLabel` and the existing close event/callback. Vue adds `v-model:open`; Svelte
+adds `bind:open` and `onOpenChange`. Both add `size` and per-part `ui` classes.
+Install `reka-ui` for Vue or `bits-ui` for Svelte. Svelte now requires 5.33+.
+
+The content uses a focus-managed `div[role="dialog"]` rather than a native
+`dialog` element. Replace consumer selectors such as `dialog:modal` with
+`[role="dialog"][data-state="open"]`. BISS part classes and tokens are the styling
+contract. Advanced composition is available through the Dialog namespace.

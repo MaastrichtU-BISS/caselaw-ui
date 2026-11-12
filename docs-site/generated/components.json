@@ -4011,7 +4011,7 @@
       "slug": "dialog",
       "short": "Dialog",
       "category": "Overlays and search",
-      "description": "A focused task with native modal behavior, a title and an action row.",
+      "description": "Connected dialog parts with managed focus, nested layers and a shared visual recipe.",
       "guidance": "Use an overlay for a focused choice or task. Provide a clear title, preserve keyboard focus and return focus when the task ends.",
       "vue": {
         "props": [
@@ -4030,17 +4030,22 @@
           },
           {
             "name": "description",
-            "type": "string | undefined",
+            "type": "string",
             "required": false,
-            "description": "",
-            "default": "undefined"
+            "description": ""
           },
           {
             "name": "width",
             "type": "number",
             "required": false,
+            "description": ""
+          },
+          {
+            "name": "size",
+            "type": "BissDialogSize",
+            "required": false,
             "description": "",
-            "default": "520"
+            "default": "'md'"
           },
           {
             "name": "closeLabel",
@@ -4055,12 +4060,31 @@
             "required": false,
             "description": "",
             "default": "false"
+          },
+          {
+            "name": "portal",
+            "type": "boolean",
+            "required": false,
+            "description": "",
+            "default": "false"
+          },
+          {
+            "name": "ui",
+            "type": "BissDialogUi",
+            "required": false,
+            "description": ""
           }
         ],
         "events": [
           {
             "name": "close",
             "type": "[]",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "update:open",
+            "type": "[open: boolean]",
             "required": true,
             "description": ""
           }
@@ -4087,17 +4111,22 @@
           },
           {
             "name": "description",
-            "type": "string | undefined",
+            "type": "string",
             "required": false,
-            "description": "",
-            "default": "undefined"
+            "description": ""
           },
           {
             "name": "width",
             "type": "number",
             "required": false,
+            "description": ""
+          },
+          {
+            "name": "size",
+            "type": "BissDialogSize",
+            "required": false,
             "description": "",
-            "default": "520"
+            "default": "'md'"
           },
           {
             "name": "closeLabel",
@@ -4114,8 +4143,27 @@
             "default": "false"
           },
           {
+            "name": "portal",
+            "type": "boolean",
+            "required": false,
+            "description": "",
+            "default": "false"
+          },
+          {
+            "name": "ui",
+            "type": "BissDialogUi",
+            "required": false,
+            "description": ""
+          },
+          {
             "name": "onclose",
             "type": "() => void",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "onOpenChange",
+            "type": "(open: boolean) => void",
             "required": false,
             "description": ""
           },
@@ -4136,6 +4184,12 @@
           {
             "name": "onclose",
             "type": "() => void",
+            "required": false,
+            "description": "Callback prop."
+          },
+          {
+            "name": "onOpenChange",
+            "type": "(open: boolean) => void",
             "required": false,
             "description": "Callback prop."
           }

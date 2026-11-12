@@ -1,11 +1,21 @@
 import { createApp, nextTick } from 'vue';
 import ComponentPreview from './ComponentPreview.vue';
+import {dialogExamples} from './examples/dialog/manifest';
 import '../src/styles/index.css';
 const params = new URLSearchParams(location.search),
   name = params.get('component') ?? 'BissButton',
   state = params.get('state') ?? 'default';
 document.documentElement.dataset.bissDensity = params.get('density') ?? 'standard';
-if (params.get('framework') === 'svelte') {
+const example=dialogExamples.find(item=>item.id===params.get('example'));
+if(example){
+ const isSvelte=params.get('framework')==='svelte';
+ const modules=isSvelte?import.meta.glob('./examples/dialog/*.svelte'):import.meta.glob('./examples/dialog/*.vue');
+ const loader=modules['./examples/dialog/'+example.file+(isSvelte?'.svelte':'.vue')];
+ const component=(await loader!()) as {default:any};
+ const frame=document.createElement('div');frame.className='preview-frame dialog-example-frame';frame.dataset.example=example.id;frame.dataset.component='BissDialog';frame.dataset.framework=isSvelte?'svelte':'vue';document.querySelector('#app')!.append(frame);
+ if(isSvelte){const {mount,tick}=await import('svelte');mount(component.default,{target:frame});await tick();}
+ else{createApp(component.default).mount(frame);await nextTick();}
+}else if (params.get('framework') === 'svelte') {
   const [{ mount, tick }, { default: SveltePreview }] = await Promise.all([
     import('svelte'),
     import('./SveltePreview.svelte'),

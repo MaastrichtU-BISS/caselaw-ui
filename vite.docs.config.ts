@@ -4,6 +4,7 @@ import { svelte } from '@sveltejs/vite-plugin-svelte';
 import { fileURLToPath } from 'node:url';
 export default defineConfig({
   base: './',
+  resolve:{alias:[{find:'biss-ui/vue',replacement:fileURLToPath(new URL('./src/vue/index.ts',import.meta.url))},{find:'biss-ui/svelte',replacement:fileURLToPath(new URL('./src/svelte/index.ts',import.meta.url))}]},
   publicDir: '../public',
   plugins: [vue(), svelte()],
   root: 'docs-site',
