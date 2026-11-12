@@ -15,13 +15,13 @@ export const guides = [
       },
       {
         title: 'Vue',
-        body: 'Import the stylesheet once in your application entry point. Use Vue 3.5 or newer. Vue components ship as compiled ESM with declarations; consumers do not need a Vue SFC loader for the library.',
-        code: "import 'biss-ui/styles.css';\nimport { BissButton, BissPageBar } from 'biss-ui/vue';",
+        body: 'Import the stylesheet once in your application entry point. Use Vue 3.5 or newer and install reka-ui alongside the library. Vue components ship as compiled ESM with declarations; consumers do not need a Vue SFC loader for the library.',
+        code: "// npm install biss-ui vue reka-ui\nimport 'biss-ui/styles.css';\nimport { BissButton, BissPageBar } from 'biss-ui/vue';",
       },
       {
         title: 'Svelte',
-        body: 'Use Svelte 5.20 or newer. Every component uses Svelte 5 callback props and snippets. Each component page shows its actual contract.',
-        code: "import 'biss-ui/styles.css';\nimport { BissButton, BissDatePicker } from 'biss-ui/svelte';",
+        body: 'Use Svelte 5.33 or newer and install bits-ui alongside the library. Every component uses Svelte 5 callback props and snippets. Each component page shows its actual contract.',
+        code: "// npm install biss-ui svelte bits-ui\nimport 'biss-ui/styles.css';\nimport { BissButton, BissDatePicker } from 'biss-ui/svelte';",
       },
       {
         title: 'Keep the application in charge',
@@ -46,7 +46,7 @@ export const guides = [
       },
       {
         title: 'Overlay inheritance',
-        body: 'The new menus and popovers stay inside the wrapper’s DOM while using the browser’s top layer. They keep the surrounding theme, including when opened from a dialog. Modal and ConfirmDialog compose the same native dialog implementation and preserve wrapper tokens.',
+        body: 'The new menus and popovers stay inside the wrapper’s DOM while using the browser’s top layer. They keep the surrounding theme, including when opened from a dialog. Dialog, Modal and ConfirmDialog compose the same Reka/Bits foundation. The convenient wrapper stays inline to preserve wrapper tokens; explicit Portal destinations let compound parts inherit a scoped theme.',
       },
       {
         title: 'State colors',
@@ -65,7 +65,7 @@ export const guides = [
       },
       {
         title: 'Keyboard and focus',
-        body: 'Menus and pickers support arrows, Home and End through enabled choices. Native dialogs make the background inert, wrap focus and return focus to the invoking control. Escape and outside interaction dismiss floating choices; busy dialogs block dismissal while work is in flight.',
+        body: 'Menus and pickers support arrows, Home and End through enabled choices. Modal dialogs isolate background interaction, wrap focus and return focus to the invoking control. Escape and outside interaction dismiss floating choices; busy dialogs block dismissal while work is in flight.',
       },
       {
         title: 'Dates and ranges',
@@ -97,7 +97,7 @@ export const guides = [
       },
       {
         title: 'Choose the right component',
-        body: 'The inherited API remains available alongside the Bizzy-derived components. Prefer PageBar for compact application headers, Dialog for the native modal contract, and SelectPicker for a searchable choice. Modal and Select keep the inherited contracts for migration.',
+        body: 'The inherited API remains available alongside the Bizzy-derived components. Prefer PageBar for compact application headers, Dialog for connected, focus-managed modal parts, and SelectPicker for a searchable choice. Modal and Select keep the inherited contracts for migration.',
       },
       {
         title: 'Respect the host boundary',

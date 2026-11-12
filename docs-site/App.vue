@@ -20,6 +20,42 @@ const route = ref(location.hash.slice(1).split('?')[0] || '/getting-started'),
   previewKey = ref(0),
   copied = ref(false);
 const searchInput = ref<HTMLInputElement>();
+const mobileNavButton = ref<HTMLButtonElement>();
+const collapsedGroups = ref(new Set(catalog.groups.slice(1)));
+const activeSection = ref('');
+let scrollFrame: number | undefined;
+function updateActiveSection() {
+  const nodes = Array.from(document.querySelectorAll<HTMLElement>('.docs-section[id]'));
+  activeSection.value =
+    [...nodes].reverse().find((node) => node.getBoundingClientRect().top <= 150)?.id ??
+    nodes[0]?.id ??
+    '';
+}
+function trackSection() {
+  if (scrollFrame !== undefined) return;
+  scrollFrame = requestAnimationFrame(() => {
+    scrollFrame = undefined;
+    updateActiveSection();
+  });
+}
+function groupExpanded(group: string) {
+  return !!query.value || !collapsedGroups.value.has(group);
+}
+function toggleGroup(group: string) {
+  const next = new Set(collapsedGroups.value);
+  next.has(group) ? next.delete(group) : next.add(group);
+  collapsedGroups.value = next;
+}
+function closeNavigation() {
+  navOpen.value = false;
+  mobileNavButton.value?.focus();
+}
+const sourceUrl = computed(() =>
+  current.value
+    ? `https://github.com/MaastrichtU-BISS/caselaw-ui/blob/feature/biss-ui/src/${framework.value}/${current.value.name}.${framework.value === 'vue' ? 'vue' : 'svelte'}`
+    : 'https://github.com/MaastrichtU-BISS/caselaw-ui/tree/feature/biss-ui',
+);
+
 const current = computed(() =>
   catalog.components.find((c) => route.value === '/components/' + c.slug),
 );
@@ -29,6 +65,14 @@ const matches = computed(() =>
     (c.name + ' ' + c.description + ' ' + c.category)
       .toLowerCase()
       .includes(query.value.toLowerCase()),
+  ),
+);
+const catalogueQuery = ref('');
+const catalogueMatches = computed(() =>
+  catalog.components.filter((c) =>
+    (c.name + ' ' + c.description + ' ' + c.category)
+      .toLowerCase()
+      .includes(catalogueQuery.value.toLowerCase()),
   ),
 );
 const api = computed(() => current.value?.[framework.value]);
@@ -73,7 +117,9 @@ function resizePreview(event: Event) {
 }
 const sections = computed(() =>
   current.value
-    ? current.value.name==='BissDialog'?['Preview','Installation','Anatomy','State','Customization','API','Accessibility']:['Preview', 'Usage', 'Props', 'Events and composition', 'Guidance']
+    ? current.value.name === 'BissDialog'
+      ? ['Preview', 'Installation', 'Anatomy', 'State', 'Customization', 'API', 'Accessibility']
+      : ['Preview', 'Usage', 'Props', 'Events and composition', 'Guidance']
     : (guide.value?.sections.map((s) => s.title) ?? []),
 );
 const anchor = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-');
@@ -132,7 +178,24 @@ function key(e: KeyboardEvent) {
     navOpen.value = true;
     nextTick(() => searchInput.value?.focus());
   }
+  if (e.key === 'Tab' && navOpen.value && window.matchMedia('(max-width: 760px)').matches) {
+    const controls = Array.from(
+      document.querySelectorAll<HTMLElement>(
+        '#docs-navigation a, #docs-navigation button, #docs-navigation input',
+      ),
+    ).filter((node) => node.getClientRects().length);
+    const first = controls[0],
+      last = controls.at(-1);
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last?.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first?.focus();
+    }
+  }
   if (e.key === 'Escape') {
+    if (navOpen.value) closeNavigation();
     navOpen.value = false;
     query.value = '';
   }
@@ -144,10 +207,32 @@ watch(
       ? (fixtures[c.short]?.state ?? fixtures[c.short]?.states?.[0] ?? 'default')
       : 'default';
     framework.value = c?.vue ? 'vue' : 'svelte';
+    if (c) {
+      const next = new Set(collapsedGroups.value);
+      next.delete(c.category);
+      collapsedGroups.value = next;
+    }
+
     previewHeight.value = 360;
     previewKey.value++;
     document.title = c ? `${c.short} · BISS UI` : 'BISS UI · Documentation';
     window.scrollTo(0, 0);
+  },
+  { immediate: true },
+);
+watch(navOpen, async (open) => {
+  if (!window.matchMedia('(max-width: 760px)').matches) return;
+  document.body.style.overflow = open ? 'hidden' : '';
+  if (open) {
+    await nextTick();
+    searchInput.value?.focus();
+  }
+});
+watch(
+  [route, sections],
+  async () => {
+    await nextTick();
+    updateActiveSection();
   },
   { immediate: true },
 );
@@ -164,10 +249,14 @@ onMounted(() => {
   onHash();
   window.addEventListener('hashchange', onHash);
   window.addEventListener('keydown', key);
+  window.addEventListener('scroll', trackSection, { passive: true });
 });
 onBeforeUnmount(() => {
   window.removeEventListener('hashchange', onHash);
   window.removeEventListener('keydown', key);
+  window.removeEventListener('scroll', trackSection);
+  if (scrollFrame !== undefined) cancelAnimationFrame(scrollFrame);
+  document.body.style.overflow = '';
 });
 </script>
 <template>
@@ -175,12 +264,28 @@ onBeforeUnmount(() => {
   <header class="docs-topbar">
     <a class="docs-brand" href="#/getting-started"
       ><span class="brand-mark"><BissIcon name="grid" /></span>BISS UI</a
-    ><span class="docs-product">Component documentation</span>
+    >
+    <nav class="docs-primary-nav" aria-label="Primary">
+      <a href="#/getting-started" :aria-current="guide ? 'page' : undefined">Documentation</a
+      ><a
+        href="#/components"
+        :aria-current="current || route === '/components' ? 'page' : undefined"
+        >Components</a
+      ><a href="#/playground" :aria-current="route === '/playground' ? 'page' : undefined"
+        >Playground</a
+      >
+    </nav>
     <div class="topbar-end">
-      <span class="version">0.1.0-next.0</span
+      <a
+        class="header-repository"
+        href="https://github.com/MaastrichtU-BISS/caselaw-ui/tree/feature/biss-ui"
+        aria-label="BISS UI on GitHub"
+        ><BissIcon name="code" /><span>GitHub</span></a
+      ><span class="version">v0.1.0-next.0</span
       ><button
         type="button"
         class="mobile-nav"
+        ref="mobileNavButton"
         :aria-expanded="navOpen"
         aria-controls="docs-navigation"
         @click="navOpen = !navOpen"
@@ -200,7 +305,7 @@ onBeforeUnmount(() => {
       /><kbd>/</kbd></label
     >
     <nav aria-label="Documentation">
-      <div v-if="!query" class="nav-group">
+      <div v-if="!query" class="nav-group nav-guides">
         <p>Start here</p>
         <a href="#/playground" :aria-current="route === '/playground' ? 'page' : undefined"
           >Library playground</a
@@ -218,24 +323,41 @@ onBeforeUnmount(() => {
       </div>
       <template v-for="group in catalog.groups" :key="group"
         ><div v-if="matches.some((c) => c.category === group)" class="nav-group">
-          <p>{{ group }}</p>
-          <a
-            v-for="c in matches.filter((c) => c.category === group)"
-            :key="c.name"
-            :href="`#/components/${c.slug}`"
-            :aria-current="current?.name === c.name ? 'page' : undefined"
-            >{{ label(c.short) }}<span v-if="!c.vue" class="framework-note">Svelte</span></a
+          <button
+            type="button"
+            class="nav-group-toggle"
+            :aria-expanded="groupExpanded(group)"
+            :aria-controls="'group-' + anchor(group)"
+            @click="toggleGroup(group)"
           >
+            <span>{{ group }}</span><small>{{
+              catalog.components.filter((c) => c.category === group).length
+            }}</small
+            ><BissIcon name="chev" />
+          </button>
+          <div v-show="groupExpanded(group)" :id="'group-' + anchor(group)" class="nav-group-links">
+            <a
+              v-for="c in matches.filter((c) => c.category === group)"
+              :key="c.name"
+              :href="`#/components/${c.slug}`"
+              :aria-current="current?.name === c.name ? 'page' : undefined"
+              >{{ label(c.short) }}<span v-if="!c.vue" class="framework-note">Svelte</span></a
+            >
+          </div>
         </div></template
       >
       <p v-if="!matches.length" class="nav-empty">
         No matching components. Try “date”, “table” or “menu”.
       </p>
     </nav>
-    <div class="sidebar-note">From Bizzy’s design system.<br />Built for your application.</div>
+    <div class="sidebar-note">
+      Built with BISS UI.<br /><a href="#/theming"
+        >Make it yours <span aria-hidden="true">↗</span></a
+      >
+    </div>
   </aside>
-  <div v-if="navOpen" class="nav-scrim" @click="navOpen = false" aria-hidden="true" />
-  <div class="docs-layout" :class="{'without-toc':!sections.length}">
+  <div v-if="navOpen" class="nav-scrim" @click="closeNavigation" aria-hidden="true" />
+  <div class="docs-layout" :class="{ 'without-toc': !sections.length }">
     <main id="main-content" tabindex="-1">
       <template v-if="current">
         <div class="breadcrumbs">
@@ -243,11 +365,21 @@ onBeforeUnmount(() => {
             current.category
           }}</span>
         </div>
-        <div class="page-heading">
-          <h1>{{ label(current.short) }}</h1>
-          <code>{{ current.name }}</code>
-        </div>
-        <p class="docs-lead">{{ current.description }}</p>
+        <header class="component-heading">
+          <div class="page-heading">
+            <h1>{{ label(current.short) }}</h1>
+            <code>{{ current.name }}</code>
+          </div>
+          <p class="docs-lead">{{ current.description }}</p>
+          <div class="page-resources">
+            <a :href="sourceUrl"
+              ><BissIcon name="code" />View source<span aria-hidden="true">↗</span></a
+            ><a
+              :href="'#' + route + '?section=' + (current.name === 'BissDialog' ? 'api' : 'props')"
+              >API reference<BissIcon name="chev"
+            /></a>
+          </div>
+        </header>
         <div class="framework-switch" role="group" aria-label="Code framework">
           <button
             type="button"
@@ -265,188 +397,195 @@ onBeforeUnmount(() => {
             Svelte <span v-if="!current.svelte">unavailable</span></button
           ><span>{{
             current.vue && current.svelte
-              ? 'Both frameworks'
+              ? 'Vue 3 · Svelte 5'
               : current.vue
                 ? 'Vue only'
                 : 'Svelte only'
           }}</span>
         </div>
-        <DialogDocumentation v-if="current.name==='BissDialog'" :framework="framework"/>
+        <DialogDocumentation v-if="current.name === 'BissDialog'" :framework="framework" />
         <template v-else>
-        <section id="preview" class="docs-section">
-          <h2>Preview</h2>
-          <div class="preview-toolbar">
-            <span>Interactive preview</span
-            ><label class="state-control"
-              >Density
-              <select v-model="density" aria-label="Preview density">
-                <option value="standard">Standard</option>
-                <option value="compact">Compact</option>
-                <option value="comfortable">Comfortable</option>
-              </select></label
-            >
-            <button type="button" class="biss-button biss-button-secondary" @click="previewKey++">
-              Reset example
-            </button>
-            <label class="state-control"
-              >State
-              <select v-model="state" aria-label="Component state">
-                <option v-for="s in states" :key="s" :value="s">{{ label(s) }}</option>
-              </select></label
-            >
-            <div class="segmented" role="group" aria-label="Preview viewport">
-              <button
-                type="button"
-                :aria-pressed="viewport === 'desktop'"
-                @click="viewport = 'desktop'"
+          <section id="preview" class="docs-section">
+            <h2>Preview</h2>
+            <div class="preview-toolbar">
+              <span class="preview-live-label"><i aria-hidden="true" />Live preview</span
+              ><label class="state-control"
+                >Density
+                <select v-model="density" aria-label="Preview density">
+                  <option value="standard">Standard</option>
+                  <option value="compact">Compact</option>
+                  <option value="comfortable">Comfortable</option>
+                </select></label
               >
-                Desktop</button
-              ><button
-                type="button"
-                :aria-pressed="viewport === 'phone'"
-                @click="viewport = 'phone'"
-              >
-                Phone
+              <button type="button" class="biss-button biss-button-secondary" @click="previewKey++">
+                Reset example
               </button>
+              <label class="state-control"
+                >State
+                <select v-model="state" aria-label="Component state">
+                  <option v-for="s in states" :key="s" :value="s">{{ label(s) }}</option>
+                </select></label
+              >
+              <div class="segmented" role="group" aria-label="Preview viewport">
+                <button
+                  type="button"
+                  :aria-pressed="viewport === 'desktop'"
+                  @click="viewport = 'desktop'"
+                >
+                  Desktop</button
+                ><button
+                  type="button"
+                  :aria-pressed="viewport === 'phone'"
+                  @click="viewport = 'phone'"
+                >
+                  Phone
+                </button>
+              </div>
             </div>
-          </div>
-          <div class="live-example" :class="{ 'phone-preview': viewport === 'phone' }">
-            <iframe
-              :key="current.name + framework + density + state + previewKey"
-              :src="previewUrl"
-              :title="`${current.name} interactive example`"
-              :style="{ height: previewHeight + 'px' }"
-              @load="resizePreview"
-            />
-          </div>
-          <p class="preview-description">
-            Live {{ framework === 'vue' ? 'Vue' : 'Svelte' }} component with local example data.
-          </p>
-        </section>
-        <section id="usage" class="docs-section">
-          <h2>Usage</h2>
-          <p>
-            Import from <code>biss-ui/{{ framework }}</code
-            >. This example shows the initial state; handle events in your application to persist
-            changes.
-          </p>
-          <div class="sample-code">
-            <div>
-              <span>{{ framework === 'vue' ? 'Vue' : 'Svelte' }} · TypeScript</span
-              ><button type="button" @click="copy">{{ copied ? 'Copied' : 'Copy code' }}</button>
+            <div class="live-example" :class="{ 'phone-preview': viewport === 'phone' }">
+              <iframe
+                :key="current.name + framework + density + state + previewKey"
+                :src="previewUrl"
+                :title="`${current.name} interactive example`"
+                :style="{ height: previewHeight + 'px' }"
+                @load="resizePreview"
+              />
             </div>
-            <pre
+            <p class="preview-description">
+              Live {{ framework === 'vue' ? 'Vue' : 'Svelte' }} component with local example data.
+            </p>
+          </section>
+          <section id="usage" class="docs-section">
+            <h2>Usage</h2>
+            <p>
+              Import from <code>biss-ui/{{ framework }}</code
+              >. This example shows the initial state; handle events in your application to persist
+              changes.
+            </p>
+            <div class="sample-code">
+              <div>
+                <span>{{ framework === 'vue' ? 'Vue' : 'Svelte' }} · TypeScript</span
+                ><button type="button" @click="copy">{{ copied ? 'Copied' : 'Copy code' }}</button>
+              </div>
+              <pre
+                tabindex="0"
+                aria-label="Usage code"
+              ><code><span v-for="(token,i) in codeTokens" :key="i" :class="'biss-tok-'+token.kind">{{token.text}}</span></code></pre>
+            </div>
+            <p v-if="framework === 'svelte' && current.modern">
+              This component uses Svelte 5 callback props and snippets. Pass callbacks such as
+              <code>onchange</code> directly.
+            </p>
+            <p v-else-if="framework === 'svelte'">
+              This component uses callback props. Use
+              <code>onchange</code> where the component exposes a change event.
+            </p>
+          </section>
+          <section id="props" class="docs-section">
+            <h2>Props</h2>
+            <p>
+              The table is generated from the shipped
+              {{ framework === 'vue' ? 'Vue' : 'Svelte' }} component source. Required values have no
+              default.
+            </p>
+            <div
+              v-if="visibleProps.length"
+              class="api-table-wrap"
+              role="region"
+              aria-label="Component props"
               tabindex="0"
-              aria-label="Usage code"
-            ><code><span v-for="(token,i) in codeTokens" :key="i" :class="'biss-tok-'+token.kind">{{token.text}}</span></code></pre>
-          </div>
-          <p v-if="framework === 'svelte' && current.modern">
-            This component uses Svelte 5 callback props and snippets. Pass callbacks such as
-            <code>onchange</code> directly.
-          </p>
-          <p v-else-if="framework === 'svelte'">
-            This component uses callback props. Use
-            <code>onchange</code> where the component exposes a change event.
-          </p>
-        </section>
-        <section id="props" class="docs-section">
-          <h2>Props</h2>
-          <p>
-            The table is generated from the shipped
-            {{ framework === 'vue' ? 'Vue' : 'Svelte' }} component source. Required values have no
-            default.
-          </p>
-          <div v-if="visibleProps.length" class="api-table-wrap">
-            <table class="api-table">
-              <thead>
-                <tr>
-                  <th>Prop</th>
-                  <th>Type</th>
-                  <th>Default</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="prop in visibleProps" :key="prop.name">
-                  <td>
-                    <code>{{ prop.name }}</code><span
-                      v-if="prop.required && !(prop as any).default"
-                      class="required"
-                      >Required</span
-                    >
-                    <p v-if="prop.description">{{ prop.description }}</p>
-                  </td>
-                  <td>
-                    <code>{{ prop.type }}</code>
-                  </td>
-                  <td>
-                    <code>{{ (prop as any).default ?? '—' }}</code>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <p v-else class="quiet-note">
-            This component composes its content through slots or snippets and has no configuration
-            props.
-          </p>
-        </section>
-        <section id="events-and-composition" class="docs-section">
-          <h2>Events and composition</h2>
-          <ul v-if="callbacks.length" class="contract-list">
-            <li v-for="event in callbacks" :key="event.name">
-              <code>{{ event.name }}</code><code>{{ event.type }}</code>
-            </li>
-          </ul>
-          <p v-else>
-            No custom events are declared in this framework’s prop contract. Standard element events
-            follow the component’s native attribute forwarding.
-          </p>
-          <p v-if="api?.slots.length">
-            Slots: <code v-for="slot in api.slots" :key="slot" class="slot-name">{{ slot }}</code>.
-          </p>
-          <p v-if="framework === 'svelte' && current.modern">
-            Composition snippets appear in the typed Svelte props. <code>children</code> is the main
-            content; named snippets provide actions or a footer where supported.
-          </p>
-          <p>
-            Use <code>{{ current.name }}Props</code> from <code>biss-ui/{{ framework }}</code> when
-            building a typed wrapper.
-          </p>
-        </section>
-        <section id="guidance" class="docs-section">
-          <h2>Guidance</h2>
-          <p>{{ current.guidance }}</p>
-          <p v-if="['Kanban', 'Calendar', 'Timeline'].includes(current.short)">
-            The application owns writes and permissions. These views do not include Bizzy’s
-            persistence, dependency scheduling or collaborative editing engine.
-          </p>
-          <p
-            v-if="
-              ['Menu', 'Popover', 'SelectPicker', 'SwatchPicker', 'DateField'].includes(
-                current.short,
-              )
-            "
-          >
-            Requires the native Popover API. Give the trigger a clear label and keep search,
-            keyboard and disabled states intact when customizing.
-          </p>
-          <p v-if="['DatePicker', 'DateField'].includes(current.short)">
-            Use ISO calendar days. Typed date parsing currently understands English and Dutch;
-            provide localized display labels and a deterministic <code>today</code> value when
-            rendering across time zones.
-          </p>
-          <p>
-            Override semantic CSS tokens on the surrounding wrapper. Read
-            <a href="#/theming">Theming</a> before changing colors or density, and
-            <a href="#/accessibility">Accessibility</a> before replacing controls or labels.
-          </p>
-        </section>
-        <nav class="related-components" aria-label="Related components">
-          <h2>Related components</h2>
-          <a v-for="c in related" :key="c.name" :href="`#/components/${c.slug}`"
-            >{{ label(c.short) }}<BissIcon name="chev"
-          /></a>
-        </nav>
+            >
+              <table class="api-table">
+                <thead>
+                  <tr>
+                    <th>Prop</th>
+                    <th>Type</th>
+                    <th>Default</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="prop in visibleProps" :key="prop.name">
+                    <td>
+                      <code>{{ prop.name }}</code><span
+                        v-if="prop.required && !(prop as any).default"
+                        class="required"
+                        >Required</span
+                      >
+                      <p v-if="prop.description">{{ prop.description }}</p>
+                    </td>
+                    <td>
+                      <code>{{ prop.type }}</code>
+                    </td>
+                    <td>
+                      <code>{{ (prop as any).default ?? '—' }}</code>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p v-else class="quiet-note">
+              This component composes its content through slots or snippets and has no configuration
+              props.
+            </p>
+          </section>
+          <section id="events-and-composition" class="docs-section">
+            <h2>Events and composition</h2>
+            <ul v-if="callbacks.length" class="contract-list">
+              <li v-for="event in callbacks" :key="event.name">
+                <code>{{ event.name }}</code><code>{{ event.type }}</code>
+              </li>
+            </ul>
+            <p v-else>
+              No custom events are declared in this framework’s prop contract. Standard element
+              events follow the component’s native attribute forwarding.
+            </p>
+            <p v-if="api?.slots.length">
+              Slots:
+              <code v-for="slot in api.slots" :key="slot" class="slot-name">{{ slot }}</code>.
+            </p>
+            <p v-if="framework === 'svelte' && current.modern">
+              Composition snippets appear in the typed Svelte props. <code>children</code> is the
+              main content; named snippets provide actions or a footer where supported.
+            </p>
+            <p>
+              Use <code>{{ current.name }}Props</code> from
+              <code>biss-ui/{{ framework }}</code> when building a typed wrapper.
+            </p>
+          </section>
+          <section id="guidance" class="docs-section">
+            <h2>Guidance</h2>
+            <p>{{ current.guidance }}</p>
+            <p v-if="['Kanban', 'Calendar', 'Timeline'].includes(current.short)">
+              The application owns writes and permissions. These views do not include Bizzy’s
+              persistence, dependency scheduling or collaborative editing engine.
+            </p>
+            <p
+              v-if="
+                ['Menu', 'Popover', 'SelectPicker', 'SwatchPicker', 'DateField'].includes(
+                  current.short,
+                )
+              "
+            >
+              Requires the native Popover API. Give the trigger a clear label and keep search,
+              keyboard and disabled states intact when customizing.
+            </p>
+            <p v-if="['DatePicker', 'DateField'].includes(current.short)">
+              Use ISO calendar days. Typed date parsing currently understands English and Dutch;
+              provide localized display labels and a deterministic <code>today</code> value when
+              rendering across time zones.
+            </p>
+            <p>
+              Override semantic CSS tokens on the surrounding wrapper. Read
+              <a href="#/theming">Theming</a> before changing colors or density, and
+              <a href="#/accessibility">Accessibility</a> before replacing controls or labels.
+            </p>
+          </section>
+          <nav class="related-components" aria-label="Related components">
+            <h2>Related components</h2>
+            <a v-for="c in related" :key="c.name" :href="`#/components/${c.slug}`"
+              >{{ label(c.short) }}<BissIcon name="chev"
+            /></a>
+          </nav>
         </template>
       </template>
       <template v-else-if="route === '/playground'"
@@ -489,24 +628,51 @@ onBeforeUnmount(() => {
           {{ catalog.components.length }} components. Live examples in both frameworks and
           source-derived contracts.
         </p>
-        <p class="coverage-line">
-          130 Vue components · 130 Svelte components · interactive examples
+        <div class="catalogue-tools">
+          <label class="catalogue-search"
+            ><BissIcon name="search" /><input
+              v-model="catalogueQuery"
+              type="search"
+              aria-label="Search component catalogue"
+              placeholder="Search components…" /></label
+          ><span>{{ catalogueMatches.length }} components</span>
+        </div>
+        <p v-if="!catalogueMatches.length" class="catalogue-empty" role="status">
+          No components match “{{ catalogueQuery }}”. Try a name such as “button”, “date” or
+          “dialog”.
         </p>
-        <section v-for="group in catalog.groups" :key="group" class="docs-section">
-          <h2>{{ group }}</h2>
+        <nav class="category-index" aria-label="Component categories">
           <a
-            v-for="c in catalog.components.filter((c) => c.category === group)"
-            :key="c.name"
-            class="component-row"
-            :href="`#/components/${c.slug}`"
-            ><div>
-              <strong>{{ label(c.short) }}</strong>
-              <p>{{ c.description }}</p>
-            </div>
-            <small>{{
-              c.vue && c.svelte ? 'Vue · Svelte' : c.vue ? 'Vue' : 'Svelte'
-            }}</small><BissIcon name="chev"
-          /></a></section
+            v-for="group in catalog.groups"
+            :key="group"
+            :href="'#/components?section=' + anchor(group)"
+            >{{ group }}</a
+          >
+        </nav>
+        <section
+          v-for="group in catalog.groups.filter((group) =>
+            catalogueMatches.some((c) => c.category === group),
+          )"
+          :id="anchor(group)"
+          :key="group"
+          class="docs-section catalogue-group"
+        >
+          <h2>{{ group }}</h2>
+          <div class="component-grid">
+            <a
+              v-for="c in catalogueMatches.filter((c) => c.category === group)"
+              :key="c.name"
+              class="component-row"
+              :href="`#/components/${c.slug}`"
+              ><div>
+                <strong>{{ label(c.short) }}</strong>
+                <p>{{ c.description }}</p>
+              </div>
+              <small>{{
+                c.vue && c.svelte ? 'Vue · Svelte' : c.vue ? 'Vue' : 'Svelte'
+              }}</small><BissIcon name="chev"
+            /></a>
+          </div></section
       ></template>
       <template v-else
         ><h1>Page not found</h1>
@@ -525,34 +691,14 @@ onBeforeUnmount(() => {
         v-for="section in sections"
         :key="section"
         :href="'#' + route + '?section=' + anchor(section)"
+        :aria-current="activeSection === anchor(section) ? 'location' : undefined"
         >{{ section }}</a
       >
+      <div class="toc-resources">
+        <p>Build with BISS UI</p>
+        <a href="#/theming">Customize your theme <span aria-hidden="true">↗</span></a
+        ><a :href="sourceUrl">Browse the source <span aria-hidden="true">↗</span></a>
+      </div>
     </aside>
   </div>
 </template>
-
-<style>
-.docs-layout.without-toc{grid-template-columns:minmax(0,1fr)}
-
-.live-example {
-  width: 100%;
-  background: var(--biss-card);
-  border: 1px solid var(--biss-border);
-  border-radius: 8px;
-  overflow: hidden;
-}
-.live-example.phone-preview {
-  max-width: 390px;
-  margin-inline: auto;
-}
-.live-example iframe {
-  display: block;
-  width: 100%;
-  border: 0;
-  min-height: 260px;
-}
-.preview-description {
-  font-size: 13px;
-  color: var(--biss-muted);
-}
-</style>

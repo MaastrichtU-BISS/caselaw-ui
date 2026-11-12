@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
+import { BissIcon } from '../src/vue';
+import { highlight } from '../src/core/highlight';
 import { dialogExamples } from './examples/dialog/manifest';
 const props = defineProps<{ framework: 'vue' | 'svelte' }>();
 const source = import.meta.glob('./examples/dialog/*.{vue,svelte}', {
@@ -10,7 +12,20 @@ const source = import.meta.glob('./examples/dialog/*.{vue,svelte}', {
 const active = ref('basic'),
   showCode = ref(false),
   copied = ref(false),
-  reset = ref(0);
+  reset = ref(0),
+  viewport = ref<'desktop' | 'phone'>('desktop');
+watch(
+  () => props.framework,
+  () => {
+    copied.value = false;
+  },
+);
+const tokens = computed(() => highlight(code.value, 'ts'));
+function chooseExample(id: string) {
+  active.value = id;
+  showCode.value = false;
+  copied.value = false;
+}
 const current = computed(() => dialogExamples.find((example) => example.id === active.value)!);
 const code = computed(
   () => source[`./examples/dialog/${current.value.file}.${props.framework}`] ?? '',
@@ -29,8 +44,12 @@ const anatomy = computed(() =>
     : '<Dialog.Root>\n  <Dialog.Trigger>Open</Dialog.Trigger>\n  <Dialog.Portal>\n    <Dialog.Overlay />\n    <Dialog.Content>\n      <Dialog.Title>Title</Dialog.Title>\n      <Dialog.Description>Context</Dialog.Description>\n      <Dialog.Close>Close</Dialog.Close>\n    </Dialog.Content>\n  </Dialog.Portal>\n</Dialog.Root>',
 );
 async function copy() {
-  await navigator.clipboard.writeText(code.value);
-  copied.value = true;
+  try {
+    await navigator.clipboard.writeText(code.value);
+    copied.value = true;
+  } catch {
+    copied.value = false;
+  }
 }
 const parts = [
   ['Root', 'Owns open state and connects the parts.', 'open, defaultOpen (Vue), modal (Vue)'],
@@ -62,52 +81,89 @@ const parts = [
       A dialog is a connected set of parts. Start with the common composition, then explore
       controlled forms, nested layers or the convenient wrapper.
     </p>
+    <div class="example-choices" role="group" aria-label="Dialog examples">
+      <button
+        v-for="example in dialogExamples"
+        :key="example.id"
+        type="button"
+        :aria-pressed="active === example.id"
+        @click="chooseExample(example.id)"
+      >
+        {{ example.title }}
+      </button>
+    </div>
     <div class="dialog-docs-example">
       <div class="dialog-docs-toolbar">
-        <label
-          >Example<select
-            v-model="active"
-            aria-label="Dialog example"
-            @change="
-              showCode = false;
-              copied = false;
-            "
-          >
-            <option v-for="example in dialogExamples" :key="example.id" :value="example.id">
-              {{ example.title }}
-            </option>
-          </select></label
-        >
         <div class="segmented" role="group" aria-label="Example view">
-          <button type="button" :aria-pressed="!showCode" @click="showCode = false">Preview</button
-          ><button type="button" :aria-pressed="showCode" @click="showCode = true">Code</button>
+          <button type="button" :aria-pressed="!showCode" @click="showCode = false">
+            <BissIcon name="grid" />Preview
+          </button>
+          <button type="button" :aria-pressed="showCode" @click="showCode = true">
+            <BissIcon name="code" />Code
+          </button>
         </div>
-        <button type="button" class="biss-button biss-button-ghost biss-button-sm" @click="reset++">
-          Reset
-        </button>
-      </div>
-      <p class="dialog-docs-caption">{{ current.description }}</p>
-      <iframe
-        v-show="!showCode"
-        :key="framework + active + reset"
-        :src="url"
-        :title="`Dialog ${current.title} ${framework} example`"
-        class="dialog-docs-frame"
-      />
-      <div v-if="showCode" class="dialog-docs-code">
-        <button
-          type="button"
-          class="biss-button biss-button-secondary biss-button-sm"
-          @click="copy"
-        >
+        <div v-show="!showCode" class="example-tools">
+          <div class="segmented viewport-picker" role="group" aria-label="Dialog preview viewport">
+            <button
+              type="button"
+              :aria-pressed="viewport === 'desktop'"
+              @click="viewport = 'desktop'"
+            >
+              Desktop</button
+            ><button type="button" :aria-pressed="viewport === 'phone'" @click="viewport = 'phone'">
+              Phone
+            </button>
+          </div>
+          <button
+            type="button"
+            class="example-icon-button"
+            aria-label="Reset Dialog example"
+            @click="reset++"
+          >
+            <BissIcon name="refresh" />
+          </button>
+          <a
+            :href="url"
+            target="_blank"
+            rel="noopener"
+            class="example-icon-button"
+            aria-label="Open Dialog example in a new tab"
+            ><span aria-hidden="true">↗</span></a
+          >
+        </div>
+        <button v-if="showCode" type="button" class="example-copy" @click="copy">
           {{ copied ? 'Copied' : 'Copy code' }}
         </button>
-        <pre tabindex="0" aria-label="Dialog example source"><code>{{code}}</code></pre>
+      </div>
+      <div
+        v-show="!showCode"
+        class="dialog-docs-canvas"
+        :class="{ 'is-phone': viewport === 'phone' }"
+      >
+        <iframe
+          :key="framework + active + reset"
+          :src="url"
+          :title="`Dialog ${current.title} ${framework} example`"
+          class="dialog-docs-frame"
+        />
+      </div>
+      <div v-if="showCode" class="dialog-docs-code">
+        <pre
+          tabindex="0"
+          aria-label="Dialog example source"
+        ><code><span v-for="(token,index) in tokens" :key="index" :class="'biss-tok-'+token.kind">{{token.text}}</span></code></pre>
+      </div>
+      <div class="example-file">
+        <span
+          ><i aria-hidden="true" />{{ framework === 'vue' ? 'Vue' : 'Svelte' }} · Live
+          component</span
+        ><code>{{ current.file }}.{{ framework }}</code>
       </div>
     </div>
+    <p class="dialog-docs-caption">{{ current.description }}</p>
     <p class="dialog-docs-source-note">
-      The preview runs this exact example file. Vue uses Reka UI; Svelte uses Bits UI. Both use the
-      same BISS dialog recipe.
+      Preview and code use the same file. Built on
+      {{ framework === 'vue' ? 'Reka UI' : 'Bits UI' }} with the BISS visual recipe.
     </p>
   </section>
   <section id="installation" class="docs-section">
@@ -176,7 +232,7 @@ const parts = [
       tokens globally, or choose an explicit Portal destination inside a themed subtree. The
       convenient wrapper stays inline by default; set <code>portal</code> to move it to the body.
     </p>
-    <div class="api-table-wrap">
+    <div class="api-table-wrap" role="region" aria-label="Dialog style parts" tabindex="0">
       <table class="api-table">
         <thead>
           <tr>
@@ -201,7 +257,7 @@ const parts = [
   </section>
   <section id="api" class="docs-section">
     <h2>API by part</h2>
-    <div class="api-table-wrap">
+    <div class="api-table-wrap" role="region" aria-label="Dialog part API" tabindex="0">
       <table class="api-table">
         <thead>
           <tr>
@@ -250,72 +306,153 @@ const parts = [
   </section>
 </template>
 <style>
+.example-choices {
+  display: flex;
+  gap: 6px;
+  margin: 24px 0 14px;
+  flex-wrap: wrap;
+}
+.example-choices button {
+  font-size: 12px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  padding: 6px 10px;
+  background: transparent;
+  color: var(--biss-muted);
+}
+.example-choices button:hover {
+  background: var(--biss-surface-subtle);
+  color: var(--biss-text);
+}
+.example-choices button[aria-pressed='true'] {
+  color: var(--biss-text);
+  border-color: var(--biss-border);
+  background: var(--biss-surface-subtle);
+  font-weight: 500;
+}
 .dialog-docs-example {
   border: 1px solid var(--biss-border);
-  border-radius: 10px;
-  background: var(--biss-card);
+  border-radius: 9px;
+  background: var(--docs-paper);
   overflow: hidden;
 }
 .dialog-docs-toolbar {
   display: flex;
   align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: space-between;
   padding: 10px 12px;
-  background: var(--biss-surface-subtle);
   border-bottom: 1px solid var(--biss-border);
 }
-.dialog-docs-toolbar > label {
+.dialog-docs-toolbar .segmented button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.dialog-docs-toolbar .biss-icon {
+  width: 13px;
+  height: 13px;
+}
+.example-tools {
   display: flex;
   align-items: center;
   gap: 8px;
+}
+.example-icon-button {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
   color: var(--biss-muted);
-  font-size: 12px;
+  text-decoration: none;
+  font-size: 17px;
 }
-.dialog-docs-toolbar select {
-  font: 13px var(--biss-font-family);
-  padding: 5px 8px;
-  border: 1px solid var(--biss-border-strong);
-  border-radius: 6px;
-  background: var(--biss-card);
+.example-icon-button:hover,
+.example-copy:hover {
+  background: var(--biss-surface-muted);
   color: var(--biss-text);
-  max-width: 220px;
 }
-.dialog-docs-toolbar > .segmented {
-  margin-inline-start: auto;
+.example-copy {
+  font-size: 11px;
+  border: 0;
+  border-radius: 4px;
+  padding: 5px 8px;
+  background: transparent;
+  color: var(--biss-muted);
+}
+.dialog-docs-canvas {
+  background: var(--biss-surface-subtle);
 }
 .dialog-docs-frame {
   display: block;
   width: 100%;
-  height: 520px;
+  height: 390px;
   border: 0;
-  background: var(--biss-card);
+  background: var(--docs-paper);
 }
-.dialog-docs-caption,
-.dialog-docs-source-note {
-  font-size: 13px;
-  line-height: 1.6;
-  color: var(--biss-muted);
+.dialog-docs-canvas.is-phone {
+  padding: 16px;
+}
+.dialog-docs-canvas.is-phone .dialog-docs-frame {
+  max-width: 390px;
+  height: 480px;
+  margin-inline: auto;
+  border: 1px solid var(--biss-border);
+  border-radius: 10px;
 }
 .dialog-docs-caption {
-  margin: 0;
-  padding: 14px 18px;
-  border-bottom: 1px solid var(--biss-border-subtle);
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--biss-text);
+  margin: 14px 0 4px !important;
+}
+.dialog-docs-source-note {
+  font-size: 11px !important;
+  line-height: 1.7;
+  color: var(--biss-muted);
+  margin: 4px 0 0 !important;
 }
 .dialog-docs-code {
-  position: relative;
-}
-.dialog-docs-code > button {
-  position: absolute;
-  right: 12px;
-  top: 12px;
+  background: var(--biss-surface-subtle);
 }
 .dialog-docs-code pre {
   margin: 0;
-  padding: 54px 20px 20px;
-  max-height: 520px;
+  padding: 22px;
+  max-height: 440px;
+  min-height: 240px;
   overflow: auto;
-  font: 12px/1.7 var(--biss-mono);
+  font: 12px/1.8 var(--biss-mono);
+}
+.dialog-docs-code code {
+  font-size: 12px;
+  line-height: 1.8;
+}
+.example-file {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px;
+  border-top: 1px solid var(--biss-border);
+  color: var(--biss-muted);
+  font-size: 10px;
+}
+.example-file > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.example-file i {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--biss-primary);
+}
+.example-file code {
+  font-size: 10px;
 }
 .dialog-example-stack {
   display: flex;
@@ -324,11 +461,37 @@ const parts = [
   gap: 12px;
 }
 @media (max-width: 640px) {
-  .dialog-docs-frame {
-    height: 560px;
+  .example-choices {
+    gap: 2px;
+    margin-top: 20px;
   }
-  .dialog-docs-toolbar > .segmented {
-    margin-inline-start: 0;
+  .example-choices button {
+    font-size: 11px;
+    padding: 6px 8px;
+  }
+  .dialog-docs-toolbar {
+    padding: 9px 10px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .dialog-docs-toolbar .viewport-picker {
+    display: none;
+  }
+  .dialog-docs-frame {
+    height: 420px;
+  }
+  .dialog-docs-code pre {
+    padding: 16px;
+  }
+  .example-file {
+    font-size: 9px;
+    gap: 6px;
+  }
+  .example-file code {
+    font-size: 9px;
+  }
+  .dialog-docs-canvas.is-phone {
+    padding: 8px;
   }
 }
 </style>
