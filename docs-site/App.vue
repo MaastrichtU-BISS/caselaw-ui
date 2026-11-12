@@ -111,6 +111,7 @@ const snippet = computed(() => {
 });
 const codeTokens = computed(() => highlight(snippet.value, 'ts'));
 
+const related = computed(() => catalog.components.filter(c=>c.category===current.value?.category&&c.name!==current.value?.name).slice(0,5));
 function onHash() {
   const [path, queryString] = location.hash.slice(1).split('?');
   route.value = path || '/getting-started';
