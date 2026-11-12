@@ -4,8 +4,8 @@ Live reference: [bissui.wicker.life](https://bissui.wicker.life).
 
 The reference follows Bizzy’s compact application style: warm surfaces, clear
 page headings, a predictable navigation rail, quiet controls and specific copy.
-Every component page has real screenshots, a live example and source-derived
-API tables. Demonstration names and records are synthetic.
+Every component page renders a live, interactive example and source-derived
+API tables. Demonstration names and records are synthetic. Previews render the actual Vue components immediately, with state selection, responsive widths and reset controls. Stored PNGs are historical reference artifacts and are not used by the site.
 
 | Start here | What it covers |
 |---|---|

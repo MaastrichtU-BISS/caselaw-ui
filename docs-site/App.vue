@@ -3,22 +3,18 @@ import { computed, nextTick, onMounted, onBeforeUnmount, ref, watch } from 'vue'
 import { BissIcon } from '../src/vue';
 import { highlight } from '../src/core/highlight';
 import catalog from './generated/components.json';
-import screenshots from './generated/screenshots.json';
+
 import { guides } from './content';
 import { example } from './examples';
 import { fixtures } from './fixtures';
-const assets = import.meta.glob('../docs/screenshots/*.png', {
-  eager: true,
-  query: '?url',
-  import: 'default',
-}) as Record<string, string>;
 const route = ref(location.hash.slice(1).split('?')[0] || '/getting-started'),
   query = ref(''),
   navOpen = ref(false),
   framework = ref<'vue' | 'svelte'>('vue'),
   viewport = ref<'desktop' | 'phone'>('desktop'),
   state = ref('default'),
-  tab = ref<'screenshot' | 'live'>('screenshot'),
+  previewHeight = ref(360),
+  previewKey = ref(0),
   copied = ref(false);
 const searchInput = ref<HTMLInputElement>();
 const current = computed(() =>
@@ -49,19 +45,29 @@ const states = computed(() => {
   const f = fixtures[current.value.short];
   return f?.states ?? [f?.state ?? 'default'];
 });
-const shot = computed(() =>
-  screenshots.find(
-    (s) =>
-      s.name === current.value?.name && s.state === state.value && s.viewport === viewport.value,
-  ),
-);
-const screenshotUrl = computed(() =>
-  shot.value ? assets['../docs/screenshots/' + shot.value.file] : undefined,
-);
 const previewUrl = computed(
   () =>
     `./preview.html?component=${encodeURIComponent(current.value?.name ?? 'BissButton')}&state=${encodeURIComponent(state.value)}`,
 );
+let previewObserver: ResizeObserver | undefined;
+onBeforeUnmount(() => previewObserver?.disconnect());
+function resizePreview(event: Event) {
+  previewObserver?.disconnect();
+  const frame = event.target as HTMLIFrameElement;
+  const doc = frame.contentDocument;
+  if (!doc) return;
+  const update = () => {
+    previewHeight.value = Math.max(
+      /Dialog|Modal|SidePanel|SearchPalette/.test(current.value?.name ?? '') ? 640 : 260,
+      Math.min(1100, doc.querySelector('.preview-frame')?.scrollHeight ?? 360),
+    );
+  };
+  update();
+  const observer = new ResizeObserver(update);
+  previewObserver = observer;
+  observer.observe(doc.body);
+  frame.addEventListener('load', () => observer.disconnect(), { once: true });
+}
 const sections = computed(() =>
   current.value
     ? ['Preview', 'Usage', 'Props', 'Events and composition', 'Guidance']
@@ -104,25 +110,7 @@ const snippet = computed(() => {
         `ipt>\n\n${tag}`;
 });
 const codeTokens = computed(() => highlight(snippet.value, 'ts'));
-const stateHelp: Record<string, string> = {
-  default: 'Reference appearance with synthetic project data.',
-  open: 'The open state is captured so the content and focus treatment are visible.',
-  error: 'An error explains the problem and keeps a recovery action available.',
-  busy: 'Dismissal and actions are blocked while work is in flight.',
-  saving: 'The save action is disabled while the application persists changes.',
-  empty: 'The component explains what is missing before offering a next step.',
-  loading: 'The component holds the layout while data is loading.',
-  disabled: 'A disabled control communicates availability without accepting an action.',
-  range: 'A selected date range includes both endpoints.',
-  filtered: 'Search narrows the available actions.',
-  editing: 'The current value is being edited in place.',
-  visible: 'A status message appears after an application action.',
-};
-const related = computed(() =>
-  catalog.components
-    .filter((c) => c.category === current.value?.category && c.name !== current.value?.name)
-    .slice(0, 5),
-);
+
 function onHash() {
   const [path, queryString] = location.hash.slice(1).split('?');
   route.value = path || '/getting-started';
@@ -148,7 +136,8 @@ watch(
       ? (fixtures[c.short]?.state ?? fixtures[c.short]?.states?.[0] ?? 'default')
       : 'default';
     framework.value = c?.vue ? 'vue' : 'svelte';
-    tab.value = 'screenshot';
+    previewHeight.value = 360;
+    previewKey.value++;
     document.title = c ? `${c.short} · BISS UI` : 'BISS UI · Documentation';
     window.scrollTo(0, 0);
   },
@@ -274,29 +263,17 @@ onBeforeUnmount(() => {
         <section id="preview" class="docs-section">
           <h2>Preview</h2>
           <div class="preview-toolbar">
-            <div class="segmented" role="group" aria-label="Preview mode">
-              <button
-                type="button"
-                :aria-pressed="tab === 'screenshot'"
-                @click="tab = 'screenshot'"
-              >
-                Screenshot</button
-              ><button type="button" :aria-pressed="tab === 'live'" @click="tab = 'live'">
-                Try it
-              </button>
-            </div>
+            <span>Interactive preview</span>
+            <button type="button" class="biss-button biss-button-secondary" @click="previewKey++">
+              Reset example
+            </button>
             <label class="state-control"
               >State
               <select v-model="state" aria-label="Component state">
                 <option v-for="s in states" :key="s" :value="s">{{ label(s) }}</option>
               </select></label
             >
-            <div
-              v-if="tab === 'screenshot'"
-              class="segmented"
-              role="group"
-              aria-label="Screenshot viewport"
-            >
+            <div class="segmented" role="group" aria-label="Preview viewport">
               <button
                 type="button"
                 :aria-pressed="viewport === 'desktop'"
@@ -312,43 +289,18 @@ onBeforeUnmount(() => {
               </button>
             </div>
           </div>
-          <figure
-            v-if="tab === 'screenshot'"
-            class="component-shot"
-            :class="{ 'phone-shot': viewport === 'phone' }"
-          >
-            <img
-              v-if="screenshotUrl"
-              :src="screenshotUrl"
-              :alt="`${current.name}, ${state} state, ${viewport} layout`"
-              :width="shot?.width"
-              :height="shot?.height"
-            />
-            <p v-else class="capture-pending">
-              Screenshot capture is pending. Use “Try it” for the live component.
-            </p>
-            <figcaption>
-              {{ current.name }} · {{ state }} · {{ viewport
-              }}<a v-if="screenshotUrl" :href="screenshotUrl" :download="shot?.file"
-                >Download PNG <BissIcon name="down"
-              /></a>
-            </figcaption>
-          </figure>
-          <div v-else class="live-example">
+          <div class="live-example" :class="{ 'phone-preview': viewport === 'phone' }">
             <iframe
-              :key="previewUrl"
+              :key="current.name + state + previewKey"
               :src="previewUrl"
               :title="`${current.name} interactive example`"
-              loading="lazy"
+              :style="{ height: previewHeight + 'px' }"
+              @load="resizePreview"
             />
-            <p>
-              Live {{ current.vue ? 'Vue' : 'Svelte' }} reference example. Interactions use local
-              synthetic data.
-            </p>
           </div>
-          <p class="state-note">
-            {{ stateHelp[state] ?? stateHelp.default }} Screenshots show the
-            {{ current.vue ? 'Vue' : 'Svelte' }} reference implementation.
+          <p class="preview-description">
+            Live Vue component with local example data. The framework switch selects the usage code
+            and API.
           </p>
         </section>
         <section id="usage" class="docs-section">
@@ -508,8 +460,7 @@ onBeforeUnmount(() => {
           source-derived contracts.
         </p>
         <p class="coverage-line">
-          130 Vue components · 130 Svelte components · {{ screenshots.length }} reference
-          screenshots
+          130 Vue components · 130 Svelte components · interactive examples
         </p>
         <section v-for="group in catalog.groups" :key="group" class="docs-section">
           <h2>{{ group }}</h2>
@@ -549,3 +500,27 @@ onBeforeUnmount(() => {
     </aside>
   </div>
 </template>
+
+<style>
+.live-example {
+  width: 100%;
+  background: var(--biss-card);
+  border: 1px solid var(--biss-border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.live-example.phone-preview {
+  max-width: 390px;
+  margin-inline: auto;
+}
+.live-example iframe {
+  display: block;
+  width: 100%;
+  border: 0;
+  min-height: 260px;
+}
+.preview-description {
+  font-size: 13px;
+  color: var(--biss-muted);
+}
+</style>

@@ -36,7 +36,7 @@ permissions, document blocks, comments, dashboards, task lists, calendars, board
 charts, forms, navigation, overlays and feedback.
 
 The [documentation site](docs/README.md) derives API tables from source and shows
-real screenshots and live examples. The [architecture guide](docs/architecture.md)
+live examples. The [architecture guide](docs/architecture.md)
 explains package boundaries, state ownership and contribution standards.
 
 All styles and custom properties are `biss-` prefixed. Customize tokens globally
@@ -63,7 +63,7 @@ HTML reset. Dark themes require supplying the full semantic token palette.
 Browse the library at [bissui.wicker.life](https://bissui.wicker.life).
 
 Run `npm run docs:dev` for the Bizzy-style documentation site: all 130
-components, desktop and phone screenshots, interactive examples, framework usage, and
+components, live desktop and phone previews, framework usage, and
 source-derived API tables. [Documentation guide](docs/README.md) ·
 [Component screenshots](docs/visual-reference.md).
 

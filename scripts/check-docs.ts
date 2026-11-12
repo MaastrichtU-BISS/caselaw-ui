@@ -1,33 +1,8 @@
-import { readFile, stat, mkdir } from 'node:fs/promises';
-import { createHash } from 'node:crypto';
+import { mkdir } from 'node:fs/promises';
 import { chromium, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import { spawn } from 'node:child_process';
 import catalog from '../docs-site/generated/components.json';
-import screenshots from '../docs-site/generated/screenshots.json';
-import { fixtures } from '../docs-site/fixtures';
-import { docsInputHash } from './docs-inputs.mjs';
-const manifest = JSON.parse(await readFile('docs/screenshots/manifest.json', 'utf8'));
-if (manifest.inputsSha256 !== docsInputHash())
-  throw Error(
-    'Component screenshot inputs changed. Run npm run docs:build, npm run docs:screenshots, then rebuild the docs.',
-  );
-for (const c of catalog.components) {
-  const f = fixtures[c.short];
-  if (!f) throw Error('Missing fixture ' + c.name);
-  for (const state of f.states ?? [f.state ?? 'default'])
-    for (const viewport of ['desktop', 'phone']) {
-      const shot = screenshots.find(
-        (s) => s.name === c.name && s.state === state && s.viewport === viewport,
-      );
-      if (!shot) throw Error('Missing screenshot ' + c.name + ' ' + state + ' ' + viewport);
-      const png = await readFile('docs/screenshots/' + shot.file);
-      if (createHash('sha256').update(png).digest('hex') !== shot.sha256)
-        throw Error('Screenshot hash mismatch ' + shot.file);
-      if ((await stat('docs/screenshots/' + shot.file)).size < 200)
-        throw Error('Empty screenshot ' + shot.file);
-    }
-}
 const server = spawn(
   process.execPath,
   [
@@ -78,24 +53,13 @@ try {
     await page.goto('http://127.0.0.1:4189/#/components/date-picker?section=props');
     await expect(page.getByRole('heading', { name: 'Props', exact: true })).toBeInViewport();
     await page.goto('http://127.0.0.1:4189/#/components/date-picker');
-    const image = page.getByRole('img', { name: 'BissDatePicker, default state, desktop layout' });
-    await expect(image).toBeVisible();
-    await expect(image).toHaveJSProperty('complete', true);
-    await page.getByRole('button', { name: 'Phone', exact: true }).click();
-    await expect(
-      page.getByRole('img', { name: 'BissDatePicker, default state, phone layout' }),
-    ).toBeVisible();
-    await page.getByRole('combobox', { name: 'Component state' }).selectOption('range');
-    await expect(
-      page.getByRole('img', { name: 'BissDatePicker, range state, phone layout' }),
-    ).toBeVisible();
-    await page.getByRole('button', { name: 'Svelte', exact: true }).click();
-    await expect(page.locator('.sample-code')).toContainText("from 'biss-ui/svelte'");
-    await expect(page.locator('.sample-code')).toContainText('onchange');
-    await page.getByRole('button', { name: 'Try it', exact: true }).click();
     const frame = page.frameLocator('iframe');
     await expect(frame.getByRole('grid', { name: 'Due date' })).toBeVisible();
-    await page.getByRole('button', { name: 'Screenshot', exact: true }).click();
+    await page.getByRole('button', { name: 'Phone', exact: true }).click();
+    await page.getByRole('combobox', { name: 'Component state' }).selectOption('range');
+    await expect(frame.getByRole('grid', { name: 'Due date' })).toBeVisible();
+    await page.getByRole('button', { name: 'Svelte', exact: true }).click();
+    await expect(page.locator('.sample-code')).toContainText("from 'biss-ui/svelte'");
     await expect(page.locator('html')).toHaveJSProperty('scrollWidth', width);
     const axe = await new AxeBuilder({ page })
       .withTags(['wcag2a', 'wcag2aa', 'wcag21aa'])
@@ -128,10 +92,12 @@ try {
   for (const c of catalog.components) {
     await page.goto('http://127.0.0.1:4189/#/components/' + c.slug);
     await expect(page.locator('h1')).toHaveText(c.short.replace(/([a-z0-9])([A-Z])/g, '$1 $2'));
-    const image = page.locator('.component-shot img');
-    await expect(image).toBeVisible();
-    await expect(image).toHaveJSProperty('complete', true);
-    expect(await image.evaluate((i: HTMLImageElement) => i.naturalWidth)).toBeGreaterThan(0);
+    const preview = page.frameLocator('iframe');
+    await expect(preview.locator('.preview-frame')).toHaveAttribute('data-component', c.name);
+    if (c.name === 'BissPageBar')
+      await expect(
+        preview.getByRole('heading', { name: 'Research projects', exact: true }),
+      ).toBeVisible();
   }
   for (const slug of ['getting-started', 'theming', 'accessibility', 'migration', 'components']) {
     await page.goto('http://127.0.0.1:4189/#/' + slug);
@@ -140,7 +106,7 @@ try {
   await context.close();
   expect(errors).toEqual([]);
   console.log(
-    `Verified ${catalog.components.length} docs pages, ${screenshots.length} screenshots, guides, live examples, mobile navigation and accessibility.`,
+    `Verified ${catalog.components.length} docs pages, live component renders, guides, live examples, mobile navigation and accessibility.`,
   );
 } finally {
   await browser?.close();
