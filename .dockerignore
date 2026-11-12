@@ -1,0 +1,11 @@
+.git
+node_modules
+dist
+dist-demo
+dist-demo-svelte
+dist-docs
+artifacts
+.svelte-kit
+.impeccable/review
+*.tgz
+.DS_Store

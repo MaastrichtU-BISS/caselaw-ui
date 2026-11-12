@@ -60,13 +60,15 @@ HTML reset. Dark themes require supplying the full semantic token palette.
 
 ## Documentation
 
+Browse the library at [bissui.wicker.life](https://bissui.wicker.life).
+
 Run `npm run docs:dev` for the Bizzy-style documentation site: all 130
 components, desktop and phone screenshots, interactive examples, framework usage, and
 source-derived API tables. [Documentation guide](docs/README.md) ·
 [Component screenshots](docs/visual-reference.md).
 
-Build the static site with `npm run docs:build`. No hosting is configured or
-published by this change.
+Build the static site with `npm run docs:build`. [Hosting and deployment](docs/HOSTING.md)
+describe the separate Coolify documentation app and CI deployment after checks pass.
 
 ## Develop
 

@@ -29,3 +29,19 @@ jobs:
         with:
           name: verification-screenshots
           path: artifacts/
+  deploy-docs:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/feature/biss-ui'
+    needs: verify
+    runs-on: ubuntu-latest
+    concurrency:
+      group: biss-ui-docs-production
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Deploy documentation after verification
+        env:
+          COOLIFY_WEBHOOK_SECRET: ${{ secrets.BISS_UI_DOCS_WEBHOOK_SECRET }}
+        run: node scripts/deploy-docs.mjs
