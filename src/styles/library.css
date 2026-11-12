@@ -1,0 +1,1113 @@
+/* Reusable Bizzy controls. Semantic tokens remain overridable on any wrapper. */
+:where(
+  .biss-floating,
+  .biss-native-dialog,
+  .biss-value-picker,
+  .biss-home-card,
+  .biss-goal-card,
+  .biss-kanban,
+  .biss-calendar,
+  .biss-timeline,
+  .biss-property-list,
+  .biss-activity-list,
+  .biss-checklist,
+  .biss-onboarding
+) {
+  font: 14px/1.55 var(--biss-font-family);
+  color: var(--biss-text);
+  box-sizing: border-box;
+}
+:where(
+    .biss-floating,
+    .biss-native-dialog,
+    .biss-value-picker,
+    .biss-home-card,
+    .biss-goal-card,
+    .biss-kanban,
+    .biss-calendar,
+    .biss-timeline
+  )
+  * {
+  box-sizing: border-box;
+}
+.biss-header-action {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: var(--biss-control-height);
+  height: var(--biss-control-height);
+  padding: 0;
+  border: 0;
+  border-radius: var(--biss-radius-sm);
+  background: transparent;
+  color: var(--biss-muted);
+  cursor: pointer;
+  text-decoration: none;
+}
+.biss-header-action:hover,
+.biss-header-action[aria-pressed='true'] {
+  background: var(--biss-info-bg);
+  color: var(--biss-primary);
+}
+.biss-header-action:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.biss-text-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: var(--biss-control-height);
+  padding: 0 8px;
+  border: 0;
+  border-radius: var(--biss-radius-sm);
+  background: transparent;
+  color: var(--biss-primary);
+  font: 500 13px var(--biss-font-family);
+  cursor: pointer;
+}
+.biss-text-button:hover {
+  background: var(--biss-surface-muted);
+}
+.biss-text-button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.biss-tool-button {
+  display: inline-flex;
+  align-items: stretch;
+  border: 1px solid transparent;
+  border-radius: var(--biss-radius-sm);
+  height: var(--biss-control-height);
+  overflow: hidden;
+}
+.biss-tool-button button {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  border: 0;
+  background: transparent;
+  color: var(--biss-muted);
+  padding: 0 9px;
+  font: 500 13px var(--biss-font-family);
+  cursor: pointer;
+}
+.biss-tool-button:hover {
+  background: var(--biss-surface-muted);
+}
+.biss-tool-button[data-active='true'] {
+  border-color: var(--biss-info-border);
+  background: var(--biss-info-bg);
+}
+.biss-tool-button[data-active='true'] button {
+  color: var(--biss-primary);
+}
+.biss-tool-button button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.biss-tool-button button + button {
+  border-inline-start: 1px solid var(--biss-info-border);
+  padding: 0 5px;
+}
+.biss-picker-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: var(--biss-control-height);
+  padding: 0 10px;
+  max-width: 100%;
+  border: 1px solid var(--biss-border-strong);
+  border-radius: var(--biss-radius-sm);
+  background: var(--biss-card);
+  color: var(--biss-text);
+  font: 500 13px var(--biss-font-family);
+  text-align: start;
+  cursor: pointer;
+}
+.biss-picker-trigger:hover {
+  background: var(--biss-surface-muted);
+}
+.biss-picker-trigger:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.biss-floating-trigger {
+  display: inline-flex;
+  max-width: 100%;
+}
+.biss-floating {
+  position: fixed;
+  inset: auto;
+  margin: 0;
+  padding: 6px;
+  border: 1px solid var(--biss-border);
+  border-radius: 12px;
+  background: var(--biss-card);
+  color: var(--biss-text);
+  box-shadow: var(--biss-popover-shadow);
+  max-width: calc(100vw - 16px);
+  max-height: calc(100dvh - 16px);
+  overflow: auto;
+}
+.biss-floating:popover-open {
+  animation: biss-float-in 0.14s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.biss-floating hr {
+  border: 0;
+  border-top: 1px solid var(--biss-border);
+  margin: 6px -6px;
+}
+.biss-picker-search {
+  display: block;
+  width: 100%;
+  height: var(--biss-control-height);
+  padding: 0 9px;
+  border: 1px solid var(--biss-border-strong);
+  border-radius: var(--biss-radius-sm);
+  font: 13px var(--biss-font-family);
+  background: var(--biss-card);
+  color: var(--biss-text);
+  margin-bottom: 6px;
+}
+.biss-picker-search::placeholder {
+  color: var(--biss-muted);
+}
+.biss-picker-option {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  padding: 7px 9px;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--biss-text);
+  font: 13.5px/1.35 var(--biss-font-family);
+  text-align: start;
+  cursor: pointer;
+}
+.biss-picker-option:hover,
+.biss-picker-option:focus-visible {
+  background: var(--biss-surface-muted);
+}
+.biss-picker-option:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.biss-picker-option[data-danger='true'] {
+  color: var(--biss-danger);
+}
+.biss-picker-option small {
+  display: block;
+  font-size: 12px;
+  color: var(--biss-muted);
+  margin-top: 2px;
+}
+.biss-picker-option[aria-selected='true'] {
+  color: var(--biss-primary);
+  background: var(--biss-info-bg);
+}
+.biss-picker-option input {
+  accent-color: var(--biss-primary);
+}
+.biss-picker-option kbd {
+  font: 12px var(--biss-font-family);
+  color: var(--biss-muted);
+}
+.biss-picker-option-group,
+.biss-picker-empty {
+  padding: 4px 9px;
+  color: var(--biss-muted);
+  font-size: 12px;
+}
+.biss-picker-option-group {
+  font-weight: 600;
+}
+.biss-picker-option-scroll {
+  max-height: 320px;
+  overflow: auto;
+}
+.biss-native-dialog {
+  width: min(var(--dialog-width, 520px), calc(100vw - 24px));
+  max-height: calc(100dvh - 32px);
+  padding: 0;
+  border: 1px solid var(--biss-border);
+  border-radius: 12px;
+  background: var(--biss-card);
+  color: var(--biss-text);
+  box-shadow: var(--biss-popover-shadow);
+  overflow: auto;
+}
+.biss-native-dialog::backdrop {
+  background: rgba(29, 28, 26, 0.32);
+}
+.biss-native-dialog > header {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 20px 22px;
+  border-bottom: 1px solid var(--biss-border);
+}
+.biss-native-dialog h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+.biss-native-dialog header p {
+  margin: 4px 0 0;
+  color: var(--biss-muted);
+  font-size: 13px;
+}
+.biss-dialog-body {
+  padding: 20px 22px;
+}
+.biss-native-dialog > footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 14px 22px;
+  border-top: 1px solid var(--biss-border);
+}
+.biss-side-panel {
+  margin: 0 0 0 auto;
+  height: 100dvh;
+  max-height: 100dvh;
+  border-radius: 12px 0 0 12px;
+  width: min(var(--dialog-width, 640px), 100vw);
+}
+.biss-value-picker > header,
+.biss-value-picker > footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 6px;
+}
+.biss-value-picker > footer {
+  border-top: 1px solid var(--biss-border);
+  font-size: 12px;
+  color: var(--biss-muted);
+}
+.biss-segmented {
+  display: inline-flex;
+  border: 1px solid var(--biss-border);
+  border-radius: 7px;
+  padding: 2px;
+  background: var(--biss-surface-muted);
+}
+.biss-segmented button {
+  border: 0;
+  padding: 4px 8px;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--biss-muted);
+  font: 500 12px var(--biss-font-family);
+  cursor: pointer;
+}
+.biss-segmented button[aria-pressed='true'] {
+  background: var(--biss-card);
+  color: var(--biss-text);
+  box-shadow: var(--biss-shadow);
+}
+.biss-color-dot {
+  display: inline-block;
+  flex: none;
+  width: 9px;
+  height: 9px;
+  border-radius: 3px;
+  background: var(--biss-primary);
+}
+.biss-swatch-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+.biss-swatch-grid button {
+  display: grid;
+  place-items: center;
+  height: 28px;
+  border: 1px solid var(--biss-border);
+  border-radius: 7px;
+  background: var(--biss-card);
+  cursor: pointer;
+}
+.biss-swatch-grid i {
+  width: 15px;
+  height: 15px;
+  background: var(--swatch);
+  border-radius: 4px;
+}
+.biss-swatch-grid [aria-pressed='true'] {
+  border-color: var(--biss-text);
+}
+.biss-capacity {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-variant-numeric: tabular-nums;
+}
+.biss-capacity > .biss-goal-bar {
+  min-width: 40px;
+  flex: 1;
+}
+.biss-capacity b {
+  font-size: 12.5px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.biss-capacity small {
+  font-weight: 400;
+  color: var(--biss-muted);
+}
+.biss-capacity[data-over='true'] b {
+  color: var(--biss-danger);
+}
+.biss-presence {
+  display: inline-flex;
+  align-items: center;
+  padding-left: 5px;
+}
+.biss-presence > .biss-avatar,
+.biss-presence > span {
+  margin-left: -5px;
+  outline: 2px solid var(--biss-card);
+  border-radius: 50%;
+}
+.biss-presence > span:last-child {
+  font: 12px var(--biss-font-family);
+  margin-left: 5px;
+  outline: 0;
+}
+.biss-home-card {
+  border: 1px solid var(--biss-border);
+  border-radius: var(--biss-radius-md);
+  background: var(--biss-card);
+  box-shadow: var(--biss-shadow);
+  min-width: 0;
+}
+.biss-home-card > header {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 48px;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--biss-border);
+}
+.biss-home-card h2 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+.biss-home-card header p {
+  margin: 1px 0 0;
+  font-size: 12.5px;
+  color: var(--biss-muted);
+}
+.biss-home-body {
+  padding: 14px 16px;
+}
+.biss-home-body[data-flush='true'] {
+  padding: 0;
+}
+.biss-home-card > footer {
+  padding: 9px 16px;
+  border-top: 1px solid var(--biss-border);
+  color: var(--biss-muted);
+  font-size: 13px;
+}
+.biss-home-card[aria-busy='true'] .biss-home-body {
+  opacity: 0.5;
+}
+.biss-status-cell {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 22px;
+  padding: 0 8px;
+  border-radius: 11px;
+  font: 500 12px var(--biss-font-family);
+  color: var(--status-color);
+}
+.biss-status-cell[data-soft='true'] {
+  background: color-mix(in srgb, var(--status-color) 10%, var(--biss-card));
+  border: 1px solid color-mix(in srgb, var(--status-color) 25%, var(--biss-card));
+}
+.biss-status-cell i {
+  height: 6px;
+  width: 6px;
+  background: currentColor;
+  border-radius: 50%;
+}
+.biss-people-cell,
+.biss-people-cell > span,
+.biss-record-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font: 13px var(--biss-font-family);
+}
+.biss-people-cell {
+  flex-wrap: wrap;
+  gap: 6px 12px;
+}
+.biss-record-chip {
+  padding: 3px 7px;
+  border-radius: 6px;
+  border: 1px solid var(--biss-border);
+  background: var(--biss-surface-subtle);
+  color: var(--biss-text);
+  text-decoration: none;
+  max-width: 100%;
+}
+.biss-record-chip > span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.biss-record-chip small {
+  color: var(--biss-muted);
+}
+a.biss-record-chip:hover {
+  background: var(--biss-info-bg);
+  border-color: var(--biss-info-border);
+}
+.biss-table-add {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: var(--biss-row-height);
+  width: 100%;
+  padding: 0 14px;
+  background: transparent;
+  color: var(--biss-muted);
+  font: 13px var(--biss-font-family);
+  border: 0;
+  cursor: pointer;
+}
+.biss-table-add:hover {
+  background: var(--biss-surface-muted);
+  color: var(--biss-primary);
+}
+.biss-table-add:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.biss-table-group > header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+.biss-table-group > header > button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: 0;
+  padding: 10px 4px;
+  font: 600 14px var(--biss-font-family);
+  color: var(--biss-text);
+  cursor: pointer;
+}
+.biss-table-group header i {
+  width: 7px;
+  height: 7px;
+  border-radius: 2px;
+}
+.biss-table-group small {
+  font-weight: 400;
+  color: var(--biss-muted);
+}
+.biss-table-total {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  font: 12px var(--biss-font-family);
+  font-variant-numeric: tabular-nums;
+}
+.biss-table-total small {
+  color: var(--biss-muted);
+}
+.biss-table-total b {
+  font-weight: 500;
+}
+.biss-page-hint {
+  position: relative;
+  display: inline-block;
+}
+.biss-page-hint summary {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  list-style: none;
+  color: var(--biss-muted);
+  cursor: pointer;
+}
+.biss-page-hint summary::-webkit-details-marker {
+  display: none;
+}
+.biss-page-hint p {
+  margin: 4px 0 0;
+  padding: 10px 12px;
+  border: 1px solid var(--biss-border);
+  border-radius: 8px;
+  background: var(--biss-surface-subtle);
+  font-size: 13px;
+  max-width: 65ch;
+}
+.biss-onboarding {
+  max-width: 560px;
+  margin: auto;
+  padding: 32px 24px;
+}
+.biss-onboarding h1 {
+  font-size: 26px;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+  margin: 8px 0;
+}
+.biss-onboarding header p {
+  color: var(--biss-muted);
+  margin: 0 0 24px;
+}
+.biss-onboarding > footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 24px;
+}
+.biss-onboarding-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.biss-onboarding-chips button {
+  padding: 9px 14px;
+  border: 1px solid var(--biss-border-strong);
+  border-radius: var(--biss-radius-sm);
+  background: var(--biss-card);
+  font: 13px var(--biss-font-family);
+  color: var(--biss-text);
+  cursor: pointer;
+}
+.biss-onboarding-chips button[aria-pressed='true'] {
+  background: var(--biss-info-bg);
+  border-color: var(--biss-primary);
+  color: var(--biss-primary);
+}
+.biss-onboarding-chips button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.biss-no-access {
+  text-align: center;
+  padding: 32px 20px;
+}
+.biss-no-access h2 {
+  font-size: 17px;
+  font-weight: 600;
+  margin: 8px 0;
+}
+.biss-no-access p {
+  font-size: 13.5px;
+  color: var(--biss-muted);
+}
+.biss-live-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font: 12px var(--biss-font-family);
+  color: var(--biss-muted);
+  border: 1px solid var(--biss-border);
+  border-radius: 20px;
+  padding: 5px 10px;
+  background: var(--biss-card);
+}
+.biss-goal-card {
+  padding: 18px;
+  border: 1px solid var(--biss-border);
+  border-radius: 10px;
+  background: var(--biss-card);
+}
+.biss-goal-card header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+}
+.biss-goal-card h3,
+.biss-goal-card header a {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--biss-text);
+}
+.biss-goal-card p {
+  color: var(--biss-muted);
+  font-size: 13px;
+  margin: 6px 0 16px;
+}
+.biss-goal-card footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 12px;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+.biss-checklist {
+  list-style: none;
+  padding: 0;
+}
+.biss-checklist label {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--biss-border);
+  cursor: pointer;
+}
+.biss-checklist input {
+  accent-color: var(--biss-primary);
+  margin-top: 4px;
+}
+.biss-checklist small {
+  display: block;
+  font-size: 12px;
+  color: var(--biss-muted);
+}
+.biss-property-list {
+  margin: 0;
+}
+.biss-property-list > div {
+  display: grid;
+  grid-template-columns: minmax(90px, 30%) minmax(0, 1fr);
+  gap: 16px;
+  padding: 8px 0;
+}
+.biss-property-list dt {
+  color: var(--biss-muted);
+  font-size: 13px;
+}
+.biss-property-list dd {
+  margin: 0;
+  font-size: 13.5px;
+  overflow-wrap: anywhere;
+}
+.biss-property-list a {
+  color: var(--biss-primary);
+}
+.biss-activity-list {
+  list-style: none;
+  padding: 0;
+}
+.biss-activity-list li {
+  display: flex;
+  gap: 10px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--biss-border);
+  font-size: 13px;
+}
+.biss-activity-list b {
+  font-weight: 500;
+}
+.biss-activity-list p {
+  margin: 4px 0;
+}
+.biss-activity-list small {
+  color: var(--biss-muted);
+  font-size: 12px;
+}
+.biss-date-picker {
+  font: 13.5px var(--biss-font-family);
+  color: var(--biss-text);
+  max-width: 100%;
+  width: 280px;
+}
+.biss-date-picker header,
+.biss-date-picker footer {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  justify-content: space-between;
+  padding: 4px 0;
+}
+.biss-date-picker header b {
+  flex: 1;
+  font-size: 13.5px;
+  font-weight: 600;
+}
+.biss-date-picker table {
+  border-collapse: separate;
+  border-spacing: 1px;
+  width: 100%;
+  table-layout: fixed;
+}
+.biss-date-picker th {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--biss-muted);
+  height: 26px;
+}
+.biss-date-picker td {
+  padding: 0;
+}
+.biss-date-picker td button {
+  width: 100%;
+  min-height: 34px;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 7px;
+  font: 13px var(--biss-font-family);
+  color: var(--biss-text);
+  cursor: pointer;
+}
+.biss-date-picker td button:hover {
+  background: var(--biss-surface-muted);
+}
+.biss-date-picker td button[data-out='true'] {
+  color: var(--biss-muted);
+}
+.biss-date-picker td button[data-range='true'] {
+  background: var(--biss-info-bg);
+  border-radius: 0;
+}
+.biss-date-picker td button[data-selected='true'] {
+  background: var(--biss-primary);
+  color: white;
+}
+.biss-date-picker td button[aria-current='date'] {
+  box-shadow: inset 0 0 0 1px var(--biss-primary);
+}
+.biss-date-picker td button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.biss-date-picker footer {
+  margin-top: 6px;
+  border-top: 1px solid var(--biss-border);
+}
+.biss-date-error {
+  font-size: 12px;
+  color: var(--biss-danger);
+}
+.biss-tool-search {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  max-width: 100%;
+  min-height: var(--biss-control-height);
+  color: var(--biss-muted);
+}
+.biss-tool-search > input {
+  width: 180px;
+  max-width: 100%;
+  height: var(--biss-control-height);
+  border: 1px solid var(--biss-border-strong);
+  border-radius: 7px;
+  background: var(--biss-card);
+  color: var(--biss-text);
+  padding: 0 9px;
+  font: 13px var(--biss-font-family);
+}
+.biss-tool-new {
+  display: inline-flex;
+  gap: 3px;
+  flex-wrap: wrap;
+}
+.biss-chart-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+}
+.biss-grouped-bars {
+  width: 100%;
+}
+.biss-grouped-bars line {
+  stroke: var(--biss-border);
+}
+.biss-grouped-bars text {
+  fill: var(--biss-muted);
+  font: 11.5px var(--biss-font-family);
+}
+.biss-grouped-bars [role='button'] {
+  cursor: pointer;
+}
+.biss-grouped-bars [role='button']:focus-visible {
+  outline: 2px solid var(--biss-primary);
+}
+.biss-line-chart {
+  width: 100%;
+  min-width: 280px;
+}
+.biss-line-chart polyline {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+}
+.biss-line-chart circle {
+  fill: currentColor;
+}
+.biss-mini-chart {
+  display: block;
+  width: 60px;
+  height: 36px;
+}
+.biss-mini-chart .a {
+  fill: var(--biss-primary);
+}
+.biss-mini-chart .o {
+  opacity: 0.45;
+}
+.biss-mini-chart .y {
+  fill: var(--biss-warning);
+}
+.biss-mini-chart .m {
+  fill: var(--biss-border-strong);
+}
+.biss-mini-chart .ln {
+  fill: none;
+  stroke: var(--biss-primary);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.biss-kanban {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+  max-width: 100%;
+}
+.biss-kanban-lane {
+  flex: 1 0 240px;
+  min-width: 0;
+  max-width: 340px;
+  background: var(--biss-surface-subtle);
+  border-radius: 10px;
+  padding: 10px;
+}
+.biss-kanban-lane > header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.biss-kanban h3 {
+  font-size: 13px;
+  margin: 0;
+  flex: 1;
+}
+.biss-kanban small {
+  color: var(--biss-muted);
+  font-size: 12px;
+}
+.biss-kanban article {
+  border: 1px solid var(--biss-border);
+  border-radius: 8px;
+  background: var(--biss-card);
+  padding: 12px;
+  margin: 8px 0;
+  box-shadow: var(--biss-shadow);
+}
+.biss-kanban article p {
+  margin: 6px 0;
+  font-size: 12.5px;
+  color: var(--biss-muted);
+}
+.biss-kanban article footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+}
+.biss-kanban-title {
+  display: block;
+  width: 100%;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  color: var(--biss-text);
+  font: 500 13.5px var(--biss-font-family);
+  text-align: start;
+  cursor: pointer;
+}
+.biss-kanban article .biss-picker-trigger {
+  font-size: 12px;
+  min-height: 26px;
+}
+.biss-calendar {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  border-top: 1px solid var(--biss-border);
+  border-left: 1px solid var(--biss-border);
+}
+.biss-calendar > section {
+  min-height: 100px;
+  padding: 6px;
+  border-right: 1px solid var(--biss-border);
+  border-bottom: 1px solid var(--biss-border);
+  margin: 0;
+}
+.biss-calendar > section[data-out='true'] {
+  background: var(--biss-surface-subtle);
+  color: var(--biss-muted);
+}
+.biss-calendar header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+}
+.biss-calendar time {
+  font-size: 11px;
+}
+.biss-calendar-item {
+  display: block;
+  width: 100%;
+  text-align: start;
+  border: 1px solid var(--biss-border);
+  border-radius: 5px;
+  background: var(--biss-info-bg);
+  padding: 5px;
+  font: 12px var(--biss-font-family);
+  color: var(--biss-primary);
+  margin-top: 5px;
+  cursor: pointer;
+  overflow-wrap: anywhere;
+}
+.biss-timeline {
+  max-width: 100%;
+  overflow-x: auto;
+}
+.biss-timeline-axis {
+  display: flex;
+  justify-content: space-between;
+  margin-inline-start: 130px;
+  color: var(--biss-muted);
+  font-size: 12px;
+  padding: 8px 0;
+}
+.biss-timeline-row {
+  display: grid;
+  grid-template-columns: 120px minmax(200px, 1fr);
+  gap: 10px;
+  min-height: 40px;
+  align-items: center;
+  border-top: 1px solid var(--biss-border);
+  font-size: 13px;
+}
+.biss-timeline-row > span {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.biss-timeline-row > div {
+  position: relative;
+  height: 28px;
+  background: var(--biss-surface-subtle);
+}
+.biss-timeline-row button {
+  position: absolute;
+  top: 3px;
+  height: 22px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border: 0;
+  border-radius: 4px;
+  color: white;
+  font: 12px var(--biss-font-family);
+  padding: 0 6px;
+  cursor: pointer;
+}
+.biss-editable > button {
+  display: inline-block;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--biss-text);
+  padding: 4px 6px;
+  font: 13.5px var(--biss-font-family);
+  cursor: text;
+  text-align: start;
+}
+.biss-editable > button:hover {
+  background: var(--biss-surface-muted);
+}
+.biss-editable > button:disabled {
+  cursor: default;
+}
+.biss-editable > input,
+.biss-editable > textarea {
+  font: 13.5px var(--biss-font-family);
+  padding: 4px 6px;
+  border: 1px solid var(--biss-primary);
+  border-radius: 4px;
+  background: var(--biss-card);
+  color: var(--biss-text);
+  max-width: 100%;
+}
+.biss-table-head,
+.biss-table-head > button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font: 500 12.5px var(--biss-font-family);
+  color: var(--biss-muted);
+}
+.biss-table-head > button {
+  border: 0;
+  background: transparent;
+  padding: 4px 0;
+  cursor: pointer;
+}
+@keyframes biss-float-in {
+  from {
+    opacity: 0;
+    transform: translateY(-3px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .biss-floating:popover-open {
+    animation: none;
+  }
+}
+@media (max-width: 640px) {
+  .biss-native-dialog:not(.biss-side-panel) {
+    margin: auto 0 0;
+    width: 100vw;
+    max-height: 90dvh;
+    border-radius: 14px 14px 0 0;
+  }
+  .biss-dialog-body {
+    padding: 16px;
+  }
+  .biss-side-panel {
+    border-radius: 0;
+  }
+  .biss-calendar {
+    grid-template-columns: 1fr;
+  }
+  .biss-calendar > section {
+    min-height: 0;
+    padding: 8px;
+  }
+  .biss-calendar > section[data-out='true'] {
+    display: none;
+  }
+  .biss-calendar header time {
+    font-size: 13px;
+  }
+  .biss-kanban-lane {
+    flex-basis: 260px;
+  }
+  .biss-onboarding {
+    padding: 20px 0;
+  }
+}

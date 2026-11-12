@@ -1,0 +1,260 @@
+<script lang="ts">
+  import { onMount } from "svelte";
+  import { setBissFavicon, type BissServiceIconName } from "../icons";
+  import type { BissLink } from "../tokens";
+  import BissServiceIcon from "./BissServiceIcon.svelte";
+  import BissBottomBar from "./BissBottomBar.svelte";
+  import BissTopBar from "./BissTopBar.svelte";
+
+  export let brand = "Case Law Explorer";
+  export let mark = "CLE";
+  export let icon: BissServiceIconName | undefined = undefined;
+  export let iconLabel: string | undefined = undefined;
+  export let favicon = true;
+  export let href = "/";
+  export let topLinks: BissLink[] = [];
+  /**
+   * Whether to render the sidebar. Defaults to "was the slot given", which is
+   * the right answer for direct use — but a wrapper always forwards its slots,
+   * so it has to say explicitly.
+   */
+  export let sidebar: boolean | undefined = undefined;
+  export let sidebarFooter: boolean | undefined = undefined;
+  /**
+   * Let the content own the whole area: no page padding, no measure.
+   *
+   * The default is a document surface, where a line of prose past 1440px is
+   * unreadable and 32px of breathing room is right. A workspace is the other
+   * thing entirely — a graph canvas, a results table, a docked panel — and it
+   * wants the pixels. Without this each one reaches for a negative-margin
+   * override, and they all reach differently.
+   */
+  export let fluid = false;
+  /**
+   * Close the page with the same footer the public pages carry.
+   *
+   * A console is a place you stay, so it did without one. A workspace is
+   * still a page of a site, and a product whose signed-in half has no
+   * footer reads as somewhere else entirely. Off unless asked for, so no
+   * existing console grows one by surprise.
+   */
+  export let footer = false;
+  export let footerText = "Managed by BISS Institute.";
+  export let footerLinks: BissLink[] = [];
+
+  /** Sidebar is a drawer below 960px; the toggle only renders there. */
+  let sidebarOpen = false;
+  let mounted = false;
+
+  /**
+   * Above 960px the rail folds down to a strip instead. A workspace (a graph,
+   * a results table) wants the width back, and a sidebar that can only be
+   * narrowed to 200px does not give enough of it. Remembered per browser,
+   * since whoever folds it away once wants it folded on the next page too.
+   */
+  const COLLAPSED_KEY = "biss-sidebar-collapsed";
+  let sidebarCollapsed = false;
+
+  function setCollapsed(next: boolean) {
+    sidebarCollapsed = next;
+    try {
+      localStorage.setItem(COLLAPSED_KEY, next ? "1" : "0");
+    } catch {
+      // Storage can be blocked; the rail still folds, it just forgets.
+    }
+  }
+
+  function syncFavicon() {
+    if (favicon && icon) setBissFavicon(icon);
+  }
+
+  onMount(() => {
+    mounted = true;
+    syncFavicon();
+    try {
+      sidebarCollapsed = localStorage.getItem(COLLAPSED_KEY) === "1";
+    } catch {
+      sidebarCollapsed = false;
+    }
+  });
+
+  $: if (mounted) syncFavicon();
+
+  $: showSidebar = sidebar ?? Boolean($$slots.sidebar);
+  $: showSidebarFooter = sidebarFooter ?? Boolean($$slots["sidebar-footer"]);
+
+  /**
+   * Widens or narrows the rail.
+   *
+   * Pointer events rather than mouse events so a trackpad, a touchscreen and a
+   * pen all work, and pointer capture keeps the drag alive when the cursor
+   * outruns the handle, which at speed it always does. Arrow keys do the same
+   * thing, since a drag cannot be tabbed to.
+   */
+  const SIDEBAR_MIN = 200;
+  const SIDEBAR_MAX = 460;
+
+  function sidebarResize(node: HTMLElement) {
+    const shell = node.closest<HTMLElement>(".biss-app-shell");
+    const rail = node.closest<HTMLElement>(".biss-app-sidebar");
+    if (!shell || !rail) return {};
+
+    let startX = 0;
+    let startWidth = 0;
+
+    function apply(width: number) {
+      const next = Math.min(SIDEBAR_MAX, Math.max(SIDEBAR_MIN, width));
+      shell!.style.setProperty("--biss-sidebar-width", `${Math.round(next)}px`);
+    }
+
+    function onPointerMove(event: PointerEvent) {
+      apply(startWidth + (event.clientX - startX));
+    }
+
+    function onPointerUp(event: PointerEvent) {
+      node.releasePointerCapture?.(event.pointerId);
+      node.classList.remove("is-dragging");
+      document.body.style.userSelect = "";
+      window.removeEventListener("pointermove", onPointerMove);
+      window.removeEventListener("pointerup", onPointerUp);
+    }
+
+    function onPointerDown(event: PointerEvent) {
+      if (event.button !== 0) return;
+      event.preventDefault();
+      startX = event.clientX;
+      startWidth = rail!.getBoundingClientRect().width;
+      node.setPointerCapture?.(event.pointerId);
+      node.classList.add("is-dragging");
+      document.body.style.userSelect = "none";
+      window.addEventListener("pointermove", onPointerMove);
+      window.addEventListener("pointerup", onPointerUp);
+    }
+
+    function onKeydown(event: KeyboardEvent) {
+      const step = event.shiftKey ? 64 : 16;
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        apply(rail!.getBoundingClientRect().width + step);
+      } else if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        apply(rail!.getBoundingClientRect().width - step);
+      }
+    }
+
+    node.addEventListener("pointerdown", onPointerDown);
+    node.addEventListener("keydown", onKeydown);
+
+    return {
+      destroy() {
+        node.removeEventListener("pointerdown", onPointerDown);
+        node.removeEventListener("keydown", onKeydown);
+        window.removeEventListener("pointermove", onPointerMove);
+        window.removeEventListener("pointerup", onPointerUp);
+        document.body.style.userSelect = "";
+      },
+    };
+  }
+</script>
+
+<div
+  class="biss-app-shell"
+  class:has-footer={footer}
+  class:is-sidebar-collapsed={showSidebar && sidebarCollapsed}
+>
+  <BissTopBar {brand} {mark} {icon} {iconLabel} {href} links={topLinks}>
+    <!-- A <svelte:fragment> must be a direct child of the component, so the
+         "was it provided" test goes inside it. Providing a slot at all
+         suppresses the child's fallback, which is why the default is repeated
+         here rather than left to BissTopBar. -->
+    <svelte:fragment slot="icon">
+      {#if $$slots.icon}
+        <slot name="icon" />
+      {:else}
+        <BissServiceIcon {icon} {mark} label={iconLabel} />
+      {/if}
+    </svelte:fragment>
+    <svelte:fragment slot="actions">
+      {#if showSidebar}
+        <button
+          type="button"
+          class="biss-button biss-button-secondary biss-button-sm biss-sidebar-toggle"
+          aria-expanded={sidebarOpen}
+          on:click={() => (sidebarOpen = !sidebarOpen)}
+        >
+          Menu
+        </button>
+      {/if}
+      <slot name="topbar-actions" />
+    </svelte:fragment>
+  </BissTopBar>
+
+  <div class="biss-app-body">
+    <!-- Consoles without a record switcher (a self-service account page, say)
+         omit the slot and get the full width. -->
+    {#if showSidebar}
+      {#if sidebarOpen}
+        <button
+          type="button"
+          class="biss-sidebar-scrim"
+          aria-label="Close navigation"
+          on:click={() => (sidebarOpen = false)}
+        ></button>
+      {/if}
+      <aside class="biss-app-sidebar" class:is-open={sidebarOpen}>
+        <!-- Sits on the rail's border so it is still there, and in the same
+             place, once the rail has folded down to a strip. -->
+        <button
+          type="button"
+          class="biss-sidebar-collapse"
+          aria-expanded={!sidebarCollapsed}
+          aria-label={sidebarCollapsed ? "Expand the sidebar" : "Collapse the sidebar"}
+          title={sidebarCollapsed ? "Expand the sidebar" : "Collapse the sidebar"}
+          on:click={() => setCollapsed(!sidebarCollapsed)}
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="m15 18-6-6 6-6" />
+          </svg>
+        </button>
+        <!-- Closing on click is what dismisses the mobile drawer after a nav
+             link is followed. Scoped to the scrolling body so the account
+             block's own buttons do not inherit it. -->
+        <div
+          class="biss-sidebar-body"
+          role="presentation"
+          on:click={() => (sidebarOpen = false)}
+        >
+          <slot name="sidebar" />
+        </div>
+        {#if showSidebarFooter}
+          <div class="biss-sidebar-footer">
+            <slot name="sidebar-footer" />
+          </div>
+        {/if}
+        <!--
+          Drag the rail's outer edge to widen it. Navigation labels are as long
+          as the product's own vocabulary makes them, and a saved query is named
+          by whoever saved it, so one fixed width truncates somebody. Writes the
+          variable the sidebar already sizes from, so nothing downstream needs
+          to know a drag happened.
+        -->
+        <button
+          type="button"
+          class="biss-sidebar-resizer"
+          aria-label="Resize the sidebar"
+          title="Drag to resize"
+          use:sidebarResize
+        ></button>
+      </aside>
+    {/if}
+    <main class="biss-app-main" class:is-fluid={fluid}>
+      <div class="biss-app-main-inner">
+        <slot />
+      </div>
+    </main>
+  </div>
+
+  {#if footer}
+    <BissBottomBar managedBy={footerText} links={footerLinks} />
+  {/if}
+</div>

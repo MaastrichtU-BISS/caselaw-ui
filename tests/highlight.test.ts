@@ -10,14 +10,14 @@
 import assert from "node:assert/strict";
 import { describe, test } from "node:test";
 
-import { highlight, inferLanguage, type CleCodeToken } from "../src/highlight";
+import { highlight, inferLanguage, type BissCodeToken } from "../src/highlight";
 
 /** The concatenated text must always reproduce the input exactly. */
-function roundTrip(tokens: CleCodeToken[]): string {
+function roundTrip(tokens: BissCodeToken[]): string {
   return tokens.map((token) => token.text).join("");
 }
 
-function kindOf(tokens: CleCodeToken[], text: string): string | undefined {
+function kindOf(tokens: BissCodeToken[], text: string): string | undefined {
   return tokens.find((token) => token.text === text)?.kind;
 }
 

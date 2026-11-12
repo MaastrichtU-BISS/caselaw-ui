@@ -1,4 +1,4 @@
-export type CleTableColumn = {
+export type BissTableColumn = {
   key: string;
   label: string;
   /** Right-aligns and tabular-aligns the column. Use for counts and amounts. */
@@ -10,31 +10,31 @@ export type CleTableColumn = {
   width?: string;
 };
 
-export type CleTone = "neutral" | "success" | "danger" | "warning" | "info";
+export type BissTone = "neutral" | "success" | "danger" | "warning" | "info";
 
-export type CleOption = {
+export type BissOption = {
   label: string;
   value: string | number;
 };
 
-export type CleCrumb = {
+export type BissCrumb = {
   label: string;
   href?: string;
 };
 
-export type CleStat = {
+export type BissStat = {
   label: string;
   value: string | number;
 };
 
-export type CleChartPoint = {
+export type BissChartPoint = {
   label: string;
   value: number;
   /** Secondary value drawn inside the bar, e.g. denials within total requests. */
   compare?: number;
 };
 
-export type CleMeterItem = {
+export type BissMeterItem = {
   label: string;
   value: number;
   /** Overrides the printed value when it needs formatting. */
@@ -42,7 +42,7 @@ export type CleMeterItem = {
 };
 
 /** The signed-in account shown at the foot of a console sidebar. */
-export interface CleConsoleUser {
+export interface BissConsoleUser {
   name: string;
   email?: string;
   /** Two letters at most. Derived from the name when not given. */
@@ -50,7 +50,7 @@ export interface CleConsoleUser {
 }
 
 /** One language's version of a code sample. */
-export interface CleCodeSample {
+export interface BissCodeSample {
   label: string;
   code: string;
   /** Overrides detection, which normally reads the code then the label. */

@@ -1,7 +1,7 @@
 {
-  "name": "caselaw-ui",
-  "version": "0.9.29",
-  "description": "Shared Case Law Explorer design tokens and Vue/Svelte UI primitives.",
+  "name": "biss-ui",
+  "version": "0.1.0-next.0",
+  "description": "Customizable Vue and Svelte components with the Bizzy design language.",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/MaastrichtU-BISS/caselaw-ui.git"
@@ -18,9 +18,8 @@
   "files": [
     "src",
     "README.md",
-    "docs",
-    "scripts",
-    "tests"
+    "DESIGN.md",
+    "docs"
   ],
   "exports": {
     ".": {
@@ -44,19 +43,50 @@
   "scripts": {
     "check": "npm run check:vue && npm run check:svelte && npm test",
     "pack:dry": "npm pack --dry-run",
-    "check:svelte": "node scripts/compile-svelte.mjs",
+    "check:svelte": "node scripts/compile-svelte.mjs && npm run check:svelte:types",
     "check:vue": "vue-tsc --noEmit -p tsconfig.json",
-    "test": "tsx --test tests/*.test.ts"
+    "test": "tsx --test tests/*.test.ts",
+    "demo": "vite --host 127.0.0.1",
+    "demo:build": "vite build && vite build --config vite.svelte.config.ts",
+    "test:browser": "node scripts/test-browser.mjs && SVELTE=1 node scripts/test-browser.mjs",
+    "check:svelte:types": "svelte-check --tsconfig ./tsconfig.svelte.json",
+    "docs:generate": "node scripts/generate-docs.mjs",
+    "docs:dev": "vite --config vite.docs.config.ts --host 127.0.0.1",
+    "docs:build": "npm run docs:generate && vite build --config vite.docs.config.ts",
+    "docs:screenshots": "tsx scripts/capture-docs.ts",
+    "docs:check": "tsx scripts/check-docs.ts",
+    "docs:markdown": "node scripts/docs-markdown.mjs",
+    "docs:typecheck": "vue-tsc --noEmit -p tsconfig.docs.json"
   },
   "peerDependencies": {
-    "svelte": "^5.0.0",
+    "svelte": "^5.20.0",
     "vue": "^3.5.0"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "@playwright/test": "^1.65.0",
+    "@sveltejs/vite-plugin-svelte": "^7.3.1",
+    "@vitejs/plugin-vue": "^6.0.10",
+    "prettier": "^3.10.0",
+    "prettier-plugin-svelte": "^4.1.1",
     "svelte": "^5.0.0",
+    "svelte-check": "^4.7.8",
     "tsx": "^4.23.1",
     "typescript": "^5.6.3",
+    "vite": "^8.3.8",
     "vue": "^3.5.0",
     "vue-tsc": "^3.3.8"
+  },
+  "publishConfig": {
+    "access": "public",
+    "tag": "next"
+  },
+  "peerDependenciesMeta": {
+    "vue": {
+      "optional": true
+    },
+    "svelte": {
+      "optional": true
+    }
   }
 }

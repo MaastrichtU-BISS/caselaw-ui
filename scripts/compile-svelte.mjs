@@ -2,9 +2,9 @@
  * Compile every Svelte component.
  *
  * `tsc --noEmit` does not look inside .svelte files, so nothing here was
- * checking them — CleGridShell had been shipping a template that cannot
+ * checking them — BissGridShell had been shipping a template that cannot
  * compile under Svelte 5 (a `<svelte:fragment>` wrapped in an `{#if}`), and no
- * consumer noticed because nothing imports caselaw-ui/svelte yet.
+ * consumer noticed because nothing imports biss-ui/svelte yet.
  *
  * A compile check, not a type check: template errors are the class of mistake
  * that was actually getting through.

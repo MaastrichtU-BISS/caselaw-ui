@@ -1,50 +1,50 @@
 /* Console primitives.
-   Entry pages (CleGridShell) stay expressive: huge display type, grid backdrop.
+   Entry pages (BissGridShell) stay expressive: huge display type, grid backdrop.
    Console pages are the opposite: dense, quiet, and built for repeat use. */
 
-.cle-app-shell {
+.biss-app-shell {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background: var(--cle-surface-subtle);
-  color: var(--cle-text);
-  font-family: var(--cle-font-family);
+  background: var(--biss-surface-subtle);
+  color: var(--biss-text);
+  font-family: var(--biss-font-family);
   letter-spacing: 0;
 }
 
-.cle-app-shell .cle-fixed-topbar {
+.biss-app-shell .biss-fixed-topbar {
   background: rgba(255, 255, 255, 0.92);
 }
 
-.cle-app-body {
+.biss-app-body {
   display: flex;
   flex: 1 1 auto;
   align-items: stretch;
   width: 100%;
   min-height: 0;
-  padding-top: var(--cle-topbar-height);
+  padding-top: var(--biss-topbar-height);
 }
 
-.cle-app-sidebar {
+.biss-app-sidebar {
   /* A column rather than a scroll box, so the account block can sit against
      the bottom edge while the navigation above it scrolls independently. */
   position: sticky;
-  top: var(--cle-topbar-height);
+  top: var(--biss-topbar-height);
   display: flex;
-  flex: 0 0 var(--cle-sidebar-width);
+  flex: 0 0 var(--biss-sidebar-width);
   flex-direction: column;
-  width: var(--cle-sidebar-width);
-  height: calc(100vh - var(--cle-topbar-height));
-  border-right: 1px solid var(--cle-border);
-  background: var(--cle-card);
+  width: var(--biss-sidebar-width);
+  height: calc(100vh - var(--biss-topbar-height));
+  border-right: 1px solid var(--biss-border);
+  background: var(--biss-card);
 }
 
 /*
-  The rail's own drag handle. Mirrors .cle-dock-resizer on the other side of
+  The rail's own drag handle. Mirrors .biss-dock-resizer on the other side of
   the screen: straddling the border, because the border is the part that looks
   draggable, and wider than it draws so it can be hit without being seen.
 */
-.cle-sidebar-resizer {
+.biss-sidebar-resizer {
   position: absolute;
   top: 0;
   right: -4px;
@@ -58,32 +58,32 @@
   touch-action: none;
 }
 
-.cle-sidebar-resizer::after {
+.biss-sidebar-resizer::after {
   content: "";
   position: absolute;
   top: 0;
   bottom: 0;
   left: 4px;
   width: 1px;
-  background: var(--cle-primary);
+  background: var(--biss-primary);
   opacity: 0;
   transition: opacity 0.12s ease;
 }
 
-.cle-sidebar-resizer:hover::after,
-.cle-sidebar-resizer:focus-visible::after,
-.cle-sidebar-resizer.is-dragging::after {
+.biss-sidebar-resizer:hover::after,
+.biss-sidebar-resizer:focus-visible::after,
+.biss-sidebar-resizer.is-dragging::after {
   opacity: 1;
 }
 
-.cle-sidebar-resizer:focus-visible {
+.biss-sidebar-resizer:focus-visible {
   outline: none;
 }
 
 /* Matches the width at which the rail becomes a drawer: once it slides over
    the content there is nothing left to trade width with. */
 @media (max-width: 960px) {
-  .cle-sidebar-resizer {
+  .biss-sidebar-resizer {
     display: none;
   }
 }
@@ -92,7 +92,7 @@
   Folds the rail away on desktop. The button sits on the rail's border while
   it is open and becomes a tab on the window edge once it is folded.
 */
-.cle-sidebar-collapse {
+.biss-sidebar-collapse {
   position: absolute;
   top: 14px;
   right: -12px;
@@ -102,49 +102,49 @@
   width: 24px;
   height: 24px;
   padding: 0;
-  border: 1px solid var(--cle-border);
+  border: 1px solid var(--biss-border);
   border-radius: 999px;
-  background: var(--cle-card);
-  color: var(--cle-muted);
-  box-shadow: var(--cle-shadow-sm);
+  background: var(--biss-card);
+  color: var(--biss-muted);
+  box-shadow: var(--biss-shadow-sm);
   cursor: pointer;
   transition: color 0.12s ease, border-color 0.12s ease;
 }
 
-.cle-sidebar-collapse svg {
+.biss-sidebar-collapse svg {
   width: 14px;
   height: 14px;
   transition: transform 0.18s ease;
 }
 
-.cle-sidebar-collapse:hover,
-.cle-sidebar-collapse:focus-visible {
-  border-color: var(--cle-primary);
-  color: var(--cle-primary);
+.biss-sidebar-collapse:hover,
+.biss-sidebar-collapse:focus-visible {
+  border-color: var(--biss-primary);
+  color: var(--biss-primary);
 }
 
-.cle-sidebar-collapse:focus-visible {
-  outline: 2px solid var(--cle-primary);
+.biss-sidebar-collapse:focus-visible {
+  outline: 2px solid var(--biss-primary);
   outline-offset: 2px;
 }
 
 @media (min-width: 961px) {
   /* Above the content that follows it, so the button on its border is not
      painted over by a positioned canvas in the main area. */
-  .cle-app-sidebar {
+  .biss-app-sidebar {
     z-index: 4;
   }
 
   /* Gone entirely, border included: an empty strip with a rule down it is
      a sidebar that looks broken, not one that was put away. */
-  .cle-app-shell.is-sidebar-collapsed .cle-app-sidebar {
+  .biss-app-shell.is-sidebar-collapsed .biss-app-sidebar {
     flex-basis: 0;
     width: 0;
     border-right: 0;
   }
 
   /* What is left is a tab on the window edge that pulls the rail back. */
-  .cle-app-shell.is-sidebar-collapsed .cle-sidebar-collapse {
+  .biss-app-shell.is-sidebar-collapsed .biss-sidebar-collapse {
     right: auto;
     left: 0;
     width: 20px;
@@ -152,35 +152,35 @@
     border-radius: 0 999px 999px 0;
   }
 
-  .cle-app-shell.is-sidebar-collapsed .cle-sidebar-body,
-  .cle-app-shell.is-sidebar-collapsed .cle-sidebar-footer,
-  .cle-app-shell.is-sidebar-collapsed .cle-sidebar-resizer {
+  .biss-app-shell.is-sidebar-collapsed .biss-sidebar-body,
+  .biss-app-shell.is-sidebar-collapsed .biss-sidebar-footer,
+  .biss-app-shell.is-sidebar-collapsed .biss-sidebar-resizer {
     display: none;
   }
 
-  .cle-app-shell.is-sidebar-collapsed .cle-sidebar-collapse svg {
+  .biss-app-shell.is-sidebar-collapsed .biss-sidebar-collapse svg {
     transform: rotate(180deg);
   }
 }
 
 /* The drawer has its own Menu toggle and scrim. */
 @media (max-width: 960px) {
-  .cle-sidebar-collapse {
+  .biss-sidebar-collapse {
     display: none;
   }
 }
 
-.cle-sidebar-body {
+.biss-sidebar-body {
   flex: 1 1 auto;
   overflow-y: auto;
   min-height: 0;
   padding: 20px 14px 28px;
 }
 
-.cle-sidebar-footer {
+.biss-sidebar-footer {
   flex: 0 0 auto;
   padding: 12px 14px;
-  border-top: 1px solid var(--cle-border);
+  border-top: 1px solid var(--biss-border);
 }
 
 /* ---------------------------------------------------------------------------
@@ -193,23 +193,23 @@
 --------------------------------------------------------------------------- */
 
 /* The fallback when a page has no sidebar to hold the account block. */
-.cle-topbar-account {
+.biss-topbar-account {
   overflow: hidden;
   max-width: 220px;
-  color: var(--cle-muted);
-  font-size: var(--cle-text-sm);
+  color: var(--biss-muted);
+  font-size: var(--biss-text-sm);
   font-weight: 750;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 @media (max-width: 720px) {
-  .cle-topbar-account {
+  .biss-topbar-account {
     display: none;
   }
 }
 
-.cle-sidebar-user {
+.biss-sidebar-user {
   /* Actions sit on the row rather than under it. A block of buttons below the
      name reads as a form; a trailing control reads as part of the identity,
      which is what it is. */
@@ -218,23 +218,23 @@
   align-items: center;
   gap: 9px;
   padding: 6px 4px;
-  border-radius: var(--cle-radius-sm);
+  border-radius: var(--biss-radius-sm);
   transition: background 0.14s ease;
 }
 
-.cle-sidebar-user:hover,
-.cle-sidebar-user:focus-within {
-  background: var(--cle-surface-muted);
+.biss-sidebar-user:hover,
+.biss-sidebar-user:focus-within {
+  background: var(--biss-surface-muted);
 }
 
-.cle-sidebar-user-avatar {
+.biss-sidebar-user-avatar {
   display: grid;
   place-items: center;
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background: var(--cle-accent-soft, var(--cle-surface-muted));
-  color: var(--cle-accent, var(--cle-text));
+  background: var(--biss-accent-soft, var(--biss-surface-muted));
+  color: var(--biss-accent, var(--biss-text));
   font-size: 0.68rem;
   font-weight: 900;
   letter-spacing: 0.02em;
@@ -247,7 +247,7 @@
   outside the link: reaching for your account and leaving it are not the same
   gesture, and one should not be able to trigger the other.
 */
-.cle-sidebar-user-identity {
+.biss-sidebar-user-identity {
   display: grid;
   grid-template-columns: 30px minmax(0, 1fr);
   align-items: center;
@@ -257,47 +257,47 @@
   text-decoration: none;
 }
 
-.cle-sidebar-user-identity.is-linked {
-  border-radius: var(--cle-radius-sm);
+.biss-sidebar-user-identity.is-linked {
+  border-radius: var(--biss-radius-sm);
   cursor: pointer;
 }
 
-.cle-sidebar-user-identity.is-linked:hover .cle-sidebar-user-name {
+.biss-sidebar-user-identity.is-linked:hover .biss-sidebar-user-name {
   text-decoration: underline;
 }
 
-.cle-sidebar-user-identity.is-linked:focus-visible,
-.cle-sidebar-user-identity.is-menu:focus-visible {
-  outline: 2px solid var(--cle-accent, currentColor);
+.biss-sidebar-user-identity.is-linked:focus-visible,
+.biss-sidebar-user-identity.is-menu:focus-visible {
+  outline: 2px solid var(--biss-accent, currentColor);
   outline-offset: 2px;
 }
 
 /* The menu trigger. A button rather than a link, so it carries no button
    chrome of its own: the row is the target, and it should look like the row. */
-.cle-sidebar-user-identity.is-menu {
+.biss-sidebar-user-identity.is-menu {
   grid-template-columns: 30px minmax(0, 1fr) 16px;
   width: 100%;
   padding: 5px 6px;
   border: 0;
-  border-radius: var(--cle-radius-sm);
+  border-radius: var(--biss-radius-sm);
   background: none;
   font: inherit;
   text-align: left;
   cursor: pointer;
 }
 
-.cle-sidebar-user-identity.is-menu:hover {
-  background: var(--cle-surface-muted);
+.biss-sidebar-user-identity.is-menu:hover {
+  background: var(--biss-surface-muted);
 }
 
-.cle-sidebar-user-chevron {
+.biss-sidebar-user-chevron {
   width: 16px;
   height: 16px;
-  color: var(--cle-muted);
+  color: var(--biss-muted);
   transition: transform 0.12s ease;
 }
 
-.cle-sidebar-user-identity.is-menu[aria-expanded="true"] .cle-sidebar-user-chevron {
+.biss-sidebar-user-identity.is-menu[aria-expanded="true"] .biss-sidebar-user-chevron {
   transform: rotate(180deg);
 }
 
@@ -308,106 +308,106 @@
    out of the last row of a scroll container that owns its own stacking
    context. Positioned from the trigger's rectangle by the component.
    --------------------------------------------------------------------------- */
-.cle-user-menu {
+.biss-user-menu {
   position: fixed;
   z-index: 60;
   display: grid;
   gap: 1px;
   padding: 6px;
-  border: 1px solid var(--cle-border);
-  border-radius: var(--cle-radius-md);
-  background: var(--cle-card);
+  border: 1px solid var(--biss-border);
+  border-radius: var(--biss-radius-md);
+  background: var(--biss-card);
   box-shadow: 0 12px 32px rgba(16, 24, 40, 0.14);
 }
 
 /* The address, which is what the row used to truncate. Selectable, because the
    reason to look at it is usually to check or copy which account you are in. */
-.cle-user-menu-email {
+.biss-user-menu-email {
   margin: 0;
   padding: 6px 10px 8px;
   overflow: hidden;
-  color: var(--cle-muted);
-  font-size: var(--cle-text-sm);
+  color: var(--biss-muted);
+  font-size: var(--biss-text-sm);
   text-overflow: ellipsis;
   white-space: nowrap;
   user-select: text;
 }
 
-.cle-user-menu-item {
+.biss-user-menu-item {
   display: flex;
   align-items: center;
   gap: 9px;
   width: 100%;
   padding: 8px 10px;
   border: 0;
-  border-radius: var(--cle-radius-sm);
+  border-radius: var(--biss-radius-sm);
   background: none;
-  color: var(--cle-text-body);
+  color: var(--biss-text-body);
   font: inherit;
-  font-size: var(--cle-text-sm);
+  font-size: var(--biss-text-sm);
   font-weight: 750;
   text-align: left;
   text-decoration: none;
   cursor: pointer;
 }
 
-.cle-user-menu-item svg {
+.biss-user-menu-item svg {
   width: 16px;
   height: 16px;
   flex: none;
-  color: var(--cle-muted);
+  color: var(--biss-muted);
 }
 
-.cle-user-menu-item:hover {
-  background: var(--cle-surface-muted);
-  color: var(--cle-text);
+.biss-user-menu-item:hover {
+  background: var(--biss-surface-muted);
+  color: var(--biss-text);
 }
 
-.cle-user-menu-item:focus-visible {
-  outline: 2px solid var(--cle-primary);
+.biss-user-menu-item:focus-visible {
+  outline: 2px solid var(--biss-primary);
   outline-offset: -2px;
 }
 
-.cle-user-menu-item.is-danger,
-.cle-user-menu-item.is-danger svg {
-  color: var(--cle-danger);
+.biss-user-menu-item.is-danger,
+.biss-user-menu-item.is-danger svg {
+  color: var(--biss-danger);
 }
 
-.cle-user-menu-item.is-danger:hover {
-  background: var(--cle-danger-surface, rgba(196, 22, 28, 0.08));
+.biss-user-menu-item.is-danger:hover {
+  background: var(--biss-danger-surface, rgba(196, 22, 28, 0.08));
 }
 
-.cle-user-menu-separator {
+.biss-user-menu-separator {
   height: 1px;
   margin: 5px 6px;
   border: 0;
-  background: var(--cle-border-subtle);
+  background: var(--biss-border-subtle);
 }
 
-.cle-sidebar-user-text {
+.biss-sidebar-user-text {
   min-width: 0;
 }
 
-.cle-sidebar-user-name,
-.cle-sidebar-user-email {
+.biss-sidebar-user-name,
+.biss-sidebar-user-email {
   display: block;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.cle-sidebar-user-name {
-  color: var(--cle-text);
-  font-size: var(--cle-text-sm);
+.biss-sidebar-user-name {
+  color: var(--biss-text);
+  font-size: var(--biss-text-sm);
   font-weight: 850;
 }
 
-.cle-sidebar-user-email {
-  color: var(--cle-muted);
-  font-size: var(--cle-text-xs);
+.biss-sidebar-user-email {
+  color: var(--biss-muted);
+  font-size: var(--biss-text-xs);
 }
 
-.cle-sidebar-user-actions {
+.biss-sidebar-user-actions {
   display: flex;
   align-items: center;
   gap: 2px;
@@ -422,73 +422,73 @@
 --------------------------------------------------------------------------- */
 
 /* Body copy inside a dialog, which otherwise inherits nothing. */
-.cle-modal-copy {
+.biss-modal-copy {
   margin: 0;
-  color: var(--cle-muted);
-  font-size: var(--cle-text-sm);
+  color: var(--biss-muted);
+  font-size: var(--biss-text-sm);
   line-height: 1.6;
 }
 
-.cle-icon-button {
+.biss-icon-button {
   display: inline-grid;
   place-items: center;
   width: 30px;
   height: 30px;
   padding: 0;
   border: 1px solid transparent;
-  border-radius: var(--cle-radius-sm);
+  border-radius: var(--biss-radius-sm);
   background: transparent;
   /* Muted until wanted: it is a destructive action sitting permanently on
      screen, so it should not compete with the navigation above it. */
-  color: var(--cle-muted);
+  color: var(--biss-muted);
   cursor: pointer;
   transition: color 0.14s ease, background 0.14s ease, border-color 0.14s ease;
 }
 
-.cle-icon-button svg {
+.biss-icon-button svg {
   width: 16px;
   height: 16px;
 }
 
-.cle-icon-button:hover {
-  border-color: var(--cle-border);
-  background: var(--cle-card);
-  color: var(--cle-text);
+.biss-icon-button:hover {
+  border-color: var(--biss-border);
+  background: var(--biss-card);
+  color: var(--biss-text);
 }
 
-.cle-icon-button:focus-visible {
-  outline: 2px solid var(--cle-accent, currentColor);
+.biss-icon-button:focus-visible {
+  outline: 2px solid var(--biss-accent, currentColor);
   outline-offset: 1px;
 }
 
-.cle-icon-button-danger:hover {
-  border-color: var(--cle-danger-border);
-  color: var(--cle-danger);
+.biss-icon-button-danger:hover {
+  border-color: var(--biss-danger-border);
+  color: var(--biss-danger);
 }
 
-.cle-app-main {
+.biss-app-main {
   flex: 1 1 auto;
   min-width: 0;
   padding: 28px 32px 64px;
 }
 
-.cle-app-main-inner {
+.biss-app-main-inner {
   width: 100%;
-  max-width: var(--cle-console-max);
+  max-width: var(--biss-console-max);
   margin: 0 auto;
 }
 
 /* A workspace surface: the content is the page, so it gets the whole area and
    the full height. Height matters as much as width here, because a graph
    canvas sized to its content collapses to nothing. */
-.cle-app-main.is-fluid {
+.biss-app-main.is-fluid {
   display: flex;
   flex-direction: column;
   min-height: 0;
   padding: 0;
 }
 
-.cle-app-main.is-fluid > .cle-app-main-inner {
+.biss-app-main.is-fluid > .biss-app-main-inner {
   display: flex;
   flex: 1 1 auto;
   flex-direction: column;
@@ -496,14 +496,14 @@
   max-width: none;
 }
 
-.cle-app-shell .cle-sidebar-toggle {
+.biss-app-shell .biss-sidebar-toggle {
   display: none;
 }
 
 /* The entry-page bar stacks below 700px. A console bar must not: its height is
-   fixed by --cle-topbar-height, which the body's top padding depends on. */
+   fixed by --biss-topbar-height, which the body's top padding depends on. */
 @media (max-width: 700px) {
-  .cle-app-shell .cle-bar-inner {
+  .biss-app-shell .biss-bar-inner {
     align-items: center;
     flex-direction: row;
     padding: 0;
@@ -511,30 +511,30 @@
 }
 
 @media (max-width: 960px) {
-  .cle-app-sidebar {
+  .biss-app-sidebar {
     position: fixed;
     z-index: 60;
     transform: translateX(-100%);
     transition: transform 0.18s ease;
-    box-shadow: var(--cle-shadow-lg);
+    box-shadow: var(--biss-shadow-lg);
   }
 
-  .cle-app-sidebar.is-open {
+  .biss-app-sidebar.is-open {
     transform: translateX(0);
   }
 
-  .cle-app-main {
+  .biss-app-main {
     padding: 20px 18px 56px;
   }
 
-  .cle-app-shell .cle-sidebar-toggle {
+  .biss-app-shell .biss-sidebar-toggle {
     display: inline-flex;
   }
 
-  .cle-sidebar-scrim {
+  .biss-sidebar-scrim {
     position: fixed;
     z-index: 55;
-    inset: var(--cle-topbar-height) 0 0;
+    inset: var(--biss-topbar-height) 0 0;
     border: 0;
     background: rgba(15, 23, 42, 0.34);
   }
@@ -542,95 +542,95 @@
 
 /* Sidebar navigation ---------------------------------------------------- */
 
-.cle-nav-section + .cle-nav-section {
+.biss-nav-section + .biss-nav-section {
   margin-top: 22px;
 }
 
-.cle-nav-heading {
+.biss-nav-heading {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 8px;
   padding: 0 10px 8px;
   color: #8792a4;
-  font-size: var(--cle-text-xs);
+  font-size: var(--biss-text-xs);
   font-weight: 850;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
-.cle-nav-item {
+.biss-nav-item {
   display: flex;
   align-items: center;
   gap: 10px;
   width: 100%;
   padding: 9px 10px;
   border: 0;
-  border-radius: var(--cle-radius-sm);
+  border-radius: var(--biss-radius-sm);
   background: none;
-  color: var(--cle-text);
+  color: var(--biss-text);
   font: inherit;
-  font-size: var(--cle-text-md);
+  font-size: var(--biss-text-md);
   font-weight: 750;
   text-align: left;
   text-decoration: none;
   cursor: pointer;
 }
 
-.cle-nav-item + .cle-nav-item {
+.biss-nav-item + .biss-nav-item {
   margin-top: 2px;
 }
 
-.cle-nav-item:hover {
-  background: var(--cle-surface-muted);
+.biss-nav-item:hover {
+  background: var(--biss-surface-muted);
 }
 
-.cle-nav-item.is-active {
-  background: var(--cle-info-bg);
-  color: var(--cle-primary-hover);
+.biss-nav-item.is-active {
+  background: var(--biss-info-bg);
+  color: var(--biss-primary-hover);
   font-weight: 850;
 }
 
-.cle-nav-item:focus-visible {
+.biss-nav-item:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px var(--cle-focus);
+  box-shadow: 0 0 0 3px var(--biss-focus);
 }
 
-.cle-nav-item-icon {
+.biss-nav-item-icon {
   flex: 0 0 auto;
   width: 17px;
   height: 17px;
-  color: var(--cle-muted);
+  color: var(--biss-muted);
 }
 
-.cle-nav-item.is-active .cle-nav-item-icon {
-  color: var(--cle-primary);
+.biss-nav-item.is-active .biss-nav-item-icon {
+  color: var(--biss-primary);
 }
 
-.cle-nav-item-label {
+.biss-nav-item-label {
   overflow: hidden;
   flex: 1 1 auto;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.cle-nav-item-meta {
+.biss-nav-item-meta {
   flex: 0 0 auto;
-  color: var(--cle-muted);
-  font-size: var(--cle-text-xs);
+  color: var(--biss-muted);
+  font-size: var(--biss-text-xs);
   font-weight: 800;
 }
 
-.cle-nav-empty {
+.biss-nav-empty {
   padding: 10px;
-  color: var(--cle-muted);
-  font-size: var(--cle-text-sm);
+  color: var(--biss-muted);
+  font-size: var(--biss-text-sm);
   line-height: 1.5;
 }
 
 /* Console page header --------------------------------------------------- */
 
-.cle-console-header {
+.biss-console-header {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -638,23 +638,23 @@
   margin-bottom: 22px;
 }
 
-.cle-console-title {
+.biss-console-title {
   margin: 0;
-  font-size: var(--cle-console-title);
+  font-size: var(--biss-console-title);
   font-weight: 900;
   line-height: 1.2;
   letter-spacing: 0;
 }
 
-.cle-console-subtitle {
+.biss-console-subtitle {
   max-width: 68ch;
   margin: 6px 0 0;
-  color: var(--cle-muted);
-  font-size: var(--cle-text-md);
+  color: var(--biss-muted);
+  font-size: var(--biss-text-md);
   line-height: 1.6;
 }
 
-.cle-console-header-actions {
+.biss-console-header-actions {
   display: inline-flex;
   flex: 0 0 auto;
   flex-wrap: wrap;
@@ -662,33 +662,33 @@
   gap: 8px;
 }
 
-.cle-breadcrumbs {
+.biss-breadcrumbs {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 6px;
   margin-bottom: 10px;
-  color: var(--cle-muted);
-  font-size: var(--cle-text-sm);
+  color: var(--biss-muted);
+  font-size: var(--biss-text-sm);
   font-weight: 700;
 }
 
-.cle-breadcrumbs a {
-  color: var(--cle-muted);
+.biss-breadcrumbs a {
+  color: var(--biss-muted);
   text-decoration: none;
 }
 
-.cle-breadcrumbs a:hover {
-  color: var(--cle-primary-hover);
+.biss-breadcrumbs a:hover {
+  color: var(--biss-primary-hover);
 }
 
-.cle-breadcrumb-sep {
-  color: var(--cle-border-strong);
+.biss-breadcrumb-sep {
+  color: var(--biss-border-strong);
 }
 
 /* Section header inside a card ----------------------------------------- */
 
-.cle-section-header {
+.biss-section-header {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -696,22 +696,22 @@
   margin-bottom: 16px;
 }
 
-.cle-section-title {
+.biss-section-title {
   margin: 0;
   font-size: 1rem;
   font-weight: 900;
   letter-spacing: 0;
 }
 
-.cle-section-copy {
+.biss-section-copy {
   max-width: 72ch;
   margin: 5px 0 0;
-  color: var(--cle-muted);
-  font-size: var(--cle-text-sm);
+  color: var(--biss-muted);
+  font-size: var(--biss-text-sm);
   line-height: 1.55;
 }
 
-.cle-section-actions {
+.biss-section-actions {
   display: inline-flex;
   flex: 0 0 auto;
   align-items: center;
@@ -720,219 +720,219 @@
 
 /* Buttons: extra variants and sizes ------------------------------------ */
 
-.cle-button-sm {
+.biss-button-sm {
   min-height: 34px;
   padding: 0 12px;
-  font-size: var(--cle-text-sm);
+  font-size: var(--biss-text-sm);
 }
 
 /* A button whose whole label is one glyph. Square and input-height, so it can
    sit beside a field without the two disagreeing about where the row is. */
-.cle-button-icon {
+.biss-button-icon {
   width: 40px;
   min-height: 40px;
   padding: 0;
 }
 
-.cle-button-icon.cle-button-sm {
+.biss-button-icon.biss-button-sm {
   width: 34px;
 }
 
-.cle-button-icon svg {
+.biss-button-icon svg {
   width: 16px;
   height: 16px;
 }
 
-.cle-button-ghost {
+.biss-button-ghost {
   border-color: transparent;
   background: none;
-  color: var(--cle-primary);
+  color: var(--biss-primary);
 }
 
-.cle-button-ghost:hover {
+.biss-button-ghost:hover {
   border-color: transparent;
-  background: var(--cle-info-bg);
-  color: var(--cle-primary-hover);
+  background: var(--biss-info-bg);
+  color: var(--biss-primary-hover);
 }
 
-.cle-button-danger {
-  border-color: var(--cle-danger);
-  background: var(--cle-danger);
-  color: #ffffff;
+.biss-button-danger {
+  border-color: var(--biss-danger);
+  background: var(--biss-danger);
+  color: #FFFFFF;
 }
 
-.cle-button-danger:hover {
-  border-color: var(--cle-danger-hover);
-  background: var(--cle-danger-hover);
+.biss-button-danger:hover {
+  border-color: var(--biss-danger-hover);
+  background: var(--biss-danger-hover);
 }
 
-.cle-button-danger-quiet {
-  border-color: var(--cle-danger-border);
-  background: var(--cle-card);
-  color: var(--cle-danger);
+.biss-button-danger-quiet {
+  border-color: var(--biss-danger-border);
+  background: var(--biss-card);
+  color: var(--biss-danger);
 }
 
-.cle-button-danger-quiet:hover {
-  border-color: var(--cle-danger);
-  background: var(--cle-danger-bg);
-  color: var(--cle-danger-hover);
+.biss-button-danger-quiet:hover {
+  border-color: var(--biss-danger);
+  background: var(--biss-danger-bg);
+  color: var(--biss-danger-hover);
 }
 
-.cle-button:disabled,
-.cle-button[aria-disabled="true"] {
+.biss-button:disabled,
+.biss-button[aria-disabled="true"] {
   opacity: 0.55;
   cursor: not-allowed;
 }
 
-.cle-button-block {
+.biss-button-block {
   width: 100%;
 }
 
 /* Badges ---------------------------------------------------------------- */
 
-.cle-badge {
+.biss-badge {
   display: inline-flex;
   align-items: center;
   gap: 5px;
   min-height: 22px;
   padding: 0 8px;
-  border: 1px solid var(--cle-border);
+  border: 1px solid var(--biss-border);
   border-radius: 999px;
-  background: var(--cle-surface-muted);
-  color: var(--cle-muted);
-  font-size: var(--cle-text-xs);
+  background: var(--biss-surface-muted);
+  color: var(--biss-muted);
+  font-size: var(--biss-text-xs);
   font-weight: 850;
   line-height: 1;
   white-space: nowrap;
 }
 
-.cle-badge-success {
-  border-color: var(--cle-success-border);
-  background: var(--cle-success-bg);
-  color: var(--cle-success);
+.biss-badge-success {
+  border-color: var(--biss-success-border);
+  background: var(--biss-success-bg);
+  color: var(--biss-success);
 }
 
-.cle-badge-danger {
-  border-color: var(--cle-danger-border);
-  background: var(--cle-danger-bg);
-  color: var(--cle-danger);
+.biss-badge-danger {
+  border-color: var(--biss-danger-border);
+  background: var(--biss-danger-bg);
+  color: var(--biss-danger);
 }
 
-.cle-badge-warning {
-  border-color: var(--cle-warning-border);
-  background: var(--cle-warning-bg);
-  color: var(--cle-warning);
+.biss-badge-warning {
+  border-color: var(--biss-warning-border);
+  background: var(--biss-warning-bg);
+  color: var(--biss-warning);
 }
 
-.cle-badge-info {
-  border-color: var(--cle-info-border);
-  background: var(--cle-info-bg);
-  color: var(--cle-info);
+.biss-badge-info {
+  border-color: var(--biss-info-border);
+  background: var(--biss-info-bg);
+  color: var(--biss-info);
 }
 
-.cle-badge-dot {
+.biss-badge-dot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
   background: currentColor;
 }
 
-.cle-badge-mono {
-  font-family: var(--cle-mono);
+.biss-badge-mono {
+  font-family: var(--biss-mono);
   font-weight: 650;
 }
 
 /* Forms ----------------------------------------------------------------- */
 
-.cle-field {
+.biss-field {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: 6px;
 }
 
-.cle-field-label {
+.biss-field-label {
   display: flex;
   align-items: center;
   gap: 6px;
-  color: var(--cle-text);
-  font-size: var(--cle-text-sm);
+  color: var(--biss-text);
+  font-size: var(--biss-text-sm);
   font-weight: 850;
 }
 
-.cle-field-optional {
-  color: var(--cle-muted);
-  font-size: var(--cle-text-xs);
+.biss-field-optional {
+  color: var(--biss-muted);
+  font-size: var(--biss-text-xs);
   font-weight: 700;
 }
 
-.cle-field-hint {
+.biss-field-hint {
   margin: 0;
-  color: var(--cle-muted);
-  font-size: var(--cle-text-xs);
+  color: var(--biss-muted);
+  font-size: var(--biss-text-xs);
   line-height: 1.5;
 }
 
-.cle-field-error {
+.biss-field-error {
   margin: 0;
-  color: var(--cle-danger);
-  font-size: var(--cle-text-xs);
+  color: var(--biss-danger);
+  font-size: var(--biss-text-xs);
   font-weight: 750;
   line-height: 1.5;
 }
 
-.cle-input,
-.cle-select,
-.cle-textarea {
+.biss-input,
+.biss-select,
+.biss-textarea {
   width: 100%;
   min-height: 40px;
   padding: 9px 11px;
-  border: 1px solid var(--cle-border);
-  border-radius: var(--cle-radius-sm);
-  background: var(--cle-card);
-  color: var(--cle-text);
+  border: 1px solid var(--biss-border);
+  border-radius: var(--biss-radius-sm);
+  background: var(--biss-card);
+  color: var(--biss-text);
   font: inherit;
-  font-size: var(--cle-text-md);
+  font-size: var(--biss-text-md);
   line-height: 1.4;
 }
 
-.cle-textarea {
+.biss-textarea {
   min-height: 84px;
   resize: vertical;
 }
 
-.cle-input::placeholder,
-.cle-textarea::placeholder {
+.biss-input::placeholder,
+.biss-textarea::placeholder {
   color: #98a2b3;
 }
 
-.cle-input:focus,
-.cle-select:focus,
-.cle-textarea:focus {
+.biss-input:focus,
+.biss-select:focus,
+.biss-textarea:focus {
   outline: none;
-  border-color: var(--cle-primary);
-  box-shadow: 0 0 0 3px var(--cle-focus);
+  border-color: var(--biss-primary);
+  box-shadow: 0 0 0 3px var(--biss-focus);
 }
 
-.cle-input:disabled,
-.cle-select:disabled,
-.cle-textarea:disabled {
-  background: var(--cle-surface-muted);
-  color: var(--cle-muted);
+.biss-input:disabled,
+.biss-select:disabled,
+.biss-textarea:disabled {
+  background: var(--biss-surface-muted);
+  color: var(--biss-muted);
   cursor: not-allowed;
 }
 
-.cle-input-invalid,
-.cle-input-invalid:focus {
-  border-color: var(--cle-danger);
+.biss-input-invalid,
+.biss-input-invalid:focus {
+  border-color: var(--biss-danger);
   box-shadow: 0 0 0 3px rgba(196, 22, 28, 0.16);
 }
 
-.cle-input-mono {
-  font-family: var(--cle-mono);
-  font-size: var(--cle-text-sm);
+.biss-input-mono {
+  font-family: var(--biss-mono);
+  font-size: var(--biss-text-sm);
 }
 
-.cle-select {
+.biss-select {
   appearance: none;
   padding-right: 34px;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%23667085' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 8l5 5 5-5'/%3E%3C/svg%3E");
@@ -942,19 +942,19 @@
   cursor: pointer;
 }
 
-.cle-form-grid {
+.biss-form-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: 16px;
 }
 
-.cle-form-row {
+.biss-form-row {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 14px;
 }
 
-.cle-form-actions {
+.biss-form-actions {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -965,126 +965,126 @@
 
 /* Switch ---------------------------------------------------------------- */
 
-.cle-switch {
+.biss-switch {
   display: flex;
   align-items: flex-start;
   gap: 11px;
   cursor: pointer;
 }
 
-.cle-switch input {
+.biss-switch input {
   position: absolute;
   width: 1px;
   height: 1px;
   opacity: 0;
 }
 
-.cle-switch-track {
+.biss-switch-track {
   position: relative;
   flex: 0 0 auto;
   width: 38px;
   height: 22px;
   margin-top: 1px;
-  border: 1px solid var(--cle-border-strong);
+  border: 1px solid var(--biss-border-strong);
   border-radius: 999px;
-  background: var(--cle-surface-muted);
+  background: var(--biss-surface-muted);
   transition: background 0.15s ease, border-color 0.15s ease;
 }
 
-.cle-switch-thumb {
+.biss-switch-thumb {
   position: absolute;
   top: 2px;
   left: 2px;
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background: #ffffff;
-  box-shadow: var(--cle-shadow-sm);
+  background: #FFFFFF;
+  box-shadow: var(--biss-shadow-sm);
   transition: transform 0.15s ease;
 }
 
-.cle-switch input:checked + .cle-switch-track {
-  border-color: var(--cle-primary);
-  background: var(--cle-primary);
+.biss-switch input:checked + .biss-switch-track {
+  border-color: var(--biss-primary);
+  background: var(--biss-primary);
 }
 
-.cle-switch input:checked + .cle-switch-track .cle-switch-thumb {
+.biss-switch input:checked + .biss-switch-track .biss-switch-thumb {
   transform: translateX(16px);
 }
 
-.cle-switch input:focus-visible + .cle-switch-track {
-  box-shadow: 0 0 0 3px var(--cle-focus);
+.biss-switch input:focus-visible + .biss-switch-track {
+  box-shadow: 0 0 0 3px var(--biss-focus);
 }
 
-.cle-switch input:disabled + .cle-switch-track {
+.biss-switch input:disabled + .biss-switch-track {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.cle-switch-text {
+.biss-switch-text {
   display: grid;
   gap: 3px;
 }
 
-.cle-switch-label {
-  color: var(--cle-text);
-  font-size: var(--cle-text-sm);
+.biss-switch-label {
+  color: var(--biss-text);
+  font-size: var(--biss-text-sm);
   font-weight: 800;
   line-height: 1.35;
 }
 
-.cle-switch-hint {
-  color: var(--cle-muted);
-  font-size: var(--cle-text-xs);
+.biss-switch-hint {
+  color: var(--biss-muted);
+  font-size: var(--biss-text-xs);
   line-height: 1.5;
 }
 
 /* Tag input ------------------------------------------------------------- */
 
-.cle-tag-input {
+.biss-tag-input {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 6px;
   min-height: 40px;
   padding: 6px 8px;
-  border: 1px solid var(--cle-border);
-  border-radius: var(--cle-radius-sm);
-  background: var(--cle-card);
+  border: 1px solid var(--biss-border);
+  border-radius: var(--biss-radius-sm);
+  background: var(--biss-card);
   cursor: text;
 }
 
-.cle-tag-input:focus-within {
-  border-color: var(--cle-primary);
-  box-shadow: 0 0 0 3px var(--cle-focus);
+.biss-tag-input:focus-within {
+  border-color: var(--biss-primary);
+  box-shadow: 0 0 0 3px var(--biss-focus);
 }
 
-.cle-tag-input-field {
+.biss-tag-input-field {
   flex: 1 1 90px;
   min-width: 90px;
   border: 0;
   background: none;
-  color: var(--cle-text);
+  color: var(--biss-text);
   font: inherit;
-  font-size: var(--cle-text-md);
+  font-size: var(--biss-text-md);
   outline: none;
 }
 
-.cle-tag {
+.biss-tag {
   display: inline-flex;
   align-items: center;
   gap: 5px;
   padding: 3px 4px 3px 9px;
-  border: 1px solid var(--cle-info-border);
-  border-radius: var(--cle-radius-sm);
-  background: var(--cle-info-bg);
-  color: var(--cle-info);
-  font-family: var(--cle-mono);
-  font-size: var(--cle-text-xs);
+  border: 1px solid var(--biss-info-border);
+  border-radius: var(--biss-radius-sm);
+  background: var(--biss-info-bg);
+  color: var(--biss-info);
+  font-family: var(--biss-mono);
+  font-size: var(--biss-text-xs);
   font-weight: 650;
 }
 
-.cle-tag-remove {
+.biss-tag-remove {
   display: grid;
   place-items: center;
   width: 17px;
@@ -1099,84 +1099,84 @@
   cursor: pointer;
 }
 
-.cle-tag-remove:hover {
+.biss-tag-remove:hover {
   background: rgba(24, 73, 169, 0.14);
 }
 
-.cle-tag-suggestions {
+.biss-tag-suggestions {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
   margin-top: 8px;
 }
 
-.cle-tag-suggestion {
+.biss-tag-suggestion {
   padding: 4px 9px;
-  border: 1px dashed var(--cle-border-strong);
-  border-radius: var(--cle-radius-sm);
+  border: 1px dashed var(--biss-border-strong);
+  border-radius: var(--biss-radius-sm);
   background: none;
-  color: var(--cle-muted);
+  color: var(--biss-muted);
   font: inherit;
-  font-family: var(--cle-mono);
-  font-size: var(--cle-text-xs);
+  font-family: var(--biss-mono);
+  font-size: var(--biss-text-xs);
   cursor: pointer;
 }
 
-.cle-tag-suggestion:hover {
-  border-color: var(--cle-primary);
+.biss-tag-suggestion:hover {
+  border-color: var(--biss-primary);
   border-style: solid;
-  color: var(--cle-primary);
+  color: var(--biss-primary);
 }
 
 /* Copy field ------------------------------------------------------------ */
 
-.cle-copy-field {
+.biss-copy-field {
   display: flex;
   align-items: stretch;
   gap: 0;
   min-width: 0;
-  border: 1px solid var(--cle-border);
-  border-radius: var(--cle-radius-sm);
-  background: var(--cle-surface-muted);
+  border: 1px solid var(--biss-border);
+  border-radius: var(--biss-radius-sm);
+  background: var(--biss-surface-muted);
 }
 
-.cle-copy-field-multiline .cle-copy-value {
+.biss-copy-field-multiline .biss-copy-value {
   overflow-x: auto;
   white-space: pre;
 }
 
-.cle-copy-value {
+.biss-copy-value {
   overflow-x: auto;
   flex: 1 1 auto;
   min-width: 0;
   padding: 11px 12px;
-  color: var(--cle-text);
-  font-family: var(--cle-mono);
-  font-size: var(--cle-text-sm);
+  color: var(--biss-text);
+  font-family: var(--biss-mono);
+  font-size: var(--biss-text-sm);
   white-space: nowrap;
 }
 
-.cle-copy-button {
+.biss-copy-button {
   flex: 0 0 auto;
   padding: 0 14px;
   border: 0;
-  border-left: 1px solid var(--cle-border);
-  border-radius: 0 var(--cle-radius-sm) var(--cle-radius-sm) 0;
-  background: var(--cle-card);
-  color: var(--cle-primary);
+  border-left: 1px solid var(--biss-border);
+  border-radius: 0 var(--biss-radius-sm) var(--biss-radius-sm) 0;
+  background: var(--biss-card);
+  color: var(--biss-primary);
   font: inherit;
-  font-size: var(--cle-text-sm);
+  font-size: var(--biss-text-sm);
   font-weight: 850;
   cursor: pointer;
 }
 
-.cle-copy-button:hover {
-  background: var(--cle-info-bg);
+.biss-copy-button:hover {
+  background: var(--biss-info-bg);
 }
 
 /* Callouts -------------------------------------------------------------- */
 
-.cle-callout {
+.biss-callout {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -1187,66 +1187,66 @@
      Margins collapse in block flow, so two in a row still sit 16px apart. */
   margin-block: 16px;
   padding: 13px 15px;
-  border: 1px solid var(--cle-info-border);
-  border-radius: var(--cle-radius-md);
-  background: var(--cle-info-bg);
-  color: var(--cle-info);
-  font-size: var(--cle-text-sm);
+  border: 1px solid var(--biss-info-border);
+  border-radius: var(--biss-radius-md);
+  background: var(--biss-info-bg);
+  color: var(--biss-info);
+  font-size: var(--biss-text-sm);
   line-height: 1.55;
 }
 
 /* A gap-based container already spaces its children, and margin adds to gap
    rather than collapsing into it. */
-:where(.cle-stack, .cle-stack-sm, .cle-split, .cle-form, .cle-modal-footer)
-  > .cle-callout {
+:where(.biss-stack, .biss-stack-sm, .biss-split, .biss-form, .biss-modal-footer)
+  > .biss-callout {
   margin-block: 0;
 }
 
 /* The padding of a card or a modal body is the spacing at the edges. */
-.cle-callout:first-child {
+.biss-callout:first-child {
   margin-block-start: 0;
 }
 
-.cle-callout:last-child {
+.biss-callout:last-child {
   margin-block-end: 0;
 }
 
-.cle-callout-success {
-  border-color: var(--cle-success-border);
-  background: var(--cle-success-bg);
-  color: var(--cle-success);
+.biss-callout-success {
+  border-color: var(--biss-success-border);
+  background: var(--biss-success-bg);
+  color: var(--biss-success);
 }
 
-.cle-callout-warning {
-  border-color: var(--cle-warning-border);
-  background: var(--cle-warning-bg);
-  color: var(--cle-warning);
+.biss-callout-warning {
+  border-color: var(--biss-warning-border);
+  background: var(--biss-warning-bg);
+  color: var(--biss-warning);
 }
 
-.cle-callout-danger {
-  border-color: var(--cle-danger-border);
-  background: var(--cle-danger-bg);
-  color: var(--cle-danger);
+.biss-callout-danger {
+  border-color: var(--biss-danger-border);
+  background: var(--biss-danger-bg);
+  color: var(--biss-danger);
 }
 
-.cle-callout-title {
+.biss-callout-title {
   margin: 0 0 3px;
-  font-size: var(--cle-text-sm);
+  font-size: var(--biss-text-sm);
   font-weight: 900;
 }
 
-.cle-callout-body {
+.biss-callout-body {
   margin: 0;
 }
 
-.cle-callout-body code {
-  font-family: var(--cle-mono);
+.biss-callout-body code {
+  font-family: var(--biss-mono);
   font-size: 0.94em;
 }
 
 /* Modal ----------------------------------------------------------------- */
 
-.cle-modal-backdrop {
+.biss-modal-backdrop {
   position: fixed;
   z-index: 200;
   display: grid;
@@ -1257,28 +1257,28 @@
   backdrop-filter: blur(2px);
 }
 
-.cle-modal {
+.biss-modal {
   display: flex;
   overflow: hidden;
   flex-direction: column;
   width: 100%;
   max-width: 560px;
   max-height: calc(100vh - 48px);
-  border: 1px solid var(--cle-border);
-  border-radius: var(--cle-radius-lg);
-  background: var(--cle-card);
-  box-shadow: var(--cle-shadow-lg);
+  border: 1px solid var(--biss-border);
+  border-radius: var(--biss-radius-lg);
+  background: var(--biss-card);
+  box-shadow: var(--biss-shadow-lg);
 }
 
-.cle-modal-lg {
+.biss-modal-lg {
   max-width: 760px;
 }
 
-.cle-modal-sm {
+.biss-modal-sm {
   max-width: 440px;
 }
 
-.cle-modal-header {
+.biss-modal-header {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -1286,68 +1286,68 @@
   padding: 20px 22px 14px;
 }
 
-.cle-modal-title {
+.biss-modal-title {
   margin: 0;
   font-size: 1.08rem;
   font-weight: 900;
 }
 
-.cle-modal-subtitle {
+.biss-modal-subtitle {
   max-width: 60ch;
   margin: 6px 0 0;
-  color: var(--cle-muted);
-  font-size: var(--cle-text-sm);
+  color: var(--biss-muted);
+  font-size: var(--biss-text-sm);
   line-height: 1.55;
 }
 
-.cle-modal-close {
+.biss-modal-close {
   display: grid;
   flex: 0 0 auto;
   place-items: center;
   width: 30px;
   height: 30px;
   border: 0;
-  border-radius: var(--cle-radius-sm);
+  border-radius: var(--biss-radius-sm);
   background: none;
-  color: var(--cle-muted);
+  color: var(--biss-muted);
   font: inherit;
   font-size: 1.15rem;
   line-height: 1;
   cursor: pointer;
 }
 
-.cle-modal-close:hover {
-  background: var(--cle-surface-muted);
-  color: var(--cle-text);
+.biss-modal-close:hover {
+  background: var(--biss-surface-muted);
+  color: var(--biss-text);
 }
 
 /* Without this the browser's own ring shows, which is the one colour on the
    page nothing else uses. */
-.cle-modal-close:focus-visible {
-  outline: 2px solid var(--cle-accent, currentColor);
+.biss-modal-close:focus-visible {
+  outline: 2px solid var(--biss-accent, currentColor);
   outline-offset: 1px;
 }
 
-.cle-modal-body {
+.biss-modal-body {
   overflow-y: auto;
   flex: 1 1 auto;
   padding: 4px 22px 20px;
 }
 
-.cle-modal-footer {
+.biss-modal-footer {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: flex-end;
   gap: 10px;
   padding: 14px 22px 18px;
-  border-top: 1px solid var(--cle-border-subtle);
-  background: var(--cle-surface-subtle);
+  border-top: 1px solid var(--biss-border-subtle);
+  background: var(--biss-surface-subtle);
 }
 
 /* Toasts ---------------------------------------------------------------- */
 
-.cle-toast-stack {
+.biss-toast-stack {
   position: fixed;
   z-index: 300;
   right: 20px;
@@ -1357,61 +1357,61 @@
   width: min(380px, calc(100vw - 40px));
 }
 
-.cle-toast {
+.biss-toast {
   display: flex;
   align-items: flex-start;
   gap: 11px;
   padding: 13px 14px;
-  border: 1px solid var(--cle-border);
-  border-radius: var(--cle-radius-md);
-  background: var(--cle-card);
-  box-shadow: var(--cle-shadow-lg);
+  border: 1px solid var(--biss-border);
+  border-radius: var(--biss-radius-md);
+  background: var(--biss-card);
+  box-shadow: var(--biss-shadow-lg);
 }
 
-.cle-toast-accent {
+.biss-toast-accent {
   flex: 0 0 auto;
   width: 4px;
   align-self: stretch;
   border-radius: 999px;
-  background: var(--cle-muted);
+  background: var(--biss-muted);
 }
 
-.cle-toast-success .cle-toast-accent {
-  background: var(--cle-success);
+.biss-toast-success .biss-toast-accent {
+  background: var(--biss-success);
 }
 
-.cle-toast-danger .cle-toast-accent {
-  background: var(--cle-danger);
+.biss-toast-danger .biss-toast-accent {
+  background: var(--biss-danger);
 }
 
-.cle-toast-warning .cle-toast-accent {
-  background: var(--cle-warning);
+.biss-toast-warning .biss-toast-accent {
+  background: var(--biss-warning);
 }
 
-.cle-toast-text {
+.biss-toast-text {
   flex: 1 1 auto;
   min-width: 0;
 }
 
-.cle-toast-title {
+.biss-toast-title {
   margin: 0;
-  font-size: var(--cle-text-sm);
+  font-size: var(--biss-text-sm);
   font-weight: 900;
 }
 
-.cle-toast-copy {
+.biss-toast-copy {
   overflow-wrap: anywhere;
   margin: 4px 0 0;
-  color: var(--cle-muted);
-  font-size: var(--cle-text-xs);
+  color: var(--biss-muted);
+  font-size: var(--biss-text-xs);
   line-height: 1.55;
 }
 
-.cle-toast-dismiss {
+.biss-toast-dismiss {
   flex: 0 0 auto;
   border: 0;
   background: none;
-  color: var(--cle-muted);
+  color: var(--biss-muted);
   font: inherit;
   font-size: 1rem;
   line-height: 1;
@@ -1420,48 +1420,48 @@
 
 /* Tabs ------------------------------------------------------------------ */
 
-.cle-tabs {
+.biss-tabs {
   display: flex;
   overflow-x: auto;
   gap: 2px;
-  border-bottom: 1px solid var(--cle-border);
+  border-bottom: 1px solid var(--biss-border);
 }
 
-.cle-tab {
+.biss-tab {
   padding: 10px 14px;
   border: 0;
   border-bottom: 2px solid transparent;
   background: none;
-  color: var(--cle-muted);
+  color: var(--biss-muted);
   font: inherit;
-  font-size: var(--cle-text-md);
+  font-size: var(--biss-text-md);
   font-weight: 800;
   white-space: nowrap;
   text-decoration: none;
   cursor: pointer;
 }
 
-.cle-tab:hover {
-  color: var(--cle-text);
+.biss-tab:hover {
+  color: var(--biss-text);
 }
 
-.cle-tab.is-active {
-  border-bottom-color: var(--cle-primary);
-  color: var(--cle-primary);
+.biss-tab.is-active {
+  border-bottom-color: var(--biss-primary);
+  color: var(--biss-primary);
 }
 
 /* Segmented switcher ---------------------------------------------------- */
 
-.cle-segmented {
+.biss-segmented {
   display: flex;
   gap: 4px;
   padding: 3px;
-  border: 1px solid var(--cle-border);
-  border-radius: var(--cle-radius-md);
-  background: var(--cle-surface-muted);
+  border: 1px solid var(--biss-border);
+  border-radius: var(--biss-radius-md);
+  background: var(--biss-surface-muted);
 }
 
-.cle-segment {
+.biss-segment {
   display: inline-flex;
   flex: 1 1 0;
   align-items: center;
@@ -1470,11 +1470,11 @@
   min-width: 0;
   padding: 7px 12px;
   border: 1px solid transparent;
-  border-radius: var(--cle-radius-sm);
+  border-radius: var(--biss-radius-sm);
   background: none;
-  color: var(--cle-muted);
+  color: var(--biss-muted);
   font: inherit;
-  font-size: var(--cle-text-sm);
+  font-size: var(--biss-text-sm);
   font-weight: 800;
   white-space: nowrap;
   text-decoration: none;
@@ -1485,40 +1485,40 @@
     border-color 0.12s ease;
 }
 
-.cle-segment:hover {
-  color: var(--cle-text);
+.biss-segment:hover {
+  color: var(--biss-text);
 }
 
-.cle-segment:focus-visible {
+.biss-segment:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px var(--cle-focus);
+  box-shadow: 0 0 0 3px var(--biss-focus);
 }
 
-.cle-segment.is-active {
-  border-color: var(--cle-border);
-  background: var(--cle-card);
-  color: var(--cle-text);
-  box-shadow: var(--cle-shadow-sm);
+.biss-segment.is-active {
+  border-color: var(--biss-border);
+  background: var(--biss-card);
+  color: var(--biss-text);
+  box-shadow: var(--biss-shadow-sm);
 }
 
-.cle-segment:disabled {
+.biss-segment:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.cle-segmented-auto .cle-segment {
+.biss-segmented-auto .biss-segment {
   flex: 0 0 auto;
 }
 
 /* Disclosure ------------------------------------------------------------ */
 
-.cle-disclosure {
-  border: 1px solid var(--cle-border);
-  border-radius: var(--cle-radius-md);
-  background: var(--cle-card);
+.biss-disclosure {
+  border: 1px solid var(--biss-border);
+  border-radius: var(--biss-radius-md);
+  background: var(--biss-card);
 }
 
-.cle-disclosure-head {
+.biss-disclosure-head {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1528,90 +1528,90 @@
   border: 0;
   border-radius: inherit;
   background: none;
-  color: var(--cle-text);
+  color: var(--biss-text);
   font: inherit;
-  font-size: var(--cle-text-sm);
+  font-size: var(--biss-text-sm);
   font-weight: 850;
   text-align: left;
   cursor: pointer;
 }
 
-.cle-disclosure-head:hover {
-  background: var(--cle-surface-subtle);
+.biss-disclosure-head:hover {
+  background: var(--biss-surface-subtle);
 }
 
-.cle-disclosure-head:focus-visible {
+.biss-disclosure-head:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px var(--cle-focus);
+  box-shadow: 0 0 0 3px var(--biss-focus);
 }
 
-.cle-disclosure-caret {
+.biss-disclosure-caret {
   flex: 0 0 auto;
-  color: var(--cle-muted);
+  color: var(--biss-muted);
   transition: transform 0.15s ease;
 }
 
-.cle-disclosure.is-open > .cle-disclosure-head {
+.biss-disclosure.is-open > .biss-disclosure-head {
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
 
-.cle-disclosure.is-open > .cle-disclosure-head .cle-disclosure-caret {
+.biss-disclosure.is-open > .biss-disclosure-head .biss-disclosure-caret {
   transform: rotate(90deg);
 }
 
-.cle-disclosure-body {
+.biss-disclosure-body {
   padding: 4px 13px 13px;
-  border-top: 1px solid var(--cle-border-subtle);
+  border-top: 1px solid var(--biss-border-subtle);
 }
 
 /* Option lists ---------------------------------------------------------- */
 
-.cle-option-list {
+.biss-option-list {
   display: grid;
   gap: 2px;
   max-height: 260px;
   overflow-y: auto;
   padding: 6px;
-  border: 1px solid var(--cle-border);
-  border-radius: var(--cle-radius-sm);
-  background: var(--cle-card);
+  border: 1px solid var(--biss-border);
+  border-radius: var(--biss-radius-sm);
+  background: var(--biss-card);
 }
 
-.cle-option-list-flush {
+.biss-option-list-flush {
   max-height: none;
   padding: 0;
   border: 0;
   background: none;
 }
 
-.cle-option {
+.biss-option {
   display: flex;
   align-items: center;
   gap: 9px;
   padding: 5px 7px;
-  border-radius: var(--cle-radius-sm);
+  border-radius: var(--biss-radius-sm);
 }
 
-.cle-option:hover {
-  background: var(--cle-surface-subtle);
+.biss-option:hover {
+  background: var(--biss-surface-subtle);
 }
 
-.cle-option-label {
+.biss-option-label {
   min-width: 0;
-  color: var(--cle-text);
-  font-size: var(--cle-text-sm);
+  color: var(--biss-text);
+  font-size: var(--biss-text-sm);
   font-weight: 650;
   line-height: 1.4;
   cursor: pointer;
 }
 
-.cle-option-note {
-  color: var(--cle-muted);
+.biss-option-note {
+  color: var(--biss-muted);
   font-weight: 600;
 }
 
-.cle-option-children {
+.biss-option-children {
   display: grid;
   gap: 2px;
   margin-left: 26px;
@@ -1628,21 +1628,21 @@
   pixels because the limit is about how far the eye travels back to find the
   next line, which is a property of the text, not the panel.
 */
-.cle-prose {
+.biss-prose {
   max-width: 68ch;
   margin: 0;
-  color: var(--cle-text-body);
-  font-size: var(--cle-text-sm);
+  color: var(--biss-text-body);
+  font-size: var(--biss-text-sm);
   line-height: 1.65;
 }
 
-.cle-prose-lg {
-  font-size: var(--cle-text-md);
+.biss-prose-lg {
+  font-size: var(--biss-text-md);
   line-height: 1.7;
 }
 
 /* Preserves the source's own line breaks, for text that arrives pre-wrapped. */
-.cle-prose-raw {
+.biss-prose-raw {
   white-space: pre-wrap;
 }
 
@@ -1654,21 +1654,21 @@
   options are too many to sit in a row and too few to deserve a select, such
   as the two dozen languages a Court of Justice judgment can exist in.
 */
-.cle-choice-set {
+.biss-choice-set {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
 }
 
-.cle-choice {
+.biss-choice {
   padding: 4px 10px;
-  border: 1px solid var(--cle-border);
+  border: 1px solid var(--biss-border);
   border-radius: 999px;
-  background: var(--cle-card);
-  color: var(--cle-muted);
+  background: var(--biss-card);
+  color: var(--biss-muted);
   font: inherit;
-  font-family: var(--cle-mono);
-  font-size: var(--cle-text-xs);
+  font-family: var(--biss-mono);
+  font-size: var(--biss-text-xs);
   font-weight: 650;
   text-transform: uppercase;
   cursor: pointer;
@@ -1678,23 +1678,23 @@
     border-color 0.12s ease;
 }
 
-.cle-choice:hover {
-  border-color: var(--cle-border-strong);
-  color: var(--cle-text);
+.biss-choice:hover {
+  border-color: var(--biss-border-strong);
+  color: var(--biss-text);
 }
 
-.cle-choice:focus-visible {
+.biss-choice:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px var(--cle-focus);
+  box-shadow: 0 0 0 3px var(--biss-focus);
 }
 
-.cle-choice.is-active {
-  border-color: var(--cle-primary);
-  background: var(--cle-primary);
-  color: #ffffff;
+.biss-choice.is-active {
+  border-color: var(--biss-primary);
+  background: var(--biss-primary);
+  color: #FFFFFF;
 }
 
-.cle-choice:disabled {
+.biss-choice:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
@@ -1723,7 +1723,7 @@
   is the whole problem. A fixed height wins only if nothing is also telling
   it to grow.
 
-  The height subtracts the same bars .cle-app-sidebar does, and for the same
+  The height subtracts the same bars .biss-app-sidebar does, and for the same
   reason: both are fixed, so both are already covering the window before this
   gets any of it. Miss one and the shell ends up exactly that bar's height
   taller than the window, which is enough to give the page a scrollbar it
@@ -1732,19 +1732,19 @@
   the dock's own footer underneath the bottom bar, so the submit button for
   the query you are writing ends up behind the site credits.
 */
-.cle-dock-layout {
+.biss-dock-layout {
   display: flex;
   flex: none;
   align-items: stretch;
-  height: calc(100vh - var(--cle-topbar-height));
+  height: calc(100vh - var(--biss-topbar-height));
   min-height: 0;
 }
 
-.cle-app-shell.has-footer .cle-dock-layout {
-  height: calc(100vh - var(--cle-topbar-height) - var(--cle-bottombar-height));
+.biss-app-shell.has-footer .biss-dock-layout {
+  height: calc(100vh - var(--biss-topbar-height) - var(--biss-bottombar-height));
 }
 
-.cle-dock-content {
+.biss-dock-content {
   display: flex;
   flex: 1 1 auto;
   flex-direction: column;
@@ -1754,22 +1754,22 @@
 }
 
 /*
-  The mirror of .cle-app-sidebar. It fills the bounded layout rather than its
+  The mirror of .biss-app-sidebar. It fills the bounded layout rather than its
   content, so its header and submit stay put and only its middle scrolls,
   however long the form inside gets.
 */
-.cle-dock {
+.biss-dock {
   position: relative;
   display: flex;
-  flex: 0 0 var(--cle-dock-width, 420px);
+  flex: 0 0 var(--biss-dock-width, 420px);
   flex-direction: column;
   align-self: stretch;
-  width: var(--cle-dock-width, 420px);
+  width: var(--biss-dock-width, 420px);
   max-width: 100%;
   height: 100%;
   min-height: 0;
-  border-left: 1px solid var(--cle-border);
-  background: var(--cle-card);
+  border-left: 1px solid var(--biss-border);
+  background: var(--biss-card);
 }
 
 /*
@@ -1780,7 +1780,7 @@
   the border is what looks draggable, and it is wider than it looks so the
   target is hittable without being visible.
 */
-.cle-dock-resizer {
+.biss-dock-resizer {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -1794,61 +1794,61 @@
   touch-action: none;
 }
 
-.cle-dock-resizer::after {
+.biss-dock-resizer::after {
   content: "";
   position: absolute;
   top: 0;
   bottom: 0;
   left: 4px;
   width: 1px;
-  background: var(--cle-primary);
+  background: var(--biss-primary);
   opacity: 0;
   transition: opacity 0.12s ease;
 }
 
-.cle-dock-resizer:hover::after,
-.cle-dock-resizer:focus-visible::after,
-.cle-dock-resizer.is-dragging::after {
+.biss-dock-resizer:hover::after,
+.biss-dock-resizer:focus-visible::after,
+.biss-dock-resizer.is-dragging::after {
   opacity: 1;
 }
 
-.cle-dock-resizer:focus-visible {
+.biss-dock-resizer:focus-visible {
   outline: none;
 }
 
 /* Nothing to trade width with once the dock is covering the content. */
 @media (max-width: 1023px) {
-  .cle-dock-resizer {
+  .biss-dock-resizer {
     display: none;
   }
 }
 
-.cle-dock-header {
+.biss-dock-header {
   display: flex;
   flex: 0 0 auto;
   align-items: flex-start;
   justify-content: space-between;
   gap: 12px;
   padding: 18px 20px 14px;
-  border-bottom: 1px solid var(--cle-border);
+  border-bottom: 1px solid var(--biss-border);
 }
 
-.cle-dock-body {
+.biss-dock-body {
   flex: 1 1 auto;
   min-height: 0;
   overflow-y: auto;
   padding: 18px 20px;
 }
 
-.cle-dock-footer {
+.biss-dock-footer {
   display: grid;
   flex: 0 0 auto;
   gap: 8px;
   padding: 14px 20px 18px;
-  border-top: 1px solid var(--cle-border);
+  border-top: 1px solid var(--biss-border);
 }
 
-.cle-dock-scrim {
+.biss-dock-scrim {
   display: none;
 }
 
@@ -1859,7 +1859,7 @@
 */
 @media (max-width: 1023px) {
   /*
-    Pinned to the band .cle-dock-layout bounds, not to the window.
+    Pinned to the band .biss-dock-layout bounds, not to the window.
 
     Going fixed takes the panel out of that layout, so its height stops being
     the layout's and becomes the viewport's. Anchoring it to the window instead
@@ -1868,22 +1868,22 @@
     back at the one width where the panel is the whole screen and there is
     nothing else to scroll to reach it.
   */
-  .cle-dock {
+  .biss-dock {
     position: fixed;
-    top: var(--cle-topbar-height);
+    top: var(--biss-topbar-height);
     right: 0;
     bottom: 0;
     z-index: 50;
-    width: min(var(--cle-dock-width, 420px), 100%);
+    width: min(var(--biss-dock-width, 420px), 100%);
     height: auto;
-    box-shadow: var(--cle-shadow-lg);
+    box-shadow: var(--biss-shadow-lg);
   }
 
-  .cle-app-shell.has-footer .cle-dock {
-    bottom: var(--cle-bottombar-height);
+  .biss-app-shell.has-footer .biss-dock {
+    bottom: var(--biss-bottombar-height);
   }
 
-  .cle-dock-scrim {
+  .biss-dock-scrim {
     display: block;
     position: fixed;
     inset: 0;
@@ -1895,42 +1895,42 @@
 
 /* Pickers --------------------------------------------------------------- */
 
-.cle-picker {
-  border: 1px solid var(--cle-border);
-  border-radius: var(--cle-radius-sm);
-  background: var(--cle-card);
+.biss-picker {
+  border: 1px solid var(--biss-border);
+  border-radius: var(--biss-radius-sm);
+  background: var(--biss-card);
 }
 
-.cle-picker:focus-within {
-  border-color: var(--cle-primary);
-  box-shadow: 0 0 0 3px var(--cle-focus);
+.biss-picker:focus-within {
+  border-color: var(--biss-primary);
+  box-shadow: 0 0 0 3px var(--biss-focus);
 }
 
-.cle-picker-status {
+.biss-picker-status {
   display: block;
   margin: 0 12px 8px;
-  color: var(--cle-muted);
-  font-size: var(--cle-text-sm);
+  color: var(--biss-muted);
+  font-size: var(--biss-text-sm);
 }
 
-.cle-picker-count {
+.biss-picker-count {
   margin-left: auto;
-  color: var(--cle-muted);
-  font-family: var(--cle-mono);
-  font-size: var(--cle-text-xs);
+  color: var(--biss-muted);
+  font-family: var(--biss-mono);
+  font-size: var(--biss-text-xs);
   font-variant-numeric: tabular-nums;
 }
 
 /* Skeletons ------------------------------------------------------------- */
 
-.cle-skeleton {
-  border-radius: var(--cle-radius-sm);
-  background: linear-gradient(90deg, var(--cle-surface-muted) 25%, #e8eef6 37%, var(--cle-surface-muted) 63%);
+.biss-skeleton {
+  border-radius: var(--biss-radius-sm);
+  background: linear-gradient(90deg, var(--biss-surface-muted) 25%, #e8eef6 37%, var(--biss-surface-muted) 63%);
   background-size: 400% 100%;
-  animation: cle-shimmer 1.4s ease infinite;
+  animation: biss-shimmer 1.4s ease infinite;
 }
 
-@keyframes cle-shimmer {
+@keyframes biss-shimmer {
   0% {
     background-position: 100% 50%;
   }
@@ -1941,64 +1941,64 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .cle-skeleton {
+  .biss-skeleton {
     animation: none;
   }
 
-  .cle-app-sidebar,
-  .cle-switch-track,
-  .cle-switch-thumb {
+  .biss-app-sidebar,
+  .biss-switch-track,
+  .biss-switch-thumb {
     transition: none;
   }
 }
 
 /* Stat list ------------------------------------------------------------- */
 
-.cle-stat-list {
+.biss-stat-list {
   display: grid;
   gap: 1px;
-  border-radius: var(--cle-radius-md);
-  background: var(--cle-border-subtle);
+  border-radius: var(--biss-radius-md);
+  background: var(--biss-border-subtle);
 }
 
-.cle-stat-row {
+.biss-stat-row {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
   gap: 14px;
   padding: 11px 13px;
-  background: var(--cle-card);
+  background: var(--biss-card);
 }
 
-.cle-stat-row:first-child {
-  border-radius: var(--cle-radius-md) var(--cle-radius-md) 0 0;
+.biss-stat-row:first-child {
+  border-radius: var(--biss-radius-md) var(--biss-radius-md) 0 0;
 }
 
-.cle-stat-row:last-child {
-  border-radius: 0 0 var(--cle-radius-md) var(--cle-radius-md);
+.biss-stat-row:last-child {
+  border-radius: 0 0 var(--biss-radius-md) var(--biss-radius-md);
 }
 
-.cle-stat-label {
-  color: var(--cle-muted);
-  font-size: var(--cle-text-sm);
+.biss-stat-label {
+  color: var(--biss-muted);
+  font-size: var(--biss-text-sm);
   font-weight: 700;
 }
 
-.cle-stat-value {
-  color: var(--cle-text);
-  font-size: var(--cle-text-md);
+.biss-stat-value {
+  color: var(--biss-text);
+  font-size: var(--biss-text-md);
   font-weight: 900;
   font-variant-numeric: tabular-nums;
 }
 
 /* Bar chart ------------------------------------------------------------- */
 
-.cle-chart {
+.biss-chart {
   display: grid;
   gap: 10px;
 }
 
-.cle-chart-plot {
+.biss-chart-plot {
   position: relative;
   display: flex;
   align-items: flex-end;
@@ -2008,28 +2008,28 @@
   /* Quarter gridlines, so a bar's height can be read rather than compared. */
   background-image: repeating-linear-gradient(
     to top,
-    var(--cle-border-subtle) 0 1px,
+    var(--biss-border-subtle) 0 1px,
     transparent 1px 25%
   );
 }
 
 /* The scale sits above the plot rather than beside it: a left gutter would
    misalign these bars with every other full-width card on the page. */
-.cle-chart-scale {
+.biss-chart-scale {
   display: flex;
   justify-content: space-between;
-  color: var(--cle-muted);
-  font-size: var(--cle-text-xs);
+  color: var(--biss-muted);
+  font-size: var(--biss-text-xs);
   font-variant-numeric: tabular-nums;
 }
 
-.cle-chart-empty {
+.biss-chart-empty {
   margin: 0;
-  color: var(--cle-muted);
-  font-size: var(--cle-text-sm);
+  color: var(--biss-muted);
+  font-size: var(--biss-text-sm);
 }
 
-.cle-chart-bar {
+.biss-chart-bar {
   position: relative;
   flex: 1 1 0;
   display: flex;
@@ -2038,115 +2038,115 @@
   height: 100%;
 }
 
-.cle-chart-bar:hover {
-  background: var(--cle-surface-muted);
+.biss-chart-bar:hover {
+  background: var(--biss-surface-muted);
 }
 
-.cle-chart-bar-fill {
+.biss-chart-bar-fill {
   display: flex;
   width: 100%;
   min-height: 2px;
   /* Denials stack at the base of the total so the bar reads bottom-up. */
   align-items: flex-end;
   border-radius: 3px 3px 0 0;
-  background: var(--cle-primary);
+  background: var(--biss-primary);
 }
 
-.cle-chart-bar-denied {
+.biss-chart-bar-denied {
   width: 100%;
   min-height: 2px;
   border-radius: 0;
-  background: var(--cle-danger);
+  background: var(--biss-danger);
 }
 
-.cle-chart-axis {
+.biss-chart-axis {
   font-variant-numeric: tabular-nums;
   display: flex;
   justify-content: space-between;
-  color: var(--cle-muted);
-  font-size: var(--cle-text-xs);
+  color: var(--biss-muted);
+  font-size: var(--biss-text-xs);
   font-weight: 700;
 }
 
-.cle-chart-legend {
+.biss-chart-legend {
   display: flex;
   flex-wrap: wrap;
   gap: 14px;
-  color: var(--cle-muted);
-  font-size: var(--cle-text-xs);
+  color: var(--biss-muted);
+  font-size: var(--biss-text-xs);
   font-weight: 750;
 }
 
-.cle-chart-legend-item {
+.biss-chart-legend-item {
   display: inline-flex;
   align-items: center;
   gap: 6px;
 }
 
-.cle-chart-swatch {
+.biss-chart-swatch {
   width: 9px;
   height: 9px;
   border-radius: 2px;
-  background: var(--cle-primary);
+  background: var(--biss-primary);
 }
 
-.cle-chart-swatch-denied {
-  background: var(--cle-danger);
+.biss-chart-swatch-denied {
+  background: var(--biss-danger);
 }
 
 /* Meter row (top endpoints and similar) --------------------------------- */
 
-.cle-meter-row {
+.biss-meter-row {
   display: grid;
   gap: 6px;
   padding: 9px 0;
 }
 
-.cle-meter-row + .cle-meter-row {
-  border-top: 1px solid var(--cle-border-subtle);
+.biss-meter-row + .biss-meter-row {
+  border-top: 1px solid var(--biss-border-subtle);
 }
 
-.cle-meter-head {
+.biss-meter-head {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
   gap: 12px;
 }
 
-.cle-meter-name {
+.biss-meter-name {
   overflow: hidden;
-  color: var(--cle-text);
-  font-family: var(--cle-mono);
-  font-size: var(--cle-text-sm);
+  color: var(--biss-text);
+  font-family: var(--biss-mono);
+  font-size: var(--biss-text-sm);
   font-weight: 650;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.cle-meter-value {
+.biss-meter-value {
   flex: 0 0 auto;
-  color: var(--cle-muted);
-  font-size: var(--cle-text-xs);
+  color: var(--biss-muted);
+  font-size: var(--biss-text-xs);
   font-weight: 800;
   font-variant-numeric: tabular-nums;
 }
 
-.cle-meter-track {
+.biss-meter-track {
   overflow: hidden;
   height: 6px;
   border-radius: 999px;
-  background: var(--cle-surface-muted);
+  background: var(--biss-surface-muted);
 }
 
-.cle-meter-fill {
+.biss-meter-fill {
   height: 100%;
   border-radius: 999px;
-  background: var(--cle-primary);
+  background: var(--biss-primary);
 }
 
 /* Toolbar --------------------------------------------------------------- */
 
-.cle-toolbar {
+.biss-toolbar {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -2155,7 +2155,7 @@
   margin-bottom: 14px;
 }
 
-.cle-toolbar-group {
+.biss-toolbar-group {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -2163,69 +2163,69 @@
 }
 
 /* Controls sit inline in a toolbar; only inside a form do they fill the row. */
-.cle-toolbar .cle-select,
-.cle-toolbar .cle-input {
+.biss-toolbar .biss-select,
+.biss-toolbar .biss-input {
   width: auto;
   min-width: 150px;
 }
 
-.cle-search {
+.biss-search {
   position: relative;
   display: flex;
   align-items: center;
   min-width: 220px;
 }
 
-.cle-search-icon {
+.biss-search-icon {
   position: absolute;
   left: 10px;
   width: 15px;
   height: 15px;
-  color: var(--cle-muted);
+  color: var(--biss-muted);
   pointer-events: none;
 }
 
-.cle-search .cle-input {
+.biss-search .biss-input {
   padding-left: 32px;
 }
 
 /* Table refinements ----------------------------------------------------- */
 
-/* Scoped to .cle-table so these beat the base `.cle-table th, .cle-table td`
+/* Scoped to .biss-table so these beat the base `.biss-table th, .biss-table td`
    rule, which is one element more specific than a bare class. */
-.cle-table .cle-table-numeric {
+.biss-table .biss-table-numeric {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-.cle-table .cle-table-actions {
+.biss-table .biss-table-actions {
   width: 1%;
   text-align: right;
   white-space: nowrap;
 }
 
-.cle-table tbody tr:hover {
-  background: var(--cle-surface-subtle);
+.biss-table tbody tr:hover {
+  background: var(--biss-surface-subtle);
 }
 
-.cle-table-primary {
-  color: var(--cle-text);
+.biss-table-primary {
+  color: var(--biss-text);
   font-weight: 850;
 }
 
-.cle-table-subtext {
+.biss-table-subtext {
   display: block;
   margin-top: 2px;
-  color: var(--cle-muted);
-  font-size: var(--cle-text-xs);
+  color: var(--biss-muted);
+  font-size: var(--biss-text-xs);
 }
 
-.cle-table-mono {
-  font-family: var(--cle-mono);
-  font-size: var(--cle-text-sm);
+.biss-table-mono {
+  font-family: var(--biss-mono);
+  font-size: var(--biss-text-sm);
 }
 
-.cle-table-sort {
+.biss-table-sort {
   display: inline-flex;
   align-items: center;
   gap: 5px;
@@ -2237,18 +2237,18 @@
   cursor: pointer;
 }
 
-.cle-table-sort:hover {
-  color: var(--cle-text);
+.biss-table-sort:hover {
+  color: var(--biss-text);
 }
 
-.cle-table-sort-caret {
-  color: var(--cle-primary);
+.biss-table-sort-caret {
+  color: var(--biss-primary);
   font-size: 0.7rem;
 }
 
-.cle-table .cle-table-empty {
+.biss-table .biss-table-empty {
   padding: 34px 14px;
-  color: var(--cle-muted);
+  color: var(--biss-muted);
   text-align: center;
 }
 
@@ -2256,19 +2256,19 @@
 
 /* minmax(0, 1fr) stops a nowrap child (code blocks, wide tables) from sizing
    the track to its min-content and blowing the layout past the viewport. */
-.cle-stack {
+.biss-stack {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: 18px;
 }
 
-.cle-stack-sm {
+.biss-stack-sm {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: 10px;
 }
 
-.cle-split {
+.biss-split {
   display: grid;
   grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr);
   align-items: start;
@@ -2276,27 +2276,27 @@
 }
 
 @media (max-width: 1080px) {
-  .cle-split {
+  .biss-split {
     grid-template-columns: minmax(0, 1fr);
   }
 }
 
-/* Doubled class beats CleCard's own component style, whose injection order
+/* Doubled class beats BissCard's own component style, whose injection order
    relative to this sheet is not guaranteed. */
-.cle-card.cle-card-flat {
-  box-shadow: var(--cle-shadow-sm);
+.biss-card.biss-card-flat {
+  box-shadow: var(--biss-shadow-sm);
 }
 
-.cle-card.cle-card-pad-sm {
+.biss-card.biss-card-pad-sm {
   padding: 18px;
 }
 
-.cle-inline-code {
+.biss-inline-code {
   padding: 1px 5px;
-  border: 1px solid var(--cle-border-subtle);
+  border: 1px solid var(--biss-border-subtle);
   border-radius: 4px;
-  background: var(--cle-surface-muted);
-  font-family: var(--cle-mono);
+  background: var(--biss-surface-muted);
+  font-family: var(--biss-mono);
   font-size: 0.88em;
 }
 
@@ -2309,27 +2309,27 @@
    sequence says what to do next.
 --------------------------------------------------------------------------- */
 
-.cle-steps {
+.biss-steps {
   display: grid;
   gap: 0;
   margin: 0;
   padding: 0;
   list-style: none;
-  counter-reset: cle-step;
+  counter-reset: biss-step;
 }
 
-.cle-step {
+.biss-step {
   display: grid;
   grid-template-columns: 28px minmax(0, 1fr);
   gap: 14px;
   padding-bottom: 22px;
 }
 
-.cle-step:last-child {
+.biss-step:last-child {
   padding-bottom: 0;
 }
 
-.cle-step-rail {
+.biss-step-rail {
   display: grid;
   grid-template-rows: 28px 1fr;
   justify-items: center;
@@ -2337,72 +2337,72 @@
 
 /* Drawn on the rail rather than between markers, so it stretches with however
    much content a step happens to carry. */
-.cle-step-line {
+.biss-step-line {
   width: 2px;
   margin-top: 6px;
   border-radius: 1px;
-  background: var(--cle-border);
+  background: var(--biss-border);
 }
 
-.cle-step:last-child .cle-step-line {
+.biss-step:last-child .biss-step-line {
   display: none;
 }
 
-.cle-step-marker {
+.biss-step-marker {
   display: grid;
   place-items: center;
   width: 28px;
   height: 28px;
-  border: 1px solid var(--cle-border-strong);
+  border: 1px solid var(--biss-border-strong);
   border-radius: 50%;
-  background: var(--cle-card);
-  color: var(--cle-muted);
+  background: var(--biss-card);
+  color: var(--biss-muted);
   font-size: 0.75rem;
   font-weight: 900;
   font-variant-numeric: tabular-nums;
 }
 
-.cle-step.is-done .cle-step-marker {
-  border-color: var(--cle-success-border);
-  background: var(--cle-success-bg);
-  color: var(--cle-success);
+.biss-step.is-done .biss-step-marker {
+  border-color: var(--biss-success-border);
+  background: var(--biss-success-bg);
+  color: var(--biss-success);
 }
 
-.cle-step.is-done .cle-step-line {
-  background: var(--cle-success-border);
+.biss-step.is-done .biss-step-line {
+  background: var(--biss-success-border);
 }
 
 /* The step being worked on, so the eye lands on it rather than on step 1. */
-.cle-step.is-current .cle-step-marker {
-  border-color: var(--cle-accent, var(--cle-text));
-  color: var(--cle-accent, var(--cle-text));
-  box-shadow: 0 0 0 3px var(--cle-accent-soft, transparent);
+.biss-step.is-current .biss-step-marker {
+  border-color: var(--biss-accent, var(--biss-text));
+  color: var(--biss-accent, var(--biss-text));
+  box-shadow: 0 0 0 3px var(--biss-accent-soft, transparent);
 }
 
-.cle-step-body {
+.biss-step-body {
   min-width: 0;
   padding-top: 3px;
 }
 
-.cle-step-title {
+.biss-step-title {
   margin: 0;
-  color: var(--cle-text);
-  font-size: var(--cle-text-md);
+  color: var(--biss-text);
+  font-size: var(--biss-text-md);
   font-weight: 850;
 }
 
-.cle-step-copy {
+.biss-step-copy {
   margin: 5px 0 0;
-  color: var(--cle-muted);
-  font-size: var(--cle-text-sm);
+  color: var(--biss-muted);
+  font-size: var(--biss-text-sm);
   line-height: 1.6;
 }
 
-.cle-step-content {
+.biss-step-content {
   margin-top: 12px;
 }
 
-.cle-step-content:empty {
+.biss-step-content:empty {
   display: none;
 }
 
@@ -2414,33 +2414,33 @@
    looking at and whether it is copyable.
 --------------------------------------------------------------------------- */
 
-.cle-code {
+.biss-code {
   overflow: hidden;
-  border: 1px solid var(--cle-border);
-  border-radius: var(--cle-radius-sm);
-  background: var(--cle-surface-muted);
+  border: 1px solid var(--biss-border);
+  border-radius: var(--biss-radius-sm);
+  background: var(--biss-surface-muted);
 }
 
-.cle-code-header {
+.biss-code-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 10px;
   min-height: 36px;
   padding: 0 6px 0 12px;
-  border-bottom: 1px solid var(--cle-border);
-  background: var(--cle-card);
+  border-bottom: 1px solid var(--biss-border);
+  background: var(--biss-card);
 }
 
-.cle-code-label {
-  color: var(--cle-muted);
-  font-size: var(--cle-text-xs);
+.biss-code-label {
+  color: var(--biss-muted);
+  font-size: var(--biss-text-xs);
   font-weight: 850;
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
 
-.cle-code-tablist {
+.biss-code-tablist {
   display: flex;
   overflow-x: auto;
   gap: 1px;
@@ -2449,89 +2449,89 @@
   scrollbar-width: none;
 }
 
-.cle-code-tablist::-webkit-scrollbar {
+.biss-code-tablist::-webkit-scrollbar {
   display: none;
 }
 
-.cle-code-tab {
+.biss-code-tab {
   flex: 0 0 auto;
   padding: 5px 10px;
   white-space: nowrap;
   border: 0;
-  border-radius: var(--cle-radius-sm);
+  border-radius: var(--biss-radius-sm);
   background: transparent;
-  color: var(--cle-muted);
+  color: var(--biss-muted);
   font: inherit;
-  font-size: var(--cle-text-xs);
+  font-size: var(--biss-text-xs);
   font-weight: 850;
   cursor: pointer;
 }
 
-.cle-code-tab:hover {
-  color: var(--cle-text);
+.biss-code-tab:hover {
+  color: var(--biss-text);
 }
 
-.cle-code-tab.is-active {
-  background: var(--cle-surface-muted);
-  color: var(--cle-text);
+.biss-code-tab.is-active {
+  background: var(--biss-surface-muted);
+  color: var(--biss-text);
 }
 
-.cle-code-tab:focus-visible {
-  outline: 2px solid var(--cle-accent, currentColor);
+.biss-code-tab:focus-visible {
+  outline: 2px solid var(--biss-accent, currentColor);
   outline-offset: -2px;
 }
 
-.cle-code-copy {
+.biss-code-copy {
   flex: 0 0 auto;
   padding: 5px 9px;
   border: 1px solid transparent;
-  border-radius: var(--cle-radius-sm);
+  border-radius: var(--biss-radius-sm);
   background: transparent;
-  color: var(--cle-muted);
+  color: var(--biss-muted);
   font: inherit;
-  font-size: var(--cle-text-xs);
+  font-size: var(--biss-text-xs);
   font-weight: 850;
   cursor: pointer;
 }
 
-.cle-code-copy:hover {
-  border-color: var(--cle-border);
-  color: var(--cle-text);
+.biss-code-copy:hover {
+  border-color: var(--biss-border);
+  color: var(--biss-text);
 }
 
-.cle-code-copy:focus-visible {
-  outline: 2px solid var(--cle-accent, currentColor);
+.biss-code-copy:focus-visible {
+  outline: 2px solid var(--biss-accent, currentColor);
   outline-offset: 1px;
 }
 
-.cle-code-body {
+.biss-code-body {
   overflow-x: auto;
   margin: 0;
   padding: 13px 14px;
-  color: var(--cle-text);
-  font-family: var(--cle-mono);
-  font-size: var(--cle-text-sm);
+  color: var(--biss-text);
+  font-family: var(--biss-mono);
+  font-size: var(--biss-text-sm);
   line-height: 1.65;
   tab-size: 2;
 }
 
 /* Tightened: the steps carry real instructions now, and the original spacing
    was tuned for one-line labels. */
-.cle-step {
+.biss-step {
   padding-bottom: 26px;
 }
 
-.cle-step-title {
-  font-size: var(--cle-text-md);
+.biss-step-title {
+  font-size: var(--biss-text-md);
   font-weight: 900;
   letter-spacing: -0.005em;
 }
 
-.cle-step-copy {
+.biss-step-copy {
   max-width: 68ch;
 }
 
-.cle-step-content > * + * {
+.biss-step-content > * + * {
   margin-top: 10px;
 }
 
@@ -2543,48 +2543,48 @@
    finding — what you import and what you pass — come forward.
 --------------------------------------------------------------------------- */
 
-.cle-tok-comment {
-  color: var(--cle-code-comment, #7a8699);
+.biss-tok-comment {
+  color: var(--biss-code-comment, #7a8699);
   font-style: italic;
 }
 
-.cle-tok-string {
-  color: var(--cle-code-string, #0f7b6c);
+.biss-tok-string {
+  color: var(--biss-code-string, #0f7b6c);
 }
 
-.cle-tok-keyword {
-  color: var(--cle-code-keyword, #8250df);
+.biss-tok-keyword {
+  color: var(--biss-code-keyword, #8250df);
   font-weight: 800;
 }
 
-.cle-tok-builtin {
-  color: var(--cle-code-builtin, #0550ae);
+.biss-tok-builtin {
+  color: var(--biss-code-builtin, #0550ae);
 }
 
-.cle-tok-number {
-  color: var(--cle-code-number, #b3541e);
+.biss-tok-number {
+  color: var(--biss-code-number, #b3541e);
 }
 
-.cle-tok-decorator {
-  color: var(--cle-code-decorator, #953800);
+.biss-tok-decorator {
+  color: var(--biss-code-decorator, #953800);
   font-weight: 800;
 }
 
 /* The name in KEY=value, which is the part you check against the console. */
-.cle-tok-key {
-  color: var(--cle-code-key, #0550ae);
+.biss-tok-key {
+  color: var(--biss-code-key, #0550ae);
   font-weight: 800;
 }
 
 @media (prefers-color-scheme: dark) {
-  .cle-code {
-    --cle-code-comment: #8b98a9;
-    --cle-code-string: #7ee2c8;
-    --cle-code-keyword: #d2a8ff;
-    --cle-code-builtin: #79c0ff;
-    --cle-code-number: #ffa657;
-    --cle-code-decorator: #ffa657;
-    --cle-code-key: #79c0ff;
+  .biss-code {
+    --biss-code-comment: #8b98a9;
+    --biss-code-string: #7ee2c8;
+    --biss-code-keyword: #d2a8ff;
+    --biss-code-builtin: #79c0ff;
+    --biss-code-number: #ffa657;
+    --biss-code-decorator: #ffa657;
+    --biss-code-key: #79c0ff;
   }
 }
 
@@ -2593,23 +2593,23 @@
    Table paging and sort affordances.
 --------------------------------------------------------------------------- */
 
-.cle-table-pager {
+.biss-table-pager {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
   padding: 10px 14px;
-  border-top: 1px solid var(--cle-border);
+  border-top: 1px solid var(--biss-border);
 }
 
-.cle-table-pager-range,
-.cle-table-pager-page {
-  color: var(--cle-muted);
-  font-size: var(--cle-text-sm);
+.biss-table-pager-range,
+.biss-table-pager-page {
+  color: var(--biss-muted);
+  font-size: var(--biss-text-sm);
   font-variant-numeric: tabular-nums;
 }
 
-.cle-table-pager-buttons {
+.biss-table-pager-buttons {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -2618,18 +2618,18 @@
 /* Every sortable header shows its caret, faint until it is the active sort —
    so the column reads as sortable before it is clicked, rather than looking
    inert until something happens. */
-.cle-table-sort-caret {
+.biss-table-sort-caret {
   margin-left: 4px;
   opacity: 0;
   font-size: 0.62rem;
   transition: opacity 0.12s ease;
 }
 
-.cle-table-sort:hover .cle-table-sort-caret {
+.biss-table-sort:hover .biss-table-sort-caret {
   opacity: 0.45;
 }
 
-.cle-table-sort-caret.is-active {
+.biss-table-sort-caret.is-active {
   opacity: 1;
 }
 
@@ -2638,65 +2638,65 @@
    to a fixed square: the copy is what differs between them, so letting it set
    the height keeps a row of three from being mostly empty space. */
 
-.cle-action-card {
+.biss-action-card {
   display: flex;
   flex-direction: column;
   gap: 10px;
   padding: 22px;
-  border: 1px solid var(--cle-border);
-  border-radius: var(--cle-radius-lg);
-  background: var(--cle-card);
-  color: var(--cle-text);
+  border: 1px solid var(--biss-border);
+  border-radius: var(--biss-radius-lg);
+  background: var(--biss-card);
+  color: var(--biss-text);
   text-decoration: none;
-  box-shadow: var(--cle-shadow-sm);
+  box-shadow: var(--biss-shadow-sm);
   transition:
     border-color 0.15s ease,
     box-shadow 0.15s ease,
     transform 0.15s ease;
 }
 
-.cle-action-card:hover {
-  border-color: var(--cle-primary);
-  box-shadow: var(--cle-shadow-md);
+.biss-action-card:hover {
+  border-color: var(--biss-primary);
+  box-shadow: var(--biss-shadow-md);
   transform: translateY(-2px);
 }
 
-.cle-action-card:focus-visible {
-  outline: 3px solid var(--cle-focus);
+.biss-action-card:focus-visible {
+  outline: 3px solid var(--biss-focus);
   outline-offset: 2px;
 }
 
-.cle-action-card.is-active {
-  border-color: var(--cle-primary);
+.biss-action-card.is-active {
+  border-color: var(--biss-primary);
 }
 
-.cle-action-card-icon {
+.biss-action-card-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 38px;
   height: 38px;
   margin-bottom: 4px;
-  border-radius: var(--cle-radius-md);
-  background: var(--cle-info-bg);
-  color: var(--cle-primary);
+  border-radius: var(--biss-radius-md);
+  background: var(--biss-info-bg);
+  color: var(--biss-primary);
 }
 
-.cle-action-card-title {
+.biss-action-card-title {
   font-size: 1rem;
   font-weight: 900;
   letter-spacing: 0;
 }
 
-.cle-action-card-copy {
-  color: var(--cle-muted);
-  font-size: var(--cle-text-sm);
+.biss-action-card-copy {
+  color: var(--biss-muted);
+  font-size: var(--biss-text-sm);
   line-height: 1.6;
 }
 
 /* The set itself. Wrapping by measure rather than by count keeps three cards
    and five cards both looking deliberate. */
-.cle-action-grid {
+.biss-action-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 18px;
@@ -2706,10 +2706,10 @@
    to reserve its height and the sidebar has to stop short of it, or the last
    navigation item and the account block sit underneath it. */
 
-.cle-app-shell.has-footer .cle-app-body {
-  padding-bottom: var(--cle-bottombar-height);
+.biss-app-shell.has-footer .biss-app-body {
+  padding-bottom: var(--biss-bottombar-height);
 }
 
-.cle-app-shell.has-footer .cle-app-sidebar {
-  height: calc(100vh - var(--cle-topbar-height) - var(--cle-bottombar-height));
+.biss-app-shell.has-footer .biss-app-sidebar {
+  height: calc(100vh - var(--biss-topbar-height) - var(--biss-bottombar-height));
 }

@@ -1,36 +1,36 @@
-export const caselawTheme = {
+export const bissTheme = {
   color: {
-    bg: "#f8fafc",
-    grid: "rgba(148, 163, 184, 0.14)",
-    card: "#ffffff",
-    border: "#d9e1ec",
-    text: "#111827",
-    muted: "#667085",
-    primary: "#2f63ee",
-    primaryHover: "#2454d6",
-    danger: "#c4161c",
-    focus: "rgba(47, 99, 238, 0.24)",
+    bg: "#FAF9F7",
+    grid: "transparent",
+    card: "#FFFFFF",
+    border: "#E7E5E0",
+    text: "#1D1C1A",
+    muted: "#5E5C57",
+    primary: "#005CA9",
+    primaryHover: "#004A8A",
+    danger: "#C2412F",
+    focus: "rgba(0, 92, 169, 0.24)",
   },
   radius: {
-    sm: "6px",
-    md: "8px",
+    sm: "7px",
+    md: "10px",
     pill: "999px",
   },
   shadow: {
-    card: "0 20px 54px rgba(15, 23, 42, 0.08)",
+    card: "0 1px 2px rgba(29, 28, 26, 0.04)",
   },
   typeScale: {
     eyebrow: "0.74rem",
     body: "1rem",
     lead: "1.2rem",
-    h1: "clamp(3rem, 7vw, 6.75rem)",
+    h1: "clamp(2rem, 4vw, 3.5rem)",
     h2: "clamp(1.45rem, 2vw, 2rem)",
   },
 } as const;
 
-export type CaselawTheme = typeof caselawTheme;
+export type BissTheme = typeof bissTheme;
 
-export type CleLink = {
+export type BissLink = {
   label: string;
   href: string;
   /** A different origin. Affects `rel`, not where the link opens. */

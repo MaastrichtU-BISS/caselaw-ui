@@ -1,0 +1,10 @@
+export type BissIconName = 'search' | 'plus' | 'down' | 'up' | 'spark' | 'filter' | 'grip' | 'cal' | 'chev' | 'x' | 'lock' | 'undo'
+  | 'menu' | 'panel' | 'chat' | 'home' | 'deals' | 'chart' | 'people' | 'grid' | 'send' | 'edit' | 'trash' | 'copy' | 'more' | 'check'
+  | 'expand' | 'collapse' | 'stop' | 'history' | 'flag' | 'key' | 'file' | 'print' | 'plug'
+  | 'target' | 'pie' | 'sigma'
+  | 'user' | 'users' | 'gear' | 'logout' | 'mail' | 'link' | 'pin' | 'eye' | 'palette' | 'text' | 'layout' | 'refresh' | 'globe' | 'sliders' | 'drag'
+  | 'building'
+  | 'kanban' | 'gantt' | 'inbox' | 'star' | 'folder' | 'clock' | 'list' | 'checkbox' | 'paperclip' | 'at'
+  | 'chevLeft' | 'arrowUp' | 'arrowDown' | 'moveTo'
+  | 'bold' | 'italic' | 'strike' | 'code' | 'quote' | 'heading' | 'listOl' | 'image' | 'smile' | 'reply' | 'minus' | 'codeBlock'
+  | 'play' | 'info' | 'alert' | 'columns' | 'toggle' | 'bell';

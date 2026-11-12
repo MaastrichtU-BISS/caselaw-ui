@@ -1,6 +1,6 @@
-export type CleServiceIconName = "explorer" | "database" | "access" | "api" | "auth" | "rate-limit";
+export type BissServiceIconName = "explorer" | "database" | "access" | "api" | "auth" | "rate-limit";
 
-export const cleServiceIconLabels: Record<CleServiceIconName, string> = {
+export const bissServiceIconLabels: Record<BissServiceIconName, string> = {
   explorer: "Case law explorer",
   database: "Database workbench",
   access: "Access control",
@@ -9,7 +9,7 @@ export const cleServiceIconLabels: Record<CleServiceIconName, string> = {
   "rate-limit": "Rate limiting",
 };
 
-export const cleServiceIconPaths: Record<CleServiceIconName, string> = {
+export const bissServiceIconPaths: Record<BissServiceIconName, string> = {
   explorer:
     "M7.5 7.5a2.5 2.5 0 1 0 0 .01ZM16.5 7.5a2.5 2.5 0 1 0 0 .01ZM12 16.5a2.5 2.5 0 1 0 0 .01ZM9.7 8.4l4.6-.1M8.8 9.6l2.3 4.8M15.2 9.6l-2.3 4.8",
   database:
@@ -24,20 +24,20 @@ export const cleServiceIconPaths: Record<CleServiceIconName, string> = {
     "M12 5a7 7 0 1 0 7 7M12 12l4-4M8 20h8M9 3h6M12 3v2M18.5 5.5l1.5 1.5",
 };
 
-export function getCleServiceIconSvg(icon: CleServiceIconName, color = "#2f63ee", bg = "#ffffff"): string {
-  const label = cleServiceIconLabels[icon];
-  const path = cleServiceIconPaths[icon];
+export function getBissServiceIconSvg(icon: BissServiceIconName, color = "#2f63ee", bg = "#ffffff"): string {
+  const label = bissServiceIconLabels[icon];
+  const path = bissServiceIconPaths[icon];
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img" aria-label="${label}"><rect x="1" y="1" width="22" height="22" rx="6" fill="${bg}" stroke="#d9e1ec"/><path d="${path}" fill="none" stroke="${color}" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 }
 
-export function getCleFaviconHref(icon: CleServiceIconName, color = "#2f63ee", bg = "#ffffff"): string {
-  return `data:image/svg+xml,${encodeURIComponent(getCleServiceIconSvg(icon, color, bg))}`;
+export function getBissFaviconHref(icon: BissServiceIconName, color = "#2f63ee", bg = "#ffffff"): string {
+  return `data:image/svg+xml,${encodeURIComponent(getBissServiceIconSvg(icon, color, bg))}`;
 }
 
-export function setCleFavicon(icon: CleServiceIconName, color = "#2f63ee", bg = "#ffffff"): HTMLLinkElement | undefined {
+export function setBissFavicon(icon: BissServiceIconName, color = "#2f63ee", bg = "#ffffff"): HTMLLinkElement | undefined {
   if (typeof document === "undefined") return undefined;
 
-  let link = document.querySelector<HTMLLinkElement>('link[rel="icon"][data-cle-favicon="true"]');
+  let link = document.querySelector<HTMLLinkElement>('link[rel="icon"][data-biss-favicon="true"]');
   if (!link) {
     link = document.createElement("link");
     link.rel = "icon";
@@ -46,6 +46,6 @@ export function setCleFavicon(icon: CleServiceIconName, color = "#2f63ee", bg = 
     document.head.appendChild(link);
   }
 
-  link.href = getCleFaviconHref(icon, color, bg);
+  link.href = getBissFaviconHref(icon, color, bg);
   return link;
 }

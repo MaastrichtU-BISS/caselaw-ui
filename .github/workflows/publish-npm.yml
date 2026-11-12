@@ -1,10 +1,10 @@
 name: Publish to npm
 
-# One package in this repo, so a plain version tag is unambiguous: v0.2.3, …
+# BISS releases use a separate tag namespace from legacy caselaw-ui releases.
 on:
   push:
     tags:
-      - "v*"
+      - "biss-ui-v*"
   workflow_dispatch:
     inputs:
       dry_run:
@@ -27,12 +27,21 @@ jobs:
       - name: Typecheck
         run: npm run check
 
+      - run: npm run demo:build
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:browser
+      - run: npm run docs:typecheck
+      - run: npm run docs:build
+      - run: npm run docs:check
+
       # Catches a files/exports mistake before it reaches consumers, which a
       # typecheck alone would not.
       - name: Verify the tarball contents
         run: npm pack --dry-run
 
   publish:
+    # Legacy v* tags can never publish this package.
+    if: startsWith(github.ref, 'refs/tags/biss-ui-v') || github.event_name == 'workflow_dispatch'
     needs: check
     runs-on: ubuntu-latest
     environment: npm
@@ -55,16 +64,19 @@ jobs:
 
       - run: npm ci
 
+      - name: Verify package identity
+        run: node -e "if (require('./package.json').name !== 'biss-ui') process.exit(1)"
+
       - name: Check the tag matches the packaged version
         if: startsWith(github.ref, 'refs/tags/')
         run: |
-          tag_version="${GITHUB_REF_NAME#v}"
+          tag_version="${GITHUB_REF_NAME#biss-ui-v}"
           pkg_version="$(node -p "require('./package.json').version")"
           if [ "$tag_version" != "$pkg_version" ]; then
             echo "Tag $GITHUB_REF_NAME implies $tag_version but package.json says $pkg_version" >&2
             exit 1
           fi
-          echo "Publishing caselaw-ui $pkg_version"
+          echo "Publishing biss-ui $pkg_version"
 
       # No NODE_AUTH_TOKEN: the OIDC identity is the credential, and npm
       # attaches provenance automatically for trusted publishes.

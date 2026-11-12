@@ -17,9 +17,9 @@
  * assembled from independent regexes get exactly that wrong.
  */
 
-export type CleCodeLanguage = "python" | "ts" | "bash" | "env" | "json" | "plain";
+export type BissCodeLanguage = "python" | "ts" | "bash" | "env" | "json" | "plain";
 
-export type CleTokenKind =
+export type BissTokenKind =
   | "plain"
   | "comment"
   | "string"
@@ -29,12 +29,12 @@ export type CleTokenKind =
   | "decorator"
   | "key";
 
-export interface CleCodeToken {
+export interface BissCodeToken {
   text: string;
-  kind: CleTokenKind;
+  kind: BissTokenKind;
 }
 
-const KEYWORDS: Record<CleCodeLanguage, readonly string[]> = {
+const KEYWORDS: Record<BissCodeLanguage, readonly string[]> = {
   python: [
     "and", "as", "assert", "async", "await", "break", "class", "continue", "def", "del",
     "elif", "else", "except", "finally", "for", "from", "global", "if", "import", "in",
@@ -53,7 +53,7 @@ const KEYWORDS: Record<CleCodeLanguage, readonly string[]> = {
   plain: [],
 };
 
-const BUILTINS: Record<CleCodeLanguage, readonly string[]> = {
+const BUILTINS: Record<BissCodeLanguage, readonly string[]> = {
   python: ["False", "None", "True", "self", "cls", "print", "dict", "list", "str", "int"],
   ts: ["console", "null", "true", "false", "undefined", "this", "Response", "Request"],
   bash: ["npm", "pip", "node", "python", "python3", "git", "curl", "docker", "uv", "pnpm", "yarn"],
@@ -62,7 +62,7 @@ const BUILTINS: Record<CleCodeLanguage, readonly string[]> = {
   plain: [],
 };
 
-const LINE_COMMENT: Record<CleCodeLanguage, string | null> = {
+const LINE_COMMENT: Record<BissCodeLanguage, string | null> = {
   python: "#",
   bash: "#",
   env: "#",
@@ -75,7 +75,7 @@ const WORD = /[A-Za-z_$][A-Za-z0-9_$]*/y;
 const NUMBER = /\d[\d_]*(\.\d+)?([eE][+-]?\d+)?/y;
 
 /** Which language a sample is, from an explicit hint, its shape, or its label. */
-export function inferLanguage(code: string, hint?: string): CleCodeLanguage {
+export function inferLanguage(code: string, hint?: string): BissCodeLanguage {
   const explicit = normalizeHint(hint);
   if (explicit) return explicit;
 
@@ -101,7 +101,7 @@ export function inferLanguage(code: string, hint?: string): CleCodeLanguage {
   return "plain";
 }
 
-function normalizeHint(hint?: string): CleCodeLanguage | null {
+function normalizeHint(hint?: string): BissCodeLanguage | null {
   const value = (hint || "").trim().toLowerCase();
   if (["python", "py"].includes(value)) return "python";
   if (["ts", "typescript", "js", "javascript", "node"].includes(value)) return "ts";
@@ -112,7 +112,7 @@ function normalizeHint(hint?: string): CleCodeLanguage | null {
 }
 
 /** Framework labels, since a tab is usually named for the framework. */
-function labelLanguage(hint?: string): CleCodeLanguage | null {
+function labelLanguage(hint?: string): BissCodeLanguage | null {
   const value = (hint || "").trim().toLowerCase();
   if (["flask", "fastapi", "django", "http.server", "starlette"].includes(value)) return "python";
   if (["express", "fastify", "koa", "hono", "next.js", "nextjs", "deno", "bun"].includes(value)) {
@@ -121,10 +121,10 @@ function labelLanguage(hint?: string): CleCodeLanguage | null {
   return null;
 }
 
-export function highlight(code: string, language: CleCodeLanguage): CleCodeToken[] {
+export function highlight(code: string, language: BissCodeLanguage): BissCodeToken[] {
   if (language === "plain") return [{ text: code, kind: "plain" }];
 
-  const tokens: CleCodeToken[] = [];
+  const tokens: BissCodeToken[] = [];
   const keywords = new Set(KEYWORDS[language]);
   const builtins = new Set(BUILTINS[language]);
   const comment = LINE_COMMENT[language];
@@ -136,7 +136,7 @@ export function highlight(code: string, language: CleCodeLanguage): CleCodeToken
       plain = "";
     }
   };
-  const push = (text: string, kind: CleTokenKind) => {
+  const push = (text: string, kind: BissTokenKind) => {
     flush();
     tokens.push({ text, kind });
   };
