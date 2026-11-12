@@ -7,7 +7,7 @@ No repository rename, dependent-app edit, deprecation or npm publication is part
 of this change.
 
 1. Review and test this branch. Test a local `npm pack` tarball in one Vue and one
-   Svelte consumer before release; the source exports require a framework bundler.
+   Svelte consumer before release; Vue ships compiled ESM; Svelte ships standard preprocessed Svelte components.
 2. Confirm ownership/availability of the npm name `biss-ui`. If unavailable, agree
    on a scoped name before publishing; do not silently substitute a name.
 3. Configure a **separate** npm trusted publisher for the new package and the
@@ -29,5 +29,8 @@ not upgrade an existing dependency on caselaw-ui. Both stylesheets can coexist
 because their selectors and properties use separate prefixes.
 
 The old API was not an exact Bizzy match. Its components retain capabilities but
-receive the new palette and controls. App-specific grids and editors are not
-claimed as portable; see the extraction inventory before planning migration.
+receive the new palette and controls. The library includes controlled data grids, editors and sharing surfaces; the host supplies permissions, persistence and application rules.
+
+Svelte migration is intentional: replace `on:change` with `onchange`, `on:save` with `onsave`, and named slots with snippets. `children` supplies default content. Every component page lists its actual props and callbacks. Modal, ConfirmDialog and Dialog share one native dialog implementation.
+
+See [architecture](architecture.md) for compiled exports, SSR isolation and the shared token source.

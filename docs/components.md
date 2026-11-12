@@ -1,8 +1,7 @@
-# Portable Bizzy components
+# Component guide
 
-54 components are available in both Vue and Svelte. This includes 40 added in
-the expanded extraction, beyond the original 14. The inherited library remains
-available as well: **96 Vue components and 81 Svelte components in total**.
+The current library contains 130 components in each framework, all using the Bizzy design language. The live documentation site is the authoritative source-derived API reference. See [architecture](architecture.md) for package boundaries, public entry points and state ownership.
+
 
 See the [visual reference](visual-reference.md) for screenshots of every component,
 or run `npm run docs:dev` for the searchable documentation site.
@@ -41,11 +40,9 @@ or run `npm run docs:dev` for the searchable documentation site.
 
 ## Framework contracts
 
-Vue uses normal events: `@change`, `@pick`, `@close`, and named slots. The new
-40 Svelte components use Svelte 5 callback props (`onchange`, `onpick`, `onclose`)
-and snippets (`children`, `actions`, `footer`). The initial 14 and inherited
-Svelte components retain their existing `on:…` and named-slot conventions.
-The reference source links make the distinction explicit; do not mix them.
+Vue uses normal events: `@change`, `@pick`, `@close`, and named slots. All Svelte components use Svelte 5 callback props (`onchange`, `onpick`, `onclose`)
+and snippets (`children`, `actions`, `footer`). All Svelte components now use callbacks and snippets.
+The source-derived API tables show each component’s exact contract.
 
 All components expose public `BissNameProps` types in their framework entry
 point. Shared records such as `BissMenuItem`, `BissPickOption`, `BissPerson`,
@@ -111,3 +108,9 @@ The catalogs in `examples/vue/Expanded.vue` and `examples/svelte/Expanded.svelte
 show every new component with working host state. `npm run test:browser` checks
 both built catalogs at 1440 and 390 pixels, including accessibility scans of the
 menu, dialog and full expanded catalog.
+
+## Editing, collaboration and document patterns
+
+DataGrid, ColumnManager, LabelEditor and FilterBuilder provide controlled editing surfaces. SharePanel, AccessList and RoleEditor emit permission intent to the host. CommentComposer and CommentThread support discussion; TaskList, Agenda and DeadlineList cover team work. DocumentToc, DocumentCallout, Bookmark, MediaFigure and AttachmentList compose document content. SplitPane and WidgetGrid provide resizable and reorderable layouts.
+
+Use the searchable documentation site for every prop, callback, slot and screenshot.

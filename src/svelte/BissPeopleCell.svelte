@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
   import BissAvatar from './BissAvatar.svelte';
-  import type { BissPerson } from '../library-types';
+  import type { BissPerson } from '../core/types';
   let {
     people,
     empty = 'Unassigned',

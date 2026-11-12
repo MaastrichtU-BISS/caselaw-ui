@@ -9,3 +9,7 @@ artifacts/
 dist-demo-svelte/
 
 dist-docs/
+
+.svelte-kit/
+
+.impeccable/review/

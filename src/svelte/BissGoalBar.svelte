@@ -1,11 +1,15 @@
 <script lang="ts">
-  import { progressPercent } from '../portable';
-  export let value: number | null;
-  export let expected: number | undefined = undefined;
-  export let label: string;
-  export let tone = 'primary';
-  export let height = 8;
-  $: fill = progressPercent(value);
+  import { progressPercent } from '../core/format';
+  interface Props {
+    value: number | null;
+    expected?: number | undefined;
+    label: string;
+    tone?: string;
+    height?: number;
+  }
+
+  let { value, expected = undefined, label, tone = 'primary', height = 8 }: Props = $props();
+  let fill = $derived(progressPercent(value));
 </script>
 
 <div

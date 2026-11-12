@@ -10,7 +10,7 @@
 import assert from "node:assert/strict";
 import { describe, test } from "node:test";
 
-import { highlight, inferLanguage, type BissCodeToken } from "../src/highlight";
+import { highlight, inferLanguage, type BissCodeToken } from "../src/core/highlight";
 
 /** The concatenated text must always reproduce the input exactly. */
 function roundTrip(tokens: BissCodeToken[]): string {

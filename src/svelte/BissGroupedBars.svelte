@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
-  import { groupedLayout } from '../chart-layout';
-  import type { BissBarSeries } from '../library-types';
+  import { groupedLayout } from '../core/charts';
+  import type { BissBarSeries } from '../core/types';
   let {
     categories,
     series,

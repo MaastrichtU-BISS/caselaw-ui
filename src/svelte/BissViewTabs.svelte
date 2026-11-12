@@ -1,9 +1,13 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte';
-  export let items: { key: string; label: string; count?: number; disabled?: boolean }[];
-  export let value: string;
-  export let label: string;
-  const dispatch = createEventDispatcher();
+  interface Props {
+    items: { key: string; label: string; count?: number; disabled?: boolean }[];
+    value: string;
+    label: string;
+    end?: import('svelte').Snippet;
+    onchange?: (value: string) => void;
+  }
+
+  let { items, value = $bindable(), label, end, onchange }: Props = $props();
 </script>
 
 <nav class="biss-view-tabs" aria-label={label}>
@@ -11,10 +15,10 @@
       type="button"
       disabled={item.disabled}
       aria-pressed={value === item.key}
-      on:click={() => {
+      onclick={() => {
         value = item.key;
-        dispatch('change', value);
+        onchange?.(value);
       }}
       >{item.label}{#if item.count !== undefined}<small>{item.count}</small>{/if}</button
-    >{/each}<slot name="end" />
+    >{/each}{@render end?.()}
 </nav>

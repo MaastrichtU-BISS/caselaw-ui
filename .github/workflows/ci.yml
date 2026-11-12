@@ -1,0 +1,31 @@
+name: Library checks
+on:
+  pull_request:
+  push:
+    branches: [feature/biss-ui]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - run: npm run test:package
+      - run: npm run demo:build
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:browser
+      - run: npm run docs:typecheck
+      - run: npm run docs:build
+      - run: npm run docs:check
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: verification-screenshots
+          path: artifacts/

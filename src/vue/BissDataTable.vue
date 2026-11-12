@@ -1,25 +1,28 @@
 <script setup lang="ts">
-import { computed, ref, watch } from "vue";
-import type { BissTableColumn } from "../types";
+import { computed, ref, watch } from 'vue';
+import type { BissTableColumn } from '../core/types';
 
-const props = withDefaults(defineProps<{
-  columns: BissTableColumn[];
-  /* Rows are arbitrary records, so cell values stay untyped by design.
+const props = withDefaults(
+  defineProps<{
+    columns: BissTableColumn[];
+    /* Rows are arbitrary records, so cell values stay untyped by design.
      `unknown` here would reject every plain interface passed in. */
-  rows: Record<string, any>[];
-  empty?: string;
-  loading?: boolean;
-  /** Skeleton rows drawn while loading. */
-  loadingRows?: number;
-  /** Rows per page. 0 shows everything. */
-  pageSize?: number;
-}>(), {
-  loading: false,
-  loadingRows: 4,
-  pageSize: 0,
-});
+    rows: Record<string, any>[];
+    empty?: string;
+    loading?: boolean;
+    /** Skeleton rows drawn while loading. */
+    loadingRows?: number;
+    /** Rows per page. 0 shows everything. */
+    pageSize?: number;
+  }>(),
+  {
+    loading: false,
+    loadingRows: 4,
+    pageSize: 0,
+  },
+);
 
-const sortKey = ref("");
+const sortKey = ref('');
 const sortDesc = ref(false);
 const page = ref(1);
 
@@ -37,8 +40,8 @@ function isSortable(column: BissTableColumn) {
 
 function cellClass(column: BissTableColumn) {
   return [
-    column.numeric ? "biss-table-numeric" : "",
-    column.actions ? "biss-table-actions" : "",
+    column.numeric ? 'biss-table-numeric' : '',
+    column.actions ? 'biss-table-actions' : '',
   ].filter(Boolean);
 }
 
@@ -51,7 +54,7 @@ function toggleSort(column: BissTableColumn) {
   } else if (!sortDesc.value) {
     sortDesc.value = true;
   } else {
-    sortKey.value = "";
+    sortKey.value = '';
     sortDesc.value = false;
   }
   page.value = 1;
@@ -66,9 +69,10 @@ const sortedRows = computed(() => {
     if (left == null && right == null) return 0;
     if (left == null) return 1;
     if (right == null) return -1;
-    const compared = typeof left === "number" && typeof right === "number"
-      ? left - right
-      : String(left).localeCompare(String(right), undefined, { numeric: true });
+    const compared =
+      typeof left === 'number' && typeof right === 'number'
+        ? left - right
+        : String(left).localeCompare(String(right), undefined, { numeric: true });
     return sortDesc.value ? -compared : compared;
   });
 });
@@ -92,9 +96,7 @@ const visibleRows = computed(() => {
 const rangeStart = computed(() =>
   sortedRows.value.length === 0 ? 0 : (page.value - 1) * props.pageSize + 1,
 );
-const rangeEnd = computed(() =>
-  Math.min(page.value * props.pageSize, sortedRows.value.length),
-);
+const rangeEnd = computed(() => Math.min(page.value * props.pageSize, sortedRows.value.length));
 </script>
 
 <template>
@@ -107,7 +109,9 @@ const rangeEnd = computed(() =>
             :key="column.key"
             :class="cellClass(column)"
             :style="column.width ? { width: column.width } : undefined"
-            :aria-sort="sortKey === column.key ? (sortDesc ? 'descending' : 'ascending') : undefined"
+            :aria-sort="
+              sortKey === column.key ? (sortDesc ? 'descending' : 'ascending') : undefined
+            "
           >
             <button
               v-if="isSortable(column) && column.label"
@@ -117,7 +121,7 @@ const rangeEnd = computed(() =>
             >
               {{ column.label }}
               <span class="biss-table-sort-caret" :class="{ 'is-active': sortKey === column.key }">
-                {{ sortKey === column.key && sortDesc ? "▼" : "▲" }}
+                {{ sortKey === column.key && sortDesc ? '▼' : '▲' }}
               </span>
             </button>
             <template v-else>{{ column.label }}</template>
@@ -134,14 +138,14 @@ const rangeEnd = computed(() =>
         </template>
         <tr v-else-if="!sortedRows.length">
           <td :colspan="columns.length" class="biss-table-empty">
-            <slot name="empty">{{ empty || "No rows" }}</slot>
+            <slot name="empty">{{ empty || 'No rows' }}</slot>
           </td>
         </tr>
         <template v-else>
           <tr v-for="(row, index) in visibleRows" :key="String(row.id ?? row.key_id ?? index)">
             <td v-for="column in columns" :key="column.key" :class="cellClass(column)">
               <slot :name="`cell-${column.key}`" :row="row" :value="row[column.key]">
-                {{ row[column.key] ?? "" }}
+                {{ row[column.key] ?? '' }}
               </slot>
             </td>
           </tr>

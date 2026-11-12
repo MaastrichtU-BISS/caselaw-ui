@@ -1,24 +1,38 @@
 <script lang="ts">
-  /**
-   * One step of a setup sequence.
-   *
-   * `done` marks it satisfied; `current` marks the one to do next. Both are
-   * the caller's judgement rather than something derived from position,
-   * because "what is still missing" is usually read from live state — a secret
-   * that exists, a manifest that has arrived — not from how far a wizard has
-   * walked.
-   */
-  export let index: number | string;
-  export let title: string;
-  export let copy: string | undefined = undefined;
-  export let done = false;
-  export let current = false;
+  interface Props {
+    /**
+     * One step of a setup sequence.
+     *
+     * `done` marks it satisfied; `current` marks the one to do next. Both are
+     * the caller's judgement rather than something derived from position,
+     * because "what is still missing" is usually read from live state — a secret
+     * that exists, a manifest that has arrived — not from how far a wizard has
+     * walked.
+     */
+    index: number | string;
+    title: string;
+    copy?: string | undefined;
+    done?: boolean;
+    current?: boolean;
+    marker?: import('svelte').Snippet;
+    children?: import('svelte').Snippet;
+  }
+
+  let {
+    index,
+    title,
+    copy = undefined,
+    done = false,
+    current = false,
+    marker,
+    children,
+  }: Props = $props();
 </script>
 
 <li class="biss-step" class:is-done={done} class:is-current={current && !done}>
   <div class="biss-step-rail" aria-hidden="true">
     <span class="biss-step-marker">
-      <slot name="marker">{done ? "✓" : index}</slot>
+      {#if marker}{@render marker()}{:else}{done ? '✓' : index}{/if}
     </span>
     <span class="biss-step-line"></span>
   </div>
@@ -27,9 +41,9 @@
     {#if copy}
       <p class="biss-step-copy">{copy}</p>
     {/if}
-    {#if $$slots.default}
+    {#if children}
       <div class="biss-step-content">
-        <slot />
+        {@render children?.()}
       </div>
     {/if}
   </div>

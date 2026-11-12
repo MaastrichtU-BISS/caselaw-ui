@@ -1,26 +1,35 @@
 <script lang="ts">
-  import { createEventDispatcher } from "svelte";
-  import BissButton from "./BissButton.svelte";
-  import BissModal from "./BissModal.svelte";
-
-  export let title: string;
-  export let confirmLabel = "Confirm";
-  export let cancelLabel = "Cancel";
-  export let tone: "danger" | "primary" = "danger";
-  export let busy = false;
-  export let open = false;
-
-  const dispatch = createEventDispatcher<{ confirm: void }>();
+  import type { Snippet } from 'svelte';
+  import BissModal from './BissModal.svelte';
+  import BissButton from './BissButton.svelte';
+  let {
+    open = $bindable(false),
+    title,
+    confirmLabel = 'Confirm',
+    cancelLabel = 'Cancel',
+    tone = 'danger',
+    busy = false,
+    children,
+    onconfirm,
+  }: {
+    open?: boolean;
+    title: string;
+    confirmLabel?: string;
+    cancelLabel?: string;
+    tone?: 'danger' | 'primary';
+    busy?: boolean;
+    children?: Snippet;
+    onconfirm?: () => void;
+  } = $props();
 </script>
 
-<BissModal bind:open {title} size="sm" {busy} footer={true}>
-  <slot />
-  <svelte:fragment slot="footer">
-    <BissButton variant="secondary" data-biss-autofocus disabled={busy} on:click={() => (open = false)}>
-      {cancelLabel}
-    </BissButton>
-    <BissButton variant={tone === "danger" ? "danger" : "primary"} disabled={busy} on:click={() => dispatch("confirm")}>
-      {busy ? "Working..." : confirmLabel}
-    </BissButton>
-  </svelte:fragment>
-</BissModal>
+<BissModal bind:open {title} size="sm" {busy}
+  >{@render children?.()}{#snippet footer()}<BissButton
+      variant="secondary"
+      data-biss-autofocus
+      disabled={busy}
+      onclick={() => (open = false)}>{cancelLabel}</BissButton
+    ><BissButton variant={tone} disabled={busy} onclick={() => onconfirm?.()}
+      >{confirmLabel}</BissButton
+    >{/snippet}</BissModal
+>

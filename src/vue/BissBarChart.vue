@@ -1,30 +1,35 @@
 <script setup lang="ts">
-import { computed } from "vue";
-import type { BissChartPoint } from "../types";
+import { computed } from 'vue';
+import type { BissChartPoint } from '../core/types';
 
-const props = withDefaults(defineProps<{
-  points: BissChartPoint[];
-  /** Legend label for the main series. */
-  seriesLabel?: string;
-  /** Legend label for the highlighted sub-series (drawn at the base of each bar). */
-  compareLabel?: string;
-}>(), {
-  seriesLabel: "Requests",
-});
+const props = withDefaults(
+  defineProps<{
+    points: BissChartPoint[];
+    /** Legend label for the main series. */
+    seriesLabel?: string;
+    /** Legend label for the highlighted sub-series (drawn at the base of each bar). */
+    compareLabel?: string;
+  }>(),
+  {
+    seriesLabel: 'Requests',
+  },
+);
 
 const max = computed(() => Math.max(1, ...props.points.map((point) => point.value)));
 
-const bars = computed(() => props.points.map((point) => ({
-  ...point,
-  height: `${Math.max(point.value > 0 ? 3 : 0, Math.round((point.value / max.value) * 100))}%`,
-  compareHeight: point.compare
-    ? `${Math.max(3, Math.round((point.compare / max.value) * 100))}%`
-    : "0%",
-})));
+const bars = computed(() =>
+  props.points.map((point) => ({
+    ...point,
+    height: `${Math.max(point.value > 0 ? 3 : 0, Math.round((point.value / max.value) * 100))}%`,
+    compareHeight: point.compare
+      ? `${Math.max(3, Math.round((point.compare / max.value) * 100))}%`
+      : '0%',
+  })),
+);
 
-const firstLabel = computed(() => props.points[0]?.label || "");
-const midLabel = computed(() => props.points[Math.floor(props.points.length / 2)]?.label || "");
-const lastLabel = computed(() => props.points[props.points.length - 1]?.label || "");
+const firstLabel = computed(() => props.points[0]?.label || '');
+const midLabel = computed(() => props.points[Math.floor(props.points.length / 2)]?.label || '');
+const lastLabel = computed(() => props.points[props.points.length - 1]?.label || '');
 
 /* The peak, so the bars mean a number rather than a shape. Without it a chart
    of one request and a chart of ten thousand are the same picture. */
@@ -40,7 +45,11 @@ const empty = computed(() => total.value === 0);
       <span>0</span>
     </div>
 
-    <div class="biss-chart-plot" role="img" :aria-label="`${seriesLabel} over ${points.length} buckets`">
+    <div
+      class="biss-chart-plot"
+      role="img"
+      :aria-label="`${seriesLabel} over ${points.length} buckets`"
+    >
       <div
         v-for="(bar, index) in bars"
         :key="index"
@@ -48,7 +57,11 @@ const empty = computed(() => total.value === 0);
         :title="`${bar.label}: ${bar.value}${bar.compare ? ` (${bar.compare} ${compareLabel || 'flagged'})` : ''}`"
       >
         <div class="biss-chart-bar-fill" :style="{ height: bar.height }">
-          <div v-if="bar.compare" class="biss-chart-bar-denied" :style="{ height: bar.compareHeight }" />
+          <div
+            v-if="bar.compare"
+            class="biss-chart-bar-denied"
+            :style="{ height: bar.compareHeight }"
+          />
         </div>
       </div>
     </div>
@@ -60,7 +73,9 @@ const empty = computed(() => total.value === 0);
       <span>{{ lastLabel }}</span>
     </div>
     <figcaption class="biss-chart-legend">
-      <span class="biss-chart-legend-item"><span class="biss-chart-swatch" />{{ seriesLabel }}</span>
+      <span class="biss-chart-legend-item"
+        ><span class="biss-chart-swatch" />{{ seriesLabel }}</span
+      >
       <span v-if="compareLabel" class="biss-chart-legend-item">
         <span class="biss-chart-swatch biss-chart-swatch-denied" />{{ compareLabel }}
       </span>

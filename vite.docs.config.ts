@@ -4,6 +4,7 @@ import { svelte } from '@sveltejs/vite-plugin-svelte';
 import { fileURLToPath } from 'node:url';
 export default defineConfig({
   base: './',
+  publicDir: '../public',
   plugins: [vue(), svelte()],
   root: 'docs-site',
   build: {

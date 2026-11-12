@@ -1,9 +1,9 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
   import BissIcon from './BissIcon.svelte';
-  import type { BissIconName } from '../icon-names';
-  import { monthGrid } from '../date-pick';
-  import type { BissCalendarItem } from '../library-types';
+  import type { BissIconName } from '../core/icon-names';
+  import { monthGrid } from '../core/date';
+  import type { BissCalendarItem } from '../core/types';
   let {
     month,
     items,

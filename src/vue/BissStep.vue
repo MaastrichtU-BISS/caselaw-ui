@@ -7,23 +7,26 @@
  * "what is still missing" is usually read from live state — a secret that
  * exists, a manifest that has arrived — not from how far a wizard has walked.
  */
-withDefaults(defineProps<{
-  index: number | string;
-  title: string;
-  copy?: string;
-  done?: boolean;
-  current?: boolean;
-}>(), {
-  done: false,
-  current: false,
-});
+withDefaults(
+  defineProps<{
+    index: number | string;
+    title: string;
+    copy?: string;
+    done?: boolean;
+    current?: boolean;
+  }>(),
+  {
+    done: false,
+    current: false,
+  },
+);
 </script>
 
 <template>
   <li class="biss-step" :class="{ 'is-done': done, 'is-current': current && !done }">
     <div class="biss-step-rail" aria-hidden="true">
       <span class="biss-step-marker">
-        <slot name="marker">{{ done ? "✓" : index }}</slot>
+        <slot name="marker">{{ done ? '✓' : index }}</slot>
       </span>
       <span class="biss-step-line" />
     </div>

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, ref, watch, onMounted, onBeforeUnmount, nextTick, useId } from 'vue';
 import BissGoalBar from './BissGoalBar.vue';
 const {
   title,
@@ -29,8 +28,7 @@ const {
     <p v-if="status">{{ status }}</p>
     <BissGoalBar :value="progress" :expected="expected" :label="label" :tone="tone" />
     <footer>
-      <span>{{ progress === null ? '—' : Math.round(progress * 100) + '%' }}</span
-      ><slot />
+      <span>{{ progress === null ? '—' : Math.round(progress * 100) + '%' }}</span><slot />
     </footer>
   </article>
 </template>

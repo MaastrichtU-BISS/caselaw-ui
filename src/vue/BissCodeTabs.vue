@@ -6,10 +6,9 @@
  * pairing is always the same and getting it wrong — copy that copies the
  * inactive sample, tabs that do not survive a re-render — is easy and quiet.
  */
-import { computed, ref } from "vue";
-import { highlight, inferLanguage } from "../highlight";
-import type { BissCodeSample } from "../types";
-
+import { computed, ref } from 'vue';
+import { highlight, inferLanguage } from '../core/highlight';
+import type { BissCodeSample } from '../core/types';
 
 const props = defineProps<{ samples: BissCodeSample[] }>();
 
@@ -19,7 +18,7 @@ const props = defineProps<{ samples: BissCodeSample[] }>();
  * one set of instructions is the kind of small friction documentation is
  * supposed to remove.
  */
-const activeIndex = defineModel<number>("activeIndex", { default: 0 });
+const activeIndex = defineModel<number>('activeIndex', { default: 0 });
 const active = computed(() => props.samples[activeIndex.value] || props.samples[0]);
 const tokens = computed(() => {
   const sample = active.value;
@@ -33,7 +32,7 @@ let timer: ReturnType<typeof setTimeout> | undefined;
 async function copy() {
   try {
     // Reads through `active`, so it can never copy a sample that is not shown.
-    await navigator.clipboard.writeText(active.value?.code || "");
+    await navigator.clipboard.writeText(active.value?.code || '');
   } catch {
     return;
   }
@@ -61,7 +60,7 @@ async function copy() {
         </button>
       </div>
       <button type="button" class="biss-code-copy" @click="copy">
-        {{ copied ? "Copied" : "Copy" }}
+        {{ copied ? 'Copied' : 'Copy' }}
       </button>
     </div>
     <pre class="biss-code-body"><span

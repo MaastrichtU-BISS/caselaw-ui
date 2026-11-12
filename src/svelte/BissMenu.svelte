@@ -1,9 +1,9 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
-  import { floatPanel, listKeys, closePopover } from '../interactions';
+  import { floatPanel, closePopover } from '../core/dom';
   import BissIcon from './BissIcon.svelte';
-  import type { BissIconName } from '../icon-names';
-  import type { BissMenuItem } from '../library-types';
+  import type { BissIconName } from '../core/icon-names';
+  import type { BissMenuItem } from '../core/types';
 
   let {
     label,

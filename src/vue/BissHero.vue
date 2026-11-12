@@ -10,7 +10,7 @@
  * `align="start"` exists for pages that sit inside a console shell, where a
  * centred title would fight the left-aligned content under it.
  */
-import BissHeroPill from "./BissHeroPill.vue";
+import BissHeroPill from './BissHeroPill.vue';
 
 withDefaults(
   defineProps<{
@@ -19,9 +19,9 @@ withDefaults(
     subtitle?: string;
     /** Short labels above the title — what this product covers, at a glance. */
     pills?: string[];
-    align?: "center" | "start";
+    align?: 'center' | 'start';
   }>(),
-  { align: "center" },
+  { align: 'center' },
 );
 </script>
 

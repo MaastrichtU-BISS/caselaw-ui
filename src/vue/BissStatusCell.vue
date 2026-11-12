@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, ref, watch, onMounted, onBeforeUnmount, nextTick, useId } from 'vue';
-
 const {
   label,
   color = 'var(--biss-primary)',

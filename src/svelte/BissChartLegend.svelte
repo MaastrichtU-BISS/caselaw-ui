@@ -1,6 +1,10 @@
 <script lang="ts">
-  export let items: { label: string; color: string; dashed?: boolean }[];
-  export let label: string;
+  interface Props {
+    items: { label: string; color: string; dashed?: boolean }[];
+    label: string;
+  }
+
+  let { items, label }: Props = $props();
 </script>
 
 <ul class="biss-chart-legend" aria-label={label}>

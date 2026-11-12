@@ -14,8 +14,7 @@ const emit = defineEmits<{ save: []; discard: [] }>();
 </script>
 <template>
   <div v-if="show" class="biss-savebar" role="region" :aria-label="note" :aria-busy="saving">
-    <span class="biss-grow" role="status">{{ error || note }}</span
-    ><button
+    <span class="biss-grow" role="status">{{ error || note }}</span><button
       type="button"
       class="biss-button biss-button-ghost"
       :disabled="saving"

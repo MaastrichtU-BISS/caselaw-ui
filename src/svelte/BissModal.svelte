@@ -1,138 +1,35 @@
 <script lang="ts">
-  import { tick, onDestroy } from "svelte";
-
-  export let title: string;
-  export let subtitle: string | undefined = undefined;
-  export let size: "sm" | "md" | "lg" = "md";
-  /** Blocks backdrop and escape dismissal while a request is in flight. */
-  export let busy = false;
-  export let open = false;
-  /** Defaults to "was the slot given". A wrapper forwards unconditionally. */
-  export let footer: boolean | undefined = undefined;
-
-  let panel: HTMLElement | null = null;
-  let lastFocused: HTMLElement | null = null;
-
-  $: showFooter = footer ?? Boolean($$slots.footer);
-
-  function close() {
-    if (busy) return;
-    open = false;
-  }
-
-  function onKeydown(event: KeyboardEvent) {
-    if (event.key === "Escape") {
-      event.stopPropagation();
-      close();
-      return;
-    }
-    if (event.key !== "Tab" || !panel) return;
-    const focusable = panel.querySelectorAll<HTMLElement>(
-      'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
-    );
-    const first = focusable[0];
-    const last = focusable[focusable.length - 1];
-    if (!first || !last) return;
-    if (event.shiftKey && document.activeElement === first) {
-      event.preventDefault();
-      last.focus();
-    } else if (!event.shiftKey && document.activeElement === last) {
-      event.preventDefault();
-      first.focus();
-    }
-  }
-
-  function onBackdrop(event: MouseEvent) {
-    if (event.target === event.currentTarget) close();
-  }
-
-  async function sync(isOpen: boolean) {
-    if (typeof document === "undefined") return;
-    if (isOpen) {
-      lastFocused = document.activeElement as HTMLElement | null;
-      document.body.style.overflow = "hidden";
-      await tick();
-      // An explicit target first. Falling back to "first focusable in DOM
-      // order" lands on the close button in any dialog without a form field,
-      // which for a destructive confirmation means the dismiss control is
-      // highlighted instead of the safe one.
-      const target =
-        panel?.querySelector<HTMLElement>("[data-biss-autofocus]") ||
-        panel?.querySelector<HTMLElement>(
-          'input:not([type="checkbox"]):not([disabled]), textarea:not([disabled]), select:not([disabled]), button:not([disabled])',
-        );
-      (target || panel)?.focus();
-    } else {
-      document.body.style.overflow = "";
-      lastFocused?.focus();
-      lastFocused = null;
-    }
-  }
-
-  $: void sync(open);
-
-  /**
-   * Moves the backdrop to the end of <body>.
-   *
-   * Fixed positioning covers the viewport wherever the node is mounted, which
-   * is why this seemed unnecessary, but z-index is resolved inside the nearest
-   * ancestor stacking context, not against the page. Mounted inside anything
-   * that opens one, and a sticky sidebar or a transformed panel is enough, the
-   * dialog is confined to that ancestor's layer: it paints under the fixed top
-   * and bottom bars, which then stay bright while everything else dims, and
-   * under whatever content the page paints after it.
-   *
-   * At the end of body there is no ancestor left to be trapped by.
-   */
-  function portal(node: HTMLElement) {
-    document.body.appendChild(node);
-    return {
-      destroy() {
-        node.parentNode?.removeChild(node);
-      },
-    };
-  }
-
-  onDestroy(() => {
-    if (typeof document !== "undefined") document.body.style.overflow = "";
-  });
+  import type { Snippet } from 'svelte';
+  import BissDialog from './BissDialog.svelte';
+  let {
+    open = $bindable(false),
+    title,
+    subtitle,
+    size = 'md',
+    busy = false,
+    children,
+    footer,
+    onclose,
+  }: {
+    open?: boolean;
+    title: string;
+    subtitle?: string;
+    size?: 'sm' | 'md' | 'lg';
+    busy?: boolean;
+    children?: Snippet;
+    footer?: Snippet;
+    onclose?: () => void;
+  } = $props();
 </script>
 
-{#if open}
-  <div
-    use:portal
-    class="biss-modal-backdrop"
-    on:keydown={onKeydown}
-    on:mousedown={onBackdrop}
-    role="presentation"
-  >
-    <div
-      bind:this={panel}
-      class="biss-modal {size === 'md' ? '' : `biss-modal-${size}`}"
-      role="dialog"
-      aria-modal="true"
-      aria-label={title}
-      tabindex="-1"
-    >
-      <header class="biss-modal-header">
-        <div>
-          <h2 class="biss-modal-title">{title}</h2>
-          {#if subtitle}
-            <p class="biss-modal-subtitle">{subtitle}</p>
-          {/if}
-        </div>
-        <button type="button" class="biss-modal-close" aria-label="Close dialog" disabled={busy} on:click={close}>
-          &times;
-        </button>
-      </header>
-      <div class="biss-modal-body">
-        <slot />
-      </div>
-      {#if showFooter}
-        <footer class="biss-modal-footer">
-          <slot name="footer" />
-        </footer>
-      {/if}
-    </div>
-  </div>
-{/if}
+<BissDialog
+  {open}
+  {title}
+  description={subtitle}
+  width={size === 'sm' ? 440 : size === 'lg' ? 760 : 520}
+  {busy}
+  onclose={() => {
+    open = false;
+    onclose?.();
+  }}>{@render children?.()}{#snippet actions()}{@render footer?.()}{/snippet}</BissDialog
+>

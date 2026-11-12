@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
   import BissIcon from './BissIcon.svelte';
-  import type { BissIconName } from '../icon-names';
+  import type { BissIconName } from '../core/icon-names';
   let {
     label,
     count = undefined,

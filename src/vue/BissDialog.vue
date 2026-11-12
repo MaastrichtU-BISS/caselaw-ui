@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { computed, ref, watch, onMounted, onBeforeUnmount, nextTick, useId } from 'vue';
 import BissIcon from './BissIcon.vue';
-import type { BissIconName } from '../icon-names';
-import { modal } from '../interactions';
+import type { BissIconName } from '../core/icon-names';
+import { modal } from '../core/dom';
 import { actionDirective } from './actions';
 const {
   open = false,

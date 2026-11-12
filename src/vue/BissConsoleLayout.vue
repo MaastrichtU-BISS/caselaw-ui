@@ -25,67 +25,70 @@
  * Omit `nav` and the sidebar disappears, at which point the account falls back
  * to the top bar — a full-width page still has to say who is signed in.
  */
-import { computed, useSlots } from "vue";
-import type { BissServiceIconName } from "../icons";
-import type { BissLink } from "../tokens";
-import type { BissConsoleUser, BissCrumb } from "../types";
-import BissAppShell from "./BissAppShell.vue";
-import BissConsoleHeader from "./BissConsoleHeader.vue";
-import BissSidebarUser from "./BissSidebarUser.vue";
+import { computed, useSlots } from 'vue';
+import type { BissServiceIconName } from '../core/service-icons';
+import type { BissLink } from '../tokens';
+import type { BissConsoleUser, BissCrumb } from '../core/types';
+import BissAppShell from './BissAppShell.vue';
+import BissConsoleHeader from './BissConsoleHeader.vue';
+import BissSidebarUser from './BissSidebarUser.vue';
 
-const props = withDefaults(defineProps<{
-  brand?: string;
-  mark?: string;
-  icon?: BissServiceIconName;
-  iconLabel?: string;
-  favicon?: boolean;
-  href?: string;
-  topLinks?: BissLink[];
-  /** Close the console with the shared site footer. */
-  footer?: boolean;
-  footerText?: string;
-  footerLinks?: BissLink[];
-  /** Hand the content area the whole surface. See BissAppShell. */
-  fluid?: boolean;
-  /** Heading. Omit to render content with no header at all. */
-  title?: string;
-  subtitle?: string;
-  crumbs?: BissCrumb[];
-  user?: BissConsoleUser;
-  /** Passed through to the account block, making the identity a link. */
-  accountHref?: string;
-  /** Render the sign-out control in the account block. */
-  signOut?: boolean;
-  signOutLabel?: string;
-  confirmSignOut?: boolean;
-  signOutTitle?: string;
-  signOutCopy?: string;
-  busy?: boolean;
-}>(), {
-  // Declared here, not left to BissSidebarUser's own defaults: binding a prop
-  // the wrapper never sets passes `undefined` down, and the child's default
-  // does not reliably win against an explicitly-passed undefined. Relying on
-  // it turned the sign-out confirmation off in every console that used the
-  // layout, while working fine for anyone using BissSidebarUser directly.
-  signOut: false,
-  signOutLabel: "Sign out",
-  confirmSignOut: true,
-  signOutTitle: "Sign out?",
-  busy: false,
-  brand: "Case Law Explorer",
-  mark: "CLE",
-  favicon: true,
-  href: "/",
-  topLinks: () => [],
-  footer: false,
-  footerText: "Managed by BISS Institute.",
-  footerLinks: () => [],
-  fluid: false,
-});
+const props = withDefaults(
+  defineProps<{
+    brand?: string;
+    mark?: string;
+    icon?: BissServiceIconName;
+    iconLabel?: string;
+    favicon?: boolean;
+    href?: string;
+    topLinks?: BissLink[];
+    /** Close the console with the shared site footer. */
+    footer?: boolean;
+    footerText?: string;
+    footerLinks?: BissLink[];
+    /** Hand the content area the whole surface. See BissAppShell. */
+    fluid?: boolean;
+    /** Heading. Omit to render content with no header at all. */
+    title?: string;
+    subtitle?: string;
+    crumbs?: BissCrumb[];
+    user?: BissConsoleUser;
+    /** Passed through to the account block, making the identity a link. */
+    accountHref?: string;
+    /** Render the sign-out control in the account block. */
+    signOut?: boolean;
+    signOutLabel?: string;
+    confirmSignOut?: boolean;
+    signOutTitle?: string;
+    signOutCopy?: string;
+    busy?: boolean;
+  }>(),
+  {
+    // Declared here, not left to BissSidebarUser's own defaults: binding a prop
+    // the wrapper never sets passes `undefined` down, and the child's default
+    // does not reliably win against an explicitly-passed undefined. Relying on
+    // it turned the sign-out confirmation off in every console that used the
+    // layout, while working fine for anyone using BissSidebarUser directly.
+    signOut: false,
+    signOutLabel: 'Sign out',
+    confirmSignOut: true,
+    signOutTitle: 'Sign out?',
+    busy: false,
+    brand: 'Workspace',
+    mark: 'B',
+    favicon: true,
+    href: '/',
+    topLinks: () => [],
+    footer: false,
+    footerText: 'Managed by BISS Institute.',
+    footerLinks: () => [],
+    fluid: false,
+  },
+);
 
 const emit = defineEmits<{ signOut: [] }>();
 const slots = useSlots();
-const hasSidebar = computed(() => Boolean(slots.nav || slots["nav-footer"]));
+const hasSidebar = computed(() => Boolean(slots.nav || slots['nav-footer']));
 const showHeader = computed(() => Boolean(props.title || props.crumbs?.length || slots.actions));
 </script>
 
@@ -107,7 +110,9 @@ const showHeader = computed(() => Boolean(props.title || props.crumbs?.length ||
 
     <template #topbar-actions>
       <!-- Only when there is no sidebar to put it in. -->
-      <span v-if="user && !hasSidebar" class="biss-topbar-account">{{ user.email || user.name }}</span>
+      <span v-if="user && !hasSidebar" class="biss-topbar-account">{{
+        user.email || user.name
+      }}</span>
       <slot name="topbar-actions" />
       <slot v-if="!hasSidebar" name="user-actions" />
     </template>
@@ -137,12 +142,7 @@ const showHeader = computed(() => Boolean(props.title || props.crumbs?.length ||
 
     <template v-if="$slots.footer" #footer><slot name="footer" /></template>
 
-    <BissConsoleHeader
-      v-if="showHeader"
-      :title="title || ''"
-      :subtitle="subtitle"
-      :crumbs="crumbs"
-    >
+    <BissConsoleHeader v-if="showHeader" :title="title || ''" :subtitle="subtitle" :crumbs="crumbs">
       <template v-if="$slots.actions" #actions><slot name="actions" /></template>
       <slot name="tabs" />
     </BissConsoleHeader>

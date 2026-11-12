@@ -1,8 +1,8 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
   import BissIcon from './BissIcon.svelte';
-  import type { BissIconName } from '../icon-names';
-  import { modal } from '../interactions';
+  import type { BissIconName } from '../core/icon-names';
+  import { modal } from '../core/dom';
 
   let {
     open = $bindable(false),

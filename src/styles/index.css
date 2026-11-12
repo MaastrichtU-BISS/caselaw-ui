@@ -1,9 +1,10 @@
-/* Order matters: console.css refines base rules such as .biss-button and
-   .biss-table, so it must cascade after them. */
-@import "./tokens.css";
-@import "./base.css";
-@import "./console.css";
+/* One visual system. Component families share the same Bizzy tokens. */
+@import './tokens.css';
+@import './foundation.css';
+@import './forms.css';
+@import './layout.css';
+@import './content.css';
+@import './bizzy.css';
+@import './library.css';
 
-@import "./bizzy.css";
-
-@import "./library.css";
+@import './editors.css';

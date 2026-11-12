@@ -1,12 +1,25 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte';
-  export let show: boolean;
-  export let saving = false;
-  export let error: string | undefined = undefined;
-  export let note = 'Unsaved changes';
-  export let saveLabel = 'Save';
-  export let discardLabel = 'Discard';
-  const dispatch = createEventDispatcher();
+  interface Props {
+    show: boolean;
+    saving?: boolean;
+    error?: string | undefined;
+    note?: string;
+    saveLabel?: string;
+    discardLabel?: string;
+    onsave?: () => void;
+    ondiscard?: () => void;
+  }
+
+  let {
+    show,
+    saving = false,
+    error = undefined,
+    note = 'Unsaved changes',
+    saveLabel = 'Save',
+    discardLabel = 'Discard',
+    onsave,
+    ondiscard,
+  }: Props = $props();
 </script>
 
 {#if show}<div class="biss-savebar" role="region" aria-label={note} aria-busy={saving}>
@@ -14,8 +27,8 @@
       type="button"
       class="biss-button biss-button-ghost"
       disabled={saving}
-      on:click={() => dispatch('discard')}>{discardLabel}</button
-    ><button type="button" class="biss-button" disabled={saving} on:click={() => dispatch('save')}
+      onclick={() => ondiscard?.()}>{discardLabel}</button
+    ><button type="button" class="biss-button" disabled={saving} onclick={() => onsave?.()}
       >{saveLabel}</button
     >
   </div>{/if}

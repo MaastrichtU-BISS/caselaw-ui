@@ -4,19 +4,22 @@
  * right. A bare <pre> leaves the reader working out which language they are
  * looking at and whether it can be copied.
  */
-import { computed, ref } from "vue";
-import { highlight, inferLanguage, type BissCodeLanguage } from "../highlight";
+import { computed, ref } from 'vue';
+import { highlight, inferLanguage, type BissCodeLanguage } from '../core/highlight';
 
-const props = withDefaults(defineProps<{
-  code: string;
-  /** Shown top-left. A language, a filename, or "Terminal". */
-  label?: string;
-  copyable?: boolean;
-  /** Overrides detection. `plain` turns highlighting off. */
-  language?: BissCodeLanguage | string;
-}>(), {
-  copyable: true,
-});
+const props = withDefaults(
+  defineProps<{
+    code: string;
+    /** Shown top-left. A language, a filename, or "Terminal". */
+    label?: string;
+    copyable?: boolean;
+    /** Overrides detection. `plain` turns highlighting off. */
+    language?: BissCodeLanguage | string;
+  }>(),
+  {
+    copyable: true,
+  },
+);
 
 // Detected from the code's own shape first, then the label — an install
 // sample is labelled with its framework but is a shell command.
@@ -44,7 +47,7 @@ async function copy() {
     <div v-if="label || copyable" class="biss-code-header">
       <span class="biss-code-label">{{ label }}</span>
       <button v-if="copyable" type="button" class="biss-code-copy" @click="copy">
-        {{ copied ? "Copied" : "Copy" }}
+        {{ copied ? 'Copied' : 'Copy' }}
       </button>
     </div>
     <pre class="biss-code-body"><span

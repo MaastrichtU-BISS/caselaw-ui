@@ -1,0 +1,529 @@
+/* The application frame follows Bizzy's warm rail and white working surface. */
+.biss-app-shell,
+.biss-grid-shell {
+  min-height: 100dvh;
+  background: var(--biss-surface-muted);
+  color: var(--biss-text);
+  font: 14px/1.55 var(--biss-font-family);
+}
+.biss-fixed-topbar,
+.biss-fixed-bottombar {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 50;
+  background: var(--biss-card);
+  border-bottom: 1px solid var(--biss-border);
+  color: var(--biss-text);
+  font: 13px/1.5 var(--biss-font-family);
+}
+.biss-fixed-bottombar {
+  inset: auto 0 0;
+  border-bottom: 0;
+  border-top: 1px solid var(--biss-border);
+}
+.biss-bar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: var(--biss-topbar-height);
+  padding: 0 20px;
+  max-width: var(--biss-bar-max);
+  margin: auto;
+}
+.biss-footer-inner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  min-height: var(--biss-bottombar-height);
+  padding: 12px 20px;
+  font-size: 12px;
+  color: var(--biss-muted);
+}
+.biss-footer-inner a {
+  color: var(--biss-primary);
+  text-decoration: none;
+}
+.biss-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  color: var(--biss-text);
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+}
+.biss-brand-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 44vw;
+}
+.biss-brand-mark {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--biss-border);
+  border-radius: 7px;
+  background: var(--biss-surface-subtle);
+  font: 600 12px var(--biss-font-family);
+  color: var(--biss-primary);
+}
+.biss-service-icon {
+  height: 18px;
+  width: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.biss-topbar-right,
+.biss-topbar-actions,
+.biss-link-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+.biss-topbar-right {
+  margin-left: auto;
+}
+.biss-link-row {
+  flex-wrap: wrap;
+}
+.biss-link-row a {
+  font-size: 13px;
+  color: var(--biss-muted);
+  text-decoration: none;
+}
+.biss-link-row a:hover {
+  color: var(--biss-text);
+}
+.biss-page {
+  max-width: var(--biss-page-max);
+  margin: auto;
+  padding: calc(var(--biss-topbar-height) + 24px) 24px calc(var(--biss-bottombar-height) + 24px);
+}
+.biss-app-body {
+  display: flex;
+  align-items: stretch;
+  min-height: 100dvh;
+  padding-top: var(--biss-topbar-height);
+}
+.biss-app-sidebar {
+  position: sticky;
+  top: var(--biss-topbar-height);
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 var(--biss-sidebar-width);
+  width: var(--biss-sidebar-width);
+  height: calc(100dvh - var(--biss-topbar-height));
+  background: var(--biss-surface-muted);
+  border-right: 1px solid var(--biss-border);
+  z-index: 4;
+}
+.biss-sidebar-body {
+  overflow: auto;
+  flex: 1;
+  min-height: 0;
+  padding: 18px 12px;
+}
+.biss-sidebar-footer {
+  padding: 12px;
+  border-top: 1px solid var(--biss-border);
+}
+.biss-app-main {
+  flex: 1;
+  min-width: 0;
+  padding: 16px;
+}
+.biss-app-main-inner {
+  max-width: var(--biss-console-max);
+  min-height: calc(100dvh - var(--biss-topbar-height) - 32px);
+  margin: auto;
+  padding: 22px;
+  background: var(--biss-card);
+  border: 1px solid var(--biss-border);
+  border-radius: 12px;
+}
+.biss-app-main.is-fluid {
+  padding: 0;
+}
+.biss-app-main.is-fluid .biss-app-main-inner {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  max-width: none;
+}
+.biss-app-shell.has-footer .biss-app-main,
+.biss-app-shell.has-footer .biss-app-sidebar {
+  padding-bottom: var(--biss-bottombar-height);
+}
+.biss-topbar-account {
+  color: var(--biss-muted);
+  font-size: 13px;
+}
+.biss-nav-section {
+  margin-bottom: 20px;
+}
+.biss-nav-heading {
+  font: 500 11.5px/1.5 var(--biss-font-family);
+  color: var(--biss-muted);
+  padding: 0 10px;
+  margin: 0 0 6px;
+  text-transform: none;
+  letter-spacing: normal;
+}
+.biss-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 32px;
+  padding: 5px 10px;
+  border-radius: 7px;
+  color: var(--biss-muted);
+  font: 400 13px/1.5 var(--biss-font-family);
+  text-decoration: none;
+}
+.biss-nav-item:hover {
+  background: var(--biss-hover);
+  color: var(--biss-text);
+}
+.biss-nav-item.is-active {
+  background: var(--biss-info-bg);
+  color: var(--biss-primary);
+  font-weight: 500;
+}
+.biss-nav-item-icon {
+  display: flex;
+  flex: none;
+}
+.biss-nav-item-icon svg {
+  width: 15px;
+  height: 15px;
+}
+.biss-nav-item-label {
+  flex: 1;
+  min-width: 0;
+}
+.biss-nav-item-meta {
+  font-size: 12px;
+  color: var(--biss-muted);
+}
+.biss-nav-empty {
+  font-size: 13px;
+  color: var(--biss-muted);
+  padding: 8px 10px;
+}
+.biss-sidebar-resizer,
+.biss-dock-resizer {
+  position: absolute;
+  inset: 0 -4px 0 auto;
+  z-index: 3;
+  width: 9px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: col-resize;
+  touch-action: none;
+}
+.biss-sidebar-resizer::after {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 4px;
+  width: 1px;
+  background: var(--biss-primary);
+  opacity: 0;
+}
+.biss-sidebar-resizer:hover::after,
+.biss-sidebar-resizer:focus-visible::after,
+.biss-sidebar-resizer.is-dragging::after {
+  opacity: 1;
+}
+.biss-sidebar-collapse {
+  position: absolute;
+  top: 12px;
+  right: -11px;
+  z-index: 4;
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border: 1px solid var(--biss-border);
+  border-radius: 6px;
+  background: var(--biss-card);
+  color: var(--biss-muted);
+  cursor: pointer;
+}
+.biss-sidebar-collapse svg {
+  width: 14px;
+  height: 14px;
+}
+.biss-sidebar-toggle,
+.biss-sidebar-scrim {
+  display: none;
+}
+.biss-sidebar-user {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  color: var(--biss-text);
+  font: 13px/1.45 var(--biss-font-family);
+}
+.biss-sidebar-user-identity {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  flex: 1;
+  text-decoration: none;
+  color: inherit;
+  border: 0;
+  background: transparent;
+  padding: 4px;
+  cursor: pointer;
+  text-align: start;
+}
+.biss-sidebar-user-avatar {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--biss-info-bg);
+  color: var(--biss-primary);
+  font: 600 11px var(--biss-font-family);
+}
+.biss-sidebar-user-text {
+  min-width: 0;
+  flex: 1;
+}
+.biss-sidebar-user-name {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.biss-sidebar-user-email {
+  font-size: 12px;
+  color: var(--biss-muted);
+}
+.biss-sidebar-user-chevron {
+  height: 14px;
+  width: 14px;
+  color: var(--biss-muted);
+}
+.biss-sidebar-user-actions {
+  display: flex;
+  gap: 6px;
+}
+.biss-user-menu {
+  position: fixed;
+  z-index: 100;
+  padding: 6px;
+  border: 1px solid var(--biss-border);
+  border-radius: 12px;
+  background: var(--biss-card);
+  box-shadow: var(--biss-popover-shadow);
+  font: 13px/1.5 var(--biss-font-family);
+  color: var(--biss-text);
+}
+.biss-user-menu-email {
+  padding: 7px 9px;
+  font-size: 12px;
+  color: var(--biss-muted);
+  overflow-wrap: anywhere;
+}
+.biss-user-menu-item {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  width: 100%;
+  padding: 7px 9px;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--biss-text);
+  text-decoration: none;
+  font: 13px var(--biss-font-family);
+  cursor: pointer;
+}
+.biss-user-menu-item svg {
+  width: 15px;
+  height: 15px;
+}
+.biss-user-menu-item:hover {
+  background: var(--biss-hover);
+}
+.biss-user-menu-separator {
+  border: 0;
+  border-top: 1px solid var(--biss-border);
+  margin: 5px -6px;
+}
+.biss-tabs {
+  display: flex;
+  gap: 20px;
+  border-bottom: 1px solid var(--biss-border);
+  overflow-x: auto;
+}
+.biss-tab {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  gap: 6px;
+  padding: 10px 0;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: var(--biss-muted);
+  font: 500 13px var(--biss-font-family);
+  text-decoration: none;
+  cursor: pointer;
+}
+.biss-tab.is-active {
+  border-bottom-color: var(--biss-primary);
+  color: var(--biss-primary);
+}
+.biss-dock-layout {
+  display: flex;
+  min-width: 0;
+  min-height: 0;
+}
+.biss-dock-content {
+  flex: 1;
+  min-width: 0;
+}
+.biss-dock {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 var(--biss-dock-width, 380px);
+  width: var(--biss-dock-width, 380px);
+  border-left: 1px solid var(--biss-border);
+  background: var(--biss-card);
+}
+.biss-dock-header,
+.biss-dock-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--biss-border);
+}
+.biss-dock-body {
+  padding: 16px;
+  overflow: auto;
+  flex: 1;
+}
+.biss-dock-footer {
+  border: 0;
+  border-top: 1px solid var(--biss-border);
+}
+.biss-dock-scrim {
+  display: none;
+}
+@media (min-width: 961px) {
+  .biss-app-shell.is-sidebar-collapsed .biss-app-sidebar {
+    flex-basis: 0;
+    width: 0;
+    border: 0;
+  }
+  .biss-app-shell.is-sidebar-collapsed .biss-sidebar-body,
+  .biss-app-shell.is-sidebar-collapsed .biss-sidebar-footer,
+  .biss-app-shell.is-sidebar-collapsed .biss-sidebar-resizer {
+    display: none;
+  }
+  .biss-app-shell.is-sidebar-collapsed .biss-sidebar-collapse {
+    left: 0;
+    right: auto;
+  }
+  .biss-app-shell.is-sidebar-collapsed .biss-sidebar-collapse svg {
+    transform: rotate(180deg);
+  }
+}
+@media (max-width: 960px) {
+  .biss-sidebar-toggle {
+    display: inline-flex;
+  }
+  .biss-app-sidebar {
+    position: fixed;
+    inset: var(--biss-topbar-height) auto 0 0;
+    height: calc(100dvh - var(--biss-topbar-height));
+    transform: translateX(-100%);
+    z-index: 70;
+    max-width: calc(100vw - 40px);
+  }
+  .biss-app-sidebar.is-open {
+    transform: none;
+  }
+  .biss-sidebar-scrim {
+    display: block;
+    position: fixed;
+    inset: var(--biss-topbar-height) 0 0;
+    z-index: 60;
+    border: 0;
+    background: rgba(29, 28, 26, 0.24);
+  }
+  .biss-sidebar-resizer,
+  .biss-sidebar-collapse {
+    display: none;
+  }
+  .biss-app-main {
+    padding: 12px;
+  }
+  .biss-app-main-inner {
+    padding: 18px;
+  }
+  .biss-dock {
+    position: fixed;
+    inset: var(--biss-topbar-height) 0 0 auto;
+    z-index: 60;
+    max-width: 100vw;
+  }
+  .biss-dock-scrim {
+    display: block;
+    position: fixed;
+    inset: var(--biss-topbar-height) 0 0;
+    background: rgba(29, 28, 26, 0.24);
+    border: 0;
+    z-index: 55;
+  }
+}
+@media (max-width: 640px) {
+  .biss-bar-inner {
+    padding: 0 12px;
+    gap: 10px;
+  }
+  .biss-brand {
+    font-size: 13px;
+  }
+  .biss-link-row {
+    gap: 8px;
+  }
+  .biss-link-row a {
+    font-size: 12px;
+  }
+  .biss-page {
+    padding-inline: 16px;
+  }
+  .biss-app-main {
+    padding: 8px;
+  }
+  .biss-app-main-inner {
+    padding: 16px;
+    border-radius: 10px;
+  }
+}

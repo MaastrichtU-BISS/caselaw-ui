@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { computed, ref, watch, onMounted, onBeforeUnmount, nextTick, useId } from 'vue';
+import { ref, onMounted, onBeforeUnmount, nextTick } from 'vue';
 import BissIcon from './BissIcon.vue';
-import type { BissIconName } from '../icon-names';
+import type { BissIconName } from '../core/icon-names';
 
 const {
   value = '',

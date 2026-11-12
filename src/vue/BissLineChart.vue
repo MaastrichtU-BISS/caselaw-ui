@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { computed, ref, watch, onMounted, onBeforeUnmount, nextTick, useId } from 'vue';
-import { lineLayout } from '../chart-layout';
+import { computed } from 'vue';
+import { lineLayout } from '../core/charts';
 const {
   values,
   label,

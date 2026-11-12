@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { computed, ref, watch, onMounted, onBeforeUnmount, nextTick, useId } from 'vue';
-import type { BissPickOption } from '../library-types';
-import { toggleValue } from '../portable';
+import { computed, ref } from 'vue';
+import type { BissPickOption } from '../core/types';
+import { toggleValue } from '../core/format';
 const {
   options,
   selected = [],
@@ -34,8 +34,7 @@ const shown = computed(() =>
 <template>
   <div class="biss-value-picker">
     <header>
-      <b>{{ label }}</b
-      ><span v-if="canNegate" class="biss-segmented"
+      <b>{{ label }}</b><span v-if="canNegate" class="biss-segmented"
         ><button type="button" :aria-pressed="!negate" @click="emit('negate', false)">
           {{ isLabel }}</button
         ><button type="button" :aria-pressed="negate" @click="emit('negate', true)">
@@ -66,8 +65,11 @@ const shown = computed(() =>
       <p v-if="!shown.length">{{ emptyLabel }}</p>
     </div>
     <footer>
-      <span>{{ selected.length }}</span
-      ><button type="button" class="biss-text-button" @click="emit('change', [])">
+      <span>{{ selected.length }}</span><button
+        type="button"
+        class="biss-text-button"
+        @click="emit('change', [])"
+      >
         {{ clearLabel }}
       </button>
     </footer>

@@ -1,15 +1,18 @@
 <script setup lang="ts">
-withDefaults(defineProps<{
-  placeholder?: string;
-  disabled?: boolean;
-  label?: string;
-}>(), {
-  placeholder: "Search",
-  disabled: false,
-  label: "Search",
-});
+withDefaults(
+  defineProps<{
+    placeholder?: string;
+    disabled?: boolean;
+    label?: string;
+  }>(),
+  {
+    placeholder: 'Search',
+    disabled: false,
+    label: 'Search',
+  },
+);
 
-const model = defineModel<string>({ default: "" });
+const model = defineModel<string>({ default: '' });
 </script>
 
 <template>
@@ -25,6 +28,6 @@ const model = defineModel<string>({ default: "" });
       :placeholder="placeholder"
       :disabled="disabled"
       :aria-label="label"
-    >
+    />
   </div>
 </template>

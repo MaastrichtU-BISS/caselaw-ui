@@ -5,15 +5,15 @@ Source: Bizzy commit 3db9d5a3067fb97bc6123c1ebee804fa94732f37 (read only).
 The BISS foundation retains the prior library’s forms, tables, charts, shells,
 code blocks and feedback components with renamed APIs and Bizzy-inspired tokens.
 Toolbar is a new composition primitive for Bizzy’s shared toolbar pattern.
-There are now 54 portable components across both frameworks. The following
+There are now 130 components in each framework, including generalized editing, sharing, document and dashboard patterns. The following
 inventory covers every source component; backend-dependent pieces
 are candidates for host adapters, not drop-in package exports.
 
 | Source | Disposition |
 |---|---|
 | app/components/AccessButton.vue | Application composition: retain in host or extract with an explicit data/action adapter |
-| app/components/AccessPanel.vue | Application composition: retain in host or extract with an explicit data/action adapter |
-| app/components/AccessTile.vue | Application composition: retain in host or extract with an explicit data/action adapter |
+| app/components/AccessPanel.vue | Generalized as BissSharePanel in both frameworks; application data and persistence stay in the host |
+| app/components/AccessTile.vue | Generalized as BissAccessList in both frameworks; application data and persistence stay in the host |
 | app/components/AiUsagePanel.vue | Application composition: retain in host or extract with an explicit data/action adapter |
 | app/components/AlertLine.vue | Ported and generalized as BissAlertLine in Vue and Svelte |
 | app/components/AppFooter.vue | Application composition: retain in host or extract with an explicit data/action adapter |
@@ -41,8 +41,8 @@ are candidates for host adapters, not drop-in package exports.
 | app/components/BoardCalendar.vue | Adapted as BissCalendar in both frameworks; see documented scope and host events |
 | app/components/BoardCell.vue | Application composition: retain in host or extract with an explicit data/action adapter |
 | app/components/BoardChart.vue | Application composition: retain in host or extract with an explicit data/action adapter |
-| app/components/BoardColumnPanel.vue | Application composition: retain in host or extract with an explicit data/action adapter |
-| app/components/BoardFilters.vue | Application composition: retain in host or extract with an explicit data/action adapter |
+| app/components/BoardColumnPanel.vue | Generalized as BissColumnManager in both frameworks; application data and persistence stay in the host |
+| app/components/BoardFilters.vue | Generalized as BissFilterBuilder in both frameworks; application data and persistence stay in the host |
 | app/components/BoardItem.vue | Application composition: retain in host or extract with an explicit data/action adapter |
 | app/components/BoardKanban.vue | Adapted as BissKanban in both frameworks; see documented scope and host events |
 | app/components/BoardProject.vue | Application composition: retain in host or extract with an explicit data/action adapter |
@@ -59,13 +59,13 @@ are candidates for host adapters, not drop-in package exports.
 | app/components/ChartLegend.vue | Ported and generalized as BissChartLegend in Vue and Svelte |
 | app/components/CollabCarets.vue | Application composition: retain in host or extract with an explicit data/action adapter |
 | app/components/CollabField.vue | Application composition: retain in host or extract with an explicit data/action adapter |
-| app/components/ColumnSettings.vue | Application composition: retain in host or extract with an explicit data/action adapter |
+| app/components/ColumnSettings.vue | Generalized as BissColumnManager in both frameworks; application data and persistence stay in the host |
 | app/components/ConfirmHost.vue | Application composition: retain in host or extract with an explicit data/action adapter |
 | app/components/CostLineDialog.vue | Application composition: retain in host or extract with an explicit data/action adapter |
 | app/components/CostRequestDialog.vue | Application composition: retain in host or extract with an explicit data/action adapter |
 | app/components/CostRequestPanel.vue | Application composition: retain in host or extract with an explicit data/action adapter |
 | app/components/DTile.vue | Application composition: retain in host or extract with an explicit data/action adapter |
-| app/components/DashFilterBar.vue | Application composition: retain in host or extract with an explicit data/action adapter |
+| app/components/DashFilterBar.vue | Generalized as BissFilterBuilder in both frameworks; application data and persistence stay in the host |
 | app/components/DateField.vue | Adapted as BissDateField in both frameworks; see documented scope and host events |
 | app/components/DatePicker.vue | Adapted as BissDatePicker in both frameworks; see documented scope and host events |
 | app/components/DatePop.vue | Next extraction: isolate interaction, keyboard and focus contract; remove app dependencies |
@@ -84,14 +84,14 @@ are candidates for host adapters, not drop-in package exports.
 | app/components/DocMedia.vue | Application composition: retain in host or extract with an explicit data/action adapter |
 | app/components/DocRecord.vue | Application composition: retain in host or extract with an explicit data/action adapter |
 | app/components/DocText.vue | Application composition: retain in host or extract with an explicit data/action adapter |
-| app/components/DocToc.vue | Application composition: retain in host or extract with an explicit data/action adapter |
+| app/components/DocToc.vue | Generalized as BissDocumentToc in both frameworks; application data and persistence stay in the host |
 | app/components/DocumentNewDialog.vue | Application composition: retain in host or extract with an explicit data/action adapter |
 | app/components/DocumentPanel.vue | Application composition: retain in host or extract with an explicit data/action adapter |
 | app/components/EditCell.vue | Adapted as BissEditableText in both frameworks; see documented scope and host events |
 | app/components/EmptyState.vue | Application composition: retain in host or extract with an explicit data/action adapter |
 | app/components/ExportMenu.vue | Application composition: retain in host or extract with an explicit data/action adapter |
 | app/components/FeedbackDialog.vue | Application composition: retain in host or extract with an explicit data/action adapter |
-| app/components/FigureHelp.vue | Application composition: retain in host or extract with an explicit data/action adapter |
+| app/components/FigureHelp.vue | Generalized as BissFigureHelp in both frameworks; application data and persistence stay in the host |
 | app/components/FigureYears.vue | Application composition: retain in host or extract with an explicit data/action adapter |
 | app/components/FiguresDrill.vue | Application composition: retain in host or extract with an explicit data/action adapter |
 | app/components/FiguresFormula.vue | Application composition: retain in host or extract with an explicit data/action adapter |
@@ -118,7 +118,7 @@ are candidates for host adapters, not drop-in package exports.
 | app/components/HomeNewDefault.vue | Application composition: retain in host or extract with an explicit data/action adapter |
 | app/components/HomeOptions.vue | Application composition: retain in host or extract with an explicit data/action adapter |
 | app/components/HomePreview.vue | Application composition: retain in host or extract with an explicit data/action adapter |
-| app/components/HomeProposal.vue | Application composition: retain in host or extract with an explicit data/action adapter |
+| app/components/HomeProposal.vue | Generalized as BissProposalCard in both frameworks; application data and persistence stay in the host |
 | app/components/HomeSkel.vue | Ported and generalized as BissHomeSkel in Vue and Svelte |
 | app/components/HrReviewTile.vue | Application composition: retain in host or extract with an explicit data/action adapter |
 | app/components/ImportMapper.vue | Application composition: retain in host or extract with an explicit data/action adapter |
@@ -129,15 +129,15 @@ are candidates for host adapters, not drop-in package exports.
 | app/components/KrCheckin.vue | Application composition: retain in host or extract with an explicit data/action adapter |
 | app/components/KrMetric.vue | Application composition: retain in host or extract with an explicit data/action adapter |
 | app/components/KrRow.vue | Application composition: retain in host or extract with an explicit data/action adapter |
-| app/components/LabelEditor.vue | Application composition: retain in host or extract with an explicit data/action adapter |
+| app/components/LabelEditor.vue | Generalized as BissLabelEditor in both frameworks; application data and persistence stay in the host |
 | app/components/LanguageMenu.vue | Application composition: retain in host or extract with an explicit data/action adapter |
 | app/components/LiveStatus.vue | Adapted as BissLiveStatus in both frameworks; see documented scope and host events |
 | app/components/LogList.vue | Adapted as BissActivityList in both frameworks; see documented scope and host events |
 | app/components/MeetingActions.vue | Application composition: retain in host or extract with an explicit data/action adapter |
-| app/components/MeetingAgenda.vue | Application composition: retain in host or extract with an explicit data/action adapter |
+| app/components/MeetingAgenda.vue | Generalized as BissAgenda in both frameworks; application data and persistence stay in the host |
 | app/components/MeetingAttendees.vue | Application composition: retain in host or extract with an explicit data/action adapter |
 | app/components/MeetingDecisions.vue | Application composition: retain in host or extract with an explicit data/action adapter |
-| app/components/MeetingLinks.vue | Application composition: retain in host or extract with an explicit data/action adapter |
+| app/components/MeetingLinks.vue | Generalized as BissQuickLinks in both frameworks; application data and persistence stay in the host |
 | app/components/MeetingNewDialog.vue | Application composition: retain in host or extract with an explicit data/action adapter |
 | app/components/MeetingNotes.vue | Application composition: retain in host or extract with an explicit data/action adapter |
 | app/components/MeetingPanel.vue | Application composition: retain in host or extract with an explicit data/action adapter |
@@ -184,7 +184,7 @@ are candidates for host adapters, not drop-in package exports.
 | app/components/ProjectOverview.vue | Application composition: retain in host or extract with an explicit data/action adapter |
 | app/components/PropCell.vue | Application composition: retain in host or extract with an explicit data/action adapter |
 | app/components/PropFields.vue | Adapted as BissPropertyList in both frameworks; see documented scope and host events |
-| app/components/ProposalCard.vue | Application composition: retain in host or extract with an explicit data/action adapter |
+| app/components/ProposalCard.vue | Generalized as BissProposalCard in both frameworks; application data and persistence stay in the host |
 | app/components/PublicLinkDialog.vue | Application composition: retain in host or extract with an explicit data/action adapter |
 | app/components/ReachSample.vue | Application composition: retain in host or extract with an explicit data/action adapter |
 | app/components/ReceivablesAging.vue | Application composition: retain in host or extract with an explicit data/action adapter |
@@ -256,7 +256,7 @@ are candidates for host adapters, not drop-in package exports.
 | app/components/home/ActsYear.vue | Application composition: retain in host or extract with an explicit data/action adapter |
 | app/components/home/Away.vue | Application composition: retain in host or extract with an explicit data/action adapter |
 | app/components/home/Bizzy.vue | Application composition: retain in host or extract with an explicit data/action adapter |
-| app/components/home/Block.vue | Application composition: retain in host or extract with an explicit data/action adapter |
+| app/components/home/Block.vue | Generalized as BissDataTile in both frameworks; application data and persistence stay in the host |
 | app/components/home/Budgets.vue | Application composition: retain in host or extract with an explicit data/action adapter |
 | app/components/home/ByType.vue | Application composition: retain in host or extract with an explicit data/action adapter |
 | app/components/home/Calls.vue | Application composition: retain in host or extract with an explicit data/action adapter |
@@ -265,7 +265,7 @@ are candidates for host adapters, not drop-in package exports.
 | app/components/home/Costs.vue | Application composition: retain in host or extract with an explicit data/action adapter |
 | app/components/home/Coverage.vue | Application composition: retain in host or extract with an explicit data/action adapter |
 | app/components/home/Dashboard.vue | Application composition: retain in host or extract with an explicit data/action adapter |
-| app/components/home/Deadlines.vue | Application composition: retain in host or extract with an explicit data/action adapter |
+| app/components/home/Deadlines.vue | Generalized as BissDeadlineList in both frameworks; application data and persistence stay in the host |
 | app/components/home/Deals.vue | Application composition: retain in host or extract with an explicit data/action adapter |
 | app/components/home/Events.vue | Application composition: retain in host or extract with an explicit data/action adapter |
 | app/components/home/FcChart.vue | Application composition: retain in host or extract with an explicit data/action adapter |
@@ -287,7 +287,7 @@ are candidates for host adapters, not drop-in package exports.
 | app/components/home/GoalsYear.vue | Application composition: retain in host or extract with an explicit data/action adapter |
 | app/components/home/Invoices.vue | Application composition: retain in host or extract with an explicit data/action adapter |
 | app/components/home/Kpis.vue | Application composition: retain in host or extract with an explicit data/action adapter |
-| app/components/home/Links.vue | Application composition: retain in host or extract with an explicit data/action adapter |
+| app/components/home/Links.vue | Generalized as BissQuickLinks in both frameworks; application data and persistence stay in the host |
 | app/components/home/Meetings.vue | Application composition: retain in host or extract with an explicit data/action adapter |
 | app/components/home/Mentions.vue | Application composition: retain in host or extract with an explicit data/action adapter |
 | app/components/home/Money.vue | Application composition: retain in host or extract with an explicit data/action adapter |
@@ -303,7 +303,7 @@ are candidates for host adapters, not drop-in package exports.
 | app/components/home/Review.vue | Application composition: retain in host or extract with an explicit data/action adapter |
 | app/components/home/Section.vue | Application composition: retain in host or extract with an explicit data/action adapter |
 | app/components/home/Steward.vue | Application composition: retain in host or extract with an explicit data/action adapter |
-| app/components/home/Tasks.vue | Application composition: retain in host or extract with an explicit data/action adapter |
+| app/components/home/Tasks.vue | Generalized as BissTaskList in both frameworks; application data and persistence stay in the host |
 | app/components/home/Timeline.vue | Application composition: retain in host or extract with an explicit data/action adapter |
 | app/components/home/Week.vue | Application composition: retain in host or extract with an explicit data/action adapter |
 | app/components/home/WinRate.vue | Application composition: retain in host or extract with an explicit data/action adapter |

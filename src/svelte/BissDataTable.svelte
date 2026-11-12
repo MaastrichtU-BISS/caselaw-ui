@@ -1,10 +1,10 @@
 <script lang="ts">
-  import type { BissTableColumn } from "../types";
+  import type { BissTableColumn } from '../core/types';
 
   let {
     columns,
     rows,
-    empty = "No rows",
+    empty = 'No rows',
   }: {
     columns: BissTableColumn[];
     rows: Record<string, unknown>[];
@@ -28,7 +28,7 @@
         {#each rows as row}
           <tr>
             {#each columns as column}
-              <td>{row[column.key] ?? ""}</td>
+              <td>{row[column.key] ?? ''}</td>
             {/each}
           </tr>
         {/each}

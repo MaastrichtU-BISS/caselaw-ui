@@ -24,25 +24,20 @@ import 'biss-ui/styles.css';
 </template>
 ```
 
-Use `biss-ui/svelte` for Svelte. New components use named slots for composition;
-the original Svelte tabs/pager use `bind:value` / `bind:page` and `on:change`;
-Vue uses `v-model` and `v-model:page`. No router, translations, server, session,
-or Nuxt globals are required. Labels are props; applications supply translations.
-Use `on:save` / `on:discard` for the original Svelte SaveBar. The expanded
-components use Svelte 5 callback props and snippets; see the component reference.
+Use `biss-ui/svelte` for Svelte. Every Svelte component uses Svelte 5 callback
+props and snippets. Vue uses emits and slots, with `v-model` on form controls.
+No router, account store, server connection or Nuxt globals are required.
 
 ## Components and customization
 
-54 components adapt Bizzy’s components and patterns in both frameworks, including
-menus, dialogs, pickers, boards, charts, tables, identity and onboarding.
-The full library exports 96 Vue and 81 Svelte components.
+130 components are available in **each framework**, with one Bizzy design language.
+They include data grids, column and label editors, filter builders, sharing and
+permissions, document blocks, comments, dashboards, task lists, calendars, boards,
+charts, forms, navigation, overlays and feedback.
 
-
-[Component reference](docs/components.md) documents the new Bizzy extractions and
-[existing API](docs/legacy-api.md) covers the inherited library, now named `Biss…`.
-The inherited API retains its functionality; the portable Bizzy components are
-available in **both** frameworks. Framework coverage for inherited components
-continues to differ; consult the two entry points before importing.
+The [documentation site](docs/README.md) derives API tables from source and shows
+real screenshots and live examples. The [architecture guide](docs/architecture.md)
+explains package boundaries, state ownership and contribution standards.
 
 All styles and custom properties are `biss-` prefixed. Customize tokens globally
 or on a wrapper to theme a single region:
@@ -65,8 +60,8 @@ HTML reset. Dark themes require supplying the full semantic token palette.
 
 ## Documentation
 
-Run `npm run docs:dev` for the Bizzy-style documentation site: all 97 distinct
-components, 226 real screenshots, interactive examples, framework usage, and
+Run `npm run docs:dev` for the Bizzy-style documentation site: all 130
+components, desktop and phone screenshots, interactive examples, framework usage, and
 source-derived API tables. [Documentation guide](docs/README.md) ·
 [Component screenshots](docs/visual-reference.md).
 
@@ -80,6 +75,8 @@ npm ci
 npm run check
 npm run demo:build
 npm run test:browser
+npm run build
+npm run test:package
 npm run pack:dry
 npm run demo
 ```

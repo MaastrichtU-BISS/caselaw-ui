@@ -1,16 +1,29 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte';
-  export let page: number;
-  export let total: number;
-  export let pageSize = 25;
-  export let label = 'Pagination';
-  export let previousLabel = 'Previous';
-  export let nextLabel = 'Next';
-  const dispatch = createEventDispatcher();
-  $: pages = Math.max(1, Math.ceil(total / Math.max(1, pageSize)));
+  interface Props {
+    page: number;
+    total: number;
+    pageSize?: number;
+    label?: string;
+    previousLabel?: string;
+    nextLabel?: string;
+    children?: import('svelte').Snippet;
+    onchange?: (value: number) => void;
+  }
+
+  let {
+    page = $bindable(),
+    total,
+    pageSize = 25,
+    label = 'Pagination',
+    previousLabel = 'Previous',
+    nextLabel = 'Next',
+    children,
+    onchange,
+  }: Props = $props();
+  let pages = $derived(Math.max(1, Math.ceil(total / Math.max(1, pageSize))));
   function go(n: number) {
     page = n;
-    dispatch('change', n);
+    onchange?.(n);
   }
 </script>
 
@@ -19,11 +32,11 @@
     class="biss-button biss-button-ghost"
     type="button"
     disabled={page <= 1}
-    on:click={() => go(Math.max(1, page - 1))}>{previousLabel}</button
+    onclick={() => go(Math.max(1, page - 1))}>{previousLabel}</button
   ><button
     class="biss-button biss-button-ghost"
     type="button"
     disabled={page >= pages}
-    on:click={() => go(Math.min(pages, page + 1))}>{nextLabel}</button
-  ><slot />
+    onclick={() => go(Math.min(pages, page + 1))}>{nextLabel}</button
+  >{@render children?.()}
 </nav>

@@ -1,7 +1,7 @@
 # Component screenshots
 
 Real renders of the shipped components, using synthetic research-project data.
-All 97 components have desktop and phone references.
+All 130 components have desktop and phone references.
 Open the documentation site for state selection, interactive examples and API tables.
 
 Run `npm run docs:dev` locally, or build the static site with `npm run docs:build`.
@@ -130,11 +130,26 @@ Vue and Svelte.
 
 ## Forms and selection
 
+### BissCheckbox
+
+Checkbox for the team’s everyday work.
+
+Vue and Svelte.
+
+![BissCheckbox · default · desktop](screenshots/checkbox-default-desktop.png)
+
+<details>
+<summary>Phone layout</summary>
+
+![BissCheckbox · default · phone](screenshots/checkbox-default-phone.png)
+
+</details>
+
 ### BissCopyField
 
 A value that can be read, selected and copied without changing it.
 
-Vue only.
+Vue and Svelte.
 
 ![BissCopyField · default · desktop](screenshots/copy-field-default-desktop.png)
 
@@ -179,7 +194,7 @@ Vue and Svelte.
 
 A label, hint or error around a control, with a scoped identifier.
 
-Vue only.
+Vue and Svelte.
 
 ![BissField · default · desktop](screenshots/field-default-desktop.png)
 
@@ -190,11 +205,26 @@ Vue only.
 
 </details>
 
+### BissFilePicker
+
+File Picker for the team’s everyday work.
+
+Vue and Svelte.
+
+![BissFilePicker · default · desktop](screenshots/file-picker-default-desktop.png)
+
+<details>
+<summary>Phone layout</summary>
+
+![BissFilePicker · default · phone](screenshots/file-picker-default-phone.png)
+
+</details>
+
 ### BissInput
 
 A single-line value with normal form attributes and validation styling.
 
-Vue only.
+Vue and Svelte.
 
 ![BissInput · default · desktop](screenshots/input-default-desktop.png)
 
@@ -205,11 +235,26 @@ Vue only.
 
 </details>
 
+### BissRadioGroup
+
+Radio Group for the team’s everyday work.
+
+Vue and Svelte.
+
+![BissRadioGroup · default · desktop](screenshots/radio-group-default-desktop.png)
+
+<details>
+<summary>Phone layout</summary>
+
+![BissRadioGroup · default · phone](screenshots/radio-group-default-phone.png)
+
+</details>
+
 ### BissSearchInput
 
-A search field with the inherited input contract and search treatment.
+A search field with the input contract and search treatment.
 
-Vue only.
+Vue and Svelte.
 
 ![BissSearchInput · default · desktop](screenshots/search-input-default-desktop.png)
 
@@ -220,11 +265,26 @@ Vue only.
 
 </details>
 
+### BissSegmentedControl
+
+Segmented Control for the team’s everyday work.
+
+Vue and Svelte.
+
+![BissSegmentedControl · default · desktop](screenshots/segmented-control-default-desktop.png)
+
+<details>
+<summary>Phone layout</summary>
+
+![BissSegmentedControl · default · phone](screenshots/segmented-control-default-phone.png)
+
+</details>
+
 ### BissSelect
 
-The inherited native select for simple browser-driven choice.
+The native select for simple browser-driven choice.
 
-Vue only.
+Vue and Svelte.
 
 ![BissSelect · default · desktop](screenshots/select-default-desktop.png)
 
@@ -267,9 +327,9 @@ Vue and Svelte.
 
 ### BissSwitch
 
-A labelled on/off setting using the inherited model contract.
+A labelled on/off setting using the model contract.
 
-Vue only.
+Vue and Svelte.
 
 ![BissSwitch · default · desktop](screenshots/switch-default-desktop.png)
 
@@ -282,9 +342,9 @@ Vue only.
 
 ### BissTagInput
 
-Add and remove short labels using the inherited model contract.
+Add and remove short labels using the model contract.
 
-Vue only.
+Vue and Svelte.
 
 ![BissTagInput · default · desktop](screenshots/tag-input-default-desktop.png)
 
@@ -299,7 +359,7 @@ Vue only.
 
 A multiline form value with normal field attributes and validation styling.
 
-Vue only.
+Vue and Svelte.
 
 ![BissTextarea · default · desktop](screenshots/textarea-default-desktop.png)
 
@@ -357,6 +417,21 @@ Vue and Svelte.
 
 </details>
 
+### BissFigureHelp
+
+Figure Help for the team’s everyday work.
+
+Vue and Svelte.
+
+![BissFigureHelp · open · desktop](screenshots/figure-help-open-desktop.png)
+
+<details>
+<summary>Phone layout</summary>
+
+![BissFigureHelp · open · phone](screenshots/figure-help-open-phone.png)
+
+</details>
+
 ### BissMenu
 
 Searchable actions, checked choices and nested groups in a floating panel.
@@ -374,7 +449,7 @@ Vue and Svelte.
 
 ### BissModal
 
-The inherited modal API, for consumers migrating an existing dialog.
+The modal API, for consumers migrating an existing dialog.
 
 Vue and Svelte.
 
@@ -432,6 +507,21 @@ Vue and Svelte.
 
 </details>
 
+### BissTooltip
+
+Tooltip for the team’s everyday work.
+
+Vue and Svelte.
+
+![BissTooltip · open · desktop](screenshots/tooltip-open-desktop.png)
+
+<details>
+<summary>Phone layout</summary>
+
+![BissTooltip · open · phone](screenshots/tooltip-open-phone.png)
+
+</details>
+
 ## Pages and navigation
 
 ### BissAppShell
@@ -461,6 +551,21 @@ Vue and Svelte.
 <summary>Phone layout</summary>
 
 ![BissBottomBar · default · phone](screenshots/bottom-bar-default-phone.png)
+
+</details>
+
+### BissBreadcrumbs
+
+Breadcrumbs for the team’s everyday work.
+
+Vue and Svelte.
+
+![BissBreadcrumbs · default · desktop](screenshots/breadcrumbs-default-desktop.png)
+
+<details>
+<summary>Phone layout</summary>
+
+![BissBreadcrumbs · default · phone](screenshots/breadcrumbs-default-phone.png)
 
 </details>
 
@@ -494,9 +599,39 @@ Vue and Svelte.
 
 </details>
 
+### BissDisclosure
+
+Disclosure for the team’s everyday work.
+
+Vue and Svelte.
+
+![BissDisclosure · default · desktop](screenshots/disclosure-default-desktop.png)
+
+<details>
+<summary>Phone layout</summary>
+
+![BissDisclosure · default · phone](screenshots/disclosure-default-phone.png)
+
+</details>
+
+### BissDocumentToc
+
+Document Toc for the team’s everyday work.
+
+Vue and Svelte.
+
+![BissDocumentToc · default · desktop](screenshots/document-toc-default-desktop.png)
+
+<details>
+<summary>Phone layout</summary>
+
+![BissDocumentToc · default · phone](screenshots/document-toc-default-phone.png)
+
+</details>
+
 ### BissGridShell
 
-The inherited public-page frame with a shared top bar and footer.
+The public-page frame with a shared top bar and footer.
 
 Vue and Svelte.
 
@@ -556,7 +691,7 @@ Vue and Svelte.
 
 ### BissPageHeader
 
-The inherited page title and subtitle, with an actions slot.
+The page title and subtitle, with an actions slot.
 
 Vue and Svelte.
 
@@ -588,7 +723,7 @@ Vue and Svelte.
 
 Introduce a content section and place its actions alongside the title.
 
-Vue only.
+Vue and Svelte.
 
 ![BissSectionHeader · default · desktop](screenshots/section-header-default-desktop.png)
 
@@ -629,6 +764,21 @@ Vue and Svelte.
 
 </details>
 
+### BissSplitPane
+
+Split Pane for the team’s everyday work.
+
+Vue and Svelte.
+
+![BissSplitPane · default · desktop](screenshots/split-pane-default-desktop.png)
+
+<details>
+<summary>Phone layout</summary>
+
+![BissSplitPane · default · phone](screenshots/split-pane-default-phone.png)
+
+</details>
+
 ### BissTab
 
 A navigation tab that can render as a native button or a router link.
@@ -646,7 +796,7 @@ Vue and Svelte.
 
 ### BissTopBar
 
-The inherited shared brand and primary navigation bar.
+The shared brand and primary navigation bar.
 
 Vue and Svelte.
 
@@ -676,6 +826,21 @@ Vue and Svelte.
 
 ## People and records
 
+### BissAccessList
+
+Access List for the team’s everyday work.
+
+Vue and Svelte.
+
+![BissAccessList · default · desktop](screenshots/access-list-default-desktop.png)
+
+<details>
+<summary>Phone layout</summary>
+
+![BissAccessList · default · phone](screenshots/access-list-default-phone.png)
+
+</details>
+
 ### BissActivityList
 
 Activity List for the team’s everyday work.
@@ -703,6 +868,36 @@ Vue and Svelte.
 <summary>Phone layout</summary>
 
 ![BissAvatar · default · phone](screenshots/avatar-default-phone.png)
+
+</details>
+
+### BissCommentComposer
+
+Comment Composer for the team’s everyday work.
+
+Vue and Svelte.
+
+![BissCommentComposer · default · desktop](screenshots/comment-composer-default-desktop.png)
+
+<details>
+<summary>Phone layout</summary>
+
+![BissCommentComposer · default · phone](screenshots/comment-composer-default-phone.png)
+
+</details>
+
+### BissCommentThread
+
+Comment Thread for the team’s everyday work.
+
+Vue and Svelte.
+
+![BissCommentThread · default · desktop](screenshots/comment-thread-default-desktop.png)
+
+<details>
+<summary>Phone layout</summary>
+
+![BissCommentThread · default · phone](screenshots/comment-thread-default-phone.png)
 
 </details>
 
@@ -751,6 +946,21 @@ Vue and Svelte.
 
 </details>
 
+### BissPresenceCursor
+
+Presence Cursor for the team’s everyday work.
+
+Vue and Svelte.
+
+![BissPresenceCursor · default · desktop](screenshots/presence-cursor-default-desktop.png)
+
+<details>
+<summary>Phone layout</summary>
+
+![BissPresenceCursor · default · phone](screenshots/presence-cursor-default-phone.png)
+
+</details>
+
 ### BissPresenceStack
 
 A quiet, overlapping group of people currently on a page.
@@ -796,9 +1006,39 @@ Vue and Svelte.
 
 </details>
 
+### BissRecordPreview
+
+Record Preview for the team’s everyday work.
+
+Vue and Svelte.
+
+![BissRecordPreview · default · desktop](screenshots/record-preview-default-desktop.png)
+
+<details>
+<summary>Phone layout</summary>
+
+![BissRecordPreview · default · phone](screenshots/record-preview-default-phone.png)
+
+</details>
+
+### BissRoleEditor
+
+Role Editor for the team’s everyday work.
+
+Vue and Svelte.
+
+![BissRoleEditor · default · desktop](screenshots/role-editor-default-desktop.png)
+
+<details>
+<summary>Phone layout</summary>
+
+![BissRoleEditor · default · phone](screenshots/role-editor-default-phone.png)
+
+</details>
+
 ### BissServiceIcon
 
-The inherited product marks, or a short text mark supplied by the host.
+The product marks, or a short text mark supplied by the host.
 
 Vue and Svelte.
 
@@ -808,6 +1048,21 @@ Vue and Svelte.
 <summary>Phone layout</summary>
 
 ![BissServiceIcon · default · phone](screenshots/service-icon-default-phone.png)
+
+</details>
+
+### BissSharePanel
+
+Share Panel for the team’s everyday work.
+
+Vue and Svelte.
+
+![BissSharePanel · default · desktop](screenshots/share-panel-default-desktop.png)
+
+<details>
+<summary>Phone layout</summary>
+
+![BissSharePanel · default · phone](screenshots/share-panel-default-phone.png)
 
 </details>
 
@@ -828,6 +1083,21 @@ Vue and Svelte.
 
 ## Tables and boards
 
+### BissAgenda
+
+Agenda for the team’s everyday work.
+
+Vue and Svelte.
+
+![BissAgenda · default · desktop](screenshots/agenda-default-desktop.png)
+
+<details>
+<summary>Phone layout</summary>
+
+![BissAgenda · default · phone](screenshots/agenda-default-phone.png)
+
+</details>
+
 ### BissCalendar
 
 Dates and deadlines in a month grid, with an agenda on phones.
@@ -840,6 +1110,36 @@ Vue and Svelte.
 <summary>Phone layout</summary>
 
 ![BissCalendar · default · phone](screenshots/calendar-default-phone.png)
+
+</details>
+
+### BissColumnManager
+
+Column Manager for the team’s everyday work.
+
+Vue and Svelte.
+
+![BissColumnManager · default · desktop](screenshots/column-manager-default-desktop.png)
+
+<details>
+<summary>Phone layout</summary>
+
+![BissColumnManager · default · phone](screenshots/column-manager-default-phone.png)
+
+</details>
+
+### BissDataGrid
+
+Data Grid for the team’s everyday work.
+
+Vue and Svelte.
+
+![BissDataGrid · default · desktop](screenshots/data-grid-default-desktop.png)
+
+<details>
+<summary>Phone layout</summary>
+
+![BissDataGrid · default · phone](screenshots/data-grid-default-phone.png)
 
 </details>
 
@@ -858,6 +1158,21 @@ Vue and Svelte.
 
 </details>
 
+### BissFilterBuilder
+
+Filter Builder for the team’s everyday work.
+
+Vue and Svelte.
+
+![BissFilterBuilder · default · desktop](screenshots/filter-builder-default-desktop.png)
+
+<details>
+<summary>Phone layout</summary>
+
+![BissFilterBuilder · default · phone](screenshots/filter-builder-default-phone.png)
+
+</details>
+
 ### BissKanban
 
 Group cards into lanes and move them by dragging or keyboard selection.
@@ -870,6 +1185,21 @@ Vue and Svelte.
 <summary>Phone layout</summary>
 
 ![BissKanban · default · phone](screenshots/kanban-default-phone.png)
+
+</details>
+
+### BissLabelEditor
+
+Label Editor for the team’s everyday work.
+
+Vue and Svelte.
+
+![BissLabelEditor · default · desktop](screenshots/label-editor-default-desktop.png)
+
+<details>
+<summary>Phone layout</summary>
+
+![BissLabelEditor · default · phone](screenshots/label-editor-default-phone.png)
 
 </details>
 
@@ -948,6 +1278,21 @@ Vue and Svelte.
 
 </details>
 
+### BissTaskList
+
+Task List for the team’s everyday work.
+
+Vue and Svelte.
+
+![BissTaskList · default · desktop](screenshots/task-list-default-desktop.png)
+
+<details>
+<summary>Phone layout</summary>
+
+![BissTaskList · default · phone](screenshots/task-list-default-phone.png)
+
+</details>
+
 ### BissTimeline
 
 Show inclusive date spans clipped to the visible time window.
@@ -969,7 +1314,7 @@ Vue and Svelte.
 
 A compact request-style bar chart with an optional highlighted sub-series.
 
-Vue only.
+Vue and Svelte.
 
 ![BissBarChart · default · desktop](screenshots/bar-chart-default-desktop.png)
 
@@ -1007,6 +1352,36 @@ Vue and Svelte.
 <summary>Phone layout</summary>
 
 ![BissChartLegend · default · phone](screenshots/chart-legend-default-phone.png)
+
+</details>
+
+### BissDataTile
+
+Data Tile for the team’s everyday work.
+
+Vue and Svelte.
+
+![BissDataTile · default · desktop](screenshots/data-tile-default-desktop.png)
+
+<details>
+<summary>Phone layout</summary>
+
+![BissDataTile · default · phone](screenshots/data-tile-default-phone.png)
+
+</details>
+
+### BissDeadlineList
+
+Deadline List for the team’s everyday work.
+
+Vue and Svelte.
+
+![BissDeadlineList · default · desktop](screenshots/deadline-list-default-desktop.png)
+
+<details>
+<summary>Phone layout</summary>
+
+![BissDeadlineList · default · phone](screenshots/deadline-list-default-phone.png)
 
 </details>
 
@@ -1104,7 +1479,7 @@ Vue and Svelte.
 
 Compare labelled values on a shared horizontal scale.
 
-Vue only.
+Vue and Svelte.
 
 ![BissMeterList · default · desktop](screenshots/meter-list-default-desktop.png)
 
@@ -1130,11 +1505,41 @@ Vue and Svelte.
 
 </details>
 
+### BissQuickLinks
+
+Quick Links for the team’s everyday work.
+
+Vue and Svelte.
+
+![BissQuickLinks · default · desktop](screenshots/quick-links-default-desktop.png)
+
+<details>
+<summary>Phone layout</summary>
+
+![BissQuickLinks · default · phone](screenshots/quick-links-default-phone.png)
+
+</details>
+
+### BissStackedBar
+
+Stacked Bar for the team’s everyday work.
+
+Vue and Svelte.
+
+![BissStackedBar · default · desktop](screenshots/stacked-bar-default-desktop.png)
+
+<details>
+<summary>Phone layout</summary>
+
+![BissStackedBar · default · phone](screenshots/stacked-bar-default-phone.png)
+
+</details>
+
 ### BissStatList
 
 A compact list of labelled counts or formatted values.
 
-Vue only.
+Vue and Svelte.
 
 ![BissStatList · default · desktop](screenshots/stat-list-default-desktop.png)
 
@@ -1160,13 +1565,28 @@ Vue and Svelte.
 
 </details>
 
+### BissWidgetGrid
+
+Widget Grid for the team’s everyday work.
+
+Vue and Svelte.
+
+![BissWidgetGrid · default · desktop](screenshots/widget-grid-default-desktop.png)
+
+<details>
+<summary>Phone layout</summary>
+
+![BissWidgetGrid · default · phone](screenshots/widget-grid-default-phone.png)
+
+</details>
+
 ## Content and feedback
 
 ### BissActionCard
 
-A linked surface for choosing a destination, available in Svelte.
+A linked surface for choosing a destination, available in both frameworks.
 
-Svelte only.
+Vue and Svelte.
 
 ![BissActionCard · default · desktop](screenshots/action-card-default-desktop.png)
 
@@ -1192,11 +1612,26 @@ Vue and Svelte.
 
 </details>
 
+### BissAttachmentList
+
+Attachment List for the team’s everyday work.
+
+Vue and Svelte.
+
+![BissAttachmentList · default · desktop](screenshots/attachment-list-default-desktop.png)
+
+<details>
+<summary>Phone layout</summary>
+
+![BissAttachmentList · default · phone](screenshots/attachment-list-default-phone.png)
+
+</details>
+
 ### BissBadge
 
 A compact status or category label with optional dot and tone.
 
-Vue only.
+Vue and Svelte.
 
 ![BissBadge · default · desktop](screenshots/badge-default-desktop.png)
 
@@ -1207,11 +1642,26 @@ Vue only.
 
 </details>
 
+### BissBookmark
+
+Bookmark for the team’s everyday work.
+
+Vue and Svelte.
+
+![BissBookmark · default · desktop](screenshots/bookmark-default-desktop.png)
+
+<details>
+<summary>Phone layout</summary>
+
+![BissBookmark · default · phone](screenshots/bookmark-default-phone.png)
+
+</details>
+
 ### BissCallout
 
 Callout for the team’s everyday work.
 
-Vue only.
+Vue and Svelte.
 
 ![BissCallout · default · desktop](screenshots/callout-default-desktop.png)
 
@@ -1267,6 +1717,21 @@ Vue and Svelte.
 
 </details>
 
+### BissDocumentCallout
+
+Document Callout for the team’s everyday work.
+
+Vue and Svelte.
+
+![BissDocumentCallout · default · desktop](screenshots/document-callout-default-desktop.png)
+
+<details>
+<summary>Phone layout</summary>
+
+![BissDocumentCallout · default · phone](screenshots/document-callout-default-phone.png)
+
+</details>
+
 ### BissEmptyState
 
 Explain why the area is empty and what someone can do next.
@@ -1299,7 +1764,7 @@ Vue and Svelte.
 
 ### BissHero
 
-The inherited public-page heading with supporting copy and optional actions.
+The public-page heading with supporting copy and optional actions.
 
 Vue and Svelte.
 
@@ -1357,6 +1822,21 @@ Vue and Svelte.
 
 </details>
 
+### BissMediaFigure
+
+Media Figure for the team’s everyday work.
+
+Vue and Svelte.
+
+![BissMediaFigure · default · desktop](screenshots/media-figure-default-desktop.png)
+
+<details>
+<summary>Phone layout</summary>
+
+![BissMediaFigure · default · phone](screenshots/media-figure-default-phone.png)
+
+</details>
+
 ### BissNoAccess
 
 Explain restricted access and provide a useful next step.
@@ -1372,11 +1852,26 @@ Vue and Svelte.
 
 </details>
 
+### BissProposalCard
+
+Proposal Card for the team’s everyday work.
+
+Vue and Svelte.
+
+![BissProposalCard · default · desktop](screenshots/proposal-card-default-desktop.png)
+
+<details>
+<summary>Phone layout</summary>
+
+![BissProposalCard · default · phone](screenshots/proposal-card-default-phone.png)
+
+</details>
+
 ### BissSkeleton
 
-Simple content-shaped bars for inherited loading layouts.
+Simple content-shaped bars for loading layouts.
 
-Vue only.
+Vue and Svelte.
 
 ![BissSkeleton · default · desktop](screenshots/skeleton-default-desktop.png)
 
@@ -1389,9 +1884,9 @@ Vue only.
 
 ### BissToastStack
 
-Render the inherited application-wide toast queue after an action.
+Render the application-wide toast queue after an action.
 
-Vue only.
+Vue and Svelte.
 
 ![BissToastStack · visible · desktop](screenshots/toast-stack-visible-desktop.png)
 

@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import { computed, ref, watch, onMounted, onBeforeUnmount, nextTick, useId } from 'vue';
 import BissIcon from './BissIcon.vue';
-import type { BissIconName } from '../icon-names';
+import type { BissIconName } from '../core/icon-names';
 import BissMenu from './BissMenu.vue';
-import type { BissMenuItem } from '../library-types';
+import type { BissMenuItem } from '../core/types';
 const {
   label,
   items = [],

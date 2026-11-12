@@ -1,10 +1,14 @@
 <script lang="ts">
-  import { avatarHue, initials } from '../portable';
-  export let name: string;
-  export let size = 32;
-  export let label: string | undefined = undefined;
-  $: hue = avatarHue(name);
-  $: text = initials(name);
+  import { avatarHue, initials } from '../core/format';
+  interface Props {
+    name: string;
+    size?: number;
+    label?: string | undefined;
+  }
+
+  let { name, size = 32, label = undefined }: Props = $props();
+  let hue = $derived(avatarHue(name));
+  let text = $derived(initials(name));
 </script>
 
 <span

@@ -1,12 +1,25 @@
 <script lang="ts">
-  /**
-   * Renders as an <a> by default. Pass `as` to use a framework link component;
-   * remaining attributes are forwarded to it.
-   */
-  export let href: string | undefined = undefined;
-  export let label: string;
-  export let meta: string | number | undefined = undefined;
-  export let active = false;
+  interface Props {
+    /**
+     * Renders as an <a> by default. Pass `as` to use a framework link component;
+     * remaining attributes are forwarded to it.
+     */
+    href?: string | undefined;
+    label: string;
+    meta?: string | number | undefined;
+    active?: boolean;
+    icon?: import('svelte').Snippet;
+    [key: string]: any;
+  }
+
+  let {
+    href = undefined,
+    label,
+    meta = undefined,
+    active = false,
+    icon,
+    ...rest
+  }: Props = $props();
 </script>
 
 <!--
@@ -20,16 +33,17 @@
   class="biss-nav-item"
   class:is-active={active}
   {href}
-  {...$$restProps}
-  on:click
-  on:keydown
-  on:focus
-  on:blur>
-  {#if $$slots.icon}
-    <span class="biss-nav-item-icon"><slot name="icon" /></span>
+  {...rest}
+  onclick={rest.onclick}
+  onkeydown={rest.onkeydown}
+  onfocus={rest.onfocus}
+  onblur={rest.onblur}
+>
+  {#if icon}
+    <span class="biss-nav-item-icon">{@render icon?.()}</span>
   {/if}
   <span class="biss-nav-item-label">{label}</span>
-  {#if meta !== undefined && meta !== ""}
+  {#if meta !== undefined && meta !== ''}
     <span class="biss-nav-item-meta">{meta}</span>
   {/if}
 </a>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, watch, onMounted, onBeforeUnmount, nextTick, useId } from 'vue';
+import { computed } from 'vue';
 import BissGoalBar from './BissGoalBar.vue';
 const {
   allocated,

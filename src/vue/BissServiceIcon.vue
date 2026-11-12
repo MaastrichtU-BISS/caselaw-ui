@@ -8,16 +8,25 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
-import { bissServiceIconLabels, bissServiceIconPaths, type BissServiceIconName } from "../icons";
+import { computed } from 'vue';
+import {
+  bissServiceIconLabels,
+  bissServiceIconPaths,
+  type BissServiceIconName,
+} from '../core/service-icons';
 
-const props = withDefaults(defineProps<{
-  icon?: BissServiceIconName;
-  mark?: string;
-  label?: string;
-}>(), {
-  mark: "CLE",
-});
+const props = withDefaults(
+  defineProps<{
+    icon?: BissServiceIconName;
+    mark?: string;
+    label?: string;
+  }>(),
+  {
+    mark: 'B',
+  },
+);
 
-const label = computed(() => props.label ?? (props.icon ? bissServiceIconLabels[props.icon] : props.mark));
+const label = computed(
+  () => props.label ?? (props.icon ? bissServiceIconLabels[props.icon] : props.mark),
+);
 </script>

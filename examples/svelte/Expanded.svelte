@@ -53,7 +53,7 @@
     timelineItems,
     searchItems,
   } from '../catalog-data';
-  import type { BissBoardCard } from '../../src/library-types';
+  import type { BissBoardCard } from '../../src/core/types';
   const chartTypes = ['kpi', 'bar', 'column', 'stacked', 'line', 'table', 'text'] as const;
   let dialog = $state(false),
     panel = $state(false),
@@ -94,17 +94,16 @@
       /><BissPopover label="Project details"
         ><p>Popovers stay within the viewport.</p>
         <BissButton variant="ghost">A focusable action</BissButton></BissPopover
-      ><BissButton variant="secondary" on:click={() => (dialog = true)}>Open dialog</BissButton
-      ><BissButton variant="secondary" on:click={() => (panel = true)}>Open side panel</BissButton
-      ><BissButton variant="secondary" on:click={() => (search = true)}>Open search</BissButton>
+      ><BissButton variant="secondary" onclick={() => (dialog = true)}>Open dialog</BissButton
+      ><BissButton variant="secondary" onclick={() => (panel = true)}>Open side panel</BissButton
+      ><BissButton variant="secondary" onclick={() => (search = true)}>Open search</BissButton>
     </div>
     <BissDialog open={dialog} title="Edit research project" onclose={() => (dialog = false)}
-      ><label>Project name<input class="biss-picker-search" value="Open justice" autofocus /></label
-      ><BissMenu
+      ><label>Project name<input class="biss-picker-search" value="Open justice" data-biss-autofocus /></label><BissMenu
         label="Nested dialog actions"
         items={menuActions}
         onpick={(item) => (result = item.key)}
-      />{#snippet actions()}<BissButton on:click={() => (dialog = false)}>Done</BissButton
+      />{#snippet actions()}<BissButton onclick={() => (dialog = false)}>Done</BissButton
         >{/snippet}</BissDialog
     ><BissSidePanel open={panel} title="Project record" onclose={() => (panel = false)}
       ><p>Details and activities share a focused panel.</p></BissSidePanel

@@ -18,13 +18,16 @@
 </template>
 
 <script setup lang="ts">
-import type { BissLink } from "../tokens";
+import type { BissLink } from '../tokens';
 
-withDefaults(defineProps<{
-  managedBy?: string;
-  links?: BissLink[];
-}>(), {
-  managedBy: "Managed by BISS Institute.",
-  links: () => [],
-});
+withDefaults(
+  defineProps<{
+    managedBy?: string;
+    links?: BissLink[];
+  }>(),
+  {
+    managedBy: 'Managed by BISS Institute.',
+    links: () => [],
+  },
+);
 </script>

@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, watch, onMounted, onBeforeUnmount, nextTick, useId } from 'vue';
-import type { BissPickOption } from '../library-types';
+import type { BissPickOption } from '../core/types';
 const {
   options,
   selected = [],

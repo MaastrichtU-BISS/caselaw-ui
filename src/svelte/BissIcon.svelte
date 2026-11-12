@@ -1,6 +1,10 @@
 <script lang="ts">
-  import type { BissIconName } from '../icon-names';
-  export let name: BissIconName;
+  import type { BissIconName } from '../core/icon-names';
+  interface Props {
+    name: BissIconName;
+  }
+
+  let { name }: Props = $props();
 </script>
 
 <svg class="biss-icon" viewBox="0 0 24 24" aria-hidden="true">

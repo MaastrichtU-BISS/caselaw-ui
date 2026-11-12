@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { computed, ref, watch, onMounted, onBeforeUnmount, nextTick, useId } from 'vue';
-import { groupedLayout } from '../chart-layout';
-import type { BissBarSeries } from '../library-types';
+import { computed } from 'vue';
+import { groupedLayout } from '../core/charts';
+import type { BissBarSeries } from '../core/types';
 const {
   categories,
   series,

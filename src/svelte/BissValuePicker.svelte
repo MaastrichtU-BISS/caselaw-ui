@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
-  import type { BissPickOption } from '../library-types';
-  import { toggleValue } from '../portable';
+  import type { BissPickOption } from '../core/types';
+  import { toggleValue } from '../core/format';
   let {
     options,
     selected = $bindable([]),

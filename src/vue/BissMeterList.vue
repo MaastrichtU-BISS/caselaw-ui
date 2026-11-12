@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { computed } from "vue";
-import type { BissMeterItem } from "../types";
+import { computed } from 'vue';
+import type { BissMeterItem } from '../core/types';
 
 const props = defineProps<{
   items: BissMeterItem[];
@@ -17,7 +17,10 @@ const max = computed(() => Math.max(1, ...props.items.map((item) => item.value))
         <span class="biss-meter-value">{{ item.display ?? item.value }}</span>
       </div>
       <div class="biss-meter-track">
-        <div class="biss-meter-fill" :style="{ width: `${Math.round((item.value / max) * 100)}%` }" />
+        <div
+          class="biss-meter-fill"
+          :style="{ width: `${Math.round((item.value / max) * 100)}%` }"
+        />
       </div>
     </div>
   </div>

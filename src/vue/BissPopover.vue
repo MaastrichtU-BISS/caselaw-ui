@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { computed, ref, watch, onMounted, onBeforeUnmount, nextTick, useId } from 'vue';
-import { floatPanel, listKeys, closePopover } from '../interactions';
+import { ref, useId } from 'vue';
+import { floatPanel } from '../core/dom';
 import BissIcon from './BissIcon.vue';
-import type { BissIconName } from '../icon-names';
+import type { BissIconName } from '../core/icon-names';
 
 import { actionDirective } from './actions';
 const {

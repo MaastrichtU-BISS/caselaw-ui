@@ -10,7 +10,7 @@ const model = defineModel<boolean>();
 
 <template>
   <label class="biss-switch">
-    <input v-model="model" type="checkbox" :disabled="disabled">
+    <input v-model="model" type="checkbox" :disabled="disabled" />
     <span class="biss-switch-track"><span class="biss-switch-thumb" /></span>
     <span class="biss-switch-text">
       <span class="biss-switch-label">{{ label }}</span>

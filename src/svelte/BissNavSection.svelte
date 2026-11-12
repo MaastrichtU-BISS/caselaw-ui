@@ -1,16 +1,22 @@
 <script lang="ts">
-  export let heading: string | undefined = undefined;
-  export let empty: string | undefined = undefined;
+  interface Props {
+    heading?: string | undefined;
+    empty?: string | undefined;
+    action?: import('svelte').Snippet;
+    children?: import('svelte').Snippet;
+  }
+
+  let { heading = undefined, empty = undefined, action, children }: Props = $props();
 </script>
 
 <nav class="biss-nav-section" aria-label={heading}>
   {#if heading}
     <div class="biss-nav-heading">
       <span>{heading}</span>
-      <slot name="action" />
+      {@render action?.()}
     </div>
   {/if}
-  <slot />
+  {@render children?.()}
   {#if empty}
     <p class="biss-nav-empty">{empty}</p>
   {/if}

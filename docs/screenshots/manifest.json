@@ -1,9 +1,27 @@
 {
   "description": "Headless screenshots of the actual shipped components, using docs-site/fixtures.ts. All names and records are synthetic.",
   "capture": "scripts/capture-docs.ts",
-  "inputsSha256": "b7246d7f6cdadef7c180f9a40daaaa0111d44f459971c33af160cd745e14c7d6",
+  "inputsSha256": "e7f90b59a9805aeda79162dc6158bee739eeeea9c9d129a79dccce75dc6c85b8",
   "referenceFramework": "Vue where available; Svelte for ActionCard",
   "screenshots": [
+    {
+      "name": "BissAccessList",
+      "state": "default",
+      "viewport": "desktop",
+      "file": "access-list-default-desktop.png",
+      "width": 960,
+      "height": 240,
+      "sha256": "fb19e87b9c1e4db435419bd74c440eca0a7ea5dab6ce9bb033d78b9a654fd9f0"
+    },
+    {
+      "name": "BissAccessList",
+      "state": "default",
+      "viewport": "phone",
+      "file": "access-list-default-phone.png",
+      "width": 390,
+      "height": 240,
+      "sha256": "da8ca952f6795aec17a4f02db7f80b1967a9436ff058040b6da34611358af591"
+    },
     {
       "name": "BissActionCard",
       "state": "default",
@@ -11,7 +29,7 @@
       "file": "action-card-default-desktop.png",
       "width": 960,
       "height": 240,
-      "sha256": "bad27c78d25c1e3141035418f35686dc2eadf2fcdc7959dbd61aaeb0a6286e2f"
+      "sha256": "59002c87a2aad3e09b7fa513e31ba4fd969bf4f314121f533e9f1a8214e4a226"
     },
     {
       "name": "BissActionCard",
@@ -20,7 +38,7 @@
       "file": "action-card-default-phone.png",
       "width": 390,
       "height": 240,
-      "sha256": "581fe33487e5f2ffb9a5d8230d5b3be1fb8cb22e0185c10eae2350a40c95aa56"
+      "sha256": "91c0a7401fbc6a560ef6d3b2baf90d6cca7bcb5e7a3a80850eb191cff6ceebd3"
     },
     {
       "name": "BissActivityList",
@@ -41,13 +59,31 @@
       "sha256": "d0c5d5853e988d19384daa047d7a27018d862f6dff12546ff00ed9c99e0d633d"
     },
     {
+      "name": "BissAgenda",
+      "state": "default",
+      "viewport": "desktop",
+      "file": "agenda-default-desktop.png",
+      "width": 960,
+      "height": 242,
+      "sha256": "8db82a83fecf94f883d51be5ee401e0794557ad11af3b9e5d5065dc20d00cd29"
+    },
+    {
+      "name": "BissAgenda",
+      "state": "default",
+      "viewport": "phone",
+      "file": "agenda-default-phone.png",
+      "width": 390,
+      "height": 240,
+      "sha256": "2bbafbcb96b3f03de8b3697e42d593333da7e262355c29324b5a7d0f01622c39"
+    },
+    {
       "name": "BissAlertLine",
       "state": "default",
       "viewport": "desktop",
       "file": "alert-line-default-desktop.png",
       "width": 960,
       "height": 240,
-      "sha256": "a12a15572eb90cfc56adb61ae30f126f02cdbdce3c703fc5082431665467f346"
+      "sha256": "3fa87ac19f66085cf68ff60620907ac6a62a46d2fa6f7f64941e46b41fd625c5"
     },
     {
       "name": "BissAlertLine",
@@ -56,7 +92,7 @@
       "file": "alert-line-default-phone.png",
       "width": 390,
       "height": 240,
-      "sha256": "829e3cf223ec45c52e1b1224eaf0dbc1b301a320610bbd5ae622178831790f62"
+      "sha256": "f27b710929a87d9dd640827b50d2621edf9086f53c491a9dd13a65f6afdddfef"
     },
     {
       "name": "BissAppShell",
@@ -65,7 +101,7 @@
       "file": "app-shell-default-desktop.png",
       "width": 960,
       "height": 640,
-      "sha256": "82e5bdba8e85258415f08f678b392a57e2a775eacf2f5b065050d0fb728fef11"
+      "sha256": "ba630775b29c8f3a9cd6e24fed9d946ccc480d61ead4549a427005a97d08fd1c"
     },
     {
       "name": "BissAppShell",
@@ -74,7 +110,25 @@
       "file": "app-shell-default-phone.png",
       "width": 390,
       "height": 640,
-      "sha256": "3b76597df4c04c1b847a2f32da813d4bddc5d20fe1717f5d8a5f68022305b51f"
+      "sha256": "d73eea3ad8e46bf9403045f30e4aeaaa01b7a0b00c78e6270882d241edc9da4c"
+    },
+    {
+      "name": "BissAttachmentList",
+      "state": "default",
+      "viewport": "desktop",
+      "file": "attachment-list-default-desktop.png",
+      "width": 960,
+      "height": 240,
+      "sha256": "0d99ca088a18433edcaf9df87a115f29717a6c20eceead22dcd1b38b8c905daa"
+    },
+    {
+      "name": "BissAttachmentList",
+      "state": "default",
+      "viewport": "phone",
+      "file": "attachment-list-default-phone.png",
+      "width": 390,
+      "height": 240,
+      "sha256": "a98875b5ee0382cef94febc058cac56f3f60226263584da29e66c03e034d21ab"
     },
     {
       "name": "BissAvatar",
@@ -101,7 +155,7 @@
       "file": "badge-default-desktop.png",
       "width": 960,
       "height": 240,
-      "sha256": "13f9a32d9b32429a82e978bb4d59b84de971629f3111167e3286837da91b66a5"
+      "sha256": "1eb3b45110d61b8b14f5c1dc54a1168b2f503db32a6120fcbc159787063f040d"
     },
     {
       "name": "BissBadge",
@@ -110,7 +164,7 @@
       "file": "badge-default-phone.png",
       "width": 390,
       "height": 240,
-      "sha256": "a590f5c3b035c44eaf60b3b2be1b57ece50461590c62684e98b8b39e57507780"
+      "sha256": "ab3474e1f5577c1d9933818cd6a17192a199e3e77775c832f5b8e400f404ca3f"
     },
     {
       "name": "BissBarChart",
@@ -118,8 +172,8 @@
       "viewport": "desktop",
       "file": "bar-chart-default-desktop.png",
       "width": 960,
-      "height": 305,
-      "sha256": "af111e9da1338cc8168734920a41aab7ae28b763a1b446bb330c007f2cc3fbb1"
+      "height": 274,
+      "sha256": "aa7bdfbd4ca627385147e527ae1daeb64f90891356823ed7f5831b6f77526f88"
     },
     {
       "name": "BissBarChart",
@@ -127,8 +181,26 @@
       "viewport": "phone",
       "file": "bar-chart-default-phone.png",
       "width": 390,
-      "height": 289,
-      "sha256": "c260add7f854229bb7eb966c5d7124ded40892d1bf87e1d20bab265b3ce79dcc"
+      "height": 258,
+      "sha256": "9395bd448f579d892be53c3add4bf9778860304c2a27599e766555753941acb4"
+    },
+    {
+      "name": "BissBookmark",
+      "state": "default",
+      "viewport": "desktop",
+      "file": "bookmark-default-desktop.png",
+      "width": 960,
+      "height": 240,
+      "sha256": "f85ddea9f140e47a93b440051ce174dce69a9ead48b986515233c68b1ad15045"
+    },
+    {
+      "name": "BissBookmark",
+      "state": "default",
+      "viewport": "phone",
+      "file": "bookmark-default-phone.png",
+      "width": 390,
+      "height": 240,
+      "sha256": "6ad1f88c16f53c22c340dc4e9f88728d4f38db8fca11161908d06cdfe07fc23d"
     },
     {
       "name": "BissBottomBar",
@@ -137,7 +209,7 @@
       "file": "bottom-bar-default-desktop.png",
       "width": 960,
       "height": 640,
-      "sha256": "4b64a3405b4d6e15e93f8523ac6245c7f8e1d78b39ee8331a0601f458cc479b0"
+      "sha256": "ba6e2716e88544305a8c11edf605f85e862b85bed0e600bfa1b093d673679615"
     },
     {
       "name": "BissBottomBar",
@@ -146,7 +218,25 @@
       "file": "bottom-bar-default-phone.png",
       "width": 390,
       "height": 640,
-      "sha256": "13dd2d4e5457b55addec6408b9ba7010f0348ccde1be5c99f954b1c4ea8f9c22"
+      "sha256": "e35d06b7905dcc6b39ed742d8f1669a4b7a4e3c2f15db965d5a408157f8c6f27"
+    },
+    {
+      "name": "BissBreadcrumbs",
+      "state": "default",
+      "viewport": "desktop",
+      "file": "breadcrumbs-default-desktop.png",
+      "width": 960,
+      "height": 240,
+      "sha256": "23e7c58ce5662e65920382f39610845d3aecdf9be0a407e5429b908b966e4d45"
+    },
+    {
+      "name": "BissBreadcrumbs",
+      "state": "default",
+      "viewport": "phone",
+      "file": "breadcrumbs-default-phone.png",
+      "width": 390,
+      "height": 240,
+      "sha256": "df6fc77a59cf712bc269461150cba37f34222b9bb292771082c13bacd8fd0e89"
     },
     {
       "name": "BissButton",
@@ -155,7 +245,7 @@
       "file": "button-default-desktop.png",
       "width": 960,
       "height": 240,
-      "sha256": "d93b7acdb1efc99782c97c45da8d0f3ec6ca3d14c38c476daee59554550d339a"
+      "sha256": "a91916e71bcc917e5b86ee1118bd516fd77ea253cd1c9ff8b1900cd0179be71e"
     },
     {
       "name": "BissButton",
@@ -164,7 +254,7 @@
       "file": "button-default-phone.png",
       "width": 390,
       "height": 240,
-      "sha256": "3ee9f17896fd70e1820e9f8c181339c0c79fe8f6a5c836b49fdc558d4fdb8d2f"
+      "sha256": "10f2c0cc6675e7e4d807c4b290bba3570532a83af096f6a39f22736b541601fd"
     },
     {
       "name": "BissButton",
@@ -173,7 +263,7 @@
       "file": "button-disabled-desktop.png",
       "width": 960,
       "height": 240,
-      "sha256": "5cc7c37edee5d82eeb40498b188b94ff951d5a514aa6a0f0ddf546c75ceee947"
+      "sha256": "1c8fa4f6964a3a55a70c519d90ae7b1eec0b632c16e44a21f3146407f574d736"
     },
     {
       "name": "BissButton",
@@ -182,7 +272,7 @@
       "file": "button-disabled-phone.png",
       "width": 390,
       "height": 240,
-      "sha256": "c272644dc89c5433cc6c506d227e6293cb9f03ec427312bb37151f59206580d0"
+      "sha256": "90f40b2716bfca287c4b81948727dc5e73abd6bac1b22fba20b41603b847a514"
     },
     {
       "name": "BissCalendar",
@@ -191,7 +281,7 @@
       "file": "calendar-default-desktop.png",
       "width": 960,
       "height": 665,
-      "sha256": "a159dc041d5a4a6e1fb62f480a0bc85fc6b12a1a4d5594c105f8515c44d89d2c"
+      "sha256": "0d95b6df9189a4e252a105dcaff6ee53e9c53593b72fb8789f069ff695550642"
     },
     {
       "name": "BissCalendar",
@@ -209,7 +299,7 @@
       "file": "callout-default-desktop.png",
       "width": 960,
       "height": 240,
-      "sha256": "7697ae92b0c841a925f456fe60d838b3bb1261b532e70cce5ab33702fc9ff013"
+      "sha256": "490755a676650e326327e0819eaad10726383f9c6a05ca704d19936383dc6fa7"
     },
     {
       "name": "BissCallout",
@@ -218,7 +308,7 @@
       "file": "callout-default-phone.png",
       "width": 390,
       "height": 240,
-      "sha256": "ee0bd996fa65af4654ad6c10fb02ec8c4e198d97f3b50230c8aaeebfc92d5d9a"
+      "sha256": "57070e99b016b7c255f06d6e62069a063ca34ec0b014feb26ae1e8563adf4771"
     },
     {
       "name": "BissCapacityBar",
@@ -245,7 +335,7 @@
       "file": "card-default-desktop.png",
       "width": 960,
       "height": 240,
-      "sha256": "0d8ad9135f19786e48379d00eee7039c6a0060f9bcc59ee4e1f17e06a71735ec"
+      "sha256": "a9527531ff7b6185cf90e363397fbf146a12a9652c64c0901dc0396d69639c92"
     },
     {
       "name": "BissCard",
@@ -254,7 +344,7 @@
       "file": "card-default-phone.png",
       "width": 390,
       "height": 240,
-      "sha256": "3865e5a4a4e62e8f0d2f321ecef54dd5983eec9c177a2addd62b2eb893e6a557"
+      "sha256": "e1715ac06012a971d8211326cb8fa35efa2a4b0babe1d6204d454da21506242a"
     },
     {
       "name": "BissChartLegend",
@@ -273,6 +363,42 @@
       "width": 390,
       "height": 240,
       "sha256": "9f6d3c7e63450db1f12b6c9b69e308708615b210ec214dbc85c7cd137fb97801"
+    },
+    {
+      "name": "BissCheckbox",
+      "state": "default",
+      "viewport": "desktop",
+      "file": "checkbox-default-desktop.png",
+      "width": 960,
+      "height": 240,
+      "sha256": "1bff0e7a80398a9cff540b8ed9ecdfc0189662bd9f5f7bb5e9d7cbbc1807611a"
+    },
+    {
+      "name": "BissCheckbox",
+      "state": "default",
+      "viewport": "phone",
+      "file": "checkbox-default-phone.png",
+      "width": 390,
+      "height": 240,
+      "sha256": "a8680ed0a97aad2ad96edd35bf3338c777087ccfd9044086bcd2cfb81a5a3667"
+    },
+    {
+      "name": "BissCheckbox",
+      "state": "disabled",
+      "viewport": "desktop",
+      "file": "checkbox-disabled-desktop.png",
+      "width": 960,
+      "height": 240,
+      "sha256": "6b5e83caf4c7ca6f8020a8c53c1a7ed1567b6cb89f4fce47c746147d73328ec8"
+    },
+    {
+      "name": "BissCheckbox",
+      "state": "disabled",
+      "viewport": "phone",
+      "file": "checkbox-disabled-phone.png",
+      "width": 390,
+      "height": 240,
+      "sha256": "845675901a68f0eb498683a7e7ee42d7d4ba2162ee7d9f22b1fef0ba97a3f20f"
     },
     {
       "name": "BissChecklist",
@@ -299,7 +425,7 @@
       "file": "code-block-default-desktop.png",
       "width": 960,
       "height": 240,
-      "sha256": "f32c81ef5f422a4509940661efedf272be024b74c0176cb0edca0e2c671fb525"
+      "sha256": "3f83ce5cd9c070e941a07ca75b0cbdaf39578b4665e456d9389c0643db2f3184"
     },
     {
       "name": "BissCodeBlock",
@@ -308,7 +434,7 @@
       "file": "code-block-default-phone.png",
       "width": 390,
       "height": 240,
-      "sha256": "8a83e4aebf71e0c2076ce89b08f0d47e18a3e7872ccf0f5f3da4f69099183aa7"
+      "sha256": "2ac146650423466b09a220dd3cccb7a36e5785420f1b168f0c1576b5f9518b7c"
     },
     {
       "name": "BissCodeTabs",
@@ -317,7 +443,7 @@
       "file": "code-tabs-default-desktop.png",
       "width": 960,
       "height": 240,
-      "sha256": "fe8c1e2d4509635c27c1112058b9f19e702353084388194ebdd3dc0acaaef8e9"
+      "sha256": "023f4b34b6373a22608f5eb9ae2f682001bb67af682de50ca59088ba9bc720f7"
     },
     {
       "name": "BissCodeTabs",
@@ -326,7 +452,61 @@
       "file": "code-tabs-default-phone.png",
       "width": 390,
       "height": 240,
-      "sha256": "104446597a8e51fe700e5c5d5bdba10f6f73e50e0387e36998c393d8be4c6be3"
+      "sha256": "509a0bad5b1ece9d2b3e779befaba310ae80d951f146d51b8922c52e51138d31"
+    },
+    {
+      "name": "BissColumnManager",
+      "state": "default",
+      "viewport": "desktop",
+      "file": "column-manager-default-desktop.png",
+      "width": 960,
+      "height": 240,
+      "sha256": "3d2d5990c01f935d8ead7597cb5085b830a81cf5b410c8dbccca8462430b3b10"
+    },
+    {
+      "name": "BissColumnManager",
+      "state": "default",
+      "viewport": "phone",
+      "file": "column-manager-default-phone.png",
+      "width": 390,
+      "height": 243,
+      "sha256": "f858bd72bb2df7fa77c09135c376cd78e3e811c98dceb18114bd2bd0b1ec16d0"
+    },
+    {
+      "name": "BissCommentComposer",
+      "state": "default",
+      "viewport": "desktop",
+      "file": "comment-composer-default-desktop.png",
+      "width": 960,
+      "height": 240,
+      "sha256": "ef0d53199c421016b921c2e9c90207318c55afe3848fe3162011847c92de810f"
+    },
+    {
+      "name": "BissCommentComposer",
+      "state": "default",
+      "viewport": "phone",
+      "file": "comment-composer-default-phone.png",
+      "width": 390,
+      "height": 240,
+      "sha256": "cb131656aac2fc43ab23a69a1e741847eb779e95339c77b83ea42334565f757a"
+    },
+    {
+      "name": "BissCommentThread",
+      "state": "default",
+      "viewport": "desktop",
+      "file": "comment-thread-default-desktop.png",
+      "width": 960,
+      "height": 392,
+      "sha256": "3b480ff6f5e73a7e2e88d0d6273320eedbb23a638ca3e903738c046a593bb2af"
+    },
+    {
+      "name": "BissCommentThread",
+      "state": "default",
+      "viewport": "phone",
+      "file": "comment-thread-default-phone.png",
+      "width": 390,
+      "height": 376,
+      "sha256": "03482a0149037124bd73790fa7aff9d7d3c595746e91f12e10e5782f5c044fc6"
     },
     {
       "name": "BissConfirmDialog",
@@ -335,7 +515,7 @@
       "file": "confirm-dialog-busy-desktop.png",
       "width": 960,
       "height": 640,
-      "sha256": "766da2682ce2900af7e5c7c619006d125353ddd6b0fcedca4a2919ca9d6caa6a"
+      "sha256": "dbbbdbeeb6ef5fd03a2dcd26606bf8a389ef7b3f1bd5801c64344f4b3a6aeb78"
     },
     {
       "name": "BissConfirmDialog",
@@ -344,7 +524,7 @@
       "file": "confirm-dialog-busy-phone.png",
       "width": 390,
       "height": 640,
-      "sha256": "7da6fc076d3a8f823a3e2dff8be5b0226e8fe8e64e08fd7ed5a638571ab5ee98"
+      "sha256": "1ecbc3e9f50159e8fef4d3e8e3b4b572e57283ae0532857b738489cb22f1d13b"
     },
     {
       "name": "BissConfirmDialog",
@@ -353,7 +533,7 @@
       "file": "confirm-dialog-open-desktop.png",
       "width": 960,
       "height": 640,
-      "sha256": "c1f14abde5296612da2b4ab5120b22ec9f9f17be063494ed7286a2bc0f0cf3da"
+      "sha256": "ae862c2a2e18df387f3573248d0b81fa03e269823d0dbefe1a0754f0e59db1c6"
     },
     {
       "name": "BissConfirmDialog",
@@ -362,7 +542,7 @@
       "file": "confirm-dialog-open-phone.png",
       "width": 390,
       "height": 640,
-      "sha256": "39b600c7685a3e014b827bf11a40db82cf04d4e9125dad6a82589947d12ed002"
+      "sha256": "3dbc8b3cd8589002bd0777be994fbd9ffa85079710086dbafdaff2baf8179ad4"
     },
     {
       "name": "BissConsoleHeader",
@@ -371,7 +551,7 @@
       "file": "console-header-default-desktop.png",
       "width": 960,
       "height": 240,
-      "sha256": "bafd52b2fb2270b0027f3743753a936bd61819fdb945145ffd510babe2381459"
+      "sha256": "0f53adcf248b3042a1bdc695970207484aaa7c711a04c05020bf854c722b7095"
     },
     {
       "name": "BissConsoleHeader",
@@ -380,7 +560,7 @@
       "file": "console-header-default-phone.png",
       "width": 390,
       "height": 240,
-      "sha256": "b297fd9c6d7e5b1500c106df46b3ee57a6b97d1a86f926b676758de92446d8f1"
+      "sha256": "0148669642277c73940bb570eb63ff66d570e3dca5a87295743b91f27e7d167d"
     },
     {
       "name": "BissConsoleLayout",
@@ -389,7 +569,7 @@
       "file": "console-layout-default-desktop.png",
       "width": 960,
       "height": 640,
-      "sha256": "ca0249026fad2b84a9861688b5724f7a568f9f577a60c4a98f85038684d0520f"
+      "sha256": "4cc7fe58a652ef5a86e7fccd99cae01214ca9b780c8c4811cd4821111d15a95e"
     },
     {
       "name": "BissConsoleLayout",
@@ -398,7 +578,7 @@
       "file": "console-layout-default-phone.png",
       "width": 390,
       "height": 640,
-      "sha256": "493149cad26d189c59f5be8da923f3cfb7c41de9e54eb8af1d19ff7e3711a057"
+      "sha256": "2fd2ef86431f09d8dbc84888175531a2158205bc864169f2b63ab59b9fcd9916"
     },
     {
       "name": "BissCopyField",
@@ -407,7 +587,7 @@
       "file": "copy-field-default-desktop.png",
       "width": 960,
       "height": 240,
-      "sha256": "c4b1f894002d27405ca6d5260976e758f24d97b4fdfb6635a6c62f3e68cfb16d"
+      "sha256": "fccd7cc605a564d518519176c14d480455946ef0510d306dda0bff5d097a0b3d"
     },
     {
       "name": "BissCopyField",
@@ -416,7 +596,43 @@
       "file": "copy-field-default-phone.png",
       "width": 390,
       "height": 240,
-      "sha256": "95849379f8d2f5af621e70111ee2a095615e2ea41aab6b8f3282800e2b6af057"
+      "sha256": "47bb8bfe80a5e8385f3c97b3974a95dc98f046e2d58405fdf2b0f03ab8cef644"
+    },
+    {
+      "name": "BissDataGrid",
+      "state": "default",
+      "viewport": "desktop",
+      "file": "data-grid-default-desktop.png",
+      "width": 960,
+      "height": 266,
+      "sha256": "52c103ce9fefc3d91cf11d9f7b03de58e7a80ac48c9e8e528a96292e29841443"
+    },
+    {
+      "name": "BissDataGrid",
+      "state": "default",
+      "viewport": "phone",
+      "file": "data-grid-default-phone.png",
+      "width": 390,
+      "height": 250,
+      "sha256": "bc4ac720d2db6c9f516364851c43aaec9a2d5594e1e2964b70968c0f890820b4"
+    },
+    {
+      "name": "BissDataGrid",
+      "state": "empty",
+      "viewport": "desktop",
+      "file": "data-grid-empty-desktop.png",
+      "width": 960,
+      "height": 240,
+      "sha256": "6f4ecc94746c45f50f5d11626518ca4ea1e6b0005cb41a1e394986e3fc049990"
+    },
+    {
+      "name": "BissDataGrid",
+      "state": "empty",
+      "viewport": "phone",
+      "file": "data-grid-empty-phone.png",
+      "width": 390,
+      "height": 240,
+      "sha256": "ee291c4d8fe5bf60e69b2764dd38bde5defd692f11b59ecfebbadd336c746c7d"
     },
     {
       "name": "BissDataTable",
@@ -425,7 +641,7 @@
       "file": "data-table-default-desktop.png",
       "width": 960,
       "height": 240,
-      "sha256": "41e360abc332bd98a643bf09e3bb0732af0a4fd58a6f306ef84943621a6c626e"
+      "sha256": "7bbc8226b830427f60090f5b2d67339936dd76af78eeb359fa3bebcfb3d95bdf"
     },
     {
       "name": "BissDataTable",
@@ -434,7 +650,7 @@
       "file": "data-table-default-phone.png",
       "width": 390,
       "height": 240,
-      "sha256": "a147c6608f52cfb1ee054ae9be30394266aabdc30abe3554737623cd90478b03"
+      "sha256": "f32f0dde0c3639f0a760d5109152d790b41e70ec2feb32e1290fd6608ab04fd6"
     },
     {
       "name": "BissDataTable",
@@ -443,7 +659,7 @@
       "file": "data-table-empty-desktop.png",
       "width": 960,
       "height": 240,
-      "sha256": "55e5c65f98f516cafceb53b132f22c7db20ce0e89eb02778b6ad7e397701673c"
+      "sha256": "e3733190ab62a71464192af99a6b9ac326deb6a02d8604ceb3ec3a6a9ad18351"
     },
     {
       "name": "BissDataTable",
@@ -452,7 +668,7 @@
       "file": "data-table-empty-phone.png",
       "width": 390,
       "height": 240,
-      "sha256": "284e0d5919f75286331d132979b4df52103fe7ddb6b23676a40217deb3c1bb91"
+      "sha256": "01f6bc2f4e4d6e2ae42f55de5ed2011ec8e4ac992124c457a2420119580cf233"
     },
     {
       "name": "BissDataTable",
@@ -460,8 +676,8 @@
       "viewport": "desktop",
       "file": "data-table-loading-desktop.png",
       "width": 960,
-      "height": 274,
-      "sha256": "649d96148b49ef06eda77c215e8e259bc231e148da70d5ed043d4d7edcf4602b"
+      "height": 330,
+      "sha256": "f1e4c4187c33abb5ced52686007bc46867c954ce15d733d8293a36b378f1374b"
     },
     {
       "name": "BissDataTable",
@@ -469,8 +685,26 @@
       "viewport": "phone",
       "file": "data-table-loading-phone.png",
       "width": 390,
-      "height": 258,
-      "sha256": "f68a3ef371ec05a5f912f0ccd95c46310207322eabb323f3f648dcfd73581014"
+      "height": 314,
+      "sha256": "5577207dc6913cc156472ce69f400292b40df8478d216563a5c55e6295ef94aa"
+    },
+    {
+      "name": "BissDataTile",
+      "state": "default",
+      "viewport": "desktop",
+      "file": "data-tile-default-desktop.png",
+      "width": 960,
+      "height": 240,
+      "sha256": "f8bf7d7c0cd0c3d285dd11c793a97adffbe2e1ab2c141510e63b1ca69aba5270"
+    },
+    {
+      "name": "BissDataTile",
+      "state": "default",
+      "viewport": "phone",
+      "file": "data-tile-default-phone.png",
+      "width": 390,
+      "height": 240,
+      "sha256": "e9bcba9294ed93a6d121322513a12be4343f57fd9d5fb58c81e3a1e7af1bda92"
     },
     {
       "name": "BissDateField",
@@ -514,8 +748,8 @@
       "viewport": "desktop",
       "file": "date-picker-default-desktop.png",
       "width": 960,
-      "height": 431,
-      "sha256": "60c89f7a4ca1f0c527fa80c0228d3d8c2234e653a2f7eb021c9388d68ca9730e"
+      "height": 429,
+      "sha256": "a2fbfb16c2365025026740f909023cb7b06313400da95fa66096cac2ad117a4b"
     },
     {
       "name": "BissDatePicker",
@@ -523,8 +757,8 @@
       "viewport": "phone",
       "file": "date-picker-default-phone.png",
       "width": 390,
-      "height": 415,
-      "sha256": "d400ac897c63eaccfe7e2a976b40b13d620bf9cf9dae02315724bf8ba8a1ab54"
+      "height": 413,
+      "sha256": "973f9e9dbb90f70d65766afa948ba7d8b1ff41aee4adf44281be436a6701d926"
     },
     {
       "name": "BissDatePicker",
@@ -532,8 +766,8 @@
       "viewport": "desktop",
       "file": "date-picker-range-desktop.png",
       "width": 960,
-      "height": 431,
-      "sha256": "d0f5866c22ad6205b6400515986f25ae873e2c45e3794abbbefce3d779f147c0"
+      "height": 429,
+      "sha256": "42232e5cd3e13aa4d7455771665a4eab876cf347504228d2fe9bc3dafe27c94c"
     },
     {
       "name": "BissDatePicker",
@@ -541,8 +775,26 @@
       "viewport": "phone",
       "file": "date-picker-range-phone.png",
       "width": 390,
-      "height": 415,
-      "sha256": "58ea0bb8bc7f93872e43224b5ec64353716e49c13806e63c646d80c029ad7b31"
+      "height": 413,
+      "sha256": "6cf7ed1c2f4b1f63a7dbf1493258729f6f88cb5671f59f7c696f01a2fa6eb324"
+    },
+    {
+      "name": "BissDeadlineList",
+      "state": "default",
+      "viewport": "desktop",
+      "file": "deadline-list-default-desktop.png",
+      "width": 960,
+      "height": 240,
+      "sha256": "0ebea6fda6abd289ba39d9c63de4f5ec62981292771bf763765cc00bf18f51ba"
+    },
+    {
+      "name": "BissDeadlineList",
+      "state": "default",
+      "viewport": "phone",
+      "file": "deadline-list-default-phone.png",
+      "width": 390,
+      "height": 240,
+      "sha256": "586950d8eb4eac0b852c15110f2b89d482ce15f14a9222522ee4fbb1f750db06"
     },
     {
       "name": "BissDialog",
@@ -551,7 +803,7 @@
       "file": "dialog-busy-desktop.png",
       "width": 960,
       "height": 640,
-      "sha256": "0d5d9bfe6d02e8305a7d70eb8bae72c7f246a6033a1295a6c88a0b407956068e"
+      "sha256": "db9a49b364dee2ffa668a4d098eda0dfb803b8998556a5adcb9837c91a3d9b1f"
     },
     {
       "name": "BissDialog",
@@ -560,7 +812,7 @@
       "file": "dialog-busy-phone.png",
       "width": 390,
       "height": 640,
-      "sha256": "77637610770e71a62a828de8c337c2c0b09c1a84e26bff2badfe07791038a1f4"
+      "sha256": "a99b8297b6c184ac3ab37960b78c6a530fe7e7f0ce77623120c62da4f849ec7b"
     },
     {
       "name": "BissDialog",
@@ -569,7 +821,7 @@
       "file": "dialog-open-desktop.png",
       "width": 960,
       "height": 640,
-      "sha256": "8ca33a1a2eaeb8c752a80d9dc1883ece7ad738fd93c283f99548a375e839c6cb"
+      "sha256": "d017647ca62109dcc971657fdc0426361b7f9d2cec05b75774b9838351327d6e"
     },
     {
       "name": "BissDialog",
@@ -578,7 +830,61 @@
       "file": "dialog-open-phone.png",
       "width": 390,
       "height": 640,
-      "sha256": "da850c6d4e0f1a851ef81700f893dd393d0c01db85ea9385d46e3cbf233efae2"
+      "sha256": "a35cae9f21df5a0008b53428ba803e89e20cd9eac2158ef504512ab70f634ce6"
+    },
+    {
+      "name": "BissDisclosure",
+      "state": "default",
+      "viewport": "desktop",
+      "file": "disclosure-default-desktop.png",
+      "width": 960,
+      "height": 240,
+      "sha256": "1401a8ee30e422f03863f8b3d937de9965bca9703d08644cafaf3380c13a2040"
+    },
+    {
+      "name": "BissDisclosure",
+      "state": "default",
+      "viewport": "phone",
+      "file": "disclosure-default-phone.png",
+      "width": 390,
+      "height": 240,
+      "sha256": "8741492ab1e90eceda9a09b815bf2f7bacdb15f22e07e2bb41bb67ef8098a934"
+    },
+    {
+      "name": "BissDocumentCallout",
+      "state": "default",
+      "viewport": "desktop",
+      "file": "document-callout-default-desktop.png",
+      "width": 960,
+      "height": 240,
+      "sha256": "7fa480d1e1c5a455cb53498497adbeb45e3350ab8593e89c73f881954199969e"
+    },
+    {
+      "name": "BissDocumentCallout",
+      "state": "default",
+      "viewport": "phone",
+      "file": "document-callout-default-phone.png",
+      "width": 390,
+      "height": 240,
+      "sha256": "960576246b806f1ddd8ef377e020c4451db786b7cb34236c9c1c7e3a623b3917"
+    },
+    {
+      "name": "BissDocumentToc",
+      "state": "default",
+      "viewport": "desktop",
+      "file": "document-toc-default-desktop.png",
+      "width": 960,
+      "height": 240,
+      "sha256": "07505dcb1f94ea7b1393e6730bd0c2c0b95babd973aadbabb0af51d405ea2e96"
+    },
+    {
+      "name": "BissDocumentToc",
+      "state": "default",
+      "viewport": "phone",
+      "file": "document-toc-default-phone.png",
+      "width": 390,
+      "height": 240,
+      "sha256": "77b9b9018b38f19917dca367813845321389dea5c3a93b6f9758a7fbf28bff11"
     },
     {
       "name": "BissEditableText",
@@ -614,7 +920,7 @@
       "file": "editable-text-editing-phone.png",
       "width": 390,
       "height": 240,
-      "sha256": "ea1d376e99b631e0c3fbcf3d4f07124fc72c86df433603d3a758e49f44a182d7"
+      "sha256": "636d235a26943415798aba67239326088a80120c45dd50077c1c023b63ac1dc5"
     },
     {
       "name": "BissEmptyState",
@@ -623,7 +929,7 @@
       "file": "empty-state-default-desktop.png",
       "width": 960,
       "height": 240,
-      "sha256": "b49d07d716e18972ad98d14cda961a87b872bab4a551b8450a5c7035c429ef3f"
+      "sha256": "03c1a9a0d23811784ed96cfd4926023b33103017fd9497b8fddc0d946e0658f5"
     },
     {
       "name": "BissEmptyState",
@@ -632,7 +938,7 @@
       "file": "empty-state-default-phone.png",
       "width": 390,
       "height": 240,
-      "sha256": "6ba12211d1586e406b6bb77aeebf04996e9e84d64c89407e78c39f5013a667c8"
+      "sha256": "238725d7b04036b1a98faf27b184b5ae6b569e66385b8d8eea46d9860bcd26db"
     },
     {
       "name": "BissFeatureCard",
@@ -641,7 +947,7 @@
       "file": "feature-card-default-desktop.png",
       "width": 960,
       "height": 240,
-      "sha256": "62dfc6be77fe50cf35edb54639e1109f0716c32dbbd2dbede8119337047a1629"
+      "sha256": "1ff024714d8aeee6e952ae52527eadebd1394739a778a8995b107d6c4810ed9e"
     },
     {
       "name": "BissFeatureCard",
@@ -650,7 +956,7 @@
       "file": "feature-card-default-phone.png",
       "width": 390,
       "height": 240,
-      "sha256": "87d7532b35a0aee39ea18c92d59476142821f5d255e14fc934af2f54d4ffdedc"
+      "sha256": "3321c1b2b67857f3d292dfa8b21df0f1e9bc5e954a6f41547127654c240693f2"
     },
     {
       "name": "BissField",
@@ -659,7 +965,7 @@
       "file": "field-default-desktop.png",
       "width": 960,
       "height": 240,
-      "sha256": "14812010ba79d69c62e86ed557cc61cfa54d1a06ae4c12affbfdde807fef9dfa"
+      "sha256": "92e230903396557345533792562856ef1404b4c0bd2be27b429eae31869b261e"
     },
     {
       "name": "BissField",
@@ -668,7 +974,7 @@
       "file": "field-default-phone.png",
       "width": 390,
       "height": 240,
-      "sha256": "1835a2e4defa1db4d299e63fb4c3425e3f52b57b7ce116aed65e1e2bf317e619"
+      "sha256": "c1426c22396698ad583512e0897f3fdab49593c647eb9dffde4399a431cf3ff1"
     },
     {
       "name": "BissField",
@@ -677,7 +983,7 @@
       "file": "field-error-desktop.png",
       "width": 960,
       "height": 240,
-      "sha256": "3dd9c8e0c40dd96e55d7c4a16f9c80f159d827097c9e127aff94f28fd76d3aec"
+      "sha256": "05e3114ea2e210148b0dd0d5c9cf7d08ffb9b64929a1373687489c63a63dbe51"
     },
     {
       "name": "BissField",
@@ -686,7 +992,61 @@
       "file": "field-error-phone.png",
       "width": 390,
       "height": 240,
-      "sha256": "8600b34d5af10083add718821e9b06e39258f17a7ed3ca6ff7deefc7ddc0fbff"
+      "sha256": "504275df5f0171cdf05e313ca854e33c306e8484a02bc960b6b58265b37b41f6"
+    },
+    {
+      "name": "BissFigureHelp",
+      "state": "open",
+      "viewport": "desktop",
+      "file": "figure-help-open-desktop.png",
+      "width": 960,
+      "height": 240,
+      "sha256": "173e28160c2c4ef97c78d2e21b2f77c23fadef39318d9c33ade03a4dee7ab58d"
+    },
+    {
+      "name": "BissFigureHelp",
+      "state": "open",
+      "viewport": "phone",
+      "file": "figure-help-open-phone.png",
+      "width": 390,
+      "height": 240,
+      "sha256": "e216926fe713867426fe90fc47d38749298238c16d39dcf21b0ded1e1419f4af"
+    },
+    {
+      "name": "BissFilePicker",
+      "state": "default",
+      "viewport": "desktop",
+      "file": "file-picker-default-desktop.png",
+      "width": 960,
+      "height": 240,
+      "sha256": "6402db285007c72677d6fd5db4be903b6ed82f6ad8ba5eb05e7b08cfa46753ea"
+    },
+    {
+      "name": "BissFilePicker",
+      "state": "default",
+      "viewport": "phone",
+      "file": "file-picker-default-phone.png",
+      "width": 390,
+      "height": 240,
+      "sha256": "e9298e241efb4699c4be0e060480988ca64886c1067c90f26c44f1af4158a94f"
+    },
+    {
+      "name": "BissFilterBuilder",
+      "state": "default",
+      "viewport": "desktop",
+      "file": "filter-builder-default-desktop.png",
+      "width": 960,
+      "height": 240,
+      "sha256": "cc8b107857764cc700604e26bd615a01fff370bd55a87789ae9b654a768de0ce"
+    },
+    {
+      "name": "BissFilterBuilder",
+      "state": "default",
+      "viewport": "phone",
+      "file": "filter-builder-default-phone.png",
+      "width": 390,
+      "height": 240,
+      "sha256": "be461863da3c5ffd208f74c96425ea69e6721c3d4feb514112ebb83e3fe17dad"
     },
     {
       "name": "BissGoalBar",
@@ -731,7 +1091,7 @@
       "file": "grid-shell-default-desktop.png",
       "width": 960,
       "height": 640,
-      "sha256": "e6f8d3b906447704c5185ed0dfd0bbcaa8b0d64e560300c6250426113973a056"
+      "sha256": "cf47c57f8355bcc8e00bd24d634ac74697abc7df87a82ee03f1d98a2573eadc9"
     },
     {
       "name": "BissGridShell",
@@ -740,7 +1100,7 @@
       "file": "grid-shell-default-phone.png",
       "width": 390,
       "height": 640,
-      "sha256": "61aac7ff115c007e68618ff6209842646fdb33c0571d378902dc760ee1e606a1"
+      "sha256": "5abdc05cbf28ea3c16fd577779189b7f2e2ecdb1d6edf1ff9f2a180442a2bd20"
     },
     {
       "name": "BissGroupedBars",
@@ -785,7 +1145,7 @@
       "file": "hero-default-desktop.png",
       "width": 960,
       "height": 240,
-      "sha256": "bd44d48f88b46b6c6d0435a376c5e90672933a4c731ffcb8908999030e97a680"
+      "sha256": "82e452a7ad881cac7951e396a958d1cf59aed6bc852252e17bf6321d503c0af4"
     },
     {
       "name": "BissHero",
@@ -794,7 +1154,7 @@
       "file": "hero-default-phone.png",
       "width": 390,
       "height": 240,
-      "sha256": "6138ea7337e4a6768179d960e199f16648948a57446a8706689576cdd34225d1"
+      "sha256": "27579102e7331aa4be36db8af596efa2381e81e2a67743c4a04a79451b3dd9b2"
     },
     {
       "name": "BissHeroPill",
@@ -803,7 +1163,7 @@
       "file": "hero-pill-default-desktop.png",
       "width": 960,
       "height": 240,
-      "sha256": "8a32cc75d018c3af814bb4087edd8fe5de2f2c2ca5f1f8256deca1a2a8ec3f04"
+      "sha256": "c12a90e7327b8caee30d6044bbc113e34ec190f25a4bd79568b39cb12538f4ab"
     },
     {
       "name": "BissHeroPill",
@@ -812,7 +1172,7 @@
       "file": "hero-pill-default-phone.png",
       "width": 390,
       "height": 240,
-      "sha256": "ccd3df76964f41de1c978779b12daa021b036914b9826be0b942e50f0c49e2e7"
+      "sha256": "52dd8846c2c06f0e3456755c4517cc8729ae9cbfed6355889bc72637c5bf74aa"
     },
     {
       "name": "BissHomeCard",
@@ -875,7 +1235,7 @@
       "file": "input-default-desktop.png",
       "width": 960,
       "height": 240,
-      "sha256": "be8d4f2c3e945ea040b0991e7e1092f57911bccd42e40f90c7807e8b24ac0b1f"
+      "sha256": "6a9ded5b24c26691e483b6b7bce650ec5db8d55e38bd9786cf4e91d81f3d9513"
     },
     {
       "name": "BissInput",
@@ -884,7 +1244,7 @@
       "file": "input-default-phone.png",
       "width": 390,
       "height": 240,
-      "sha256": "9e65803b04841f38ef552814b956dff445a5b1254f15d14471b71c2773d78b07"
+      "sha256": "8a1135188f72454912b0a2e2196e7523435ed3f277d6ef6c4238b4938e18dda0"
     },
     {
       "name": "BissInput",
@@ -893,7 +1253,7 @@
       "file": "input-disabled-desktop.png",
       "width": 960,
       "height": 240,
-      "sha256": "8fef70c44c6a66eabfe47d498d96ea3e2bcf3dc36f34222044395b09f4f1d98c"
+      "sha256": "7d57a426841dddf9ef96c8e478b99aab2571575049f13f8063ac4c87a59b1fb2"
     },
     {
       "name": "BissInput",
@@ -902,7 +1262,7 @@
       "file": "input-disabled-phone.png",
       "width": 390,
       "height": 240,
-      "sha256": "17f3f94c6bcd5a4351b1b558bb8ab20222c2c481e095cf4f8493c91765588d20"
+      "sha256": "6e934a381657da2f1d8b5e94b853d81ce279742613c3690b6f33ed028fb8a14d"
     },
     {
       "name": "BissInput",
@@ -911,7 +1271,7 @@
       "file": "input-error-desktop.png",
       "width": 960,
       "height": 240,
-      "sha256": "4b367493f3f7288c77f99107dd5b76e3b2edfa8f12a1c11e28315efb6fc63fb8"
+      "sha256": "7da8887560e3855ff254ba2476cc9fe7efa793829c17349e3aa8ed2a06026702"
     },
     {
       "name": "BissInput",
@@ -920,7 +1280,7 @@
       "file": "input-error-phone.png",
       "width": 390,
       "height": 240,
-      "sha256": "65e553efc7841520d180a347ce7a7d2a6df410c7eeb3b16c8603cb3905d7f5da"
+      "sha256": "02845a8d7be3c1b1ae139222b149033814d9252fc731af9292fdfcd13edba2b4"
     },
     {
       "name": "BissKanban",
@@ -929,7 +1289,7 @@
       "file": "kanban-default-desktop.png",
       "width": 960,
       "height": 304,
-      "sha256": "cb8d1457a1b71a57976fcfc92e4e228927d5c611518c0964e510a6964d0ec3bd"
+      "sha256": "67b7458535ce4fb6c317bebc50213902e5ccbe9129dadc13dc098b20f4624e0c"
     },
     {
       "name": "BissKanban",
@@ -938,7 +1298,7 @@
       "file": "kanban-default-phone.png",
       "width": 390,
       "height": 288,
-      "sha256": "5fc2d99a97e62d7ae6c8162e2039ce6ea4d3b1a701e674a7bef7806bd5f3bba4"
+      "sha256": "d8bc420f9ebc716507cc1b69c131f294d0734fda20922d97e527c36bf6556c02"
     },
     {
       "name": "BissKpiCard",
@@ -947,7 +1307,7 @@
       "file": "kpi-card-default-desktop.png",
       "width": 960,
       "height": 240,
-      "sha256": "7588826598aaae7519d9ad1f2db4ed3591864378a7bc8fd541af0211dd8f57a2"
+      "sha256": "2b7ae3be2471d24ed3edbfa19a85d39ac98de5571076615e6d351a19b5dfb159"
     },
     {
       "name": "BissKpiCard",
@@ -956,7 +1316,25 @@
       "file": "kpi-card-default-phone.png",
       "width": 390,
       "height": 240,
-      "sha256": "8e905307d4ebfedd79851896e180df2880ed47b8405e26a847c0eedf63e83d4d"
+      "sha256": "8e43d99732e685af467f9def7810b23260852243fb5940e9cc2617086867e186"
+    },
+    {
+      "name": "BissLabelEditor",
+      "state": "default",
+      "viewport": "desktop",
+      "file": "label-editor-default-desktop.png",
+      "width": 960,
+      "height": 267,
+      "sha256": "c840b4b9fd5eab363bed8b20eda00f961c9cca920e63d573baa4882496c003ea"
+    },
+    {
+      "name": "BissLabelEditor",
+      "state": "default",
+      "viewport": "phone",
+      "file": "label-editor-default-phone.png",
+      "width": 390,
+      "height": 251,
+      "sha256": "a025fb9eb82728434cc9e17324a84600e15e7e4d7680277b34291d2aaf365941"
     },
     {
       "name": "BissLineChart",
@@ -993,6 +1371,24 @@
       "width": 390,
       "height": 240,
       "sha256": "ceeafcef13f08270f160e665fa29a7a973d14073581e47df14f961d8b452ae15"
+    },
+    {
+      "name": "BissMediaFigure",
+      "state": "default",
+      "viewport": "desktop",
+      "file": "media-figure-default-desktop.png",
+      "width": 960,
+      "height": 240,
+      "sha256": "a38902ba8891b859a646cf112ab24c6736d33122d3c7027d0504b377e352339c"
+    },
+    {
+      "name": "BissMediaFigure",
+      "state": "default",
+      "viewport": "phone",
+      "file": "media-figure-default-phone.png",
+      "width": 390,
+      "height": 240,
+      "sha256": "800ace49c84c0a7e0a6bef4fbc40da84476c027f1615694abed9c34f7c502631"
     },
     {
       "name": "BissMenu",
@@ -1037,7 +1433,7 @@
       "file": "meter-list-default-desktop.png",
       "width": 960,
       "height": 240,
-      "sha256": "a345938363db230d86cccc87d73265e6f59c3a81a8b30bc49a37bceeb6eabc30"
+      "sha256": "9b980cfbf77d14270a67429c4c51b7e680572a87be7088f3dfd19eb6e637af17"
     },
     {
       "name": "BissMeterList",
@@ -1046,7 +1442,7 @@
       "file": "meter-list-default-phone.png",
       "width": 390,
       "height": 240,
-      "sha256": "4a573618dade164c23dbdf6e1b2e3871830328e510dd7111f0c32b8ce3f06d6f"
+      "sha256": "383814c958ee6cd39962c69319e49346a2f4b80ea54ec43231beed7ddd4fb8a0"
     },
     {
       "name": "BissMiniChart",
@@ -1073,7 +1469,7 @@
       "file": "modal-open-desktop.png",
       "width": 960,
       "height": 640,
-      "sha256": "a73bbcf974cbe03790d0b73b4faed661b2a5c014c4c650a9a2afa067e74b786f"
+      "sha256": "311f1ff7f72195be340221fb24e8225aba1b3a776c972493bf8e65f3f6e116df"
     },
     {
       "name": "BissModal",
@@ -1082,7 +1478,7 @@
       "file": "modal-open-phone.png",
       "width": 390,
       "height": 640,
-      "sha256": "7b6f1d8f7a0d03f3dc8d70404c60a3d92e3e1fe2ee6a5bfa6884a26530d28c85"
+      "sha256": "26e68eb6befe1427004eea3707720ddcd863897a3f391d227c31675b50e9cb94"
     },
     {
       "name": "BissNavItem",
@@ -1091,7 +1487,7 @@
       "file": "nav-item-default-desktop.png",
       "width": 960,
       "height": 240,
-      "sha256": "64ddc9e5283902add4b85243696bbf547b8256d46b402d807c7d9e4621ac9924"
+      "sha256": "1d7a3bb3762d143562b7304aa91d8a1a2d68d2fea3fbf2722e04a8f27c5cd8c6"
     },
     {
       "name": "BissNavItem",
@@ -1100,7 +1496,7 @@
       "file": "nav-item-default-phone.png",
       "width": 390,
       "height": 240,
-      "sha256": "0793b18a9d82ee5fa5cc9cea87438f2bbfa543c4a38662ba730fa57eca0746b1"
+      "sha256": "176a939ade2732be96f162c18c9670436c2a5343238089443ed24d3b20bd9a14"
     },
     {
       "name": "BissNavSection",
@@ -1109,7 +1505,7 @@
       "file": "nav-section-default-desktop.png",
       "width": 960,
       "height": 240,
-      "sha256": "b9a02a7d7a0ec711bcc5010142c4d06fdeeaea3e21595205a1fb61de1bde5f9a"
+      "sha256": "62d24b786ebf5ecef50ff06a4829d0d7fc77e75e51e63ba2502af98f3f973092"
     },
     {
       "name": "BissNavSection",
@@ -1118,7 +1514,7 @@
       "file": "nav-section-default-phone.png",
       "width": 390,
       "height": 240,
-      "sha256": "92407dfe18c64102b437d43d53e1372483e1715c5568518f39f2ddd887689f2a"
+      "sha256": "81b881a9e6a19fb76170d8d4e81204890c814d5cec228675fbcfd104dcca7a0f"
     },
     {
       "name": "BissNoAccess",
@@ -1145,7 +1541,7 @@
       "file": "notice-row-default-desktop.png",
       "width": 960,
       "height": 240,
-      "sha256": "16065c14b02d4167144360c23fafd85ed30362cb5e1213f9a8935433a9c9b600"
+      "sha256": "48e6901ad6d03f0097b7806362eddb50ced8707fe759831f9a6e590faea51fa1"
     },
     {
       "name": "BissNoticeRow",
@@ -1154,7 +1550,7 @@
       "file": "notice-row-default-phone.png",
       "width": 390,
       "height": 240,
-      "sha256": "6bb11a97bbc4c6f2c834be8a27dfdd96daf811cbcbd52f974596061f2103b773"
+      "sha256": "b2fd41cbd7cf2c8b010be2dd455b7743b058313c1c9a99bdc99310ae07ad1df6"
     },
     {
       "name": "BissOnboardingChips",
@@ -1199,7 +1595,7 @@
       "file": "page-bar-default-desktop.png",
       "width": 960,
       "height": 240,
-      "sha256": "945391bf36617767235da157de7d1273205964efe32ab6c1a5d7bf7ec940edce"
+      "sha256": "403994540e022830248688019ff881b57ba1c2393602fa57dbe78503ab2fd276"
     },
     {
       "name": "BissPageBar",
@@ -1208,7 +1604,7 @@
       "file": "page-bar-default-phone.png",
       "width": 390,
       "height": 240,
-      "sha256": "58a18de4c60e03c483df23324b6916f54029b5832186980de493cb995e2e6719"
+      "sha256": "48a5005a0635f2d91b23be5e97ee0dbe63c6fa1b55a5ac84b920319c8645b3e4"
     },
     {
       "name": "BissPageHeader",
@@ -1217,7 +1613,7 @@
       "file": "page-header-default-desktop.png",
       "width": 960,
       "height": 240,
-      "sha256": "e88f734dc75aa068c5d8f7356d5a21ab4795a20fc4a369e5a2ebfa84dd6ddd5d"
+      "sha256": "b741f0a703d875f6de35923ed334bfa35d3fcf8cd30aa6201886e4261864c257"
     },
     {
       "name": "BissPageHeader",
@@ -1226,7 +1622,7 @@
       "file": "page-header-default-phone.png",
       "width": 390,
       "height": 240,
-      "sha256": "84b72b7ef81c88d0228b49c8f48ed8b03f23eebee67eedc706618bb46ec4dc28"
+      "sha256": "f3ef5a7c2abcdd26cd8a415fc014f9b85a0d19a3bffbfaec36bb1e43062084a3"
     },
     {
       "name": "BissPageHint",
@@ -1235,7 +1631,7 @@
       "file": "page-hint-open-desktop.png",
       "width": 960,
       "height": 240,
-      "sha256": "e934401f6f7eb85c16113450d68f035cf6cc4dbc144d3106192f4e83082bc469"
+      "sha256": "529f4feee9a819873097ff874962bdebab371229360f648bde5e2aa5533d9625"
     },
     {
       "name": "BissPageHint",
@@ -1244,7 +1640,7 @@
       "file": "page-hint-open-phone.png",
       "width": 390,
       "height": 240,
-      "sha256": "33de995a7b05b69af722ec7d1470e4066463dab9f277db2ed33ada9b90f40a56"
+      "sha256": "8d5c500bc41f86be92e791d6f3100d8957c9423f1d02ffc1cd774508899dc040"
     },
     {
       "name": "BissPeopleCell",
@@ -1283,6 +1679,24 @@
       "sha256": "ae0bb1a1b87630d8e505e51f7356c902fd928cb4ed6b12ef18960f7d3d76cd72"
     },
     {
+      "name": "BissPresenceCursor",
+      "state": "default",
+      "viewport": "desktop",
+      "file": "presence-cursor-default-desktop.png",
+      "width": 960,
+      "height": 240,
+      "sha256": "16d993f13ae653d5e1577c19f47297b455ab1825ffb69887b31149d53f27dace"
+    },
+    {
+      "name": "BissPresenceCursor",
+      "state": "default",
+      "viewport": "phone",
+      "file": "presence-cursor-default-phone.png",
+      "width": 390,
+      "height": 240,
+      "sha256": "4226694215fb4d7080345a663c4078369b46af6141b5918e915e55f90ce3ce36"
+    },
+    {
       "name": "BissPresenceStack",
       "state": "default",
       "viewport": "desktop",
@@ -1319,13 +1733,67 @@
       "sha256": "a6a979172d2f30c7d150dc46b9dd9a538fc7dd6fcbabf5652427610ad426aa68"
     },
     {
+      "name": "BissProposalCard",
+      "state": "default",
+      "viewport": "desktop",
+      "file": "proposal-card-default-desktop.png",
+      "width": 960,
+      "height": 268,
+      "sha256": "3cfa10cdd1821a4a3bbd9cc803d5899549df3d39529ffbce81cd5f76ce0f6d0d"
+    },
+    {
+      "name": "BissProposalCard",
+      "state": "default",
+      "viewport": "phone",
+      "file": "proposal-card-default-phone.png",
+      "width": 390,
+      "height": 273,
+      "sha256": "55905c5aa6b147fb9700a7694ae3f1935ff39748a1d3d0499bf835dcfa95bc2a"
+    },
+    {
+      "name": "BissQuickLinks",
+      "state": "default",
+      "viewport": "desktop",
+      "file": "quick-links-default-desktop.png",
+      "width": 960,
+      "height": 240,
+      "sha256": "670edce5bf695bf01913e9ab3df1bae8b57a2002b0424e238906abe74beb8d88"
+    },
+    {
+      "name": "BissQuickLinks",
+      "state": "default",
+      "viewport": "phone",
+      "file": "quick-links-default-phone.png",
+      "width": 390,
+      "height": 240,
+      "sha256": "960fa23404938644fd6010b84720927e48ed4f19cbc7f74fe10126e1dcda8bd7"
+    },
+    {
+      "name": "BissRadioGroup",
+      "state": "default",
+      "viewport": "desktop",
+      "file": "radio-group-default-desktop.png",
+      "width": 960,
+      "height": 240,
+      "sha256": "d383313bf605f6e0f91ed01fedb57a87d11dd70d81a111dc3591c29cc2015e41"
+    },
+    {
+      "name": "BissRadioGroup",
+      "state": "default",
+      "viewport": "phone",
+      "file": "radio-group-default-phone.png",
+      "width": 390,
+      "height": 240,
+      "sha256": "4cccd0b28143db22c751b818fa82ebbb12daadb6893a9b93f51ed3ff24acf8fa"
+    },
+    {
       "name": "BissRecordChip",
       "state": "default",
       "viewport": "desktop",
       "file": "record-chip-default-desktop.png",
       "width": 960,
       "height": 240,
-      "sha256": "c3aa36ae9136f9d6ed5577da1cf55b322c627b3b94f22660e8735c38ebd339db"
+      "sha256": "49e47ae7e98fedfe90b0a69370f65917fd080725a596d97559053ee06dc66a8a"
     },
     {
       "name": "BissRecordChip",
@@ -1334,7 +1802,61 @@
       "file": "record-chip-default-phone.png",
       "width": 390,
       "height": 240,
-      "sha256": "7fa9a86ad8adc838843ca003945a15519f506f02c7a6745e7d7c01269a8f40c4"
+      "sha256": "b394e008e2eb958cbefee8ee043938ffe9ee82da756c233b4148bca451cf1a6b"
+    },
+    {
+      "name": "BissRecordPreview",
+      "state": "default",
+      "viewport": "desktop",
+      "file": "record-preview-default-desktop.png",
+      "width": 960,
+      "height": 240,
+      "sha256": "82f4bf0e79581db4e82c324bd1403d81efa4026de59689a7c8087227d245516d"
+    },
+    {
+      "name": "BissRecordPreview",
+      "state": "default",
+      "viewport": "phone",
+      "file": "record-preview-default-phone.png",
+      "width": 390,
+      "height": 240,
+      "sha256": "c155efcdcd00521adf12f79fb7c7d26a961da5e11026a8f9ece8d72910a5f0ba"
+    },
+    {
+      "name": "BissRecordPreview",
+      "state": "restricted",
+      "viewport": "desktop",
+      "file": "record-preview-restricted-desktop.png",
+      "width": 960,
+      "height": 240,
+      "sha256": "5362bf5eec00d4c1131de5f8ca71aee8edc0ed2b5a58e028f5b83882b5ee33e4"
+    },
+    {
+      "name": "BissRecordPreview",
+      "state": "restricted",
+      "viewport": "phone",
+      "file": "record-preview-restricted-phone.png",
+      "width": 390,
+      "height": 240,
+      "sha256": "728616b9c5149bd1fee0fae7a9d212614043e954b919df4fe48c1fd896569962"
+    },
+    {
+      "name": "BissRoleEditor",
+      "state": "default",
+      "viewport": "desktop",
+      "file": "role-editor-default-desktop.png",
+      "width": 960,
+      "height": 282,
+      "sha256": "814bec709013f4775d173f3fa29751a34a114266ce8ebc3bc9750af8d8619d74"
+    },
+    {
+      "name": "BissRoleEditor",
+      "state": "default",
+      "viewport": "phone",
+      "file": "role-editor-default-phone.png",
+      "width": 390,
+      "height": 266,
+      "sha256": "7d62351ff0e99784276faf09e35cf4619bd1d1b34322f7e0a06fc9e11e015787"
     },
     {
       "name": "BissSaveBar",
@@ -1343,7 +1865,7 @@
       "file": "save-bar-default-desktop.png",
       "width": 960,
       "height": 240,
-      "sha256": "1ba3fe385c94ee45355ec7c4a1b73e05697308a73059e04ce625b60c1f71ce10"
+      "sha256": "12540a24b9e450b75dfb0d185f569885c48d6e425e1f5a93a363d3d4a67c5444"
     },
     {
       "name": "BissSaveBar",
@@ -1352,7 +1874,7 @@
       "file": "save-bar-default-phone.png",
       "width": 390,
       "height": 240,
-      "sha256": "23ca49d7fef6c40a0a8a7a13d6b12aca75c27cd1d0701c9fdea0b4f260575df0"
+      "sha256": "37ecb5d698230cf7459e13142369b6e63043fd22d3d04fc987f2c4f149c4dbf9"
     },
     {
       "name": "BissSaveBar",
@@ -1361,7 +1883,7 @@
       "file": "save-bar-error-desktop.png",
       "width": 960,
       "height": 240,
-      "sha256": "c391ee19a3626861f823fa8aa88fb452fa681518fabccdb1183f628dbd1a429b"
+      "sha256": "d652c3dcc96324b517640af902471db7a7bb63522481a72639d37f9d133f7f73"
     },
     {
       "name": "BissSaveBar",
@@ -1370,7 +1892,7 @@
       "file": "save-bar-error-phone.png",
       "width": 390,
       "height": 240,
-      "sha256": "5e45e6eb789741229607e9e06d08d71893ab898632fc2b219679f9f4cc561309"
+      "sha256": "7b142cadd96104dc56c43c8e3c7175abb6d562bfd81e7775bf480f41001606da"
     },
     {
       "name": "BissSaveBar",
@@ -1379,7 +1901,7 @@
       "file": "save-bar-saving-desktop.png",
       "width": 960,
       "height": 240,
-      "sha256": "b61e04a260724f414524c266dd90c75eeaf6fbf35a7ed8d8941741364208787a"
+      "sha256": "1ebb7f572da4b7523692dec85449dcff8cb98726b7adcb25390dabb26a6450ab"
     },
     {
       "name": "BissSaveBar",
@@ -1388,7 +1910,7 @@
       "file": "save-bar-saving-phone.png",
       "width": 390,
       "height": 240,
-      "sha256": "d968e6ec070d215592e91a57ea5d2f2cd83d486e10e6321dfa24ffbfe20265e8"
+      "sha256": "8724afc2e0a050b9ea0fe148534c07516bc6dbe60bc410cc0bcfd883456bd2e1"
     },
     {
       "name": "BissSearchInput",
@@ -1397,7 +1919,7 @@
       "file": "search-input-default-desktop.png",
       "width": 960,
       "height": 240,
-      "sha256": "d100a05ca91c3d0b8ec3b0e861f2b5f12a6132a57d350cb287ca0d15f971348e"
+      "sha256": "b2624df66bf17d74697e0e14da425c019c611eb9f4b9f2787b52df0a93bd9a79"
     },
     {
       "name": "BissSearchInput",
@@ -1406,7 +1928,7 @@
       "file": "search-input-default-phone.png",
       "width": 390,
       "height": 240,
-      "sha256": "1c810f57ebbd5a5ddfca94e0fec66f981307433cbd22bc9ffbfef08b7afb3ab1"
+      "sha256": "f3338846f692cddedb78ea3afc05b3d6894a54e4bdcdb7af7b6a96a9b74da5f2"
     },
     {
       "name": "BissSearchPalette",
@@ -1469,7 +1991,7 @@
       "file": "section-header-default-desktop.png",
       "width": 960,
       "height": 240,
-      "sha256": "d0412eb824bcb508bfbeba4d4e2d6b9cb3ed062be0aa33df8d24db66c4d71799"
+      "sha256": "627bdba40f173907323736788721fef7bda09a7a3dfd0e1d768731839394a02e"
     },
     {
       "name": "BissSectionHeader",
@@ -1478,7 +2000,25 @@
       "file": "section-header-default-phone.png",
       "width": 390,
       "height": 240,
-      "sha256": "2dd39961fbd4e111393486c1d427cb0a0f59833d0ef3683ac15709d806ac9055"
+      "sha256": "1fc5082efd4a72cb689a7e4e99147b4844d2a0b4e183eb547ee9ee9946354806"
+    },
+    {
+      "name": "BissSegmentedControl",
+      "state": "default",
+      "viewport": "desktop",
+      "file": "segmented-control-default-desktop.png",
+      "width": 960,
+      "height": 240,
+      "sha256": "2a9027a8c1cfdc959d3b614f983e89c81207cf5d95a674a1291614853f8976dd"
+    },
+    {
+      "name": "BissSegmentedControl",
+      "state": "default",
+      "viewport": "phone",
+      "file": "segmented-control-default-phone.png",
+      "width": 390,
+      "height": 240,
+      "sha256": "96fc68f18281a4409ef6c147f5581f34da754ab26bc244fbcdec405f7a0ad542"
     },
     {
       "name": "BissSelect",
@@ -1487,7 +2027,7 @@
       "file": "select-default-desktop.png",
       "width": 960,
       "height": 240,
-      "sha256": "5249d2739013ca20b342f9b6e98fe1e96dcab440e87ae8449e744154c5c209bc"
+      "sha256": "f017cf008cccc0a89ac71c084bc2cbccd1479b8ca73327521800e0f53c3d789f"
     },
     {
       "name": "BissSelect",
@@ -1496,7 +2036,7 @@
       "file": "select-default-phone.png",
       "width": 390,
       "height": 240,
-      "sha256": "4b166b74be8e4484bce8e87ff80b978b714b2a12bdf2b00ff74119543b82f0f3"
+      "sha256": "586b972713f8670eacb67e957715d71006abb7a7c58f3a54e1990f8936e6995e"
     },
     {
       "name": "BissSelectPicker",
@@ -1523,7 +2063,7 @@
       "file": "service-icon-default-desktop.png",
       "width": 960,
       "height": 240,
-      "sha256": "6b858bad21dca2795c55625a59c66e0472789469caf21786e6eaaf112219a448"
+      "sha256": "dbf5ba81712ae4f4d1bb43bd96b84a60b70953e3cf3548a51e4a3a83d3904d41"
     },
     {
       "name": "BissServiceIcon",
@@ -1532,7 +2072,7 @@
       "file": "service-icon-default-phone.png",
       "width": 390,
       "height": 240,
-      "sha256": "6a12f3745835ae6e5bb224951c934ea4040c8b458370216ab3cec770dc3af54b"
+      "sha256": "6eb1243c290b81e3b2dab78e09c980ac68ff134082d2c51e1472583a39482f3f"
     },
     {
       "name": "BissSettingsHead",
@@ -1553,13 +2093,49 @@
       "sha256": "2b2831e891d7984259c9adb374c3498a667ddfbb1173de957a241ad21b057829"
     },
     {
+      "name": "BissSharePanel",
+      "state": "default",
+      "viewport": "desktop",
+      "file": "share-panel-default-desktop.png",
+      "width": 960,
+      "height": 361,
+      "sha256": "1cd957dcae8de8c6ef4c34e4b5a123c53a697ddcb00d7ca3bcf911e57a5ee673"
+    },
+    {
+      "name": "BissSharePanel",
+      "state": "default",
+      "viewport": "phone",
+      "file": "share-panel-default-phone.png",
+      "width": 390,
+      "height": 345,
+      "sha256": "5d3cf53061922895520d1026057852ef3f88d3091aefb53333f6bfac9a95a6cb"
+    },
+    {
+      "name": "BissSharePanel",
+      "state": "error",
+      "viewport": "desktop",
+      "file": "share-panel-error-desktop.png",
+      "width": 960,
+      "height": 380,
+      "sha256": "5bec9b593ca7f1203c862d4277456acfe83139843beab55a83e04e848c91ff33"
+    },
+    {
+      "name": "BissSharePanel",
+      "state": "error",
+      "viewport": "phone",
+      "file": "share-panel-error-phone.png",
+      "width": 390,
+      "height": 364,
+      "sha256": "b8042bb3351cc498e31320e078dd63b03977d976af6b2378b703402462eb67d8"
+    },
+    {
       "name": "BissSidePanel",
       "state": "open",
       "viewport": "desktop",
       "file": "side-panel-open-desktop.png",
       "width": 960,
       "height": 640,
-      "sha256": "35a8f1acaa3a8dd8ab2b7caaf2fb8a25143ec49b2cc8e33ef1a7160330d8331d"
+      "sha256": "9bf5fa6ca5a1127e4591d26342d54317792206c85a7ed93bbef81faa2df4a312"
     },
     {
       "name": "BissSidePanel",
@@ -1568,7 +2144,7 @@
       "file": "side-panel-open-phone.png",
       "width": 390,
       "height": 640,
-      "sha256": "aa2df5e200f01ddefa4e3066721ad97fd0f64f684a93018182ddd4e311d574ba"
+      "sha256": "da8f0ef98a6439ed45027a9d38462022abac43762c72f325973411c67c94dae4"
     },
     {
       "name": "BissSidebarUser",
@@ -1577,7 +2153,7 @@
       "file": "sidebar-user-default-desktop.png",
       "width": 960,
       "height": 240,
-      "sha256": "5ea4b74904b9d4ab7114157a075ff6f53ec7681a014d03abfe7bb5506df16251"
+      "sha256": "ee040bf8928f9f1580e78b2b133349584dafc6b2f55cddc94eecef302f8a4485"
     },
     {
       "name": "BissSidebarUser",
@@ -1586,7 +2162,7 @@
       "file": "sidebar-user-default-phone.png",
       "width": 390,
       "height": 240,
-      "sha256": "ec10b97f87465dd5b3ec5d1724fb2445a16c6ef2020d74d8a7f676d489d2f60f"
+      "sha256": "3e0b4ada7f44da4a5e0076c04a1ba60488d8993d41d1961f7093b42e3238cb7d"
     },
     {
       "name": "BissSkeleton",
@@ -1605,6 +2181,42 @@
       "width": 390,
       "height": 240,
       "sha256": "8923c23ec0013e35615a991eb36a8fbd605fddb16d4ece73faf92c6b8a93674b"
+    },
+    {
+      "name": "BissSplitPane",
+      "state": "default",
+      "viewport": "desktop",
+      "file": "split-pane-default-desktop.png",
+      "width": 960,
+      "height": 240,
+      "sha256": "4f4c7b7b3c81b3569c0e6dc8e2bbe8cfc4a47d84f3869c875e6f9e1ccda299bf"
+    },
+    {
+      "name": "BissSplitPane",
+      "state": "default",
+      "viewport": "phone",
+      "file": "split-pane-default-phone.png",
+      "width": 390,
+      "height": 240,
+      "sha256": "a33c6d4646edfce44885401c01b4009457f60665bd73af59344a88f8b7fb9c83"
+    },
+    {
+      "name": "BissStackedBar",
+      "state": "default",
+      "viewport": "desktop",
+      "file": "stacked-bar-default-desktop.png",
+      "width": 960,
+      "height": 240,
+      "sha256": "726b921012789039835c7ec51309a095013237c2d2b7d57a0376510875f463a5"
+    },
+    {
+      "name": "BissStackedBar",
+      "state": "default",
+      "viewport": "phone",
+      "file": "stacked-bar-default-phone.png",
+      "width": 390,
+      "height": 240,
+      "sha256": "b35d5b281ad7ae7a32e081043eaf6d7487bb5365f81185bc668e3662647b3c63"
     },
     {
       "name": "BissStatList",
@@ -1631,7 +2243,7 @@
       "file": "status-cell-default-desktop.png",
       "width": 960,
       "height": 240,
-      "sha256": "3fbe3b855b14b26feca1c6222426f1232c65378a3c36ae205e5d43f8e010412a"
+      "sha256": "977731927b8bd380d3ebd3b24a1f847f77b663d8b60015dda038e64c381855a0"
     },
     {
       "name": "BissStatusCell",
@@ -1640,7 +2252,7 @@
       "file": "status-cell-default-phone.png",
       "width": 390,
       "height": 240,
-      "sha256": "91812d8dfdd75b577ec819a9e4c6db2f3b3fbc342899451cbd8b25ee164b64ae"
+      "sha256": "9f29e4f67539510f72c6c338e6acd73ea0a2468bf4dc822bb8df4fe6c6b8e8b7"
     },
     {
       "name": "BissStep",
@@ -1649,7 +2261,7 @@
       "file": "step-default-desktop.png",
       "width": 960,
       "height": 240,
-      "sha256": "c4cc397e9aa0d4ee10207927d1a733f2bb162d9c41023a8ac3ac90d75025bcd6"
+      "sha256": "5a6de7e0a24c67c3e031334f95d25d1b1e3355f3b3854f64b3af946ee145a502"
     },
     {
       "name": "BissStep",
@@ -1658,7 +2270,7 @@
       "file": "step-default-phone.png",
       "width": 390,
       "height": 240,
-      "sha256": "44dc93a9f04d49a17d84ce38007c22dcc641c4105ac480af67929693b1877ee2"
+      "sha256": "16089ebab94f6497655e0e99d42fb184758f875148c22be3eb97b3493ccab1d8"
     },
     {
       "name": "BissSteps",
@@ -1667,7 +2279,7 @@
       "file": "steps-default-desktop.png",
       "width": 960,
       "height": 240,
-      "sha256": "4fc0dd7bb6d3282d50e47913145842f2b506410c047b2e09937110ecb3f5fc42"
+      "sha256": "cb8e08b63b713be3385e8a1435ad2adfecea0428394e8d609790e4cd3d259725"
     },
     {
       "name": "BissSteps",
@@ -1676,7 +2288,7 @@
       "file": "steps-default-phone.png",
       "width": 390,
       "height": 240,
-      "sha256": "3596357b5bba3fe1f4e462dac8a2157226bfcee77cdf0b3f550e8d152abe8ed4"
+      "sha256": "2b84c67562d72436cf85ac1441006b377f33d26f48a5d80318c2a3fd553c2f63"
     },
     {
       "name": "BissSummaryStrip",
@@ -1721,7 +2333,7 @@
       "file": "switch-default-desktop.png",
       "width": 960,
       "height": 240,
-      "sha256": "7c03918eeec045184b95dbe09c9e0f1267acc7b73c2ada08943c3d8d8b39e9e8"
+      "sha256": "83fa470a2e681161e09ddab3b32d67be7d1707267866ad0ba26639e14e6f027f"
     },
     {
       "name": "BissSwitch",
@@ -1730,7 +2342,7 @@
       "file": "switch-default-phone.png",
       "width": 390,
       "height": 240,
-      "sha256": "ced42004aa28839bab9d1467ee7b02fd030466987c3b4986d82652235c9398a2"
+      "sha256": "0c1f800fd50b16cdfc507e8676fe2c78e78e7e795791fe0f07d23da50a019112"
     },
     {
       "name": "BissTab",
@@ -1739,7 +2351,7 @@
       "file": "tab-default-desktop.png",
       "width": 960,
       "height": 240,
-      "sha256": "f28524b174f8556514802c5d98f5090f16999d69c0fc27c9bb1acf512da86f68"
+      "sha256": "21628e8d7c1d796637a04e474ebccff40746a191fc91d9c90018fb89b5bb8c1b"
     },
     {
       "name": "BissTab",
@@ -1748,7 +2360,7 @@
       "file": "tab-default-phone.png",
       "width": 390,
       "height": 240,
-      "sha256": "531911a9263a3e8a015ab55952ae181c3b1115dc0055e00ff2cb50f450f13519"
+      "sha256": "649a259ab2355cf96d40c21b53fce0925b510fe904ed28b3167bf581a0b26eee"
     },
     {
       "name": "BissTableAddRow",
@@ -1774,8 +2386,8 @@
       "viewport": "desktop",
       "file": "table-group-default-desktop.png",
       "width": 960,
-      "height": 250,
-      "sha256": "cf867745258df3bbc0f9c626934e61300bf44bac227c4a72cabc949cbe8887c9"
+      "height": 261,
+      "sha256": "3545d837a8bac35b3e40eea5e2b84fef7eee4b6c933240694e5d5966c43ecbdc"
     },
     {
       "name": "BissTableGroup",
@@ -1783,8 +2395,8 @@
       "viewport": "phone",
       "file": "table-group-default-phone.png",
       "width": 390,
-      "height": 240,
-      "sha256": "5af28184fb22fbd954e3a722f64e6c3ea0af7df608af4a22a2c55e1935f53b1d"
+      "height": 245,
+      "sha256": "90f8eda231acd3b1dbc6150cc21a4464053d4e2af3d1deced1d643fe08bc17db"
     },
     {
       "name": "BissTableHead",
@@ -1811,7 +2423,7 @@
       "file": "table-pager-default-desktop.png",
       "width": 960,
       "height": 240,
-      "sha256": "38443592092c9770d9e45bf2dbab256c08f40ab4fc5fa005eb74c581fbe3d029"
+      "sha256": "cc116ecb27fe22a4c82a4c6a3dc1529fa15bf639fe37b7856c322f5148cc6f0f"
     },
     {
       "name": "BissTablePager",
@@ -1820,7 +2432,7 @@
       "file": "table-pager-default-phone.png",
       "width": 390,
       "height": 240,
-      "sha256": "b9be09646e2a69f29fc035ad1f865ff2564d9cf88a5b30ada3fca6d61dd46eff"
+      "sha256": "daab9feb1da534ea7b3e4e9c73f87f771c6af4353b7847c233a53507b5e735ec"
     },
     {
       "name": "BissTableTotal",
@@ -1847,7 +2459,7 @@
       "file": "tag-input-default-desktop.png",
       "width": 960,
       "height": 240,
-      "sha256": "b495c463df177bea683d5c63615b15912ca594d951bb0d12da9f241e21cdc8ac"
+      "sha256": "0b3861c7a812391c7177c60e6694a4c0c4ca0a21e1d9e0a32628b4475084572d"
     },
     {
       "name": "BissTagInput",
@@ -1856,7 +2468,25 @@
       "file": "tag-input-default-phone.png",
       "width": 390,
       "height": 240,
-      "sha256": "d39a16f5e60c133ec54f9df9594d0198e87840c3abb54444c34e3338655414bf"
+      "sha256": "69b73592558c5307dd1b8b91eea8f67ac0a92b84cf0c617a10e69217ed2e541f"
+    },
+    {
+      "name": "BissTaskList",
+      "state": "default",
+      "viewport": "desktop",
+      "file": "task-list-default-desktop.png",
+      "width": 960,
+      "height": 240,
+      "sha256": "e8fec42b3b28caa2f8b88a8effa3b0eb89efd13d5e2b7efdf8616096820cee4e"
+    },
+    {
+      "name": "BissTaskList",
+      "state": "default",
+      "viewport": "phone",
+      "file": "task-list-default-phone.png",
+      "width": 390,
+      "height": 240,
+      "sha256": "222f389a56b0fc95c9454d1dd87dd4f88b47209c0a26286c8428a9d2a744a1f3"
     },
     {
       "name": "BissTextarea",
@@ -1865,7 +2495,7 @@
       "file": "textarea-default-desktop.png",
       "width": 960,
       "height": 240,
-      "sha256": "159cc8626669c68c68fa71d4af52dbd1c78fc8e96ef05dc41876924a91db3847"
+      "sha256": "b236bfe82477a2eb013781bc8149bf1e1ee8fc736be7ea0317548363df1997b9"
     },
     {
       "name": "BissTextarea",
@@ -1874,7 +2504,7 @@
       "file": "textarea-default-phone.png",
       "width": 390,
       "height": 240,
-      "sha256": "562831e330ad418420445a4c0552f62b987966a1314f969d76c2eb1c00e3208a"
+      "sha256": "e9982471b46f6d42f0b229a5b07e572a913f2b08ebabe2bac3ef887e777800c6"
     },
     {
       "name": "BissTimeline",
@@ -1883,7 +2513,7 @@
       "file": "timeline-default-desktop.png",
       "width": 960,
       "height": 240,
-      "sha256": "625b60a74dfdf4a30ee7c3d9b215e319198ccfcc3b2e70651af2690f1c78f1db"
+      "sha256": "4fc574b7db48c242a205a53ef3a3885bb28447a595fa6dc76dd61c506f9e6b59"
     },
     {
       "name": "BissTimeline",
@@ -1892,7 +2522,7 @@
       "file": "timeline-default-phone.png",
       "width": 390,
       "height": 240,
-      "sha256": "398aa749724e2c174d5e2d3301cb39547dc99839b57b87d0e5634fe0d6b1139b"
+      "sha256": "c3ab0eb668fa8779c9f1846aa70b6d66274709e3e779b92d423cb3b06e97315d"
     },
     {
       "name": "BissToastStack",
@@ -1901,7 +2531,7 @@
       "file": "toast-stack-visible-desktop.png",
       "width": 960,
       "height": 640,
-      "sha256": "d398ad400b26c69d7fb32fc5d24af5f3cad7b5151b6643ab4ab235bb0414a1c4"
+      "sha256": "2a4f81b4a53eb4435eb37773387120649393f39f411f3a9c7894edbe0624d2e0"
     },
     {
       "name": "BissToastStack",
@@ -1910,7 +2540,7 @@
       "file": "toast-stack-visible-phone.png",
       "width": 390,
       "height": 640,
-      "sha256": "4fe37c0d177acc462dcf451eb2fd9b9304af9acfb48e68d490c4f2a2e1a5c841"
+      "sha256": "c68457e3287d3a4cbd4bf4240fc31d3df54abd43834f3dce6c1cd317f61cbd49"
     },
     {
       "name": "BissToolButton",
@@ -1919,7 +2549,7 @@
       "file": "tool-button-default-desktop.png",
       "width": 960,
       "height": 240,
-      "sha256": "5703310ba561e8a2c8a206bb275ece206bcb774c522d31a681f8173fed9281a1"
+      "sha256": "98d60f78e333c8e59f11695a063a22ec0471098e0b0b441487ddc26b1fda6eea"
     },
     {
       "name": "BissToolButton",
@@ -1928,7 +2558,7 @@
       "file": "tool-button-default-phone.png",
       "width": 390,
       "height": 240,
-      "sha256": "6f77f1662343836e78a3379b3576e38cf8729e404f5cb5becd9cc33b33c73906"
+      "sha256": "bb7cf42a56f7e72392e479e78c78bf34dbe8baf30b5e316c744229970350a957"
     },
     {
       "name": "BissToolNew",
@@ -1937,7 +2567,7 @@
       "file": "tool-new-default-desktop.png",
       "width": 960,
       "height": 240,
-      "sha256": "5e55324f1d8ad774bc04f60f59ac3307975615d728eb81ec8efaec6834a862f8"
+      "sha256": "9a6102ca74a3c1765e95e50a0b3c2d916a54f273f8aec1dec16fb3d5e93e30b6"
     },
     {
       "name": "BissToolNew",
@@ -1946,7 +2576,7 @@
       "file": "tool-new-default-phone.png",
       "width": 390,
       "height": 240,
-      "sha256": "c098df2059e8d80b0b36349f099869e2ef7bec50cc7071a3b354f8a84059119c"
+      "sha256": "2eaa3542cd4092ed08242e10c69a27ed6653bebf79e25cc1e86b52697b91be92"
     },
     {
       "name": "BissToolSearch",
@@ -1955,7 +2585,7 @@
       "file": "tool-search-default-desktop.png",
       "width": 960,
       "height": 240,
-      "sha256": "f7d7ea7387305e6be874a4d14725c3d20a1973e57fd3468f3329ae646e1dc461"
+      "sha256": "561f25a48e01977e7b288c59620ba38744b3ab305dee953624fc9275b295c6eb"
     },
     {
       "name": "BissToolSearch",
@@ -1964,7 +2594,7 @@
       "file": "tool-search-default-phone.png",
       "width": 390,
       "height": 240,
-      "sha256": "6fd70e134a7c9b6dd923f8a5bfc814db1cc171213dd68067650a8801a89ec2df"
+      "sha256": "bab713209da2b599932b93391838c31564d0798bb61dd017626ad9a4264504ae"
     },
     {
       "name": "BissToolbar",
@@ -1973,7 +2603,7 @@
       "file": "toolbar-default-desktop.png",
       "width": 960,
       "height": 240,
-      "sha256": "a5aee62b0b461b297ac6f8f5981e8a3764c80cd39b83fdbf0b2a174ee4413d7b"
+      "sha256": "e6f4f507ac2e75bdd980c90bca89f5f59f1b7e889ecf3386db98dbcf40dd5108"
     },
     {
       "name": "BissToolbar",
@@ -1982,7 +2612,25 @@
       "file": "toolbar-default-phone.png",
       "width": 390,
       "height": 240,
-      "sha256": "d1b02448c515080d85a8b9ad3a61d694a2ad356f89f2443446887a8c4b2658b1"
+      "sha256": "43ff9b7133965b9be4bc2daf250e4afc5742eaf9277254dd28e0d8c10a49bb05"
+    },
+    {
+      "name": "BissTooltip",
+      "state": "open",
+      "viewport": "desktop",
+      "file": "tooltip-open-desktop.png",
+      "width": 960,
+      "height": 240,
+      "sha256": "1a400531b0713d480d32343ee94bc6429e7809319314c6f3798b30f44710ce69"
+    },
+    {
+      "name": "BissTooltip",
+      "state": "open",
+      "viewport": "phone",
+      "file": "tooltip-open-phone.png",
+      "width": 390,
+      "height": 240,
+      "sha256": "e85884c1ef56ea75ff6d753d3b5cdbfc5541c76d015ff297d0a561f50d748db2"
     },
     {
       "name": "BissTopBar",
@@ -1991,7 +2639,7 @@
       "file": "top-bar-default-desktop.png",
       "width": 960,
       "height": 640,
-      "sha256": "ab35dc8e017c2c46038eb1f0f3464a8f0f67032f2b310013208868b410fe2c8a"
+      "sha256": "b8db1cb5f098055db3ba137f4fc6c869c2f98d200082acc3b9eab45dea33f681"
     },
     {
       "name": "BissTopBar",
@@ -2000,7 +2648,7 @@
       "file": "top-bar-default-phone.png",
       "width": 390,
       "height": 640,
-      "sha256": "6405ce806bef6f6c521588e10da78832c9389e437c407f23e9a31e6579882b1b"
+      "sha256": "815d523bfdf92cf81f772ece22a3076f266b9e44988b02d425b2ce175e9ec50e"
     },
     {
       "name": "BissValuePicker",
@@ -2009,7 +2657,7 @@
       "file": "value-picker-default-desktop.png",
       "width": 960,
       "height": 287,
-      "sha256": "7e9f8ad6b188b4d0ace6deaf24348709836d527b223c2fb157c25db79b082108"
+      "sha256": "312f1020675a8d9cddbd04bed3d6e00873b336d9808c9d67a2dd9863961b4bad"
     },
     {
       "name": "BissValuePicker",
@@ -2018,7 +2666,7 @@
       "file": "value-picker-default-phone.png",
       "width": 390,
       "height": 271,
-      "sha256": "9494854c9e2a66a0c07dcf708ef7adc00c59873f19e39303a658173331428650"
+      "sha256": "d848a4d6a65d4f9f9d94fdccffb56164825fd2f53602eec001015510455e3bf7"
     },
     {
       "name": "BissViewTabs",
@@ -2037,6 +2685,24 @@
       "width": 390,
       "height": 240,
       "sha256": "7edec0a4d1474c75c1fe129818ac73af9ba5f3ce7a3ed74a83868af3630a8a3c"
+    },
+    {
+      "name": "BissWidgetGrid",
+      "state": "default",
+      "viewport": "desktop",
+      "file": "widget-grid-default-desktop.png",
+      "width": 960,
+      "height": 262,
+      "sha256": "31fb9280e7acd88d719e278ed03960e67e805556185ab97c1b1f1a08fed4ed2c"
+    },
+    {
+      "name": "BissWidgetGrid",
+      "state": "default",
+      "viewport": "phone",
+      "file": "widget-grid-default-phone.png",
+      "width": 390,
+      "height": 460,
+      "sha256": "f955524b4ab340a2b36a696d3eec86c91b82c12d943908d6cffdc6156875158b"
     }
   ]
 }

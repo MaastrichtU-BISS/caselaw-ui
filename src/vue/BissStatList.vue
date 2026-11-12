@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { BissStat } from "../types";
+import type { BissStat } from '../core/types';
 
 defineProps<{
   stats: BissStat[];

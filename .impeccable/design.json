@@ -1,0 +1,270 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-12T04:27:12.964030+00:00",
+  "title": "BISS UI design contract",
+  "extensions": {
+    "colorMeta": {
+      "primary": {
+        "role": "primary",
+        "displayName": "Primary",
+        "tonalRamp": [
+          "oklch(15.00% 0.14357 252.44)",
+          "oklch(26.43% 0.14357 252.44)",
+          "oklch(37.86% 0.14357 252.44)",
+          "oklch(49.29% 0.14357 252.44)",
+          "oklch(60.71% 0.14357 252.44)",
+          "oklch(72.14% 0.14357 252.44)",
+          "oklch(83.57% 0.14357 252.44)",
+          "oklch(95.00% 0.14357 252.44)"
+        ]
+      },
+      "primary-hover": {
+        "role": "primary",
+        "displayName": "Primary Hover",
+        "tonalRamp": [
+          "oklch(15.00% 0.12382 252.46)",
+          "oklch(26.43% 0.12382 252.46)",
+          "oklch(37.86% 0.12382 252.46)",
+          "oklch(49.29% 0.12382 252.46)",
+          "oklch(60.71% 0.12382 252.46)",
+          "oklch(72.14% 0.12382 252.46)",
+          "oklch(83.57% 0.12382 252.46)",
+          "oklch(95.00% 0.12382 252.46)"
+        ]
+      },
+      "background": {
+        "role": "neutral",
+        "displayName": "Background",
+        "tonalRamp": [
+          "oklch(15.00% 0.00286 84.56)",
+          "oklch(26.43% 0.00286 84.56)",
+          "oklch(37.86% 0.00286 84.56)",
+          "oklch(49.29% 0.00286 84.56)",
+          "oklch(60.71% 0.00286 84.56)",
+          "oklch(72.14% 0.00286 84.56)",
+          "oklch(83.57% 0.00286 84.56)",
+          "oklch(95.00% 0.00286 84.56)"
+        ]
+      },
+      "panel": {
+        "role": "neutral",
+        "displayName": "Panel",
+        "tonalRamp": [
+          "oklch(15.00% 0.00000 0.00)",
+          "oklch(26.43% 0.00000 0.00)",
+          "oklch(37.86% 0.00000 0.00)",
+          "oklch(49.29% 0.00000 0.00)",
+          "oklch(60.71% 0.00000 0.00)",
+          "oklch(72.14% 0.00000 0.00)",
+          "oklch(83.57% 0.00000 0.00)",
+          "oklch(95.00% 0.00000 0.00)"
+        ]
+      },
+      "border": {
+        "role": "neutral",
+        "displayName": "Border",
+        "tonalRamp": [
+          "oklch(15.00% 0.00706 88.65)",
+          "oklch(26.43% 0.00706 88.65)",
+          "oklch(37.86% 0.00706 88.65)",
+          "oklch(49.29% 0.00706 88.65)",
+          "oklch(60.71% 0.00706 88.65)",
+          "oklch(72.14% 0.00706 88.65)",
+          "oklch(83.57% 0.00706 88.65)",
+          "oklch(95.00% 0.00706 88.65)"
+        ]
+      },
+      "text": {
+        "role": "neutral",
+        "displayName": "Text",
+        "tonalRamp": [
+          "oklch(15.00% 0.00410 84.59)",
+          "oklch(26.43% 0.00410 84.59)",
+          "oklch(37.86% 0.00410 84.59)",
+          "oklch(49.29% 0.00410 84.59)",
+          "oklch(60.71% 0.00410 84.59)",
+          "oklch(72.14% 0.00410 84.59)",
+          "oklch(83.57% 0.00410 84.59)",
+          "oklch(95.00% 0.00410 84.59)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted",
+        "tonalRamp": [
+          "oklch(15.00% 0.00830 88.70)",
+          "oklch(26.43% 0.00830 88.70)",
+          "oklch(37.86% 0.00830 88.70)",
+          "oklch(49.29% 0.00830 88.70)",
+          "oklch(60.71% 0.00830 88.70)",
+          "oklch(72.14% 0.00830 88.70)",
+          "oklch(83.57% 0.00830 88.70)",
+          "oklch(95.00% 0.00830 88.70)"
+        ]
+      },
+      "success": {
+        "role": "semantic",
+        "displayName": "Success",
+        "tonalRamp": [
+          "oklch(15.00% 0.11383 158.83)",
+          "oklch(26.43% 0.11383 158.83)",
+          "oklch(37.86% 0.11383 158.83)",
+          "oklch(49.29% 0.11383 158.83)",
+          "oklch(60.71% 0.11383 158.83)",
+          "oklch(72.14% 0.11383 158.83)",
+          "oklch(83.57% 0.11383 158.83)",
+          "oklch(95.00% 0.11383 158.83)"
+        ]
+      },
+      "danger": {
+        "role": "semantic",
+        "displayName": "Danger",
+        "tonalRamp": [
+          "oklch(15.00% 0.16811 30.88)",
+          "oklch(26.43% 0.16811 30.88)",
+          "oklch(37.86% 0.16811 30.88)",
+          "oklch(49.29% 0.16811 30.88)",
+          "oklch(60.71% 0.16811 30.88)",
+          "oklch(72.14% 0.16811 30.88)",
+          "oklch(83.57% 0.16811 30.88)",
+          "oklch(95.00% 0.16811 30.88)"
+        ]
+      },
+      "warning": {
+        "role": "semantic",
+        "displayName": "Warning",
+        "tonalRamp": [
+          "oklch(15.00% 0.10004 84.43)",
+          "oklch(26.43% 0.10004 84.43)",
+          "oklch(37.86% 0.10004 84.43)",
+          "oklch(49.29% 0.10004 84.43)",
+          "oklch(60.71% 0.10004 84.43)",
+          "oklch(72.14% 0.10004 84.43)",
+          "oklch(83.57% 0.10004 84.43)",
+          "oklch(95.00% 0.10004 84.43)"
+        ]
+      }
+    },
+    "shadows": [
+      {
+        "name": "card",
+        "value": "0 1px 2px rgba(29, 28, 26, 0.04)",
+        "purpose": "Minimal separation for white cards."
+      },
+      {
+        "name": "popover",
+        "value": "0 12px 32px rgba(29,28,26,.12), 0 2px 6px rgba(29,28,26,.06)",
+        "purpose": "Shared modal and popover elevation."
+      }
+    ],
+    "motion": [
+      {
+        "name": "button-state",
+        "value": "background 0.15s, border-color 0.15s",
+        "purpose": "Subtle color transitions; disabled with reduced motion."
+      },
+      {
+        "name": "tooltip-dismiss",
+        "value": "140ms",
+        "purpose": "Cancellable pointer transit delay, not an appearance animation."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "compact",
+        "value": "640px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Compact primary button.",
+      "html": "<button class=\"ds-button\" type=\"button\">Save changes</button>",
+      "css": ".ds-button {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  gap: 7px;\n  min-height: var(--biss-control-height);\n  height: var(--biss-control-height);\n  padding: 0 12px;\n  border: 1px solid var(--biss-primary);\n  border-radius: var(--biss-radius-sm);\n  background: var(--biss-primary);\n  color: #fff;\n  font: 500 13.5px/1.2 var(--biss-font-family);\n  text-decoration: none;\n  white-space: nowrap;\n  cursor: pointer;\n  box-shadow: var(--biss-shadow);\n  transition:\n    background 0.15s,\n    border-color 0.15s;\n}\n.ds-button {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  gap: 7px;\n  min-height: var(--biss-control-height);\n  height: var(--biss-control-height);\n  padding: 0 12px;\n  border: 1px solid var(--biss-primary);\n  border-radius: var(--biss-radius-sm);\n  background: var(--biss-primary);\n  color: #fff;\n  font: 500 13.5px/1.2 var(--biss-font-family);\n  text-decoration: none;\n  white-space: nowrap;\n  cursor: pointer;\n  box-shadow: var(--biss-shadow);\n  transition:\n    background 0.15s,\n    border-color 0.15s;\n}\n.ds-button:hover:not(:disabled):not([aria-disabled='true']) {\n  background: var(--biss-primary-hover);\n  border-color: var(--biss-primary-hover);\n}\n.ds-button:disabled, .ds-button[aria-disabled='true'] {\n  opacity: 0.5;\n  cursor: default;\n  pointer-events: none;\n}\n.ds-button {\n    transition: none;\n  }\n.ds-button:focus-visible,.ds-nav-item:focus-visible{outline:2px solid var(--biss-primary);outline-offset:2px;}\n@media(prefers-reduced-motion:reduce){.ds-button{transition:none}}"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "description": "Compact secondary button.",
+      "html": "<button class=\"ds-button ds-button-secondary\" type=\"button\">Save changes</button>",
+      "css": ".ds-button {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  gap: 7px;\n  min-height: var(--biss-control-height);\n  height: var(--biss-control-height);\n  padding: 0 12px;\n  border: 1px solid var(--biss-primary);\n  border-radius: var(--biss-radius-sm);\n  background: var(--biss-primary);\n  color: #fff;\n  font: 500 13.5px/1.2 var(--biss-font-family);\n  text-decoration: none;\n  white-space: nowrap;\n  cursor: pointer;\n  box-shadow: var(--biss-shadow);\n  transition:\n    background 0.15s,\n    border-color 0.15s;\n}\n.ds-button {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  gap: 7px;\n  min-height: var(--biss-control-height);\n  height: var(--biss-control-height);\n  padding: 0 12px;\n  border: 1px solid var(--biss-primary);\n  border-radius: var(--biss-radius-sm);\n  background: var(--biss-primary);\n  color: #fff;\n  font: 500 13.5px/1.2 var(--biss-font-family);\n  text-decoration: none;\n  white-space: nowrap;\n  cursor: pointer;\n  box-shadow: var(--biss-shadow);\n  transition:\n    background 0.15s,\n    border-color 0.15s;\n}\n.ds-button:hover:not(:disabled):not([aria-disabled='true']) {\n  background: var(--biss-primary-hover);\n  border-color: var(--biss-primary-hover);\n}\n.ds-button-secondary {\n  background: var(--biss-card);\n  color: var(--biss-text);\n  border-color: var(--biss-border-strong);\n}\n.ds-button-secondary:hover:not(:disabled) {\n  background: var(--biss-hover);\n  border-color: var(--biss-border-strong);\n}\n.ds-button:disabled, .ds-button[aria-disabled='true'] {\n  opacity: 0.5;\n  cursor: default;\n  pointer-events: none;\n}\n.ds-button {\n    transition: none;\n  }\n.ds-button:focus-visible,.ds-nav-item:focus-visible{outline:2px solid var(--biss-primary);outline-offset:2px;}\n@media(prefers-reduced-motion:reduce){.ds-button{transition:none}}"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "description": "Compact ghost button.",
+      "html": "<button class=\"ds-button ds-button-ghost\" type=\"button\">Save changes</button>",
+      "css": ".ds-button {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  gap: 7px;\n  min-height: var(--biss-control-height);\n  height: var(--biss-control-height);\n  padding: 0 12px;\n  border: 1px solid var(--biss-primary);\n  border-radius: var(--biss-radius-sm);\n  background: var(--biss-primary);\n  color: #fff;\n  font: 500 13.5px/1.2 var(--biss-font-family);\n  text-decoration: none;\n  white-space: nowrap;\n  cursor: pointer;\n  box-shadow: var(--biss-shadow);\n  transition:\n    background 0.15s,\n    border-color 0.15s;\n}\n.ds-button {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  gap: 7px;\n  min-height: var(--biss-control-height);\n  height: var(--biss-control-height);\n  padding: 0 12px;\n  border: 1px solid var(--biss-primary);\n  border-radius: var(--biss-radius-sm);\n  background: var(--biss-primary);\n  color: #fff;\n  font: 500 13.5px/1.2 var(--biss-font-family);\n  text-decoration: none;\n  white-space: nowrap;\n  cursor: pointer;\n  box-shadow: var(--biss-shadow);\n  transition:\n    background 0.15s,\n    border-color 0.15s;\n}\n.ds-button:hover:not(:disabled):not([aria-disabled='true']) {\n  background: var(--biss-primary-hover);\n  border-color: var(--biss-primary-hover);\n}\n.ds-button-ghost {\n  background: transparent;\n  color: var(--biss-muted);\n  border-color: transparent;\n  box-shadow: none;\n}\n.ds-button-ghost:hover:not(:disabled) {\n  background: var(--biss-hover);\n  border-color: transparent;\n  color: var(--biss-text);\n}\n.ds-button:disabled, .ds-button[aria-disabled='true'] {\n  opacity: 0.5;\n  cursor: default;\n  pointer-events: none;\n}\n.ds-button {\n    transition: none;\n  }\n.ds-button:focus-visible,.ds-nav-item:focus-visible{outline:2px solid var(--biss-primary);outline-offset:2px;}\n@media(prefers-reduced-motion:reduce){.ds-button{transition:none}}"
+    },
+    {
+      "name": "Danger Button",
+      "kind": "button",
+      "description": "Compact danger button.",
+      "html": "<button class=\"ds-button ds-button-danger\" type=\"button\">Save changes</button>",
+      "css": ".ds-button {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  gap: 7px;\n  min-height: var(--biss-control-height);\n  height: var(--biss-control-height);\n  padding: 0 12px;\n  border: 1px solid var(--biss-primary);\n  border-radius: var(--biss-radius-sm);\n  background: var(--biss-primary);\n  color: #fff;\n  font: 500 13.5px/1.2 var(--biss-font-family);\n  text-decoration: none;\n  white-space: nowrap;\n  cursor: pointer;\n  box-shadow: var(--biss-shadow);\n  transition:\n    background 0.15s,\n    border-color 0.15s;\n}\n.ds-button {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  gap: 7px;\n  min-height: var(--biss-control-height);\n  height: var(--biss-control-height);\n  padding: 0 12px;\n  border: 1px solid var(--biss-primary);\n  border-radius: var(--biss-radius-sm);\n  background: var(--biss-primary);\n  color: #fff;\n  font: 500 13.5px/1.2 var(--biss-font-family);\n  text-decoration: none;\n  white-space: nowrap;\n  cursor: pointer;\n  box-shadow: var(--biss-shadow);\n  transition:\n    background 0.15s,\n    border-color 0.15s;\n}\n.ds-button:hover:not(:disabled):not([aria-disabled='true']) {\n  background: var(--biss-primary-hover);\n  border-color: var(--biss-primary-hover);\n}\n.ds-button-danger {\n  background: var(--biss-danger);\n  border-color: var(--biss-danger);\n}\n.ds-button-danger:hover:not(:disabled) {\n  background: var(--biss-danger-hover);\n  border-color: var(--biss-danger-hover);\n}\n.ds-button:disabled, .ds-button[aria-disabled='true'] {\n  opacity: 0.5;\n  cursor: default;\n  pointer-events: none;\n}\n.ds-button {\n    transition: none;\n  }\n.ds-button:focus-visible,.ds-nav-item:focus-visible{outline:2px solid var(--biss-primary);outline-offset:2px;}\n@media(prefers-reduced-motion:reduce){.ds-button{transition:none}}"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "description": "A labeled compact text field with a visible focus outline.",
+      "html": "<label class=\"ds-field\"><span class=\"ds-field-label\">Project name</span><input class=\"ds-input\" value=\"Open justice\"></label>",
+      "css": ".ds-field {\n  display: flex;\n  flex-direction: column;\n  gap: 6px;\n  color: var(--biss-text);\n  font: 13.5px/1.5 var(--biss-font-family);\n}\n.ds-field-label {\n  display: block;\n  font-size: 13px;\n  font-weight: 500;\n}\n.ds-input {\n  display: block;\n  box-sizing: border-box;\n  width: 100%;\n  min-width: 0;\n  height: var(--biss-control-height);\n  padding: 0 10px;\n  border: 1px solid var(--biss-border-strong);\n  border-radius: var(--biss-radius-sm);\n  background: var(--biss-card);\n  color: var(--biss-text);\n  font: 400 13.5px/1.5 var(--biss-font-family);\n  box-shadow: none;\n  transition: border-color 0.15s;\n}\n.ds-input::placeholder {\n  color: var(--biss-muted);\n}\n.ds-input:focus {\n  outline: 2px solid var(--biss-primary);\n  outline-offset: 1px;\n  border-color: var(--biss-primary);\n}\n.ds-input[aria-invalid='true'] {\n  border-color: var(--biss-danger);\n}\n.ds-input:disabled {\n  opacity: 0.5;\n  cursor: default;\n}\n.ds-input {\n    transition: none;\n  }\n@media(prefers-reduced-motion:reduce){.ds-input{transition:none}}"
+    },
+    {
+      "name": "Navigation",
+      "kind": "nav",
+      "description": "Compact navigation with a blue selected state.",
+      "html": "<nav aria-label=\"Project\"><a class=\"ds-nav-item is-active\" href=\"#overview\" aria-current=\"page\">Overview</a><a class=\"ds-nav-item\" href=\"#records\">Records</a></nav>",
+      "css": ".ds-nav-item {\n  display: flex;\n  align-items: center;\n  gap: 8px;\n  min-height: 32px;\n  padding: 5px 10px;\n  border-radius: 7px;\n  color: var(--biss-muted);\n  font: 400 13px/1.5 var(--biss-font-family);\n  text-decoration: none;\n}\n.ds-nav-item:hover {\n  background: var(--biss-hover);\n  color: var(--biss-text);\n}\n.ds-nav-item.is-active {\n  background: var(--biss-info-bg);\n  color: var(--biss-primary);\n  font-weight: 500;\n}.ds-button:focus-visible,.ds-nav-item:focus-visible{outline:2px solid var(--biss-primary);outline-offset:2px;}"
+    },
+    {
+      "name": "Status Badge",
+      "kind": "chip",
+      "description": "Status text paired with semantic color.",
+      "html": "<span class=\"ds-badge ds-badge-success\">On track</span>",
+      "css": ".ds-badge {\n  display: inline-flex;\n  align-items: center;\n  gap: 5px;\n  min-height: 22px;\n  padding: 1px 8px;\n  border: 1px solid var(--biss-border);\n  border-radius: 11px;\n  background: var(--biss-surface-subtle);\n  color: var(--biss-muted);\n  font: 500 12px/1.4 var(--biss-font-family);\n  text-transform: none;\n  letter-spacing: normal;\n  white-space: nowrap;\n}\n.ds-badge-success {\n  background: var(--biss-success-bg);\n  color: var(--biss-success);\n  border-color: var(--biss-success-border);\n}"
+    },
+    {
+      "name": "Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "A quiet surface for related information.",
+      "html": "<section class=\"ds-card ds-card-padded\">A quiet surface for a related set of information.</section>",
+      "css": ".ds-card {\n  background: var(--biss-card);\n  color: var(--biss-text);\n  border: 1px solid var(--biss-border);\n  border-radius: var(--biss-radius-md);\n  box-shadow: var(--biss-shadow);\n  min-width: 0;\n}\n.ds-card-padded {\n  padding: 20px 22px;\n}\n.ds-card{font-family:var(--biss-font-family, \"Inter Variable\", \"Inter\", system-ui, -apple-system, \"Segoe UI\", sans-serif);font-size:14px;line-height:1.55;}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Quiet, legible tools",
+    "overview": "Source authority is Bizzy's DESIGN.md and app/assets/css/theme.css. BISS UI\nextends that established visual language for research and administration. Operate\nmode uses warm surfaces, white panels, compact controls and restrained blue actions.\n\nAll 130 Vue and 130 Svelte components share this system, including the renamed\ncaselaw APIs and public-page compositions. There is no separate legacy visual\nfoundation; the old Caselaw stylesheet has been removed.",
+    "keyCharacteristics": [
+      "Warm, quiet surfaces with clear borders.",
+      "Compact sans-serif typography and consistent control rhythm.",
+      "Host-controlled data, labels and composition in both frameworks."
+    ],
+    "rules": [
+      {
+        "name": "The Shared Source Rule",
+        "body": "`src/theme/tokens.json` owns runtime tokens and generates the CSS and TypeScript exports. The frontmatter records the design contract; change runtime values in that source, then regenerate the exports. Customize semantic CSS properties on a host wrapper rather than layering a second theme.",
+        "section": "colors"
+      },
+      {
+        "name": "The One System Rule",
+        "body": "Every component uses the shared foundation. Styles are organized into `src/styles/foundation.css`, `forms.css`, `layout.css`, `content.css`, `bizzy.css`, `library.css` and `editors.css`, composed by `index.css` with the generated tokens. Do not restore a legacy stylesheet or introduce another visual foundation for a component family.",
+        "section": "components"
+      }
+    ],
+    "dos": [
+      "Do use the shared token source and the same visual system in both frameworks.",
+      "Do preserve visible focus, semantic controls and host-configurable labels.",
+      "Do let actions and metadata wrap at phone widths."
+    ],
+    "donts": [
+      "Don't use color alone to communicate state.",
+      "Don't use glass, gradients, display-scale marketing type, uppercase labels or ornamental borders.",
+      "Don't layer overrides over the removed Caselaw stylesheet."
+    ]
+  }
+}

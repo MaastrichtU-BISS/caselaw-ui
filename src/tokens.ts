@@ -1,47 +1,92 @@
-export const bissTheme = {
-  color: {
-    bg: "#FAF9F7",
-    grid: "transparent",
-    card: "#FFFFFF",
-    border: "#E7E5E0",
-    text: "#1D1C1A",
-    muted: "#5E5C57",
-    primary: "#005CA9",
-    primaryHover: "#004A8A",
-    danger: "#C2412F",
-    focus: "rgba(0, 92, 169, 0.24)",
-  },
-  radius: {
-    sm: "7px",
-    md: "10px",
-    pill: "999px",
-  },
-  shadow: {
-    card: "0 1px 2px rgba(29, 28, 26, 0.04)",
-  },
-  typeScale: {
-    eyebrow: "0.74rem",
-    body: "1rem",
-    lead: "1.2rem",
-    h1: "clamp(2rem, 4vw, 3.5rem)",
-    h2: "clamp(1.45rem, 2vw, 2rem)",
-  },
+/** Generated from src/theme/tokens.json; edit that source rather than these values. */
+export const bissCssTokens = {
+  "--biss-hover": "#EFEDE9",
+  "--biss-row-hover": "#F8F7F4",
+  "--biss-track": "#ECEAE5",
+  "--biss-ai": "#7A3FB8",
+  "--biss-ai-soft": "#F5EFFB",
+  "--biss-control-height": "32px",
+  "--biss-row-height": "36px",
+  "--biss-popover-shadow": "0 12px 32px rgba(29,28,26,.12), 0 2px 6px rgba(29,28,26,.06)",
+  "--biss-bg": "#FAF9F7",
+  "--biss-grid": "transparent",
+  "--biss-card": "#FFFFFF",
+  "--biss-border": "#E7E5E0",
+  "--biss-text": "#1D1C1A",
+  "--biss-muted": "#5E5C57",
+  "--biss-primary": "#005CA9",
+  "--biss-primary-hover": "#004A8A",
+  "--biss-danger": "#C2412F",
+  "--biss-focus": "rgba(0, 92, 169, 0.24)",
+  "--biss-shadow": "0 1px 2px rgba(29, 28, 26, 0.04)",
+  "--biss-radius-sm": "7px",
+  "--biss-radius-md": "10px",
+  "--biss-topbar-height": "56px",
+  "--biss-bottombar-height": "58px",
+  "--biss-bar-max": "100%",
+  "--biss-page-max": "1180px",
+  "--biss-font-family": "\"Inter Variable\", \"Inter\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
+  "--biss-text-eyebrow": "0.74rem",
+  "--biss-text-body": "14px",
+  "--biss-text-lead": "15px",
+  "--biss-text-h1": "22px",
+  "--biss-text-h2": "15px",
+  "--biss-surface-subtle": "#F6F5F2",
+  "--biss-surface-muted": "#F3F2EF",
+  "--biss-border-subtle": "#EDEBE7",
+  "--biss-border-strong": "#D6D3CC",
+  "--biss-radius-lg": "12px",
+  "--biss-mono": "\"SFMono-Regular\", \"SF Mono\", Consolas, \"Liberation Mono\", Menlo, monospace",
+  "--biss-success": "#0F7A4E",
+  "--biss-success-bg": "#E5F4EC",
+  "--biss-success-border": "#BFE3CF",
+  "--biss-danger-bg": "#FBEAE7",
+  "--biss-danger-border": "#F1C6BF",
+  "--biss-danger-hover": "#A93626",
+  "--biss-warning": "#7A5A00",
+  "--biss-warning-bg": "#FFF6D9",
+  "--biss-warning-border": "#F0D27A",
+  "--biss-info": "#005CA9",
+  "--biss-info-bg": "#E9F1F9",
+  "--biss-info-border": "#BFD5EB",
+  "--biss-shadow-sm": "var(--biss-shadow)",
+  "--biss-shadow-md": "var(--biss-popover-shadow)",
+  "--biss-shadow-lg": "var(--biss-popover-shadow)",
+  "--biss-sidebar-width": "240px",
+  "--biss-console-max": "1440px",
+  "--biss-text-xs": "0.76rem",
+  "--biss-text-sm": "0.86rem",
+  "--biss-text-md": "0.94rem",
+  "--biss-console-title": "1.375rem"
 } as const;
-
+export const bissTheme = {
+  "color": {
+    "bg": "#FAF9F7",
+    "grid": "transparent",
+    "card": "#FFFFFF",
+    "border": "#E7E5E0",
+    "text": "#1D1C1A",
+    "muted": "#5E5C57",
+    "primary": "#005CA9",
+    "primaryHover": "#004A8A",
+    "danger": "#C2412F",
+    "focus": "rgba(0, 92, 169, 0.24)"
+  },
+  "radius": {
+    "sm": "7px",
+    "md": "10px",
+    "pill": "999px"
+  },
+  "shadow": {
+    "card": "0 1px 2px rgba(29, 28, 26, 0.04)"
+  },
+  "typeScale": {
+    "body": "14px",
+    "lead": "15px",
+    "h1": "22px",
+    "h2": "15px"
+  }
+} as const;
 export type BissTheme = typeof bissTheme;
-
-export type BissLink = {
-  label: string;
-  href: string;
-  /** A different origin. Affects `rel`, not where the link opens. */
-  external?: boolean;
-  /**
-   * Open in a new tab.
-   *
-   * Off by default, including for `external`. Moving between Case Law Explorer
-   * products is ordinary navigation, and opening each one in its own tab left
-   * people managing tabs they never asked for. Reserve this for third-party
-   * destinations someone is unlikely to want to leave the page for.
-   */
-  newTab?: boolean;
-};
+export type BissTokenName = keyof typeof bissCssTokens;
+export type {BissLink} from "./core/types";

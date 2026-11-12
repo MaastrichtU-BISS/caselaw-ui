@@ -27,6 +27,8 @@ jobs:
       - name: Typecheck
         run: npm run check
 
+      - run: npm run build
+      - run: npm run test:package
       - run: npm run demo:build
       - run: npx playwright install --with-deps chromium
       - run: npm run test:browser

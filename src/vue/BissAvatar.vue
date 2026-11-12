@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue';
-import { avatarHue, initials } from '../portable';
+import { avatarHue, initials } from '../core/format';
 const props = withDefaults(defineProps<{ name: string; size?: number; label?: string }>(), {
   size: 32,
 });

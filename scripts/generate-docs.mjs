@@ -117,12 +117,12 @@ const descriptions = {
   Button: 'A clear action with an explicit visual priority.',
   Menu: 'Searchable actions, checked choices and nested groups in a floating panel.',
   Dialog: 'A focused task with native modal behavior, a title and an action row.',
-  Modal: 'The inherited modal API, for consumers migrating an existing dialog.',
+  Modal: 'The modal API, for consumers migrating an existing dialog.',
   ConfirmDialog: 'An explicit confirmation before a consequential action.',
   SidePanel: 'Keep a record’s details in view without leaving the surrounding work.',
   Popover: 'A small panel for a choice that needs more room than a menu.',
   SelectPicker: 'A searchable dropdown with groups, disabled choices and keyboard navigation.',
-  Select: 'The inherited native select for simple browser-driven choice.',
+  Select: 'The native select for simple browser-driven choice.',
   ValuePicker: 'Search and select multiple filter values, with optional negation.',
   SwatchPicker: 'Choose a named color from the workspace palette.',
   DatePicker: 'Select a day or a range, type a date, or navigate the calendar by keyboard.',
@@ -152,7 +152,7 @@ const descriptions = {
   CodeTabs: 'Keep related language samples together and copy the active one.',
 };
 Object.assign(descriptions, {
-  ActionCard: 'A linked surface for choosing a destination, available in Svelte.',
+  ActionCard: 'A linked surface for choosing a destination, available in both frameworks.',
   AlertLine: 'One quiet line that names a concern and points toward a useful action.',
   AppShell: 'An application frame with navigation, a working area and optional account furniture.',
   Badge: 'A compact status or category label with optional dot and tone.',
@@ -167,9 +167,9 @@ Object.assign(descriptions, {
   CopyField: 'A value that can be read, selected and copied without changing it.',
   Field: 'A label, hint or error around a control, with a scoped identifier.',
   FeatureCard: 'Describe one capability, using the service mark and supporting copy.',
-  GridShell: 'The inherited public-page frame with a shared top bar and footer.',
+  GridShell: 'The public-page frame with a shared top bar and footer.',
   HeaderAction: 'One labelled icon action in a page header.',
-  Hero: 'The inherited public-page heading with supporting copy and optional actions.',
+  Hero: 'The public-page heading with supporting copy and optional actions.',
   HeroPill: 'A small piece of supporting context in a public-page heading.',
   Input: 'A single-line value with normal form attributes and validation styling.',
   KpiCard: 'One headline figure with the label and note needed to interpret it.',
@@ -179,39 +179,73 @@ Object.assign(descriptions, {
   NavSection: 'Group related navigation destinations under a small heading.',
   NoticeRow: 'A notification row with unread state, context and a host-owned action.',
   OnboardingChips: 'Choose several interests or areas during workspace setup.',
-  PageHeader: 'The inherited page title and subtitle, with an actions slot.',
+  PageHeader: 'The page title and subtitle, with an actions slot.',
   PageHint: 'A keyboard-accessible explanation that stays out of the page’s main reading path.',
   PeopleCell: 'Show a small set of assigned people, with overflow summarized by count.',
   PropertyList: 'Display a record’s labelled properties in a compact description list.',
   RecordChip: 'A small labelled reference to a record, optionally linked.',
-  SearchInput: 'A search field with the inherited input contract and search treatment.',
+  SearchInput: 'A search field with the input contract and search treatment.',
   SectionHeader: 'Introduce a content section and place its actions alongside the title.',
-  ServiceIcon: 'The inherited product marks, or a short text mark supplied by the host.',
+  ServiceIcon: 'The product marks, or a short text mark supplied by the host.',
   SettingsHead: 'A settings section’s title, one-line explanation and optional extra detail.',
   SidebarUser: 'The signed-in identity with account navigation and sign-out actions.',
-  Skeleton: 'Simple content-shaped bars for inherited loading layouts.',
+  Skeleton: 'Simple content-shaped bars for loading layouts.',
   StatList: 'A compact list of labelled counts or formatted values.',
   StatusCell: 'A written status reinforced by a colored dot or soft tint.',
   Step: 'One completed, current or upcoming step in an ordered setup flow.',
   Steps: 'An ordered container that gives setup steps a shared reading rhythm.',
   SummaryStrip: 'A row of labelled figures, with supporting notes and optional color markers.',
-  Switch: 'A labelled on/off setting using the inherited model contract.',
+  Switch: 'A labelled on/off setting using the model contract.',
   Tab: 'A navigation tab that can render as a native button or a router link.',
   TableAddRow: 'A quiet row-level action for adding a record to the current group.',
   TableGroup: 'A collapsible group with a name, count and actions around table content.',
   TableHead: 'A column heading with a host-owned three-state sort action.',
   TablePager: 'Previous and next page controls with a live range announcement.',
   TableTotal: 'A compact label and formatted total for a table footer or group summary.',
-  TagInput: 'Add and remove short labels using the inherited model contract.',
+  TagInput: 'Add and remove short labels using the model contract.',
   Textarea: 'A multiline form value with normal field attributes and validation styling.',
-  ToastStack: 'Render the inherited application-wide toast queue after an action.',
+  ToastStack: 'Render the application-wide toast queue after an action.',
   ToolButton: 'A quiet toolbar control with active state, count and a separate clear action.',
   ToolNew: 'A primary create action with a menu for other ways to add.',
   ToolSearch: 'A compact toolbar search that expands into an editable query.',
   Toolbar: 'A wrapping row for related page tools and trailing controls.',
-  TopBar: 'The inherited shared brand and primary navigation bar.',
+  TopBar: 'The shared brand and primary navigation bar.',
   ViewTabs: 'Switch a page’s view while keeping labels, counts and disabled states consistent.',
 });
+groups['Forms and selection'].push('Checkbox', 'RadioGroup', 'SegmentedControl', 'FilePicker');
+groups['Overlays and search'].push('Tooltip', 'FigureHelp');
+groups['Pages and navigation'].push('Breadcrumbs', 'Disclosure', 'SplitPane', 'DocumentToc');
+groups['People and records'].push(
+  'AccessList',
+  'RoleEditor',
+  'SharePanel',
+  'CommentComposer',
+  'CommentThread',
+  'RecordPreview',
+  'PresenceCursor',
+);
+groups['Tables and boards'].push(
+  'DataGrid',
+  'ColumnManager',
+  'FilterBuilder',
+  'LabelEditor',
+  'TaskList',
+  'Agenda',
+);
+groups['Widgets and charts'].push(
+  'DataTile',
+  'WidgetGrid',
+  'QuickLinks',
+  'DeadlineList',
+  'StackedBar',
+);
+groups['Content and feedback'].push(
+  'DocumentCallout',
+  'Bookmark',
+  'MediaFigure',
+  'AttachmentList',
+  'ProposalCard',
+);
 const groupAdvice = {
   'Getting things done':
     'Keep one primary action per task. Use quiet controls for secondary work, and provide a specific accessible name for every icon-only action.',
@@ -250,6 +284,17 @@ function api(source, vue) {
     models = [];
   const defaults = {};
   let svelteType;
+  function members(type,seen=new Set()){
+    if(!type)return [];
+    if(ts.isTypeLiteralNode(type)||ts.isInterfaceDeclaration(type))return [...type.members];
+    if(ts.isIntersectionTypeNode(type))return type.types.flatMap(t=>members(t,seen));
+    if(ts.isTypeReferenceNode(type)){
+      const name=type.typeName.getText(sf);if(seen.has(name))return [];seen.add(name);
+      const declaration=sf.statements.find(s=>(ts.isInterfaceDeclaration(s)||ts.isTypeAliasDeclaration(s))&&s.name.text===name);
+      if(declaration)return members(ts.isTypeAliasDeclaration(declaration)?declaration.type:declaration,seen);
+    }
+    return [];
+  }
   const property = (m) => ({
     name: m.name?.getText(sf).replace(/['"]/g, ''),
     type: m.type?.getText(sf) ?? 'unknown',
@@ -320,7 +365,7 @@ function api(source, vue) {
       for (const binding of node.name.elements)
         if (binding.initializer)
           defaults[binding.name.getText(sf)] = binding.initializer.getText(sf);
-      if (node.type && ts.isTypeLiteralNode(node.type)) svelteType = node.type;
+      if(node.type)svelteType=node.type;
     }
     if (
       !vue &&
@@ -340,7 +385,7 @@ function api(source, vue) {
   };
   visit(sf);
   if (!vue && svelteType)
-    props.push(...svelteType.members.filter(ts.isPropertySignature).map(property));
+    props.push(...members(svelteType).filter(ts.isPropertySignature).map(property));
   if (!vue)
     for (const match of source.matchAll(/on:(\w+)(?=\s|>)/g)) {
       if (!events.some((e) => e.name === match[1]))
@@ -356,10 +401,19 @@ function api(source, vue) {
       ...p,
       ...(defaults[p.name] !== undefined ? { default: defaults[p.name] } : {}),
     })),
-    events,
+    events: [
+      ...events,
+      ...(!vue
+        ? props
+            .filter((p) => /^on[a-zA-Z]/.test(p.name))
+            .map((p) => ({ ...p, description: 'Callback prop.' }))
+        : []),
+    ],
     slots: [
       ...new Set(
-        [...source.matchAll(/<slot(?:\s+name="([^"]+)")?/g)].map((m) => m[1] ?? 'default'),
+        [...source.matchAll(/<slot(?:\s+name="([^"]+)")?/g)]
+          .map((m) => m[1] ?? 'default')
+          .concat(!vue ? props.filter((p) => p.type.includes('Snippet')).map((p) => p.name) : []),
       ),
     ],
   };

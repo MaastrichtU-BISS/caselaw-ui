@@ -29,21 +29,24 @@
 </template>
 
 <script setup lang="ts">
-import type { BissServiceIconName } from "../icons";
-import type { BissLink } from "../tokens";
-import BissServiceIcon from "./BissServiceIcon.vue";
+import type { BissServiceIconName } from '../core/service-icons';
+import type { BissLink } from '../tokens';
+import BissServiceIcon from './BissServiceIcon.vue';
 
-withDefaults(defineProps<{
-  brand?: string;
-  mark?: string;
-  icon?: BissServiceIconName;
-  iconLabel?: string;
-  href?: string;
-  links?: BissLink[];
-}>(), {
-  brand: "Case Law Explorer",
-  mark: "CLE",
-  href: "/",
-  links: () => [],
-});
+withDefaults(
+  defineProps<{
+    brand?: string;
+    mark?: string;
+    icon?: BissServiceIconName;
+    iconLabel?: string;
+    href?: string;
+    links?: BissLink[];
+  }>(),
+  {
+    brand: 'Workspace',
+    mark: 'B',
+    href: '/',
+    links: () => [],
+  },
+);
 </script>

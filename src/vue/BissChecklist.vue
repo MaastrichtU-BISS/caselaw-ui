@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, ref, watch, onMounted, onBeforeUnmount, nextTick, useId } from 'vue';
-
 const { items, label } = defineProps<{
   items: { key: string; label: string; description?: string; done: boolean; disabled?: boolean }[];
   label: string;

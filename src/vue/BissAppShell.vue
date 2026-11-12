@@ -1,41 +1,44 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref, useSlots, watch } from "vue";
-import { setBissFavicon, type BissServiceIconName } from "../icons";
-import type { BissLink } from "../tokens";
-import BissBottomBar from "./BissBottomBar.vue";
-import BissTopBar from "./BissTopBar.vue";
+import { computed, onBeforeUnmount, onMounted, ref, useSlots, watch } from 'vue';
+import { setBissFavicon, type BissServiceIconName } from '../core/service-icons';
+import type { BissLink } from '../tokens';
+import BissBottomBar from './BissBottomBar.vue';
+import BissTopBar from './BissTopBar.vue';
 
-const props = withDefaults(defineProps<{
-  brand?: string;
-  mark?: string;
-  icon?: BissServiceIconName;
-  iconLabel?: string;
-  favicon?: boolean;
-  href?: string;
-  topLinks?: BissLink[];
-  /** Close the console with the shared site footer. */
-  footer?: boolean;
-  footerText?: string;
-  footerLinks?: BissLink[];
-  /**
-   * Let the content own the whole area: no page padding, no measure.
-   *
-   * The default is a document surface, where a line of prose past 1440px is
-   * unreadable and 32px of breathing room is right. A workspace is the other
-   * thing entirely, a graph canvas or a docked panel, and it wants the pixels.
-   */
-  fluid?: boolean;
-}>(), {
-  fluid: false,
-  brand: "Case Law Explorer",
-  mark: "CLE",
-  favicon: true,
-  href: "/",
-  topLinks: () => [],
-  footer: false,
-  footerText: "Managed by BISS Institute.",
-  footerLinks: () => [],
-});
+const props = withDefaults(
+  defineProps<{
+    brand?: string;
+    mark?: string;
+    icon?: BissServiceIconName;
+    iconLabel?: string;
+    favicon?: boolean;
+    href?: string;
+    topLinks?: BissLink[];
+    /** Close the console with the shared site footer. */
+    footer?: boolean;
+    footerText?: string;
+    footerLinks?: BissLink[];
+    /**
+     * Let the content own the whole area: no page padding, no measure.
+     *
+     * The default is a document surface, where a line of prose past 1440px is
+     * unreadable and 32px of breathing room is right. A workspace is the other
+     * thing entirely, a graph canvas or a docked panel, and it wants the pixels.
+     */
+    fluid?: boolean;
+  }>(),
+  {
+    fluid: false,
+    brand: 'Workspace',
+    mark: 'B',
+    favicon: true,
+    href: '/',
+    topLinks: () => [],
+    footer: false,
+    footerText: 'Managed by BISS Institute.',
+    footerLinks: () => [],
+  },
+);
 
 /** Sidebar is a drawer below 960px; the toggle only renders there. */
 const sidebarOpen = ref(false);
@@ -46,13 +49,13 @@ const sidebarOpen = ref(false);
  * narrowed to 200px does not give enough of it. Remembered per browser,
  * since whoever folds it away once wants it folded on the next page too.
  */
-const COLLAPSED_KEY = "biss-sidebar-collapsed";
+const COLLAPSED_KEY = 'biss-sidebar-collapsed';
 const sidebarCollapsed = ref(false);
 
 function setCollapsed(next: boolean) {
   sidebarCollapsed.value = next;
   try {
-    localStorage.setItem(COLLAPSED_KEY, next ? "1" : "0");
+    localStorage.setItem(COLLAPSED_KEY, next ? '1' : '0');
   } catch {
     // Storage can be blocked; the rail still folds, it just forgets.
   }
@@ -60,7 +63,7 @@ function setCollapsed(next: boolean) {
 
 onMounted(() => {
   try {
-    sidebarCollapsed.value = localStorage.getItem(COLLAPSED_KEY) === "1";
+    sidebarCollapsed.value = localStorage.getItem(COLLAPSED_KEY) === '1';
   } catch {
     sidebarCollapsed.value = false;
   }
@@ -88,8 +91,8 @@ let startWidth = 0;
 function railAndShell() {
   const node = resizer.value;
   return {
-    rail: node?.closest<HTMLElement>(".biss-app-sidebar") || null,
-    shell: node?.closest<HTMLElement>(".biss-app-shell") || null,
+    rail: node?.closest<HTMLElement>('.biss-app-sidebar') || null,
+    shell: node?.closest<HTMLElement>('.biss-app-shell') || null,
   };
 }
 
@@ -97,7 +100,7 @@ function applyWidth(width: number) {
   const { shell } = railAndShell();
   if (!shell) return;
   const next = Math.min(SIDEBAR_MAX, Math.max(SIDEBAR_MIN, width));
-  shell.style.setProperty("--biss-sidebar-width", `${Math.round(next)}px`);
+  shell.style.setProperty('--biss-sidebar-width', `${Math.round(next)}px`);
 }
 
 function onPointerMove(event: PointerEvent) {
@@ -106,10 +109,10 @@ function onPointerMove(event: PointerEvent) {
 
 function onPointerUp(event: PointerEvent) {
   resizer.value?.releasePointerCapture?.(event.pointerId);
-  resizer.value?.classList.remove("is-dragging");
-  document.body.style.userSelect = "";
-  window.removeEventListener("pointermove", onPointerMove);
-  window.removeEventListener("pointerup", onPointerUp);
+  resizer.value?.classList.remove('is-dragging');
+  document.body.style.userSelect = '';
+  window.removeEventListener('pointermove', onPointerMove);
+  window.removeEventListener('pointerup', onPointerUp);
 }
 
 function onResizeStart(event: PointerEvent) {
@@ -120,29 +123,29 @@ function onResizeStart(event: PointerEvent) {
   startX = event.clientX;
   startWidth = rail.getBoundingClientRect().width;
   resizer.value?.setPointerCapture?.(event.pointerId);
-  resizer.value?.classList.add("is-dragging");
-  document.body.style.userSelect = "none";
-  window.addEventListener("pointermove", onPointerMove);
-  window.addEventListener("pointerup", onPointerUp);
+  resizer.value?.classList.add('is-dragging');
+  document.body.style.userSelect = 'none';
+  window.addEventListener('pointermove', onPointerMove);
+  window.addEventListener('pointerup', onPointerUp);
 }
 
 function onResizeKey(event: KeyboardEvent) {
   const { rail } = railAndShell();
   if (!rail) return;
   const step = event.shiftKey ? 64 : 16;
-  if (event.key === "ArrowRight") {
+  if (event.key === 'ArrowRight') {
     event.preventDefault();
     applyWidth(rail.getBoundingClientRect().width + step);
-  } else if (event.key === "ArrowLeft") {
+  } else if (event.key === 'ArrowLeft') {
     event.preventDefault();
     applyWidth(rail.getBoundingClientRect().width - step);
   }
 }
 
 onBeforeUnmount(() => {
-  window.removeEventListener("pointermove", onPointerMove);
-  window.removeEventListener("pointerup", onPointerUp);
-  document.body.style.userSelect = "";
+  window.removeEventListener('pointermove', onPointerMove);
+  window.removeEventListener('pointerup', onPointerUp);
+  document.body.style.userSelect = '';
 });
 
 function syncFavicon() {
@@ -210,7 +213,15 @@ defineExpose({ closeSidebar: () => (sidebarOpen.value = false) });
             :title="sidebarCollapsed ? 'Expand the sidebar' : 'Collapse the sidebar'"
             @click="setCollapsed(!sidebarCollapsed)"
           >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
               <path d="m15 18-6-6 6-6" />
             </svg>
           </button>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { computed, ref, watch, onMounted, onBeforeUnmount, nextTick, useId } from 'vue';
+import { computed } from 'vue';
 import BissAvatar from './BissAvatar.vue';
-import type { BissPerson } from '../library-types';
+import type { BissPerson } from '../core/types';
 const {
   people,
   limit = 4,

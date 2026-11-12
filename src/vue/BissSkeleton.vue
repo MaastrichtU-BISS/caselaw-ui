@@ -1,16 +1,19 @@
 <script setup lang="ts">
-withDefaults(defineProps<{
-  /** Number of stacked bars to render. */
-  lines?: number;
-  height?: string;
-  width?: string;
-  gap?: string;
-}>(), {
-  lines: 1,
-  height: "14px",
-  width: "100%",
-  gap: "10px",
-});
+withDefaults(
+  defineProps<{
+    /** Number of stacked bars to render. */
+    lines?: number;
+    height?: string;
+    width?: string;
+    gap?: string;
+  }>(),
+  {
+    lines: 1,
+    height: '14px',
+    width: '100%',
+    gap: '10px',
+  },
+);
 </script>
 
 <template>

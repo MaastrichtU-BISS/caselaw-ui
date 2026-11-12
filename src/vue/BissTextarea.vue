@@ -1,28 +1,33 @@
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed } from 'vue';
 
-const props = withDefaults(defineProps<{
-  placeholder?: string;
-  disabled?: boolean;
-  required?: boolean;
-  invalid?: boolean;
-  rows?: number;
-  mono?: boolean;
-}>(), {
-  disabled: false,
-  required: false,
-  invalid: false,
-  rows: 3,
-  mono: false,
-});
+const props = withDefaults(
+  defineProps<{
+    placeholder?: string;
+    disabled?: boolean;
+    required?: boolean;
+    invalid?: boolean;
+    rows?: number;
+    mono?: boolean;
+  }>(),
+  {
+    disabled: false,
+    required: false,
+    invalid: false,
+    rows: 3,
+    mono: false,
+  },
+);
 
 const model = defineModel<string>();
 
-const classes = computed(() => [
-  "biss-textarea",
-  props.invalid ? "biss-input-invalid" : "",
-  props.mono ? "biss-input-mono" : "",
-].filter(Boolean));
+const classes = computed(() =>
+  [
+    'biss-textarea',
+    props.invalid ? 'biss-input-invalid' : '',
+    props.mono ? 'biss-input-mono' : '',
+  ].filter(Boolean),
+);
 </script>
 
 <template>

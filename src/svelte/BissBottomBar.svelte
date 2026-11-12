@@ -1,19 +1,28 @@
 <script lang="ts">
-  import type { BissLink } from "../tokens";
+  import type { BissLink } from '../tokens';
 
-  export let managedBy = "Managed by BISS Institute.";
-  export let links: BissLink[] = [];
+  interface Props {
+    managedBy?: string;
+    links?: BissLink[];
+    children?: import('svelte').Snippet;
+  }
+
+  let { managedBy = 'Managed by BISS Institute.', links = [], children }: Props = $props();
 </script>
 
 <footer class="biss-fixed-bottombar">
   <div class="biss-footer-inner">
-    <slot>
+    {#if children}{@render children()}{:else}
       <span>{managedBy}</span>
       {#each links as link}
-        <a href={link.href} target={link.newTab ? "_blank" : undefined} rel={link.external ? "noreferrer" : undefined}>
+        <a
+          href={link.href}
+          target={link.newTab ? '_blank' : undefined}
+          rel={link.external ? 'noreferrer' : undefined}
+        >
           {link.label}
         </a>
       {/each}
-    </slot>
+    {/if}
   </div>
 </footer>

@@ -53,7 +53,7 @@ export function example(name: string, framework: 'vue' | 'svelte'): string | und
       [name, 'BissButton'],
       vue
         ? `<BissButton @click="open = true">Edit project</BissButton>\n<${name} :open="open" title="Edit project" @close="open = false">\n  <label>Project name <input value="Open justice" /></label>\n  <template #actions>\n    <BissButton @click="open = false">Done</BissButton>\n  </template>\n</${name}>`
-        : `<BissButton on:click={() => open = true}>Edit project</BissButton>\n<${name} {open} title="Edit project" onclose={() => open = false}>\n  <label>Project name <input value="Open justice" /></label>\n  {#snippet actions()}\n    <BissButton on:click={() => open = false}>Done</BissButton>\n  {/snippet}\n</${name}>`,
+        : `<BissButton onclick={() => open = true}>Edit project</BissButton>\n<${name} {open} title="Edit project" onclose={() => open = false}>\n  <label>Project name <input value="Open justice" /></label>\n  {#snippet actions()}\n    <BissButton onclick={() => open = false}>Done</BissButton>\n  {/snippet}\n</${name}>`,
       vue ? 'const open = ref(false);' : 'let open = $state(false);',
     );
   if (name === 'BissModal' || name === 'BissConfirmDialog')
@@ -61,14 +61,16 @@ export function example(name: string, framework: 'vue' | 'svelte'): string | und
       [name, 'BissButton'],
       vue
         ? `<BissButton @click="open = true">Open ${name === 'BissModal' ? 'settings' : 'confirmation'}</BissButton>\n<${name} v-model="open" title="${name === 'BissModal' ? 'Project settings' : 'Delete project?'}">\n  <p>${name === 'BissModal' ? 'Choose the settings for this project.' : 'This removes the project and its records.'}</p>\n</${name}>`
-        : `<BissButton on:click={() => open = true}>Open dialog</BissButton>\n<${name} bind:open title="${name === 'BissModal' ? 'Project settings' : 'Delete project?'}">\n  <p>${name === 'BissModal' ? 'Choose the settings for this project.' : 'This removes the project and its records.'}</p>\n</${name}>`,
+        : `<BissButton onclick={() => open = true}>Open dialog</BissButton>\n<${name} bind:open title="${name === 'BissModal' ? 'Project settings' : 'Delete project?'}">\n  <p>${name === 'BissModal' ? 'Choose the settings for this project.' : 'This removes the project and its records.'}</p>\n</${name}>`,
       vue ? 'const open = ref(false);' : 'let open = $state(false);',
     );
   if (name === 'BissField')
     return wrap(
       ['BissField', 'BissInput'],
-      '<BissField label="Project name" hint="Use a recognizable name.">\n  <template #default="{ id, invalid }">\n    <BissInput :id="id" v-model="name" :invalid="invalid" />\n  </template>\n</BissField>',
-      "const name = ref('Open justice');",
+      vue
+        ? '<BissField label="Project name" hint="Use a recognizable name.">\n  <template #default="{ id, invalid }">\n    <BissInput :id="id" v-model="name" :invalid="invalid" />\n  </template>\n</BissField>'
+        : '<BissField label="Project name" hint="Use a recognizable name.">\n  {#snippet children({id, invalid})}\n    <BissInput {id} bind:modelValue={name} {invalid} />\n  {/snippet}\n</BissField>',
+      vue ? "const name = ref('Open justice');" : "let name = $state('Open justice');",
     );
   if (name === 'BissHomeCard')
     return wrap(
@@ -94,7 +96,7 @@ export function example(name: string, framework: 'vue' | 'svelte'): string | und
       ['BissPageBar', 'BissButton'],
       vue
         ? '<BissPageBar title="Projects" description="The team’s work">\n  <template #actions><BissButton>New project</BissButton></template>\n</BissPageBar>'
-        : '<BissPageBar title="Projects" description="The team’s work">\n  <svelte:fragment slot="actions"><BissButton>New project</BissButton></svelte:fragment>\n</BissPageBar>',
+        : '<BissPageBar title="Projects" description="The team’s work">\n  {#snippet actions()}<BissButton>New project</BissButton>{/snippet}\n</BissPageBar>',
     );
   if (name === 'BissPopover')
     return wrap(
@@ -108,6 +110,10 @@ export function example(name: string, framework: 'vue' | 'svelte'): string | und
           '<BissButton @click="toasts.success(\'Changes saved\')">Save</BissButton>\n<BissToastStack />',
           'const toasts = useBissToasts();',
         )
-      : undefined;
+      : wrap(
+          ['BissToastStack','BissButton'],
+          '<BissButton onclick={() => queue.push(\'Changes saved\', {tone: \'success\'})}>Save</BissButton>\n<BissToastStack {queue} />',
+          "import {onDestroy} from 'svelte';\nimport {createBissToasts} from 'biss-ui';\nconst queue=createBissToasts();\nonDestroy(queue.destroy);",
+        );
   return undefined;
 }

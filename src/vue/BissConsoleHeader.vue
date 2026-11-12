@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { BissCrumb } from "../types";
+import type { BissCrumb } from '../core/types';
 
 defineProps<{
   title: string;

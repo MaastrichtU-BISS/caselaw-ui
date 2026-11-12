@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { computed, ref, watch, onMounted, onBeforeUnmount, nextTick, useId } from 'vue';
+import { computed, ref } from 'vue';
 import BissIcon from './BissIcon.vue';
-import type { BissIconName } from '../icon-names';
+import type { BissIconName } from '../core/icon-names';
 import BissDialog from './BissDialog.vue';
-import type { BissSearchItem } from '../library-types';
-import { listKeys } from '../interactions';
+import type { BissSearchItem } from '../core/types';
+import { listKeys } from '../core/dom';
 const {
   open = false,
   label = 'Search',

@@ -1,0 +1,422 @@
+/* Bizzy's base grammar, shared by every component, including migration APIs. */
+:where([class^='biss-'], [class*=' biss-']) {
+  box-sizing: border-box;
+  font-family: var(--biss-font-family);
+  font-variant-numeric: tabular-nums;
+}
+:where([class^='biss-'], [class*=' biss-']) :where(button, input, select, textarea) {
+  font-family: var(--biss-font-family);
+  box-sizing: border-box;
+}
+:where([class^='biss-'], [class*=' biss-']):focus-visible {
+  outline: 2px solid var(--biss-primary);
+  outline-offset: 2px;
+}
+.biss-button,
+.biss-icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: var(--biss-control-height);
+  height: var(--biss-control-height);
+  padding: 0 12px;
+  border: 1px solid var(--biss-primary);
+  border-radius: var(--biss-radius-sm);
+  background: var(--biss-primary);
+  color: #fff;
+  font: 500 13.5px/1.2 var(--biss-font-family);
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  box-shadow: var(--biss-shadow);
+  transition:
+    background 0.15s,
+    border-color 0.15s;
+}
+.biss-button:hover:not(:disabled):not([aria-disabled='true']) {
+  background: var(--biss-primary-hover);
+  border-color: var(--biss-primary-hover);
+}
+.biss-button-secondary {
+  background: var(--biss-card);
+  color: var(--biss-text);
+  border-color: var(--biss-border-strong);
+}
+.biss-button-secondary:hover:not(:disabled) {
+  background: var(--biss-hover);
+  border-color: var(--biss-border-strong);
+}
+.biss-button-ghost {
+  background: transparent;
+  color: var(--biss-muted);
+  border-color: transparent;
+  box-shadow: none;
+}
+.biss-button-ghost:hover:not(:disabled) {
+  background: var(--biss-hover);
+  border-color: transparent;
+  color: var(--biss-text);
+}
+.biss-button-danger {
+  background: var(--biss-danger);
+  border-color: var(--biss-danger);
+}
+.biss-button-danger:hover:not(:disabled) {
+  background: var(--biss-danger-hover);
+  border-color: var(--biss-danger-hover);
+}
+.biss-button-danger-quiet {
+  color: var(--biss-danger);
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+}
+.biss-button-danger-quiet:hover:not(:disabled) {
+  background: var(--biss-danger-bg);
+  border-color: transparent;
+}
+.biss-button:disabled,
+.biss-button[aria-disabled='true'] {
+  opacity: 0.5;
+  cursor: default;
+  pointer-events: none;
+}
+.biss-button-sm {
+  padding: 0 10px;
+  font-size: 13px;
+}
+.biss-button-block {
+  width: 100%;
+}
+.biss-button-icon,
+.biss-icon-button {
+  width: var(--biss-control-height);
+  padding: 0;
+  flex: none;
+}
+.biss-icon-button {
+  background: transparent;
+  color: var(--biss-muted);
+  border-color: transparent;
+  box-shadow: none;
+}
+.biss-icon-button:hover {
+  background: var(--biss-hover);
+  color: var(--biss-text);
+}
+.biss-icon-button-danger {
+  color: var(--biss-danger);
+}
+.biss-card {
+  background: var(--biss-card);
+  color: var(--biss-text);
+  border: 1px solid var(--biss-border);
+  border-radius: var(--biss-radius-md);
+  box-shadow: var(--biss-shadow);
+  min-width: 0;
+}
+.biss-card-flat {
+  box-shadow: none;
+}
+.biss-card-pad-sm {
+  padding: 14px 16px;
+}
+.biss-badge,
+.biss-pill,
+.biss-hero-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 22px;
+  padding: 1px 8px;
+  border: 1px solid var(--biss-border);
+  border-radius: 11px;
+  background: var(--biss-surface-subtle);
+  color: var(--biss-muted);
+  font: 500 12px/1.4 var(--biss-font-family);
+  text-transform: none;
+  letter-spacing: normal;
+  white-space: nowrap;
+}
+.biss-badge-success {
+  background: var(--biss-success-bg);
+  color: var(--biss-success);
+  border-color: var(--biss-success-border);
+}
+.biss-badge-danger {
+  background: var(--biss-danger-bg);
+  color: var(--biss-danger);
+  border-color: var(--biss-danger-border);
+}
+.biss-badge-warning {
+  background: var(--biss-warning-bg);
+  color: var(--biss-warning);
+  border-color: var(--biss-warning-border);
+}
+.biss-badge-info {
+  background: var(--biss-info-bg);
+  color: var(--biss-primary);
+  border-color: var(--biss-info-border);
+}
+.biss-badge-dot {
+  height: 6px;
+  width: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.biss-badge-mono {
+  font-family: var(--biss-mono);
+}
+.biss-page-header,
+.biss-console-header {
+  margin-bottom: 20px;
+  color: var(--biss-text);
+}
+.biss-page-header-row,
+.biss-console-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.biss-page-title,
+.biss-console-title {
+  font: 600 22px/1.25 var(--biss-font-family);
+  letter-spacing: -0.015em;
+  margin: 0;
+}
+.biss-page-subtitle,
+.biss-console-subtitle {
+  font: 400 13.5px/1.5 var(--biss-font-family);
+  color: var(--biss-muted);
+  margin: 5px 0 0;
+  max-width: 90ch;
+}
+.biss-console-header-actions,
+.biss-section-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.biss-eyebrow {
+  font: 400 12.5px/1.5 var(--biss-font-family);
+  color: var(--biss-muted);
+  letter-spacing: normal;
+  text-transform: none;
+  margin: 0 0 6px;
+}
+.biss-section-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.biss-section-title {
+  font: 600 15px/1.35 var(--biss-font-family);
+  margin: 0;
+  color: var(--biss-text);
+  letter-spacing: -0.005em;
+}
+.biss-section-copy {
+  font: 400 13.5px/1.5 var(--biss-font-family);
+  color: var(--biss-muted);
+  margin: 4px 0 0;
+}
+.biss-hero {
+  padding: 24px 0;
+  max-width: 760px;
+  margin: 0;
+  color: var(--biss-text);
+}
+.biss-hero-center {
+  text-align: center;
+  margin-inline: auto;
+}
+.biss-hero-start {
+  text-align: start;
+}
+.biss-hero-title {
+  font: 600 var(--biss-text-h1)/1.25 var(--biss-font-family);
+  letter-spacing: -0.015em;
+  margin: 0 0 8px;
+}
+.biss-hero-subtitle {
+  font: 400 var(--biss-text-lead)/1.6 var(--biss-font-family);
+  color: var(--biss-muted);
+  max-width: 65ch;
+  margin: 0;
+}
+.biss-hero-center .biss-hero-subtitle {
+  margin-inline: auto;
+}
+.biss-hero-pills,
+.biss-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 12px;
+}
+.biss-hero-actions {
+  margin: 18px 0 0;
+}
+.biss-hero-center .biss-hero-actions,
+.biss-hero-center .biss-hero-pills {
+  justify-content: center;
+}
+.biss-feature-grid,
+.biss-kpi-grid,
+.biss-action-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: 12px;
+}
+.biss-feature-card {
+  padding: 18px 20px;
+}
+.biss-feature-card-title,
+.biss-action-card-title {
+  font: 600 15px/1.35 var(--biss-font-family);
+  margin: 10px 0 5px;
+  letter-spacing: -0.005em;
+}
+.biss-feature-card-copy,
+.biss-action-card-copy {
+  font: 400 13.5px/1.55 var(--biss-font-family);
+  color: var(--biss-muted);
+  margin: 0;
+}
+.biss-action-card {
+  display: flex;
+  flex-direction: column;
+  padding: 18px 20px;
+  background: var(--biss-card);
+  border: 1px solid var(--biss-border);
+  border-radius: 10px;
+  box-shadow: var(--biss-shadow);
+  text-decoration: none;
+  color: var(--biss-text);
+}
+.biss-action-card:hover,
+.biss-action-card.is-active {
+  border-color: var(--biss-info-border);
+  background: var(--biss-info-bg);
+}
+.biss-action-card-icon {
+  color: var(--biss-muted);
+}
+.biss-kpi-card {
+  padding: 16px 18px;
+}
+.biss-kpi-label {
+  font: 400 13px/1.5 var(--biss-font-family);
+  color: var(--biss-muted);
+  text-transform: none;
+  letter-spacing: normal;
+}
+.biss-kpi-value {
+  font: 600 24px/1.3 var(--biss-font-family);
+  letter-spacing: -0.02em;
+  margin: 4px 0 2px;
+  color: var(--biss-text);
+}
+.biss-kpi-note {
+  font: 400 12.5px/1.5 var(--biss-font-family);
+  color: var(--biss-muted);
+}
+.biss-empty-state {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  padding: 28px 20px;
+  color: var(--biss-text);
+  border: 0;
+  background: transparent;
+  min-height: 0;
+}
+.biss-empty-title {
+  font: 600 14.5px/1.4 var(--biss-font-family);
+  margin: 0 0 6px;
+}
+.biss-empty-copy {
+  font: 400 13.5px/1.5 var(--biss-font-family);
+  color: var(--biss-muted);
+  margin: 0 0 12px;
+}
+.biss-breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  list-style: none;
+  margin: 0 0 10px;
+  padding: 0;
+  font: 12.5px/1.5 var(--biss-font-family);
+  color: var(--biss-muted);
+}
+.biss-breadcrumbs a {
+  color: var(--biss-muted);
+  text-decoration: none;
+}
+.biss-breadcrumbs a:hover {
+  color: var(--biss-primary);
+}
+.biss-breadcrumb-sep {
+  color: var(--biss-border-strong);
+}
+.biss-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.biss-stack-sm {
+  gap: 12px;
+}
+.biss-split {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+.biss-prose {
+  font: 400 14px/1.7 var(--biss-font-family);
+  color: var(--biss-text);
+  max-width: 70ch;
+}
+.biss-prose-lg {
+  font-size: 15px;
+}
+.biss-prose-raw {
+  white-space: pre-wrap;
+}
+.biss-inline-code {
+  font: 12px var(--biss-mono);
+  padding: 2px 5px;
+  background: var(--biss-surface-muted);
+  border-radius: 4px;
+}
+@media (max-width: 640px) {
+  .biss-page-title,
+  .biss-console-title {
+    font-size: 20px;
+  }
+  .biss-split {
+    grid-template-columns: 1fr;
+  }
+  .biss-page-header-row {
+    align-items: stretch;
+  }
+  .biss-hero {
+    padding: 16px 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .biss-button {
+    transition: none;
+  }
+}
+
+.biss-card-padded {
+  padding: 20px 22px;
+}

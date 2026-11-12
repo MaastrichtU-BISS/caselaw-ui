@@ -15,12 +15,12 @@ export const guides = [
       },
       {
         title: 'Vue',
-        body: 'Import the stylesheet once in your application entry point. Use Vue 3.5 or newer, and a bundler that compiles Vue single-file components.',
+        body: 'Import the stylesheet once in your application entry point. Use Vue 3.5 or newer. Vue components ship as compiled ESM with declarations; consumers do not need a Vue SFC loader for the library.',
         code: "import 'biss-ui/styles.css';\nimport { BissButton, BissPageBar } from 'biss-ui/vue';",
       },
       {
         title: 'Svelte',
-        body: 'Use Svelte 5.20 or newer. The expanded components use callback props and snippets. Earlier components retain their existing events and slots; each component page shows its actual contract.',
+        body: 'Use Svelte 5.20 or newer. Every component uses Svelte 5 callback props and snippets. Each component page shows its actual contract.',
         code: "import 'biss-ui/styles.css';\nimport { BissButton, BissDatePicker } from 'biss-ui/svelte';",
       },
       {
@@ -46,7 +46,7 @@ export const guides = [
       },
       {
         title: 'Overlay inheritance',
-        body: 'The new menus and popovers stay inside the wrapper’s DOM while using the browser’s top layer. They keep the surrounding theme, including when opened from a dialog. The inherited Modal uses a body portal; put its theme overrides on :root.',
+        body: 'The new menus and popovers stay inside the wrapper’s DOM while using the browser’s top layer. They keep the surrounding theme, including when opened from a dialog. Modal and ConfirmDialog compose the same native dialog implementation and preserve wrapper tokens.',
       },
       {
         title: 'State colors',

@@ -1,6 +1,10 @@
 <script lang="ts">
-  export let items: { label: string; value: string; sub?: string; color?: string }[];
-  export let label: string;
+  interface Props {
+    items: { label: string; value: string; sub?: string; color?: string }[];
+    label: string;
+  }
+
+  let { items, label }: Props = $props();
 </script>
 
 <dl class="biss-summary-strip" aria-label={label}>

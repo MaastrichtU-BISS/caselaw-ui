@@ -1,7 +1,12 @@
 <script lang="ts">
-  export let title: string;
-  export let help: string | undefined = undefined;
-  export let more: string | undefined = undefined;
+  interface Props {
+    title: string;
+    help?: string | undefined;
+    more?: string | undefined;
+    children?: import('svelte').Snippet;
+  }
+
+  let { title, help = undefined, more = undefined, children }: Props = $props();
 </script>
 
 <div class="biss-settings-head">
@@ -13,5 +18,5 @@
     </h2>
     {#if help}<p>{help}</p>{/if}
   </div>
-  <slot />
+  {@render children?.()}
 </div>

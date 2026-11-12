@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
-  import type { BissTimelineItem } from '../library-types';
-  import { timelineSpan } from '../portable';
+  import type { BissTimelineItem } from '../core/types';
+  import { timelineSpan } from '../core/format';
   let {
     from,
     to,

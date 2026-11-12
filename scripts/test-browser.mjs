@@ -1,3 +1,4 @@
+import { testLibrary } from './test-library.mjs';
 import { testExpanded } from './test-expanded.mjs';
 import { chromium } from '@playwright/test';
 import { spawn } from 'node:child_process';
@@ -79,6 +80,7 @@ try {
     );
     try {
       await testExpanded(page, width);
+      await testLibrary(page, width);
     } catch (error) {
       await page.screenshot({
         path: `artifacts/failure-${process.env.SVELTE ? 'svelte' : 'vue'}-${width}.png`,

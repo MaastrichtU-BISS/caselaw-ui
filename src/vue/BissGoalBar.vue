@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue';
-import { progressPercent } from '../portable';
+import { progressPercent } from '../core/format';
 const props = withDefaults(
   defineProps<{
     value: number | null;

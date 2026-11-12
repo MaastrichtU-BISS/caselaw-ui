@@ -5,15 +5,12 @@
 </template>
 
 <script setup lang="ts">
-withDefaults(defineProps<{
-  padded?: boolean;
-}>(), {
-  padded: true,
-});
+withDefaults(
+  defineProps<{
+    padded?: boolean;
+  }>(),
+  {
+    padded: true,
+  },
+);
 </script>
-
-<style>
-.biss-card-padded {
-  padding: 24px;
-}
-</style>

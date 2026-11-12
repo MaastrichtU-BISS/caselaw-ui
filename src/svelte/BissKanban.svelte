@@ -1,10 +1,10 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
   import BissIcon from './BissIcon.svelte';
-  import type { BissIconName } from '../icon-names';
+  import type { BissIconName } from '../core/icon-names';
   import BissAvatar from './BissAvatar.svelte';
   import BissSelectPicker from './BissSelectPicker.svelte';
-  import type { BissBoardLane, BissBoardCard } from '../library-types';
+  import type { BissBoardLane, BissBoardCard } from '../core/types';
   let {
     lanes,
     cards,

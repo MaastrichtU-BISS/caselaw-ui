@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { BissIconName } from '../icon-names';
+import type { BissIconName } from '../core/icon-names';
 defineProps<{ name: BissIconName }>();
 </script>
 <template>

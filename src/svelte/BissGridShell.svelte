@@ -1,57 +1,43 @@
 <script lang="ts">
-  import { onMount } from "svelte";
-  import { setBissFavicon, type BissServiceIconName } from "../icons";
-  import type { BissLink } from "../tokens";
-  import BissBottomBar from "./BissBottomBar.svelte";
-  import BissServiceIcon from "./BissServiceIcon.svelte";
-  import BissTopBar from "./BissTopBar.svelte";
-
-  export let brand = "Case Law Explorer";
-  export let mark = "CLE";
-  export let icon: BissServiceIconName | undefined = undefined;
-  export let iconLabel: string | undefined = undefined;
-  export let favicon = true;
-  export let href = "/";
-  export let topLinks: BissLink[] = [];
-  export let footerText = "Managed by BISS Institute.";
-  export let footerLinks: BissLink[] = [];
-
-  let mounted = false;
-
-  function syncFavicon() {
-    if (favicon && icon) setBissFavicon(icon);
-  }
-
+  import type { Snippet } from 'svelte';
+  import { onMount } from 'svelte';
+  import type { BissLink } from '../tokens';
+  import type { BissServiceIconName } from '../core/service-icons';
+  import { setBissFavicon } from '../core/service-icons';
+  import BissTopBar from './BissTopBar.svelte';
+  import BissBottomBar from './BissBottomBar.svelte';
+  let {
+    brand = 'Workspace',
+    mark = 'B',
+    icon,
+    iconLabel,
+    href = '/',
+    favicon = true,
+    topLinks = [],
+    footerText = 'Managed by BISS Institute.',
+    footerLinks = [],
+    children,
+    actions,
+  }: {
+    brand?: string;
+    mark?: string;
+    icon?: BissServiceIconName;
+    iconLabel?: string;
+    href?: string;
+    favicon?: boolean;
+    topLinks?: BissLink[];
+    footerText?: string;
+    footerLinks?: BissLink[];
+    children?: Snippet;
+    actions?: Snippet;
+  } = $props();
   onMount(() => {
-    mounted = true;
-    syncFavicon();
+    if (favicon && icon) setBissFavicon(icon);
   });
-
-  $: if (mounted) syncFavicon();
 </script>
 
 <div class="biss-grid-shell">
-  <BissTopBar {brand} {mark} {icon} {iconLabel} {href} links={topLinks}>
-    <!-- A <svelte:fragment> must be a direct child of the component, so the
-         "was it provided" test goes inside it. Providing a slot at all
-         suppresses the child's fallback, which is why the default is repeated
-         here rather than left to BissTopBar. -->
-    <svelte:fragment slot="icon">
-      {#if $$slots.icon}
-        <slot name="icon" />
-      {:else}
-        <BissServiceIcon {icon} {mark} label={iconLabel} />
-      {/if}
-    </svelte:fragment>
-    <svelte:fragment slot="actions">
-      <slot name="topbar-actions" />
-    </svelte:fragment>
-    {#if $$slots.topbar}
-      <slot name="topbar" />
-    {/if}
-  </BissTopBar>
-  <main class="biss-page">
-    <slot />
-  </main>
+  <BissTopBar {brand} {mark} {icon} {iconLabel} {href} links={topLinks} {actions} />
+  <main class="biss-page">{@render children?.()}</main>
   <BissBottomBar managedBy={footerText} links={footerLinks} />
 </div>

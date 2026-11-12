@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, nextTick, onMounted, onBeforeUnmount, ref, watch } from 'vue';
 import { BissIcon } from '../src/vue';
-import { highlight } from '../src/highlight';
+import { highlight } from '../src/core/highlight';
 import catalog from './generated/components.json';
 import screenshots from './generated/screenshots.json';
 import { guides } from './content';
@@ -373,8 +373,8 @@ onBeforeUnmount(() => {
             <code>onchange</code> directly.
           </p>
           <p v-else-if="framework === 'svelte'">
-            This component retains Svelte’s event and slot contract. Use
-            <code>on:change</code> where the component exposes a change event.
+            This component uses callback props. Use
+            <code>onchange</code> where the component exposes a change event.
           </p>
         </section>
         <section id="props" class="docs-section">
@@ -508,7 +508,8 @@ onBeforeUnmount(() => {
           source-derived contracts.
         </p>
         <p class="coverage-line">
-          96 Vue components · 81 Svelte components · {{ screenshots.length }} reference screenshots
+          130 Vue components · 130 Svelte components · {{ screenshots.length }} reference
+          screenshots
         </p>
         <section v-for="group in catalog.groups" :key="group" class="docs-section">
           <h2>{{ group }}</h2>

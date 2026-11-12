@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useBissToasts } from "./useBissToasts";
+import { useBissToasts } from './useBissToasts';
 
 const { toasts, dismiss } = useBissToasts();
 </script>
@@ -19,7 +19,12 @@ const { toasts, dismiss } = useBissToasts();
           <p class="biss-toast-title">{{ toast.title }}</p>
           <p v-if="toast.copy" class="biss-toast-copy">{{ toast.copy }}</p>
         </div>
-        <button type="button" class="biss-toast-dismiss" aria-label="Dismiss" @click="dismiss(toast.id)">
+        <button
+          type="button"
+          class="biss-toast-dismiss"
+          aria-label="Dismiss"
+          @click="dismiss(toast.id)"
+        >
           &times;
         </button>
       </div>

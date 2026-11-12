@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { computed, ref, watch, onMounted, onBeforeUnmount, nextTick, useId } from 'vue';
+import { computed, ref, watch, nextTick } from 'vue';
 import BissIcon from './BissIcon.vue';
-import type { BissIconName } from '../icon-names';
+import type { BissIconName } from '../core/icon-names';
 import {
   isPickDay,
   dayPlus,
@@ -11,7 +11,7 @@ import {
   parseDay,
   startOfMonth,
   todayDay,
-} from '../date-pick';
+} from '../core/date';
 
 const {
   value = null,
@@ -108,8 +108,7 @@ watch(
     />
     <p v-if="typed && !parsed" class="biss-date-error" role="status">{{ invalidLabel }}</p>
     <header>
-      <b aria-live="polite">{{ format(view, { month: 'long', year: 'numeric' }) }}</b
-      ><button
+      <b aria-live="polite">{{ format(view, { month: 'long', year: 'numeric' }) }}</b><button
         type="button"
         class="biss-header-action"
         :aria-label="previousLabel"
@@ -165,8 +164,7 @@ watch(
         :disabled="disabledDay(today)"
         @click="choose(today)"
       >
-        {{ todayLabel }}</button
-      ><button
+        {{ todayLabel }}</button><button
         type="button"
         class="biss-text-button"
         @click="

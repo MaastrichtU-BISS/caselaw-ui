@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { computed, ref, watch, onMounted, onBeforeUnmount, nextTick, useId } from 'vue';
+import { computed } from 'vue';
 import BissIcon from './BissIcon.vue';
-import type { BissIconName } from '../icon-names';
-import { monthGrid } from '../date-pick';
-import type { BissCalendarItem } from '../library-types';
+import type { BissIconName } from '../core/icon-names';
+import { monthGrid } from '../core/date';
+import type { BissCalendarItem } from '../core/types';
 const {
   month,
   items,
@@ -30,8 +30,7 @@ const format = (d: string) =>
   <div class="biss-calendar" role="group" :aria-label="label">
     <section v-for="cell in days" :key="cell.day" :data-out="cell.out">
       <header>
-        <time :datetime="cell.day">{{ format(cell.day) }}</time
-        ><button
+        <time :datetime="cell.day">{{ format(cell.day) }}</time><button
           v-if="!readonly"
           type="button"
           class="biss-header-action"

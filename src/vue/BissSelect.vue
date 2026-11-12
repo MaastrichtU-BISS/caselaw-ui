@@ -1,17 +1,20 @@
 <script setup lang="ts">
-import type { BissOption } from "../types";
+import type { BissOption } from '../core/types';
 
-withDefaults(defineProps<{
-  options?: BissOption[];
-  placeholder?: string;
-  disabled?: boolean;
-  required?: boolean;
-  invalid?: boolean;
-}>(), {
-  disabled: false,
-  required: false,
-  invalid: false,
-});
+withDefaults(
+  defineProps<{
+    options?: BissOption[];
+    placeholder?: string;
+    disabled?: boolean;
+    required?: boolean;
+    invalid?: boolean;
+  }>(),
+  {
+    disabled: false,
+    required: false,
+    invalid: false,
+  },
+);
 
 const model = defineModel<string | number | null>();
 </script>

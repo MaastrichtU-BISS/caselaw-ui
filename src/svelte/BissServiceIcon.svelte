@@ -1,11 +1,19 @@
 <script lang="ts">
-  import { bissServiceIconLabels, bissServiceIconPaths, type BissServiceIconName } from "../icons";
+  import {
+    bissServiceIconLabels,
+    bissServiceIconPaths,
+    type BissServiceIconName,
+  } from '../core/service-icons';
 
-  export let icon: BissServiceIconName | undefined = undefined;
-  export let mark = "CLE";
-  export let label: string | undefined = undefined;
+  interface Props {
+    icon?: BissServiceIconName | undefined;
+    mark?: string;
+    label?: string | undefined;
+  }
 
-  $: iconLabel = label ?? (icon ? bissServiceIconLabels[icon] : mark);
+  let { icon = undefined, mark = 'B', label = undefined }: Props = $props();
+
+  let iconLabel = $derived(label ?? (icon ? bissServiceIconLabels[icon] : mark));
 </script>
 
 <span class="biss-brand-mark" aria-label={iconLabel} role="img">

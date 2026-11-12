@@ -4,7 +4,7 @@ import type {
   BissBoardCard,
   BissBoardLane,
   BissBarSeries,
-} from '../src/library-types';
+} from '../src/core/types';
 export const options: BissPickOption[] = [
   { value: 'research', label: 'Research', count: 12, color: '#005CA9', group: 'Teams' },
   { value: 'operations', label: 'Operations', count: 4, color: '#0F7A4E', group: 'Teams' },

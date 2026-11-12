@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
   import BissIcon from './BissIcon.svelte';
-  import type { BissIconName } from '../icon-names';
+  import type { BissIconName } from '../core/icon-names';
   import {
     isPickDay,
     dayPlus,
@@ -11,7 +11,7 @@
     parseDay,
     startOfMonth,
     todayDay,
-  } from '../date-pick';
+  } from '../core/date';
   import { tick, untrack } from 'svelte';
   let {
     value = null,

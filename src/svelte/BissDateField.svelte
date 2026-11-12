@@ -1,8 +1,8 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
-  import { floatPanel, listKeys, closePopover } from '../interactions';
+  import { floatPanel, closePopover } from '../core/dom';
   import BissIcon from './BissIcon.svelte';
-  import type { BissIconName } from '../icon-names';
+  import type { BissIconName } from '../core/icon-names';
   import BissDatePicker from './BissDatePicker.svelte';
 
   let {

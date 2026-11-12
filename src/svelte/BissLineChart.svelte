@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
-  import { lineLayout } from '../chart-layout';
+  import { lineLayout } from '../core/charts';
   let {
     values,
     label,

@@ -1,15 +1,18 @@
 <script setup lang="ts">
 /** Same `as` escape hatch as BissNavItem so tabs can be real router links. */
-import type { Component } from "vue";
+import type { Component } from 'vue';
 
-withDefaults(defineProps<{
-  as?: string | Component;
-  label: string;
-  active?: boolean;
-}>(), {
-  as: "button",
-  active: false,
-});
+withDefaults(
+  defineProps<{
+    as?: string | Component;
+    label: string;
+    active?: boolean;
+  }>(),
+  {
+    as: 'button',
+    active: false,
+  },
+);
 
 defineOptions({ inheritAttrs: false });
 </script>

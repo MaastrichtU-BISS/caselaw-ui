@@ -1,10 +1,10 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
   import BissIcon from './BissIcon.svelte';
-  import type { BissIconName } from '../icon-names';
+  import type { BissIconName } from '../core/icon-names';
   import BissDialog from './BissDialog.svelte';
-  import type { BissSearchItem } from '../library-types';
-  import { choiceKeys } from '../interactions';
+  import type { BissSearchItem } from '../core/types';
+  import { choiceKeys } from '../core/dom';
   let {
     open = false,
     label = 'Search',

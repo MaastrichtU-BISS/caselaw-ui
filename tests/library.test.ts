@@ -1,8 +1,8 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { dayPlus, addMonths, monthGrid, keyStep, parseDay, isPickDay } from '../src/date-pick';
-import { timelineSpan, toggleValue } from '../src/portable';
-import { groupedLayout, lineLayout } from '../src/chart-layout';
+import { dayPlus, addMonths, monthGrid, keyStep, parseDay, isPickDay } from '../src/core/date';
+import { timelineSpan, toggleValue } from '../src/core/format';
+import { groupedLayout, lineLayout } from '../src/core/charts';
 const today = '2026-11-12';
 test('date parser ports relative, English and Dutch dates and rejects impossible days', () => {
   for (const [typed, expected] of [

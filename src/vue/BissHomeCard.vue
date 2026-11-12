@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { computed, ref, watch, onMounted, onBeforeUnmount, nextTick, useId } from 'vue';
 import BissIcon from './BissIcon.vue';
-import type { BissIconName } from '../icon-names';
+import type { BissIconName } from '../core/icon-names';
 const {
   title,
   note = undefined,
@@ -26,8 +25,7 @@ const {
         <h2>{{ title }}</h2>
         <p v-if="note">{{ note }}</p>
       </div>
-      <small v-if="count !== undefined">{{ count }}</small
-      ><slot name="actions" />
+      <small v-if="count !== undefined">{{ count }}</small><slot name="actions" />
     </header>
     <div class="biss-home-body" :data-flush="flush"><slot /></div>
     <footer v-if="$slots.footer"><slot name="footer" /></footer>

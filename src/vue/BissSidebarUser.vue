@@ -8,44 +8,47 @@
  * moves into the menu where it has room to be read, and account and sign-out
  * become labelled items rather than an icon a person has to guess at.
  */
-import { computed, onBeforeUnmount, ref, Teleport } from "vue";
-import BissConfirmDialog from "./BissConfirmDialog.vue";
+import { computed, onBeforeUnmount, ref, Teleport } from 'vue';
+import BissConfirmDialog from './BissConfirmDialog.vue';
 
-const props = withDefaults(defineProps<{
-  name: string;
-  email?: string;
-  /** Two letters at most. Derived from the name when not given. */
-  initials?: string;
-  /**
-   * Where the account lives. Set it and the identity becomes a link.
-   *
-   * The block already names who you are, which makes it the thing people
-   * reach for when they want to do something about that, and until now it
-   * did nothing when clicked. Every console shows this widget, so pointing
-   * it at one account page is what stops each product growing its own.
-   */
-  accountHref?: string;
-  accountLabel?: string;
-  /** Render the sign-out control. */
-  signOut?: boolean;
-  signOutLabel?: string;
-  /**
-   * Skip the confirmation. Off by default: signing out is one small click
-   * away from every navigation target in the sidebar, and the cost of an
-   * accidental one is re-authenticating.
-   */
-  confirmSignOut?: boolean;
-  signOutTitle?: string;
-  signOutCopy?: string;
-  /** Disables the dialog's buttons while the sign-out is in flight. */
-  busy?: boolean;
-}>(), {
-  signOut: false,
-  signOutLabel: "Sign out",
-  confirmSignOut: true,
-  signOutTitle: "Sign out?",
-  busy: false,
-});
+const props = withDefaults(
+  defineProps<{
+    name: string;
+    email?: string;
+    /** Two letters at most. Derived from the name when not given. */
+    initials?: string;
+    /**
+     * Where the account lives. Set it and the identity becomes a link.
+     *
+     * The block already names who you are, which makes it the thing people
+     * reach for when they want to do something about that, and until now it
+     * did nothing when clicked. Every console shows this widget, so pointing
+     * it at one account page is what stops each product growing its own.
+     */
+    accountHref?: string;
+    accountLabel?: string;
+    /** Render the sign-out control. */
+    signOut?: boolean;
+    signOutLabel?: string;
+    /**
+     * Skip the confirmation. Off by default: signing out is one small click
+     * away from every navigation target in the sidebar, and the cost of an
+     * accidental one is re-authenticating.
+     */
+    confirmSignOut?: boolean;
+    signOutTitle?: string;
+    signOutCopy?: string;
+    /** Disables the dialog's buttons while the sign-out is in flight. */
+    busy?: boolean;
+  }>(),
+  {
+    signOut: false,
+    signOutLabel: 'Sign out',
+    confirmSignOut: true,
+    signOutTitle: 'Sign out?',
+    busy: false,
+  },
+);
 
 const emit = defineEmits<{ signOut: [] }>();
 const confirming = ref(false);
@@ -76,7 +79,7 @@ function onPointerDown(event: PointerEvent) {
 }
 
 function onKeydown(event: KeyboardEvent) {
-  if (open.value && event.key === "Escape") {
+  if (open.value && event.key === 'Escape') {
     event.stopPropagation();
     open.value = false;
     trigger.value?.focus();
@@ -91,16 +94,16 @@ function toggle() {
   open.value = !open.value;
   if (open.value) {
     place();
-    window.addEventListener("pointerdown", onPointerDown);
-    window.addEventListener("keydown", onKeydown);
-    window.addEventListener("resize", onResize);
+    window.addEventListener('pointerdown', onPointerDown);
+    window.addEventListener('keydown', onKeydown);
+    window.addEventListener('resize', onResize);
   }
 }
 
 onBeforeUnmount(() => {
-  window.removeEventListener("pointerdown", onPointerDown);
-  window.removeEventListener("keydown", onKeydown);
-  window.removeEventListener("resize", onResize);
+  window.removeEventListener('pointerdown', onPointerDown);
+  window.removeEventListener('keydown', onKeydown);
+  window.removeEventListener('resize', onResize);
 });
 
 function requestSignOut() {
@@ -109,18 +112,18 @@ function requestSignOut() {
     confirming.value = true;
     return;
   }
-  emit("signOut");
+  emit('signOut');
 }
 
 function confirmed() {
   confirming.value = false;
-  emit("signOut");
+  emit('signOut');
 }
 
 const derived = computed(() => {
   if (props.initials) return props.initials.slice(0, 2).toUpperCase();
-  const source = (props.name || props.email || "").trim();
-  if (!source) return "?";
+  const source = (props.name || props.email || '').trim();
+  if (!source) return '?';
   // "Ada Lovelace" -> AL, but "ada@example.org" -> AD, because splitting an
   // address on spaces yields one very long "word".
   const words = source.split(/\s+/).filter(Boolean);
@@ -146,8 +149,13 @@ const derived = computed(() => {
       </span>
       <svg
         class="biss-sidebar-user-chevron"
-        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
       >
         <polyline points="6 9 12 15 18 9" />
       </svg>
@@ -178,19 +186,40 @@ const derived = computed(() => {
           :href="accountHref"
           @click="open = false"
         >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
             <circle cx="12" cy="7" r="4" />
           </svg>
-          {{ accountLabel || "Your account" }}
+          {{ accountLabel || 'Your account' }}
         </a>
 
         <slot name="menu" />
 
         <template v-if="signOut">
           <hr v-if="accountHref || $slots.menu" class="biss-user-menu-separator" />
-          <button type="button" class="biss-user-menu-item is-danger" role="menuitem" @click="requestSignOut">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <button
+            type="button"
+            class="biss-user-menu-item is-danger"
+            role="menuitem"
+            @click="requestSignOut"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
               <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
               <polyline points="16 17 21 12 16 7" />
               <line x1="21" y1="12" x2="9" y2="12" />
@@ -210,7 +239,10 @@ const derived = computed(() => {
       @confirm="confirmed"
     >
       <p class="biss-modal-copy">
-        {{ signOutCopy || `${name} will be signed out of every Case Law Explorer console sharing this account.` }}
+        {{
+          signOutCopy ||
+          `${name} will be signed out of every Case Law Explorer console sharing this account.`
+        }}
       </p>
     </BissConfirmDialog>
   </div>

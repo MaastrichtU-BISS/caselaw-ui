@@ -54,7 +54,7 @@ import {
   timelineItems,
   searchItems,
 } from '../catalog-data';
-import type { BissBoardCard } from '../../src/library-types';
+import type { BissBoardCard } from '../../src/core/types';
 const chartTypes = ['kpi', 'bar', 'column', 'stacked', 'line', 'table', 'text'] as const;
 const dialog = ref(false),
   panel = ref(false),

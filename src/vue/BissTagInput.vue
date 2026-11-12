@@ -1,20 +1,23 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed, ref } from 'vue';
 
-const props = withDefaults(defineProps<{
-  placeholder?: string;
-  disabled?: boolean;
-  suggestions?: string[];
-  /** Separators that commit the current draft. Comma and Enter are always active. */
-  allowSpaces?: boolean;
-}>(), {
-  disabled: false,
-  allowSpaces: false,
-});
+const props = withDefaults(
+  defineProps<{
+    placeholder?: string;
+    disabled?: boolean;
+    suggestions?: string[];
+    /** Separators that commit the current draft. Comma and Enter are always active. */
+    allowSpaces?: boolean;
+  }>(),
+  {
+    disabled: false,
+    allowSpaces: false,
+  },
+);
 
 const model = defineModel<string[]>({ default: () => [] });
 
-const draft = ref("");
+const draft = ref('');
 const field = ref<HTMLInputElement | null>(null);
 
 const openSuggestions = computed(() =>
@@ -33,7 +36,7 @@ function commit() {
     }
     model.value = next;
   }
-  draft.value = "";
+  draft.value = '';
 }
 
 function add(value: string) {
@@ -45,12 +48,16 @@ function remove(value: string) {
 }
 
 function onKeydown(event: KeyboardEvent) {
-  if (event.key === "Enter" || event.key === "," || (props.allowSpaces === false && event.key === " ")) {
+  if (
+    event.key === 'Enter' ||
+    event.key === ',' ||
+    (props.allowSpaces === false && event.key === ' ')
+  ) {
     event.preventDefault();
     commit();
     return;
   }
-  if (event.key === "Backspace" && !draft.value && model.value.length) {
+  if (event.key === 'Backspace' && !draft.value && model.value.length) {
     model.value = model.value.slice(0, -1);
   }
 }
@@ -67,7 +74,9 @@ function onKeydown(event: KeyboardEvent) {
           class="biss-tag-remove"
           :aria-label="`Remove ${tag}`"
           @click.stop="remove(tag)"
-        >&times;</button>
+        >
+          &times;
+        </button>
       </span>
       <input
         ref="field"
@@ -77,7 +86,7 @@ function onKeydown(event: KeyboardEvent) {
         :disabled="disabled"
         @keydown="onKeydown"
         @blur="commit"
-      >
+      />
     </div>
     <div v-if="openSuggestions.length && !disabled" class="biss-tag-suggestions">
       <button
@@ -86,7 +95,9 @@ function onKeydown(event: KeyboardEvent) {
         type="button"
         class="biss-tag-suggestion"
         @click="add(suggestion)"
-      >+ {{ suggestion }}</button>
+      >
+        + {{ suggestion }}
+      </button>
     </div>
   </div>
 </template>

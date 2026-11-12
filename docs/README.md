@@ -7,11 +7,11 @@ API tables. Demonstration names and records are synthetic.
 
 | Start here | What it covers |
 |---|---|
-| Documentation site | Run `npm run docs:dev`, or build `dist-docs/` with `npm run docs:build`. It includes installation, theming, accessibility, migration, and all 97 distinct components across Vue and Svelte. |
-| [Component screenshots](visual-reference.md) | Real desktop and phone renders of all 97 components. Open each page in the site to switch between the 226 captured states and layouts. |
-| [Portable components](components.md) | The 54 Bizzy-derived components, their framework contracts, customization and host responsibilities. |
-| [API reference](api.md) | The portable component APIs, with links to source. The site derives props, defaults, events, models and composition directly from the shipped SFCs. |
-| [Inherited API](legacy-api.md) | The renamed caselaw-ui components and their original contracts. |
+| Documentation site | Run `npm run docs:dev`, or build `dist-docs/` with `npm run docs:build`. It includes installation, theming, accessibility, migration, and all 130 distinct components across Vue and Svelte. |
+| [Component screenshots](visual-reference.md) | Real desktop and phone renders of all 130 components. Open each page in the site to switch between the captured states and layouts. |
+| [Portable components](components.md) | The initial Bizzy-derived components, their framework contracts, customization and host responsibilities. |
+| [API reference](api.md) | All 130 component APIs, generated from source with framework-specific contracts. The site derives props, defaults, events, models and composition directly from the shipped SFCs. |
+| [Earlier API migration](legacy-api.md) | How existing consumers opt into the new package and Svelte contracts. |
 | [Migration and releases](biss-migration.md) | Independent package identity and releases, and how a consumer opts in. |
 | [Extraction inventory](bizzy-inventory.md) | Which Bizzy components were adapted, and the application features that remain in the host. |
 | [Design contract](../DESIGN.md) | Colors, typography, shape, motion and component boundaries. |
@@ -50,5 +50,4 @@ Use `docs-site/fixtures.ts` to add or adjust an example, and
 `scripts/generate-docs.mjs` to add a component’s category and introduction. API
 rows come from source, rather than a second hand-maintained prop list. Add
 copyable examples in `docs-site/examples.ts` when a component needs composition
-or controlled state. Availability is explicit: the one Svelte-only ActionCard
-is captured through its real Svelte implementation; other screenshots use Vue.
+or controlled state. All 130 components are available in both frameworks. Screenshots use the Vue implementation; both framework workbenches have interaction and accessibility checks.

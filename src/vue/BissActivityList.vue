@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, ref, watch, onMounted, onBeforeUnmount, nextTick, useId } from 'vue';
 import BissAvatar from './BissAvatar.vue';
 const { items, label } = defineProps<{
   items: { key: string; actor: string; action: string; time: string; detail?: string }[];
