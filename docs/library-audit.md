@@ -36,3 +36,9 @@ The library is still a prerelease. A full library-wide API consistency pass, gen
 row/cell typing, compound/headless composition APIs, virtualized large-data views,
 and broader browser/assistive-technology coverage remain separate substantial work.
 These are not claimed as implemented by the presence of similarly named components.
+
+## Public-library references
+
+The [reference-led direction](reference-architecture.md) studies Reka UI, Bits UI,
+Nuxt UI, shadcn and Storybook. It sets the target architecture and docs experience
+beyond the incremental fixes recorded here.
