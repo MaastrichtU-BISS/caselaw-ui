@@ -78,8 +78,8 @@ The quality checks cover type safety, Svelte compilation, pure logic, both
 framework workbenches at desktop and phone widths, keyboard interactions and axe
 scans. `test:package` unpacks the real archive into an isolated consumer, renders
 all 260 framework implementations on the server, verifies a Vue build without an
-SFC compiler, and checks request-local state. Documentation checks verify every
-route, screenshot and source fingerprint.
+SFC compiler, and checks request-local state. Documentation checks render all 130 components in both frameworks and verify
+field associations, a composed editing workflow, responsive layout and accessibility.
 
 ```sh
 npm run check
@@ -97,3 +97,26 @@ npm run docs:check
 
 Screenshots are reproducible synthetic examples. Both workbench test runners and
 documentation scripts close browsers and stop preview servers in `finally`.
+
+## Shared field and grid contracts
+
+`core/field.ts` owns the framework-independent field contract. Field providers scope
+IDs and descriptions to a control (set a custom ID on Field, rather than its child); Input, Select and Textarea consume them. A host
+can use the scoped `control` object with another native control. Required, disabled
+and error state propagate through context, without a global singleton.
+
+Svelte controls support native `value` and `bind:value`. `modelValue` remains a
+compatibility alias; prefer `value` in new code. Supply one value contract at a time.
+
+`core/data-grid.ts` owns selection and column geometry. Off-page selection survives
+page-local select-all changes; the header exposes indeterminate state. Pinned columns
+are contiguous, widths are clamped, and the final flexible column fills the measured
+container. A shared ResizeObserver action disposes measurement on unmount.
+
+CSS is organized into `biss.tokens` and `biss.components` cascade layers. Unlayered
+host styles override the library without selector escalation. A wrapper can select
+`data-biss-density="compact"` or `"comfortable"`; standard density remains the default.
+
+The docs render actual selected-framework components in an isolated frame, and the
+[playground](https://bissui.wicker.life/#/playground) demonstrates composition. See
+[the quality audit](library-audit.md) for changes and outstanding architectural work.

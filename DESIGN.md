@@ -161,3 +161,17 @@ See `docs/README.md` for capture, generation and verification commands.
 - Don't use color alone to communicate state.
 - Don't use glass, gradients, display-scale marketing type, uppercase labels or ornamental borders.
 - Don't layer overrides over the removed Caselaw stylesheet.
+
+## Library quality contracts
+
+Form fields scope control IDs, accessible descriptions, errors and required/disabled
+state through framework contexts. Host IDs belong on the Field. Loading buttons
+retain their label and width; disabled links cannot dispatch activation callbacks.
+Grid columns share one model across frameworks, keep pinned columns together, and
+fill available width with a final flexible column. Selection supports partial and
+off-page state. Compact and comfortable density are token-based wrapper choices.
+
+The stylesheet declares token and component cascade layers, leaving application
+styles free to override them. Both Vue and Svelte are actually rendered in docs.
+The composed playground demonstrates the working design with real form validation
+and local record editing, rather than relying on isolated component appearance.

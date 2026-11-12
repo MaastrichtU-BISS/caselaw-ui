@@ -154,10 +154,8 @@ const Demo = defineComponent({
         slots.default = steps;
       }
       if (name === 'BissField')
-        slots.default = ({ id, invalid }) =>
+        slots.default = () =>
           H('BissInput', {
-            id,
-            invalid,
             placeholder: 'Project name',
             'aria-label': 'Project name',
           });
@@ -208,7 +206,7 @@ onMounted(() => {
       'preview-wide': data.wide,
       'preview-shell': ['BissAppShell', 'BissConsoleLayout', 'BissGridShell'].includes(name),
     }"
-    :data-component="name"
+    :data-component="name" data-framework="vue"
   >
     <Demo />
     <p v-if="message" class="preview-feedback" role="status">{{ message }}</p>

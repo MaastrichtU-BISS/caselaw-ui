@@ -1,11 +1,19 @@
 <script setup lang="ts">
-defineProps<{ title: string; description?: string; meta?: string }>();
+withDefaults(
+  defineProps<{
+    heading?: 'h1' | 'h2' | 'h3';
+    title: string;
+    description?: string;
+    meta?: string;
+  }>(),
+  { heading: 'h1' },
+);
 </script>
 <template>
   <header class="biss-pagebar">
     <div class="biss-pagebar-row">
       <slot name="lead" />
-      <h1>{{ title }}</h1>
+      <component :is="heading">{{ title }}</component>
       <span class="biss-muted">{{ meta }}</span>
       <div class="biss-pagebar-actions"><slot name="actions" /></div>
     </div>

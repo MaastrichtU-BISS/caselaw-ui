@@ -1,0 +1,1 @@
+{"extends":"./tsconfig.svelte.json","compilerOptions":{"resolveJsonModule":true,"allowSyntheticDefaultImports":true},"include":["docs-site/SveltePreview.svelte","docs-site/fixtures.ts","docs-site/new-fixtures.ts","examples/catalog-data.ts","src/svelte/**/*.svelte","src/core/**/*.ts"],"exclude":[]}

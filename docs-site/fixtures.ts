@@ -70,7 +70,7 @@ export const fixtures: Record<string, Fixture> = {
       ],
     },
   },
-  Button: { props: { variant: 'primary' }, text: 'New project', states: ['default', 'disabled'] },
+  Button: { props: { variant: 'primary' }, text: 'New project', states: ['default', 'disabled','loading'] },
   Calendar: {
     props: { month: '2026-11', items: calendarItems, label: 'Project deadlines' },
     wide: true,
@@ -315,6 +315,7 @@ export const fixtures: Record<string, Fixture> = {
     },
   },
   PageBar: {
+    wide:true,
     props: {
       title: 'Research projects',
       description: 'The team’s ongoing work.',

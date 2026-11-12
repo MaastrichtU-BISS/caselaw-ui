@@ -58,6 +58,16 @@ Components inherit CSS tokens, support documented slots, and expose native
 attributes where their framework implementation allows them. There is no global
 HTML reset. Dark themes require supplying the full semantic token palette.
 
+## Quality and composition
+
+Fields automatically connect labels, hints, validation and controls. The shared grid
+model governs selection and column geometry in both frameworks. CSS cascade layers
+and compact/comfortable density provide predictable customization. Svelte text
+controls support native `value` / `bind:value`; `modelValue` remains compatible.
+
+Try the [composed playground](https://bissui.wicker.life/#/playground), or read the
+[quality audit](docs/library-audit.md) for what changed and what remains.
+
 ## Documentation
 
 Browse the library at [bissui.wicker.life](https://bissui.wicker.life).

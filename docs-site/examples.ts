@@ -69,7 +69,7 @@ export function example(name: string, framework: 'vue' | 'svelte'): string | und
       ['BissField', 'BissInput'],
       vue
         ? '<BissField label="Project name" hint="Use a recognizable name.">\n  <template #default="{ id, invalid }">\n    <BissInput :id="id" v-model="name" :invalid="invalid" />\n  </template>\n</BissField>'
-        : '<BissField label="Project name" hint="Use a recognizable name.">\n  {#snippet children({id, invalid})}\n    <BissInput {id} bind:modelValue={name} {invalid} />\n  {/snippet}\n</BissField>',
+        : '<BissField label="Project name" hint="Use a recognizable name.">\n  {#snippet children({id, invalid})}\n    <BissInput {id} bind:value={name} {invalid} />\n  {/snippet}\n</BissField>',
       vue ? "const name = ref('Open justice');" : "let name = $state('Open justice');",
     );
   if (name === 'BissHomeCard')

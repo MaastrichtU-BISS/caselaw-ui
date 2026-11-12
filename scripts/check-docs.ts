@@ -94,11 +94,48 @@ try {
     await expect(page.locator('h1')).toHaveText(c.short.replace(/([a-z0-9])([A-Z])/g, '$1 $2'));
     const preview = page.frameLocator('iframe');
     await expect(preview.locator('.preview-frame')).toHaveAttribute('data-component', c.name);
+    await page.getByRole('button', { name: 'Svelte', exact: true }).click();
+    await expect(preview.locator('.preview-frame')).toHaveAttribute('data-framework', 'svelte');
+    await expect(preview.locator('.preview-frame')).toHaveAttribute('data-component', c.name);
     if (c.name === 'BissPageBar')
       await expect(
         preview.getByRole('heading', { name: 'Research projects', exact: true }),
       ).toBeVisible();
   }
+  for (const framework of ['vue', 'svelte']) {
+    await page.goto(
+      'http://127.0.0.1:4189/preview.html?component=BissField&state=error&framework=' + framework,
+    );
+    const input = page.getByRole('textbox');
+    await expect(input).toHaveAttribute('aria-invalid', 'true');
+    const description = await input.getAttribute('aria-describedby');
+    expect(description).toBeTruthy();
+    await expect(page.locator('[id="' + description + '"]')).toHaveText('Enter a project name.');
+  }
+  await page.goto('http://127.0.0.1:4189/#/playground');
+  await page.getByRole('button', { name: 'New project', exact: true }).click();
+  const dialog = page.getByRole('dialog', { name: 'New project', exact: true });
+  await dialog.getByRole('button', { name: 'Save project', exact: true }).click();
+  await expect(dialog.getByRole('textbox', { name: 'Project name', exact: true })).toHaveAttribute(
+    'aria-invalid',
+    'true',
+  );
+  await dialog
+    .getByRole('textbox', { name: 'Project name', exact: true })
+    .fill('Library quality review');
+  await dialog.getByRole('button', { name: 'Save project', exact: true }).click();
+  await expect(
+    page.getByRole('button', { name: 'Library quality review', exact: true }),
+  ).toBeVisible();
+  await page.screenshot({ path: 'artifacts/docs/playground-desktop.png', fullPage: true });
+  await page.setViewportSize({ width: 390, height: 1000 });
+  await page.screenshot({ path: 'artifacts/docs/playground-phone.png', fullPage: true });
+  const playgroundAxe = await new AxeBuilder({ page })
+    .withTags(['wcag2a', 'wcag2aa', 'wcag21aa'])
+    .analyze();
+  expect(
+    playgroundAxe.violations.map((v) => ({ id: v.id, nodes: v.nodes.map((n) => n.target) })),
+  ).toEqual([]);
   for (const slug of ['getting-started', 'theming', 'accessibility', 'migration', 'components']) {
     await page.goto('http://127.0.0.1:4189/#/' + slug);
     await expect(page.locator('h1')).toBeVisible();

@@ -323,3 +323,19 @@ export function tooltip(node: HTMLButtonElement, options: { id: string }) {
     },
   };
 }
+
+/** Report a container's usable width; keep measurement outside framework render functions. */
+export function observeWidth(node: HTMLElement, options: { onchange: (width: number) => void }) {
+  const measure = () => options.onchange(node.clientWidth);
+  const observer = new ResizeObserver(measure);
+  observer.observe(node);
+  measure();
+  return {
+    update(next: typeof options) {
+      options = next;
+    },
+    destroy() {
+      observer.disconnect();
+    },
+  };
+}

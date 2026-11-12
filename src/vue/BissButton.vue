@@ -1,21 +1,51 @@
 <template>
   <a
+    v-bind="{ ...attrs, onClick: undefined }"
     v-if="href"
     :class="classes"
-    :href="disabled ? undefined : href"
-    :tabindex="disabled ? -1 : undefined"
-    @click="disabled && $event.preventDefault()"
-    :aria-disabled="disabled"
+    :href="disabled || loading ? undefined : href"
+    :tabindex="disabled || loading ? -1 : undefined"
+    @click="click"
+    :aria-disabled="disabled || loading"
+    :aria-busy="loading || undefined"
   >
-    <slot />
+    <span v-if="loading" class="biss-button-spinner" aria-hidden="true" /><span
+      class="biss-button-label"
+      :style="{ opacity: loading ? 0 : undefined }"
+      ><slot
+    /></span>
   </a>
-  <button v-else :class="classes" :type="type" :disabled="disabled">
-    <slot />
+  <button
+    v-bind="{ ...attrs, onClick: undefined }"
+    v-else
+    :class="classes"
+    :type="type"
+    :disabled="disabled || loading"
+    :aria-busy="loading || undefined"
+    @click="click"
+  >
+    <span v-if="loading" class="biss-button-spinner" aria-hidden="true" /><span
+      class="biss-button-label"
+      :style="{ opacity: loading ? 0 : undefined }"
+      ><slot
+    /></span>
   </button>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, useAttrs } from 'vue';
+defineOptions({ inheritAttrs: false });
+const attrs = useAttrs();
+function click(event: MouseEvent) {
+  if (props.disabled || props.loading) {
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    return;
+  }
+  const handlers = attrs.onClick;
+  for (const handle of Array.isArray(handlers) ? handlers : [handlers])
+    if (typeof handle === 'function') handle(event);
+}
 
 const props = withDefaults(
   defineProps<{
@@ -24,6 +54,7 @@ const props = withDefaults(
     size?: 'md' | 'sm';
     type?: 'button' | 'submit' | 'reset';
     disabled?: boolean;
+    loading?: boolean;
     block?: boolean;
     /** Square, sized to a field rather than to text. Needs an aria-label. */
     icon?: boolean;
@@ -33,6 +64,7 @@ const props = withDefaults(
     size: 'md',
     type: 'button',
     disabled: false,
+    loading: false,
     block: false,
     icon: false,
   },

@@ -393,6 +393,7 @@ A clear action with an explicit visual priority.
 | `size` | `'md' \| 'sm'` | No | `'md'` |
 | `type` | `'button' \| 'submit' \| 'reset'` | No | `'button'` |
 | `disabled` | `boolean` | No | `false` |
+| `loading` | `boolean` | No | `false` |
 | `block` | `boolean` | No | `false` |
 | `icon` | `boolean` | No | `false` |
 
@@ -402,6 +403,7 @@ Slots: `default`.
 
 | Prop | Type | Required | Default |
 |---|---|---|---|
+| `loading` | `boolean` | No | `false` |
 | `href` | `string` | No | — |
 | `variant` | `'primary' \| 'secondary' \| 'ghost' \| 'danger' \| 'danger-quiet'` | No | `'primary'` |
 | `size` | `'md' \| 'sm'` | No | `'md'` |
@@ -1416,10 +1418,14 @@ A label, hint or error around a control, with a scoped identifier.
 
 | Prop | Type | Required | Default |
 |---|---|---|---|
+| `id` | `string` | No | — |
 | `label` | `string` | No | — |
 | `hint` | `string` | No | — |
 | `error` | `string` | No | — |
-| `optional` | `boolean` | No | — |
+| `optional` | `boolean` | No | `false` |
+| `optionalLabel` | `string` | No | `'optional'` |
+| `required` | `boolean` | No | `false` |
+| `disabled` | `boolean` | No | `false` |
 
 Slots: `default`.
 
@@ -1427,11 +1433,15 @@ Slots: `default`.
 
 | Prop | Type | Required | Default |
 |---|---|---|---|
+| `id` | `string` | No | — |
 | `label` | `string` | No | — |
 | `hint` | `string` | No | — |
 | `error` | `string` | No | — |
 | `optional` | `boolean` | No | `false` |
-| `children` | `Snippet<[{ id: string; invalid: boolean }]>` | No | — |
+| `optionalLabel` | `string` | No | `'optional'` |
+| `required` | `boolean` | No | `false` |
+| `disabled` | `boolean` | No | `false` |
+| `children` | `Snippet< [{ id: string; invalid: boolean; control: ReturnType<typeof fieldControl> }] >` | No | — |
 
 Snippets: `children`.
 
@@ -1868,7 +1878,8 @@ A single-line value with normal form attributes and validation styling.
 
 | Prop | Type | Required | Default |
 |---|---|---|---|
-| `modelValue` | `string \| number \| null` | No | `$bindable<string \| number \| null>(null)` |
+| `value` | `string \| number \| null` | No | `$bindable<string \| number \| null \| undefined>(undefined)` |
+| `modelValue` | `string \| number \| null` | No | `$bindable<string \| number \| null \| undefined>(undefined)` |
 | `invalid` | `boolean` | No | `false` |
 | `mono` | `boolean` | No | `false` |
 | `onchange` | `(value: string \| number \| null) => void` | No | — |
@@ -2366,6 +2377,7 @@ A page title, context, actions and view navigation in one compact header.
 
 | Prop | Type | Required | Default |
 |---|---|---|---|
+| `heading` | `'h1' \| 'h2' \| 'h3'` | No | `'h1'` |
 | `title` | `string` | Yes | — |
 | `description` | `string` | No | — |
 | `meta` | `string` | No | — |
@@ -2376,6 +2388,7 @@ Slots: `lead`, `actions`, `tabs`.
 
 | Prop | Type | Required | Default |
 |---|---|---|---|
+| `heading` | `'h1' \| 'h2' \| 'h3'` | No | `'h1'` |
 | `title` | `string` | Yes | — |
 | `description` | `string \| undefined` | No | `undefined` |
 | `meta` | `string \| undefined` | No | `undefined` |
@@ -2938,7 +2951,8 @@ Slots: `default`.
 
 | Prop | Type | Required | Default |
 |---|---|---|---|
-| `modelValue` | `string \| number` | No | `$bindable<string \| number>('')` |
+| `value` | `string \| number` | No | `$bindable<string \| number \| undefined>(undefined)` |
+| `modelValue` | `string \| number` | No | `$bindable<string \| number \| undefined>(undefined)` |
 | `options` | `BissOption[]` | Yes | — |
 | `onchange` | `(value: string \| number) => void` | No | — |
 
@@ -3736,8 +3750,10 @@ A multiline form value with normal field attributes and validation styling.
 
 | Prop | Type | Required | Default |
 |---|---|---|---|
-| `modelValue` | `string` | No | `$bindable('')` |
+| `value` | `string` | No | `$bindable<string \| undefined>(undefined)` |
+| `modelValue` | `string` | No | `$bindable<string \| undefined>(undefined)` |
 | `invalid` | `boolean` | No | `false` |
+| `mono` | `boolean` | No | `false` |
 | `onchange` | `(value: string) => void` | No | — |
 
 Callbacks:

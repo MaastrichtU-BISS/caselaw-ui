@@ -4,9 +4,9 @@
   import BissColumnManager from './BissColumnManager.svelte';
   import BissTableHead from './BissTableHead.svelte';
   import type { BissColumn } from '../core/types';
-  import { sortRows } from '../core/collections';
-  import { toggleValue } from '../core/format';
-  import { resizeHandle } from '../core/dom';
+  import { dataGridModel } from '../core/data-grid';
+
+  import { resizeHandle, observeWidth } from '../core/dom';
   let {
     selectedLabel = '{count} selected',
     rowLabel = 'Select {id}',
@@ -74,14 +74,13 @@
   function emit<K extends keyof Events>(name: K, ...args: Events[K]) {
     (handlers[name] as ((...args: Events[K]) => void) | undefined)?.(...args);
   }
-  let visible = $derived(columns.filter((c) => c.visible));
-  let sorted = $derived(sortRows(rows, sortKey, sortDirection));
-  const pinLeft = (index: number) =>
-    44 +
-    visible
-      .slice(0, index)
-      .filter((c) => c.pinned)
-      .reduce((sum, c) => sum + (c.width ?? 160), 0);
+  let availableWidth = $state(0);
+  const grid = $derived(
+    dataGridModel({ rows, columns, selected, sortKey, sortDirection, availableWidth }),
+  );
+  const visible = $derived(grid.visible),
+    sorted = $derived(grid.sorted);
+  const pinLeft = (index: number) => grid.geometry(visible[index]!.key).left;
 </script>
 
 <section class="biss-data-grid" aria-label={label}>
@@ -96,26 +95,24 @@
       /></BissPopover
     >
   </header>
-  <div class="biss-table-wrap">
-    <table class="biss-table">
+  <div
+    class="biss-table-wrap"
+    use:observeWidth={{ onchange: (width: number) => (availableWidth = width) }}
+  >
+    <table class="biss-table" style:width={grid.width + 'px'} style:table-layout="fixed">
       <thead
         ><tr
           ><th
             ><input
               type="checkbox"
               aria-label={selectAllLabel}
-              checked={rows.length > 0 && rows.every((r) => selected.includes(r.id))}
-              onchange={(e) =>
-                emit(
-                  'select',
-                  e.currentTarget.checked
-                    ? Array.from(new Set([...selected, ...rows.map((r) => r.id)]))
-                    : selected.filter((id) => !rows.some((r) => r.id === id)),
-                )}
+              checked={grid.allSelected}
+              indeterminate={grid.someSelected}
+              onchange={(e) => emit('select', grid.selectAll(e.currentTarget.checked))}
             /></th
           >{#each visible as column, i (column.key)}<th
-              style:width={(column.width ?? 160) + 'px'}
-              style:min-width={(column.width ?? 160) + 'px'}
+              style:width={grid.geometry(column.key).width + 'px'}
+              style:min-width={grid.geometry(column.key).width + 'px'}
               style:position={column.pinned ? 'sticky' : undefined}
               style:left={column.pinned ? pinLeft(i) + 'px' : undefined}
               style:z-index={column.pinned ? 2 : undefined}
@@ -153,7 +150,7 @@
                 type="checkbox"
                 aria-label={rowLabel.replace('{id}', row.id)}
                 checked={selected.includes(row.id)}
-                onchange={() => emit('select', toggleValue(selected, row.id))}
+                onchange={() => emit('select', grid.toggleRow(row.id))}
               /></td
             >{#each visible as column, i (column.key)}<td
                 style:position={column.pinned ? 'sticky' : undefined}

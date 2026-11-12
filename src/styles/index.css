@@ -1,10 +1,11 @@
-/* One visual system. Component families share the same Bizzy tokens. */
-@import './tokens.css';
-@import './foundation.css';
-@import './forms.css';
-@import './layout.css';
-@import './content.css';
-@import './bizzy.css';
-@import './library.css';
+/* Explicit cascade boundaries: application styles can override the library without specificity wars. */
+@layer biss.tokens, biss.components;
+@import './tokens.css' layer(biss.tokens);
+@import './foundation.css' layer(biss.components);
+@import './forms.css' layer(biss.components);
+@import './layout.css' layer(biss.components);
+@import './content.css' layer(biss.components);
+@import './bizzy.css' layer(biss.components);
+@import './library.css' layer(biss.components);
 
-@import './editors.css';
+@import './editors.css' layer(biss.components);

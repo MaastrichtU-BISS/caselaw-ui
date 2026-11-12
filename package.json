@@ -63,7 +63,7 @@
     "docs:screenshots": "tsx scripts/capture-docs.ts",
     "docs:check": "tsx scripts/check-docs.ts",
     "docs:markdown": "node scripts/docs-markdown.mjs",
-    "docs:typecheck": "vue-tsc --noEmit -p tsconfig.docs.json",
+    "docs:typecheck": "vue-tsc --noEmit -p tsconfig.docs.json && svelte-check --tsconfig ./tsconfig.docs-svelte.json --fail-on-warnings",
     "tokens:generate": "node scripts/generate-tokens.mjs",
     "tokens:check": "node scripts/generate-tokens.mjs --check",
     "build": "node scripts/build.mjs",

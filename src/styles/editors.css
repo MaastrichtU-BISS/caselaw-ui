@@ -918,3 +918,27 @@
     flex-wrap: wrap;
   }
 }
+
+.biss-data-grid .biss-table th:first-child,
+.biss-data-grid .biss-table td:first-child {
+  width: 44px;
+  min-width: 44px;
+  box-sizing: border-box;
+}
+.biss-data-grid .biss-table th {
+  position: relative;
+}
+.biss-data-grid .biss-table td,
+.biss-data-grid .biss-table th {
+  height: var(--biss-row-height);
+  padding: var(--biss-cell-padding, 8px 12px);
+  font-variant-numeric: tabular-nums;
+}
+.biss-data-grid .biss-table [style*='sticky'] {
+  background: var(--biss-card);
+}
+.biss-data-grid .biss-table tr[data-selected='true'] td {
+  background: var(--biss-info-bg);
+}
+
+.biss-data-grid .biss-table th[style*='sticky']{background:var(--biss-surface-subtle)}

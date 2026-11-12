@@ -32,7 +32,7 @@
   gap: 12px;
   flex-wrap: wrap;
 }
-.biss-pagebar-row h1 {
+.biss-pagebar-row :is(h1, h2, h3) {
   font-size: 22px;
   line-height: 1.25;
   letter-spacing: -0.015em;
@@ -277,7 +277,7 @@
   .biss-summary-strip > div {
     padding: 8px 12px;
   }
-  .biss-pagebar-row h1 {
+  .biss-pagebar-row :is(h1, h2, h3) {
     font-size: 20px;
   }
   .biss-savebar .biss-grow {

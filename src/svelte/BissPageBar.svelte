@@ -1,5 +1,6 @@
 <script lang="ts">
   interface Props {
+    heading?: 'h1' | 'h2' | 'h3';
     title: string;
     description?: string | undefined;
     meta?: string | undefined;
@@ -8,13 +9,21 @@
     tabs?: import('svelte').Snippet;
   }
 
-  let { title, description = undefined, meta = undefined, lead, actions, tabs }: Props = $props();
+  let {
+    heading = 'h1',
+    title,
+    description = undefined,
+    meta = undefined,
+    lead,
+    actions,
+    tabs,
+  }: Props = $props();
 </script>
 
 <header class="biss-pagebar">
   <div class="biss-pagebar-row">
     {@render lead?.()}
-    <h1>{title}</h1>
+    <svelte:element this={heading}>{title}</svelte:element>
     <span class="biss-muted">{meta ?? ''}</span>
     <div class="biss-pagebar-actions">{@render actions?.()}</div>
   </div>

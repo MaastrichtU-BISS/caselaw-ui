@@ -4,8 +4,18 @@ import '../src/styles/index.css';
 const params = new URLSearchParams(location.search),
   name = params.get('component') ?? 'BissButton',
   state = params.get('state') ?? 'default';
-createApp(ComponentPreview, { name, state }).mount('#app');
-await nextTick();
+document.documentElement.dataset.bissDensity = params.get('density') ?? 'standard';
+if (params.get('framework') === 'svelte') {
+  const [{ mount, tick }, { default: SveltePreview }] = await Promise.all([
+    import('svelte'),
+    import('./SveltePreview.svelte'),
+  ]);
+  mount(SveltePreview, { target: document.querySelector('#app')!, props: { name, state } });
+  await tick();
+} else {
+  createApp(ComponentPreview, { name, state }).mount('#app');
+  await nextTick();
+}
 if (
   [
     'BissMenu',

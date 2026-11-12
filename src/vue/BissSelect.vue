@@ -1,7 +1,14 @@
 <script setup lang="ts">
+import { inject, useAttrs } from 'vue';
+import { BISS_FIELD, fieldControl, type BissFieldContext } from '../core/field';
+defineOptions({ inheritAttrs: false });
+const attrs = useAttrs();
+const field = inject<BissFieldContext | undefined>(BISS_FIELD, undefined);
+const control = () =>
+  fieldControl(field, { ...attrs, required: props.required, disabled: props.disabled });
 import type { BissOption } from '../core/types';
 
-withDefaults(
+const props = withDefaults(
   defineProps<{
     options?: BissOption[];
     placeholder?: string;
@@ -21,12 +28,13 @@ const model = defineModel<string | number | null>();
 
 <template>
   <select
+    v-bind="{ ...attrs, ...control() }"
     v-model="model"
     class="biss-select"
     :class="{ 'biss-input-invalid': invalid }"
-    :disabled="disabled"
-    :required="required"
-    :aria-invalid="invalid || undefined"
+    :disabled="control().disabled"
+    :required="control().required"
+    :aria-invalid="invalid || control()['aria-invalid'] || undefined"
   >
     <option v-if="placeholder" disabled value="">{{ placeholder }}</option>
     <slot>

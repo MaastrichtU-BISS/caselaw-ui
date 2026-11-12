@@ -1,5 +1,16 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, inject, useAttrs } from 'vue';
+import { BISS_FIELD, fieldControl, type BissFieldContext } from '../core/field';
+defineOptions({ inheritAttrs: false });
+const attrs = useAttrs();
+const field = inject<BissFieldContext | undefined>(BISS_FIELD, undefined);
+const control = () =>
+  fieldControl(field, {
+    ...attrs,
+    invalid: props.invalid,
+    required: props.required,
+    disabled: props.disabled,
+  });
 
 const props = withDefaults(
   defineProps<{
@@ -35,15 +46,16 @@ const classes = computed(() =>
 
 <template>
   <input
+    v-bind="{ ...attrs, ...control() }"
     v-model="model"
     :class="classes"
     :type="type"
     :placeholder="placeholder"
-    :disabled="disabled"
-    :required="required"
+    :disabled="control().disabled"
+    :required="control().required"
     :min="min"
     :max="max"
     :autocomplete="autocomplete"
-    :aria-invalid="invalid || undefined"
+    :aria-invalid="invalid || control()['aria-invalid'] || undefined"
   />
 </template>

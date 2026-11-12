@@ -1,25 +1,36 @@
 <script lang="ts">
+  import { getContext } from 'svelte';
+  import { BISS_FIELD, fieldControl, type BissFieldContext } from '../core/field';
+  const field = getContext<BissFieldContext | undefined>(BISS_FIELD);
   import type { Snippet } from 'svelte';
   import type { HTMLTextareaAttributes } from 'svelte/elements';
   let {
-    modelValue = $bindable(''),
+    class: className,
+    value = $bindable<string | undefined>(undefined),
+    modelValue = $bindable<string | undefined>(undefined),
     invalid = false,
+    mono = false,
     onchange,
     ...rest
-  }: Omit<HTMLTextareaAttributes, 'onchange'> & {
+  }: Omit<HTMLTextareaAttributes, 'onchange' | 'value'> & {
+    value?: string;
     modelValue?: string;
     invalid?: boolean;
+    mono?: boolean;
     onchange?: (value: string) => void;
   } = $props();
 </script>
 
 <textarea
   {...rest}
-  class="biss-textarea"
-  aria-invalid={invalid || undefined}
-  value={modelValue}
+  {...fieldControl(field, rest)}
+  class={['biss-textarea', className].filter(Boolean).join(' ')}
+  aria-invalid={invalid || field?.invalid || undefined}
+  value={value !== undefined ? value : (modelValue ?? '')}
   oninput={(e) => {
-    modelValue = e.currentTarget.value;
-    onchange?.(modelValue);
+    const next = e.currentTarget.value;
+    if (value !== undefined || modelValue === undefined) value = next;
+    else modelValue = next;
+    onchange?.(next);
     rest.oninput?.(e);
   }}></textarea>

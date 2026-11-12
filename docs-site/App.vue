@@ -6,12 +6,14 @@ import catalog from './generated/components.json';
 
 import { guides } from './content';
 import { example } from './examples';
+import Workbench from './Workbench.vue';
 import { fixtures } from './fixtures';
 const route = ref(location.hash.slice(1).split('?')[0] || '/getting-started'),
   query = ref(''),
   navOpen = ref(false),
   framework = ref<'vue' | 'svelte'>('vue'),
   viewport = ref<'desktop' | 'phone'>('desktop'),
+  density = ref('standard'),
   state = ref('default'),
   previewHeight = ref(360),
   previewKey = ref(0),
@@ -47,7 +49,7 @@ const states = computed(() => {
 });
 const previewUrl = computed(
   () =>
-    `./preview.html?component=${encodeURIComponent(current.value?.name ?? 'BissButton')}&state=${encodeURIComponent(state.value)}`,
+    `./preview.html?component=${encodeURIComponent(current.value?.name ?? 'BissButton')}&state=${encodeURIComponent(state.value)}&framework=${framework.value}&density=${density.value}`,
 );
 let previewObserver: ResizeObserver | undefined;
 onBeforeUnmount(() => previewObserver?.disconnect());
@@ -111,7 +113,11 @@ const snippet = computed(() => {
 });
 const codeTokens = computed(() => highlight(snippet.value, 'ts'));
 
-const related = computed(() => catalog.components.filter(c=>c.category===current.value?.category&&c.name!==current.value?.name).slice(0,5));
+const related = computed(() =>
+  catalog.components
+    .filter((c) => c.category === current.value?.category && c.name !== current.value?.name)
+    .slice(0, 5),
+);
 function onHash() {
   const [path, queryString] = location.hash.slice(1).split('?');
   route.value = path || '/getting-started';
@@ -195,6 +201,9 @@ onBeforeUnmount(() => {
     <nav aria-label="Documentation">
       <div v-if="!query" class="nav-group">
         <p>Start here</p>
+        <a href="#/playground" :aria-current="route === '/playground' ? 'page' : undefined"
+          >Library playground</a
+        >
         <a
           v-for="g in guides"
           :key="g.slug"
@@ -225,7 +234,7 @@ onBeforeUnmount(() => {
     <div class="sidebar-note">From Bizzy’s design system.<br />Built for your application.</div>
   </aside>
   <div v-if="navOpen" class="nav-scrim" @click="navOpen = false" aria-hidden="true" />
-  <div class="docs-layout">
+  <div class="docs-layout" :class="{'without-toc':!sections.length}">
     <main id="main-content" tabindex="-1">
       <template v-if="current">
         <div class="breadcrumbs">
@@ -264,7 +273,15 @@ onBeforeUnmount(() => {
         <section id="preview" class="docs-section">
           <h2>Preview</h2>
           <div class="preview-toolbar">
-            <span>Interactive preview</span>
+            <span>Interactive preview</span
+            ><label class="state-control"
+              >Density
+              <select v-model="density" aria-label="Preview density">
+                <option value="standard">Standard</option>
+                <option value="compact">Compact</option>
+                <option value="comfortable">Comfortable</option>
+              </select></label
+            >
             <button type="button" class="biss-button biss-button-secondary" @click="previewKey++">
               Reset example
             </button>
@@ -292,7 +309,7 @@ onBeforeUnmount(() => {
           </div>
           <div class="live-example" :class="{ 'phone-preview': viewport === 'phone' }">
             <iframe
-              :key="current.name + state + previewKey"
+              :key="current.name + framework + density + state + previewKey"
               :src="previewUrl"
               :title="`${current.name} interactive example`"
               :style="{ height: previewHeight + 'px' }"
@@ -300,8 +317,7 @@ onBeforeUnmount(() => {
             />
           </div>
           <p class="preview-description">
-            Live Vue component with local example data. The framework switch selects the usage code
-            and API.
+            Live {{ framework === 'vue' ? 'Vue' : 'Svelte' }} component with local example data.
           </p>
         </section>
         <section id="usage" class="docs-section">
@@ -429,6 +445,15 @@ onBeforeUnmount(() => {
           /></a>
         </nav>
       </template>
+      <template v-else-if="route === '/playground'"
+        ><div class="breadcrumbs">BISS UI in use</div>
+        <h1>Library playground</h1>
+        <p class="docs-lead">
+          Search, sort and select records. Edit a project or create one to explore form validation
+          and component composition.
+        </p>
+        <Workbench
+      /></template>
       <template v-else-if="guide"
         ><div class="breadcrumbs">Documentation</div>
         <h1>{{ guide.title }}</h1>
@@ -457,7 +482,7 @@ onBeforeUnmount(() => {
         ><div class="breadcrumbs">Component reference</div>
         <h1>All components</h1>
         <p class="docs-lead">
-          {{ catalog.components.length }} components. Screenshots, working examples and
+          {{ catalog.components.length }} components. Live examples in both frameworks and
           source-derived contracts.
         </p>
         <p class="coverage-line">
@@ -490,7 +515,7 @@ onBeforeUnmount(() => {
         <span>BISS UI · From Bizzy’s design system</span><a href="#/migration">Migration guide</a>
       </footer>
     </main>
-    <aside class="page-toc" aria-label="On this page">
+    <aside v-if="sections.length" class="page-toc" aria-label="On this page">
       <p>On this page</p>
       <a
         v-for="section in sections"
@@ -503,6 +528,8 @@ onBeforeUnmount(() => {
 </template>
 
 <style>
+.docs-layout.without-toc{grid-template-columns:minmax(0,1fr)}
+
 .live-example {
   width: 100%;
   background: var(--biss-card);

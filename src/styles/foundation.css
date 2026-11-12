@@ -420,3 +420,40 @@
 .biss-card-padded {
   padding: 20px 22px;
 }
+
+.biss-button {
+  position: relative;
+}
+.biss-button-label {
+  display: inline-flex;
+  gap: 7px;
+  align-items: center;
+  justify-content: center;
+}
+.biss-button-spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  width: 12px;
+  height: 12px;
+  flex: none;
+  border: 1.5px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: biss-button-spin 0.7s linear infinite;
+}
+.biss-button[aria-busy='true'] {
+  cursor: wait;
+}
+@keyframes biss-button-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .biss-button-spinner {
+    animation: none;
+    border-style: dotted;
+  }
+}

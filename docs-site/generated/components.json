@@ -1217,6 +1217,13 @@
             "default": "false"
           },
           {
+            "name": "loading",
+            "type": "boolean",
+            "required": false,
+            "description": "",
+            "default": "false"
+          },
+          {
             "name": "block",
             "type": "boolean",
             "required": false,
@@ -1238,6 +1245,13 @@
       },
       "svelte": {
         "props": [
+          {
+            "name": "loading",
+            "type": "boolean",
+            "required": false,
+            "description": "",
+            "default": "false"
+          },
           {
             "name": "href",
             "type": "string",
@@ -4573,37 +4587,11 @@
       "vue": {
         "props": [
           {
-            "name": "label",
+            "name": "id",
             "type": "string",
             "required": false,
             "description": ""
           },
-          {
-            "name": "hint",
-            "type": "string",
-            "required": false,
-            "description": ""
-          },
-          {
-            "name": "error",
-            "type": "string",
-            "required": false,
-            "description": ""
-          },
-          {
-            "name": "optional",
-            "type": "boolean",
-            "required": false,
-            "description": ""
-          }
-        ],
-        "events": [],
-        "slots": [
-          "default"
-        ]
-      },
-      "svelte": {
-        "props": [
           {
             "name": "label",
             "type": "string",
@@ -4630,8 +4618,89 @@
             "default": "false"
           },
           {
+            "name": "optionalLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'optional'"
+          },
+          {
+            "name": "required",
+            "type": "boolean",
+            "required": false,
+            "description": "",
+            "default": "false"
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "required": false,
+            "description": "",
+            "default": "false"
+          }
+        ],
+        "events": [],
+        "slots": [
+          "default"
+        ]
+      },
+      "svelte": {
+        "props": [
+          {
+            "name": "id",
+            "type": "string",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "label",
+            "type": "string",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "hint",
+            "type": "string",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "error",
+            "type": "string",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "optional",
+            "type": "boolean",
+            "required": false,
+            "description": "",
+            "default": "false"
+          },
+          {
+            "name": "optionalLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'optional'"
+          },
+          {
+            "name": "required",
+            "type": "boolean",
+            "required": false,
+            "description": "",
+            "default": "false"
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "required": false,
+            "description": "",
+            "default": "false"
+          },
+          {
             "name": "children",
-            "type": "Snippet<[{ id: string; invalid: boolean }]>",
+            "type": "Snippet<\n      [{ id: string; invalid: boolean; control: ReturnType<typeof fieldControl> }]\n    >",
             "required": false,
             "description": ""
           }
@@ -6060,11 +6129,18 @@
       "svelte": {
         "props": [
           {
+            "name": "value",
+            "type": "string | number | null",
+            "required": false,
+            "description": "",
+            "default": "$bindable<string | number | null | undefined>(undefined)"
+          },
+          {
             "name": "modelValue",
             "type": "string | number | null",
             "required": false,
             "description": "",
-            "default": "$bindable<string | number | null>(null)"
+            "default": "$bindable<string | number | null | undefined>(undefined)"
           },
           {
             "name": "invalid",
@@ -7567,6 +7643,13 @@
       "vue": {
         "props": [
           {
+            "name": "heading",
+            "type": "'h1' | 'h2' | 'h3'",
+            "required": false,
+            "description": "",
+            "default": "'h1'"
+          },
+          {
             "name": "title",
             "type": "string",
             "required": true,
@@ -7594,6 +7677,13 @@
       },
       "svelte": {
         "props": [
+          {
+            "name": "heading",
+            "type": "'h1' | 'h2' | 'h3'",
+            "required": false,
+            "description": "",
+            "default": "'h1'"
+          },
           {
             "name": "title",
             "type": "string",
@@ -9289,11 +9379,18 @@
       "svelte": {
         "props": [
           {
+            "name": "value",
+            "type": "string | number",
+            "required": false,
+            "description": "",
+            "default": "$bindable<string | number | undefined>(undefined)"
+          },
+          {
             "name": "modelValue",
             "type": "string | number",
             "required": false,
             "description": "",
-            "default": "$bindable<string | number>('')"
+            "default": "$bindable<string | number | undefined>(undefined)"
           },
           {
             "name": "options",
@@ -11734,14 +11831,28 @@
       "svelte": {
         "props": [
           {
+            "name": "value",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "$bindable<string | undefined>(undefined)"
+          },
+          {
             "name": "modelValue",
             "type": "string",
             "required": false,
             "description": "",
-            "default": "$bindable('')"
+            "default": "$bindable<string | undefined>(undefined)"
           },
           {
             "name": "invalid",
+            "type": "boolean",
+            "required": false,
+            "description": "",
+            "default": "false"
+          },
+          {
+            "name": "mono",
             "type": "boolean",
             "required": false,
             "description": "",

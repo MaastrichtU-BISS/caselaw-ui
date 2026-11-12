@@ -2,6 +2,17 @@ import assert from 'node:assert/strict';
 import AxeBuilder from '@axe-core/playwright';
 export async function testLibrary(page, width) {
   const at = (name) => page.locator(`[data-library="${name}"]`);
+  const foundation=at('Foundation');
+  const native=foundation.getByRole('textbox',{name:'Native project name',exact:true});
+  await native.fill('Updated native value');
+  assert.equal(await foundation.locator('[data-native-value]').innerText(),'Updated native value');
+  const description=await native.getAttribute('aria-describedby');
+  assert.equal(await page.locator('[id="'+description+'"]').innerText(),'Use a recognizable name.');
+  await foundation.locator('a').click({force:true});
+  assert.equal(await foundation.locator('[data-activations]').innerText(),'0');
+  assert.equal(await foundation.locator('button[aria-busy=true]').isDisabled(),true);
+  const widths=await foundation.locator('button').evaluateAll(nodes=>nodes.map(n=>n.getBoundingClientRect().width));
+  assert.ok(Math.abs(widths[0]-widths[1])<1,'Loading preserves button width');
   const grid = at('DataGrid');
   await grid.getByRole('checkbox', { name: 'Select open', exact: true }).check();
   assert.match(await grid.innerText(), /1 selected/);

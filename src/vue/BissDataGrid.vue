@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import BissPopover from './BissPopover.vue';
 import BissColumnManager from './BissColumnManager.vue';
 import BissTableHead from './BissTableHead.vue';
 import type { BissColumn } from '../core/types';
-import { sortRows } from '../core/collections';
-import { toggleValue } from '../core/format';
-import { resizeHandle } from '../core/dom';
+import { dataGridModel } from '../core/data-grid';
+
+import { resizeHandle, observeWidth } from '../core/dom';
 import { actionDirective } from './actions';
 const {
   selectedLabel = '{count} selected',
@@ -51,15 +51,22 @@ const emit = defineEmits<{
   select: [ids: string[]];
   sort: [value: { key: string; direction: 'asc' | 'desc' }];
 }>();
+const availableWidth = ref(0);
+const vMeasure = actionDirective(observeWidth);
 const vResize = actionDirective(resizeHandle);
-const visible = computed(() => columns.filter((c) => c.visible));
-const sorted = computed(() => sortRows(rows, sortKey, sortDirection));
-const pinLeft = (index: number) =>
-  44 +
-  visible.value
-    .slice(0, index)
-    .filter((c) => c.pinned)
-    .reduce((sum, c) => sum + (c.width ?? 160), 0);
+const grid = computed(() =>
+  dataGridModel({
+    rows,
+    columns,
+    selected,
+    sortKey,
+    sortDirection,
+    availableWidth: availableWidth.value,
+  }),
+);
+const visible = computed(() => grid.value.visible),
+  sorted = computed(() => grid.value.sorted);
+const pinLeft = (index: number) => grid.value.geometry(visible.value[index]!.key).left;
 </script>
 <template>
   <section class="biss-data-grid" :aria-label="label">
@@ -73,22 +80,21 @@ const pinLeft = (index: number) =>
           @change="emit('columns', $event)"
       /></BissPopover>
     </header>
-    <div class="biss-table-wrap">
-      <table class="biss-table">
+    <div
+      class="biss-table-wrap"
+      v-measure="{ onchange: (width: number) => (availableWidth = width) }"
+    >
+      <table class="biss-table" :style="{ width: grid.width + 'px', tableLayout: 'fixed' }">
         <thead>
           <tr>
             <th>
               <input
                 type="checkbox"
                 :aria-label="selectAllLabel"
-                :checked="rows.length > 0 && rows.every((r) => selected.includes(r.id))"
+                :checked="grid.allSelected"
+                :indeterminate="grid.someSelected"
                 @change="
-                  emit(
-                    'select',
-                    ($event.target as HTMLInputElement).checked
-                      ? Array.from(new Set([...selected, ...rows.map((r) => r.id)]))
-                      : selected.filter((id) => !rows.some((r) => r.id === id)),
-                  )
+                  emit('select', grid.selectAll(($event.target as HTMLInputElement).checked))
                 "
               />
             </th>
@@ -96,8 +102,8 @@ const pinLeft = (index: number) =>
               v-for="(column, i) in visible"
               :key="column.key"
               :style="{
-                width: (column.width ?? 160) + 'px',
-                minWidth: (column.width ?? 160) + 'px',
+                width: grid.geometry(column.key).width + 'px',
+                minWidth: grid.geometry(column.key).width + 'px',
                 position: column.pinned ? 'sticky' : undefined,
                 left: column.pinned ? pinLeft(i) + 'px' : undefined,
                 zIndex: column.pinned ? 2 : undefined,
@@ -139,7 +145,7 @@ const pinLeft = (index: number) =>
                 type="checkbox"
                 :aria-label="rowLabel.replace('{id}', row.id)"
                 :checked="selected.includes(row.id)"
-                @change="emit('select', toggleValue(selected, row.id))"
+                @change="emit('select', grid.toggleRow(row.id))"
               />
             </td>
             <td

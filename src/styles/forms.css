@@ -347,3 +347,29 @@
     transition: none;
   }
 }
+
+.biss-field-required {
+  color: var(--biss-danger);
+  margin-inline-start: 4px;
+}
+.biss-field[data-disabled] .biss-field-label {
+  color: var(--biss-muted);
+}
+.biss-field[data-invalid] .biss-field-label {
+  color: var(--biss-danger);
+}
+
+[data-biss-density='compact'] {
+  --biss-control-height: 28px;
+  --biss-row-height: 32px;
+  --biss-cell-padding: 6px 10px;
+}
+[data-biss-density='comfortable'] {
+  --biss-control-height: 36px;
+  --biss-row-height: 44px;
+  --biss-cell-padding: 12px 14px;
+}
+
+.biss-select[aria-invalid='true'] {
+  border-color: var(--biss-danger);
+}

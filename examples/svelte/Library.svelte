@@ -1,4 +1,5 @@
 <script lang="ts">
+  let nativeValue=$state('Research'),activations=$state(0);
   import * as UI from '../../src/svelte';
   import { newFixtures } from '../../docs-site/new-fixtures';
   let states = $state<Record<string, any>>(
@@ -23,7 +24,7 @@
   }
 </script>
 
-<div class="library-examples">
+<div class="library-examples"><article data-library="Foundation"><h2>Field and action contracts</h2><UI.BissField label="Native project name" hint="Use a recognizable name."><UI.BissInput bind:value={nativeValue}/></UI.BissField><output data-native-value>{nativeValue}</output><UI.BissButton href="#" disabled onclick={()=>activations++}>Disabled destination</UI.BissButton><output data-activations>{activations}</output><UI.BissButton data-idle>Save item</UI.BissButton><UI.BissButton loading>Save item</UI.BissButton></article>
   {#each Object.entries(states) as [name, props] (name)}{@const C = (UI as Record<string, any>)[
       'Biss' + name
     ]}
