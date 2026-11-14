@@ -40,7 +40,7 @@ try {
   assert.equal(core.bissCssTokens['--biss-primary'], '#005CA9');
   const vue = await import(pathToFileURL(join(packaged, 'dist/vue/index.js')).href);
   const names = Object.keys(vue).filter((n) => n.startsWith('Biss') && fixtures[n.slice(4)]);
-  assert.equal(names.length, 130);
+  assert.equal(names.length, 140);
   for (const name of names) {
     const props = structuredClone(fixtures[name.slice(4)]!.props);
     const html = await renderToString(createSSRApp({ render: () => h(vue[name], props) }));
@@ -60,6 +60,16 @@ const svelteDialogContent:SvelteDialogContentProps={size:'sm'};
 const badVueDialog:VueDialogRootProps={open:'bad'};
 // @ts-expect-error Reject invalid compound width variants.
 const badSvelteContent:SvelteDialogContentProps={size:'huge'};
+import type {RootProps as VueTabsRootProps,ListProps as VueTabsListProps} from 'biss-ui/vue/tabs';
+import type {RootProps as SvelteTabsRootProps,ListProps as SvelteTabsListProps} from 'biss-ui/svelte/tabs';
+const vueTabs:VueTabsRootProps={modelValue:'overview',activationMode:'manual'};
+const svelteTabs:SvelteTabsRootProps={value:'overview'};
+const vueTabsList:VueTabsListProps={variant:'segmented',size:'sm'};
+const svelteTabsList:SvelteTabsListProps={variant:'line'};
+// @ts-expect-error Reject unknown tab list variants.
+const badTabsList:VueTabsListProps={variant:'pill'};
+import {paginationRange} from 'biss-ui/core';
+paginationRange(5,10);
 import type {BissColumn} from 'biss-ui/core';
 const button:VueButtonProps={variant:'primary',disabled:true};
 const other:SvelteButtonProps={onclick:()=>{},disabled:true};
@@ -139,7 +149,7 @@ createBissToasts().push('Saved');
   }
   assert.deepEqual(outputs, ['<p>Request A</p>', '<p>Request B</p>']);
   console.log(
-    'Tarball consumer passed: 130 Vue and 130 Svelte SSR renders, installed TypeScript contracts, Vue without SFC plugin, localized composites and isolated request state.',
+    'Tarball consumer passed: 140 Vue and 140 Svelte SSR renders, installed TypeScript contracts, Vue without SFC plugin, localized composites and isolated request state.',
   );
 } finally {
   await server?.close();

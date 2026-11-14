@@ -40,7 +40,7 @@ provide(BISS_FIELD, field);
     :data-disabled="disabled || undefined"
     :data-invalid="field.invalid || undefined"
   >
-    <label v-if="label" class="biss-field-label" :for="field.id"
+    <label v-if="label" :id="field.id + '-label'" class="biss-field-label" :for="field.id"
       >{{ label }}<span v-if="optional" class="biss-field-optional">{{ optionalLabel }}</span
       ><span v-if="required" aria-hidden="true" class="biss-field-required">*</span></label
     ><slot :id="field.id" :invalid="field.invalid" :control="fieldControl(field)" />

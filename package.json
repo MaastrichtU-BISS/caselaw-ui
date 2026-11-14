@@ -54,6 +54,15 @@
       "types": "./dist/svelte/dialog/index.d.ts",
       "svelte": "./dist/svelte/dialog/index.js",
       "import": "./dist/svelte/dialog/index.js"
+    },
+    "./vue/tabs": {
+      "types": "./dist/vue/tabs/index.d.ts",
+      "import": "./dist/vue/tabs/index.js"
+    },
+    "./svelte/tabs": {
+      "types": "./dist/svelte/tabs/index.d.ts",
+      "svelte": "./dist/svelte/tabs/index.js",
+      "import": "./dist/svelte/tabs/index.js"
     }
   },
   "scripts": {

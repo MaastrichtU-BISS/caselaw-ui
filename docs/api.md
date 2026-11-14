@@ -1,10 +1,10 @@
 # Component API reference
 
-All 130 components are available in Vue and Svelte with one Bizzy design language. This file is generated from the same source-derived contracts as the documentation site. Import components and their `BissNameProps` types from the matching framework entry point. Native attributes supported by the framework also apply; tables list authored component props.
+All 140 components are available in Vue and Svelte with one Bizzy design language. This file is generated from the same source-derived contracts as the documentation site. Import components and their `BissNameProps` types from the matching framework entry point. Native attributes supported by the framework also apply; tables list authored component props.
 
 ## BissAccessList
 
-Access List for the team’s everyday work.
+Who can open a record, with their role and how they got access.
 
 [Vue source](../src/vue/BissAccessList.vue) · [Svelte source](../src/svelte/BissAccessList.svelte)
 
@@ -42,6 +42,44 @@ Callbacks:
 - `onrole`: `(value: { id: string; role: string }) => void`
 - `onremove`: `(id: string) => void`
 
+## BissAccordion
+
+Accordion for the team’s everyday work.
+
+[Vue source](../src/vue/BissAccordion.vue) · [Svelte source](../src/svelte/BissAccordion.svelte)
+
+### Vue
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `items` | `BissAccordionItem[]` | Yes | — |
+| `type` | `'single' \| 'multiple'` | No | `'single'` |
+| `collapsible` | `boolean` | No | `true` |
+| `disabled` | `boolean` | No | `false` |
+| `headingLevel` | `2 \| 3 \| 4 \| 5 \| 6` | No | `3` |
+| `modelValue` | `string \| string[]` | No | — |
+
+Slots: `default`.
+
+### Svelte
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `items` | `BissAccordionItem[]` | Yes | — |
+| `type` | `'single' \| 'multiple'` | No | `'single'` |
+| `value` | `string \| string[]` | No | `$bindable()` |
+| `collapsible` | `boolean` | No | `true` |
+| `disabled` | `boolean` | No | `false` |
+| `headingLevel` | `2 \| 3 \| 4 \| 5 \| 6` | No | `3` |
+| `onchange` | `(value: string \| string[]) => void` | No | — |
+| `children` | `Snippet<[BissAccordionItem]>` | No | — |
+
+Callbacks:
+
+- `onchange`: `(value: string \| string[]) => void`
+
+Snippets: `children`.
+
 ## BissActionCard
 
 A linked surface for choosing a destination, available in both frameworks.
@@ -74,7 +112,7 @@ Snippets: `icon`, `children`.
 
 ## BissActivityList
 
-Activity List for the team’s everyday work.
+A chronological list of who changed what, with optional detail.
 
 [Vue source](../src/vue/BissActivityList.vue) · [Svelte source](../src/svelte/BissActivityList.svelte)
 
@@ -94,7 +132,7 @@ Activity List for the team’s everyday work.
 
 ## BissAgenda
 
-Agenda for the team’s everyday work.
+A meeting agenda: timed items to add, reorder and tick off.
 
 [Vue source](../src/vue/BissAgenda.vue) · [Svelte source](../src/svelte/BissAgenda.svelte)
 
@@ -209,7 +247,7 @@ Snippets: `children`, `sidebar`, `sidebarFooter`, `topbarActions`, `footerConten
 
 ## BissAttachmentList
 
-Attachment List for the team’s everyday work.
+Files attached to a record, with links and a remove action.
 
 [Vue source](../src/vue/BissAttachmentList.vue) · [Svelte source](../src/svelte/BissAttachmentList.svelte)
 
@@ -311,7 +349,7 @@ A compact request-style bar chart with an optional highlighted sub-series.
 
 ## BissBookmark
 
-Bookmark for the team’s everyday work.
+A rich link preview with title, description and source.
 
 [Vue source](../src/vue/BissBookmark.vue) · [Svelte source](../src/svelte/BissBookmark.svelte)
 
@@ -360,7 +398,7 @@ Snippets: `children`.
 
 ## BissBreadcrumbs
 
-Breadcrumbs for the team’s everyday work.
+Show where a page sits in the hierarchy and link back up.
 
 [Vue source](../src/vue/BissBreadcrumbs.vue) · [Svelte source](../src/svelte/BissBreadcrumbs.svelte)
 
@@ -456,7 +494,7 @@ Callbacks:
 
 ## BissCallout
 
-Callout for the team’s everyday work.
+A highlighted note that explains context or a consequence.
 
 [Vue source](../src/vue/BissCallout.vue) · [Svelte source](../src/svelte/BissCallout.svelte)
 
@@ -549,7 +587,7 @@ Name the colors and line treatments used by a chart.
 
 ## BissCheckbox
 
-Checkbox for the team’s everyday work.
+A labelled checkbox with optional description text.
 
 [Vue source](../src/vue/BissCheckbox.vue) · [Svelte source](../src/svelte/BissCheckbox.svelte)
 
@@ -655,7 +693,7 @@ Keep related language samples together and copy the active one.
 
 ## BissColumnManager
 
-Column Manager for the team’s everyday work.
+Show, hide, pin, reorder and resize the columns of a table.
 
 [Vue source](../src/vue/BissColumnManager.vue) · [Svelte source](../src/svelte/BissColumnManager.svelte)
 
@@ -694,7 +732,7 @@ Callbacks:
 
 ## BissCommentComposer
 
-Comment Composer for the team’s everyday work.
+Write a comment, mention people and submit with the keyboard.
 
 [Vue source](../src/vue/BissCommentComposer.vue) · [Svelte source](../src/svelte/BissCommentComposer.svelte)
 
@@ -727,7 +765,7 @@ Callbacks:
 
 ## BissCommentThread
 
-Comment Thread for the team’s everyday work.
+A discussion on a record, with a composer and resolve state.
 
 [Vue source](../src/vue/BissCommentThread.vue) · [Svelte source](../src/svelte/BissCommentThread.svelte)
 
@@ -947,7 +985,7 @@ A value that can be read, selected and copied without changing it.
 
 ## BissDataGrid
 
-Data Grid for the team’s everyday work.
+A spreadsheet-like table with selection, pinning, sorting and resizable columns.
 
 [Vue source](../src/vue/BissDataGrid.vue) · [Svelte source](../src/svelte/BissDataGrid.svelte)
 
@@ -1036,7 +1074,7 @@ Slots: `empty`, `default`.
 
 ## BissDataTile
 
-Data Tile for the team’s everyday work.
+A dashboard tile that frames a figure, a chart or a list.
 
 [Vue source](../src/vue/BissDataTile.vue) · [Svelte source](../src/svelte/BissDataTile.svelte)
 
@@ -1168,7 +1206,7 @@ Callbacks:
 
 ## BissDeadlineList
 
-Deadline List for the team’s everyday work.
+Dated items ordered by urgency, with overdue items called out.
 
 [Vue source](../src/vue/BissDeadlineList.vue) · [Svelte source](../src/svelte/BissDeadlineList.svelte)
 
@@ -1251,7 +1289,7 @@ Snippets: `children`, `actions`.
 
 ## BissDisclosure
 
-Disclosure for the team’s everyday work.
+Hide secondary detail behind a labelled toggle.
 
 [Vue source](../src/vue/BissDisclosure.vue) · [Svelte source](../src/svelte/BissDisclosure.svelte)
 
@@ -1285,7 +1323,7 @@ Snippets: `children`.
 
 ## BissDocumentCallout
 
-Document Callout for the team’s everyday work.
+A tinted note block inside a document.
 
 [Vue source](../src/vue/BissDocumentCallout.vue) · [Svelte source](../src/svelte/BissDocumentCallout.svelte)
 
@@ -1312,7 +1350,7 @@ Snippets: `children`.
 
 ## BissDocumentToc
 
-Document Toc for the team’s everyday work.
+A document outline that tracks the heading in view.
 
 [Vue source](../src/vue/BissDocumentToc.vue) · [Svelte source](../src/svelte/BissDocumentToc.svelte)
 
@@ -1456,7 +1494,7 @@ Snippets: `children`.
 
 ## BissFigureHelp
 
-Figure Help for the team’s everyday work.
+Explain how a figure is calculated, next to the figure.
 
 [Vue source](../src/vue/BissFigureHelp.vue) · [Svelte source](../src/svelte/BissFigureHelp.svelte)
 
@@ -1480,7 +1518,7 @@ Figure Help for the team’s everyday work.
 
 ## BissFilePicker
 
-File Picker for the team’s everyday work.
+Choose files or drop them onto the field.
 
 [Vue source](../src/vue/BissFilePicker.vue) · [Svelte source](../src/svelte/BissFilePicker.svelte)
 
@@ -1515,7 +1553,7 @@ Callbacks:
 
 ## BissFilterBuilder
 
-Filter Builder for the team’s everyday work.
+Compose filter rules with fields, operators and values.
 
 [Vue source](../src/vue/BissFilterBuilder.vue) · [Svelte source](../src/svelte/BissFilterBuilder.svelte)
 
@@ -1585,7 +1623,7 @@ A progress track with an optional expected-progress marker.
 
 ## BissGoalCard
 
-Goal Card for the team’s everyday work.
+A goal with its progress, expected pace and owner.
 
 [Vue source](../src/vue/BissGoalCard.vue) · [Svelte source](../src/svelte/BissGoalCard.svelte)
 
@@ -1940,6 +1978,35 @@ Callbacks:
 - `onmove`: `(value: { id: string; lane: string }) => void`
 - `onadd`: `(lane: string) => void`
 
+## BissKbd
+
+Kbd for the team’s everyday work.
+
+[Vue source](../src/vue/BissKbd.vue) · [Svelte source](../src/svelte/BissKbd.svelte)
+
+### Vue
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `keys` | `string \| string[]` | No | — |
+| `label` | `string` | No | — |
+| `separator` | `string` | No | `''` |
+| `size` | `'sm' \| 'md'` | No | `'md'` |
+
+Slots: `default`.
+
+### Svelte
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `keys` | `string \| string[]` | No | — |
+| `label` | `string` | No | — |
+| `separator` | `string` | No | `''` |
+| `size` | `'sm' \| 'md'` | No | `'md'` |
+| `children` | `Snippet` | No | — |
+
+Snippets: `children`.
+
 ## BissKpiCard
 
 One headline figure with the label and note needed to interpret it.
@@ -1964,7 +2031,7 @@ One headline figure with the label and note needed to interpret it.
 
 ## BissLabelEditor
 
-Label Editor for the team’s everyday work.
+Create, rename, recolor and remove the labels of a field.
 
 [Vue source](../src/vue/BissLabelEditor.vue) · [Svelte source](../src/svelte/BissLabelEditor.svelte)
 
@@ -2057,7 +2124,7 @@ Quiet connection feedback only when the application is reconnecting or offline.
 
 ## BissMediaFigure
 
-Media Figure for the team’s everyday work.
+An image or video with caption and credit.
 
 [Vue source](../src/vue/BissMediaFigure.vue) · [Svelte source](../src/svelte/BissMediaFigure.svelte)
 
@@ -2315,6 +2382,59 @@ Callbacks:
 
 Snippets: `icon`.
 
+## BissNumberField
+
+Number Field for the team’s everyday work.
+
+[Vue source](../src/vue/BissNumberField.vue) · [Svelte source](../src/svelte/BissNumberField.svelte)
+
+### Vue
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `min` | `number` | No | — |
+| `max` | `number` | No | — |
+| `step` | `number` | No | `1` |
+| `largeStep` | `number` | No | — |
+| `label` | `string` | No | — |
+| `placeholder` | `string` | No | — |
+| `disabled` | `boolean` | No | `false` |
+| `required` | `boolean` | No | `false` |
+| `invalid` | `boolean` | No | `false` |
+| `locale` | `string` | No | — |
+| `format` | `Intl.NumberFormatOptions` | No | — |
+| `incrementLabel` | `string` | No | `'Increase'` |
+| `decrementLabel` | `string` | No | `'Decrease'` |
+| `size` | `'sm' \| 'md'` | No | `'md'` |
+| `name` | `string` | No | — |
+| `modelValue` | `number \| null` | No | `null` |
+
+### Svelte
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `value` | `number \| null` | No | `$bindable(null)` |
+| `min` | `number` | No | — |
+| `max` | `number` | No | — |
+| `step` | `number` | No | `1` |
+| `largeStep` | `number` | No | — |
+| `label` | `string` | No | — |
+| `placeholder` | `string` | No | — |
+| `disabled` | `boolean` | No | `false` |
+| `required` | `boolean` | No | `false` |
+| `invalid` | `boolean` | No | `false` |
+| `locale` | `string` | No | — |
+| `format` | `Intl.NumberFormatOptions` | No | — |
+| `incrementLabel` | `string` | No | `'Increase'` |
+| `decrementLabel` | `string` | No | `'Decrease'` |
+| `size` | `'sm' \| 'md'` | No | `'md'` |
+| `name` | `string` | No | — |
+| `onchange` | `(value: number \| null) => void` | No | — |
+
+Callbacks:
+
+- `onchange`: `(value: number \| null) => void`
+
 ## BissOnboardingChips
 
 Choose several interests or areas during workspace setup.
@@ -2460,6 +2580,57 @@ Slots: `default`.
 
 Snippets: `children`.
 
+## BissPagination
+
+Pagination for the team’s everyday work.
+
+[Vue source](../src/vue/BissPagination.vue) · [Svelte source](../src/svelte/BissPagination.svelte)
+
+### Vue
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `total` | `number` | No | — |
+| `pages` | `number` | No | — |
+| `pageSizes` | `number[]` | No | — |
+| `siblings` | `number` | No | `1` |
+| `boundaries` | `number` | No | `1` |
+| `label` | `string` | No | `'Pagination'` |
+| `previousLabel` | `string` | No | `'Previous page'` |
+| `nextLabel` | `string` | No | `'Next page'` |
+| `pageLabel` | `string` | No | `'Page {page}'` |
+| `pageSizeLabel` | `string` | No | `'Rows per page'` |
+| `rangeLabel` | `string` | No | `'{start}–{end} of {total}'` |
+| `disabled` | `boolean` | No | `false` |
+| `page` | `number` | No | `1` |
+| `pageSize` | `number` | No | `25` |
+
+### Svelte
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `page` | `number` | No | `$bindable(1)` |
+| `pageSize` | `number` | No | `$bindable(25)` |
+| `total` | `number` | No | — |
+| `pages` | `number` | No | — |
+| `pageSizes` | `number[]` | No | — |
+| `siblings` | `number` | No | `1` |
+| `boundaries` | `number` | No | `1` |
+| `label` | `string` | No | `'Pagination'` |
+| `previousLabel` | `string` | No | `'Previous page'` |
+| `nextLabel` | `string` | No | `'Next page'` |
+| `pageLabel` | `string` | No | `'Page {page}'` |
+| `pageSizeLabel` | `string` | No | `'Rows per page'` |
+| `rangeLabel` | `string` | No | `'{start}–{end} of {total}'` |
+| `disabled` | `boolean` | No | `false` |
+| `onchange` | `(page: number) => void` | No | — |
+| `onpagesize` | `(size: number) => void` | No | — |
+
+Callbacks:
+
+- `onchange`: `(page: number) => void`
+- `onpagesize`: `(size: number) => void`
+
 ## BissPeopleCell
 
 Show a small set of assigned people, with overflow summarized by count.
@@ -2511,7 +2682,7 @@ Snippets: `children`.
 
 ## BissPresenceCursor
 
-Presence Cursor for the team’s everyday work.
+Another person’s cursor, labelled with their name and color.
 
 [Vue source](../src/vue/BissPresenceCursor.vue) · [Svelte source](../src/svelte/BissPresenceCursor.svelte)
 
@@ -2566,6 +2737,40 @@ Slots: `default`.
 
 Snippets: `children`.
 
+## BissProgress
+
+Progress for the team’s everyday work.
+
+[Vue source](../src/vue/BissProgress.vue) · [Svelte source](../src/svelte/BissProgress.svelte)
+
+### Vue
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `value` | `number \| null` | No | `null` |
+| `max` | `number` | No | `100` |
+| `label` | `string` | Yes | — |
+| `showLabel` | `boolean` | No | `false` |
+| `showValue` | `boolean` | No | `false` |
+| `valueText` | `string` | No | — |
+| `tone` | `BissProgressTone` | No | `'primary'` |
+| `size` | `'sm' \| 'md'` | No | `'md'` |
+| `locale` | `string` | No | — |
+
+### Svelte
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `value` | `number \| null` | No | `null` |
+| `max` | `number` | No | `100` |
+| `label` | `string` | Yes | — |
+| `showLabel` | `boolean` | No | `false` |
+| `showValue` | `boolean` | No | `false` |
+| `valueText` | `string` | No | — |
+| `tone` | `BissProgressTone` | No | `'primary'` |
+| `size` | `'sm' \| 'md'` | No | `'md'` |
+| `locale` | `string` | No | — |
+
 ## BissPropertyList
 
 Display a record’s labelled properties in a compact description list.
@@ -2590,7 +2795,7 @@ Slots: `default`.
 
 ## BissProposalCard
 
-Proposal Card for the team’s everyday work.
+A suggested change that someone can review before applying.
 
 [Vue source](../src/vue/BissProposalCard.vue) · [Svelte source](../src/svelte/BissProposalCard.svelte)
 
@@ -2632,7 +2837,7 @@ Callbacks:
 
 ## BissQuickLinks
 
-Quick Links for the team’s everyday work.
+A compact grid of frequent destinations.
 
 [Vue source](../src/vue/BissQuickLinks.vue) · [Svelte source](../src/svelte/BissQuickLinks.svelte)
 
@@ -2652,7 +2857,7 @@ Quick Links for the team’s everyday work.
 
 ## BissRadioGroup
 
-Radio Group for the team’s everyday work.
+Choose one option from a short, visible list.
 
 [Vue source](../src/vue/BissRadioGroup.vue) · [Svelte source](../src/svelte/BissRadioGroup.svelte)
 
@@ -2709,7 +2914,7 @@ A small labelled reference to a record, optionally linked.
 
 ## BissRecordPreview
 
-Record Preview for the team’s everyday work.
+A compact preview of a linked record, or a notice when it is restricted.
 
 [Vue source](../src/vue/BissRecordPreview.vue) · [Svelte source](../src/svelte/BissRecordPreview.svelte)
 
@@ -2739,7 +2944,7 @@ Record Preview for the team’s everyday work.
 
 ## BissRoleEditor
 
-Role Editor for the team’s everyday work.
+Define roles and the permissions each one grants.
 
 [Vue source](../src/vue/BissRoleEditor.vue) · [Svelte source](../src/svelte/BissRoleEditor.svelte)
 
@@ -2908,7 +3113,7 @@ Snippets: `actions`.
 
 ## BissSegmentedControl
 
-Segmented Control for the team’s everyday work.
+Switch between a few mutually exclusive views or modes.
 
 [Vue source](../src/vue/BissSegmentedControl.vue) · [Svelte source](../src/svelte/BissSegmentedControl.svelte)
 
@@ -3012,6 +3217,28 @@ Callbacks:
 
 - `onchange`: `(value: string) => void`
 
+## BissSeparator
+
+Separator for the team’s everyday work.
+
+[Vue source](../src/vue/BissSeparator.vue) · [Svelte source](../src/svelte/BissSeparator.svelte)
+
+### Vue
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `orientation` | `'horizontal' \| 'vertical'` | No | `'horizontal'` |
+| `label` | `string` | No | — |
+| `decorative` | `boolean` | No | `false` |
+
+### Svelte
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `orientation` | `'horizontal' \| 'vertical'` | No | `'horizontal'` |
+| `label` | `string` | No | — |
+| `decorative` | `boolean` | No | `false` |
+
 ## BissServiceIcon
 
 The product marks, or a short text mark supplied by the host.
@@ -3063,7 +3290,7 @@ Snippets: `children`.
 
 ## BissSharePanel
 
-Share Panel for the team’s everyday work.
+Invite people, set their role and manage a public link.
 
 [Vue source](../src/vue/BissSharePanel.vue) · [Svelte source](../src/svelte/BissSharePanel.svelte)
 
@@ -3237,9 +3464,76 @@ Simple content-shaped bars for loading layouts.
 | `width` | `string` | No | `'100%'` |
 | `gap` | `string` | No | `'10px'` |
 
+## BissSlider
+
+Slider for the team’s everyday work.
+
+[Vue source](../src/vue/BissSlider.vue) · [Svelte source](../src/svelte/BissSlider.svelte)
+
+### Vue
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `label` | `string` | No | — |
+| `min` | `number` | No | `0` |
+| `max` | `number` | No | `100` |
+| `step` | `number` | No | `1` |
+| `disabled` | `boolean` | No | `false` |
+| `showValue` | `boolean` | No | `false` |
+| `thumbLabels` | `[string, string]` | No | `() => ['Minimum', 'Maximum']` |
+| `minStepsBetweenThumbs` | `number` | No | `0` |
+| `locale` | `string` | No | — |
+| `format` | `Intl.NumberFormatOptions` | No | — |
+| `name` | `string` | No | — |
+| `modelValue` | `number \| number[]` | No | — |
+
+### Svelte
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `value` | `number \| number[]` | No | `$bindable()` |
+| `label` | `string` | No | — |
+| `min` | `number` | No | `0` |
+| `max` | `number` | No | `100` |
+| `step` | `number` | No | `1` |
+| `disabled` | `boolean` | No | `false` |
+| `showValue` | `boolean` | No | `false` |
+| `thumbLabels` | `[string, string]` | No | `['Minimum', 'Maximum']` |
+| `minStepsBetweenThumbs` | `number` | No | `0` |
+| `locale` | `string` | No | — |
+| `format` | `Intl.NumberFormatOptions` | No | — |
+| `name` | `string` | No | — |
+| `onchange` | `(value: number \| number[]) => void` | No | — |
+
+Callbacks:
+
+- `onchange`: `(value: number \| number[]) => void`
+
+## BissSpinner
+
+Spinner for the team’s everyday work.
+
+[Vue source](../src/vue/BissSpinner.vue) · [Svelte source](../src/svelte/BissSpinner.svelte)
+
+### Vue
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `label` | `string` | No | `'Loading'` |
+| `size` | `'sm' \| 'md'` | No | `'md'` |
+| `decorative` | `boolean` | No | `false` |
+
+### Svelte
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `label` | `string` | No | `'Loading'` |
+| `size` | `'sm' \| 'md'` | No | `'md'` |
+| `decorative` | `boolean` | No | `false` |
+
 ## BissSplitPane
 
-Split Pane for the team’s everyday work.
+Two resizable panes, such as a list beside its detail.
 
 [Vue source](../src/vue/BissSplitPane.vue) · [Svelte source](../src/svelte/BissSplitPane.svelte)
 
@@ -3278,7 +3572,7 @@ Snippets: `start`, `end`.
 
 ## BissStackedBar
 
-Stacked Bar for the team’s everyday work.
+Parts of a whole in one horizontal bar, with a legend.
 
 [Vue source](../src/vue/BissStackedBar.vue) · [Svelte source](../src/svelte/BissStackedBar.svelte)
 
@@ -3671,6 +3965,46 @@ A compact label and formatted total for a table footer or group summary.
 | `value` | `string \| number` | Yes | — |
 | `note` | `string \| undefined` | No | `undefined` |
 
+## BissTabs
+
+Tabs for the team’s everyday work.
+
+[Vue source](../src/vue/BissTabs.vue) · [Svelte source](../src/svelte/BissTabs.svelte)
+
+### Vue
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `items` | `BissTabsItem[]` | Yes | — |
+| `label` | `string` | Yes | — |
+| `variant` | `BissTabsVariant` | No | `'line'` |
+| `size` | `BissTabsSize` | No | `'md'` |
+| `activationMode` | `'automatic' \| 'manual'` | No | `'automatic'` |
+| `ui` | `BissTabsUi` | No | — |
+| `modelValue` | `string` | No | — |
+
+Slots: `default`.
+
+### Svelte
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `items` | `BissTabsItem[]` | Yes | — |
+| `label` | `string` | Yes | — |
+| `value` | `string` | No | `$bindable()` |
+| `variant` | `BissTabsVariant` | No | `'line'` |
+| `size` | `BissTabsSize` | No | `'md'` |
+| `activationMode` | `'automatic' \| 'manual'` | No | `'automatic'` |
+| `ui` | `BissTabsUi` | No | — |
+| `onchange` | `(value: string) => void` | No | — |
+| `children` | `Snippet<[BissTabsItem]>` | No | — |
+
+Callbacks:
+
+- `onchange`: `(value: string) => void`
+
+Snippets: `children`.
+
 ## BissTagInput
 
 Add and remove short labels using the model contract.
@@ -3705,7 +4039,7 @@ Callbacks:
 
 ## BissTaskList
 
-Task List for the team’s everyday work.
+Tasks with completion, owner, due date and status.
 
 [Vue source](../src/vue/BissTaskList.vue) · [Svelte source](../src/svelte/BissTaskList.svelte)
 
@@ -3817,6 +4151,43 @@ Render the application-wide toast queue after an action.
 | `queue` | `BissToastQueue` | Yes | — |
 | `label` | `string` | No | `'Notifications'` |
 | `dismissLabel` | `string` | No | `'Dismiss'` |
+
+## BissToggleGroup
+
+Toggle Group for the team’s everyday work.
+
+[Vue source](../src/vue/BissToggleGroup.vue) · [Svelte source](../src/svelte/BissToggleGroup.svelte)
+
+### Vue
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `items` | `BissToggleItem[]` | Yes | — |
+| `label` | `string` | Yes | — |
+| `type` | `'single' \| 'multiple'` | No | `'single'` |
+| `iconOnly` | `boolean` | No | `false` |
+| `size` | `'sm' \| 'md'` | No | `'md'` |
+| `disabled` | `boolean` | No | `false` |
+| `orientation` | `'horizontal' \| 'vertical'` | No | `'horizontal'` |
+| `modelValue` | `string \| string[]` | No | — |
+
+### Svelte
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `items` | `BissToggleItem[]` | Yes | — |
+| `label` | `string` | Yes | — |
+| `value` | `string \| string[]` | No | `$bindable()` |
+| `type` | `'single' \| 'multiple'` | No | `'single'` |
+| `iconOnly` | `boolean` | No | `false` |
+| `size` | `'sm' \| 'md'` | No | `'md'` |
+| `disabled` | `boolean` | No | `false` |
+| `orientation` | `'horizontal' \| 'vertical'` | No | `'horizontal'` |
+| `onchange` | `(value: string \| string[]) => void` | No | — |
+
+Callbacks:
+
+- `onchange`: `(value: string \| string[]) => void`
 
 ## BissToolButton
 
@@ -3957,7 +4328,7 @@ Snippets: `children`, `end`.
 
 ## BissTooltip
 
-Tooltip for the team’s everyday work.
+A short label for a control, shown on hover and focus.
 
 [Vue source](../src/vue/BissTooltip.vue) · [Svelte source](../src/svelte/BissTooltip.svelte)
 
@@ -4101,7 +4472,7 @@ Snippets: `end`.
 
 ## BissWidgetGrid
 
-Widget Grid for the team’s everyday work.
+Arrange dashboard widgets in a grid that people can reorder by drag or keyboard.
 
 [Vue source](../src/vue/BissWidgetGrid.vue) · [Svelte source](../src/svelte/BissWidgetGrid.svelte)
 

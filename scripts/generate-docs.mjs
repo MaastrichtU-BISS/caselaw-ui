@@ -288,6 +288,11 @@ Object.assign(descriptions, {
   Tooltip: 'A short label for a control, shown on hover and focus.',
   WidgetGrid: 'Arrange dashboard widgets in a grid that people can reorder by drag or keyboard.',
 });
+// Core primitives.
+groups.Forms.push('Slider', 'NumberField', 'ToggleGroup');
+groups.Navigation.push('Tabs', 'Accordion', 'Pagination');
+groups.Feedback.push('Progress', 'Spinner');
+groups['Data display'].push('Kbd', 'Separator');
 const groupAdvice = {
   Actions:
     'Keep one primary action per task. Use quiet controls for secondary work, and provide a specific accessible name for every icon-only action.',

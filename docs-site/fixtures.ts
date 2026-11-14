@@ -500,7 +500,9 @@ export function fixture(name: string, state = 'default'): Fixture {
     else f.props.items = [];
   }
   if (state === 'loading') f.props.loading = true;
-  if (state === 'range')
+  if (state === 'range' && name === 'BissSlider') f.props.modelValue = [20, 80];
+  else if (state === 'range')
     Object.assign(f.props, { range: true, start: '2026-11-12', end: '2026-11-20' });
+  if (state === 'indeterminate') f.props.value = null;
   return f;
 }
