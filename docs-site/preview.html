@@ -9,6 +9,12 @@
       html[data-biss-theme] {
         background-color: var(--biss-card);
       }
+      /* Authored examples sit straight on the docs' drafting grid, which shows through the frame. */
+      html[data-example*='/'],
+      html[data-example*='/'] body,
+      html[data-example*='/'] .authored-example {
+        background: transparent;
+      }
       body {
         margin: 0;
         background: var(--biss-card);

@@ -66,6 +66,7 @@ async function copy() {
     <h3 v-else :id="`ex-${slug}-${example.id}`" class="biss-visually-hidden">{{ example.title }}</h3>
     <div class="example-card-frame">
       <div class="example-card-toolbar">
+        <span class="example-card-name"><i aria-hidden="true" />{{ fileName }}</span>
         <div class="segmented" role="group" :aria-label="`${example.title}: view`">
           <button type="button" :aria-pressed="!showCode" @click="showCode = false">
             Preview
@@ -122,10 +123,6 @@ async function copy() {
           :aria-label="`${example.title} source`"
         ><code><span v-for="(token, index) in tokens" :key="index" :class="'biss-tok-' + token.kind">{{ token.text }}</span></code></pre>
       </div>
-      <footer class="example-card-file">
-        <span><i aria-hidden="true" />{{ fileName }}</span>
-        <span>The preview runs this file</span>
-      </footer>
     </div>
     <p v-if="lead" class="example-card-caption">{{ example.description }}</p>
   </article>

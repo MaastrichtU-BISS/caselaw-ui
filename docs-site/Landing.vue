@@ -32,7 +32,6 @@ import type {
   BissMenuItem,
 } from '../src/core/types';
 import catalog from './generated/components.json';
-import './landing.css';
 
 const VERSION = 'v0.1.0-next.0';
 const INSTALL = 'npm install biss-ui@next';
@@ -952,8 +951,8 @@ const principles = [
             <h2 id="lp-principles-title">Made for applications that last</h2>
           </header>
           <ul class="lp-principle-grid">
-            <li v-for="p in principles" :key="p.title" class="lp-principle">
-              <span class="lp-principle-icon"><BissIcon :name="p.icon as never" /></span>
+            <li v-for="(p, i) in principles" :key="p.title" class="lp-principle">
+              <span class="lp-principle-num" aria-hidden="true">{{ String(i + 1).padStart(2, '0') }}</span>
               <h3>{{ p.title }}</h3>
               <p>{{ p.body }}</p>
               <code>{{ p.detail }}</code>
@@ -995,7 +994,7 @@ const principles = [
     <footer class="lp-footer">
       <div class="lp-wrap lp-footer-grid">
         <div class="lp-footer-brand">
-          <a class="docs-brand" href="#/"><span class="brand-mark"><BissIcon name="grid" /></span>BISS UI</a>
+          <a class="docs-brand" href="#/"><span class="brand-wordmark" role="img" aria-label="BISS"></span><span class="brand-ui">UI</span></a>
           <p>Vue and Svelte components from Bizzy’s design system, maintained by BISS at Maastricht University.</p>
         </div>
         <nav aria-label="Documentation links">
