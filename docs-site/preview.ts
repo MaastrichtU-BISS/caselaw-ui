@@ -99,3 +99,14 @@ if (name === 'BissEditableText' && state === 'editing')
   document.querySelector<HTMLButtonElement>('.biss-editable button')?.click();
 await nextTick();
 document.documentElement.dataset.ready = 'true';
+// Authored examples report their height so the docs can size the frame without reaching into it.
+const authoredRoot = document.querySelector<HTMLElement>('.authored-example');
+if (authoredRoot && window.parent !== window) {
+  const report = () =>
+    window.parent.postMessage(
+      { type: 'biss-example-height', example: requested, height: authoredRoot.scrollHeight },
+      location.origin,
+    );
+  new ResizeObserver(report).observe(authoredRoot);
+  report();
+}

@@ -28,13 +28,24 @@
         padding: 32px;
         background: var(--biss-card);
       }
+      .authored-example[data-layout='fill'] {
+        display: grid;
+        align-content: start;
+        gap: 16px;
+      }
+      .authored-example[data-layout='fill'] > :is(button, a) {
+        justify-self: start;
+      }
+      .authored-example > p {
+        margin: 0;
+      }
       .authored-example[data-layout='center'] {
         display: flex;
         flex-wrap: wrap;
         align-items: center;
         justify-content: center;
         gap: 12px;
-        min-height: 220px;
+        min-height: 200px;
       }
       @media (max-width: 480px) {
         .authored-example {

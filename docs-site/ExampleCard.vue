@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, ref, watch } from 'vue';
+import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import { BissIcon } from '../src/vue';
 import { highlight } from '../src/core/highlight';
 import { exampleSource, type ExampleMeta } from './examples/registry';
@@ -19,7 +19,7 @@ const showCode = ref(false),
   copied = ref(false),
   reset = ref(0),
   viewport = ref<'desktop' | 'phone'>('desktop'),
-  height = ref(props.example.height ?? 240);
+  height = ref(props.example.height ?? 200);
 
 const code = computed(() => exampleSource(props.slug, props.example.file, props.framework));
 const tokens = computed(() => highlight(code.value, 'ts'));
@@ -36,22 +36,15 @@ watch(
   () => (copied.value = false),
 );
 
-let observer: ResizeObserver | undefined;
-onBeforeUnmount(() => observer?.disconnect());
-function fit(event: Event) {
-  observer?.disconnect();
-  const frame = event.target as HTMLIFrameElement;
-  const doc = frame.contentDocument;
-  if (!doc) return;
-  const min = props.example.height ?? 240;
-  const update = () => {
-    const content = doc.querySelector<HTMLElement>('.authored-example');
-    height.value = Math.max(min, Math.min(960, content?.scrollHeight ?? min));
-  };
-  update();
-  observer = new ResizeObserver(update);
-  observer.observe(doc.body);
+const frame = ref<HTMLIFrameElement>();
+function onMessage(event: MessageEvent) {
+  if (event.origin !== location.origin || event.source !== frame.value?.contentWindow) return;
+  const data = event.data as { type?: string; height?: number };
+  if (data?.type !== 'biss-example-height' || typeof data.height !== 'number') return;
+  height.value = Math.max(props.example.height ?? 140, Math.min(960, Math.ceil(data.height)));
 }
+onMounted(() => window.addEventListener('message', onMessage));
+onBeforeUnmount(() => window.removeEventListener('message', onMessage));
 
 async function copy() {
   try {
@@ -119,8 +112,8 @@ async function copy() {
           :src="url"
           loading="lazy"
           :title="`${example.title}, ${framework === 'vue' ? 'Vue' : 'Svelte'} example`"
+          ref="frame"
           :style="{ height: height + 'px' }"
-          @load="fit"
         />
       </div>
       <div v-if="showCode" class="example-card-code">
