@@ -8,8 +8,9 @@ import { guides } from './content';
 import { example } from './examples';
 import Workbench from './Workbench.vue';
 import DialogDocumentation from './DialogDocumentation.vue';
+import Landing from './Landing.vue';
 import { fixtures } from './fixtures';
-const route = ref(location.hash.slice(1).split('?')[0] || '/getting-started'),
+const route = ref(location.hash.slice(1).split('?')[0] || '/'),
   query = ref(''),
   navOpen = ref(false),
   framework = ref<'vue' | 'svelte'>('vue'),
@@ -60,6 +61,7 @@ const current = computed(() =>
   catalog.components.find((c) => route.value === '/components/' + c.slug),
 );
 const guide = computed(() => guides.find((g) => route.value === '/' + g.slug));
+const isLanding = computed(() => route.value === '/');
 const matches = computed(() =>
   catalog.components.filter((c) =>
     (c.name + ' ' + c.description + ' ' + c.category)
@@ -167,7 +169,7 @@ const related = computed(() =>
 );
 function onHash() {
   const [path, queryString] = location.hash.slice(1).split('?');
-  route.value = path || '/getting-started';
+  route.value = path || '/';
   navOpen.value = false;
   const section = new URLSearchParams(queryString).get('section');
   if (section) nextTick(() => scrollToSection(section));
@@ -262,7 +264,7 @@ onBeforeUnmount(() => {
 <template>
   <a class="skip-link" href="#main-content" @click.prevent="skipToContent">Skip to content</a>
   <header class="docs-topbar">
-    <a class="docs-brand" href="#/getting-started"
+    <a class="docs-brand" href="#/"
       ><span class="brand-mark"><BissIcon name="grid" /></span>BISS UI</a
     >
     <nav class="docs-primary-nav" aria-label="Primary">
@@ -294,7 +296,12 @@ onBeforeUnmount(() => {
       </button>
     </div>
   </header>
-  <aside id="docs-navigation" class="docs-sidebar" :class="{ 'is-open': navOpen }">
+  <aside
+    v-if="!isLanding || navOpen"
+    id="docs-navigation"
+    class="docs-sidebar"
+    :class="{ 'is-open': navOpen }"
+  >
     <label class="docs-search"
       ><BissIcon name="search" /><input
         ref="searchInput"
@@ -357,7 +364,8 @@ onBeforeUnmount(() => {
     </div>
   </aside>
   <div v-if="navOpen" class="nav-scrim" @click="closeNavigation" aria-hidden="true" />
-  <div class="docs-layout" :class="{ 'without-toc': !sections.length }">
+  <Landing v-if="isLanding" />
+  <div v-else class="docs-layout" :class="{ 'without-toc': !sections.length }">
     <main id="main-content" tabindex="-1">
       <template v-if="current">
         <div class="breadcrumbs">
