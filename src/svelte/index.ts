@@ -25,7 +25,14 @@ export { default as BissHero } from './BissHero.svelte';
 export { default as BissHeroPill } from './BissHeroPill.svelte';
 export { default as BissActionCard } from './BissActionCard.svelte';
 export { default as BissFeatureCard } from './BissFeatureCard.svelte';
-export type { BissCodeSample, BissConsoleUser, BissCrumb, BissTableColumn } from '../core/types';
+export type {
+  BissChartPoint,
+  BissCodeSample,
+  BissConsoleUser,
+  BissCrumb,
+  BissTableColumn,
+  BissTone,
+} from '../core/types';
 export { default as BissAvatar } from './BissAvatar.svelte';
 export { default as BissGoalBar } from './BissGoalBar.svelte';
 export { default as BissPageBar } from './BissPageBar.svelte';
