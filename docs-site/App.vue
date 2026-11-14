@@ -298,7 +298,7 @@ onBeforeUnmount(() => {
   <a class="skip-link" href="#main-content" @click.prevent="skipToContent">Skip to content</a>
   <header class="docs-topbar">
     <a class="docs-brand" href="#/"
-      ><span class="brand-mark"><BissIcon name="grid" /></span>BISS UI</a
+      ><span class="brand-wordmark" role="img" aria-label="BISS"></span><span class="brand-ui">UI</span></a
     >
     <nav class="docs-primary-nav" aria-label="Primary">
       <a href="#/getting-started" :aria-current="guide ? 'page' : undefined">Documentation</a

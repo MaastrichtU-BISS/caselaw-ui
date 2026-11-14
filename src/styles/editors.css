@@ -942,3 +942,77 @@
 }
 
 .biss-data-grid .biss-table th[style*='sticky']{background:var(--biss-surface-subtle)}
+
+/* The grid sizes its columns to the wrapper's width, so the wrapper must not size itself to the
+   table: without containment the table holds the wrapper open and the grid never shrinks. */
+.biss-data-grid {
+  min-width: 0;
+}
+.biss-data-grid > .biss-table-wrap {
+  contain: inline-size;
+}
+
+/* Row and header checkboxes in the grid share the library's checkbox look in both themes. */
+.biss-data-grid input[type='checkbox'],
+.biss-checkbox input[type='checkbox'] {
+  appearance: none;
+  display: inline-grid;
+  place-content: center;
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  border: 1px solid var(--biss-border-strong);
+  border-radius: 4px;
+  background: var(--biss-card);
+  cursor: pointer;
+  vertical-align: middle;
+  transition:
+    background-color 0.12s ease,
+    border-color 0.12s ease;
+}
+.biss-checkbox input[type='checkbox'] {
+  margin-top: 2px;
+}
+.biss-data-grid input[type='checkbox']::after,
+.biss-checkbox input[type='checkbox']::after {
+  content: '';
+  width: 9px;
+  height: 5px;
+  border: solid var(--biss-on-primary);
+  border-width: 0 0 2px 2px;
+  transform: translateY(-1px) rotate(-45deg) scale(0);
+  transition: transform 0.12s ease;
+}
+.biss-data-grid input[type='checkbox']:checked,
+.biss-data-grid input[type='checkbox']:indeterminate,
+.biss-checkbox input[type='checkbox']:checked,
+.biss-checkbox input[type='checkbox']:indeterminate {
+  background: var(--biss-primary);
+  border-color: var(--biss-primary);
+}
+.biss-data-grid input[type='checkbox']:checked::after,
+.biss-checkbox input[type='checkbox']:checked::after {
+  transform: translateY(-1px) rotate(-45deg) scale(1);
+}
+.biss-data-grid input[type='checkbox']:indeterminate::after,
+.biss-checkbox input[type='checkbox']:indeterminate::after {
+  height: 0;
+  border-width: 0 0 2px;
+  transform: none;
+}
+.biss-data-grid input[type='checkbox']:focus-visible,
+.biss-checkbox input[type='checkbox']:focus-visible {
+  outline: 2px solid var(--biss-primary);
+  outline-offset: 2px;
+}
+.biss-checkbox input[type='checkbox']:disabled {
+  cursor: default;
+}
+@media (prefers-reduced-motion: reduce) {
+  .biss-data-grid input[type='checkbox'],
+  .biss-data-grid input[type='checkbox']::after,
+  .biss-checkbox input[type='checkbox'],
+  .biss-checkbox input[type='checkbox']::after {
+    transition: none;
+  }
+}

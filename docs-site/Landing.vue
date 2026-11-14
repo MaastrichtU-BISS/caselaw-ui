@@ -32,7 +32,6 @@ import type {
   BissMenuItem,
 } from '../src/core/types';
 import catalog from './generated/components.json';
-import './landing.css';
 
 const VERSION = 'v0.1.0-next.0';
 const INSTALL = 'npm install biss-ui@next';
@@ -995,7 +994,7 @@ const principles = [
     <footer class="lp-footer">
       <div class="lp-wrap lp-footer-grid">
         <div class="lp-footer-brand">
-          <a class="docs-brand" href="#/"><span class="brand-mark"><BissIcon name="grid" /></span>BISS UI</a>
+          <a class="docs-brand" href="#/"><span class="brand-wordmark" role="img" aria-label="BISS"></span><span class="brand-ui">UI</span></a>
           <p>Vue and Svelte components from Bizzy’s design system, maintained by BISS at Maastricht University.</p>
         </div>
         <nav aria-label="Documentation links">

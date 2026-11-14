@@ -1,7 +1,6 @@
 import { createApp, nextTick } from 'vue';
-import ComponentPreview from './ComponentPreview.vue';
-import { dialogExamples } from './examples/dialog/manifest';
 import '../src/styles/index.css';
+import type { ExampleMeta } from './examples/registry';
 const params = new URLSearchParams(location.search),
   name = params.get('component') ?? 'BissButton',
   state = params.get('state') ?? 'default';
@@ -9,11 +8,16 @@ document.documentElement.dataset.example = params.get('example') ?? '';
 document.documentElement.dataset.bissDensity = params.get('density') ?? 'standard';
 document.documentElement.dataset.bissTheme = params.get('theme') ?? 'light';
 const requested = params.get('example') ?? '';
-const example = dialogExamples.find((item) => item.id === requested);
+// Each frame loads only what it renders: an authored example pulls in its own file and the
+// components it imports, never the whole library (the workbench fallback below does that).
+const example = requested && !requested.includes('/')
+  ? (await import('./examples/dialog/manifest')).dialogExamples.find((item) => item.id === requested)
+  : undefined;
 if (requested.includes('/')) {
   const [slug, id] = requested.split('/');
-  const { examplesBySlug } = await import('./examples/registry');
-  const meta = examplesBySlug[slug!]?.find((item) => item.id === id);
+  const manifests = import.meta.glob<{ examples: readonly ExampleMeta[] }>('./examples/*/manifest.ts');
+  const manifest = await manifests[`./examples/${slug}/manifest.ts`]?.();
+  const meta = manifest?.examples.find((item) => item.id === id);
   const isSvelte = params.get('framework') === 'svelte';
   const modules = isSvelte
     ? import.meta.glob(['./examples/*/*.svelte', '!./examples/dialog/*'])
@@ -67,6 +71,7 @@ if (requested.includes('/')) {
   mount(SveltePreview, { target: document.querySelector('#app')!, props: { name, state } });
   await tick();
 } else {
+  const { default: ComponentPreview } = await import('./ComponentPreview.vue');
   createApp(ComponentPreview, { name, state }).mount('#app');
   await nextTick();
 }
