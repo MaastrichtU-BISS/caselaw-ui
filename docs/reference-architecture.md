@@ -75,6 +75,14 @@ as interchangeable low-level controls or buried in the same navigation group.
 A block shows how components work together. Its application state belongs to the
 example or host, not to the primitive or theme layers.
 
+The blocks ported from Bizzy's application layer follow this contract: Sidebar,
+WorkspaceSwitcher, NotificationCenter, CommandMenu, ImportMapper, Feed and FeedItem,
+KeyResult, FunnelChart, RingGauge, Tour, TemplateGallery, FeedbackDialog and
+Lightbox. They take display-ready data and labels as props, report intent through
+Vue emits/models and Svelte callbacks/bindings, and use Reka UI or Bits UI for
+popover, dialog and focus behavior. Pure matching, filtering and geometry live in
+`src/core/` with unit tests; their styles live in `src/styles/blocks.css`.
+
 ## Target repository boundaries
 
 ```text

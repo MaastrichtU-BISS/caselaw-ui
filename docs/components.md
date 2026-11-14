@@ -1,6 +1,6 @@
 # Component guide
 
-The current library contains 130 components in each framework, all using the Bizzy design language. The live documentation site is the authoritative source-derived API reference. See [architecture](architecture.md) for package boundaries, public entry points and state ownership.
+The current library contains 144 components in each framework, all using the Bizzy design language. The live documentation site is the authoritative source-derived API reference. See [architecture](architecture.md) for package boundaries, public entry points and state ownership.
 
 
 See the [visual reference](visual-reference.md) for screenshots of every component,

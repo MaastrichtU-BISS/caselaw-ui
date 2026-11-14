@@ -53,6 +53,8 @@ const groups = {
     'Tooltip',
     'FigureHelp',
     'SearchPalette',
+    'CommandMenu',
+    'FeedbackDialog',
   ],
   Navigation: ['ViewTabs', 'Tab', 'Breadcrumbs', 'NavItem', 'NavSection', 'Disclosure', 'TablePager'],
   'Data display': [
@@ -84,6 +86,8 @@ const groups = {
     'LineChart',
     'MiniChart',
     'ChartLegend',
+    'FunnelChart',
+    'RingGauge',
   ],
   Feedback: [
     'AlertLine',
@@ -105,6 +109,8 @@ const groups = {
     'BottomBar',
     'SidebarUser',
     'SplitPane',
+    'Sidebar',
+    'WorkspaceSwitcher',
   ],
   'Page headers': ['PageBar', 'PageHeader', 'ConsoleHeader', 'SectionHeader', 'SettingsHead'],
   'Data views': [
@@ -117,6 +123,7 @@ const groups = {
     'Timeline',
     'TaskList',
     'Agenda',
+    'ImportMapper',
   ],
   'Sharing and collaboration': [
     'SharePanel',
@@ -128,6 +135,9 @@ const groups = {
     'ActivityList',
     'NoticeRow',
     'RecordPreview',
+    'NotificationCenter',
+    'Feed',
+    'FeedItem',
   ],
   Dashboards: [
     'WidgetGrid',
@@ -139,6 +149,7 @@ const groups = {
     'SummaryStrip',
     'QuickLinks',
     'DeadlineList',
+    'KeyResult',
   ],
   Documents: [
     'DocumentToc',
@@ -147,8 +158,9 @@ const groups = {
     'MediaFigure',
     'AttachmentList',
     'ProposalCard',
+    'Lightbox',
   ],
-  Onboarding: ['OnboardingFrame', 'OnboardingChips', 'Checklist', 'Steps', 'Step'],
+  Onboarding: ['OnboardingFrame', 'OnboardingChips', 'Checklist', 'Steps', 'Step', 'Tour', 'TemplateGallery'],
   Marketing: ['Hero', 'HeroPill', 'FeatureCard', 'ActionCard'],
 };
 const descriptions = {
@@ -287,6 +299,20 @@ Object.assign(descriptions, {
   TaskList: 'Tasks with completion, owner, due date and status.',
   Tooltip: 'A short label for a control, shown on hover and focus.',
   WidgetGrid: 'Arrange dashboard widgets in a grid that people can reorder by drag or keyboard.',
+  NotificationCenter: 'A bell with the unread count that opens the latest notifications, with mark-all-read.',
+  Sidebar: 'A collapsible application sidebar with workspace, sections, pinned items and an account footer.',
+  WorkspaceSwitcher: 'Show the current workspace and switch to, search for or create another.',
+  CommandMenu: 'A filterable, keyboard-driven command list for slash commands and mention pickers.',
+  ImportMapper: 'Match imported columns to fields, with sample values, automatic matching and required checks.',
+  Feed: 'A stream of updates with a composer, for project news and team announcements.',
+  FeedItem: 'One update: author, time, body, attachments, link previews, reactions and replies.',
+  KeyResult: 'A key result with start, current and target values, progress, confidence and a check-in.',
+  FunnelChart: 'Stages of a pipeline as narrowing bars, with counts and conversion between stages.',
+  RingGauge: 'One rate or share as a ring, with the figure and its context in the middle.',
+  Tour: 'A step-by-step spotlight tour anchored to elements, with progress and keyboard controls.',
+  TemplateGallery: 'Choose a starting template by category or search, with a preview before using it.',
+  FeedbackDialog: 'Collect a rating, a category and a message in a focused dialog.',
+  Lightbox: 'View images full screen with captions and keyboard navigation.',
 });
 const groupAdvice = {
   Actions:

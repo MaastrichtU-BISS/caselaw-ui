@@ -40,7 +40,7 @@ try {
   assert.equal(core.bissCssTokens['--biss-primary'], '#005CA9');
   const vue = await import(pathToFileURL(join(packaged, 'dist/vue/index.js')).href);
   const names = Object.keys(vue).filter((n) => n.startsWith('Biss') && fixtures[n.slice(4)]);
-  assert.equal(names.length, 130);
+  assert.equal(names.length, 144);
   for (const name of names) {
     const props = structuredClone(fixtures[name.slice(4)]!.props);
     const html = await renderToString(createSSRApp({ render: () => h(vue[name], props) }));
@@ -139,7 +139,7 @@ createBissToasts().push('Saved');
   }
   assert.deepEqual(outputs, ['<p>Request A</p>', '<p>Request B</p>']);
   console.log(
-    'Tarball consumer passed: 130 Vue and 130 Svelte SSR renders, installed TypeScript contracts, Vue without SFC plugin, localized composites and isolated request state.',
+    'Tarball consumer passed: 144 Vue and 144 Svelte SSR renders, installed TypeScript contracts, Vue without SFC plugin, localized composites and isolated request state.',
   );
 } finally {
   await server?.close();

@@ -1,0 +1,171 @@
+/* Sidebar: brand, navigation, pinned items and account; an icon rail and a phone drawer. */
+.biss-sidebar,
+.biss-sidebar-drawer {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  box-sizing: border-box;
+  padding: 12px 10px 10px;
+  background: var(--biss-surface-muted);
+  color: var(--biss-text);
+  font: 14px/1.5 var(--biss-font-family);
+}
+.biss-sidebar {
+  flex: none;
+  width: var(--biss-sidebar-width);
+  height: 100%;
+  min-height: 0;
+  border-right: 1px solid var(--biss-border);
+  overflow: hidden;
+  transition: width 0.18s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.biss-sidebar :where(*),
+.biss-sidebar-drawer :where(*) {
+  box-sizing: border-box;
+}
+.biss-sidebar-top {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 40px;
+  padding-bottom: 4px;
+}
+.biss-sidebar-brand {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+}
+.biss-sidebar-rail-toggle,
+.biss-sidebar-close {
+  flex: none;
+}
+.biss-sidebar-rail-toggle:focus-visible,
+.biss-sidebar-close:focus-visible {
+  outline: 2px solid var(--biss-primary);
+  outline-offset: 1px;
+}
+.biss-sidebar-nav {
+  flex: 1;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  margin: 0 -4px;
+  padding: 6px 4px 8px;
+  scrollbar-width: thin;
+}
+.biss-sidebar-nav .biss-nav-section {
+  margin-bottom: 14px;
+}
+.biss-sidebar-nav .biss-nav-item {
+  white-space: nowrap;
+}
+.biss-sidebar-nav .biss-nav-item-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.biss-sidebar-nav .biss-nav-item:focus-visible {
+  outline: 2px solid var(--biss-primary);
+  outline-offset: -2px;
+}
+.biss-sidebar-foot {
+  flex: none;
+  padding-top: 10px;
+  border-top: 1px solid var(--biss-border);
+}
+
+/* The icon rail: labels stay in the accessibility tree, only the icons show. */
+.biss-sidebar[data-collapsed] {
+  width: var(--biss-sidebar-rail-width, 56px);
+  padding-inline: 8px;
+}
+.biss-sidebar[data-collapsed] .biss-sidebar-top {
+  flex-direction: column;
+  gap: 8px;
+}
+.biss-sidebar[data-collapsed] .biss-sidebar-brand {
+  flex: none;
+  justify-content: center;
+}
+.biss-sidebar[data-collapsed] .biss-nav-item {
+  justify-content: center;
+  padding-inline: 0;
+}
+.biss-sidebar[data-collapsed] :is(.biss-nav-item-label, .biss-nav-item-meta),
+.biss-sidebar[data-collapsed] .biss-nav-heading > span {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.biss-sidebar[data-collapsed] .biss-nav-heading {
+  position: relative;
+  height: 9px;
+  margin: 0 0 6px;
+  padding: 0;
+}
+.biss-sidebar[data-collapsed] .biss-nav-heading::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 4px;
+  width: 18px;
+  margin-left: -9px;
+  border-top: 1px solid var(--biss-border-strong);
+}
+.biss-sidebar[data-collapsed] .biss-nav-heading > :not(span) {
+  display: none;
+}
+.biss-sidebar[data-collapsed] .biss-sidebar-foot {
+  display: flex;
+  justify-content: center;
+}
+
+/* The phone drawer, built on the Dialog parts. */
+.biss-dialog-content.biss-sidebar-drawer {
+  left: 0;
+  top: 0;
+  translate: none;
+  width: min(300px, calc(100vw - 48px));
+  height: 100dvh;
+  max-height: none;
+  overflow: hidden;
+  border-width: 0 1px 0 0;
+  border-radius: 0 var(--biss-radius-lg) var(--biss-radius-lg) 0;
+  animation: biss-sidebar-in 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.biss-sidebar-drawer .biss-sidebar-brand:empty {
+  display: none;
+}
+.biss-sidebar-drawer .biss-sidebar-close {
+  margin-inline-start: auto;
+}
+@keyframes biss-sidebar-in {
+  from {
+    transform: translateX(-24px);
+    opacity: 0;
+  }
+}
+@media (max-width: 760px) {
+  .biss-sidebar {
+    display: none;
+  }
+}
+@media (min-width: 761px) {
+  .biss-sidebar-drawer,
+  .biss-sidebar-overlay {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .biss-sidebar {
+    transition: none;
+  }
+  .biss-dialog-content.biss-sidebar-drawer {
+    animation: none;
+  }
+}

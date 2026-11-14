@@ -1,10 +1,10 @@
 # Component API reference
 
-All 130 components are available in Vue and Svelte with one Bizzy design language. This file is generated from the same source-derived contracts as the documentation site. Import components and their `BissNameProps` types from the matching framework entry point. Native attributes supported by the framework also apply; tables list authored component props.
+All 144 components are available in Vue and Svelte with one Bizzy design language. This file is generated from the same source-derived contracts as the documentation site. Import components and their `BissNameProps` types from the matching framework entry point. Native attributes supported by the framework also apply; tables list authored component props.
 
 ## BissAccessList
 
-Access List for the team’s everyday work.
+Who can open a record, with their role and how they got access.
 
 [Vue source](../src/vue/BissAccessList.vue) · [Svelte source](../src/svelte/BissAccessList.svelte)
 
@@ -74,7 +74,7 @@ Snippets: `icon`, `children`.
 
 ## BissActivityList
 
-Activity List for the team’s everyday work.
+A chronological list of who changed what, with optional detail.
 
 [Vue source](../src/vue/BissActivityList.vue) · [Svelte source](../src/svelte/BissActivityList.svelte)
 
@@ -94,7 +94,7 @@ Activity List for the team’s everyday work.
 
 ## BissAgenda
 
-Agenda for the team’s everyday work.
+A meeting agenda: timed items to add, reorder and tick off.
 
 [Vue source](../src/vue/BissAgenda.vue) · [Svelte source](../src/svelte/BissAgenda.svelte)
 
@@ -209,7 +209,7 @@ Snippets: `children`, `sidebar`, `sidebarFooter`, `topbarActions`, `footerConten
 
 ## BissAttachmentList
 
-Attachment List for the team’s everyday work.
+Files attached to a record, with links and a remove action.
 
 [Vue source](../src/vue/BissAttachmentList.vue) · [Svelte source](../src/svelte/BissAttachmentList.svelte)
 
@@ -311,7 +311,7 @@ A compact request-style bar chart with an optional highlighted sub-series.
 
 ## BissBookmark
 
-Bookmark for the team’s everyday work.
+A rich link preview with title, description and source.
 
 [Vue source](../src/vue/BissBookmark.vue) · [Svelte source](../src/svelte/BissBookmark.svelte)
 
@@ -360,7 +360,7 @@ Snippets: `children`.
 
 ## BissBreadcrumbs
 
-Breadcrumbs for the team’s everyday work.
+Show where a page sits in the hierarchy and link back up.
 
 [Vue source](../src/vue/BissBreadcrumbs.vue) · [Svelte source](../src/svelte/BissBreadcrumbs.svelte)
 
@@ -456,7 +456,7 @@ Callbacks:
 
 ## BissCallout
 
-Callout for the team’s everyday work.
+A highlighted note that explains context or a consequence.
 
 [Vue source](../src/vue/BissCallout.vue) · [Svelte source](../src/svelte/BissCallout.svelte)
 
@@ -549,7 +549,7 @@ Name the colors and line treatments used by a chart.
 
 ## BissCheckbox
 
-Checkbox for the team’s everyday work.
+A labelled checkbox with optional description text.
 
 [Vue source](../src/vue/BissCheckbox.vue) · [Svelte source](../src/svelte/BissCheckbox.svelte)
 
@@ -655,7 +655,7 @@ Keep related language samples together and copy the active one.
 
 ## BissColumnManager
 
-Column Manager for the team’s everyday work.
+Show, hide, pin, reorder and resize the columns of a table.
 
 [Vue source](../src/vue/BissColumnManager.vue) · [Svelte source](../src/svelte/BissColumnManager.svelte)
 
@@ -692,9 +692,19 @@ Callbacks:
 
 - `onchange`: `(columns: BissColumn[]) => void`
 
+## BissCommandMenu
+
+A filterable, keyboard-driven command list for slash commands and mention pickers.
+
+[Vue source](../src/vue/BissCommandMenu.vue) · [Svelte source](../src/svelte/BissCommandMenu.svelte)
+
+### Vue
+
+### Svelte
+
 ## BissCommentComposer
 
-Comment Composer for the team’s everyday work.
+Write a comment, mention people and submit with the keyboard.
 
 [Vue source](../src/vue/BissCommentComposer.vue) · [Svelte source](../src/svelte/BissCommentComposer.svelte)
 
@@ -727,7 +737,7 @@ Callbacks:
 
 ## BissCommentThread
 
-Comment Thread for the team’s everyday work.
+A discussion on a record, with a composer and resolve state.
 
 [Vue source](../src/vue/BissCommentThread.vue) · [Svelte source](../src/svelte/BissCommentThread.svelte)
 
@@ -947,7 +957,7 @@ A value that can be read, selected and copied without changing it.
 
 ## BissDataGrid
 
-Data Grid for the team’s everyday work.
+A spreadsheet-like table with selection, pinning, sorting and resizable columns.
 
 [Vue source](../src/vue/BissDataGrid.vue) · [Svelte source](../src/svelte/BissDataGrid.svelte)
 
@@ -1036,7 +1046,7 @@ Slots: `empty`, `default`.
 
 ## BissDataTile
 
-Data Tile for the team’s everyday work.
+A dashboard tile that frames a figure, a chart or a list.
 
 [Vue source](../src/vue/BissDataTile.vue) · [Svelte source](../src/svelte/BissDataTile.svelte)
 
@@ -1168,7 +1178,7 @@ Callbacks:
 
 ## BissDeadlineList
 
-Deadline List for the team’s everyday work.
+Dated items ordered by urgency, with overdue items called out.
 
 [Vue source](../src/vue/BissDeadlineList.vue) · [Svelte source](../src/svelte/BissDeadlineList.svelte)
 
@@ -1251,7 +1261,7 @@ Snippets: `children`, `actions`.
 
 ## BissDisclosure
 
-Disclosure for the team’s everyday work.
+Hide secondary detail behind a labelled toggle.
 
 [Vue source](../src/vue/BissDisclosure.vue) · [Svelte source](../src/svelte/BissDisclosure.svelte)
 
@@ -1285,7 +1295,7 @@ Snippets: `children`.
 
 ## BissDocumentCallout
 
-Document Callout for the team’s everyday work.
+A tinted note block inside a document.
 
 [Vue source](../src/vue/BissDocumentCallout.vue) · [Svelte source](../src/svelte/BissDocumentCallout.svelte)
 
@@ -1312,7 +1322,7 @@ Snippets: `children`.
 
 ## BissDocumentToc
 
-Document Toc for the team’s everyday work.
+A document outline that tracks the heading in view.
 
 [Vue source](../src/vue/BissDocumentToc.vue) · [Svelte source](../src/svelte/BissDocumentToc.svelte)
 
@@ -1417,6 +1427,36 @@ Slots: `default`.
 
 Snippets: `children`.
 
+## BissFeed
+
+A stream of updates with a composer, for project news and team announcements.
+
+[Vue source](../src/vue/BissFeed.vue) · [Svelte source](../src/svelte/BissFeed.svelte)
+
+### Vue
+
+### Svelte
+
+## BissFeedItem
+
+One update: author, time, body, attachments, link previews, reactions and replies.
+
+[Vue source](../src/vue/BissFeedItem.vue) · [Svelte source](../src/svelte/BissFeedItem.svelte)
+
+### Vue
+
+### Svelte
+
+## BissFeedbackDialog
+
+Collect a rating, a category and a message in a focused dialog.
+
+[Vue source](../src/vue/BissFeedbackDialog.vue) · [Svelte source](../src/svelte/BissFeedbackDialog.svelte)
+
+### Vue
+
+### Svelte
+
 ## BissField
 
 A label, hint or error around a control, with a scoped identifier.
@@ -1456,7 +1496,7 @@ Snippets: `children`.
 
 ## BissFigureHelp
 
-Figure Help for the team’s everyday work.
+Explain how a figure is calculated, next to the figure.
 
 [Vue source](../src/vue/BissFigureHelp.vue) · [Svelte source](../src/svelte/BissFigureHelp.svelte)
 
@@ -1480,7 +1520,7 @@ Figure Help for the team’s everyday work.
 
 ## BissFilePicker
 
-File Picker for the team’s everyday work.
+Choose files or drop them onto the field.
 
 [Vue source](../src/vue/BissFilePicker.vue) · [Svelte source](../src/svelte/BissFilePicker.svelte)
 
@@ -1515,7 +1555,7 @@ Callbacks:
 
 ## BissFilterBuilder
 
-Filter Builder for the team’s everyday work.
+Compose filter rules with fields, operators and values.
 
 [Vue source](../src/vue/BissFilterBuilder.vue) · [Svelte source](../src/svelte/BissFilterBuilder.svelte)
 
@@ -1557,6 +1597,16 @@ Callbacks:
 - `onchange`: `(rules: BissFilterRule[]) => void`
 - `onmatch`: `(value: 'all' \| 'any') => void`
 
+## BissFunnelChart
+
+Stages of a pipeline as narrowing bars, with counts and conversion between stages.
+
+[Vue source](../src/vue/BissFunnelChart.vue) · [Svelte source](../src/svelte/BissFunnelChart.svelte)
+
+### Vue
+
+### Svelte
+
 ## BissGoalBar
 
 A progress track with an optional expected-progress marker.
@@ -1585,7 +1635,7 @@ A progress track with an optional expected-progress marker.
 
 ## BissGoalCard
 
-Goal Card for the team’s everyday work.
+A goal with its progress, expected pace and owner.
 
 [Vue source](../src/vue/BissGoalCard.vue) · [Svelte source](../src/svelte/BissGoalCard.svelte)
 
@@ -1862,6 +1912,16 @@ Bizzy’s authored SVG vocabulary, sized and stroked consistently.
 |---|---|---|---|
 | `name` | `BissIconName` | Yes | — |
 
+## BissImportMapper
+
+Match imported columns to fields, with sample values, automatic matching and required checks.
+
+[Vue source](../src/vue/BissImportMapper.vue) · [Svelte source](../src/svelte/BissImportMapper.svelte)
+
+### Vue
+
+### Svelte
+
 ## BissInput
 
 A single-line value with normal form attributes and validation styling.
@@ -1940,6 +2000,16 @@ Callbacks:
 - `onmove`: `(value: { id: string; lane: string }) => void`
 - `onadd`: `(lane: string) => void`
 
+## BissKeyResult
+
+A key result with start, current and target values, progress, confidence and a check-in.
+
+[Vue source](../src/vue/BissKeyResult.vue) · [Svelte source](../src/svelte/BissKeyResult.svelte)
+
+### Vue
+
+### Svelte
+
 ## BissKpiCard
 
 One headline figure with the label and note needed to interpret it.
@@ -1964,7 +2034,7 @@ One headline figure with the label and note needed to interpret it.
 
 ## BissLabelEditor
 
-Label Editor for the team’s everyday work.
+Create, rename, recolor and remove the labels of a field.
 
 [Vue source](../src/vue/BissLabelEditor.vue) · [Svelte source](../src/svelte/BissLabelEditor.svelte)
 
@@ -2008,6 +2078,16 @@ Events:
 Callbacks:
 
 - `onchange`: `(items: BissLabel[]) => void`
+
+## BissLightbox
+
+View images full screen with captions and keyboard navigation.
+
+[Vue source](../src/vue/BissLightbox.vue) · [Svelte source](../src/svelte/BissLightbox.svelte)
+
+### Vue
+
+### Svelte
 
 ## BissLineChart
 
@@ -2057,7 +2137,7 @@ Quiet connection feedback only when the application is reconnecting or offline.
 
 ## BissMediaFigure
 
-Media Figure for the team’s everyday work.
+An image or video with caption and credit.
 
 [Vue source](../src/vue/BissMediaFigure.vue) · [Svelte source](../src/svelte/BissMediaFigure.svelte)
 
@@ -2315,6 +2395,83 @@ Callbacks:
 
 Snippets: `icon`.
 
+## BissNotificationCenter
+
+A bell with the unread count that opens the latest notifications, with mark-all-read.
+
+[Vue source](../src/vue/BissNotificationCenter.vue) · [Svelte source](../src/svelte/BissNotificationCenter.svelte)
+
+### Vue
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `items` | `BissNotice[]` | Yes | — |
+| `unread` | `number` | No | — |
+| `max` | `number` | No | `8` |
+| `loading` | `boolean` | No | `false` |
+| `error` | `string` | No | — |
+| `label` | `string` | No | `'Notifications'` |
+| `unreadLabel` | `string` | No | `'Notifications, {count} unread'` |
+| `markAllLabel` | `string` | No | `'Mark all as read'` |
+| `emptyTitle` | `string` | No | `'You’re all caught up'` |
+| `emptyCopy` | `string` | No | `'Mentions, assignments and deadlines appear here.'` |
+| `loadingLabel` | `string` | No | `'Loading notifications…'` |
+| `retryLabel` | `string` | No | `'Try again'` |
+| `seeAllLabel` | `string` | No | `'See all notifications'` |
+| `seeAllHref` | `string` | No | — |
+| `width` | `number` | No | `380` |
+| `align` | `'start' \| 'center' \| 'end'` | No | `'end'` |
+| `portal` | `boolean` | No | `false` |
+| `open` | `boolean` | No | `false` |
+
+Events:
+
+- `pick`: `[item: BissNotice]`
+- `read-all`: `[]`
+- `more`: `[]`
+- `retry`: `[]`
+
+Slots: `footer`.
+
+### Svelte
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `items` | `BissNotice[]` | Yes | — |
+| `unread` | `number` | No | — |
+| `max` | `number` | No | `8` |
+| `loading` | `boolean` | No | `false` |
+| `error` | `string` | No | — |
+| `open` | `boolean` | No | `$bindable(false)` |
+| `label` | `string` | No | `'Notifications'` |
+| `unreadLabel` | `string` | No | `'Notifications, {count} unread'` |
+| `markAllLabel` | `string` | No | `'Mark all as read'` |
+| `emptyTitle` | `string` | No | `'You’re all caught up'` |
+| `emptyCopy` | `string` | No | `'Mentions, assignments and deadlines appear here.'` |
+| `loadingLabel` | `string` | No | `'Loading notifications…'` |
+| `retryLabel` | `string` | No | `'Try again'` |
+| `seeAllLabel` | `string` | No | `'See all notifications'` |
+| `seeAllHref` | `string` | No | — |
+| `width` | `number` | No | `380` |
+| `align` | `'start' \| 'center' \| 'end'` | No | `'end'` |
+| `portal` | `boolean` | No | `false` |
+| `onpick` | `(item: BissNotice) => void` | No | — |
+| `onreadall` | `() => void` | No | — |
+| `onmore` | `() => void` | No | — |
+| `onretry` | `() => void` | No | — |
+| `onOpenChange` | `(open: boolean) => void` | No | — |
+| `footer` | `Snippet` | No | — |
+
+Callbacks:
+
+- `onpick`: `(item: BissNotice) => void`
+- `onreadall`: `() => void`
+- `onmore`: `() => void`
+- `onretry`: `() => void`
+- `onOpenChange`: `(open: boolean) => void`
+
+Snippets: `footer`.
+
 ## BissOnboardingChips
 
 Choose several interests or areas during workspace setup.
@@ -2511,7 +2668,7 @@ Snippets: `children`.
 
 ## BissPresenceCursor
 
-Presence Cursor for the team’s everyday work.
+Another person’s cursor, labelled with their name and color.
 
 [Vue source](../src/vue/BissPresenceCursor.vue) · [Svelte source](../src/svelte/BissPresenceCursor.svelte)
 
@@ -2590,7 +2747,7 @@ Slots: `default`.
 
 ## BissProposalCard
 
-Proposal Card for the team’s everyday work.
+A suggested change that someone can review before applying.
 
 [Vue source](../src/vue/BissProposalCard.vue) · [Svelte source](../src/svelte/BissProposalCard.svelte)
 
@@ -2632,7 +2789,7 @@ Callbacks:
 
 ## BissQuickLinks
 
-Quick Links for the team’s everyday work.
+A compact grid of frequent destinations.
 
 [Vue source](../src/vue/BissQuickLinks.vue) · [Svelte source](../src/svelte/BissQuickLinks.svelte)
 
@@ -2652,7 +2809,7 @@ Quick Links for the team’s everyday work.
 
 ## BissRadioGroup
 
-Radio Group for the team’s everyday work.
+Choose one option from a short, visible list.
 
 [Vue source](../src/vue/BissRadioGroup.vue) · [Svelte source](../src/svelte/BissRadioGroup.svelte)
 
@@ -2709,7 +2866,7 @@ A small labelled reference to a record, optionally linked.
 
 ## BissRecordPreview
 
-Record Preview for the team’s everyday work.
+A compact preview of a linked record, or a notice when it is restricted.
 
 [Vue source](../src/vue/BissRecordPreview.vue) · [Svelte source](../src/svelte/BissRecordPreview.svelte)
 
@@ -2737,9 +2894,19 @@ Record Preview for the team’s everyday work.
 | `restrictedLabel` | `string` | No | `'A record you cannot access'` |
 | `icon` | `BissIconName` | No | `'file'` |
 
+## BissRingGauge
+
+One rate or share as a ring, with the figure and its context in the middle.
+
+[Vue source](../src/vue/BissRingGauge.vue) · [Svelte source](../src/svelte/BissRingGauge.svelte)
+
+### Vue
+
+### Svelte
+
 ## BissRoleEditor
 
-Role Editor for the team’s everyday work.
+Define roles and the permissions each one grants.
 
 [Vue source](../src/vue/BissRoleEditor.vue) · [Svelte source](../src/svelte/BissRoleEditor.svelte)
 
@@ -2908,7 +3075,7 @@ Snippets: `actions`.
 
 ## BissSegmentedControl
 
-Segmented Control for the team’s everyday work.
+Switch between a few mutually exclusive views or modes.
 
 [Vue source](../src/vue/BissSegmentedControl.vue) · [Svelte source](../src/svelte/BissSegmentedControl.svelte)
 
@@ -3063,7 +3230,7 @@ Snippets: `children`.
 
 ## BissSharePanel
 
-Share Panel for the team’s everyday work.
+Invite people, set their role and manage a public link.
 
 [Vue source](../src/vue/BissSharePanel.vue) · [Svelte source](../src/svelte/BissSharePanel.svelte)
 
@@ -3161,6 +3328,16 @@ Callbacks:
 
 Snippets: `children`, `actions`.
 
+## BissSidebar
+
+A collapsible application sidebar with workspace, sections, pinned items and an account footer.
+
+[Vue source](../src/vue/BissSidebar.vue) · [Svelte source](../src/svelte/BissSidebar.svelte)
+
+### Vue
+
+### Svelte
+
 ## BissSidebarUser
 
 The signed-in identity with account navigation and sign-out actions.
@@ -3239,7 +3416,7 @@ Simple content-shaped bars for loading layouts.
 
 ## BissSplitPane
 
-Split Pane for the team’s everyday work.
+Two resizable panes, such as a list beside its detail.
 
 [Vue source](../src/vue/BissSplitPane.vue) · [Svelte source](../src/svelte/BissSplitPane.svelte)
 
@@ -3278,7 +3455,7 @@ Snippets: `start`, `end`.
 
 ## BissStackedBar
 
-Stacked Bar for the team’s everyday work.
+Parts of a whole in one horizontal bar, with a legend.
 
 [Vue source](../src/vue/BissStackedBar.vue) · [Svelte source](../src/svelte/BissStackedBar.svelte)
 
@@ -3705,7 +3882,7 @@ Callbacks:
 
 ## BissTaskList
 
-Task List for the team’s everyday work.
+Tasks with completion, owner, due date and status.
 
 [Vue source](../src/vue/BissTaskList.vue) · [Svelte source](../src/svelte/BissTaskList.svelte)
 
@@ -3736,6 +3913,16 @@ Callbacks:
 
 - `oncomplete`: `(value: { id: string; done: boolean }) => void`
 - `onopen`: `(id: string) => void`
+
+## BissTemplateGallery
+
+Choose a starting template by category or search, with a preview before using it.
+
+[Vue source](../src/vue/BissTemplateGallery.vue) · [Svelte source](../src/svelte/BissTemplateGallery.svelte)
+
+### Vue
+
+### Svelte
 
 ## BissTextarea
 
@@ -3957,7 +4144,7 @@ Snippets: `children`, `end`.
 
 ## BissTooltip
 
-Tooltip for the team’s everyday work.
+A short label for a control, shown on hover and focus.
 
 [Vue source](../src/vue/BissTooltip.vue) · [Svelte source](../src/svelte/BissTooltip.svelte)
 
@@ -4014,6 +4201,16 @@ Slots: `icon`, `actions`, `default`.
 | `children` | `Snippet` | No | — |
 
 Snippets: `iconContent`, `actions`, `children`.
+
+## BissTour
+
+A step-by-step spotlight tour anchored to elements, with progress and keyboard controls.
+
+[Vue source](../src/vue/BissTour.vue) · [Svelte source](../src/svelte/BissTour.svelte)
+
+### Vue
+
+### Svelte
 
 ## BissValuePicker
 
@@ -4101,7 +4298,7 @@ Snippets: `end`.
 
 ## BissWidgetGrid
 
-Widget Grid for the team’s everyday work.
+Arrange dashboard widgets in a grid that people can reorder by drag or keyboard.
 
 [Vue source](../src/vue/BissWidgetGrid.vue) · [Svelte source](../src/svelte/BissWidgetGrid.svelte)
 
@@ -4138,3 +4335,13 @@ Callbacks:
 - `onchange`: `(items: { id: string; title: string; span?: number }[]) => void`
 
 Snippets: `children`.
+
+## BissWorkspaceSwitcher
+
+Show the current workspace and switch to, search for or create another.
+
+[Vue source](../src/vue/BissWorkspaceSwitcher.vue) · [Svelte source](../src/svelte/BissWorkspaceSwitcher.svelte)
+
+### Vue
+
+### Svelte

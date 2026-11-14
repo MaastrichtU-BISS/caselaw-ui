@@ -1,0 +1,233 @@
+/* NotificationCenter: the bell, its count and the latest-notices popover. */
+.biss-bell {
+  position: relative;
+}
+.biss-bell[data-open] {
+  background: var(--biss-info-bg);
+  color: var(--biss-primary);
+}
+.biss-bell:focus-visible {
+  outline: 2px solid var(--biss-primary);
+  outline-offset: 1px;
+}
+.biss-bell-count {
+  position: absolute;
+  top: 2px;
+  left: 16px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  background: var(--biss-primary);
+  color: var(--biss-on-primary);
+  font: 600 10.5px/16px var(--biss-font-family);
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  box-shadow: 0 0 0 2px var(--biss-card);
+  pointer-events: none;
+}
+.biss-notification-panel {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+.biss-notification-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 46px;
+  padding: 6px 8px 6px 14px;
+  border-bottom: 1px solid var(--biss-border);
+}
+.biss-notification-head h2 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+.biss-notification-head .biss-button-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.biss-notification-head .biss-icon {
+  width: 14px;
+  height: 14px;
+}
+.biss-notification-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: min(440px, calc(100dvh - 180px));
+  overflow: auto;
+}
+.biss-notification-list > li:last-child .biss-notice-row {
+  border-bottom: 0;
+}
+.biss-notification-list .biss-notice-row {
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 9px 14px;
+  font-size: 13.5px;
+  line-height: 1.4;
+}
+.biss-notification-list .biss-notice-row[data-unread='true'] {
+  background: color-mix(in srgb, var(--biss-info-bg) 55%, var(--biss-card));
+}
+.biss-notification-list .biss-notice-row:hover {
+  background: var(--biss-row-hover);
+}
+.biss-notification-list .biss-notice-row[data-unread='true']:hover {
+  background: var(--biss-info-bg);
+}
+.biss-notification-list .biss-notice-row:focus-visible {
+  outline: 2px solid var(--biss-primary);
+  outline-offset: -2px;
+}
+.biss-notification-list .biss-notice-row > .biss-grow {
+  min-width: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.biss-notification-list .biss-notice-row strong {
+  margin-inline-end: 5px;
+}
+.biss-notification-list .biss-notice-row strong + span {
+  color: var(--biss-muted);
+}
+.biss-notification-list .biss-notice-row small {
+  margin-top: 2px;
+}
+.biss-notification-list .biss-status-dot {
+  margin-top: 7px;
+  width: 8px;
+  height: 8px;
+}
+.biss-notice-icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  margin-top: 1px;
+  border-radius: 50%;
+  background: var(--biss-info-bg);
+  color: var(--biss-primary);
+}
+.biss-notice-icon .biss-icon {
+  width: 14px;
+  height: 14px;
+}
+.biss-notice-icon[data-tone='success'] {
+  background: var(--biss-success-bg);
+  color: var(--biss-success);
+}
+.biss-notice-icon[data-tone='warning'] {
+  background: var(--biss-warning-bg);
+  color: var(--biss-warning);
+}
+.biss-notice-icon[data-tone='danger'] {
+  background: var(--biss-danger-bg);
+  color: var(--biss-danger);
+}
+.biss-notice-icon[data-tone='neutral'] {
+  background: var(--biss-surface-muted);
+  color: var(--biss-muted);
+}
+.biss-notification-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 26px 20px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--biss-muted);
+}
+.biss-notification-state > .biss-icon {
+  width: 20px;
+  height: 20px;
+  margin-bottom: 4px;
+}
+.biss-notification-state strong {
+  font-weight: 500;
+  font-size: 13.5px;
+  color: var(--biss-text);
+}
+.biss-notification-state .biss-button {
+  margin-top: 8px;
+}
+.biss-notification-loading {
+  display: grid;
+  gap: 0;
+}
+.biss-notification-skeleton {
+  display: flex;
+  gap: 10px;
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--biss-border);
+}
+.biss-notification-skeleton > i {
+  flex: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--biss-surface-muted);
+}
+.biss-notification-skeleton > span {
+  flex: 1;
+  display: grid;
+  gap: 6px;
+  padding-top: 3px;
+}
+.biss-notification-skeleton b {
+  display: block;
+  height: 9px;
+  border-radius: 4px;
+  background: var(--biss-surface-muted);
+  animation: biss-block-pulse 1.4s ease-in-out infinite;
+}
+.biss-notification-skeleton b + b {
+  width: 55%;
+}
+@keyframes biss-block-pulse {
+  50% {
+    opacity: 0.55;
+  }
+}
+.biss-notification-foot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 100%;
+  padding: 10px;
+  border: 0;
+  border-top: 1px solid var(--biss-border);
+  border-radius: 0 0 var(--biss-radius-lg) var(--biss-radius-lg);
+  background: transparent;
+  color: var(--biss-primary);
+  font: 500 13px var(--biss-font-family);
+  text-decoration: none;
+  cursor: pointer;
+}
+.biss-notification-foot:hover {
+  background: var(--biss-row-hover);
+}
+.biss-notification-foot:focus-visible {
+  outline: 2px solid var(--biss-primary);
+  outline-offset: -2px;
+}
+.biss-notification-foot .biss-icon {
+  width: 14px;
+  height: 14px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .biss-notification-skeleton b {
+    animation: none;
+  }
+}

@@ -1,0 +1,106 @@
+/* Tour: a spotlight around the step's target and a small card beside it. */
+.biss-tour-layer {
+  position: fixed;
+  inset: 0;
+  z-index: var(--biss-z-tour, 58);
+  pointer-events: none;
+}
+.biss-tour-spotlight {
+  position: fixed;
+  border-radius: var(--biss-radius-md);
+  box-shadow:
+    0 0 0 2px var(--biss-primary),
+    0 0 0 6px var(--biss-focus);
+  transition:
+    top 0.18s cubic-bezier(0.23, 1, 0.32, 1),
+    left 0.18s cubic-bezier(0.23, 1, 0.32, 1),
+    width 0.18s cubic-bezier(0.23, 1, 0.32, 1),
+    height 0.18s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.biss-tour-layer[data-dim] .biss-tour-spotlight {
+  box-shadow:
+    0 0 0 2px var(--biss-primary),
+    0 0 0 6px var(--biss-focus),
+    0 0 0 100vmax var(--biss-overlay);
+}
+.biss-tour-backdrop {
+  position: fixed;
+  inset: 0;
+  background: var(--biss-overlay);
+}
+.biss-tour-card {
+  z-index: var(--biss-z-tour-card, 59);
+  padding: 12px 14px 12px;
+  font: 14px/1.5 var(--biss-font-family);
+}
+.biss-tour-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin: -4px -6px 4px 0;
+}
+.biss-tour-progress {
+  font-size: 12px;
+  color: var(--biss-muted);
+  font-variant-numeric: tabular-nums;
+}
+.biss-tour-close {
+  width: 26px;
+  height: 26px;
+}
+.biss-tour-close .biss-icon {
+  width: 14px;
+  height: 14px;
+}
+.biss-tour-close:focus-visible {
+  outline: 2px solid var(--biss-primary);
+  outline-offset: 1px;
+}
+.biss-tour-title {
+  margin: 0 0 4px;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+.biss-tour-body {
+  margin: 0;
+  font-size: 13.5px;
+  color: var(--biss-muted);
+}
+.biss-tour-dots {
+  display: flex;
+  gap: 5px;
+  margin-top: 14px;
+}
+.biss-tour-dots i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--biss-border-strong);
+  transition: width 0.18s ease-out, background-color 0.18s ease-out;
+}
+.biss-tour-dots i[data-done] {
+  background: var(--biss-primary);
+  opacity: 0.45;
+}
+.biss-tour-dots i[data-active] {
+  width: 16px;
+  border-radius: 3px;
+  background: var(--biss-primary);
+}
+.biss-tour-foot {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+}
+.biss-tour-foot > .biss-button-ghost {
+  margin-inline-start: -8px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .biss-tour-spotlight,
+  .biss-tour-dots i {
+    transition: none;
+  }
+}
