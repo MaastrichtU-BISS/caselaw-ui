@@ -135,11 +135,14 @@ try {
         await page.goto(
           `http://127.0.0.1:4189/preview.html?example=${dir.name}/${item.id}&framework=${framework}`,
         );
-        const root = page.locator('.authored-example');
-        await expect(root, `${dir.name}/${item.id} (${framework})`).toHaveAttribute(
-          'data-framework',
-          framework,
+        // preview.ts marks the document ready after the example module has loaded and mounted.
+        await expect(page.locator('html'), `${dir.name}/${item.id} (${framework})`).toHaveAttribute(
+          'data-ready',
+          'true',
+          { timeout: 20000 },
         );
+        const root = page.locator('.authored-example');
+        await expect(root).toHaveAttribute('data-framework', framework);
         await expect(root).not.toHaveText('Example not found.');
         expect(
           await root.evaluate((node) => node.childElementCount),
