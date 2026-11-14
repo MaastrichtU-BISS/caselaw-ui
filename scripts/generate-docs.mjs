@@ -288,6 +288,18 @@ Object.assign(descriptions, {
   Tooltip: 'A short label for a control, shown on hover and focus.',
   WidgetGrid: 'Arrange dashboard widgets in a grid that people can reorder by drag or keyboard.',
 });
+Object.assign(descriptions, {
+  Tabs: 'Connected tab parts with arrow-key navigation, plus a wrapper that takes items and panels.',
+  Accordion: 'Stacked sections that open one at a time or several at once, with keyboard navigation.',
+  Progress: 'A labelled progress bar for known amounts, or an indeterminate one while waiting.',
+  Spinner: 'A small activity indicator for short waits, announced and slowed for reduced motion.',
+  Slider: 'Choose a value or a range by dragging or with arrow keys, inside or outside a Field.',
+  NumberField: 'Type or step a number within limits, formatted for the locale.',
+  Kbd: 'Show a key or shortcut, such as ⌘ K, with a readable name for screen readers.',
+  Separator: 'A quiet horizontal or vertical divider, optionally labelled.',
+  Pagination: 'Numbered page navigation with ellipses, previous and next, and an optional page size.',
+  ToggleGroup: 'Pressable options, with icons, for one choice or several independent ones.',
+});
 // Core primitives.
 groups.Forms.push('Slider', 'NumberField', 'ToggleGroup');
 groups.Navigation.push('Tabs', 'Accordion', 'Pagination');

@@ -184,7 +184,7 @@
       "slug": "accordion",
       "short": "Accordion",
       "category": "Navigation",
-      "description": "Accordion for the team’s everyday work.",
+      "description": "Stacked sections that open one at a time or several at once, with keyboard navigation.",
       "guidance": "Keep navigation in a predictable order and let the host router own destinations and permissions.",
       "vue": {
         "props": [
@@ -6602,7 +6602,7 @@
       "slug": "kbd",
       "short": "Kbd",
       "category": "Data display",
-      "description": "Kbd for the team’s everyday work.",
+      "description": "Show a key or shortcut, such as ⌘ K, with a readable name for screen readers.",
       "guidance": "Use display-ready names and values. Display components do not fetch records or decide who may see them.",
       "vue": {
         "props": [
@@ -7830,7 +7830,7 @@
       "slug": "number-field",
       "short": "NumberField",
       "category": "Forms",
-      "description": "Number Field for the team’s everyday work.",
+      "description": "Type or step a number within limits, formatted for the locale.",
       "guidance": "Give every control a visible label. Keep values in host state, validate before saving, and put recovery text beside the field.",
       "vue": {
         "props": [
@@ -8479,7 +8479,7 @@
       "slug": "pagination",
       "short": "Pagination",
       "category": "Navigation",
-      "description": "Pagination for the team’s everyday work.",
+      "description": "Numbered page navigation with ellipses, previous and next, and an optional page size.",
       "guidance": "Keep navigation in a predictable order and let the host router own destinations and permissions.",
       "vue": {
         "props": [
@@ -9040,7 +9040,7 @@
       "slug": "progress",
       "short": "Progress",
       "category": "Feedback",
-      "description": "Progress for the team’s everyday work.",
+      "description": "A labelled progress bar for known amounts, or an indeterminate one while waiting.",
       "guidance": "Keep messages calm, specific and actionable. Distinguish loading, empty, error and access states instead of presenting a generic blank panel.",
       "vue": {
         "props": [
@@ -10594,7 +10594,7 @@
       "slug": "separator",
       "short": "Separator",
       "category": "Data display",
-      "description": "Separator for the team’s everyday work.",
+      "description": "A quiet horizontal or vertical divider, optionally labelled.",
       "guidance": "Use display-ready names and values. Display components do not fetch records or decide who may see them.",
       "vue": {
         "props": [
@@ -11459,7 +11459,7 @@
       "slug": "slider",
       "short": "Slider",
       "category": "Forms",
-      "description": "Slider for the team’s everyday work.",
+      "description": "Choose a value or a range by dragging or with arrow keys, inside or outside a Field.",
       "guidance": "Give every control a visible label. Keep values in host state, validate before saving, and put recovery text beside the field.",
       "vue": {
         "props": [
@@ -11653,7 +11653,7 @@
       "slug": "spinner",
       "short": "Spinner",
       "category": "Feedback",
-      "description": "Spinner for the team’s everyday work.",
+      "description": "A small activity indicator for short waits, announced and slowed for reduced motion.",
       "guidance": "Keep messages calm, specific and actionable. Distinguish loading, empty, error and access states instead of presenting a generic blank panel.",
       "vue": {
         "props": [
@@ -12915,7 +12915,7 @@
       "slug": "tabs",
       "short": "Tabs",
       "category": "Navigation",
-      "description": "Tabs for the team’s everyday work.",
+      "description": "Connected tab parts with arrow-key navigation, plus a wrapper that takes items and panels.",
       "guidance": "Keep navigation in a predictable order and let the host router own destinations and permissions.",
       "vue": {
         "props": [
@@ -13502,7 +13502,7 @@
       "slug": "toggle-group",
       "short": "ToggleGroup",
       "category": "Forms",
-      "description": "Toggle Group for the team’s everyday work.",
+      "description": "Pressable options, with icons, for one choice or several independent ones.",
       "guidance": "Give every control a visible label. Keep values in host state, validate before saving, and put recovery text beside the field.",
       "vue": {
         "props": [

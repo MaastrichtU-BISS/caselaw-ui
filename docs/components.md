@@ -29,18 +29,18 @@ Give every control a visible label. Keep values in host state, validate before s
 - [BissField](api.md#bissfield): A label, hint or error around a control, with a scoped identifier.
 - [BissFilePicker](api.md#bissfilepicker): Choose files or drop them onto the field.
 - [BissInput](api.md#bissinput): A single-line value with normal form attributes and validation styling.
-- [BissNumberField](api.md#bissnumberfield): Number Field for the team’s everyday work.
+- [BissNumberField](api.md#bissnumberfield): Type or step a number within limits, formatted for the locale.
 - [BissRadioGroup](api.md#bissradiogroup): Choose one option from a short, visible list.
 - [BissSearchInput](api.md#bisssearchinput): A search field with the input contract and search treatment.
 - [BissSegmentedControl](api.md#bisssegmentedcontrol): Switch between a few mutually exclusive views or modes.
 - [BissSelect](api.md#bissselect): The native select for simple browser-driven choice.
 - [BissSelectPicker](api.md#bissselectpicker): A searchable dropdown with groups, disabled choices and keyboard navigation.
-- [BissSlider](api.md#bissslider): Slider for the team’s everyday work.
+- [BissSlider](api.md#bissslider): Choose a value or a range by dragging or with arrow keys, inside or outside a Field.
 - [BissSwatchPicker](api.md#bissswatchpicker): Choose a named color from the workspace palette.
 - [BissSwitch](api.md#bissswitch): A labelled on/off setting using the model contract.
 - [BissTagInput](api.md#bisstaginput): Add and remove short labels using the model contract.
 - [BissTextarea](api.md#bisstextarea): A multiline form value with normal field attributes and validation styling.
-- [BissToggleGroup](api.md#bisstogglegroup): Toggle Group for the team’s everyday work.
+- [BissToggleGroup](api.md#bisstogglegroup): Pressable options, with icons, for one choice or several independent ones.
 - [BissValuePicker](api.md#bissvaluepicker): Search and select multiple filter values, with optional negation.
 
 ### Overlays
@@ -61,15 +61,15 @@ Use an overlay for a focused choice or task. Provide a clear title, preserve key
 
 Keep navigation in a predictable order and let the host router own destinations and permissions.
 
-- [BissAccordion](api.md#bissaccordion): Accordion for the team’s everyday work.
+- [BissAccordion](api.md#bissaccordion): Stacked sections that open one at a time or several at once, with keyboard navigation.
 - [BissBreadcrumbs](api.md#bissbreadcrumbs): Show where a page sits in the hierarchy and link back up.
 - [BissDisclosure](api.md#bissdisclosure): Hide secondary detail behind a labelled toggle.
 - [BissNavItem](api.md#bissnavitem): A navigation destination with optional active state and metadata.
 - [BissNavSection](api.md#bissnavsection): Group related navigation destinations under a small heading.
-- [BissPagination](api.md#bisspagination): Pagination for the team’s everyday work.
+- [BissPagination](api.md#bisspagination): Numbered page navigation with ellipses, previous and next, and an optional page size.
 - [BissTab](api.md#bisstab): A navigation tab that can render as a native button or a router link.
 - [BissTablePager](api.md#bisstablepager): Previous and next page controls with a live range announcement.
-- [BissTabs](api.md#bisstabs): Tabs for the team’s everyday work.
+- [BissTabs](api.md#bisstabs): Connected tab parts with arrow-key navigation, plus a wrapper that takes items and panels.
 - [BissViewTabs](api.md#bissviewtabs): Switch a page’s view while keeping labels, counts and disabled states consistent.
 
 ### Data display
@@ -83,12 +83,12 @@ Use display-ready names and values. Display components do not fetch records or d
 - [BissCodeTabs](api.md#bisscodetabs): Keep related language samples together and copy the active one.
 - [BissDataTable](api.md#bissdatatable): Sortable columns, pagination and explicit loading and empty states.
 - [BissIcon](api.md#bissicon): Bizzy’s authored SVG vocabulary, sized and stroked consistently.
-- [BissKbd](api.md#bisskbd): Kbd for the team’s everyday work.
+- [BissKbd](api.md#bisskbd): Show a key or shortcut, such as ⌘ K, with a readable name for screen readers.
 - [BissPeopleCell](api.md#bisspeoplecell): Show a small set of assigned people, with overflow summarized by count.
 - [BissPresenceStack](api.md#bisspresencestack): A quiet, overlapping group of people currently on a page.
 - [BissPropertyList](api.md#bisspropertylist): Display a record’s labelled properties in a compact description list.
 - [BissRecordChip](api.md#bissrecordchip): A small labelled reference to a record, optionally linked.
-- [BissSeparator](api.md#bissseparator): Separator for the team’s everyday work.
+- [BissSeparator](api.md#bissseparator): A quiet horizontal or vertical divider, optionally labelled.
 - [BissServiceIcon](api.md#bissserviceicon): The product marks, or a short text mark supplied by the host.
 - [BissStatusCell](api.md#bissstatuscell): A written status reinforced by a colored dot or soft tint.
 - [BissTableAddRow](api.md#bisstableaddrow): A quiet row-level action for adding a record to the current group.
@@ -121,10 +121,10 @@ Keep messages calm, specific and actionable. Distinguish loading, empty, error a
 - [BissLiveStatus](api.md#bisslivestatus): Quiet connection feedback only when the application is reconnecting or offline.
 - [BissNoAccess](api.md#bissnoaccess): Explain restricted access and provide a useful next step.
 - [BissPageHint](api.md#bisspagehint): A keyboard-accessible explanation that stays out of the page’s main reading path.
-- [BissProgress](api.md#bissprogress): Progress for the team’s everyday work.
+- [BissProgress](api.md#bissprogress): A labelled progress bar for known amounts, or an indeterminate one while waiting.
 - [BissSaveBar](api.md#bisssavebar): Bring unsaved changes, recovery and save actions into one place.
 - [BissSkeleton](api.md#bissskeleton): Simple content-shaped bars for loading layouts.
-- [BissSpinner](api.md#bissspinner): Spinner for the team’s everyday work.
+- [BissSpinner](api.md#bissspinner): A small activity indicator for short waits, announced and slowed for reduced motion.
 - [BissToastStack](api.md#bisstoaststack): Render the application-wide toast queue after an action.
 
 ## Blocks
