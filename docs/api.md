@@ -44,7 +44,7 @@ Callbacks:
 
 ## BissAccordion
 
-Accordion for the team’s everyday work.
+Stacked sections that open one at a time or several at once, with keyboard navigation.
 
 [Vue source](../src/vue/BissAccordion.vue) · [Svelte source](../src/svelte/BissAccordion.svelte)
 
@@ -1986,7 +1986,7 @@ Callbacks:
 
 ## BissKbd
 
-Kbd for the team’s everyday work.
+Show a key or shortcut, such as ⌘ K, with a readable name for screen readers.
 
 [Vue source](../src/vue/BissKbd.vue) · [Svelte source](../src/svelte/BissKbd.svelte)
 
@@ -2390,7 +2390,7 @@ Snippets: `icon`.
 
 ## BissNumberField
 
-Number Field for the team’s everyday work.
+Type or step a number within limits, formatted for the locale.
 
 [Vue source](../src/vue/BissNumberField.vue) · [Svelte source](../src/svelte/BissNumberField.svelte)
 
@@ -2588,7 +2588,7 @@ Snippets: `children`.
 
 ## BissPagination
 
-Pagination for the team’s everyday work.
+Numbered page navigation with ellipses, previous and next, and an optional page size.
 
 [Vue source](../src/vue/BissPagination.vue) · [Svelte source](../src/svelte/BissPagination.svelte)
 
@@ -2745,7 +2745,7 @@ Snippets: `children`.
 
 ## BissProgress
 
-Progress for the team’s everyday work.
+A labelled progress bar for known amounts, or an indeterminate one while waiting.
 
 [Vue source](../src/vue/BissProgress.vue) · [Svelte source](../src/svelte/BissProgress.svelte)
 
@@ -3227,7 +3227,7 @@ Callbacks:
 
 ## BissSeparator
 
-Separator for the team’s everyday work.
+A quiet horizontal or vertical divider, optionally labelled.
 
 [Vue source](../src/vue/BissSeparator.vue) · [Svelte source](../src/svelte/BissSeparator.svelte)
 
@@ -3474,7 +3474,7 @@ Simple content-shaped bars for loading layouts.
 
 ## BissSlider
 
-Slider for the team’s everyday work.
+Choose a value or a range by dragging or with arrow keys, inside or outside a Field.
 
 [Vue source](../src/vue/BissSlider.vue) · [Svelte source](../src/svelte/BissSlider.svelte)
 
@@ -3519,7 +3519,7 @@ Callbacks:
 
 ## BissSpinner
 
-Spinner for the team’s everyday work.
+A small activity indicator for short waits, announced and slowed for reduced motion.
 
 [Vue source](../src/vue/BissSpinner.vue) · [Svelte source](../src/svelte/BissSpinner.svelte)
 
@@ -3975,7 +3975,7 @@ A compact label and formatted total for a table footer or group summary.
 
 ## BissTabs
 
-Tabs for the team’s everyday work.
+Connected tab parts with arrow-key navigation, plus a wrapper that takes items and panels.
 
 [Vue source](../src/vue/BissTabs.vue) · [Svelte source](../src/svelte/BissTabs.svelte)
 
@@ -4162,7 +4162,7 @@ Render the application-wide toast queue after an action.
 
 ## BissToggleGroup
 
-Toggle Group for the team’s everyday work.
+Pressable options, with icons, for one choice or several independent ones.
 
 [Vue source](../src/vue/BissToggleGroup.vue) · [Svelte source](../src/svelte/BissToggleGroup.svelte)
 
