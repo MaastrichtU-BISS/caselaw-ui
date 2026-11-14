@@ -2265,6 +2265,278 @@
       "modern": true
     },
     {
+      "name": "BissCommandMenu",
+      "tier": "Components",
+      "slug": "command-menu",
+      "short": "CommandMenu",
+      "category": "Overlays",
+      "description": "A filterable, keyboard-driven command list for slash commands and mention pickers.",
+      "guidance": "Use an overlay for a focused choice or task. Provide a clear title, preserve keyboard focus and return focus when the task ends.",
+      "vue": {
+        "props": [
+          {
+            "name": "items",
+            "type": "BissCommand[]",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "label",
+            "type": "string",
+            "required": false,
+            "description": "Accessible name of the list.",
+            "default": "'Commands'"
+          },
+          {
+            "name": "searchable",
+            "type": "boolean",
+            "required": false,
+            "description": "Show a search field in the list, for menus opened from a button.",
+            "default": "false"
+          },
+          {
+            "name": "searchLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Search commands'"
+          },
+          {
+            "name": "emptyLabel",
+            "type": "string",
+            "required": false,
+            "description": "Shown when nothing matches. `{query}` is replaced.",
+            "default": "'Nothing matches “{query}”'"
+          },
+          {
+            "name": "grouped",
+            "type": "boolean",
+            "required": false,
+            "description": "Group rows under their headings while nothing is typed.",
+            "default": "true"
+          },
+          {
+            "name": "hint",
+            "type": "boolean",
+            "required": false,
+            "description": "Show the keyboard hint below the list.",
+            "default": "true"
+          },
+          {
+            "name": "moveLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'to move'"
+          },
+          {
+            "name": "chooseLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'to choose'"
+          },
+          {
+            "name": "closeLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'to close'"
+          },
+          {
+            "name": "checkedLabel",
+            "type": "string",
+            "required": false,
+            "description": "Screen-reader text for a checked command.",
+            "default": "'Current'"
+          },
+          {
+            "name": "autofocus",
+            "type": "boolean",
+            "required": false,
+            "description": "Focus the search field (or the list) when mounted.",
+            "default": "false"
+          },
+          {
+            "name": "query",
+            "type": "string",
+            "required": false,
+            "description": "Controlled model. Bind with v-model:query.",
+            "default": "''"
+          }
+        ],
+        "events": [
+          {
+            "name": "pick",
+            "type": "[item: BissCommand]",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "close",
+            "type": "[]",
+            "required": true,
+            "description": ""
+          }
+        ],
+        "slots": [
+          "leading",
+          "empty"
+        ]
+      },
+      "svelte": {
+        "props": [
+          {
+            "name": "listId",
+            "type": "inferred",
+            "required": false,
+            "default": "uid + '-list'",
+            "description": ""
+          },
+          {
+            "name": "items",
+            "type": "BissCommand[]",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "query",
+            "type": "string",
+            "required": false,
+            "description": "The typed text. Bind it, or pass it one-way from a host editor.",
+            "default": "$bindable('')"
+          },
+          {
+            "name": "label",
+            "type": "string",
+            "required": false,
+            "description": "Accessible name of the list.",
+            "default": "'Commands'"
+          },
+          {
+            "name": "searchable",
+            "type": "boolean",
+            "required": false,
+            "description": "Show a search field in the list, for menus opened from a button.",
+            "default": "false"
+          },
+          {
+            "name": "searchLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Search commands'"
+          },
+          {
+            "name": "emptyLabel",
+            "type": "string",
+            "required": false,
+            "description": "Shown when nothing matches. `{query}` is replaced.",
+            "default": "'Nothing matches “{query}”'"
+          },
+          {
+            "name": "grouped",
+            "type": "boolean",
+            "required": false,
+            "description": "Group rows under their headings while nothing is typed.",
+            "default": "true"
+          },
+          {
+            "name": "hint",
+            "type": "boolean",
+            "required": false,
+            "description": "Show the keyboard hint below the list.",
+            "default": "true"
+          },
+          {
+            "name": "moveLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'to move'"
+          },
+          {
+            "name": "chooseLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'to choose'"
+          },
+          {
+            "name": "closeLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'to close'"
+          },
+          {
+            "name": "checkedLabel",
+            "type": "string",
+            "required": false,
+            "description": "Screen-reader text for a checked command.",
+            "default": "'Current'"
+          },
+          {
+            "name": "autofocus",
+            "type": "boolean",
+            "required": false,
+            "description": "Focus the search field (or the list) when mounted.",
+            "default": "false"
+          },
+          {
+            "name": "activeId",
+            "type": "string",
+            "required": false,
+            "description": "The active row's id (read it with `bind:activeId`) for a host field's `aria-activedescendant`.",
+            "default": "$bindable()"
+          },
+          {
+            "name": "onpick",
+            "type": "(item: BissCommand) => void",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "onclose",
+            "type": "() => void",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "leading",
+            "type": "Snippet<[BissCommand]>",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "empty",
+            "type": "Snippet<[string]>",
+            "required": false,
+            "description": ""
+          }
+        ],
+        "events": [
+          {
+            "name": "onpick",
+            "type": "(item: BissCommand) => void",
+            "required": false,
+            "description": "Callback prop."
+          },
+          {
+            "name": "onclose",
+            "type": "() => void",
+            "required": false,
+            "description": "Callback prop."
+          }
+        ],
+        "slots": [
+          "leading",
+          "empty"
+        ]
+      },
+      "modern": true
+    },
+    {
       "name": "BissCommentComposer",
       "tier": "Blocks",
       "slug": "comment-composer",
@@ -4856,6 +5128,1134 @@
       "modern": true
     },
     {
+      "name": "BissFeed",
+      "tier": "Blocks",
+      "slug": "feed",
+      "short": "Feed",
+      "category": "Sharing and collaboration",
+      "description": "A stream of updates with a composer, for project news and team announcements.",
+      "guidance": "These blocks show and edit who can do what. The host resolves identities, checks permissions and persists every change.",
+      "vue": {
+        "props": [
+          {
+            "name": "items",
+            "type": "BissFeedUpdate[]",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "actions",
+            "type": "BissMenuItem[]",
+            "required": false,
+            "description": "Menu actions offered on every update."
+          },
+          {
+            "name": "composer",
+            "type": "boolean",
+            "required": false,
+            "description": "Show the composer.",
+            "default": "true"
+          },
+          {
+            "name": "posting",
+            "type": "boolean",
+            "required": false,
+            "description": "A post is being saved; the composer waits.",
+            "default": "false"
+          },
+          {
+            "name": "loading",
+            "type": "boolean",
+            "required": false,
+            "description": "",
+            "default": "false"
+          },
+          {
+            "name": "error",
+            "type": "string",
+            "required": false,
+            "description": "A failure message; replaces the list."
+          },
+          {
+            "name": "hasMore",
+            "type": "boolean",
+            "required": false,
+            "description": "More updates exist; shows “Load more”.",
+            "default": "false"
+          },
+          {
+            "name": "loadingMore",
+            "type": "boolean",
+            "required": false,
+            "description": "",
+            "default": "false"
+          },
+          {
+            "name": "label",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Updates'"
+          },
+          {
+            "name": "composerLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Write an update'"
+          },
+          {
+            "name": "placeholder",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Share progress, a decision or news with the team…'"
+          },
+          {
+            "name": "postLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Post'"
+          },
+          {
+            "name": "shortcutLabel",
+            "type": "string",
+            "required": false,
+            "description": "Shortcut hint beside the post button.",
+            "default": "'⌘ or Ctrl + Enter to post'"
+          },
+          {
+            "name": "emptyTitle",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'No updates yet'"
+          },
+          {
+            "name": "emptyCopy",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Updates about progress, decisions and news appear here.'"
+          },
+          {
+            "name": "loadingLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Loading updates…'"
+          },
+          {
+            "name": "retryLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Try again'"
+          },
+          {
+            "name": "moreLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Load more updates'"
+          },
+          {
+            "name": "draft",
+            "type": "string",
+            "required": false,
+            "description": "Controlled model. Bind with v-model:draft.",
+            "default": "''"
+          }
+        ],
+        "events": [
+          {
+            "name": "post",
+            "type": "[text: string]",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "react",
+            "type": "[value: { id: string; emoji: string }]",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "comment",
+            "type": "[id: string]",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "action",
+            "type": "[value: { id: string; key: string }]",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "more",
+            "type": "[]",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "retry",
+            "type": "[]",
+            "required": true,
+            "description": ""
+          }
+        ],
+        "slots": [
+          "item"
+        ]
+      },
+      "svelte": {
+        "props": [
+          {
+            "name": "items",
+            "type": "BissFeedUpdate[]",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "actions",
+            "type": "BissMenuItem[]",
+            "required": false,
+            "description": "Menu actions offered on every update."
+          },
+          {
+            "name": "composer",
+            "type": "boolean",
+            "required": false,
+            "description": "Show the composer.",
+            "default": "true"
+          },
+          {
+            "name": "draft",
+            "type": "string",
+            "required": false,
+            "description": "The composer text. Bind to restore or clear it.",
+            "default": "$bindable('')"
+          },
+          {
+            "name": "posting",
+            "type": "boolean",
+            "required": false,
+            "description": "A post is being saved; the composer waits.",
+            "default": "false"
+          },
+          {
+            "name": "loading",
+            "type": "boolean",
+            "required": false,
+            "description": "",
+            "default": "false"
+          },
+          {
+            "name": "error",
+            "type": "string",
+            "required": false,
+            "description": "A failure message; replaces the list."
+          },
+          {
+            "name": "hasMore",
+            "type": "boolean",
+            "required": false,
+            "description": "More updates exist; shows “Load more”.",
+            "default": "false"
+          },
+          {
+            "name": "loadingMore",
+            "type": "boolean",
+            "required": false,
+            "description": "",
+            "default": "false"
+          },
+          {
+            "name": "label",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Updates'"
+          },
+          {
+            "name": "composerLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Write an update'"
+          },
+          {
+            "name": "placeholder",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Share progress, a decision or news with the team…'"
+          },
+          {
+            "name": "postLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Post'"
+          },
+          {
+            "name": "shortcutLabel",
+            "type": "string",
+            "required": false,
+            "description": "Shortcut hint beside the post button.",
+            "default": "'⌘ or Ctrl + Enter to post'"
+          },
+          {
+            "name": "emptyTitle",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'No updates yet'"
+          },
+          {
+            "name": "emptyCopy",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Updates about progress, decisions and news appear here.'"
+          },
+          {
+            "name": "loadingLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Loading updates…'"
+          },
+          {
+            "name": "retryLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Try again'"
+          },
+          {
+            "name": "moreLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Load more updates'"
+          },
+          {
+            "name": "onpost",
+            "type": "(text: string) => void",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "onreact",
+            "type": "(value: { id: string; emoji: string }) => void",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "oncomment",
+            "type": "(id: string) => void",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "onaction",
+            "type": "(value: { id: string; key: string }) => void",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "onmore",
+            "type": "() => void",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "onretry",
+            "type": "() => void",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "item",
+            "type": "Snippet<[BissFeedUpdate]>",
+            "required": false,
+            "description": "Replaces the default item rendering."
+          }
+        ],
+        "events": [
+          {
+            "name": "onpost",
+            "type": "(text: string) => void",
+            "required": false,
+            "description": "Callback prop."
+          },
+          {
+            "name": "onreact",
+            "type": "(value: { id: string; emoji: string }) => void",
+            "required": false,
+            "description": "Callback prop."
+          },
+          {
+            "name": "oncomment",
+            "type": "(id: string) => void",
+            "required": false,
+            "description": "Callback prop."
+          },
+          {
+            "name": "onaction",
+            "type": "(value: { id: string; key: string }) => void",
+            "required": false,
+            "description": "Callback prop."
+          },
+          {
+            "name": "onmore",
+            "type": "() => void",
+            "required": false,
+            "description": "Callback prop."
+          },
+          {
+            "name": "onretry",
+            "type": "() => void",
+            "required": false,
+            "description": "Callback prop."
+          }
+        ],
+        "slots": [
+          "item"
+        ]
+      },
+      "modern": true
+    },
+    {
+      "name": "BissFeedItem",
+      "tier": "Blocks",
+      "slug": "feed-item",
+      "short": "FeedItem",
+      "category": "Sharing and collaboration",
+      "description": "One update: author, time, body, attachments, link previews, reactions and replies.",
+      "guidance": "These blocks show and edit who can do what. The host resolves identities, checks permissions and persists every change.",
+      "vue": {
+        "props": [
+          {
+            "name": "item",
+            "type": "BissFeedUpdate",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "actions",
+            "type": "BissMenuItem[]",
+            "required": false,
+            "description": "Menu actions for this update, such as edit, pin or delete."
+          },
+          {
+            "name": "emojis",
+            "type": "string[]",
+            "required": false,
+            "description": "Quick reactions offered by “Add reaction”.",
+            "default": "() => ['👍', '🎉', '❤️', '👀', '🙏']"
+          },
+          {
+            "name": "level",
+            "type": "2 | 3 | 4",
+            "required": false,
+            "description": "Heading level of the optional title.",
+            "default": "3"
+          },
+          {
+            "name": "editedLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'edited'"
+          },
+          {
+            "name": "pinnedLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Pinned'"
+          },
+          {
+            "name": "addReactionLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Add reaction'"
+          },
+          {
+            "name": "reactionLabel",
+            "type": "string",
+            "required": false,
+            "description": "Accessible name of a reaction. `{emoji}`, `{count}` and `{people}` are replaced.",
+            "default": "'{emoji} {count}: {people}'"
+          },
+          {
+            "name": "commentsLabel",
+            "type": "string",
+            "required": false,
+            "description": "The reply button. `{count}` is replaced.",
+            "default": "'{count} replies'"
+          },
+          {
+            "name": "replyLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Reply'"
+          },
+          {
+            "name": "actionsLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'More'"
+          },
+          {
+            "name": "attachmentsLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Attachments'"
+          },
+          {
+            "name": "articleLabel",
+            "type": "string",
+            "required": false,
+            "description": "Accessible name of the article. `{author}` and `{time}` are replaced.",
+            "default": "'Update by {author}, {time}'"
+          }
+        ],
+        "events": [
+          {
+            "name": "react",
+            "type": "[value: { id: string; emoji: string }]",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "comment",
+            "type": "[id: string]",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "action",
+            "type": "[value: { id: string; key: string }]",
+            "required": true,
+            "description": ""
+          }
+        ],
+        "slots": [
+          "default"
+        ]
+      },
+      "svelte": {
+        "props": [
+          {
+            "name": "item",
+            "type": "BissFeedUpdate",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "actions",
+            "type": "BissMenuItem[]",
+            "required": false,
+            "description": "Menu actions for this update, such as edit, pin or delete."
+          },
+          {
+            "name": "emojis",
+            "type": "string[]",
+            "required": false,
+            "description": "Quick reactions offered by “Add reaction”.",
+            "default": "['👍', '🎉', '❤️', '👀', '🙏']"
+          },
+          {
+            "name": "level",
+            "type": "2 | 3 | 4",
+            "required": false,
+            "description": "Heading level of the optional title.",
+            "default": "3"
+          },
+          {
+            "name": "editedLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'edited'"
+          },
+          {
+            "name": "pinnedLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Pinned'"
+          },
+          {
+            "name": "addReactionLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Add reaction'"
+          },
+          {
+            "name": "reactionLabel",
+            "type": "string",
+            "required": false,
+            "description": "Accessible name of a reaction. `{emoji}`, `{count}` and `{people}` are replaced.",
+            "default": "'{emoji} {count}: {people}'"
+          },
+          {
+            "name": "commentsLabel",
+            "type": "string",
+            "required": false,
+            "description": "The reply button. `{count}` is replaced.",
+            "default": "'{count} replies'"
+          },
+          {
+            "name": "replyLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Reply'"
+          },
+          {
+            "name": "actionsLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'More'"
+          },
+          {
+            "name": "attachmentsLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Attachments'"
+          },
+          {
+            "name": "articleLabel",
+            "type": "string",
+            "required": false,
+            "description": "Accessible name of the article. `{author}` and `{time}` are replaced.",
+            "default": "'Update by {author}, {time}'"
+          },
+          {
+            "name": "onreact",
+            "type": "(value: { id: string; emoji: string }) => void",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "oncomment",
+            "type": "(id: string) => void",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "onaction",
+            "type": "(value: { id: string; key: string }) => void",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "children",
+            "type": "Snippet<[BissFeedUpdate]>",
+            "required": false,
+            "description": "Rich body; receives the update. Defaults to the plain `body` text."
+          }
+        ],
+        "events": [
+          {
+            "name": "onreact",
+            "type": "(value: { id: string; emoji: string }) => void",
+            "required": false,
+            "description": "Callback prop."
+          },
+          {
+            "name": "oncomment",
+            "type": "(id: string) => void",
+            "required": false,
+            "description": "Callback prop."
+          },
+          {
+            "name": "onaction",
+            "type": "(value: { id: string; key: string }) => void",
+            "required": false,
+            "description": "Callback prop."
+          }
+        ],
+        "slots": [
+          "children"
+        ]
+      },
+      "modern": true
+    },
+    {
+      "name": "BissFeedbackDialog",
+      "tier": "Components",
+      "slug": "feedback-dialog",
+      "short": "FeedbackDialog",
+      "category": "Overlays",
+      "description": "Collect a rating, a category and a message in a focused dialog.",
+      "guidance": "Use an overlay for a focused choice or task. Provide a clear title, preserve keyboard focus and return focus when the task ends.",
+      "vue": {
+        "props": [
+          {
+            "name": "ratings",
+            "type": "BissPickOption[]",
+            "required": false,
+            "description": "Rating choices, worst first. Pass an empty list to hide the rating.",
+            "default": "() => [\n      { value: '1', label: 'Very poor' },\n      { value: '2', label: 'Poor' },\n      { value: '3', label: 'Okay' },\n      { value: '4', label: 'Good' },\n      { value: '5', label: 'Great' },\n    ]"
+          },
+          {
+            "name": "categories",
+            "type": "BissPickOption[]",
+            "required": false,
+            "description": "Kinds of feedback. Pass an empty list to hide them.",
+            "default": "() => [\n      { value: 'idea', label: 'Idea' },\n      { value: 'problem', label: 'Problem' },\n      { value: 'question', label: 'Question' },\n      { value: 'praise', label: 'Praise' },\n    ]"
+          },
+          {
+            "name": "context",
+            "type": "string",
+            "required": false,
+            "description": "Describes the context that may be included, e.g. the page and browser. Hidden when empty."
+          },
+          {
+            "name": "askEmail",
+            "type": "boolean",
+            "required": false,
+            "description": "Ask for an optional reply address.",
+            "default": "false"
+          },
+          {
+            "name": "minLength",
+            "type": "number",
+            "required": false,
+            "description": "Shortest accepted message, in characters.",
+            "default": "10"
+          },
+          {
+            "name": "sending",
+            "type": "boolean",
+            "required": false,
+            "description": "",
+            "default": "false"
+          },
+          {
+            "name": "sent",
+            "type": "boolean",
+            "required": false,
+            "description": "",
+            "default": "false"
+          },
+          {
+            "name": "error",
+            "type": "string",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "title",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Send feedback'"
+          },
+          {
+            "name": "description",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Tell us what works and what gets in the way. We read every message.'"
+          },
+          {
+            "name": "ratingLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'How is it going?'"
+          },
+          {
+            "name": "ratingLowLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Very poor'"
+          },
+          {
+            "name": "ratingHighLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Great'"
+          },
+          {
+            "name": "categoryLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Kind of feedback'"
+          },
+          {
+            "name": "messageLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Your feedback'"
+          },
+          {
+            "name": "messagePlaceholder",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'What happened, and what did you expect?'"
+          },
+          {
+            "name": "requiredLabel",
+            "type": "string",
+            "required": false,
+            "description": "Shown when the message is empty.",
+            "default": "'Describe your feedback before sending.'"
+          },
+          {
+            "name": "tooShortLabel",
+            "type": "string",
+            "required": false,
+            "description": "Shown when the message is too short. `{min}` is replaced.",
+            "default": "'Write at least {min} characters.'"
+          },
+          {
+            "name": "contextLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Include page and browser details'"
+          },
+          {
+            "name": "emailLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Email for a reply (optional)'"
+          },
+          {
+            "name": "submitLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Send feedback'"
+          },
+          {
+            "name": "cancelLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Cancel'"
+          },
+          {
+            "name": "closeLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Close'"
+          },
+          {
+            "name": "sentTitle",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Thanks for your feedback'"
+          },
+          {
+            "name": "sentCopy",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'It reaches the team straight away. We reply when we need more detail.'"
+          },
+          {
+            "name": "shortcutLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'to send'"
+          },
+          {
+            "name": "open",
+            "type": "boolean",
+            "required": false,
+            "description": "Controlled model. Bind with v-model:open.",
+            "default": "false"
+          },
+          {
+            "name": "message",
+            "type": "string",
+            "required": false,
+            "description": "Controlled model. Bind with v-model:message.",
+            "default": "''"
+          }
+        ],
+        "events": [
+          {
+            "name": "submit",
+            "type": "[feedback: BissFeedbackPayload]",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "close",
+            "type": "[]",
+            "required": true,
+            "description": ""
+          }
+        ],
+        "slots": []
+      },
+      "svelte": {
+        "props": [
+          {
+            "name": "open",
+            "type": "boolean",
+            "required": false,
+            "description": "",
+            "default": "$bindable(false)"
+          },
+          {
+            "name": "message",
+            "type": "string",
+            "required": false,
+            "description": "The message draft. Bind it to keep a draft when the dialog closes.",
+            "default": "$bindable('')"
+          },
+          {
+            "name": "ratings",
+            "type": "BissPickOption[]",
+            "required": false,
+            "description": "Rating choices, worst first. Pass an empty list to hide the rating.",
+            "default": "[\n      { value: '1', label: 'Very poor' },\n      { value: '2', label: 'Poor' },\n      { value: '3', label: 'Okay' },\n      { value: '4', label: 'Good' },\n      { value: '5', label: 'Great' },\n    ]"
+          },
+          {
+            "name": "categories",
+            "type": "BissPickOption[]",
+            "required": false,
+            "description": "Kinds of feedback. Pass an empty list to hide them.",
+            "default": "[\n      { value: 'idea', label: 'Idea' },\n      { value: 'problem', label: 'Problem' },\n      { value: 'question', label: 'Question' },\n      { value: 'praise', label: 'Praise' },\n    ]"
+          },
+          {
+            "name": "context",
+            "type": "string",
+            "required": false,
+            "description": "Describes the context that may be included, e.g. the page and browser. Hidden when empty."
+          },
+          {
+            "name": "askEmail",
+            "type": "boolean",
+            "required": false,
+            "description": "Ask for an optional reply address.",
+            "default": "false"
+          },
+          {
+            "name": "minLength",
+            "type": "number",
+            "required": false,
+            "description": "Shortest accepted message, in characters.",
+            "default": "10"
+          },
+          {
+            "name": "sending",
+            "type": "boolean",
+            "required": false,
+            "description": "",
+            "default": "false"
+          },
+          {
+            "name": "sent",
+            "type": "boolean",
+            "required": false,
+            "description": "",
+            "default": "false"
+          },
+          {
+            "name": "error",
+            "type": "string",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "title",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Send feedback'"
+          },
+          {
+            "name": "description",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Tell us what works and what gets in the way. We read every message.'"
+          },
+          {
+            "name": "ratingLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'How is it going?'"
+          },
+          {
+            "name": "ratingLowLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Very poor'"
+          },
+          {
+            "name": "ratingHighLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Great'"
+          },
+          {
+            "name": "categoryLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Kind of feedback'"
+          },
+          {
+            "name": "messageLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Your feedback'"
+          },
+          {
+            "name": "messagePlaceholder",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'What happened, and what did you expect?'"
+          },
+          {
+            "name": "requiredLabel",
+            "type": "string",
+            "required": false,
+            "description": "Shown when the message is empty.",
+            "default": "'Describe your feedback before sending.'"
+          },
+          {
+            "name": "tooShortLabel",
+            "type": "string",
+            "required": false,
+            "description": "Shown when the message is too short. `{min}` is replaced.",
+            "default": "'Write at least {min} characters.'"
+          },
+          {
+            "name": "contextLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Include page and browser details'"
+          },
+          {
+            "name": "emailLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Email for a reply (optional)'"
+          },
+          {
+            "name": "submitLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Send feedback'"
+          },
+          {
+            "name": "cancelLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Cancel'"
+          },
+          {
+            "name": "closeLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Close'"
+          },
+          {
+            "name": "sentTitle",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Thanks for your feedback'"
+          },
+          {
+            "name": "sentCopy",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'It reaches the team straight away. We reply when we need more detail.'"
+          },
+          {
+            "name": "shortcutLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'to send'"
+          },
+          {
+            "name": "onsubmit",
+            "type": "(feedback: BissFeedbackPayload) => void",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "onclose",
+            "type": "() => void",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "onOpenChange",
+            "type": "(open: boolean) => void",
+            "required": false,
+            "description": ""
+          }
+        ],
+        "events": [
+          {
+            "name": "onsubmit",
+            "type": "(feedback: BissFeedbackPayload) => void",
+            "required": false,
+            "description": "Callback prop."
+          },
+          {
+            "name": "onclose",
+            "type": "() => void",
+            "required": false,
+            "description": "Callback prop."
+          },
+          {
+            "name": "onOpenChange",
+            "type": "(open: boolean) => void",
+            "required": false,
+            "description": "Callback prop."
+          }
+        ],
+        "slots": []
+      },
+      "modern": true
+    },
+    {
       "name": "BissField",
       "tier": "Components",
       "slug": "field",
@@ -5339,6 +6739,142 @@
           {
             "name": "onmatch",
             "type": "(value: 'all' | 'any') => void",
+            "required": false,
+            "description": "Callback prop."
+          }
+        ],
+        "slots": []
+      },
+      "modern": true
+    },
+    {
+      "name": "BissFunnelChart",
+      "tier": "Components",
+      "slug": "funnel-chart",
+      "short": "FunnelChart",
+      "category": "Charts",
+      "description": "Stages of a pipeline as narrowing bars, with counts and conversion between stages.",
+      "guidance": "State what a figure means. Include labels and units in nearby copy, and use color as reinforcement rather than the only signal.",
+      "vue": {
+        "props": [
+          {
+            "name": "stages",
+            "type": "BissFunnelStage[]",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "label",
+            "type": "string",
+            "required": true,
+            "description": "Accessible name of the chart, for example “Grant pipeline 2026”."
+          },
+          {
+            "name": "locale",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'en-GB'"
+          },
+          {
+            "name": "interactive",
+            "type": "boolean",
+            "required": false,
+            "description": "Render each stage as a button that emits `pick`.",
+            "default": "false"
+          },
+          {
+            "name": "conversionLabel",
+            "type": "string",
+            "required": false,
+            "description": "Conversion from the previous stage. `{percent}` is replaced.",
+            "default": "'{percent} of previous'"
+          },
+          {
+            "name": "overallLabel",
+            "type": "string",
+            "required": false,
+            "description": "The summary under the chart. `{percent}`, `{first}` and `{last}` are replaced. Empty hides it.",
+            "default": "'{percent} of {first} reach {last}'"
+          },
+          {
+            "name": "emptyLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'No stages to show yet.'"
+          }
+        ],
+        "events": [
+          {
+            "name": "pick",
+            "type": "[stage: BissFunnelStage]",
+            "required": true,
+            "description": ""
+          }
+        ],
+        "slots": []
+      },
+      "svelte": {
+        "props": [
+          {
+            "name": "stages",
+            "type": "BissFunnelStage[]",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "label",
+            "type": "string",
+            "required": true,
+            "description": "Accessible name of the chart, for example “Grant pipeline 2026”."
+          },
+          {
+            "name": "locale",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'en-GB'"
+          },
+          {
+            "name": "interactive",
+            "type": "boolean",
+            "required": false,
+            "description": "Render each stage as a button that calls `onpick`.",
+            "default": "false"
+          },
+          {
+            "name": "conversionLabel",
+            "type": "string",
+            "required": false,
+            "description": "Conversion from the previous stage. `{percent}` is replaced.",
+            "default": "'{percent} of previous'"
+          },
+          {
+            "name": "overallLabel",
+            "type": "string",
+            "required": false,
+            "description": "The summary under the chart. `{percent}`, `{first}` and `{last}` are replaced. Empty hides it.",
+            "default": "'{percent} of {first} reach {last}'"
+          },
+          {
+            "name": "emptyLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'No stages to show yet.'"
+          },
+          {
+            "name": "onpick",
+            "type": "(stage: BissFunnelStage) => void",
+            "required": false,
+            "description": ""
+          }
+        ],
+        "events": [
+          {
+            "name": "onpick",
+            "type": "(stage: BissFunnelStage) => void",
             "required": false,
             "description": "Callback prop."
           }
@@ -6341,6 +7877,392 @@
       "modern": true
     },
     {
+      "name": "BissImportMapper",
+      "tier": "Blocks",
+      "slug": "import-mapper",
+      "short": "ImportMapper",
+      "category": "Data views",
+      "description": "Match imported columns to fields, with sample values, automatic matching and required checks.",
+      "guidance": "Pass only the records the person may see. The host owns persistence, permissions and domain calculations; these blocks render data and emit intent.",
+      "vue": {
+        "props": [
+          {
+            "name": "columns",
+            "type": "BissImportColumn[]",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "fields",
+            "type": "BissImportField[]",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "autoMatchOnStart",
+            "type": "boolean",
+            "required": false,
+            "description": "Suggest fields for undecided columns on first render.",
+            "default": "true"
+          },
+          {
+            "name": "steps",
+            "type": "string[]",
+            "required": false,
+            "description": "Step names for the header, for example Upload, Match columns, Review."
+          },
+          {
+            "name": "step",
+            "type": "number",
+            "required": false,
+            "description": "The current step, starting at 1."
+          },
+          {
+            "name": "title",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Match columns'"
+          },
+          {
+            "name": "description",
+            "type": "string",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "busy",
+            "type": "boolean",
+            "required": false,
+            "description": "",
+            "default": "false"
+          },
+          {
+            "name": "columnLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Column in file'"
+          },
+          {
+            "name": "samplesLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Sample values'"
+          },
+          {
+            "name": "fieldLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Imports to'"
+          },
+          {
+            "name": "skipLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Don’t import'"
+          },
+          {
+            "name": "autoMatchLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Auto-match'"
+          },
+          {
+            "name": "suggestedLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Suggested'"
+          },
+          {
+            "name": "requiredLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'required'"
+          },
+          {
+            "name": "selectLabel",
+            "type": "string",
+            "required": false,
+            "description": "Accessible name of each row's select. `{column}` is replaced.",
+            "default": "'Field for {column}'"
+          },
+          {
+            "name": "missingLabel",
+            "type": "string",
+            "required": false,
+            "description": "`{fields}` is replaced by the unmapped required fields.",
+            "default": "'Choose a column for {fields}.'"
+          },
+          {
+            "name": "conflictLabel",
+            "type": "string",
+            "required": false,
+            "description": "`{field}` and `{columns}` are replaced.",
+            "default": "'{field} is chosen for {columns}.'"
+          },
+          {
+            "name": "summaryLabel",
+            "type": "string",
+            "required": false,
+            "description": "`{count}` and `{total}` are replaced.",
+            "default": "'{count} of {total} columns will be imported.'"
+          },
+          {
+            "name": "movedLabel",
+            "type": "string",
+            "required": false,
+            "description": "Announced when a field moves. `{field}` and `{column}` are replaced.",
+            "default": "'{field} moved to {column}.'"
+          },
+          {
+            "name": "stepsLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Import steps'"
+          },
+          {
+            "name": "noSamplesLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'No values'"
+          },
+          {
+            "name": "submitLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Continue'"
+          },
+          {
+            "name": "mapping",
+            "type": "BissImportMapping",
+            "required": false,
+            "description": "Controlled model. Bind with v-model:mapping.",
+            "default": "() => ({})"
+          }
+        ],
+        "events": [
+          {
+            "name": "change",
+            "type": "[mapping: BissImportMapping]",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "submit",
+            "type": "[mapping: BissImportMapping]",
+            "required": true,
+            "description": ""
+          }
+        ],
+        "slots": []
+      },
+      "svelte": {
+        "props": [
+          {
+            "name": "columns",
+            "type": "BissImportColumn[]",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "fields",
+            "type": "BissImportField[]",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "mapping",
+            "type": "BissImportMapping",
+            "required": false,
+            "description": "Column to field; `null` leaves a column out. Bind to keep it in sync.",
+            "default": "$bindable({})"
+          },
+          {
+            "name": "autoMatchOnStart",
+            "type": "boolean",
+            "required": false,
+            "description": "Suggest fields for undecided columns on first render.",
+            "default": "true"
+          },
+          {
+            "name": "steps",
+            "type": "string[]",
+            "required": false,
+            "description": "Step names for the header, for example Upload, Match columns, Review."
+          },
+          {
+            "name": "step",
+            "type": "number",
+            "required": false,
+            "description": "The current step, starting at 1."
+          },
+          {
+            "name": "title",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Match columns'"
+          },
+          {
+            "name": "description",
+            "type": "string",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "busy",
+            "type": "boolean",
+            "required": false,
+            "description": "",
+            "default": "false"
+          },
+          {
+            "name": "columnLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Column in file'"
+          },
+          {
+            "name": "samplesLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Sample values'"
+          },
+          {
+            "name": "fieldLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Imports to'"
+          },
+          {
+            "name": "skipLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Don’t import'"
+          },
+          {
+            "name": "autoMatchLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Auto-match'"
+          },
+          {
+            "name": "suggestedLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Suggested'"
+          },
+          {
+            "name": "requiredLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'required'"
+          },
+          {
+            "name": "selectLabel",
+            "type": "string",
+            "required": false,
+            "description": "Accessible name of each row's select. `{column}` is replaced.",
+            "default": "'Field for {column}'"
+          },
+          {
+            "name": "missingLabel",
+            "type": "string",
+            "required": false,
+            "description": "`{fields}` is replaced by the unmapped required fields.",
+            "default": "'Choose a column for {fields}.'"
+          },
+          {
+            "name": "conflictLabel",
+            "type": "string",
+            "required": false,
+            "description": "`{field}` and `{columns}` are replaced.",
+            "default": "'{field} is chosen for {columns}.'"
+          },
+          {
+            "name": "summaryLabel",
+            "type": "string",
+            "required": false,
+            "description": "`{count}` and `{total}` are replaced.",
+            "default": "'{count} of {total} columns will be imported.'"
+          },
+          {
+            "name": "movedLabel",
+            "type": "string",
+            "required": false,
+            "description": "Announced when a field moves. `{field}` and `{column}` are replaced.",
+            "default": "'{field} moved to {column}.'"
+          },
+          {
+            "name": "stepsLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Import steps'"
+          },
+          {
+            "name": "noSamplesLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'No values'"
+          },
+          {
+            "name": "submitLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Continue'"
+          },
+          {
+            "name": "onchange",
+            "type": "(mapping: BissImportMapping) => void",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "onsubmit",
+            "type": "(mapping: BissImportMapping) => void",
+            "required": false,
+            "description": ""
+          }
+        ],
+        "events": [
+          {
+            "name": "onchange",
+            "type": "(mapping: BissImportMapping) => void",
+            "required": false,
+            "description": "Callback prop."
+          },
+          {
+            "name": "onsubmit",
+            "type": "(mapping: BissImportMapping) => void",
+            "required": false,
+            "description": "Callback prop."
+          }
+        ],
+        "slots": []
+      },
+      "modern": true
+    },
+    {
       "name": "BissInput",
       "tier": "Components",
       "slug": "input",
@@ -6709,6 +8631,518 @@
       "modern": true
     },
     {
+      "name": "BissKeyResult",
+      "tier": "Blocks",
+      "slug": "key-result",
+      "short": "KeyResult",
+      "category": "Dashboards",
+      "description": "A key result with start, current and target values, progress, confidence and a check-in.",
+      "guidance": "Each widget answers one question. Name the figure, explain it in a line, and offer one next action.",
+      "vue": {
+        "props": [
+          {
+            "name": "title",
+            "type": "string",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "owner",
+            "type": "string",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "start",
+            "type": "number",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "current",
+            "type": "number",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "target",
+            "type": "number",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "format",
+            "type": "BissKeyResultFormat",
+            "required": false,
+            "description": "",
+            "default": "'number'"
+          },
+          {
+            "name": "unit",
+            "type": "string",
+            "required": false,
+            "description": "Unit after plain numbers, such as “papers”."
+          },
+          {
+            "name": "currency",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'EUR'"
+          },
+          {
+            "name": "locale",
+            "type": "string",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "formatValue",
+            "type": "(value: number) => string",
+            "required": false,
+            "description": "Formats every value; overrides `format`, `unit` and `currency`."
+          },
+          {
+            "name": "expected",
+            "type": "number",
+            "required": false,
+            "description": "Expected progress by today, 0–1; drawn as a marker on the bar."
+          },
+          {
+            "name": "confidence",
+            "type": "BissConfidence",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "lastCheckin",
+            "type": "BissKeyResultLastCheckin",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "canCheckIn",
+            "type": "boolean",
+            "required": false,
+            "description": "",
+            "default": "true"
+          },
+          {
+            "name": "busy",
+            "type": "boolean",
+            "required": false,
+            "description": "The check-in is being saved.",
+            "default": "false"
+          },
+          {
+            "name": "level",
+            "type": "2 | 3 | 4",
+            "required": false,
+            "description": "Heading level of the title.",
+            "default": "3"
+          },
+          {
+            "name": "confidenceLabels",
+            "type": "Record<BissConfidence, string>",
+            "required": false,
+            "description": "",
+            "default": "() => ({\n      'on-track': 'On track',\n      'at-risk': 'At risk',\n      'off-track': 'Off track',\n    })"
+          },
+          {
+            "name": "progressLabel",
+            "type": "string",
+            "required": false,
+            "description": "Accessible name of the bar. `{title}` is replaced.",
+            "default": "'Progress of {title}'"
+          },
+          {
+            "name": "ownerLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Owner'"
+          },
+          {
+            "name": "startLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Start'"
+          },
+          {
+            "name": "targetLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Target'"
+          },
+          {
+            "name": "checkInLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Check in'"
+          },
+          {
+            "name": "formTitle",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'New check-in'"
+          },
+          {
+            "name": "valueLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Current value'"
+          },
+          {
+            "name": "confidenceLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Confidence'"
+          },
+          {
+            "name": "noteLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Note'"
+          },
+          {
+            "name": "notePlaceholder",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'What changed since the last check-in?'"
+          },
+          {
+            "name": "saveLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Save check-in'"
+          },
+          {
+            "name": "cancelLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Cancel'"
+          },
+          {
+            "name": "invalidLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Enter a number, for example 12 or 12.5.'"
+          },
+          {
+            "name": "noCheckinLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'No check-ins yet'"
+          },
+          {
+            "name": "lastCheckinLabel",
+            "type": "string",
+            "required": false,
+            "description": "`{time}` and `{author}` are replaced.",
+            "default": "'{time} by {author}'"
+          },
+          {
+            "name": "open",
+            "type": "boolean",
+            "required": false,
+            "description": "Controlled model. Bind with v-model:open.",
+            "default": "false"
+          }
+        ],
+        "events": [
+          {
+            "name": "checkin",
+            "type": "[value: BissKeyResultCheckin]",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "cancel",
+            "type": "[]",
+            "required": true,
+            "description": ""
+          }
+        ],
+        "slots": []
+      },
+      "svelte": {
+        "props": [
+          {
+            "name": "title",
+            "type": "string",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "owner",
+            "type": "string",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "start",
+            "type": "number",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "current",
+            "type": "number",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "target",
+            "type": "number",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "format",
+            "type": "BissKeyResultFormat",
+            "required": false,
+            "description": "",
+            "default": "'number'"
+          },
+          {
+            "name": "unit",
+            "type": "string",
+            "required": false,
+            "description": "Unit after plain numbers, such as “papers”."
+          },
+          {
+            "name": "currency",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'EUR'"
+          },
+          {
+            "name": "locale",
+            "type": "string",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "formatValue",
+            "type": "(value: number) => string",
+            "required": false,
+            "description": "Formats every value; overrides `format`, `unit` and `currency`."
+          },
+          {
+            "name": "expected",
+            "type": "number",
+            "required": false,
+            "description": "Expected progress by today, 0–1; drawn as a marker on the bar."
+          },
+          {
+            "name": "confidence",
+            "type": "BissConfidence",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "lastCheckin",
+            "type": "BissKeyResultLastCheckin",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "canCheckIn",
+            "type": "boolean",
+            "required": false,
+            "description": "",
+            "default": "true"
+          },
+          {
+            "name": "open",
+            "type": "boolean",
+            "required": false,
+            "description": "The check-in form is open. Bind to control it.",
+            "default": "$bindable(false)"
+          },
+          {
+            "name": "busy",
+            "type": "boolean",
+            "required": false,
+            "description": "The check-in is being saved.",
+            "default": "false"
+          },
+          {
+            "name": "level",
+            "type": "2 | 3 | 4",
+            "required": false,
+            "description": "Heading level of the title.",
+            "default": "3"
+          },
+          {
+            "name": "confidenceLabels",
+            "type": "Record<BissConfidence, string>",
+            "required": false,
+            "description": "",
+            "default": "{ 'on-track': 'On track', 'at-risk': 'At risk', 'off-track': 'Off track' }"
+          },
+          {
+            "name": "progressLabel",
+            "type": "string",
+            "required": false,
+            "description": "Accessible name of the bar. `{title}` is replaced.",
+            "default": "'Progress of {title}'"
+          },
+          {
+            "name": "ownerLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Owner'"
+          },
+          {
+            "name": "startLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Start'"
+          },
+          {
+            "name": "targetLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Target'"
+          },
+          {
+            "name": "checkInLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Check in'"
+          },
+          {
+            "name": "formTitle",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'New check-in'"
+          },
+          {
+            "name": "valueLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Current value'"
+          },
+          {
+            "name": "confidenceLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Confidence'"
+          },
+          {
+            "name": "noteLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Note'"
+          },
+          {
+            "name": "notePlaceholder",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'What changed since the last check-in?'"
+          },
+          {
+            "name": "saveLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Save check-in'"
+          },
+          {
+            "name": "cancelLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Cancel'"
+          },
+          {
+            "name": "invalidLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Enter a number, for example 12 or 12.5.'"
+          },
+          {
+            "name": "noCheckinLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'No check-ins yet'"
+          },
+          {
+            "name": "lastCheckinLabel",
+            "type": "string",
+            "required": false,
+            "description": "`{time}` and `{author}` are replaced.",
+            "default": "'{time} by {author}'"
+          },
+          {
+            "name": "oncheckin",
+            "type": "(value: BissKeyResultCheckin) => void",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "oncancel",
+            "type": "() => void",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "onOpenChange",
+            "type": "(open: boolean) => void",
+            "required": false,
+            "description": ""
+          }
+        ],
+        "events": [
+          {
+            "name": "oncheckin",
+            "type": "(value: BissKeyResultCheckin) => void",
+            "required": false,
+            "description": "Callback prop."
+          },
+          {
+            "name": "oncancel",
+            "type": "() => void",
+            "required": false,
+            "description": "Callback prop."
+          },
+          {
+            "name": "onOpenChange",
+            "type": "(open: boolean) => void",
+            "required": false,
+            "description": "Callback prop."
+          }
+        ],
+        "slots": []
+      },
+      "modern": true
+    },
+    {
       "name": "BissKpiCard",
       "tier": "Blocks",
       "slug": "kpi-card",
@@ -6957,6 +9391,276 @@
           }
         ],
         "slots": []
+      },
+      "modern": true
+    },
+    {
+      "name": "BissLightbox",
+      "tier": "Blocks",
+      "slug": "lightbox",
+      "short": "Lightbox",
+      "category": "Documents",
+      "description": "View images full screen with captions and keyboard navigation.",
+      "guidance": "Document blocks render host-provided content. Sanitize rich text before passing it in and keep links explicit.",
+      "vue": {
+        "props": [
+          {
+            "name": "images",
+            "type": "BissLightboxImage[]",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "loop",
+            "type": "boolean",
+            "required": false,
+            "description": "Wrap from the last image to the first and back.",
+            "default": "true"
+          },
+          {
+            "name": "thumbnails",
+            "type": "boolean",
+            "required": false,
+            "description": "Show the strip of thumbnails when there is more than one image.",
+            "default": "true"
+          },
+          {
+            "name": "portal",
+            "type": "boolean",
+            "required": false,
+            "description": "Render in `<body>`, outside clipping ancestors.",
+            "default": "false"
+          },
+          {
+            "name": "label",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Image viewer'"
+          },
+          {
+            "name": "closeLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Close'"
+          },
+          {
+            "name": "previousLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Previous image'"
+          },
+          {
+            "name": "nextLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Next image'"
+          },
+          {
+            "name": "counterLabel",
+            "type": "string",
+            "required": false,
+            "description": "`{index}` and `{count}` are replaced.",
+            "default": "'{index} of {count}'"
+          },
+          {
+            "name": "thumbnailLabel",
+            "type": "string",
+            "required": false,
+            "description": "`{index}` is replaced.",
+            "default": "'Show image {index}'"
+          },
+          {
+            "name": "thumbnailsLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Images'"
+          },
+          {
+            "name": "emptyLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'No images to show.'"
+          },
+          {
+            "name": "open",
+            "type": "boolean",
+            "required": false,
+            "description": "Controlled model. Bind with v-model:open.",
+            "default": "false"
+          },
+          {
+            "name": "index",
+            "type": "number",
+            "required": false,
+            "description": "Controlled model. Bind with v-model:index.",
+            "default": "0"
+          }
+        ],
+        "events": [
+          {
+            "name": "close",
+            "type": "[]",
+            "required": true,
+            "description": ""
+          }
+        ],
+        "slots": [
+          "actions"
+        ]
+      },
+      "svelte": {
+        "props": [
+          {
+            "name": "images",
+            "type": "BissLightboxImage[]",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "open",
+            "type": "boolean",
+            "required": false,
+            "description": "",
+            "default": "$bindable(false)"
+          },
+          {
+            "name": "index",
+            "type": "number",
+            "required": false,
+            "description": "",
+            "default": "$bindable(0)"
+          },
+          {
+            "name": "loop",
+            "type": "boolean",
+            "required": false,
+            "description": "Wrap from the last image to the first and back.",
+            "default": "true"
+          },
+          {
+            "name": "thumbnails",
+            "type": "boolean",
+            "required": false,
+            "description": "Show the strip of thumbnails when there is more than one image.",
+            "default": "true"
+          },
+          {
+            "name": "portal",
+            "type": "boolean",
+            "required": false,
+            "description": "Render in `<body>`, outside clipping ancestors.",
+            "default": "false"
+          },
+          {
+            "name": "label",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Image viewer'"
+          },
+          {
+            "name": "closeLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Close'"
+          },
+          {
+            "name": "previousLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Previous image'"
+          },
+          {
+            "name": "nextLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Next image'"
+          },
+          {
+            "name": "counterLabel",
+            "type": "string",
+            "required": false,
+            "description": "`{index}` and `{count}` are replaced.",
+            "default": "'{index} of {count}'"
+          },
+          {
+            "name": "thumbnailLabel",
+            "type": "string",
+            "required": false,
+            "description": "`{index}` is replaced.",
+            "default": "'Show image {index}'"
+          },
+          {
+            "name": "thumbnailsLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Images'"
+          },
+          {
+            "name": "emptyLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'No images to show.'"
+          },
+          {
+            "name": "onclose",
+            "type": "() => void",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "onOpenChange",
+            "type": "(open: boolean) => void",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "onindex",
+            "type": "(index: number) => void",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "actions",
+            "type": "Snippet<[{ image: BissLightboxImage | undefined; index: number }]>",
+            "required": false,
+            "description": ""
+          }
+        ],
+        "events": [
+          {
+            "name": "onclose",
+            "type": "() => void",
+            "required": false,
+            "description": "Callback prop."
+          },
+          {
+            "name": "onOpenChange",
+            "type": "(open: boolean) => void",
+            "required": false,
+            "description": "Callback prop."
+          },
+          {
+            "name": "onindex",
+            "type": "(index: number) => void",
+            "required": false,
+            "description": "Callback prop."
+          }
+        ],
+        "slots": [
+          "actions"
+        ]
       },
       "modern": true
     },
@@ -7848,6 +10552,368 @@
         ],
         "slots": [
           "icon"
+        ]
+      },
+      "modern": true
+    },
+    {
+      "name": "BissNotificationCenter",
+      "tier": "Blocks",
+      "slug": "notification-center",
+      "short": "NotificationCenter",
+      "category": "Sharing and collaboration",
+      "description": "A bell with the unread count that opens the latest notifications, with mark-all-read.",
+      "guidance": "These blocks show and edit who can do what. The host resolves identities, checks permissions and persists every change.",
+      "vue": {
+        "props": [
+          {
+            "name": "items",
+            "type": "BissNotice[]",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "unread",
+            "type": "number",
+            "required": false,
+            "description": "Total unread, when the host knows more than the notices shown. Defaults to the unread items."
+          },
+          {
+            "name": "max",
+            "type": "number",
+            "required": false,
+            "description": "Shows at most this many notices; link to the full inbox for the rest.",
+            "default": "8"
+          },
+          {
+            "name": "loading",
+            "type": "boolean",
+            "required": false,
+            "description": "",
+            "default": "false"
+          },
+          {
+            "name": "error",
+            "type": "string",
+            "required": false,
+            "description": "A failure message; replaces the list."
+          },
+          {
+            "name": "label",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Notifications'"
+          },
+          {
+            "name": "unreadLabel",
+            "type": "string",
+            "required": false,
+            "description": "Accessible name of the bell when there are unread notices. `{count}` is replaced.",
+            "default": "'Notifications, {count} unread'"
+          },
+          {
+            "name": "markAllLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Mark all as read'"
+          },
+          {
+            "name": "emptyTitle",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'You’re all caught up'"
+          },
+          {
+            "name": "emptyCopy",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Mentions, assignments and deadlines appear here.'"
+          },
+          {
+            "name": "loadingLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Loading notifications…'"
+          },
+          {
+            "name": "retryLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Try again'"
+          },
+          {
+            "name": "seeAllLabel",
+            "type": "string",
+            "required": false,
+            "description": "Footer link text. Pass an empty string to hide the footer.",
+            "default": "'See all notifications'"
+          },
+          {
+            "name": "seeAllHref",
+            "type": "string",
+            "required": false,
+            "description": "Renders the footer as a link. Without it the footer emits `more`."
+          },
+          {
+            "name": "width",
+            "type": "number",
+            "required": false,
+            "description": "",
+            "default": "380"
+          },
+          {
+            "name": "align",
+            "type": "'start' | 'center' | 'end'",
+            "required": false,
+            "description": "",
+            "default": "'end'"
+          },
+          {
+            "name": "portal",
+            "type": "boolean",
+            "required": false,
+            "description": "Render the panel in `<body>`, outside clipping ancestors.",
+            "default": "false"
+          },
+          {
+            "name": "open",
+            "type": "boolean",
+            "required": false,
+            "description": "Controlled model. Bind with v-model:open.",
+            "default": "false"
+          }
+        ],
+        "events": [
+          {
+            "name": "pick",
+            "type": "[item: BissNotice]",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "read-all",
+            "type": "[]",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "more",
+            "type": "[]",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "retry",
+            "type": "[]",
+            "required": true,
+            "description": ""
+          }
+        ],
+        "slots": [
+          "footer"
+        ]
+      },
+      "svelte": {
+        "props": [
+          {
+            "name": "items",
+            "type": "BissNotice[]",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "unread",
+            "type": "number",
+            "required": false,
+            "description": "Total unread, when the host knows more than the notices shown. Defaults to the unread items."
+          },
+          {
+            "name": "max",
+            "type": "number",
+            "required": false,
+            "description": "Shows at most this many notices; link to the full inbox for the rest.",
+            "default": "8"
+          },
+          {
+            "name": "loading",
+            "type": "boolean",
+            "required": false,
+            "description": "",
+            "default": "false"
+          },
+          {
+            "name": "error",
+            "type": "string",
+            "required": false,
+            "description": "A failure message; replaces the list."
+          },
+          {
+            "name": "open",
+            "type": "boolean",
+            "required": false,
+            "description": "",
+            "default": "$bindable(false)"
+          },
+          {
+            "name": "label",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Notifications'"
+          },
+          {
+            "name": "unreadLabel",
+            "type": "string",
+            "required": false,
+            "description": "Accessible name of the bell when there are unread notices. `{count}` is replaced.",
+            "default": "'Notifications, {count} unread'"
+          },
+          {
+            "name": "markAllLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Mark all as read'"
+          },
+          {
+            "name": "emptyTitle",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'You’re all caught up'"
+          },
+          {
+            "name": "emptyCopy",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Mentions, assignments and deadlines appear here.'"
+          },
+          {
+            "name": "loadingLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Loading notifications…'"
+          },
+          {
+            "name": "retryLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Try again'"
+          },
+          {
+            "name": "seeAllLabel",
+            "type": "string",
+            "required": false,
+            "description": "Footer link text. Pass an empty string to hide the footer.",
+            "default": "'See all notifications'"
+          },
+          {
+            "name": "seeAllHref",
+            "type": "string",
+            "required": false,
+            "description": "Renders the footer as a link. Without it the footer calls `onmore`."
+          },
+          {
+            "name": "width",
+            "type": "number",
+            "required": false,
+            "description": "",
+            "default": "380"
+          },
+          {
+            "name": "align",
+            "type": "'start' | 'center' | 'end'",
+            "required": false,
+            "description": "",
+            "default": "'end'"
+          },
+          {
+            "name": "portal",
+            "type": "boolean",
+            "required": false,
+            "description": "Render the panel in `<body>`, outside clipping ancestors.",
+            "default": "false"
+          },
+          {
+            "name": "onpick",
+            "type": "(item: BissNotice) => void",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "onreadall",
+            "type": "() => void",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "onmore",
+            "type": "() => void",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "onretry",
+            "type": "() => void",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "onOpenChange",
+            "type": "(open: boolean) => void",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "footer",
+            "type": "Snippet",
+            "required": false,
+            "description": ""
+          }
+        ],
+        "events": [
+          {
+            "name": "onpick",
+            "type": "(item: BissNotice) => void",
+            "required": false,
+            "description": "Callback prop."
+          },
+          {
+            "name": "onreadall",
+            "type": "() => void",
+            "required": false,
+            "description": "Callback prop."
+          },
+          {
+            "name": "onmore",
+            "type": "() => void",
+            "required": false,
+            "description": "Callback prop."
+          },
+          {
+            "name": "onretry",
+            "type": "() => void",
+            "required": false,
+            "description": "Callback prop."
+          },
+          {
+            "name": "onOpenChange",
+            "type": "(open: boolean) => void",
+            "required": false,
+            "description": "Callback prop."
+          }
+        ],
+        "slots": [
+          "footer"
         ]
       },
       "modern": true
@@ -9741,6 +12807,210 @@
       "modern": true
     },
     {
+      "name": "BissRingGauge",
+      "tier": "Components",
+      "slug": "ring-gauge",
+      "short": "RingGauge",
+      "category": "Charts",
+      "description": "One rate or share as a ring, with the figure and its context in the middle.",
+      "guidance": "State what a figure means. Include labels and units in nearby copy, and use color as reinforcement rather than the only signal.",
+      "vue": {
+        "props": [
+          {
+            "name": "value",
+            "type": "number | null",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "max",
+            "type": "number",
+            "required": false,
+            "description": "The value that fills the ring; `value / max` is the share.",
+            "default": "1"
+          },
+          {
+            "name": "label",
+            "type": "string",
+            "required": true,
+            "description": "What the figure is, for example “Grant success rate”. Also the accessible name."
+          },
+          {
+            "name": "display",
+            "type": "string",
+            "required": false,
+            "description": "Replaces the computed percentage in the middle, for example “14 of 23”."
+          },
+          {
+            "name": "caption",
+            "type": "string",
+            "required": false,
+            "description": "A line of context under the label, for example “Decided since 2022”."
+          },
+          {
+            "name": "target",
+            "type": "number | null",
+            "required": false,
+            "description": "A goal on the same scale as `value`, drawn as a tick on the ring.",
+            "default": "null"
+          },
+          {
+            "name": "targetLabel",
+            "type": "string",
+            "required": false,
+            "description": "Text for the target. `{percent}` is replaced.",
+            "default": "'Target {percent}'"
+          },
+          {
+            "name": "tone",
+            "type": "'primary' | 'success' | 'warning' | 'danger' | 'neutral'",
+            "required": false,
+            "description": "",
+            "default": "'primary'"
+          },
+          {
+            "name": "color",
+            "type": "string",
+            "required": false,
+            "description": "Any CSS color; overrides `tone`."
+          },
+          {
+            "name": "size",
+            "type": "number",
+            "required": false,
+            "description": "",
+            "default": "120"
+          },
+          {
+            "name": "thickness",
+            "type": "number",
+            "required": false,
+            "description": "",
+            "default": "10"
+          },
+          {
+            "name": "locale",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'en-GB'"
+          },
+          {
+            "name": "missingLabel",
+            "type": "string",
+            "required": false,
+            "description": "Shown in the middle when there is no value.",
+            "default": "'–'"
+          }
+        ],
+        "events": [],
+        "slots": [
+          "default"
+        ]
+      },
+      "svelte": {
+        "props": [
+          {
+            "name": "value",
+            "type": "number | null",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "max",
+            "type": "number",
+            "required": false,
+            "description": "The value that fills the ring; `value / max` is the share.",
+            "default": "1"
+          },
+          {
+            "name": "label",
+            "type": "string",
+            "required": true,
+            "description": "What the figure is, for example “Grant success rate”. Also the accessible name."
+          },
+          {
+            "name": "display",
+            "type": "string",
+            "required": false,
+            "description": "Replaces the computed percentage in the middle, for example “14 of 23”."
+          },
+          {
+            "name": "caption",
+            "type": "string",
+            "required": false,
+            "description": "A line of context under the label, for example “Decided since 2022”."
+          },
+          {
+            "name": "target",
+            "type": "number | null",
+            "required": false,
+            "description": "A goal on the same scale as `value`, drawn as a tick on the ring.",
+            "default": "null"
+          },
+          {
+            "name": "targetLabel",
+            "type": "string",
+            "required": false,
+            "description": "Text for the target. `{percent}` is replaced.",
+            "default": "'Target {percent}'"
+          },
+          {
+            "name": "tone",
+            "type": "'primary' | 'success' | 'warning' | 'danger' | 'neutral'",
+            "required": false,
+            "description": "",
+            "default": "'primary'"
+          },
+          {
+            "name": "color",
+            "type": "string",
+            "required": false,
+            "description": "Any CSS color; overrides `tone`."
+          },
+          {
+            "name": "size",
+            "type": "number",
+            "required": false,
+            "description": "",
+            "default": "120"
+          },
+          {
+            "name": "thickness",
+            "type": "number",
+            "required": false,
+            "description": "",
+            "default": "10"
+          },
+          {
+            "name": "locale",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'en-GB'"
+          },
+          {
+            "name": "missingLabel",
+            "type": "string",
+            "required": false,
+            "description": "Shown in the middle when there is no value.",
+            "default": "'–'"
+          },
+          {
+            "name": "children",
+            "type": "Snippet",
+            "required": false,
+            "description": ""
+          }
+        ],
+        "events": [],
+        "slots": [
+          "children"
+        ]
+      },
+      "modern": true
+    },
+    {
       "name": "BissRoleEditor",
       "tier": "Blocks",
       "slug": "role-editor",
@@ -11217,6 +14487,213 @@
         "slots": [
           "children",
           "actions"
+        ]
+      },
+      "modern": true
+    },
+    {
+      "name": "BissSidebar",
+      "tier": "Blocks",
+      "slug": "sidebar",
+      "short": "Sidebar",
+      "category": "Application shells",
+      "description": "A collapsible application sidebar with workspace, sections, pinned items and an account footer.",
+      "guidance": "The shell frames the page; the host router owns navigation, the signed-in account and permissions.",
+      "vue": {
+        "props": [
+          {
+            "name": "label",
+            "type": "string",
+            "required": false,
+            "description": "Accessible name of the sidebar and the drawer's title.",
+            "default": "'Main navigation'"
+          },
+          {
+            "name": "pinnedLabel",
+            "type": "string",
+            "required": false,
+            "description": "Heading of the pinned section.",
+            "default": "'Pinned'"
+          },
+          {
+            "name": "collapseLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Collapse sidebar'"
+          },
+          {
+            "name": "expandLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Expand sidebar'"
+          },
+          {
+            "name": "closeLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Close navigation'"
+          },
+          {
+            "name": "collapsible",
+            "type": "boolean",
+            "required": false,
+            "description": "Show the collapse toggle on wide screens.",
+            "default": "true"
+          },
+          {
+            "name": "portal",
+            "type": "boolean",
+            "required": false,
+            "description": "Render the phone drawer in `<body>`.",
+            "default": "true"
+          },
+          {
+            "name": "collapsed",
+            "type": "boolean",
+            "required": false,
+            "description": "Controlled model. Bind with v-model:collapsed.",
+            "default": "false"
+          },
+          {
+            "name": "mobileOpen",
+            "type": "boolean",
+            "required": false,
+            "description": "Controlled model. Bind with v-model:mobileOpen.",
+            "default": "false"
+          }
+        ],
+        "events": [],
+        "slots": [
+          "brand",
+          "default",
+          "pinned",
+          "footer"
+        ]
+      },
+      "svelte": {
+        "props": [
+          {
+            "name": "collapsed",
+            "type": "boolean",
+            "required": false,
+            "description": "",
+            "default": "$bindable(false)"
+          },
+          {
+            "name": "mobileOpen",
+            "type": "boolean",
+            "required": false,
+            "description": "",
+            "default": "$bindable(false)"
+          },
+          {
+            "name": "label",
+            "type": "string",
+            "required": false,
+            "description": "Accessible name of the sidebar and the drawer's title.",
+            "default": "'Main navigation'"
+          },
+          {
+            "name": "pinnedLabel",
+            "type": "string",
+            "required": false,
+            "description": "Heading of the pinned section.",
+            "default": "'Pinned'"
+          },
+          {
+            "name": "collapseLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Collapse sidebar'"
+          },
+          {
+            "name": "expandLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Expand sidebar'"
+          },
+          {
+            "name": "closeLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Close navigation'"
+          },
+          {
+            "name": "collapsible",
+            "type": "boolean",
+            "required": false,
+            "description": "Show the collapse toggle on wide screens.",
+            "default": "true"
+          },
+          {
+            "name": "portal",
+            "type": "boolean",
+            "required": false,
+            "description": "Render the phone drawer in `<body>`.",
+            "default": "true"
+          },
+          {
+            "name": "oncollapse",
+            "type": "(collapsed: boolean) => void",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "onMobileOpenChange",
+            "type": "(open: boolean) => void",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "brand",
+            "type": "Snippet<[boolean]>",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "children",
+            "type": "Snippet<[boolean]>",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "pinned",
+            "type": "Snippet<[boolean]>",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "footer",
+            "type": "Snippet<[boolean]>",
+            "required": false,
+            "description": ""
+          }
+        ],
+        "events": [
+          {
+            "name": "oncollapse",
+            "type": "(collapsed: boolean) => void",
+            "required": false,
+            "description": "Callback prop."
+          },
+          {
+            "name": "onMobileOpenChange",
+            "type": "(open: boolean) => void",
+            "required": false,
+            "description": "Callback prop."
+          }
+        ],
+        "slots": [
+          "brand",
+          "children",
+          "pinned",
+          "footer"
         ]
       },
       "modern": true
@@ -13297,6 +16774,322 @@
       "modern": true
     },
     {
+      "name": "BissTemplateGallery",
+      "tier": "Blocks",
+      "slug": "template-gallery",
+      "short": "TemplateGallery",
+      "category": "Onboarding",
+      "description": "Choose a starting template by category or search, with a preview before using it.",
+      "guidance": "Ask for the smallest useful choice at each step. Completion and progress belong to the application, so people can leave and return safely.",
+      "vue": {
+        "props": [
+          {
+            "name": "templates",
+            "type": "BissTemplate[]",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "categories",
+            "type": "BissTemplateCategory[]",
+            "required": false,
+            "description": "Category labels and order. Defaults to the categories the templates use."
+          },
+          {
+            "name": "blank",
+            "type": "boolean",
+            "required": false,
+            "description": "Shows a “Start blank” action beside “Use template”.",
+            "default": "false"
+          },
+          {
+            "name": "busy",
+            "type": "boolean",
+            "required": false,
+            "description": "The use action is running: the button shows progress and ignores clicks.",
+            "default": "false"
+          },
+          {
+            "name": "label",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Templates'"
+          },
+          {
+            "name": "searchLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Search templates'"
+          },
+          {
+            "name": "allLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'All'"
+          },
+          {
+            "name": "categoryLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Category'"
+          },
+          {
+            "name": "useLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Use template'"
+          },
+          {
+            "name": "blankLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Start blank'"
+          },
+          {
+            "name": "includesLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Includes'"
+          },
+          {
+            "name": "emptyTitle",
+            "type": "string",
+            "required": false,
+            "description": "`{query}` is replaced.",
+            "default": "'No templates match “{query}”'"
+          },
+          {
+            "name": "emptyCopy",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Try another word, or look in all categories.'"
+          },
+          {
+            "name": "clearLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Clear search'"
+          },
+          {
+            "name": "previewEmpty",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Choose a template to see what it sets up.'"
+          },
+          {
+            "name": "selected",
+            "type": "string | null",
+            "required": false,
+            "description": "Controlled model. Bind with v-model:selected.",
+            "default": "null"
+          },
+          {
+            "name": "category",
+            "type": "string",
+            "required": false,
+            "description": "Controlled model. Bind with v-model:category.",
+            "default": "BISS_ALL_TEMPLATES"
+          }
+        ],
+        "events": [
+          {
+            "name": "use",
+            "type": "[template: BissTemplate]",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "blank",
+            "type": "[]",
+            "required": true,
+            "description": ""
+          }
+        ],
+        "slots": [
+          "preview"
+        ]
+      },
+      "svelte": {
+        "props": [
+          {
+            "name": "templates",
+            "type": "BissTemplate[]",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "categories",
+            "type": "BissTemplateCategory[]",
+            "required": false,
+            "description": "Category labels and order. Defaults to the categories the templates use."
+          },
+          {
+            "name": "selected",
+            "type": "string | null",
+            "required": false,
+            "description": "",
+            "default": "$bindable(null)"
+          },
+          {
+            "name": "category",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "$bindable(BISS_ALL_TEMPLATES)"
+          },
+          {
+            "name": "blank",
+            "type": "boolean",
+            "required": false,
+            "description": "Shows a “Start blank” action beside “Use template”.",
+            "default": "false"
+          },
+          {
+            "name": "busy",
+            "type": "boolean",
+            "required": false,
+            "description": "The use action is running: the button shows progress and ignores clicks.",
+            "default": "false"
+          },
+          {
+            "name": "label",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Templates'"
+          },
+          {
+            "name": "searchLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Search templates'"
+          },
+          {
+            "name": "allLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'All'"
+          },
+          {
+            "name": "categoryLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Category'"
+          },
+          {
+            "name": "useLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Use template'"
+          },
+          {
+            "name": "blankLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Start blank'"
+          },
+          {
+            "name": "includesLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Includes'"
+          },
+          {
+            "name": "emptyTitle",
+            "type": "string",
+            "required": false,
+            "description": "`{query}` is replaced.",
+            "default": "'No templates match “{query}”'"
+          },
+          {
+            "name": "emptyCopy",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Try another word, or look in all categories.'"
+          },
+          {
+            "name": "clearLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Clear search'"
+          },
+          {
+            "name": "previewEmpty",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Choose a template to see what it sets up.'"
+          },
+          {
+            "name": "onuse",
+            "type": "(template: BissTemplate) => void",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "onblank",
+            "type": "() => void",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "onselect",
+            "type": "(id: string) => void",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "preview",
+            "type": "Snippet<[BissTemplate]>",
+            "required": false,
+            "description": ""
+          }
+        ],
+        "events": [
+          {
+            "name": "onuse",
+            "type": "(template: BissTemplate) => void",
+            "required": false,
+            "description": "Callback prop."
+          },
+          {
+            "name": "onblank",
+            "type": "() => void",
+            "required": false,
+            "description": "Callback prop."
+          },
+          {
+            "name": "onselect",
+            "type": "(id: string) => void",
+            "required": false,
+            "description": "Callback prop."
+          }
+        ],
+        "slots": [
+          "preview"
+        ]
+      },
+      "modern": true
+    },
+    {
       "name": "BissTextarea",
       "tier": "Components",
       "slug": "textarea",
@@ -14298,6 +18091,286 @@
       "modern": true
     },
     {
+      "name": "BissTour",
+      "tier": "Blocks",
+      "slug": "tour",
+      "short": "Tour",
+      "category": "Onboarding",
+      "description": "A step-by-step spotlight tour anchored to elements, with progress and keyboard controls.",
+      "guidance": "Ask for the smallest useful choice at each step. Completion and progress belong to the application, so people can leave and return safely.",
+      "vue": {
+        "props": [
+          {
+            "name": "steps",
+            "type": "BissTourStep[]",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "label",
+            "type": "string",
+            "required": false,
+            "description": "The tour's name, used as the card's accessible description of progress.",
+            "default": "'Product tour'"
+          },
+          {
+            "name": "progressLabel",
+            "type": "string",
+            "required": false,
+            "description": "`{current}` and `{total}` are replaced.",
+            "default": "'Step {current} of {total}'"
+          },
+          {
+            "name": "backLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Back'"
+          },
+          {
+            "name": "nextLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Next'"
+          },
+          {
+            "name": "doneLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Done'"
+          },
+          {
+            "name": "skipLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Skip tour'"
+          },
+          {
+            "name": "padding",
+            "type": "number",
+            "required": false,
+            "description": "Space between the target and the spotlight edge, in pixels.",
+            "default": "6"
+          },
+          {
+            "name": "width",
+            "type": "number",
+            "required": false,
+            "description": "Card width in pixels; narrower on small screens.",
+            "default": "320"
+          },
+          {
+            "name": "dim",
+            "type": "boolean",
+            "required": false,
+            "description": "Dim the page around the spotlight.",
+            "default": "true"
+          },
+          {
+            "name": "portal",
+            "type": "boolean",
+            "required": false,
+            "description": "Render the spotlight and card in `<body>`.",
+            "default": "true"
+          },
+          {
+            "name": "open",
+            "type": "boolean",
+            "required": false,
+            "description": "Controlled model. Bind with v-model:open.",
+            "default": "false"
+          },
+          {
+            "name": "step",
+            "type": "number",
+            "required": false,
+            "description": "Controlled model. Bind with v-model:step.",
+            "default": "0"
+          }
+        ],
+        "events": [
+          {
+            "name": "change",
+            "type": "[index: number]",
+            "required": true,
+            "description": "The step changed through Back or Next."
+          },
+          {
+            "name": "finish",
+            "type": "[]",
+            "required": true,
+            "description": "Done on the last step."
+          },
+          {
+            "name": "skip",
+            "type": "[index: number]",
+            "required": true,
+            "description": "Skip, the close button or Escape, with the step the tour was on."
+          }
+        ],
+        "slots": [
+          "step"
+        ]
+      },
+      "svelte": {
+        "props": [
+          {
+            "name": "steps",
+            "type": "BissTourStep[]",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "open",
+            "type": "boolean",
+            "required": false,
+            "description": "",
+            "default": "$bindable(false)"
+          },
+          {
+            "name": "step",
+            "type": "number",
+            "required": false,
+            "description": "The current step's index.",
+            "default": "$bindable(0)"
+          },
+          {
+            "name": "label",
+            "type": "string",
+            "required": false,
+            "description": "The tour's name, read before the progress.",
+            "default": "'Product tour'"
+          },
+          {
+            "name": "progressLabel",
+            "type": "string",
+            "required": false,
+            "description": "`{current}` and `{total}` are replaced.",
+            "default": "'Step {current} of {total}'"
+          },
+          {
+            "name": "backLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Back'"
+          },
+          {
+            "name": "nextLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Next'"
+          },
+          {
+            "name": "doneLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Done'"
+          },
+          {
+            "name": "skipLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Skip tour'"
+          },
+          {
+            "name": "padding",
+            "type": "number",
+            "required": false,
+            "description": "Space between the target and the spotlight edge, in pixels.",
+            "default": "6"
+          },
+          {
+            "name": "width",
+            "type": "number",
+            "required": false,
+            "description": "Card width in pixels; narrower on small screens.",
+            "default": "320"
+          },
+          {
+            "name": "dim",
+            "type": "boolean",
+            "required": false,
+            "description": "Dim the page around the spotlight.",
+            "default": "true"
+          },
+          {
+            "name": "portal",
+            "type": "boolean",
+            "required": false,
+            "description": "Render the spotlight and card in `<body>`.",
+            "default": "true"
+          },
+          {
+            "name": "onchange",
+            "type": "(index: number) => void",
+            "required": false,
+            "description": "The step changed through Back or Next."
+          },
+          {
+            "name": "onfinish",
+            "type": "() => void",
+            "required": false,
+            "description": "Done on the last step."
+          },
+          {
+            "name": "onskip",
+            "type": "(index: number) => void",
+            "required": false,
+            "description": "Skip, the close button or Escape, with the step the tour was on."
+          },
+          {
+            "name": "onOpenChange",
+            "type": "(open: boolean) => void",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "children",
+            "type": "Snippet<[{ step: BissTourStep; index: number }]>",
+            "required": false,
+            "description": "Extra content under the step's text."
+          }
+        ],
+        "events": [
+          {
+            "name": "onchange",
+            "type": "(index: number) => void",
+            "required": false,
+            "description": "Callback prop."
+          },
+          {
+            "name": "onfinish",
+            "type": "() => void",
+            "required": false,
+            "description": "Callback prop."
+          },
+          {
+            "name": "onskip",
+            "type": "(index: number) => void",
+            "required": false,
+            "description": "Callback prop."
+          },
+          {
+            "name": "onOpenChange",
+            "type": "(open: boolean) => void",
+            "required": false,
+            "description": "Callback prop."
+          }
+        ],
+        "slots": [
+          "children"
+        ]
+      },
+      "modern": true
+    },
+    {
       "name": "BissValuePicker",
       "tier": "Components",
       "slug": "value-picker",
@@ -14699,6 +18772,298 @@
         "slots": [
           "children"
         ]
+      },
+      "modern": true
+    },
+    {
+      "name": "BissWorkspaceSwitcher",
+      "tier": "Blocks",
+      "slug": "workspace-switcher",
+      "short": "WorkspaceSwitcher",
+      "category": "Application shells",
+      "description": "Show the current workspace and switch to, search for or create another.",
+      "guidance": "The shell frames the page; the host router owns navigation, the signed-in account and permissions.",
+      "vue": {
+        "props": [
+          {
+            "name": "workspaces",
+            "type": "BissWorkspace[]",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "current",
+            "type": "string",
+            "required": false,
+            "description": "Id of the workspace this page works in."
+          },
+          {
+            "name": "collapsed",
+            "type": "boolean",
+            "required": false,
+            "description": "Icon-only trigger, for a collapsed sidebar rail.",
+            "default": "false"
+          },
+          {
+            "name": "searchThreshold",
+            "type": "number",
+            "required": false,
+            "description": "Show the search field when there are more workspaces than this.",
+            "default": "6"
+          },
+          {
+            "name": "canCreate",
+            "type": "boolean",
+            "required": false,
+            "description": "Show the create action.",
+            "default": "true"
+          },
+          {
+            "name": "label",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Switch workspace'"
+          },
+          {
+            "name": "heading",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Your workspaces'"
+          },
+          {
+            "name": "searchLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Find a workspace'"
+          },
+          {
+            "name": "emptyLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'No workspace matches “{query}”'"
+          },
+          {
+            "name": "createLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'New workspace'"
+          },
+          {
+            "name": "currentLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Current workspace'"
+          },
+          {
+            "name": "placeholder",
+            "type": "string",
+            "required": false,
+            "description": "Trigger text when no workspace matches `current`.",
+            "default": "'Choose a workspace'"
+          },
+          {
+            "name": "width",
+            "type": "number",
+            "required": false,
+            "description": "",
+            "default": "260"
+          },
+          {
+            "name": "align",
+            "type": "'start' | 'center' | 'end'",
+            "required": false,
+            "description": "",
+            "default": "'start'"
+          },
+          {
+            "name": "portal",
+            "type": "boolean",
+            "required": false,
+            "description": "",
+            "default": "false"
+          },
+          {
+            "name": "open",
+            "type": "boolean",
+            "required": false,
+            "description": "Controlled model. Bind with v-model:open.",
+            "default": "false"
+          }
+        ],
+        "events": [
+          {
+            "name": "select",
+            "type": "[workspace: BissWorkspace]",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "create",
+            "type": "[]",
+            "required": true,
+            "description": ""
+          }
+        ],
+        "slots": []
+      },
+      "svelte": {
+        "props": [
+          {
+            "name": "workspaces",
+            "type": "BissWorkspace[]",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "current",
+            "type": "string",
+            "required": false,
+            "description": "Id of the workspace this page works in."
+          },
+          {
+            "name": "collapsed",
+            "type": "boolean",
+            "required": false,
+            "description": "Icon-only trigger, for a collapsed sidebar rail.",
+            "default": "false"
+          },
+          {
+            "name": "searchThreshold",
+            "type": "number",
+            "required": false,
+            "description": "Show the search field when there are more workspaces than this.",
+            "default": "6"
+          },
+          {
+            "name": "canCreate",
+            "type": "boolean",
+            "required": false,
+            "description": "Show the create action.",
+            "default": "true"
+          },
+          {
+            "name": "open",
+            "type": "boolean",
+            "required": false,
+            "description": "",
+            "default": "$bindable(false)"
+          },
+          {
+            "name": "label",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Switch workspace'"
+          },
+          {
+            "name": "heading",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Your workspaces'"
+          },
+          {
+            "name": "searchLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Find a workspace'"
+          },
+          {
+            "name": "emptyLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'No workspace matches “{query}”'"
+          },
+          {
+            "name": "createLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'New workspace'"
+          },
+          {
+            "name": "currentLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Current workspace'"
+          },
+          {
+            "name": "placeholder",
+            "type": "string",
+            "required": false,
+            "description": "Trigger text when no workspace matches `current`.",
+            "default": "'Choose a workspace'"
+          },
+          {
+            "name": "width",
+            "type": "number",
+            "required": false,
+            "description": "",
+            "default": "260"
+          },
+          {
+            "name": "align",
+            "type": "'start' | 'center' | 'end'",
+            "required": false,
+            "description": "",
+            "default": "'start'"
+          },
+          {
+            "name": "portal",
+            "type": "boolean",
+            "required": false,
+            "description": "",
+            "default": "false"
+          },
+          {
+            "name": "onselect",
+            "type": "(workspace: BissWorkspace) => void",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "oncreate",
+            "type": "() => void",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "onOpenChange",
+            "type": "(open: boolean) => void",
+            "required": false,
+            "description": ""
+          }
+        ],
+        "events": [
+          {
+            "name": "onselect",
+            "type": "(workspace: BissWorkspace) => void",
+            "required": false,
+            "description": "Callback prop."
+          },
+          {
+            "name": "oncreate",
+            "type": "() => void",
+            "required": false,
+            "description": "Callback prop."
+          },
+          {
+            "name": "onOpenChange",
+            "type": "(open: boolean) => void",
+            "required": false,
+            "description": "Callback prop."
+          }
+        ],
+        "slots": []
       },
       "modern": true
     }

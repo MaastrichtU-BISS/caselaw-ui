@@ -1,0 +1,177 @@
+/* CommandMenu: an inline list for slash commands and mention pickers. */
+.biss-command-menu {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 100%;
+  max-height: var(--biss-command-max-height, 420px);
+  border: 1px solid var(--biss-border);
+  border-radius: var(--biss-radius-md);
+  background: var(--biss-card);
+  color: var(--biss-text);
+  box-shadow: var(--biss-popover-shadow);
+  font: 14px/1.45 var(--biss-font-family);
+  box-sizing: border-box;
+}
+.biss-command-menu * {
+  box-sizing: border-box;
+}
+.biss-command-search {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 12px;
+  border-bottom: 1px solid var(--biss-border-subtle);
+  color: var(--biss-muted);
+}
+.biss-command-search .biss-icon {
+  width: 15px;
+  height: 15px;
+}
+.biss-command-search input {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: var(--biss-text);
+  font: 14px var(--biss-font-family);
+}
+.biss-command-search input::placeholder {
+  color: var(--biss-muted);
+}
+.biss-command-search:focus-within {
+  box-shadow: inset 0 -2px 0 var(--biss-primary);
+}
+.biss-command-list {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: 6px;
+  outline: none;
+  scrollbar-width: thin;
+}
+.biss-command-heading {
+  margin: 8px 8px 4px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--biss-muted);
+}
+.biss-command-list > div:first-child > .biss-command-heading {
+  margin-top: 4px;
+}
+.biss-command-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 36px;
+  padding: 5px 6px;
+  border-radius: var(--biss-radius-sm);
+  color: var(--biss-text);
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+}
+.biss-command-option[data-active] {
+  background: var(--biss-hover);
+}
+.biss-command-list:focus .biss-command-option[data-active],
+.biss-command-search:focus-within + .biss-command-list .biss-command-option[data-active] {
+  box-shadow: inset 2px 0 0 var(--biss-primary);
+}
+.biss-command-option[aria-disabled='true'] {
+  opacity: 0.45;
+  cursor: default;
+}
+.biss-command-icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--biss-border);
+  border-radius: var(--biss-radius-sm);
+  background: var(--biss-card);
+  color: var(--biss-muted);
+}
+.biss-command-option[data-active] .biss-command-icon {
+  color: var(--biss-text);
+}
+.biss-command-icon .biss-icon {
+  width: 16px;
+  height: 16px;
+}
+.biss-command-text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.biss-command-label {
+  font-size: 13.5px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.biss-command-text small {
+  font-size: 12px;
+  color: var(--biss-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.biss-command-group {
+  flex: none;
+  max-width: 120px;
+  font-size: 11.5px;
+  color: var(--biss-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.biss-command-option kbd,
+.biss-command-hint kbd {
+  flex: none;
+  font: 500 11px var(--biss-font-family);
+  color: var(--biss-muted);
+  border: 1px solid var(--biss-border);
+  border-radius: 4px;
+  padding: 0 5px;
+  background: var(--biss-card);
+}
+.biss-command-check {
+  flex: none;
+  display: inline-flex;
+  color: var(--biss-primary);
+}
+.biss-command-empty {
+  margin: 8px;
+  font-size: 13px;
+  color: var(--biss-muted);
+}
+.biss-command-hint {
+  flex: none;
+  margin: 0;
+  padding: 6px 10px;
+  border-top: 1px solid var(--biss-border-subtle);
+  font-size: 11.5px;
+  color: var(--biss-muted);
+}
+.biss-command-hint kbd {
+  margin-right: 2px;
+  padding: 0 4px;
+}
+@media (max-width: 640px) {
+  .biss-command-hint {
+    display: none;
+  }
+}
+@media (hover: none) {
+  .biss-command-hint {
+    display: none;
+  }
+}

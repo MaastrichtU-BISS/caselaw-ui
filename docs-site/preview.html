@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>BISS UI component preview</title>
     <style>
-      html {
-        background: var(--biss-card);
+      /* The themed root paints --biss-bg; previews sit on a card surface to the frame's edge. */
+      html[data-biss-theme] {
+        background-color: var(--biss-card);
       }
       body {
         margin: 0;

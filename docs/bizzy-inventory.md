@@ -5,7 +5,7 @@ Source: Bizzy commit 3db9d5a3067fb97bc6123c1ebee804fa94732f37 (read only).
 The BISS foundation retains the prior library’s forms, tables, charts, shells,
 code blocks and feedback components with renamed APIs and Bizzy-inspired tokens.
 Toolbar is a new composition primitive for Bizzy’s shared toolbar pattern.
-There are now 130 components in each framework, including generalized editing, sharing, document and dashboard patterns. The following
+There are now 144 components in each framework, including generalized editing, sharing, document and dashboard patterns. The following
 inventory covers every source component; backend-dependent pieces
 are candidates for host adapters, not drop-in package exports.
 

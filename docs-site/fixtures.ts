@@ -1,4 +1,5 @@
 import { newFixtures } from './new-fixtures';
+import { blockFixtures } from './block-fixtures';
 import {
   options,
   actions,
@@ -477,7 +478,7 @@ export const fixtures: Record<string, Fixture> = {
     },
   },
 };
-Object.assign(fixtures, newFixtures);
+Object.assign(fixtures, newFixtures, blockFixtures);
 export function fixture(name: string, state = 'default'): Fixture {
   const base = fixtures[name.replace(/^Biss/, '')];
   if (!base) throw new Error('No fixture for ' + name);

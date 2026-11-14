@@ -1,0 +1,91 @@
+/* RingGauge: one share as a ring, its figure in the middle and its meaning below. */
+.biss-ring {
+  --ring-color: var(--biss-primary);
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  align-self: flex-start;
+  vertical-align: top;
+  min-width: 128px;
+  font: 14px/1.45 var(--biss-font-family);
+  color: var(--biss-text);
+  text-align: center;
+}
+.biss-ring[data-tone='success'] {
+  --ring-color: var(--biss-success);
+}
+.biss-ring[data-tone='warning'] {
+  --ring-color: var(--biss-warning);
+}
+.biss-ring[data-tone='danger'] {
+  --ring-color: var(--biss-danger);
+}
+.biss-ring[data-tone='neutral'] {
+  --ring-color: var(--biss-muted);
+}
+.biss-ring-visual {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: var(--ring-size, 120px);
+  height: var(--ring-size, 120px);
+}
+.biss-ring-visual svg {
+  display: block;
+  overflow: visible;
+}
+.biss-ring-track,
+.biss-ring-value {
+  fill: none;
+}
+.biss-ring-track {
+  stroke: var(--biss-track);
+}
+.biss-ring-value {
+  stroke: var(--ring-color);
+  stroke-linecap: round;
+  transition: stroke-dasharray 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.biss-ring[data-over] .biss-ring-value {
+  stroke-linecap: butt;
+}
+.biss-ring-target {
+  stroke: var(--biss-text);
+  stroke-width: 2px;
+  stroke-linecap: round;
+  opacity: 0.6;
+}
+.biss-ring-figure {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 18%;
+  font-size: calc(var(--ring-size, 120px) * 0.2);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.biss-ring-caption {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  max-width: max(160px, var(--ring-size, 120px));
+}
+.biss-ring-caption strong {
+  font-weight: 500;
+  font-size: 13.5px;
+}
+.biss-ring-caption span {
+  font-size: 12px;
+  color: var(--biss-muted);
+}
+@media (prefers-reduced-motion: reduce) {
+  .biss-ring-value {
+    transition: none;
+  }
+}

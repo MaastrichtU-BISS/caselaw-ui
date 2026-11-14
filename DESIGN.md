@@ -60,7 +60,7 @@ Source authority is Bizzy's DESIGN.md and app/assets/css/theme.css. BISS UI
 extends that established visual language for research and administration. Operate
 mode uses warm surfaces, white panels, compact controls and restrained blue actions.
 
-All 130 Vue and 130 Svelte components share this system, including the renamed
+All 144 Vue and 144 Svelte components share this system, including the renamed
 caselaw APIs and public-page compositions. There is no separate legacy visual
 foundation; the old Caselaw stylesheet has been removed.
 

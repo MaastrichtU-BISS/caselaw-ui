@@ -33,7 +33,7 @@ No router, account store, server connection or Nuxt globals are required.
 
 ## Components and customization
 
-130 components are available in **each framework**, with one Bizzy design language.
+144 components are available in **each framework**, with one Bizzy design language.
 They include data grids, column and label editors, filter builders, sharing and
 permissions, document blocks, comments, dashboards, task lists, calendars, boards,
 charts, forms, navigation, overlays and feedback.
@@ -88,7 +88,7 @@ Try the [composed playground](https://bissui.wicker.life/#/playground), or read 
 
 Browse the library at [bissui.wicker.life](https://bissui.wicker.life).
 
-Run `npm run docs:dev` for the Bizzy-style documentation site: all 130
+Run `npm run docs:dev` for the Bizzy-style documentation site: all 144
 components, live desktop and phone previews, framework usage, and
 source-derived API tables. [Documentation guide](docs/README.md) ·
 [Component screenshots](docs/visual-reference.md).

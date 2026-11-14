@@ -1,0 +1,119 @@
+/* FunnelChart: one narrowing shape, with every figure written beside it. */
+.biss-funnel {
+  margin: 0;
+  font: 14px/1.45 var(--biss-font-family);
+  color: var(--biss-text);
+  box-sizing: border-box;
+  width: 100%;
+}
+.biss-funnel * {
+  box-sizing: border-box;
+}
+.biss-funnel-stages {
+  /* One column track for every stage, so the segments line up into one shape. */
+  display: grid;
+  grid-template-columns: minmax(7rem, 1fr) minmax(0, 2fr) minmax(6.5rem, auto);
+  column-gap: 14px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.biss-funnel-stages > li {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: subgrid;
+}
+.biss-funnel-row {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: subgrid;
+  align-items: center;
+  width: 100%;
+  min-height: 44px;
+  padding: 0 8px;
+  border: 0;
+  border-radius: var(--biss-radius-sm);
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: start;
+}
+button.biss-funnel-row {
+  cursor: pointer;
+}
+button.biss-funnel-row:hover {
+  background: var(--biss-row-hover);
+}
+button.biss-funnel-row:hover strong {
+  color: var(--biss-primary);
+}
+button.biss-funnel-row:focus-visible {
+  outline: 2px solid var(--biss-primary);
+  outline-offset: -2px;
+}
+.biss-funnel-label,
+.biss-funnel-value {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.biss-funnel-label strong {
+  font-weight: 500;
+  font-size: 13.5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.biss-funnel-label small,
+.biss-funnel-value small {
+  font-size: 12px;
+  color: var(--biss-muted);
+}
+.biss-funnel-value {
+  align-items: flex-end;
+  text-align: end;
+}
+.biss-funnel-value b {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.biss-funnel-value small {
+  white-space: nowrap;
+}
+.biss-funnel-shape {
+  display: block;
+  align-self: stretch;
+  width: 100%;
+  height: auto;
+  min-height: 44px;
+  overflow: visible;
+}
+.biss-funnel-shape polygon {
+  stroke: var(--biss-card);
+  stroke-width: 1px;
+  vector-effect: non-scaling-stroke;
+}
+.biss-funnel-summary {
+  margin: 10px 8px 0;
+  padding-top: 10px;
+  border-top: 1px solid var(--biss-border);
+  font-size: 13px;
+  color: var(--biss-muted);
+}
+.biss-funnel-empty {
+  margin: 0;
+  padding: 24px 12px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--biss-muted);
+}
+@media (max-width: 640px) {
+  .biss-funnel-stages {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr) auto;
+    column-gap: 10px;
+  }
+  .biss-funnel-row {
+    padding: 0 4px;
+  }
+}

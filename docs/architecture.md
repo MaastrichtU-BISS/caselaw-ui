@@ -1,7 +1,7 @@
 # Library architecture
 
 BISS UI is a separate release line from caselaw-ui. Both frameworks expose the
-same 130 named components and use the same styles. Consumers choose a framework
+same 144 named components and use the same styles. Consumers choose a framework
 entry point; the root entry point has no framework dependency.
 
 | Entry point | Contract |
@@ -100,8 +100,8 @@ consistent, honor reduced motion, and dispose every browser resource.
 The quality checks cover type safety, Svelte compilation, pure logic, both
 framework workbenches at desktop and phone widths, keyboard interactions and axe
 scans. `test:package` unpacks the real archive into an isolated consumer, renders
-all 260 framework implementations on the server, verifies a Vue build without an
-SFC compiler, and checks request-local state. Documentation checks render all 130 components in both frameworks and verify
+all 288 framework implementations on the server, verifies a Vue build without an
+SFC compiler, and checks request-local state. Documentation checks render all 144 components in both frameworks and verify
 field associations, a composed editing workflow, responsive layout and accessibility.
 
 ```sh

@@ -1,0 +1,308 @@
+/* FeedItem: a flat update — avatar, name and time on one line, body indented, hairline between. */
+.biss-feed-item {
+  font: 14px/1.55 var(--biss-font-family);
+  color: var(--biss-text);
+  box-sizing: border-box;
+  position: relative;
+  padding: 14px 0 12px;
+  border-top: 1px solid var(--biss-border-subtle);
+}
+.biss-feed-item * {
+  box-sizing: border-box;
+}
+.biss-feed-item:first-child {
+  border-top: 0;
+  padding-top: 4px;
+}
+.biss-feed-item-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 28px;
+}
+.biss-feed-item-avatar {
+  display: inline-flex;
+  flex: none;
+}
+.biss-feed-item-who {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 8px;
+  line-height: 1.3;
+}
+.biss-feed-item-who strong {
+  font-size: 13.5px;
+  font-weight: 600;
+}
+.biss-feed-item-meta {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 6px;
+  font-size: 12px;
+  color: var(--biss-muted);
+}
+.biss-feed-item-pin {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  color: var(--biss-primary);
+  font-weight: 500;
+}
+.biss-feed-item-pin .biss-icon {
+  width: 12px;
+  height: 12px;
+}
+.biss-feed-item-head .biss-picker-trigger {
+  height: 28px;
+  padding: 0 8px;
+  border: 0;
+  border-radius: var(--biss-radius-sm);
+  background: transparent;
+  color: var(--biss-muted);
+  font: 500 12.5px var(--biss-font-family);
+  cursor: pointer;
+}
+.biss-feed-item-head .biss-picker-trigger:hover {
+  background: var(--biss-hover);
+  color: var(--biss-text);
+}
+.biss-feed-item-body {
+  padding-left: 38px;
+  margin-top: 2px;
+}
+.biss-feed-item-title {
+  margin: 2px 0 2px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+.biss-feed-item-text {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+}
+.biss-feed-files {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+}
+.biss-feed-file {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 280px;
+  padding: 6px 10px 6px 6px;
+  border: 1px solid var(--biss-border);
+  border-radius: 8px;
+  background: var(--biss-card);
+  color: var(--biss-text);
+  text-decoration: none;
+}
+a.biss-feed-file:hover {
+  border-color: var(--biss-border-strong);
+  background: var(--biss-row-hover);
+}
+.biss-feed-file-icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  background: var(--biss-surface-subtle);
+  color: var(--biss-muted);
+}
+.biss-feed-file-name {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+.biss-feed-file-name > span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.biss-feed-file-name small {
+  font-size: 11.5px;
+  font-weight: 400;
+  color: var(--biss-muted);
+}
+.biss-feed-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+}
+.biss-feed-link {
+  display: flex;
+  align-items: stretch;
+  max-width: 520px;
+  overflow: hidden;
+  border: 1px solid var(--biss-border);
+  border-radius: 8px;
+  background: var(--biss-card);
+  color: var(--biss-text);
+  text-decoration: none;
+}
+.biss-feed-link:hover {
+  border-color: var(--biss-border-strong);
+  background: var(--biss-row-hover);
+}
+.biss-feed-link-text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 9px 12px;
+}
+.biss-feed-link-text small {
+  font-size: 11.5px;
+  color: var(--biss-muted);
+}
+.biss-feed-link-text strong {
+  font-size: 13.5px;
+  font-weight: 600;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.biss-feed-link-text span {
+  font-size: 12.5px;
+  color: var(--biss-muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.biss-feed-link img {
+  flex: none;
+  width: 112px;
+  object-fit: cover;
+  border-left: 1px solid var(--biss-border);
+  background: var(--biss-surface-subtle);
+}
+.biss-feed-item-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5px;
+  margin: 8px 0 0 38px;
+}
+.biss-feed-reaction {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 26px;
+  padding: 0 9px;
+  border: 1px solid var(--biss-border);
+  border-radius: 13px;
+  background: var(--biss-card);
+  color: var(--biss-text);
+  font: 12.5px var(--biss-font-family);
+  cursor: pointer;
+}
+.biss-feed-reaction:hover {
+  border-color: var(--biss-border-strong);
+}
+.biss-feed-reaction[aria-pressed='true'] {
+  border-color: var(--biss-info-border);
+  background: var(--biss-info-bg);
+  color: var(--biss-primary);
+}
+.biss-feed-reaction-count {
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+.biss-feed-picker {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.biss-feed-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 26px;
+  min-width: 26px;
+  justify-content: center;
+  padding: 0 6px;
+  border: 0;
+  border-radius: var(--biss-radius-sm);
+  background: transparent;
+  color: var(--biss-muted);
+  font: 500 12.5px var(--biss-font-family);
+  cursor: pointer;
+}
+.biss-feed-action:hover,
+.biss-feed-action[aria-expanded='true'] {
+  background: var(--biss-hover);
+  color: var(--biss-text);
+}
+.biss-feed-action .biss-icon {
+  width: 15px;
+  height: 15px;
+}
+.biss-feed-emojis {
+  display: inline-flex;
+  gap: 2px;
+  padding: 2px;
+  border: 1px solid var(--biss-border);
+  border-radius: 14px;
+  background: var(--biss-card);
+  box-shadow: var(--biss-shadow);
+  animation: biss-block-pop-in 0.14s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.biss-feed-emojis button {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  font-size: 15px;
+  cursor: pointer;
+}
+.biss-feed-emojis button:hover,
+.biss-feed-emojis button[aria-pressed='true'] {
+  background: var(--biss-info-bg);
+}
+.biss-feed-comments {
+  margin-left: 2px;
+}
+.biss-feed-item :is(button, a):focus-visible {
+  outline: 2px solid var(--biss-primary);
+  outline-offset: 1px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .biss-feed-emojis {
+    animation: none;
+  }
+}
+@media (max-width: 520px) {
+  .biss-feed-item-body {
+    padding-left: 0;
+  }
+  .biss-feed-item-foot {
+    margin-left: 0;
+  }
+  .biss-feed-link img {
+    width: 84px;
+  }
+}

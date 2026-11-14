@@ -1,0 +1,224 @@
+/* ImportMapper: steps, the column table, suggestions and the validation summary. */
+.biss-import-mapper {
+  font: 14px/1.55 var(--biss-font-family);
+  color: var(--biss-text);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  max-width: 960px;
+  padding: 18px 20px;
+  border: 1px solid var(--biss-border);
+  border-radius: var(--biss-radius-md);
+  background: var(--biss-card);
+  box-shadow: var(--biss-shadow);
+}
+.biss-import-mapper * {
+  box-sizing: border-box;
+}
+.biss-import-steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.biss-import-steps li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 12px 4px 5px;
+  border: 1px solid var(--biss-border);
+  border-radius: 16px;
+  background: var(--biss-card);
+  color: var(--biss-muted);
+  font-size: 13px;
+  font-weight: 500;
+}
+.biss-import-steps li > span {
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--biss-surface-muted);
+  font-size: 11px;
+}
+.biss-import-steps .biss-icon {
+  width: 12px;
+  height: 12px;
+}
+.biss-import-steps li[data-state='current'] {
+  border-color: var(--biss-info-border);
+  color: var(--biss-text);
+}
+.biss-import-steps li[data-state='current'] > span {
+  background: var(--biss-primary);
+  color: var(--biss-on-primary);
+}
+.biss-import-steps li[data-state='done'] {
+  color: var(--biss-success);
+}
+.biss-import-steps li[data-state='done'] > span {
+  background: var(--biss-success-bg);
+}
+.biss-import-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.biss-import-head h2 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+.biss-import-head p {
+  margin: 3px 0 0;
+  font-size: 13px;
+  color: var(--biss-muted);
+}
+.biss-import-head .biss-button-label,
+.biss-import-summary p {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.biss-import-head .biss-icon {
+  width: 14px;
+  height: 14px;
+}
+.biss-import-table {
+  display: flex;
+  flex-direction: column;
+}
+.biss-import-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr) 16px minmax(200px, 1.2fr);
+  gap: 12px;
+  align-items: center;
+  min-height: 46px;
+  padding: 7px 0;
+  border-top: 1px solid var(--biss-border-subtle);
+}
+.biss-import-row-head {
+  min-height: 0;
+  padding-top: 0;
+  border-top: 0;
+  font-size: 12px;
+  color: var(--biss-muted);
+}
+.biss-import-column {
+  font-size: 13.5px;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+.biss-import-samples {
+  font-size: 12.5px;
+  color: var(--biss-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.biss-import-row[data-skipped] .biss-import-column {
+  color: var(--biss-muted);
+}
+.biss-import-arrow {
+  display: grid;
+  place-items: center;
+  color: var(--biss-muted);
+}
+.biss-import-arrow .biss-icon {
+  width: 14px;
+  height: 14px;
+}
+.biss-import-pick {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+.biss-import-pick .biss-select {
+  flex: 1;
+  min-width: 0;
+}
+.biss-import-row[data-conflict] .biss-select {
+  border-color: var(--biss-danger);
+}
+.biss-import-tag {
+  flex: none;
+  padding: 1px 7px;
+  border-radius: 9px;
+  background: var(--biss-ai-soft);
+  color: var(--biss-ai);
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.biss-import-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding-top: 14px;
+  border-top: 1px solid var(--biss-border);
+}
+.biss-import-summary {
+  flex: 1 1 260px;
+  min-width: 0;
+  font-size: 13px;
+  color: var(--biss-success);
+  outline: none;
+}
+.biss-import-summary[data-invalid] {
+  color: var(--biss-danger);
+}
+.biss-import-summary:focus-visible {
+  outline: 2px solid var(--biss-primary);
+  outline-offset: 2px;
+  border-radius: var(--biss-radius-sm);
+}
+.biss-import-summary p {
+  margin: 0;
+  align-items: flex-start;
+}
+.biss-import-summary p + p {
+  margin-top: 4px;
+}
+.biss-import-summary .biss-icon {
+  width: 14px;
+  height: 14px;
+  margin-top: 3px;
+}
+@media (max-width: 640px) {
+  .biss-import-mapper {
+    padding: 14px;
+  }
+  .biss-import-row-head {
+    display: none;
+  }
+  .biss-import-row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 4px;
+    padding: 10px 0;
+  }
+  .biss-import-row-head + .biss-import-row {
+    border-top: 0;
+  }
+  .biss-import-arrow {
+    display: none;
+  }
+  .biss-import-samples {
+    white-space: normal;
+  }
+  .biss-import-pick {
+    margin-top: 4px;
+  }
+  .biss-import-foot .biss-button {
+    width: 100%;
+  }
+}

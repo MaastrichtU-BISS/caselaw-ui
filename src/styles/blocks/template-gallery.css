@@ -1,0 +1,319 @@
+/* TemplateGallery: category chips, search, template cards and the preview pane. */
+.biss-template-gallery {
+  font: 14px/1.55 var(--biss-font-family);
+  color: var(--biss-text);
+  box-sizing: border-box;
+  display: grid;
+  gap: 14px;
+  min-width: 0;
+}
+.biss-template-gallery * {
+  box-sizing: border-box;
+}
+.biss-template-gallery-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 12px;
+}
+.biss-template-gallery-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  flex: 1 1 320px;
+  min-width: 0;
+}
+.biss-template-gallery-chips button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 30px;
+  padding: 0 12px;
+  border: 1px solid var(--biss-border);
+  border-radius: 999px;
+  background: var(--biss-card);
+  color: var(--biss-muted);
+  font: 500 13px var(--biss-font-family);
+  cursor: pointer;
+}
+.biss-template-gallery-chips button:hover {
+  border-color: var(--biss-border-strong);
+  color: var(--biss-text);
+}
+.biss-template-gallery-chips button[aria-pressed='true'] {
+  border-color: var(--biss-info-border);
+  background: var(--biss-info-bg);
+  color: var(--biss-primary);
+}
+.biss-template-gallery-chips small {
+  font-size: 11.5px;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.75;
+}
+.biss-template-gallery-search {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  width: min(260px, 100%);
+  height: var(--biss-control-height);
+  padding: 0 10px;
+  border: 1px solid var(--biss-border-strong);
+  border-radius: var(--biss-radius-sm);
+  background: var(--biss-card);
+  color: var(--biss-muted);
+}
+.biss-template-gallery-search:focus-within {
+  border-color: var(--biss-primary);
+  box-shadow: 0 0 0 3px var(--biss-focus);
+}
+.biss-template-gallery-search .biss-icon {
+  width: 14px;
+  height: 14px;
+}
+.biss-template-gallery-search input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: var(--biss-text);
+  font: 13.5px var(--biss-font-family);
+}
+.biss-template-gallery-search input::placeholder {
+  color: var(--biss-muted);
+}
+.biss-template-gallery-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 320px);
+  gap: 16px;
+  align-items: start;
+}
+.biss-template-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+  min-width: 0;
+}
+.biss-template-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid var(--biss-border);
+  border-radius: var(--biss-radius-md);
+  background: var(--biss-card);
+  color: var(--biss-text);
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
+}
+.biss-template-card:hover {
+  border-color: var(--biss-info-border);
+  box-shadow: 0 0 0 3px var(--biss-focus);
+}
+.biss-template-card:focus-visible {
+  outline: 2px solid var(--biss-primary);
+  outline-offset: 1px;
+}
+.biss-template-card[aria-checked='true'] {
+  border-color: var(--biss-primary);
+  box-shadow: 0 0 0 3px var(--biss-focus);
+}
+.biss-template-card-icon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 30px;
+  height: 30px;
+  border-radius: var(--biss-radius-sm);
+  background: var(--biss-info-bg);
+  color: var(--biss-primary);
+}
+.biss-template-card-icon .biss-icon {
+  width: 16px;
+  height: 16px;
+}
+.biss-template-card-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.biss-template-card-text b {
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1.35;
+  padding-inline-end: 22px;
+}
+.biss-template-card-text small {
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--biss-muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.biss-template-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-top: auto;
+  font-size: 12px;
+  color: var(--biss-muted);
+}
+.biss-template-card-meta em {
+  font-style: normal;
+  font-weight: 500;
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: var(--biss-success-bg);
+  color: var(--biss-success);
+}
+.biss-template-card-check {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--biss-primary);
+  color: var(--biss-on-primary);
+}
+.biss-template-card-check .biss-icon {
+  width: 12px;
+  height: 12px;
+  stroke-width: 2.4;
+}
+.biss-template-gallery-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 36px 20px;
+  border: 1px dashed var(--biss-border-strong);
+  border-radius: var(--biss-radius-md);
+  text-align: center;
+  font-size: 13px;
+  color: var(--biss-muted);
+}
+.biss-template-gallery-empty > .biss-icon {
+  width: 20px;
+  height: 20px;
+  margin-bottom: 4px;
+}
+.biss-template-gallery-empty strong {
+  font-weight: 500;
+  font-size: 13.5px;
+  color: var(--biss-text);
+}
+.biss-template-gallery-empty .biss-button {
+  margin-top: 8px;
+}
+.biss-template-preview {
+  position: sticky;
+  top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px;
+  border: 1px solid var(--biss-border);
+  border-radius: var(--biss-radius-md);
+  background: var(--biss-surface-subtle);
+  min-width: 0;
+}
+.biss-template-preview-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border: 1px solid var(--biss-border);
+  border-radius: var(--biss-radius-sm);
+  background: var(--biss-card);
+}
+.biss-template-preview-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+.biss-template-preview h3 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+.biss-template-preview-head small {
+  font-size: 12px;
+  color: var(--biss-muted);
+}
+.biss-template-preview p {
+  margin: 0;
+  font-size: 13.5px;
+  color: var(--biss-muted);
+}
+.biss-template-preview h4 {
+  margin: 4px 0 0;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--biss-muted);
+}
+.biss-template-preview ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+}
+.biss-template-preview li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 13.5px;
+}
+.biss-template-preview li .biss-icon {
+  width: 14px;
+  height: 14px;
+  margin-top: 3px;
+  color: var(--biss-success);
+}
+.biss-template-preview .biss-template-preview-empty {
+  padding: 18px 0 6px;
+  text-align: center;
+}
+.biss-template-preview-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 6px;
+  padding-top: 12px;
+  border-top: 1px solid var(--biss-border);
+}
+@media (max-width: 760px) {
+  .biss-template-gallery-body {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .biss-template-preview {
+    position: static;
+  }
+  .biss-template-gallery-search {
+    width: 100%;
+  }
+  .biss-template-gallery-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .biss-template-card {
+    transition: none;
+  }
+}

@@ -1,0 +1,136 @@
+/* Feed: composer, list, loading, empty and load-more. Items are styled in feed-item.css. */
+.biss-feed {
+  font: 14px/1.55 var(--biss-font-family);
+  color: var(--biss-text);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  max-width: 680px;
+  min-width: 0;
+}
+.biss-feed * {
+  box-sizing: border-box;
+}
+.biss-feed-composer {
+  border: 1px solid var(--biss-border);
+  border-radius: 8px;
+  background: var(--biss-surface-subtle);
+  transition:
+    background 0.14s,
+    border-color 0.14s;
+}
+.biss-feed-composer:focus-within {
+  background: var(--biss-card);
+  border-color: var(--biss-border-strong);
+  box-shadow: var(--biss-shadow);
+}
+.biss-feed-composer .biss-textarea {
+  min-height: 48px;
+  border: 0;
+  background: transparent;
+  padding: 10px 12px 4px;
+  resize: none;
+  field-sizing: content;
+  max-height: 240px;
+}
+.biss-feed-composer .biss-textarea:focus {
+  outline: none;
+}
+.biss-feed-composer:has(.biss-textarea:focus-visible) {
+  outline: 2px solid var(--biss-primary);
+  outline-offset: 1px;
+}
+.biss-feed-composer-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 4px 8px 8px 12px;
+}
+.biss-feed-composer-row small {
+  margin-right: auto;
+  font-size: 12px;
+  color: var(--biss-muted);
+}
+.biss-feed-list {
+  display: flex;
+  flex-direction: column;
+}
+.biss-feed-more {
+  align-self: center;
+}
+.biss-feed-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 28px 20px;
+  border: 1px dashed var(--biss-border);
+  border-radius: var(--biss-radius-md);
+  text-align: center;
+  font-size: 13px;
+  color: var(--biss-muted);
+}
+.biss-feed-state > .biss-icon {
+  width: 20px;
+  height: 20px;
+  margin-bottom: 4px;
+}
+.biss-feed-state strong {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--biss-text);
+}
+.biss-feed-state .biss-button {
+  margin-top: 8px;
+}
+.biss-feed-skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.biss-feed-skeleton > span {
+  display: flex;
+  gap: 10px;
+}
+.biss-feed-skeleton i {
+  flex: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--biss-surface-muted);
+}
+.biss-feed-skeleton > span > span {
+  flex: 1;
+  display: grid;
+  gap: 7px;
+  padding-top: 4px;
+}
+.biss-feed-skeleton b {
+  display: block;
+  height: 10px;
+  border-radius: 4px;
+  background: var(--biss-surface-muted);
+  animation: biss-block-pulse 1.4s ease-in-out infinite;
+}
+.biss-feed-skeleton b:first-child {
+  width: 30%;
+}
+.biss-feed-skeleton b:last-child {
+  width: 70%;
+}
+@media (prefers-reduced-motion: reduce) {
+  .biss-feed-composer {
+    transition: none;
+  }
+  .biss-feed-skeleton b {
+    animation: none;
+  }
+}
+@media (max-width: 520px) {
+  .biss-feed-composer-row small {
+    display: none;
+  }
+}
