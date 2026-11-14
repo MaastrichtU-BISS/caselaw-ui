@@ -43,7 +43,7 @@
   color: var(--biss-text);
   border-color: var(--biss-border-strong);
 }
-.biss-button-secondary:hover:not(:disabled) {
+.biss-button-secondary:hover:not(:disabled):not([aria-disabled='true']) {
   background: var(--biss-hover);
   border-color: var(--biss-border-strong);
 }
@@ -53,7 +53,7 @@
   border-color: transparent;
   box-shadow: none;
 }
-.biss-button-ghost:hover:not(:disabled) {
+.biss-button-ghost:hover:not(:disabled):not([aria-disabled='true']) {
   background: var(--biss-hover);
   border-color: transparent;
   color: var(--biss-text);
@@ -62,7 +62,7 @@
   background: var(--biss-danger);
   border-color: var(--biss-danger);
 }
-.biss-button-danger:hover:not(:disabled) {
+.biss-button-danger:hover:not(:disabled):not([aria-disabled='true']) {
   background: var(--biss-danger-hover);
   border-color: var(--biss-danger-hover);
 }
@@ -72,7 +72,7 @@
   border-color: transparent;
   box-shadow: none;
 }
-.biss-button-danger-quiet:hover:not(:disabled) {
+.biss-button-danger-quiet:hover:not(:disabled):not([aria-disabled='true']) {
   background: var(--biss-danger-bg);
   border-color: transparent;
 }
