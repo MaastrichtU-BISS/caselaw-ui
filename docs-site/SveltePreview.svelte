@@ -3,6 +3,7 @@
   import * as UI from '../src/svelte';
   import { createBissToasts } from '../src/core/toasts';
   import { fixture } from './fixtures';
+  import { tabPanels } from './new-fixtures';
   import catalog from './generated/components.json';
   let { name, state: exampleState = 'default' }: { name: string; state?: string } = $props();
   const data = $state(untrack(() => fixture(name, exampleState)));
@@ -34,6 +35,8 @@
               ? 'rules'
               : name === 'BissCheckbox'
                 ? 'checked'
+                : name === 'BissPagination'
+                ? 'page'
                 : ['BissValuePicker', 'BissOnboardingChips', 'BissRoleEditor'].includes(name)
                   ? 'selected'
                   : 'value';
@@ -49,6 +52,7 @@
       value.sortDirection = v.direction;
     },
     onresize: (v: any) => (value.size = v),
+    onpagesize: (v: any) => (value.pageSize = v),
     onmatch: (v: any) => (value.match = v),
     onclose: () => {
       value.open = false;
@@ -86,6 +90,9 @@
   const renderProps = $derived({
     ...value,
     ...(name==='BissViewTabs'?{value:value.modelValue}:{}),
+    ...(['BissTabs','BissAccordion','BissSlider','BissNumberField','BissToggleGroup'].includes(name)
+      ? { value: value.modelValue, modelValue: undefined }
+      : {}),
     ...(['BissModal','BissConfirmDialog'].includes(name)?{open:value.modelValue}:{}),
     ...('open' in value ? { open: value.open } : {}),
     ...(name==='BissToastStack'?{queue}:{}),
@@ -94,7 +101,9 @@
 </script>
 
 {#snippet children(context: any = undefined)}
-  {#if name === 'BissField'}<UI.BissInput modelValue="Open justice" />
+  {#if name === 'BissTabs'}<p class="preview-panel">{tabPanels[context?.value] ?? ''}</p>
+  {:else if name === 'BissAccordion'}{context?.content ?? ''}
+  {:else if name === 'BissField'}<UI.BissInput modelValue="Open justice" />
   {:else if ['BissDialog', 'BissModal', 'BissSidePanel'].includes(name)}<UI.BissField
       label="Project name"
       hint="Use a recognizable name."><UI.BissInput modelValue="Open justice" /></UI.BissField

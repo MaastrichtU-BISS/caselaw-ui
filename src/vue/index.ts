@@ -248,3 +248,22 @@ export { default as BissStackedBar } from './BissStackedBar.vue';
 export { createBissUI, provideBissToasts } from './toasts';
 
 export * as Dialog from './dialog';
+
+export * as Tabs from './tabs';
+export { default as BissTabs } from './BissTabs.vue';
+export { default as BissAccordion } from './BissAccordion.vue';
+export { default as BissProgress } from './BissProgress.vue';
+export { default as BissSpinner } from './BissSpinner.vue';
+export { default as BissSlider } from './BissSlider.vue';
+export { default as BissNumberField } from './BissNumberField.vue';
+export { default as BissKbd } from './BissKbd.vue';
+export { default as BissSeparator } from './BissSeparator.vue';
+export { default as BissPagination } from './BissPagination.vue';
+export { default as BissToggleGroup } from './BissToggleGroup.vue';
+export type {
+  BissAccordionItem,
+  BissToggleItem,
+  BissProgressTone,
+} from '../core/types';
+export type { BissTabsItem, BissTabsSize, BissTabsVariant, BissTabsUi } from '../theme/tabs';
+export type { BissPageItem } from '../core/pagination';

@@ -1,6 +1,6 @@
 # Component API reference
 
-All 130 components are available in Vue and Svelte with one Bizzy design language. This file is generated from the same source-derived contracts as the documentation site. Import components and their `BissNameProps` types from the matching framework entry point. Native attributes supported by the framework also apply; tables list authored component props.
+All 140 components are available in Vue and Svelte with one Bizzy design language. This file is generated from the same source-derived contracts as the documentation site. Import components and their `BissNameProps` types from the matching framework entry point. Native attributes supported by the framework also apply; tables list authored component props.
 
 ## BissAccessList
 
@@ -41,6 +41,44 @@ Callbacks:
 
 - `onrole`: `(value: { id: string; role: string }) => void`
 - `onremove`: `(id: string) => void`
+
+## BissAccordion
+
+Stacked sections that open one at a time or several at once, with keyboard navigation.
+
+[Vue source](../src/vue/BissAccordion.vue) · [Svelte source](../src/svelte/BissAccordion.svelte)
+
+### Vue
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `items` | `BissAccordionItem[]` | Yes | — |
+| `type` | `'single' \| 'multiple'` | No | `'single'` |
+| `collapsible` | `boolean` | No | `true` |
+| `disabled` | `boolean` | No | `false` |
+| `headingLevel` | `2 \| 3 \| 4 \| 5 \| 6` | No | `3` |
+| `modelValue` | `string \| string[]` | No | — |
+
+Slots: `default`.
+
+### Svelte
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `items` | `BissAccordionItem[]` | Yes | — |
+| `type` | `'single' \| 'multiple'` | No | `'single'` |
+| `value` | `string \| string[]` | No | `$bindable()` |
+| `collapsible` | `boolean` | No | `true` |
+| `disabled` | `boolean` | No | `false` |
+| `headingLevel` | `2 \| 3 \| 4 \| 5 \| 6` | No | `3` |
+| `onchange` | `(value: string \| string[]) => void` | No | — |
+| `children` | `Snippet<[BissAccordionItem]>` | No | — |
+
+Callbacks:
+
+- `onchange`: `(value: string \| string[]) => void`
+
+Snippets: `children`.
 
 ## BissActionCard
 
@@ -1940,6 +1978,35 @@ Callbacks:
 - `onmove`: `(value: { id: string; lane: string }) => void`
 - `onadd`: `(lane: string) => void`
 
+## BissKbd
+
+Show a key or shortcut, such as ⌘ K, with a readable name for screen readers.
+
+[Vue source](../src/vue/BissKbd.vue) · [Svelte source](../src/svelte/BissKbd.svelte)
+
+### Vue
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `keys` | `string \| string[]` | No | — |
+| `label` | `string` | No | — |
+| `separator` | `string` | No | `''` |
+| `size` | `'sm' \| 'md'` | No | `'md'` |
+
+Slots: `default`.
+
+### Svelte
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `keys` | `string \| string[]` | No | — |
+| `label` | `string` | No | — |
+| `separator` | `string` | No | `''` |
+| `size` | `'sm' \| 'md'` | No | `'md'` |
+| `children` | `Snippet` | No | — |
+
+Snippets: `children`.
+
 ## BissKpiCard
 
 One headline figure with the label and note needed to interpret it.
@@ -2315,6 +2382,59 @@ Callbacks:
 
 Snippets: `icon`.
 
+## BissNumberField
+
+Type or step a number within limits, formatted for the locale.
+
+[Vue source](../src/vue/BissNumberField.vue) · [Svelte source](../src/svelte/BissNumberField.svelte)
+
+### Vue
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `min` | `number` | No | — |
+| `max` | `number` | No | — |
+| `step` | `number` | No | `1` |
+| `largeStep` | `number` | No | — |
+| `label` | `string` | No | — |
+| `placeholder` | `string` | No | — |
+| `disabled` | `boolean` | No | `false` |
+| `required` | `boolean` | No | `false` |
+| `invalid` | `boolean` | No | `false` |
+| `locale` | `string` | No | — |
+| `format` | `Intl.NumberFormatOptions` | No | — |
+| `incrementLabel` | `string` | No | `'Increase'` |
+| `decrementLabel` | `string` | No | `'Decrease'` |
+| `size` | `'sm' \| 'md'` | No | `'md'` |
+| `name` | `string` | No | — |
+| `modelValue` | `number \| null` | No | `null` |
+
+### Svelte
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `value` | `number \| null` | No | `$bindable(null)` |
+| `min` | `number` | No | — |
+| `max` | `number` | No | — |
+| `step` | `number` | No | `1` |
+| `largeStep` | `number` | No | — |
+| `label` | `string` | No | — |
+| `placeholder` | `string` | No | — |
+| `disabled` | `boolean` | No | `false` |
+| `required` | `boolean` | No | `false` |
+| `invalid` | `boolean` | No | `false` |
+| `locale` | `string` | No | — |
+| `format` | `Intl.NumberFormatOptions` | No | — |
+| `incrementLabel` | `string` | No | `'Increase'` |
+| `decrementLabel` | `string` | No | `'Decrease'` |
+| `size` | `'sm' \| 'md'` | No | `'md'` |
+| `name` | `string` | No | — |
+| `onchange` | `(value: number \| null) => void` | No | — |
+
+Callbacks:
+
+- `onchange`: `(value: number \| null) => void`
+
 ## BissOnboardingChips
 
 Choose several interests or areas during workspace setup.
@@ -2460,6 +2580,57 @@ Slots: `default`.
 
 Snippets: `children`.
 
+## BissPagination
+
+Numbered page navigation with ellipses, previous and next, and an optional page size.
+
+[Vue source](../src/vue/BissPagination.vue) · [Svelte source](../src/svelte/BissPagination.svelte)
+
+### Vue
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `total` | `number` | No | — |
+| `pages` | `number` | No | — |
+| `pageSizes` | `number[]` | No | — |
+| `siblings` | `number` | No | `1` |
+| `boundaries` | `number` | No | `1` |
+| `label` | `string` | No | `'Pagination'` |
+| `previousLabel` | `string` | No | `'Previous page'` |
+| `nextLabel` | `string` | No | `'Next page'` |
+| `pageLabel` | `string` | No | `'Page {page}'` |
+| `pageSizeLabel` | `string` | No | `'Rows per page'` |
+| `rangeLabel` | `string` | No | `'{start}–{end} of {total}'` |
+| `disabled` | `boolean` | No | `false` |
+| `page` | `number` | No | `1` |
+| `pageSize` | `number` | No | `25` |
+
+### Svelte
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `page` | `number` | No | `$bindable(1)` |
+| `pageSize` | `number` | No | `$bindable(25)` |
+| `total` | `number` | No | — |
+| `pages` | `number` | No | — |
+| `pageSizes` | `number[]` | No | — |
+| `siblings` | `number` | No | `1` |
+| `boundaries` | `number` | No | `1` |
+| `label` | `string` | No | `'Pagination'` |
+| `previousLabel` | `string` | No | `'Previous page'` |
+| `nextLabel` | `string` | No | `'Next page'` |
+| `pageLabel` | `string` | No | `'Page {page}'` |
+| `pageSizeLabel` | `string` | No | `'Rows per page'` |
+| `rangeLabel` | `string` | No | `'{start}–{end} of {total}'` |
+| `disabled` | `boolean` | No | `false` |
+| `onchange` | `(page: number) => void` | No | — |
+| `onpagesize` | `(size: number) => void` | No | — |
+
+Callbacks:
+
+- `onchange`: `(page: number) => void`
+- `onpagesize`: `(size: number) => void`
+
 ## BissPeopleCell
 
 Show a small set of assigned people, with overflow summarized by count.
@@ -2565,6 +2736,40 @@ Slots: `default`.
 | `children` | `Snippet` | No | — |
 
 Snippets: `children`.
+
+## BissProgress
+
+A labelled progress bar for known amounts, or an indeterminate one while waiting.
+
+[Vue source](../src/vue/BissProgress.vue) · [Svelte source](../src/svelte/BissProgress.svelte)
+
+### Vue
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `value` | `number \| null` | No | `null` |
+| `max` | `number` | No | `100` |
+| `label` | `string` | Yes | — |
+| `showLabel` | `boolean` | No | `false` |
+| `showValue` | `boolean` | No | `false` |
+| `valueText` | `string` | No | — |
+| `tone` | `BissProgressTone` | No | `'primary'` |
+| `size` | `'sm' \| 'md'` | No | `'md'` |
+| `locale` | `string` | No | — |
+
+### Svelte
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `value` | `number \| null` | No | `null` |
+| `max` | `number` | No | `100` |
+| `label` | `string` | Yes | — |
+| `showLabel` | `boolean` | No | `false` |
+| `showValue` | `boolean` | No | `false` |
+| `valueText` | `string` | No | — |
+| `tone` | `BissProgressTone` | No | `'primary'` |
+| `size` | `'sm' \| 'md'` | No | `'md'` |
+| `locale` | `string` | No | — |
 
 ## BissPropertyList
 
@@ -3012,6 +3217,28 @@ Callbacks:
 
 - `onchange`: `(value: string) => void`
 
+## BissSeparator
+
+A quiet horizontal or vertical divider, optionally labelled.
+
+[Vue source](../src/vue/BissSeparator.vue) · [Svelte source](../src/svelte/BissSeparator.svelte)
+
+### Vue
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `orientation` | `'horizontal' \| 'vertical'` | No | `'horizontal'` |
+| `label` | `string` | No | — |
+| `decorative` | `boolean` | No | `false` |
+
+### Svelte
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `orientation` | `'horizontal' \| 'vertical'` | No | `'horizontal'` |
+| `label` | `string` | No | — |
+| `decorative` | `boolean` | No | `false` |
+
 ## BissServiceIcon
 
 The product marks, or a short text mark supplied by the host.
@@ -3236,6 +3463,73 @@ Simple content-shaped bars for loading layouts.
 | `height` | `string` | No | `'14px'` |
 | `width` | `string` | No | `'100%'` |
 | `gap` | `string` | No | `'10px'` |
+
+## BissSlider
+
+Choose a value or a range by dragging or with arrow keys, inside or outside a Field.
+
+[Vue source](../src/vue/BissSlider.vue) · [Svelte source](../src/svelte/BissSlider.svelte)
+
+### Vue
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `label` | `string` | No | — |
+| `min` | `number` | No | `0` |
+| `max` | `number` | No | `100` |
+| `step` | `number` | No | `1` |
+| `disabled` | `boolean` | No | `false` |
+| `showValue` | `boolean` | No | `false` |
+| `thumbLabels` | `[string, string]` | No | `() => ['Minimum', 'Maximum']` |
+| `minStepsBetweenThumbs` | `number` | No | `0` |
+| `locale` | `string` | No | — |
+| `format` | `Intl.NumberFormatOptions` | No | — |
+| `name` | `string` | No | — |
+| `modelValue` | `number \| number[]` | No | — |
+
+### Svelte
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `value` | `number \| number[]` | No | `$bindable()` |
+| `label` | `string` | No | — |
+| `min` | `number` | No | `0` |
+| `max` | `number` | No | `100` |
+| `step` | `number` | No | `1` |
+| `disabled` | `boolean` | No | `false` |
+| `showValue` | `boolean` | No | `false` |
+| `thumbLabels` | `[string, string]` | No | `['Minimum', 'Maximum']` |
+| `minStepsBetweenThumbs` | `number` | No | `0` |
+| `locale` | `string` | No | — |
+| `format` | `Intl.NumberFormatOptions` | No | — |
+| `name` | `string` | No | — |
+| `onchange` | `(value: number \| number[]) => void` | No | — |
+
+Callbacks:
+
+- `onchange`: `(value: number \| number[]) => void`
+
+## BissSpinner
+
+A small activity indicator for short waits, announced and slowed for reduced motion.
+
+[Vue source](../src/vue/BissSpinner.vue) · [Svelte source](../src/svelte/BissSpinner.svelte)
+
+### Vue
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `label` | `string` | No | `'Loading'` |
+| `size` | `'sm' \| 'md'` | No | `'md'` |
+| `decorative` | `boolean` | No | `false` |
+
+### Svelte
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `label` | `string` | No | `'Loading'` |
+| `size` | `'sm' \| 'md'` | No | `'md'` |
+| `decorative` | `boolean` | No | `false` |
 
 ## BissSplitPane
 
@@ -3671,6 +3965,46 @@ A compact label and formatted total for a table footer or group summary.
 | `value` | `string \| number` | Yes | — |
 | `note` | `string \| undefined` | No | `undefined` |
 
+## BissTabs
+
+Connected tab parts with arrow-key navigation, plus a wrapper that takes items and panels.
+
+[Vue source](../src/vue/BissTabs.vue) · [Svelte source](../src/svelte/BissTabs.svelte)
+
+### Vue
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `items` | `BissTabsItem[]` | Yes | — |
+| `label` | `string` | Yes | — |
+| `variant` | `BissTabsVariant` | No | `'line'` |
+| `size` | `BissTabsSize` | No | `'md'` |
+| `activationMode` | `'automatic' \| 'manual'` | No | `'automatic'` |
+| `ui` | `BissTabsUi` | No | — |
+| `modelValue` | `string` | No | — |
+
+Slots: `default`.
+
+### Svelte
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `items` | `BissTabsItem[]` | Yes | — |
+| `label` | `string` | Yes | — |
+| `value` | `string` | No | `$bindable()` |
+| `variant` | `BissTabsVariant` | No | `'line'` |
+| `size` | `BissTabsSize` | No | `'md'` |
+| `activationMode` | `'automatic' \| 'manual'` | No | `'automatic'` |
+| `ui` | `BissTabsUi` | No | — |
+| `onchange` | `(value: string) => void` | No | — |
+| `children` | `Snippet<[BissTabsItem]>` | No | — |
+
+Callbacks:
+
+- `onchange`: `(value: string) => void`
+
+Snippets: `children`.
+
 ## BissTagInput
 
 Add and remove short labels using the model contract.
@@ -3817,6 +4151,43 @@ Render the application-wide toast queue after an action.
 | `queue` | `BissToastQueue` | Yes | — |
 | `label` | `string` | No | `'Notifications'` |
 | `dismissLabel` | `string` | No | `'Dismiss'` |
+
+## BissToggleGroup
+
+Pressable options, with icons, for one choice or several independent ones.
+
+[Vue source](../src/vue/BissToggleGroup.vue) · [Svelte source](../src/svelte/BissToggleGroup.svelte)
+
+### Vue
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `items` | `BissToggleItem[]` | Yes | — |
+| `label` | `string` | Yes | — |
+| `type` | `'single' \| 'multiple'` | No | `'single'` |
+| `iconOnly` | `boolean` | No | `false` |
+| `size` | `'sm' \| 'md'` | No | `'md'` |
+| `disabled` | `boolean` | No | `false` |
+| `orientation` | `'horizontal' \| 'vertical'` | No | `'horizontal'` |
+| `modelValue` | `string \| string[]` | No | — |
+
+### Svelte
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `items` | `BissToggleItem[]` | Yes | — |
+| `label` | `string` | Yes | — |
+| `value` | `string \| string[]` | No | `$bindable()` |
+| `type` | `'single' \| 'multiple'` | No | `'single'` |
+| `iconOnly` | `boolean` | No | `false` |
+| `size` | `'sm' \| 'md'` | No | `'md'` |
+| `disabled` | `boolean` | No | `false` |
+| `orientation` | `'horizontal' \| 'vertical'` | No | `'horizontal'` |
+| `onchange` | `(value: string \| string[]) => void` | No | — |
+
+Callbacks:
+
+- `onchange`: `(value: string \| string[]) => void`
 
 ## BissToolButton
 

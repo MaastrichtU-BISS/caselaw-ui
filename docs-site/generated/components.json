@@ -151,6 +151,131 @@
       "modern": true
     },
     {
+      "name": "BissAccordion",
+      "slug": "accordion",
+      "short": "Accordion",
+      "category": "Pages and navigation",
+      "description": "Stacked sections that open one at a time or several at once, with keyboard navigation.",
+      "guidance": "Keep the page title, view navigation and toolbar in a predictable order. Let the host router own navigation and permissions.",
+      "vue": {
+        "props": [
+          {
+            "name": "items",
+            "type": "BissAccordionItem[]",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "type",
+            "type": "'single' | 'multiple'",
+            "required": false,
+            "description": "`single` keeps one section open; `multiple` lets several stay open.",
+            "default": "'single'"
+          },
+          {
+            "name": "collapsible",
+            "type": "boolean",
+            "required": false,
+            "description": "In single mode, allow closing the open section again.",
+            "default": "true"
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "required": false,
+            "description": "",
+            "default": "false"
+          },
+          {
+            "name": "headingLevel",
+            "type": "2 | 3 | 4 | 5 | 6",
+            "required": false,
+            "description": "Heading level of each section title, to fit the page outline.",
+            "default": "3"
+          },
+          {
+            "name": "modelValue",
+            "type": "string | string[]",
+            "required": false,
+            "description": "Controlled model. Bind with v-model."
+          }
+        ],
+        "events": [],
+        "slots": [
+          "default"
+        ]
+      },
+      "svelte": {
+        "props": [
+          {
+            "name": "items",
+            "type": "BissAccordionItem[]",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "type",
+            "type": "'single' | 'multiple'",
+            "required": false,
+            "description": "`single` keeps one section open; `multiple` lets several stay open.",
+            "default": "'single'"
+          },
+          {
+            "name": "value",
+            "type": "string | string[]",
+            "required": false,
+            "description": "",
+            "default": "$bindable()"
+          },
+          {
+            "name": "collapsible",
+            "type": "boolean",
+            "required": false,
+            "description": "In single mode, allow closing the open section again.",
+            "default": "true"
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "required": false,
+            "description": "",
+            "default": "false"
+          },
+          {
+            "name": "headingLevel",
+            "type": "2 | 3 | 4 | 5 | 6",
+            "required": false,
+            "description": "Heading level of each section title, to fit the page outline.",
+            "default": "3"
+          },
+          {
+            "name": "onchange",
+            "type": "(value: string | string[]) => void",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "children",
+            "type": "Snippet<[BissAccordionItem]>",
+            "required": false,
+            "description": "Renders each section body; receives the item. Falls back to `item.content`."
+          }
+        ],
+        "events": [
+          {
+            "name": "onchange",
+            "type": "(value: string | string[]) => void",
+            "required": false,
+            "description": "Callback prop."
+          }
+        ],
+        "slots": [
+          "children"
+        ]
+      },
+      "modern": true
+    },
+    {
       "name": "BissActionCard",
       "slug": "action-card",
       "short": "ActionCard",
@@ -6385,6 +6510,89 @@
       "modern": true
     },
     {
+      "name": "BissKbd",
+      "slug": "kbd",
+      "short": "Kbd",
+      "category": "Content and feedback",
+      "description": "Show a key or shortcut, such as ⌘ K, with a readable name for screen readers.",
+      "guidance": "Keep messages calm, specific and actionable. Distinguish loading, empty, error and access states instead of presenting a generic blank panel.",
+      "vue": {
+        "props": [
+          {
+            "name": "keys",
+            "type": "string | string[]",
+            "required": false,
+            "description": "One key, or a combination such as `['⌘', 'K']`."
+          },
+          {
+            "name": "label",
+            "type": "string",
+            "required": false,
+            "description": "Spoken name, for example \"Command K\", since symbols like ⌘ read poorly."
+          },
+          {
+            "name": "separator",
+            "type": "string",
+            "required": false,
+            "description": "Text between keys of a combination; empty by default.",
+            "default": "''"
+          },
+          {
+            "name": "size",
+            "type": "'sm' | 'md'",
+            "required": false,
+            "description": "",
+            "default": "'md'"
+          }
+        ],
+        "events": [],
+        "slots": [
+          "default"
+        ]
+      },
+      "svelte": {
+        "props": [
+          {
+            "name": "keys",
+            "type": "string | string[]",
+            "required": false,
+            "description": "One key, or a combination such as `['⌘', 'K']`."
+          },
+          {
+            "name": "label",
+            "type": "string",
+            "required": false,
+            "description": "Spoken name, for example \"Command K\", since symbols like ⌘ read poorly."
+          },
+          {
+            "name": "separator",
+            "type": "string",
+            "required": false,
+            "description": "Text between keys of a combination; empty by default.",
+            "default": "''"
+          },
+          {
+            "name": "size",
+            "type": "'sm' | 'md'",
+            "required": false,
+            "description": "",
+            "default": "'md'"
+          },
+          {
+            "name": "children",
+            "type": "Snippet",
+            "required": false,
+            "description": ""
+          }
+        ],
+        "events": [],
+        "slots": [
+          "children"
+        ]
+      },
+      "modern": true
+    },
+    {
       "name": "BissKpiCard",
       "slug": "kpi-card",
       "short": "KpiCard",
@@ -7516,6 +7724,248 @@
       "modern": true
     },
     {
+      "name": "BissNumberField",
+      "slug": "number-field",
+      "short": "NumberField",
+      "category": "Forms and selection",
+      "description": "Type or step a number within limits, formatted for the locale.",
+      "guidance": "Give every control a visible label. Keep values in host state, validate before saving, and put recovery text beside the field.",
+      "vue": {
+        "props": [
+          {
+            "name": "min",
+            "type": "number",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "max",
+            "type": "number",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "step",
+            "type": "number",
+            "required": false,
+            "description": "",
+            "default": "1"
+          },
+          {
+            "name": "largeStep",
+            "type": "number",
+            "required": false,
+            "description": "Step for Page Up and Page Down; ten steps by default."
+          },
+          {
+            "name": "label",
+            "type": "string",
+            "required": false,
+            "description": "Accessible name when the field is not inside a labelled BissField."
+          },
+          {
+            "name": "placeholder",
+            "type": "string",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "required": false,
+            "description": "",
+            "default": "false"
+          },
+          {
+            "name": "required",
+            "type": "boolean",
+            "required": false,
+            "description": "",
+            "default": "false"
+          },
+          {
+            "name": "invalid",
+            "type": "boolean",
+            "required": false,
+            "description": "",
+            "default": "false"
+          },
+          {
+            "name": "locale",
+            "type": "string",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "format",
+            "type": "Intl.NumberFormatOptions",
+            "required": false,
+            "description": "Intl.NumberFormat options, for example `{ style: 'currency', currency: 'EUR' }`."
+          },
+          {
+            "name": "incrementLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Increase'"
+          },
+          {
+            "name": "decrementLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Decrease'"
+          },
+          {
+            "name": "size",
+            "type": "'sm' | 'md'",
+            "required": false,
+            "description": "",
+            "default": "'md'"
+          },
+          {
+            "name": "name",
+            "type": "string",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "modelValue",
+            "type": "number | null",
+            "required": false,
+            "description": "Controlled model. Bind with v-model.",
+            "default": "null"
+          }
+        ],
+        "events": [],
+        "slots": []
+      },
+      "svelte": {
+        "props": [
+          {
+            "name": "value",
+            "type": "number | null",
+            "required": false,
+            "description": "",
+            "default": "$bindable(null)"
+          },
+          {
+            "name": "min",
+            "type": "number",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "max",
+            "type": "number",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "step",
+            "type": "number",
+            "required": false,
+            "description": "",
+            "default": "1"
+          },
+          {
+            "name": "largeStep",
+            "type": "number",
+            "required": false,
+            "description": "Step for Page Up and Page Down; ten steps by default."
+          },
+          {
+            "name": "label",
+            "type": "string",
+            "required": false,
+            "description": "Accessible name when the field is not inside a labelled BissField."
+          },
+          {
+            "name": "placeholder",
+            "type": "string",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "required": false,
+            "description": "",
+            "default": "false"
+          },
+          {
+            "name": "required",
+            "type": "boolean",
+            "required": false,
+            "description": "",
+            "default": "false"
+          },
+          {
+            "name": "invalid",
+            "type": "boolean",
+            "required": false,
+            "description": "",
+            "default": "false"
+          },
+          {
+            "name": "locale",
+            "type": "string",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "format",
+            "type": "Intl.NumberFormatOptions",
+            "required": false,
+            "description": "Intl.NumberFormat options, for example `{ style: 'currency', currency: 'EUR' }`."
+          },
+          {
+            "name": "incrementLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Increase'"
+          },
+          {
+            "name": "decrementLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Decrease'"
+          },
+          {
+            "name": "size",
+            "type": "'sm' | 'md'",
+            "required": false,
+            "description": "",
+            "default": "'md'"
+          },
+          {
+            "name": "name",
+            "type": "string",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "onchange",
+            "type": "(value: number | null) => void",
+            "required": false,
+            "description": ""
+          }
+        ],
+        "events": [
+          {
+            "name": "onchange",
+            "type": "(value: number | null) => void",
+            "required": false,
+            "description": "Callback prop."
+          }
+        ],
+        "slots": []
+      },
+      "modern": true
+    },
+    {
       "name": "BissOnboardingChips",
       "slug": "onboarding-chips",
       "short": "OnboardingChips",
@@ -7917,6 +8367,242 @@
       "modern": true
     },
     {
+      "name": "BissPagination",
+      "slug": "pagination",
+      "short": "Pagination",
+      "category": "Tables and boards",
+      "description": "Numbered page navigation with ellipses, previous and next, and an optional page size.",
+      "guidance": "Pass only the records the person may see. The host owns persistence, permissions and domain calculations; these components render data and emit intent.",
+      "vue": {
+        "props": [
+          {
+            "name": "total",
+            "type": "number",
+            "required": false,
+            "description": "Total number of records; use `pages` instead when only the page count is known."
+          },
+          {
+            "name": "pages",
+            "type": "number",
+            "required": false,
+            "description": "Number of pages, overriding the count derived from `total` and `pageSize`."
+          },
+          {
+            "name": "pageSizes",
+            "type": "number[]",
+            "required": false,
+            "description": "Offer these page sizes in a select. Omit to hide the page-size control."
+          },
+          {
+            "name": "siblings",
+            "type": "number",
+            "required": false,
+            "description": "Pages shown on each side of the current page.",
+            "default": "1"
+          },
+          {
+            "name": "boundaries",
+            "type": "number",
+            "required": false,
+            "description": "Pages always shown at the start and end.",
+            "default": "1"
+          },
+          {
+            "name": "label",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Pagination'"
+          },
+          {
+            "name": "previousLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Previous page'"
+          },
+          {
+            "name": "nextLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Next page'"
+          },
+          {
+            "name": "pageLabel",
+            "type": "string",
+            "required": false,
+            "description": "Accessible name of each page button; `{page}` is replaced.",
+            "default": "'Page {page}'"
+          },
+          {
+            "name": "pageSizeLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Rows per page'"
+          },
+          {
+            "name": "rangeLabel",
+            "type": "string",
+            "required": false,
+            "description": "Visible record range when `total` is known; `{start}`, `{end}` and `{total}` are replaced.",
+            "default": "'{start}–{end} of {total}'"
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "required": false,
+            "description": "",
+            "default": "false"
+          },
+          {
+            "name": "page",
+            "type": "number",
+            "required": false,
+            "description": "Controlled model. Bind with v-model:page.",
+            "default": "1"
+          },
+          {
+            "name": "pageSize",
+            "type": "number",
+            "required": false,
+            "description": "Controlled model. Bind with v-model:pageSize.",
+            "default": "25"
+          }
+        ],
+        "events": [],
+        "slots": []
+      },
+      "svelte": {
+        "props": [
+          {
+            "name": "page",
+            "type": "number",
+            "required": false,
+            "description": "",
+            "default": "$bindable(1)"
+          },
+          {
+            "name": "pageSize",
+            "type": "number",
+            "required": false,
+            "description": "",
+            "default": "$bindable(25)"
+          },
+          {
+            "name": "total",
+            "type": "number",
+            "required": false,
+            "description": "Total number of records; use `pages` instead when only the page count is known."
+          },
+          {
+            "name": "pages",
+            "type": "number",
+            "required": false,
+            "description": "Number of pages, overriding the count derived from `total` and `pageSize`."
+          },
+          {
+            "name": "pageSizes",
+            "type": "number[]",
+            "required": false,
+            "description": "Offer these page sizes in a select. Omit to hide the page-size control."
+          },
+          {
+            "name": "siblings",
+            "type": "number",
+            "required": false,
+            "description": "Pages shown on each side of the current page.",
+            "default": "1"
+          },
+          {
+            "name": "boundaries",
+            "type": "number",
+            "required": false,
+            "description": "Pages always shown at the start and end.",
+            "default": "1"
+          },
+          {
+            "name": "label",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Pagination'"
+          },
+          {
+            "name": "previousLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Previous page'"
+          },
+          {
+            "name": "nextLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Next page'"
+          },
+          {
+            "name": "pageLabel",
+            "type": "string",
+            "required": false,
+            "description": "Accessible name of each page button; `{page}` is replaced.",
+            "default": "'Page {page}'"
+          },
+          {
+            "name": "pageSizeLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Rows per page'"
+          },
+          {
+            "name": "rangeLabel",
+            "type": "string",
+            "required": false,
+            "description": "Visible record range when `total` is known; `{start}`, `{end}` and `{total}` are replaced.",
+            "default": "'{start}–{end} of {total}'"
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "required": false,
+            "description": "",
+            "default": "false"
+          },
+          {
+            "name": "onchange",
+            "type": "(page: number) => void",
+            "required": false,
+            "description": "Called with the newly selected page."
+          },
+          {
+            "name": "onpagesize",
+            "type": "(size: number) => void",
+            "required": false,
+            "description": "Called with the newly selected page size."
+          }
+        ],
+        "events": [
+          {
+            "name": "onchange",
+            "type": "(page: number) => void",
+            "required": false,
+            "description": "Callback prop."
+          },
+          {
+            "name": "onpagesize",
+            "type": "(size: number) => void",
+            "required": false,
+            "description": "Callback prop."
+          }
+        ],
+        "slots": []
+      },
+      "modern": true
+    },
+    {
       "name": "BissPeopleCell",
       "slug": "people-cell",
       "short": "PeopleCell",
@@ -8233,6 +8919,147 @@
         "slots": [
           "children"
         ]
+      },
+      "modern": true
+    },
+    {
+      "name": "BissProgress",
+      "slug": "progress",
+      "short": "Progress",
+      "category": "Content and feedback",
+      "description": "A labelled progress bar for known amounts, or an indeterminate one while waiting.",
+      "guidance": "Keep messages calm, specific and actionable. Distinguish loading, empty, error and access states instead of presenting a generic blank panel.",
+      "vue": {
+        "props": [
+          {
+            "name": "value",
+            "type": "number | null",
+            "required": false,
+            "description": "Current value; `null` shows an indeterminate bar while the amount is unknown.",
+            "default": "null"
+          },
+          {
+            "name": "max",
+            "type": "number",
+            "required": false,
+            "description": "",
+            "default": "100"
+          },
+          {
+            "name": "label",
+            "type": "string",
+            "required": true,
+            "description": "Accessible name, shown above the bar when `showLabel` is set."
+          },
+          {
+            "name": "showLabel",
+            "type": "boolean",
+            "required": false,
+            "description": "",
+            "default": "false"
+          },
+          {
+            "name": "showValue",
+            "type": "boolean",
+            "required": false,
+            "description": "Show the formatted value beside the label.",
+            "default": "false"
+          },
+          {
+            "name": "valueText",
+            "type": "string",
+            "required": false,
+            "description": "Replaces the formatted percentage, for example \"3 of 8 files\"."
+          },
+          {
+            "name": "tone",
+            "type": "BissProgressTone",
+            "required": false,
+            "description": "",
+            "default": "'primary'"
+          },
+          {
+            "name": "size",
+            "type": "'sm' | 'md'",
+            "required": false,
+            "description": "",
+            "default": "'md'"
+          },
+          {
+            "name": "locale",
+            "type": "string",
+            "required": false,
+            "description": ""
+          }
+        ],
+        "events": [],
+        "slots": []
+      },
+      "svelte": {
+        "props": [
+          {
+            "name": "value",
+            "type": "number | null",
+            "required": false,
+            "description": "Current value; `null` shows an indeterminate bar while the amount is unknown.",
+            "default": "null"
+          },
+          {
+            "name": "max",
+            "type": "number",
+            "required": false,
+            "description": "",
+            "default": "100"
+          },
+          {
+            "name": "label",
+            "type": "string",
+            "required": true,
+            "description": "Accessible name, shown above the bar when `showLabel` is set."
+          },
+          {
+            "name": "showLabel",
+            "type": "boolean",
+            "required": false,
+            "description": "",
+            "default": "false"
+          },
+          {
+            "name": "showValue",
+            "type": "boolean",
+            "required": false,
+            "description": "Show the formatted value beside the label.",
+            "default": "false"
+          },
+          {
+            "name": "valueText",
+            "type": "string",
+            "required": false,
+            "description": "Replaces the formatted percentage, for example \"3 of 8 files\"."
+          },
+          {
+            "name": "tone",
+            "type": "BissProgressTone",
+            "required": false,
+            "description": "",
+            "default": "'primary'"
+          },
+          {
+            "name": "size",
+            "type": "'sm' | 'md'",
+            "required": false,
+            "description": "",
+            "default": "'md'"
+          },
+          {
+            "name": "locale",
+            "type": "string",
+            "required": false,
+            "description": ""
+          }
+        ],
+        "events": [],
+        "slots": []
       },
       "modern": true
     },
@@ -9635,6 +10462,67 @@
       "modern": true
     },
     {
+      "name": "BissSeparator",
+      "slug": "separator",
+      "short": "Separator",
+      "category": "Content and feedback",
+      "description": "A quiet horizontal or vertical divider, optionally labelled.",
+      "guidance": "Keep messages calm, specific and actionable. Distinguish loading, empty, error and access states instead of presenting a generic blank panel.",
+      "vue": {
+        "props": [
+          {
+            "name": "orientation",
+            "type": "'horizontal' | 'vertical'",
+            "required": false,
+            "description": "",
+            "default": "'horizontal'"
+          },
+          {
+            "name": "label",
+            "type": "string",
+            "required": false,
+            "description": "Short text centered on a horizontal rule, such as \"or\"."
+          },
+          {
+            "name": "decorative",
+            "type": "boolean",
+            "required": false,
+            "description": "Purely visual: removes the separator from the accessibility tree.",
+            "default": "false"
+          }
+        ],
+        "events": [],
+        "slots": []
+      },
+      "svelte": {
+        "props": [
+          {
+            "name": "orientation",
+            "type": "'horizontal' | 'vertical'",
+            "required": false,
+            "description": "",
+            "default": "'horizontal'"
+          },
+          {
+            "name": "label",
+            "type": "string",
+            "required": false,
+            "description": "Short text centered on a horizontal rule, such as \"or\"."
+          },
+          {
+            "name": "decorative",
+            "type": "boolean",
+            "required": false,
+            "description": "Purely visual: removes the separator from the accessibility tree.",
+            "default": "false"
+          }
+        ],
+        "events": [],
+        "slots": []
+      },
+      "modern": true
+    },
+    {
       "name": "BissServiceIcon",
       "slug": "service-icon",
       "short": "ServiceIcon",
@@ -10424,6 +11312,262 @@
             "required": false,
             "description": "",
             "default": "'10px'"
+          }
+        ],
+        "events": [],
+        "slots": []
+      },
+      "modern": true
+    },
+    {
+      "name": "BissSlider",
+      "slug": "slider",
+      "short": "Slider",
+      "category": "Forms and selection",
+      "description": "Choose a value or a range by dragging or with arrow keys, inside or outside a Field.",
+      "guidance": "Give every control a visible label. Keep values in host state, validate before saving, and put recovery text beside the field.",
+      "vue": {
+        "props": [
+          {
+            "name": "label",
+            "type": "string",
+            "required": false,
+            "description": "Visible name above the track; inside a BissField the field label names the slider."
+          },
+          {
+            "name": "min",
+            "type": "number",
+            "required": false,
+            "description": "",
+            "default": "0"
+          },
+          {
+            "name": "max",
+            "type": "number",
+            "required": false,
+            "description": "",
+            "default": "100"
+          },
+          {
+            "name": "step",
+            "type": "number",
+            "required": false,
+            "description": "",
+            "default": "1"
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "required": false,
+            "description": "",
+            "default": "false"
+          },
+          {
+            "name": "showValue",
+            "type": "boolean",
+            "required": false,
+            "description": "Show the formatted value at the end of the label row.",
+            "default": "false"
+          },
+          {
+            "name": "thumbLabels",
+            "type": "[string, string]",
+            "required": false,
+            "description": "Names of the two thumbs of a range.",
+            "default": "() => ['Minimum', 'Maximum']"
+          },
+          {
+            "name": "minStepsBetweenThumbs",
+            "type": "number",
+            "required": false,
+            "description": "Smallest gap between range thumbs, in steps.",
+            "default": "0"
+          },
+          {
+            "name": "locale",
+            "type": "string",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "format",
+            "type": "Intl.NumberFormatOptions",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "name",
+            "type": "string",
+            "required": false,
+            "description": "Submits the value with a surrounding form."
+          },
+          {
+            "name": "modelValue",
+            "type": "number | number[]",
+            "required": false,
+            "description": "Controlled model. Bind with v-model."
+          }
+        ],
+        "events": [],
+        "slots": []
+      },
+      "svelte": {
+        "props": [
+          {
+            "name": "value",
+            "type": "number | number[]",
+            "required": false,
+            "description": "A number for one thumb, or a `[start, end]` pair for a range.",
+            "default": "$bindable()"
+          },
+          {
+            "name": "label",
+            "type": "string",
+            "required": false,
+            "description": "Visible name above the track; inside a BissField the field label names the slider."
+          },
+          {
+            "name": "min",
+            "type": "number",
+            "required": false,
+            "description": "",
+            "default": "0"
+          },
+          {
+            "name": "max",
+            "type": "number",
+            "required": false,
+            "description": "",
+            "default": "100"
+          },
+          {
+            "name": "step",
+            "type": "number",
+            "required": false,
+            "description": "",
+            "default": "1"
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "required": false,
+            "description": "",
+            "default": "false"
+          },
+          {
+            "name": "showValue",
+            "type": "boolean",
+            "required": false,
+            "description": "Show the formatted value at the end of the label row.",
+            "default": "false"
+          },
+          {
+            "name": "thumbLabels",
+            "type": "[string, string]",
+            "required": false,
+            "description": "Names of the two thumbs of a range.",
+            "default": "['Minimum', 'Maximum']"
+          },
+          {
+            "name": "minStepsBetweenThumbs",
+            "type": "number",
+            "required": false,
+            "description": "Smallest gap between range thumbs, in steps.",
+            "default": "0"
+          },
+          {
+            "name": "locale",
+            "type": "string",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "format",
+            "type": "Intl.NumberFormatOptions",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "name",
+            "type": "string",
+            "required": false,
+            "description": "Submits the value with a surrounding form."
+          },
+          {
+            "name": "onchange",
+            "type": "(value: number | number[]) => void",
+            "required": false,
+            "description": ""
+          }
+        ],
+        "events": [
+          {
+            "name": "onchange",
+            "type": "(value: number | number[]) => void",
+            "required": false,
+            "description": "Callback prop."
+          }
+        ],
+        "slots": []
+      },
+      "modern": true
+    },
+    {
+      "name": "BissSpinner",
+      "slug": "spinner",
+      "short": "Spinner",
+      "category": "Content and feedback",
+      "description": "A small activity indicator for short waits, announced and slowed for reduced motion.",
+      "guidance": "Keep messages calm, specific and actionable. Distinguish loading, empty, error and access states instead of presenting a generic blank panel.",
+      "vue": {
+        "props": [
+          {
+            "name": "label",
+            "type": "string",
+            "required": false,
+            "description": "Announced to assistive technology while the spinner is visible.",
+            "default": "'Loading'"
+          },
+          {
+            "name": "size",
+            "type": "'sm' | 'md'",
+            "required": false,
+            "description": "",
+            "default": "'md'"
+          },
+          {
+            "name": "decorative",
+            "type": "boolean",
+            "required": false,
+            "description": "Hide from assistive technology when nearby text already explains the wait.",
+            "default": "false"
+          }
+        ],
+        "events": [],
+        "slots": []
+      },
+      "svelte": {
+        "props": [
+          {
+            "name": "label",
+            "type": "string",
+            "required": false,
+            "description": "Announced to assistive technology while the spinner is visible.",
+            "default": "'Loading'"
+          },
+          {
+            "name": "size",
+            "type": "'sm' | 'md'",
+            "required": false,
+            "description": "",
+            "default": "'md'"
+          },
+          {
+            "name": "decorative",
+            "type": "boolean",
+            "required": false,
+            "description": "Hide from assistive technology when nearby text already explains the wait.",
+            "default": "false"
           }
         ],
         "events": [],
@@ -11615,6 +12759,141 @@
       "modern": true
     },
     {
+      "name": "BissTabs",
+      "slug": "tabs",
+      "short": "Tabs",
+      "category": "Pages and navigation",
+      "description": "Connected tab parts with arrow-key navigation, plus a wrapper that takes items and panels.",
+      "guidance": "Keep the page title, view navigation and toolbar in a predictable order. Let the host router own navigation and permissions.",
+      "vue": {
+        "props": [
+          {
+            "name": "items",
+            "type": "BissTabsItem[]",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "label",
+            "type": "string",
+            "required": true,
+            "description": "Accessible name for the tab list."
+          },
+          {
+            "name": "variant",
+            "type": "BissTabsVariant",
+            "required": false,
+            "description": "",
+            "default": "'line'"
+          },
+          {
+            "name": "size",
+            "type": "BissTabsSize",
+            "required": false,
+            "description": "",
+            "default": "'md'"
+          },
+          {
+            "name": "activationMode",
+            "type": "'automatic' | 'manual'",
+            "required": false,
+            "description": "`automatic` selects on arrow-key focus; `manual` waits for Enter or Space.",
+            "default": "'automatic'"
+          },
+          {
+            "name": "ui",
+            "type": "BissTabsUi",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "modelValue",
+            "type": "string",
+            "required": false,
+            "description": "Controlled model. Bind with v-model."
+          }
+        ],
+        "events": [],
+        "slots": [
+          "default"
+        ]
+      },
+      "svelte": {
+        "props": [
+          {
+            "name": "items",
+            "type": "BissTabsItem[]",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "label",
+            "type": "string",
+            "required": true,
+            "description": "Accessible name for the tab list."
+          },
+          {
+            "name": "value",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "$bindable()"
+          },
+          {
+            "name": "variant",
+            "type": "BissTabsVariant",
+            "required": false,
+            "description": "",
+            "default": "'line'"
+          },
+          {
+            "name": "size",
+            "type": "BissTabsSize",
+            "required": false,
+            "description": "",
+            "default": "'md'"
+          },
+          {
+            "name": "activationMode",
+            "type": "'automatic' | 'manual'",
+            "required": false,
+            "description": "`automatic` selects on arrow-key focus; `manual` waits for Enter or Space.",
+            "default": "'automatic'"
+          },
+          {
+            "name": "ui",
+            "type": "BissTabsUi",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "onchange",
+            "type": "(value: string) => void",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "children",
+            "type": "Snippet<[BissTabsItem]>",
+            "required": false,
+            "description": "Renders each panel; receives the tab item."
+          }
+        ],
+        "events": [
+          {
+            "name": "onchange",
+            "type": "(value: string) => void",
+            "required": false,
+            "description": "Callback prop."
+          }
+        ],
+        "slots": [
+          "children"
+        ]
+      },
+      "modern": true
+    },
+    {
       "name": "BissTagInput",
       "slug": "tag-input",
       "short": "TagInput",
@@ -12056,6 +13335,147 @@
           }
         ],
         "events": [],
+        "slots": []
+      },
+      "modern": true
+    },
+    {
+      "name": "BissToggleGroup",
+      "slug": "toggle-group",
+      "short": "ToggleGroup",
+      "category": "Forms and selection",
+      "description": "Pressable options, with icons, for one choice or several independent ones.",
+      "guidance": "Give every control a visible label. Keep values in host state, validate before saving, and put recovery text beside the field.",
+      "vue": {
+        "props": [
+          {
+            "name": "items",
+            "type": "BissToggleItem[]",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "label",
+            "type": "string",
+            "required": true,
+            "description": "Accessible name for the group."
+          },
+          {
+            "name": "type",
+            "type": "'single' | 'multiple'",
+            "required": false,
+            "description": "`single` presses one option at a time; `multiple` toggles each option.",
+            "default": "'single'"
+          },
+          {
+            "name": "iconOnly",
+            "type": "boolean",
+            "required": false,
+            "description": "Show icons only; each item's label becomes its accessible name.",
+            "default": "false"
+          },
+          {
+            "name": "size",
+            "type": "'sm' | 'md'",
+            "required": false,
+            "description": "",
+            "default": "'md'"
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "required": false,
+            "description": "",
+            "default": "false"
+          },
+          {
+            "name": "orientation",
+            "type": "'horizontal' | 'vertical'",
+            "required": false,
+            "description": "",
+            "default": "'horizontal'"
+          },
+          {
+            "name": "modelValue",
+            "type": "string | string[]",
+            "required": false,
+            "description": "Controlled model. Bind with v-model."
+          }
+        ],
+        "events": [],
+        "slots": []
+      },
+      "svelte": {
+        "props": [
+          {
+            "name": "items",
+            "type": "BissToggleItem[]",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "label",
+            "type": "string",
+            "required": true,
+            "description": "Accessible name for the group."
+          },
+          {
+            "name": "value",
+            "type": "string | string[]",
+            "required": false,
+            "description": "",
+            "default": "$bindable()"
+          },
+          {
+            "name": "type",
+            "type": "'single' | 'multiple'",
+            "required": false,
+            "description": "`single` presses one option at a time; `multiple` toggles each option.",
+            "default": "'single'"
+          },
+          {
+            "name": "iconOnly",
+            "type": "boolean",
+            "required": false,
+            "description": "Show icons only; each item's label becomes its accessible name.",
+            "default": "false"
+          },
+          {
+            "name": "size",
+            "type": "'sm' | 'md'",
+            "required": false,
+            "description": "",
+            "default": "'md'"
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "required": false,
+            "description": "",
+            "default": "false"
+          },
+          {
+            "name": "orientation",
+            "type": "'horizontal' | 'vertical'",
+            "required": false,
+            "description": "",
+            "default": "'horizontal'"
+          },
+          {
+            "name": "onchange",
+            "type": "(value: string | string[]) => void",
+            "required": false,
+            "description": ""
+          }
+        ],
+        "events": [
+          {
+            "name": "onchange",
+            "type": "(value: string | string[]) => void",
+            "required": false,
+            "description": "Callback prop."
+          }
+        ],
         "slots": []
       },
       "modern": true

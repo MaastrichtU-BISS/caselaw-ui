@@ -1,0 +1,701 @@
+/* Core primitives: tabs, accordion, progress, spinner, slider, number field, kbd, separator,
+   pagination and toggle group. Same 32px control rhythm, control radius and focus ring as forms. */
+
+/* Tabs ------------------------------------------------------------------ */
+.biss-tabs-root {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  color: var(--biss-text);
+  font: 14px/1.55 var(--biss-font-family);
+}
+.biss-tabs-root[data-orientation='vertical'] {
+  flex-direction: row;
+  gap: var(--biss-space-5);
+}
+.biss-tabs-list {
+  display: flex;
+  align-items: stretch;
+  gap: var(--biss-space-5);
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
+  border-bottom: 1px solid var(--biss-border);
+}
+.biss-tabs-list[data-orientation='vertical'] {
+  flex-direction: column;
+  gap: 2px;
+  border-bottom: 0;
+  border-inline-end: 1px solid var(--biss-border);
+  overflow: visible;
+}
+.biss-tabs-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex: none;
+  margin-bottom: -1px;
+  padding: 0;
+  min-height: 40px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: var(--biss-muted);
+  font: 500 13.5px/1.2 var(--biss-font-family);
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    color 0.15s,
+    border-color 0.15s;
+}
+.biss-tabs-trigger:hover:not(:disabled) {
+  color: var(--biss-text);
+}
+.biss-tabs-trigger[data-state='active'] {
+  color: var(--biss-primary);
+  border-bottom-color: var(--biss-primary);
+}
+.biss-tabs-trigger:disabled,
+.biss-tabs-trigger[data-disabled] {
+  opacity: 0.5;
+  cursor: default;
+}
+.biss-tabs-trigger:focus-visible {
+  outline: 2px solid var(--biss-primary);
+  outline-offset: -2px;
+  border-radius: var(--biss-radius-sm) var(--biss-radius-sm) 0 0;
+}
+.biss-tabs-list[data-size='sm'] {
+  gap: var(--biss-space-4);
+}
+.biss-tabs-list[data-size='sm'] .biss-tabs-trigger {
+  min-height: var(--biss-control-height);
+  font-size: 13px;
+}
+.biss-tabs-count {
+  display: inline-grid;
+  place-items: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 9px;
+  background: var(--biss-surface-muted);
+  color: var(--biss-muted);
+  font: 500 11.5px/1 var(--biss-font-family);
+  font-variant-numeric: tabular-nums;
+}
+.biss-tabs-trigger[data-state='active'] .biss-tabs-count {
+  background: var(--biss-info-bg);
+  color: var(--biss-primary);
+}
+/* Segmented variant: the SegmentedControl look for switching between closely related panels. */
+.biss-tabs-list[data-variant='segmented'] {
+  align-self: flex-start;
+  gap: 2px;
+  padding: 2px;
+  border: 1px solid var(--biss-border);
+  border-radius: var(--biss-radius-sm);
+  background: var(--biss-surface-subtle);
+}
+.biss-tabs-list[data-variant='segmented'] .biss-tabs-trigger {
+  min-height: calc(var(--biss-control-height) - 6px);
+  margin: 0;
+  padding: 0 11px;
+  border: 0;
+  border-radius: 5px;
+  font-size: 13px;
+}
+.biss-tabs-list[data-variant='segmented'] .biss-tabs-trigger[data-state='active'] {
+  background: var(--biss-card);
+  box-shadow: var(--biss-shadow);
+  color: var(--biss-text);
+}
+.biss-tabs-list[data-variant='segmented'] .biss-tabs-trigger:focus-visible {
+  outline-offset: 0;
+  border-radius: 5px;
+}
+.biss-tabs-content {
+  padding-top: var(--biss-space-4);
+  min-width: 0;
+  color: var(--biss-text);
+  font: 13.5px/1.6 var(--biss-font-family);
+}
+.biss-tabs-content:focus-visible {
+  outline: 2px solid var(--biss-primary);
+  outline-offset: 2px;
+  border-radius: var(--biss-radius-sm);
+}
+.biss-tabs-content[hidden] {
+  display: none;
+}
+
+/* Accordion ------------------------------------------------------------- */
+.biss-accordion {
+  border-top: 1px solid var(--biss-border);
+  color: var(--biss-text);
+  font: 14px/1.55 var(--biss-font-family);
+}
+.biss-accordion-item {
+  border-bottom: 1px solid var(--biss-border);
+}
+.biss-accordion-header {
+  margin: 0;
+  font: inherit;
+}
+.biss-accordion-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--biss-space-3);
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 2px;
+  border: 0;
+  background: transparent;
+  color: var(--biss-text);
+  font: 500 13.5px/1.4 var(--biss-font-family);
+  text-align: start;
+  cursor: pointer;
+}
+.biss-accordion-trigger:hover:not(:disabled) {
+  color: var(--biss-primary);
+}
+.biss-accordion-trigger:focus-visible {
+  outline: 2px solid var(--biss-primary);
+  outline-offset: -2px;
+  border-radius: var(--biss-radius-sm);
+}
+.biss-accordion-trigger:disabled,
+.biss-accordion-trigger[data-disabled] {
+  opacity: 0.5;
+  cursor: default;
+}
+.biss-accordion-title {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.biss-accordion-description {
+  color: var(--biss-muted);
+  font: 400 12.5px/1.45 var(--biss-font-family);
+}
+.biss-accordion-trigger > .biss-icon {
+  color: var(--biss-muted);
+  rotate: 90deg;
+  transition: rotate 0.15s;
+}
+.biss-accordion-trigger[data-state='open'] > .biss-icon {
+  rotate: -90deg;
+}
+.biss-accordion-content {
+  overflow: hidden;
+}
+.biss-accordion-content[hidden] {
+  display: none;
+}
+.biss-accordion-body {
+  padding: 0 2px 14px;
+  color: var(--biss-muted);
+  font: 13.5px/1.6 var(--biss-font-family);
+}
+
+/* Progress -------------------------------------------------------------- */
+.biss-progress {
+  --progress-color: var(--biss-primary);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  min-width: 0;
+  color: var(--biss-text);
+  font: 13px/1.4 var(--biss-font-family);
+}
+.biss-progress[data-tone='neutral'] {
+  --progress-color: var(--biss-muted);
+}
+.biss-progress[data-tone='success'] {
+  --progress-color: var(--biss-success);
+}
+.biss-progress[data-tone='danger'] {
+  --progress-color: var(--biss-danger);
+}
+.biss-progress[data-tone='warning'] {
+  --progress-color: var(--biss-warning);
+}
+.biss-progress[data-tone='info'] {
+  --progress-color: var(--biss-info);
+}
+.biss-progress-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--biss-space-3);
+}
+.biss-progress-label {
+  font-weight: 500;
+}
+.biss-progress-value {
+  margin-inline-start: auto;
+  color: var(--biss-muted);
+  font-variant-numeric: tabular-nums;
+}
+.biss-progress-track {
+  position: relative;
+  height: 6px;
+  overflow: hidden;
+  border-radius: 3px;
+  background: var(--biss-track);
+}
+.biss-progress[data-size='sm'] .biss-progress-track {
+  height: 4px;
+  border-radius: 2px;
+}
+.biss-progress-bar {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--progress-color);
+  transition: width 0.25s ease-out;
+}
+.biss-progress[data-indeterminate] .biss-progress-bar {
+  position: absolute;
+  inset-block: 0;
+  width: 36%;
+  animation: biss-progress-slide 1.4s ease-in-out infinite;
+}
+@keyframes biss-progress-slide {
+  from {
+    left: -36%;
+  }
+  to {
+    left: 100%;
+  }
+}
+
+/* Spinner --------------------------------------------------------------- */
+.biss-spinner {
+  display: inline-flex;
+  flex: none;
+  width: 20px;
+  height: 20px;
+  color: var(--biss-primary);
+  vertical-align: middle;
+}
+.biss-spinner[data-size='sm'] {
+  width: 14px;
+  height: 14px;
+}
+.biss-spinner-icon {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  animation: biss-spinner-turn 0.8s linear infinite;
+}
+.biss-spinner-track {
+  stroke: var(--biss-track);
+}
+.biss-spinner-arc {
+  stroke: currentColor;
+}
+@keyframes biss-spinner-turn {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Slider ---------------------------------------------------------------- */
+.biss-slider {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  min-width: 0;
+  color: var(--biss-text);
+  font: 13px/1.4 var(--biss-font-family);
+}
+.biss-slider-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--biss-space-3);
+}
+.biss-slider-label {
+  font-weight: 500;
+}
+.biss-slider-value {
+  margin-inline-start: auto;
+  color: var(--biss-muted);
+  font-variant-numeric: tabular-nums;
+}
+.biss-slider-root {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 20px;
+  touch-action: none;
+  user-select: none;
+}
+.biss-slider-track {
+  position: relative;
+  flex: 1;
+  height: 4px;
+  overflow: hidden;
+  border-radius: 2px;
+  background: var(--biss-track);
+}
+.biss-slider-range {
+  position: absolute;
+  height: 100%;
+  background: var(--biss-primary);
+}
+.biss-slider-thumb {
+  display: block;
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid var(--biss-primary);
+  border-radius: 50%;
+  background: var(--biss-card);
+  box-shadow: var(--biss-shadow);
+  cursor: grab;
+  transition: box-shadow 0.15s;
+}
+.biss-slider-thumb:hover {
+  box-shadow: 0 0 0 4px var(--biss-focus);
+}
+.biss-slider-thumb:focus-visible {
+  outline: 2px solid var(--biss-primary);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--biss-focus);
+}
+.biss-slider-thumb:active {
+  cursor: grabbing;
+}
+.biss-slider-thumb[aria-invalid='true'] {
+  border-color: var(--biss-danger);
+}
+.biss-slider[data-disabled] {
+  opacity: 0.5;
+}
+.biss-slider[data-disabled] .biss-slider-thumb {
+  cursor: default;
+  box-shadow: var(--biss-shadow);
+}
+
+/* Number field ---------------------------------------------------------- */
+.biss-number-field {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  min-width: 0;
+  height: var(--biss-control-height);
+  border: 1px solid var(--biss-border-strong);
+  border-radius: var(--biss-radius-sm);
+  background: var(--biss-card);
+  color: var(--biss-text);
+  transition: border-color 0.15s;
+}
+.biss-number-field:focus-within {
+  outline: 2px solid var(--biss-primary);
+  outline-offset: 1px;
+  border-color: var(--biss-primary);
+}
+.biss-number-field[data-invalid] {
+  border-color: var(--biss-danger);
+}
+.biss-number-field[data-disabled] {
+  opacity: 0.5;
+}
+.biss-number-input {
+  flex: 1;
+  min-width: 0;
+  padding: 0 10px;
+  border: 0;
+  border-radius: var(--biss-radius-sm) 0 0 var(--biss-radius-sm);
+  background: transparent;
+  color: inherit;
+  font: 400 13.5px/1.5 var(--biss-font-family);
+  font-variant-numeric: tabular-nums;
+  outline: none;
+}
+.biss-number-input::placeholder {
+  color: var(--biss-muted);
+}
+.biss-number-input:focus-visible {
+  outline: none;
+}
+.biss-number-steppers {
+  display: flex;
+  flex: none;
+  border-inline-start: 1px solid var(--biss-border);
+}
+.biss-number-step {
+  display: grid;
+  place-items: center;
+  width: calc(var(--biss-control-height) - 4px);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--biss-muted);
+  cursor: pointer;
+}
+.biss-number-step + .biss-number-step {
+  border-inline-start: 1px solid var(--biss-border);
+}
+.biss-number-step:last-child {
+  border-radius: 0 var(--biss-radius-sm) var(--biss-radius-sm) 0;
+}
+.biss-number-step:hover:not(:disabled) {
+  background: var(--biss-hover);
+  color: var(--biss-text);
+}
+.biss-number-step:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.biss-number-step .biss-icon {
+  width: 14px;
+  height: 14px;
+}
+.biss-number-field[data-size='sm'] {
+  height: calc(var(--biss-control-height) - 4px);
+}
+.biss-number-field[data-size='sm'] .biss-number-input {
+  font-size: 13px;
+}
+
+/* Kbd ------------------------------------------------------------------- */
+.biss-kbd-combo,
+.biss-kbd-keys {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  vertical-align: baseline;
+}
+.biss-kbd {
+  display: inline-grid;
+  place-items: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  border: 1px solid var(--biss-border-strong);
+  border-bottom-width: 2px;
+  border-radius: 5px;
+  background: var(--biss-card);
+  color: var(--biss-muted);
+  font: 500 11.5px/1 var(--biss-font-family);
+  white-space: nowrap;
+}
+.biss-kbd-combo[data-size='sm'] .biss-kbd {
+  min-width: 17px;
+  height: 17px;
+  padding: 0 4px;
+  border-bottom-width: 1px;
+  font-size: 11px;
+}
+.biss-kbd-separator {
+  color: var(--biss-muted);
+  font: 11.5px var(--biss-font-family);
+}
+
+/* Separator ------------------------------------------------------------- */
+.biss-separator {
+  flex: none;
+  border: 0;
+  background: var(--biss-border);
+}
+.biss-separator[data-orientation='horizontal'] {
+  width: 100%;
+  height: 1px;
+}
+.biss-separator[data-orientation='vertical'] {
+  align-self: stretch;
+  width: 1px;
+  min-height: 1em;
+}
+.biss-separator[data-labelled][data-orientation='horizontal'] {
+  display: flex;
+  align-items: center;
+  gap: var(--biss-space-3);
+  height: auto;
+  background: transparent;
+  color: var(--biss-muted);
+  font: 12.5px/1.4 var(--biss-font-family);
+}
+.biss-separator[data-labelled][data-orientation='horizontal']::before,
+.biss-separator[data-labelled][data-orientation='horizontal']::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--biss-border);
+}
+
+/* Pagination ------------------------------------------------------------ */
+.biss-pagination {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--biss-space-2) var(--biss-space-4);
+  color: var(--biss-muted);
+  font: 13px/1.4 var(--biss-font-family);
+  font-variant-numeric: tabular-nums;
+}
+.biss-pagination-summary {
+  margin: 0;
+}
+.biss-pagination-size {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--biss-space-2);
+  white-space: nowrap;
+}
+.biss-pagination-size .biss-select {
+  width: auto;
+  padding-inline-end: 6px;
+}
+.biss-pagination-list {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2px;
+  margin: 0 0 0 auto;
+  padding: 0;
+  list-style: none;
+}
+.biss-pagination-button {
+  display: inline-grid;
+  place-items: center;
+  min-width: var(--biss-control-height);
+  height: var(--biss-control-height);
+  padding: 0 6px;
+  border: 1px solid transparent;
+  border-radius: var(--biss-radius-sm);
+  background: transparent;
+  color: var(--biss-muted);
+  font: 500 13px/1 var(--biss-font-family);
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+}
+.biss-pagination-button:hover:not(:disabled) {
+  background: var(--biss-hover);
+  color: var(--biss-text);
+}
+.biss-pagination-button[aria-current='page'] {
+  border-color: var(--biss-border-strong);
+  background: var(--biss-card);
+  box-shadow: var(--biss-shadow);
+  color: var(--biss-text);
+}
+.biss-pagination-button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.biss-pagination-ellipsis {
+  display: inline-grid;
+  place-items: center;
+  min-width: 20px;
+  height: var(--biss-control-height);
+  color: var(--biss-muted);
+}
+
+/* Toggle group ---------------------------------------------------------- */
+.biss-toggle-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  max-width: 100%;
+  overflow-x: auto;
+  padding: 2px;
+  border: 1px solid var(--biss-border);
+  border-radius: var(--biss-radius-sm);
+  background: var(--biss-surface-subtle);
+}
+.biss-toggle-group[data-orientation='vertical'] {
+  flex-direction: column;
+  align-items: stretch;
+}
+.biss-toggle-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: calc(var(--biss-control-height) - 6px);
+  padding: 0 10px;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--biss-muted);
+  font: 500 13px/1.2 var(--biss-font-family);
+  white-space: nowrap;
+  cursor: pointer;
+}
+.biss-toggle-item:hover:not(:disabled) {
+  color: var(--biss-text);
+}
+.biss-toggle-item[data-state='on'] {
+  background: var(--biss-card);
+  box-shadow: var(--biss-shadow);
+  color: var(--biss-text);
+}
+.biss-toggle-item[data-state='on'] .biss-icon {
+  color: var(--biss-primary);
+}
+.biss-toggle-item:disabled,
+.biss-toggle-item[data-disabled] {
+  opacity: 0.5;
+  cursor: default;
+}
+.biss-toggle-item:focus-visible {
+  outline: 2px solid var(--biss-primary);
+  outline-offset: 0;
+}
+.biss-toggle-group[data-icon-only] .biss-toggle-item {
+  width: calc(var(--biss-control-height) - 6px);
+  padding: 0;
+}
+.biss-toggle-group[data-size='sm'] .biss-toggle-item {
+  min-height: calc(var(--biss-control-height) - 10px);
+  padding: 0 8px;
+  font-size: 12.5px;
+}
+.biss-toggle-group[data-size='sm'][data-icon-only] .biss-toggle-item {
+  width: calc(var(--biss-control-height) - 10px);
+  padding: 0;
+}
+
+@media (max-width: 640px) {
+  .biss-pagination-list {
+    margin-inline-start: 0;
+  }
+  .biss-accordion-trigger {
+    min-height: 48px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .biss-tabs-trigger,
+  .biss-accordion-trigger > .biss-icon,
+  .biss-progress-bar,
+  .biss-slider-thumb,
+  .biss-number-field {
+    transition: none;
+  }
+  /* Keep a sign of activity, but slow it right down and drop the sliding motion. */
+  .biss-spinner-icon {
+    animation-duration: 2.4s;
+  }
+  .biss-progress[data-indeterminate] .biss-progress-bar {
+    left: 0;
+    width: 100%;
+    animation: biss-progress-pulse 2.4s ease-in-out infinite;
+  }
+}
+@keyframes biss-progress-pulse {
+  50% {
+    opacity: 0.45;
+  }
+}
