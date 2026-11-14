@@ -1,5 +1,5 @@
 /* Bizzy's base grammar, shared by every component, including migration APIs. */
-:where([class^='biss-'], [class*=' biss-']) {
+:where([class^='biss-']:not([class^='biss-tok-']), [class*=' biss-']) {
   box-sizing: border-box;
   font-family: var(--biss-font-family);
   font-variant-numeric: tabular-nums;
