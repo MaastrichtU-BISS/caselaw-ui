@@ -33,10 +33,19 @@ No router, account store, server connection or Nuxt globals are required.
 
 ## Components and customization
 
-144 components are available in **each framework**, with one Bizzy design language.
-They include data grids, column and label editors, filter builders, sharing and
-permissions, document blocks, comments, dashboards, task lists, calendars, boards,
-charts, forms, navigation, overlays and feedback.
+154 components are available in **each framework**, with one Bizzy design language,
+in two tiers:
+
+- **Components** (Actions, Forms, Overlays, Navigation, Data display, Charts,
+  Feedback): controls and displays with no application state, from Button, Tabs,
+  Slider and NumberField to DatePicker, Menu and DataTable.
+- **Blocks** (Application shells, Page headers, Data views, Sharing and
+  collaboration, Dashboards, Documents, Onboarding, Marketing): compositions for
+  recurring application tasks, such as Sidebar, DataGrid, FilterBuilder,
+  SharePanel, NotificationCenter, ImportMapper, Feed and Tour. The host supplies
+  their data and handles their actions.
+
+[docs/components.md](docs/components.md) lists every component by tier and group.
 
 The [documentation site](docs/README.md) derives API tables from source and shows
 live examples. The [architecture guide](docs/architecture.md)
@@ -59,7 +68,20 @@ or on a wrapper to theme a single region:
 Fonts are supplied by the host; the package makes no font network requests.
 Components inherit CSS tokens, support documented slots, and expose native
 attributes where their framework implementation allows them. There is no global
-HTML reset. Dark themes require supplying the full semantic token palette.
+HTML reset.
+
+### Light, dark and system themes
+
+Set `data-biss-theme` on `<html>`, or on any wrapper to theme one region:
+
+```html
+<html data-biss-theme="system"> <!-- or "light" / "dark" -->
+```
+
+`light` and `dark` can be nested inside each other; `system` follows the
+operating system. Both palettes are generated from `src/theme/tokens.json` and
+exported as `bissCssTokens` and `bissThemes` from `biss-ui/tokens`. Give custom
+brand colors a dark value too, for example inside `[data-biss-theme='dark']`.
 
 ## Connected component architecture
 
@@ -88,9 +110,12 @@ Try the [composed playground](https://bissui.wicker.life/#/playground), or read 
 
 Browse the library at [bissui.wicker.life](https://bissui.wicker.life).
 
-Run `npm run docs:dev` for the Bizzy-style documentation site: all 144
-components, live desktop and phone previews, framework usage, and
-source-derived API tables. [Documentation guide](docs/README.md) ·
+Run `npm run docs:dev` for the documentation site: a landing page with a live
+workspace and theming playground, all 154 components, and source-derived API
+tables. Component pages render authored examples: each is a real `.vue` and
+`.svelte` file under `docs-site/examples/<component>/`, and the page shows the
+exact source of the file it runs. Add an example by adding the file pair and an
+entry to that folder's `manifest.ts`. [Documentation guide](docs/README.md) ·
 [Component screenshots](docs/visual-reference.md).
 
 Build the static site with `npm run docs:build`. [Hosting and deployment](docs/HOSTING.md)
