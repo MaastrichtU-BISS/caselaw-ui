@@ -1278,3 +1278,9 @@ h1 {
     justify-content: flex-start;
   }
 }
+.example-stack > *,
+.example-card,
+.example-card-frame,
+.example-card-code {
+  min-width: 0;
+}
