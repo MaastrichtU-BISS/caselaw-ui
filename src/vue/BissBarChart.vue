@@ -21,8 +21,9 @@ const bars = computed(() =>
   props.points.map((point) => ({
     ...point,
     height: `${Math.max(point.value > 0 ? 3 : 0, Math.round((point.value / max.value) * 100))}%`,
+    // Drawn inside the bar's fill, so it is a share of this bar, not of the peak.
     compareHeight: point.compare
-      ? `${Math.max(3, Math.round((point.compare / max.value) * 100))}%`
+      ? `${Math.min(100, Math.max(3, Math.round((point.compare / Math.max(1, point.value)) * 100)))}%`
       : '0%',
   })),
 );

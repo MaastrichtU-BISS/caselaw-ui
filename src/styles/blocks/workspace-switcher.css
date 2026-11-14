@@ -1,0 +1,124 @@
+/* WorkspaceSwitcher: the current workspace and a popover to switch, find or create. */
+.biss-workspace-trigger {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  min-height: 40px;
+  padding: 4px 8px;
+  border: 1px solid var(--biss-border);
+  border-radius: var(--biss-radius-sm);
+  background: var(--biss-card);
+  color: var(--biss-text);
+  font: 600 13.5px/1.3 var(--biss-font-family);
+  text-align: start;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+.biss-workspace-trigger:hover,
+.biss-workspace-trigger[data-open] {
+  background: var(--biss-hover);
+}
+.biss-workspace-trigger:focus-visible {
+  outline: 2px solid var(--biss-primary);
+  outline-offset: 1px;
+}
+.biss-workspace-trigger[data-collapsed] {
+  justify-content: center;
+  width: var(--biss-control-height);
+  min-height: var(--biss-control-height);
+  padding: 0;
+  border-color: transparent;
+  background: transparent;
+}
+.biss-workspace-trigger[data-collapsed]:hover,
+.biss-workspace-trigger[data-collapsed][data-open] {
+  background: var(--biss-hover);
+}
+.biss-workspace-mark {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  overflow: hidden;
+  border-radius: 6px;
+  background: var(--biss-primary);
+  color: var(--biss-on-primary);
+  font: 700 12.5px/1 var(--biss-font-family);
+}
+.biss-workspace-mark img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.biss-workspace-name {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.biss-workspace-name > span,
+.biss-workspace-name > small {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.biss-workspace-name > small {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--biss-muted);
+}
+.biss-workspace-trigger > .biss-icon {
+  width: 14px;
+  height: 14px;
+  color: var(--biss-muted);
+  transform: rotate(90deg);
+}
+.biss-workspace-panel {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+.biss-workspace-heading {
+  margin: 10px 14px 0;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--biss-muted);
+}
+.biss-workspace-panel .biss-command-menu {
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  max-height: min(360px, calc(100dvh - 120px));
+}
+.biss-workspace-panel .biss-command-option {
+  min-height: 34px;
+}
+.biss-workspace-create {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  padding: 10px 12px;
+  border: 0;
+  border-top: 1px solid var(--biss-border);
+  border-radius: 0 0 var(--biss-radius-lg) var(--biss-radius-lg);
+  background: transparent;
+  color: var(--biss-text);
+  font: 500 13.5px var(--biss-font-family);
+  text-align: start;
+  cursor: pointer;
+}
+.biss-workspace-create:hover {
+  background: var(--biss-row-hover);
+}
+.biss-workspace-create:focus-visible {
+  outline: 2px solid var(--biss-primary);
+  outline-offset: -2px;
+}
+.biss-workspace-create .biss-icon {
+  width: 15px;
+  height: 15px;
+  color: var(--biss-muted);
+}

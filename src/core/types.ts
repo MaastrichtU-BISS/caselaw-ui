@@ -210,3 +210,40 @@ export type BissLink = {
    */
   newTab?: boolean;
 };
+
+/** One collapsible section of an accordion. */
+export interface BissAccordionItem {
+  value: string;
+  title: string;
+  /** Secondary line under the title. */
+  description?: string;
+  /** Plain-text body, used when no slot or snippet supplies richer content. */
+  content?: string;
+  disabled?: boolean;
+}
+
+/** One pressable option in a toggle group. */
+export interface BissToggleItem {
+  value: string;
+  /** Visible text, or the accessible name when the group is icon-only. */
+  label: string;
+  icon?: BissIconName;
+  disabled?: boolean;
+}
+
+/** Progress uses the badge tones plus the primary action color, which is its default. */
+export type BissProgressTone = 'primary' | BissTone;
+/** One notification in BissNotificationCenter. The host owns read state and navigation. */
+export interface BissNotice {
+  id: string;
+  /** What happened, for example “Ada mentioned you”. */
+  title: string;
+  /** What it is about, for example a record name. */
+  detail?: string;
+  /** Where and when, already formatted: “Open justice · 5 min ago”. */
+  meta?: string;
+  unread?: boolean;
+  icon?: BissIconName;
+  /** Colors the icon circle. Defaults to `info`. */
+  tone?: BissTone;
+}

@@ -168,7 +168,7 @@
   align-items: center;
   justify-content: center;
   padding: 16px;
-  background: rgba(29, 28, 26, 0.32);
+  background: var(--biss-overlay);
   font: 14px/1.55 var(--biss-font-family);
   color: var(--biss-text);
 }
@@ -567,20 +567,20 @@
   color: var(--biss-muted);
 }
 .biss-tok-string {
-  color: #0f6e46;
+  color: var(--biss-code-string);
 }
 .biss-tok-keyword {
-  color: #5e2b95;
+  color: var(--biss-code-keyword);
 }
 .biss-tok-builtin,
 .biss-tok-decorator {
-  color: #005ca9;
+  color: var(--biss-code-builtin);
 }
 .biss-tok-number {
-  color: #94450f;
+  color: var(--biss-code-number);
 }
 .biss-tok-key {
-  color: #004a8a;
+  color: var(--biss-code-key);
 }
 .biss-disclosure {
   border-bottom: 1px solid var(--biss-border);

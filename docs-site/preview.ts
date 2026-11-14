@@ -7,8 +7,38 @@ const params = new URLSearchParams(location.search),
   state = params.get('state') ?? 'default';
 document.documentElement.dataset.example = params.get('example') ?? '';
 document.documentElement.dataset.bissDensity = params.get('density') ?? 'standard';
-const example = dialogExamples.find((item) => item.id === params.get('example'));
-if (example) {
+document.documentElement.dataset.bissTheme = params.get('theme') ?? 'light';
+const requested = params.get('example') ?? '';
+const example = dialogExamples.find((item) => item.id === requested);
+if (requested.includes('/')) {
+  const [slug, id] = requested.split('/');
+  const { examplesBySlug } = await import('./examples/registry');
+  const meta = examplesBySlug[slug!]?.find((item) => item.id === id);
+  const isSvelte = params.get('framework') === 'svelte';
+  const modules = isSvelte
+    ? import.meta.glob(['./examples/*/*.svelte', '!./examples/dialog/*'])
+    : import.meta.glob(['./examples/*/*.vue', '!./examples/dialog/*']);
+  const loader = meta && modules[`./examples/${slug}/${meta.file}.${isSvelte ? 'svelte' : 'vue'}`];
+  const frame = document.createElement('div');
+  frame.className = 'authored-example';
+  frame.dataset.layout = meta?.layout ?? 'center';
+  frame.dataset.example = requested;
+  frame.dataset.framework = isSvelte ? 'svelte' : 'vue';
+  document.querySelector('#app')!.append(frame);
+  if (!loader) {
+    frame.textContent = 'Example not found.';
+  } else {
+    const component = (await loader()) as { default: any };
+    if (isSvelte) {
+      const { mount, tick } = await import('svelte');
+      mount(component.default, { target: frame });
+      await tick();
+    } else {
+      createApp(component.default).mount(frame);
+      await nextTick();
+    }
+  }
+} else if (example) {
   const isSvelte = params.get('framework') === 'svelte';
   const modules = isSvelte
     ? import.meta.glob('./examples/dialog/*.svelte')
@@ -69,3 +99,14 @@ if (name === 'BissEditableText' && state === 'editing')
   document.querySelector<HTMLButtonElement>('.biss-editable button')?.click();
 await nextTick();
 document.documentElement.dataset.ready = 'true';
+// Authored examples report their height so the docs can size the frame without reaching into it.
+const authoredRoot = document.querySelector<HTMLElement>('.authored-example');
+if (authoredRoot && window.parent !== window) {
+  const report = () =>
+    window.parent.postMessage(
+      { type: 'biss-example-height', example: requested, height: authoredRoot.scrollHeight },
+      location.origin,
+    );
+  new ResizeObserver(report).observe(authoredRoot);
+  report();
+}

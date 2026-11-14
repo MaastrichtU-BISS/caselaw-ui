@@ -2,18 +2,29 @@
 import ts from 'typescript';
 import { readFileSync, writeFileSync, readdirSync } from 'node:fs';
 import { parse } from '@vue/compiler-sfc';
-const groups = {
-  'Getting things done': [
-    'Button',
-    'HeaderAction',
-    'ToolButton',
-    'ToolNew',
-    'ToolSearch',
-    'Toolbar',
-    'SaveBar',
-    'EditableText',
+/*
+ * Two tiers, as in docs/reference-architecture.md:
+ * - Components are reusable controls and displays with no application state.
+ * - Blocks are compositions of components for a recurring application task;
+ *   the host supplies their data and handles their actions.
+ * Each group belongs to exactly one tier. Every shipped component must be listed.
+ */
+const tiers = {
+  Components: ['Actions', 'Forms', 'Overlays', 'Navigation', 'Data display', 'Charts', 'Feedback'],
+  Blocks: [
+    'Application shells',
+    'Page headers',
+    'Data views',
+    'Sharing and collaboration',
+    'Dashboards',
+    'Documents',
+    'Onboarding',
+    'Marketing',
   ],
-  'Forms and selection': [
+};
+const groups = {
+  Actions: ['Button', 'HeaderAction', 'ToolButton', 'ToolNew', 'ToolSearch', 'Toolbar', 'EditableText'],
+  Forms: [
     'Field',
     'Input',
     'Textarea',
@@ -23,95 +34,134 @@ const groups = {
     'SwatchPicker',
     'SearchInput',
     'CopyField',
+    'Checkbox',
+    'RadioGroup',
     'Switch',
+    'SegmentedControl',
     'TagInput',
     'DatePicker',
     'DateField',
+    'FilePicker',
   ],
-  'Overlays and search': [
+  Overlays: [
     'Dialog',
     'Modal',
     'ConfirmDialog',
     'SidePanel',
     'Popover',
     'Menu',
+    'Tooltip',
+    'FigureHelp',
     'SearchPalette',
+    'CommandMenu',
+    'FeedbackDialog',
   ],
-  'Pages and navigation': [
-    'PageBar',
-    'PageHeader',
-    'ConsoleHeader',
-    'SectionHeader',
-    'SettingsHead',
+  Navigation: ['ViewTabs', 'Tab', 'Breadcrumbs', 'NavItem', 'NavSection', 'Disclosure', 'TablePager'],
+  'Data display': [
+    'Avatar',
+    'PresenceStack',
+    'PeopleCell',
+    'RecordChip',
+    'StatusCell',
+    'Badge',
+    'Card',
+    'PropertyList',
+    'Icon',
+    'ServiceIcon',
+    'DataTable',
+    'TableHead',
+    'TableGroup',
+    'TableTotal',
+    'TableAddRow',
+    'CodeBlock',
+    'CodeTabs',
+  ],
+  Charts: [
+    'GoalBar',
+    'CapacityBar',
+    'MeterList',
+    'BarChart',
+    'GroupedBars',
+    'StackedBar',
+    'LineChart',
+    'MiniChart',
+    'ChartLegend',
+    'FunnelChart',
+    'RingGauge',
+  ],
+  Feedback: [
+    'AlertLine',
+    'Callout',
+    'EmptyState',
+    'NoAccess',
+    'Skeleton',
+    'HomeSkel',
+    'LiveStatus',
+    'ToastStack',
+    'SaveBar',
     'PageHint',
-    'ViewTabs',
-    'Tab',
-    'NavItem',
-    'NavSection',
+  ],
+  'Application shells': [
     'AppShell',
     'ConsoleLayout',
     'GridShell',
     'TopBar',
     'BottomBar',
     'SidebarUser',
+    'SplitPane',
+    'Sidebar',
+    'WorkspaceSwitcher',
   ],
-  'People and records': [
-    'Avatar',
-    'PresenceStack',
-    'PeopleCell',
-    'RecordChip',
-    'StatusCell',
-    'PropertyList',
-    'ActivityList',
-    'NoticeRow',
-    'ServiceIcon',
-    'Icon',
-  ],
-  'Tables and boards': [
-    'DataTable',
-    'TableHead',
-    'TableGroup',
-    'TableTotal',
-    'TableAddRow',
-    'TablePager',
+  'Page headers': ['PageBar', 'PageHeader', 'ConsoleHeader', 'SectionHeader', 'SettingsHead'],
+  'Data views': [
+    'DataGrid',
+    'ColumnManager',
+    'FilterBuilder',
+    'LabelEditor',
     'Kanban',
     'Calendar',
     'Timeline',
+    'TaskList',
+    'Agenda',
+    'ImportMapper',
   ],
-  'Widgets and charts': [
+  'Sharing and collaboration': [
+    'SharePanel',
+    'AccessList',
+    'RoleEditor',
+    'CommentThread',
+    'CommentComposer',
+    'PresenceCursor',
+    'ActivityList',
+    'NoticeRow',
+    'RecordPreview',
+    'NotificationCenter',
+    'Feed',
+    'FeedItem',
+  ],
+  Dashboards: [
+    'WidgetGrid',
     'HomeCard',
     'GoalCard',
-    'GoalBar',
-    'CapacityBar',
-    'ChartLegend',
-    'GroupedBars',
-    'LineChart',
-    'MiniChart',
     'KpiCard',
+    'DataTile',
     'StatList',
-    'MeterList',
-    'BarChart',
     'SummaryStrip',
+    'QuickLinks',
+    'DeadlineList',
+    'KeyResult',
   ],
-  'Content and feedback': [
-    'AlertLine',
-    'Card',
-    'Badge',
-    'Callout',
-    'EmptyState',
-    'NoAccess',
-    'HomeSkel',
-    'Skeleton',
-    'LiveStatus',
-    'ToastStack',
-    'Hero',
-    'HeroPill',
-    'FeatureCard',
-    'ActionCard',
-    'CodeBlock',
-    'CodeTabs',
+  Documents: [
+    'DocumentToc',
+    'DocumentCallout',
+    'Bookmark',
+    'MediaFigure',
+    'AttachmentList',
+    'ProposalCard',
+    'Lightbox',
   ],
-  Onboarding: ['OnboardingFrame', 'OnboardingChips', 'Checklist', 'Step', 'Steps'],
+  Onboarding: ['OnboardingFrame', 'OnboardingChips', 'Checklist', 'Steps', 'Step', 'Tour', 'TemplateGallery'],
+  Marketing: ['Hero', 'HeroPill', 'FeatureCard', 'ActionCard'],
 };
 const descriptions = {
   Button: 'A clear action with an explicit visual priority.',
@@ -212,59 +262,106 @@ Object.assign(descriptions, {
   TopBar: 'The shared brand and primary navigation bar.',
   ViewTabs: 'Switch a page’s view while keeping labels, counts and disabled states consistent.',
 });
-groups['Forms and selection'].push('Checkbox', 'RadioGroup', 'SegmentedControl', 'FilePicker');
-groups['Overlays and search'].push('Tooltip', 'FigureHelp');
-groups['Pages and navigation'].push('Breadcrumbs', 'Disclosure', 'SplitPane', 'DocumentToc');
-groups['People and records'].push(
-  'AccessList',
-  'RoleEditor',
-  'SharePanel',
-  'CommentComposer',
-  'CommentThread',
-  'RecordPreview',
-  'PresenceCursor',
-);
-groups['Tables and boards'].push(
-  'DataGrid',
-  'ColumnManager',
-  'FilterBuilder',
-  'LabelEditor',
-  'TaskList',
-  'Agenda',
-);
-groups['Widgets and charts'].push(
-  'DataTile',
-  'WidgetGrid',
-  'QuickLinks',
-  'DeadlineList',
-  'StackedBar',
-);
-groups['Content and feedback'].push(
-  'DocumentCallout',
-  'Bookmark',
-  'MediaFigure',
-  'AttachmentList',
-  'ProposalCard',
-);
+Object.assign(descriptions, {
+  AccessList: 'Who can open a record, with their role and how they got access.',
+  ActivityList: 'A chronological list of who changed what, with optional detail.',
+  Agenda: 'A meeting agenda: timed items to add, reorder and tick off.',
+  AttachmentList: 'Files attached to a record, with links and a remove action.',
+  Bookmark: 'A rich link preview with title, description and source.',
+  Breadcrumbs: 'Show where a page sits in the hierarchy and link back up.',
+  Callout: 'A highlighted note that explains context or a consequence.',
+  Checkbox: 'A labelled checkbox with optional description text.',
+  ColumnManager: 'Show, hide, pin, reorder and resize the columns of a table.',
+  CommentComposer: 'Write a comment, mention people and submit with the keyboard.',
+  CommentThread: 'A discussion on a record, with a composer and resolve state.',
+  DataGrid: 'A spreadsheet-like table with selection, pinning, sorting and resizable columns.',
+  DataTile: 'A dashboard tile that frames a figure, a chart or a list.',
+  DeadlineList: 'Dated items ordered by urgency, with overdue items called out.',
+  Disclosure: 'Hide secondary detail behind a labelled toggle.',
+  DocumentCallout: 'A tinted note block inside a document.',
+  DocumentToc: 'A document outline that tracks the heading in view.',
+  FigureHelp: 'Explain how a figure is calculated, next to the figure.',
+  FilePicker: 'Choose files or drop them onto the field.',
+  FilterBuilder: 'Compose filter rules with fields, operators and values.',
+  GoalCard: 'A goal with its progress, expected pace and owner.',
+  LabelEditor: 'Create, rename, recolor and remove the labels of a field.',
+  MediaFigure: 'An image or video with caption and credit.',
+  PresenceCursor: 'Another person’s cursor, labelled with their name and color.',
+  ProposalCard: 'A suggested change that someone can review before applying.',
+  QuickLinks: 'A compact grid of frequent destinations.',
+  RadioGroup: 'Choose one option from a short, visible list.',
+  RecordPreview: 'A compact preview of a linked record, or a notice when it is restricted.',
+  RoleEditor: 'Define roles and the permissions each one grants.',
+  SegmentedControl: 'Switch between a few mutually exclusive views or modes.',
+  SharePanel: 'Invite people, set their role and manage a public link.',
+  SplitPane: 'Two resizable panes, such as a list beside its detail.',
+  StackedBar: 'Parts of a whole in one horizontal bar, with a legend.',
+  TaskList: 'Tasks with completion, owner, due date and status.',
+  Tooltip: 'A short label for a control, shown on hover and focus.',
+  WidgetGrid: 'Arrange dashboard widgets in a grid that people can reorder by drag or keyboard.',
+  NotificationCenter: 'A bell with the unread count that opens the latest notifications, with mark-all-read.',
+  Sidebar: 'A collapsible application sidebar with workspace, sections, pinned items and an account footer.',
+  WorkspaceSwitcher: 'Show the current workspace and switch to, search for or create another.',
+  CommandMenu: 'A filterable, keyboard-driven command list for slash commands and mention pickers.',
+  ImportMapper: 'Match imported columns to fields, with sample values, automatic matching and required checks.',
+  Feed: 'A stream of updates with a composer, for project news and team announcements.',
+  FeedItem: 'One update: author, time, body, attachments, link previews, reactions and replies.',
+  KeyResult: 'A key result with start, current and target values, progress, confidence and a check-in.',
+  FunnelChart: 'Stages of a pipeline as narrowing bars, with counts and conversion between stages.',
+  RingGauge: 'One rate or share as a ring, with the figure and its context in the middle.',
+  Tour: 'A step-by-step spotlight tour anchored to elements, with progress and keyboard controls.',
+  TemplateGallery: 'Choose a starting template by category or search, with a preview before using it.',
+  FeedbackDialog: 'Collect a rating, a category and a message in a focused dialog.',
+  Lightbox: 'View images full screen with captions and keyboard navigation.',
+});
+Object.assign(descriptions, {
+  Tabs: 'Connected tab parts with arrow-key navigation, plus a wrapper that takes items and panels.',
+  Accordion: 'Stacked sections that open one at a time or several at once, with keyboard navigation.',
+  Progress: 'A labelled progress bar for known amounts, or an indeterminate one while waiting.',
+  Spinner: 'A small activity indicator for short waits, announced and slowed for reduced motion.',
+  Slider: 'Choose a value or a range by dragging or with arrow keys, inside or outside a Field.',
+  NumberField: 'Type or step a number within limits, formatted for the locale.',
+  Kbd: 'Show a key or shortcut, such as ⌘ K, with a readable name for screen readers.',
+  Separator: 'A quiet horizontal or vertical divider, optionally labelled.',
+  Pagination: 'Numbered page navigation with ellipses, previous and next, and an optional page size.',
+  ToggleGroup: 'Pressable options, with icons, for one choice or several independent ones.',
+});
+// Core primitives.
+groups.Forms.push('Slider', 'NumberField', 'ToggleGroup');
+groups.Navigation.push('Tabs', 'Accordion', 'Pagination');
+groups.Feedback.push('Progress', 'Spinner');
+groups['Data display'].push('Kbd', 'Separator');
 const groupAdvice = {
-  'Getting things done':
+  Actions:
     'Keep one primary action per task. Use quiet controls for secondary work, and provide a specific accessible name for every icon-only action.',
-  'Forms and selection':
+  Forms:
     'Give every control a visible label. Keep values in host state, validate before saving, and put recovery text beside the field.',
-  'Overlays and search':
+  Overlays:
     'Use an overlay for a focused choice or task. Provide a clear title, preserve keyboard focus and return focus when the task ends.',
-  'Pages and navigation':
-    'Keep the page title, view navigation and toolbar in a predictable order. Let the host router own navigation and permissions.',
-  'People and records':
-    'Use display-ready names and values. Identity components do not fetch accounts or decide who may see a record.',
-  'Tables and boards':
-    'Pass only the records the person may see. The host owns persistence, permissions and domain calculations; these components render data and emit intent.',
-  'Widgets and charts':
+  Navigation:
+    'Keep navigation in a predictable order and let the host router own destinations and permissions.',
+  'Data display':
+    'Use display-ready names and values. Display components do not fetch records or decide who may see them.',
+  Charts:
     'State what a figure means. Include labels and units in nearby copy, and use color as reinforcement rather than the only signal.',
-  'Content and feedback':
+  Feedback:
     'Keep messages calm, specific and actionable. Distinguish loading, empty, error and access states instead of presenting a generic blank panel.',
+  'Application shells':
+    'The shell frames the page; the host router owns navigation, the signed-in account and permissions.',
+  'Page headers':
+    'Keep the page title, context, view navigation and actions in a predictable order across pages.',
+  'Data views':
+    'Pass only the records the person may see. The host owns persistence, permissions and domain calculations; these blocks render data and emit intent.',
+  'Sharing and collaboration':
+    'These blocks show and edit who can do what. The host resolves identities, checks permissions and persists every change.',
+  Dashboards:
+    'Each widget answers one question. Name the figure, explain it in a line, and offer one next action.',
+  Documents:
+    'Document blocks render host-provided content. Sanitize rich text before passing it in and keep links explicit.',
   Onboarding:
     'Ask for the smallest useful choice at each step. Completion and progress belong to the application, so people can leave and return safely.',
+  Marketing:
+    'Public-page compositions: keep copy short and specific, and give each section one clear action.',
 };
 function api(source, vue) {
   const script = vue
@@ -425,6 +522,8 @@ const svelteNames = readdirSync('src/svelte')
   .filter((f) => f.endsWith('.svelte'))
   .map((f) => f.slice(0, -7));
 const names = [...new Set([...vueNames, ...svelteNames])].sort();
+for (const group of Object.keys(groups))
+  if (!Object.values(tiers).flat().includes(group)) throw Error('Group without tier ' + group);
 const components = names.map((name) => {
   const short = name.slice(4),
     category = Object.keys(groups).find((g) => groups[g].includes(short));
@@ -437,6 +536,7 @@ const components = names.map((name) => {
     : null;
   return {
     name,
+    tier: Object.keys(tiers).find((t) => tiers[t].includes(category)),
     slug: short.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase(),
     short,
     category,
@@ -451,8 +551,28 @@ const components = names.map((name) => {
 });
 writeFileSync(
   'docs-site/generated/components.json',
-  JSON.stringify({ groups: Object.keys(groups), components }, null, 2) + '\n',
+  JSON.stringify({ tiers, groups: Object.keys(groups), components }, null, 2) + '\n',
 );
 console.log(
   `Generated docs for ${components.length} components (${vueNames.length} Vue, ${svelteNames.length} Svelte).`,
 );
+// The Markdown component guide follows the same taxonomy as the site.
+const guide = [
+  '# Component guide',
+  '',
+  `Generated by scripts/generate-docs.mjs. BISS UI ships ${components.length} components in each framework, in two tiers.`,
+  'See [architecture](architecture.md) for package boundaries and state ownership, and the',
+  '[documentation site](https://bissui.wicker.life) for live examples and source-derived APIs.',
+  '',
+];
+for (const [tier, tierGroups] of Object.entries(tiers)) {
+  guide.push(`## ${tier}`, '');
+  for (const group of tierGroups) {
+    const members = components.filter((c) => c.category === group);
+    if (!members.length) continue;
+    guide.push(`### ${group}`, '', groupAdvice[group], '');
+    for (const c of members) guide.push(`- [${c.name}](api.md#${c.name.toLowerCase()}): ${c.description}`);
+    guide.push('');
+  }
+}
+writeFileSync('docs/components.md', guide.join('\n').trimEnd() + '\n');

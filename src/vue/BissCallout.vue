@@ -24,7 +24,7 @@ const classes = computed(() =>
   <div :class="classes" role="status">
     <div>
       <p v-if="title" class="biss-callout-title">{{ title }}</p>
-      <p class="biss-callout-body"><slot /></p>
+      <div class="biss-callout-body"><slot /></div>
     </div>
     <slot name="actions" />
   </div>

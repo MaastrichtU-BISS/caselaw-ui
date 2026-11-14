@@ -10,3 +10,5 @@
 
 @import './editors.css' layer(biss.components);
 @import './dialog.css' layer(biss.components);
+@import './primitives.css' layer(biss.components);
+@import './blocks.css' layer(biss.components);

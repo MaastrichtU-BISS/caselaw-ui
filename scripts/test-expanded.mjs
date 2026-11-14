@@ -10,7 +10,7 @@ export async function testExpanded(page, width) {
       .withTags(['wcag2a', 'wcag2aa', 'wcag21aa'])
       .analyze();
     await writeFile(
-      `artifacts/${process.env.SVELTE ? 'svelte-' : ''}${width}-${state}-accessibility.json`,
+      `artifacts/${process.env.SVELTE ? 'svelte-' : ''}${width}-${state.replace(/[^a-z0-9-]+/gi, '-')}-accessibility.json`,
       JSON.stringify(results.violations, null, 2),
     );
     expect(

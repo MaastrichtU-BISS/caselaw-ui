@@ -273,4 +273,97 @@ export const newFixtures: Record<string, Fixture> = {
       ],
     },
   },
+  Tabs: {
+    props: {
+      label: 'Project sections',
+      modelValue: 'overview',
+      items: [
+        { value: 'overview', label: 'Overview' },
+        { value: 'members', label: 'Members', count: 12 },
+        { value: 'activity', label: 'Activity', count: 3 },
+        { value: 'settings', label: 'Settings', disabled: true },
+      ],
+    },
+    wide: true,
+  },
+  Accordion: {
+    props: {
+      type: 'single',
+      modelValue: 'scope',
+      items: [
+        {
+          value: 'scope',
+          title: 'Research scope',
+          description: 'What the project covers',
+          content:
+            'Open justice studies how courts publish decisions and how easily the public can find them.',
+        },
+        {
+          value: 'data',
+          title: 'Data sources',
+          content: 'Decisions come from public registers and refresh every night.',
+        },
+        {
+          value: 'access',
+          title: 'Access and sharing',
+          content: 'Team members can see everything; guests only see published summaries.',
+        },
+      ],
+    },
+    wide: true,
+  },
+  Progress: {
+    props: { value: 64, label: 'Uploading decisions', showLabel: true, showValue: true },
+    states: ['default', 'indeterminate'],
+    wide: true,
+  },
+  Spinner: { props: { label: 'Loading projects' } },
+  Slider: {
+    props: {
+      label: 'Funding share',
+      modelValue: 40,
+      showValue: true,
+      step: 5,
+      format: { style: 'unit', unit: 'percent' },
+    },
+    states: ['default', 'range', 'disabled'],
+    wide: true,
+  },
+  NumberField: {
+    props: {
+      modelValue: 1250,
+      label: 'Budget',
+      min: 0,
+      step: 50,
+      locale: 'en-GB',
+      format: { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 },
+    },
+    states: ['default', 'disabled', 'error'],
+  },
+  Kbd: { props: { keys: ['⌘', 'K'], label: 'Command K' } },
+  Separator: { props: { label: 'or' }, wide: true },
+  Pagination: {
+    props: { page: 5, total: 240, pageSize: 25, pageSizes: [25, 50, 100] },
+    states: ['default', 'disabled'],
+    wide: true,
+  },
+  ToggleGroup: {
+    props: {
+      label: 'View',
+      modelValue: 'list',
+      items: [
+        { value: 'list', label: 'List', icon: 'list' },
+        { value: 'board', label: 'Board', icon: 'kanban' },
+        { value: 'calendar', label: 'Calendar', icon: 'cal' },
+      ],
+    },
+    states: ['default', 'disabled'],
+  },
+};
+/** Panel copy for the Tabs preview, shared by the Vue and Svelte renderers. */
+export const tabPanels: Record<string, string> = {
+  overview: 'Open justice studies how courts publish decisions and how easily the public can find them.',
+  members: 'Twelve people work on this project across research and engineering.',
+  activity: 'Three updates since your last visit, including a new data source.',
+  settings: 'Only project owners can change these settings.',
 };

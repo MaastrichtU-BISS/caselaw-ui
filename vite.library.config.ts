@@ -7,7 +7,11 @@ export default defineConfig({
     outDir: 'dist/vue',
     sourcemap: true,
     lib: {
-      entry: { index: 'src/vue/index.ts', 'dialog/index': 'src/vue/dialog/index.ts' },
+      entry: {
+        index: 'src/vue/index.ts',
+        'dialog/index': 'src/vue/dialog/index.ts',
+        'tabs/index': 'src/vue/tabs/index.ts',
+      },
       formats: ['es'],
       fileName: (_format, name) => name + '.js',
     },

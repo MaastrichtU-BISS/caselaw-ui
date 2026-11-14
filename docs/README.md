@@ -9,10 +9,10 @@ API tables. Demonstration names and records are synthetic. Previews render the s
 
 | Start here | What it covers |
 |---|---|
-| Documentation site | Run `npm run docs:dev`, or build `dist-docs/` with `npm run docs:build`. It includes installation, theming, accessibility, migration, and all 130 distinct components across Vue and Svelte. |
+| Documentation site | Run `npm run docs:dev`, or build `dist-docs/` with `npm run docs:build`. It includes installation, theming, accessibility, migration, and all 154 distinct components across Vue and Svelte. |
 | [Component screenshots](visual-reference.md) | Real desktop and phone renders of all 130 components. Historical visual references; the website renders interactive components. |
 | [Portable components](components.md) | The initial Bizzy-derived components, their framework contracts, customization and host responsibilities. |
-| [API reference](api.md) | All 130 component APIs, generated from source with framework-specific contracts. The site derives props, defaults, events, models and composition directly from the shipped SFCs. |
+| [API reference](api.md) | All 154 component APIs, generated from source with framework-specific contracts. The site derives props, defaults, events, models and composition directly from the shipped SFCs. |
 | [Earlier API migration](legacy-api.md) | How existing consumers opt into the new package and Svelte contracts. |
 | [Migration and releases](biss-migration.md) | Independent package identity and releases, and how a consumer opts in. |
 | [Extraction inventory](bizzy-inventory.md) | Which Bizzy components were adapted, and the application features that remain in the host. |
@@ -52,7 +52,7 @@ Use `docs-site/fixtures.ts` to add or adjust an example, and
 `scripts/generate-docs.mjs` to add a component’s category and introduction. API
 rows come from source, rather than a second hand-maintained prop list. Add
 copyable examples in `docs-site/examples.ts` when a component needs composition
-or controlled state. All 130 components are available in both frameworks. Screenshots use the Vue implementation; both framework workbenches have interaction and accessibility checks.
+or controlled state. All 154 components are available in both frameworks. Screenshots use the Vue implementation; both framework workbenches have interaction and accessibility checks.
 
 ## Documentation interface
 
@@ -68,5 +68,5 @@ compact on phones; overlay interaction remains inside its iframe.
 
 `test-docs-design.mjs` covers navigation groups, search, mobile focus, section
 tracking, source switching, directory filtering, overflow and accessibility at
-1440px and 390px. The docs check also verifies all 130 routes and the Dialog
+1440px and 390px. The docs check also verifies all 154 routes and the Dialog
 interaction examples in both frameworks.

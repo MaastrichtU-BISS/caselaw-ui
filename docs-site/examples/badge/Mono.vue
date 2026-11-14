@@ -1,0 +1,9 @@
+<script setup lang="ts">
+import { BissBadge } from 'biss-ui/vue';
+</script>
+
+<template>
+  <BissBadge mono>ERC-2027-STG-101154</BissBadge>
+  <BissBadge mono tone="info">v2.4.1</BissBadge>
+  <BissBadge mono>NWO-VI.Vidi.213.078</BissBadge>
+</template>

@@ -1,0 +1,267 @@
+/* KeyResult: an OKR row with metric, progress, confidence and an inline check-in form. */
+.biss-key-result {
+  font: 14px/1.55 var(--biss-font-family);
+  color: var(--biss-text);
+  box-sizing: border-box;
+  width: 100%;
+  border-top: 1px solid var(--biss-border);
+}
+.biss-key-result * {
+  box-sizing: border-box;
+}
+.biss-key-result:last-child {
+  border-bottom: 1px solid var(--biss-border);
+}
+.biss-key-result-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(170px, 230px) minmax(150px, 190px) auto;
+  gap: 16px;
+  align-items: center;
+  min-height: 60px;
+  padding: 10px 14px;
+}
+.biss-key-result-row:hover {
+  background: var(--biss-row-hover);
+}
+.biss-key-result-name {
+  min-width: 0;
+}
+.biss-key-result-name :is(h2, h3, h4) {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+.biss-key-result-name small,
+.biss-key-result-confidence small,
+.biss-key-result-metric small {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--biss-muted);
+  min-width: 0;
+}
+.biss-key-result-name .biss-icon {
+  width: 12px;
+  height: 12px;
+}
+.biss-key-result-metric {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+}
+.biss-key-result-metric p {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  margin: 0;
+  font-size: 13px;
+  white-space: nowrap;
+}
+.biss-key-result-metric strong {
+  font-size: 13.5px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.biss-key-result-metric span {
+  color: var(--biss-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.biss-key-result-metric em {
+  margin-left: auto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12.5px;
+  color: var(--biss-muted);
+  font-variant-numeric: tabular-nums;
+}
+.biss-key-result-metric .biss-goal-bar {
+  width: 100%;
+}
+.biss-key-result-confidence {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3px;
+  min-width: 0;
+}
+.biss-key-result-confidence small {
+  display: block;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.biss-key-result-pill,
+.biss-key-result-choices label {
+  --kr-color: var(--biss-primary);
+  --kr-bg: var(--biss-info-bg);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 24px;
+  padding: 0 9px;
+  border-radius: 12px;
+  background: var(--kr-bg);
+  color: var(--kr-color);
+  font-size: 12.5px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.biss-key-result-pill i,
+.biss-key-result-choices i {
+  width: 7px;
+  height: 7px;
+  flex: none;
+  border-radius: 50%;
+  background: currentColor;
+}
+.biss-key-result [data-confidence='on-track'] {
+  --kr-color: var(--biss-success);
+  --kr-bg: var(--biss-success-bg);
+}
+.biss-key-result [data-confidence='at-risk'] {
+  --kr-color: var(--biss-warning);
+  --kr-bg: var(--biss-warning-bg);
+}
+.biss-key-result [data-confidence='off-track'] {
+  --kr-color: var(--biss-danger);
+  --kr-bg: var(--biss-danger-bg);
+}
+.biss-key-result-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+/* Outranks the base button hover, which would otherwise paint the secondary toggle primary. */
+.biss-key-result-actions .biss-button.biss-button-secondary:hover:not(:disabled) {
+  background: var(--biss-hover);
+  border-color: var(--biss-border-strong);
+}
+.biss-key-result-actions .biss-button.biss-button-secondary[aria-expanded='true']:not(:disabled) {
+  background: var(--biss-info-bg);
+  border-color: var(--biss-info-border);
+  color: var(--biss-primary);
+}
+.biss-key-result-note {
+  margin: -6px 14px 10px;
+  font-size: 12.5px;
+  color: var(--biss-muted);
+}
+.biss-key-result-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0 14px 14px;
+  padding: 14px 16px;
+  border: 1px solid var(--biss-border);
+  border-radius: 8px;
+  background: var(--biss-surface-subtle);
+  animation: biss-block-pop-in 0.14s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.biss-key-result-fields {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+}
+.biss-key-result-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--biss-text);
+}
+.biss-key-result-fields > label {
+  flex: 0 1 200px;
+}
+.biss-key-result-field legend {
+  padding: 0;
+  margin-bottom: 4px;
+}
+.biss-key-result-field small {
+  font-weight: 400;
+  font-size: 12px;
+  color: var(--biss-muted);
+}
+.biss-key-result-field small[data-invalid] {
+  color: var(--biss-danger);
+}
+.biss-key-result-field .biss-textarea {
+  min-height: 60px;
+  font-weight: 400;
+}
+.biss-key-result-choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.biss-key-result-choices label {
+  height: 32px;
+  padding: 0 12px;
+  border: 1px solid var(--biss-border-strong);
+  background: var(--biss-card);
+  color: var(--biss-text);
+  cursor: pointer;
+  border-radius: 16px;
+}
+.biss-key-result-choices label i {
+  background: var(--kr-color);
+}
+.biss-key-result-choices label:has(input:checked) {
+  border-color: var(--kr-color);
+  background: var(--kr-bg);
+  color: var(--kr-color);
+}
+.biss-key-result-choices label:has(input:focus-visible) {
+  outline: 2px solid var(--biss-primary);
+  outline-offset: 1px;
+}
+.biss-key-result-choices input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+}
+.biss-key-result-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .biss-key-result-form {
+    animation: none;
+  }
+}
+@media (max-width: 720px) {
+  .biss-key-result-row {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 10px 12px;
+  }
+  .biss-key-result-metric {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+  .biss-key-result-confidence {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4px 10px;
+  }
+  .biss-key-result-actions {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .biss-key-result-fields > label {
+    flex-basis: 100%;
+  }
+}

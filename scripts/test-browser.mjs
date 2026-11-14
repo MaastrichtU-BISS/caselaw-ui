@@ -61,7 +61,7 @@ try {
       true,
     );
     await page.getByRole('button', { name: 'Next', exact: true }).click();
-    assert.match(await page.getByRole('navigation', { name: 'Pagination' }).innerText(), /2 \/ 3/);
+    assert.match(await page.locator('nav.biss-pager').innerText(), /2 \/ 3/);
     await page.getByRole('button', { name: 'Ada mentioned you', exact: false }).click();
     assert.equal(await page.getByRole('img', { name: 'Unread', exact: true }).count(), 0);
     await page.getByRole('button', { name: 'Save', exact: true }).click();

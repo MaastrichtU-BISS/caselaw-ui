@@ -1,4 +1,5 @@
 import { newFixtures } from './new-fixtures';
+import { blockFixtures } from './block-fixtures';
 import {
   options,
   actions,
@@ -477,7 +478,7 @@ export const fixtures: Record<string, Fixture> = {
     },
   },
 };
-Object.assign(fixtures, newFixtures);
+Object.assign(fixtures, newFixtures, blockFixtures);
 export function fixture(name: string, state = 'default'): Fixture {
   const base = fixtures[name.replace(/^Biss/, '')];
   if (!base) throw new Error('No fixture for ' + name);
@@ -500,7 +501,9 @@ export function fixture(name: string, state = 'default'): Fixture {
     else f.props.items = [];
   }
   if (state === 'loading') f.props.loading = true;
-  if (state === 'range')
+  if (state === 'range' && name === 'BissSlider') f.props.modelValue = [20, 80];
+  else if (state === 'range')
     Object.assign(f.props, { range: true, start: '2026-11-12', end: '2026-11-20' });
+  if (state === 'indeterminate') f.props.value = null;
   return f;
 }

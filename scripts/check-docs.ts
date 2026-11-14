@@ -1,6 +1,9 @@
 import { testDocsDesign } from './test-docs-design.mjs';
 import { testDialogExamples } from './test-dialog.mjs';
 import { mkdir } from 'node:fs/promises';
+import { existsSync, readdirSync } from 'node:fs';
+import { resolve } from 'node:path';
+import { pathToFileURL } from 'node:url';
 import { chromium, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import { spawn } from 'node:child_process';
@@ -55,13 +58,17 @@ try {
     await page.goto('http://127.0.0.1:4189/#/components/date-picker?section=props');
     await expect(page.getByRole('heading', { name: 'Props', exact: true })).toBeInViewport();
     await page.goto('http://127.0.0.1:4189/#/components/date-picker');
-    const frame = page.frameLocator('iframe');
-    await expect(frame.getByRole('grid', { name: 'Due date' })).toBeVisible();
-    await page.getByRole('button', { name: 'Phone', exact: true }).click();
-    await page.getByRole('combobox', { name: 'Component state' }).selectOption('range');
-    await expect(frame.getByRole('grid', { name: 'Due date' })).toBeVisible();
+    // Authored examples: the page runs the example files and shows their exact source.
+    const frame = page.frameLocator('.example-card iframe').first();
+    await expect(frame.getByRole('grid', { name: 'Submission deadline' })).toBeVisible();
+    if (width === 1440) {
+      await page.getByRole('button', { name: 'Phone', exact: true }).first().click();
+      await expect(frame.getByRole('grid', { name: 'Submission deadline' })).toBeVisible();
+    }
     await page.getByRole('button', { name: 'Svelte', exact: true }).click();
-    await expect(page.locator('.sample-code')).toContainText("from 'biss-ui/svelte'");
+    await expect(frame.locator('.authored-example')).toHaveAttribute('data-framework', 'svelte');
+    await page.getByRole('button', { name: 'Code', exact: true }).first().click();
+    await expect(page.locator('.example-card-code').first()).toContainText("from 'biss-ui/svelte'");
     await expect(page.locator('html')).toHaveJSProperty('scrollWidth', width);
     const axe = await new AxeBuilder({ page })
       .withTags(['wcag2a', 'wcag2aa', 'wcag21aa'])
@@ -96,6 +103,14 @@ try {
   for (const c of catalog.components) {
     await page.goto('http://127.0.0.1:4189/#/components/' + c.slug);
     await expect(page.locator('h1')).toHaveText(c.short.replace(/([a-z0-9])([A-Z])/g, '$1 $2'));
+    if (c.name === 'BissDialog') continue; // Covered by testDialogExamples.
+    if (await page.locator('.example-card').count()) {
+      const first = page.frameLocator('.example-card iframe').first();
+      await expect(first.locator('.authored-example')).toHaveAttribute('data-framework', 'vue');
+      await page.getByRole('button', { name: 'Svelte', exact: true }).click();
+      await expect(first.locator('.authored-example')).toHaveAttribute('data-framework', 'svelte');
+      continue;
+    }
     const preview = page.frameLocator('iframe');
     await expect(preview.locator('.preview-frame')).toHaveAttribute('data-component', c.name);
     await page.getByRole('button', { name: 'Svelte', exact: true }).click();
@@ -105,6 +120,44 @@ try {
       await expect(
         preview.getByRole('heading', { name: 'Research projects', exact: true }),
       ).toBeVisible();
+  }
+  // Every authored example renders in both frameworks without errors.
+  let exampleCount = 0;
+  for (const dir of readdirSync('docs-site/examples', { withFileTypes: true })) {
+    if (!dir.isDirectory() || dir.name === 'dialog') continue;
+    const manifest = 'docs-site/examples/' + dir.name + '/manifest.ts';
+    if (!existsSync(manifest)) continue;
+    const { examples } = (await import(pathToFileURL(resolve(manifest)).href)) as {
+      examples: { id: string }[];
+    };
+    for (const item of examples)
+      for (const framework of ['vue', 'svelte']) {
+        // preview.ts marks the document ready after the example module has loaded and mounted.
+        // A stalled module request on a busy CI runner leaves the page without even its first
+        // attributes; retry the navigation then, rather than failing on infrastructure.
+        const url = `http://127.0.0.1:4189/preview.html?example=${dir.name}/${item.id}&framework=${framework}`;
+        for (let attempt = 1; ; attempt++) {
+          await page.goto(url);
+          const ready = await page
+            .waitForFunction(() => document.documentElement.dataset.ready === 'true', null, {
+              timeout: 15000,
+            })
+            .then(() => true)
+            .catch(() => false);
+          if (ready) break;
+          const started = await page.evaluate(() => 'example' in document.documentElement.dataset);
+          if (started || attempt === 3)
+            throw Error(`${dir.name}/${item.id} (${framework}) did not finish rendering`);
+        }
+        const root = page.locator('.authored-example');
+        await expect(root).toHaveAttribute('data-framework', framework);
+        await expect(root).not.toHaveText('Example not found.');
+        expect(
+          await root.evaluate((node) => node.childElementCount),
+          `${dir.name}/${item.id}`,
+        ).toBeGreaterThan(0);
+        exampleCount++;
+      }
   }
   for (const framework of ['vue', 'svelte']) {
     await page.goto(
@@ -147,7 +200,7 @@ try {
   await context.close();
   expect(errors).toEqual([]);
   console.log(
-    `Verified ${catalog.components.length} docs pages, live component renders, guides, live examples, mobile navigation and accessibility.`,
+    `Verified ${catalog.components.length} docs pages, ${exampleCount} authored example renders, guides, mobile navigation and accessibility.`,
   );
 } finally {
   await browser?.close();

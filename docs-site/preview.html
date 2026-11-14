@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>BISS UI component preview</title>
     <style>
+      /* The themed root paints --biss-bg; previews sit on a card surface to the frame's edge. */
+      html[data-biss-theme] {
+        background-color: var(--biss-card);
+      }
       body {
         margin: 0;
         background: var(--biss-card);
@@ -22,6 +26,39 @@
         min-height: 100dvh;
         padding: 32px;
         background: var(--biss-card);
+      }
+      .authored-example {
+        box-sizing: border-box;
+        padding: 32px;
+        background: var(--biss-card);
+      }
+      .authored-example[data-layout='fill'] {
+        display: grid;
+        align-content: start;
+        gap: 16px;
+      }
+      .authored-example[data-layout='fill'] > :is(button, a) {
+        justify-self: start;
+      }
+      .authored-example > p {
+        margin: 0;
+      }
+      .authored-example[data-layout='center'] {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        min-height: 200px;
+      }
+      @media (max-width: 480px) {
+        .authored-example {
+          padding: 16px;
+        }
+      }
+      /* Full-page blocks (app shells) own the whole viewport, edge to edge. */
+      .authored-example[data-layout='page'] {
+        padding: 0;
       }
     </style>
   </head>

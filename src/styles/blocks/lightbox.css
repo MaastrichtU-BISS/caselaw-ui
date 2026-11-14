@@ -1,0 +1,223 @@
+/*
+ * Lightbox: a full-screen image viewer on the Dialog parts. The stage uses the
+ * page surface so it follows the light and dark themes; override
+ * --biss-lightbox-scrim on a wrapper for a different backdrop.
+ */
+.biss-lightbox-overlay {
+  background: var(--biss-overlay);
+}
+.biss-dialog-content.biss-lightbox {
+  inset: 0;
+  left: 0;
+  top: 0;
+  translate: none;
+  width: 100vw;
+  height: 100dvh;
+  max-height: none;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  overflow: hidden;
+  border: 0;
+  border-radius: 0;
+  background: var(--biss-lightbox-scrim, color-mix(in srgb, var(--biss-bg) 98%, transparent));
+  box-shadow: none;
+  animation: biss-lightbox-in 0.16s ease;
+}
+.biss-lightbox * {
+  box-sizing: border-box;
+}
+@keyframes biss-lightbox-in {
+  from {
+    opacity: 0;
+  }
+}
+.biss-lightbox-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  padding: 10px 12px 6px 20px;
+}
+.biss-lightbox-title {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 13.5px;
+  font-weight: 500;
+}
+.biss-lightbox-counter {
+  flex: none;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  color: var(--biss-muted);
+}
+.biss-lightbox-button {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--biss-radius-sm);
+  background: transparent;
+  color: var(--biss-muted);
+  cursor: pointer;
+}
+.biss-lightbox-button:hover {
+  background: var(--biss-hover);
+  color: var(--biss-text);
+}
+.biss-lightbox-button .biss-icon {
+  width: 18px;
+  height: 18px;
+}
+.biss-lightbox-stage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+  padding: 8px 72px 16px;
+  touch-action: pan-y;
+}
+.biss-lightbox-figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  max-width: 100%;
+  max-height: 100%;
+  min-height: 0;
+  margin: 0;
+}
+.biss-lightbox-figure img {
+  display: block;
+  min-height: 0;
+  max-width: 100%;
+  max-height: calc(100dvh - 210px);
+  object-fit: contain;
+  border-radius: var(--biss-radius-sm);
+  background: var(--biss-card);
+  box-shadow: var(--biss-popover-shadow);
+  user-select: none;
+  animation: biss-lightbox-in 0.16s ease;
+}
+.biss-lightbox-figure figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px 10px;
+  max-width: 70ch;
+  text-align: center;
+  font-size: 13.5px;
+}
+.biss-lightbox-figure figcaption small {
+  font-size: 12.5px;
+  color: var(--biss-muted);
+}
+.biss-lightbox-empty {
+  color: var(--biss-muted);
+}
+.biss-lightbox-nav {
+  position: absolute;
+  top: 50%;
+  translate: 0 -50%;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border: 1px solid var(--biss-border);
+  border-radius: 50%;
+  background: var(--biss-card);
+  color: var(--biss-text);
+  box-shadow: var(--biss-shadow);
+  cursor: pointer;
+}
+.biss-lightbox-nav:hover:not(:disabled) {
+  border-color: var(--biss-border-strong);
+  background: var(--biss-hover);
+}
+.biss-lightbox-nav:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.biss-lightbox-nav[data-side='previous'] {
+  left: 16px;
+}
+.biss-lightbox-nav[data-side='next'] {
+  right: 16px;
+}
+.biss-lightbox-nav .biss-icon {
+  width: 20px;
+  height: 20px;
+}
+.biss-lightbox-button:focus-visible,
+.biss-lightbox-nav:focus-visible,
+.biss-lightbox-thumbs button:focus-visible {
+  outline: 2px solid var(--biss-primary);
+  outline-offset: 2px;
+}
+.biss-lightbox-thumbs {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px 16px;
+  overflow-x: auto;
+}
+.biss-lightbox-thumbs button {
+  flex: none;
+  width: 64px;
+  height: 44px;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: var(--biss-radius-sm);
+  background: var(--biss-card);
+  overflow: hidden;
+  opacity: 0.6;
+  cursor: pointer;
+}
+.biss-lightbox-thumbs button:hover {
+  opacity: 1;
+}
+.biss-lightbox-thumbs button[aria-current='true'] {
+  border-color: var(--biss-primary);
+  opacity: 1;
+}
+.biss-lightbox-thumbs img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+@media (max-width: 640px) {
+  .biss-lightbox-stage {
+    padding: 4px 8px 12px;
+  }
+  .biss-lightbox-nav {
+    top: auto;
+    bottom: 12px;
+    translate: none;
+    width: 38px;
+    height: 38px;
+  }
+  .biss-lightbox-figure img {
+    max-height: calc(100dvh - 230px);
+  }
+  .biss-lightbox-figure figcaption {
+    padding: 0 48px;
+  }
+  .biss-lightbox-thumbs {
+    justify-content: flex-start;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .biss-dialog-content.biss-lightbox,
+  .biss-lightbox-figure img {
+    animation: none;
+  }
+}

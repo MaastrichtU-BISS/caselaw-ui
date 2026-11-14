@@ -1,5 +1,5 @@
 /* Bizzy's base grammar, shared by every component, including migration APIs. */
-:where([class^='biss-'], [class*=' biss-']) {
+:where([class^='biss-']:not([class^='biss-tok-']), [class*=' biss-']) {
   box-sizing: border-box;
   font-family: var(--biss-font-family);
   font-variant-numeric: tabular-nums;
@@ -24,7 +24,7 @@
   border: 1px solid var(--biss-primary);
   border-radius: var(--biss-radius-sm);
   background: var(--biss-primary);
-  color: #fff;
+  color: var(--biss-on-primary);
   font: 500 13.5px/1.2 var(--biss-font-family);
   text-decoration: none;
   white-space: nowrap;
@@ -43,7 +43,7 @@
   color: var(--biss-text);
   border-color: var(--biss-border-strong);
 }
-.biss-button-secondary:hover:not(:disabled) {
+.biss-button-secondary:hover:not(:disabled):not([aria-disabled='true']) {
   background: var(--biss-hover);
   border-color: var(--biss-border-strong);
 }
@@ -53,7 +53,7 @@
   border-color: transparent;
   box-shadow: none;
 }
-.biss-button-ghost:hover:not(:disabled) {
+.biss-button-ghost:hover:not(:disabled):not([aria-disabled='true']) {
   background: var(--biss-hover);
   border-color: transparent;
   color: var(--biss-text);
@@ -62,7 +62,7 @@
   background: var(--biss-danger);
   border-color: var(--biss-danger);
 }
-.biss-button-danger:hover:not(:disabled) {
+.biss-button-danger:hover:not(:disabled):not([aria-disabled='true']) {
   background: var(--biss-danger-hover);
   border-color: var(--biss-danger-hover);
 }
@@ -72,7 +72,7 @@
   border-color: transparent;
   box-shadow: none;
 }
-.biss-button-danger-quiet:hover:not(:disabled) {
+.biss-button-danger-quiet:hover:not(:disabled):not([aria-disabled='true']) {
   background: var(--biss-danger-bg);
   border-color: transparent;
 }
@@ -456,4 +456,12 @@
     animation: none;
     border-style: dotted;
   }
+}
+
+/* A themed region paints its own surface so nested light/dark areas read correctly. */
+[data-biss-theme='light'],
+[data-biss-theme='dark'],
+[data-biss-theme='system'] {
+  background-color: var(--biss-bg);
+  color: var(--biss-text);
 }

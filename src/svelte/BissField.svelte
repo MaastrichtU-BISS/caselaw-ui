@@ -50,7 +50,7 @@
   data-disabled={disabled || undefined}
   data-invalid={field.invalid || undefined}
 >
-  {#if label}<label class="biss-field-label" for={field.id}
+  {#if label}<label id={field.id + '-label'} class="biss-field-label" for={field.id}
       >{label}{#if optional}<span class="biss-field-optional">{optionalLabel}</span
         >{/if}{#if required}<span aria-hidden="true" class="biss-field-required">*</span
         >{/if}</label

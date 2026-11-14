@@ -1,7 +1,7 @@
 # Migrating the earlier API
 
 The earlier caselaw-ui components remain available with `Biss…` names. They now
-use the same Bizzy visual foundation as every new component. All 130 components
+use the same Bizzy visual foundation as every new component. All 154 components
 are implemented in both Vue and Svelte. The [generated API reference](api.md) and
 searchable documentation site describe the current contracts.
 

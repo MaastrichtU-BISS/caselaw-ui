@@ -2,6 +2,7 @@
 import { computed, defineComponent, h, onMounted, ref, watch, type Component } from 'vue';
 import * as UI from '../src/vue';
 import { fixture } from './fixtures';
+import { tabPanels } from './new-fixtures';
 const props = withDefaults(defineProps<{ name: string; state?: string }>(), { state: 'default' });
 const data = ref(fixture(props.name, props.state));
 const message = ref('');
@@ -48,6 +49,9 @@ const Demo = defineComponent({
         },
         'onUpdate:page': (v: number) => {
           state.page = v;
+        },
+        'onUpdate:pageSize': (v: number) => {
+          state.pageSize = v;
         },
         onClick: () => {
           if (
@@ -127,6 +131,9 @@ const Demo = defineComponent({
         slots[name === 'BissModal' ? 'footer' : 'actions'] = () =>
           H('BissButton', { onClick: callbacks.onClose }, () => 'Done');
       }
+      if (name === 'BissTabs')
+        slots.default = ({ item }: { item: { value: string } }) =>
+          h('p', { class: 'preview-panel' }, tabPanels[item.value] ?? '');
       if (name === 'BissSplitPane') {
         slots.start = () => h('div', { style: 'padding:20px' }, 'Project navigation');
         slots.end = () => h('div', { style: 'padding:20px' }, 'Your project content');
@@ -261,6 +268,23 @@ onMounted(() => {
 .preview-shell > * {
   width: 100%;
   max-width: none;
+}
+.preview-frame .biss-tabs-root,
+.preview-frame .biss-accordion,
+.preview-frame .biss-progress,
+.preview-frame .biss-slider,
+.preview-frame .biss-separator {
+  width: min(100%, 560px);
+}
+.preview-frame .biss-pagination {
+  width: min(100%, 760px);
+}
+.preview-frame .biss-number-field {
+  width: 220px;
+}
+.preview-panel {
+  margin: 0;
+  color: var(--biss-muted);
 }
 .preview-note {
   font-size: 13px;

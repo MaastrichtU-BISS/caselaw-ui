@@ -1,0 +1,16 @@
+/* Application blocks: compositions for recurring application tasks. Tokens only. */
+@import './blocks/shared.css';
+@import './blocks/notification-center.css';
+@import './blocks/sidebar.css';
+@import './blocks/workspace-switcher.css';
+@import './blocks/command-menu.css';
+@import './blocks/import-mapper.css';
+@import './blocks/feed.css';
+@import './blocks/feed-item.css';
+@import './blocks/key-result.css';
+@import './blocks/funnel-chart.css';
+@import './blocks/ring-gauge.css';
+@import './blocks/tour.css';
+@import './blocks/template-gallery.css';
+@import './blocks/feedback-dialog.css';
+@import './blocks/lightbox.css';

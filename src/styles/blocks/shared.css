@@ -1,0 +1,38 @@
+/* Shared block grammar: popover panels positioned by Reka UI / Bits UI, base type. */
+:where(
+  .biss-block-popover,
+  .biss-notification-center
+) {
+  font: 14px/1.55 var(--biss-font-family);
+  color: var(--biss-text);
+  box-sizing: border-box;
+}
+:where(.biss-block-popover) * {
+  box-sizing: border-box;
+}
+/* The provider positions a wrapper; this is only the panel's surface. */
+.biss-block-popover {
+  z-index: var(--biss-z-popover, 60);
+  max-width: calc(100vw - 16px);
+  max-height: min(var(--reka-popover-content-available-height, 100dvh), calc(100dvh - 16px));
+  overflow: auto;
+  border: 1px solid var(--biss-border);
+  border-radius: var(--biss-radius-lg);
+  background: var(--biss-card);
+  color: var(--biss-text);
+  box-shadow: var(--biss-popover-shadow);
+  outline: none;
+  transform-origin: var(--reka-popover-content-transform-origin, var(--bits-popover-content-transform-origin, top));
+  animation: biss-block-pop-in 0.14s cubic-bezier(0.23, 1, 0.32, 1);
+}
+@keyframes biss-block-pop-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.98);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .biss-block-popover {
+    animation: none;
+  }
+}

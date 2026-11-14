@@ -1,0 +1,188 @@
+/* FeedbackDialog: rating scale, kind chips, message, context and the sent state. */
+.biss-feedback-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 0;
+}
+.biss-feedback-form fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+.biss-feedback-rating legend,
+.biss-feedback-field > label {
+  display: block;
+  margin-bottom: 7px;
+  padding: 0;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--biss-text);
+}
+.biss-feedback-scale {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
+  gap: 6px;
+}
+.biss-feedback-scale label,
+.biss-feedback-kinds label {
+  position: relative;
+  cursor: pointer;
+}
+.biss-feedback-scale input,
+.biss-feedback-kinds input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  margin: 0;
+  cursor: pointer;
+}
+.biss-feedback-scale span {
+  display: grid;
+  place-items: center;
+  height: 36px;
+  border: 1px solid var(--biss-border);
+  border-radius: var(--biss-radius-sm);
+  background: var(--biss-card);
+  color: var(--biss-muted);
+  font: 500 14px var(--biss-font-family);
+  font-variant-numeric: tabular-nums;
+  transition:
+    border-color 0.15s,
+    background-color 0.15s;
+}
+.biss-feedback-scale label:hover span,
+.biss-feedback-kinds label:hover span {
+  border-color: var(--biss-border-strong);
+  color: var(--biss-text);
+}
+.biss-feedback-scale input:checked + span,
+.biss-feedback-kinds input:checked + span {
+  border-color: var(--biss-info-border);
+  background: var(--biss-info-bg);
+  color: var(--biss-primary);
+}
+.biss-feedback-scale input:focus-visible + span,
+.biss-feedback-kinds input:focus-visible + span {
+  outline: 2px solid var(--biss-primary);
+  outline-offset: 1px;
+}
+.biss-feedback-scale-ends {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--biss-muted);
+}
+.biss-feedback-kinds {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.biss-feedback-kinds span {
+  display: inline-flex;
+  align-items: center;
+  height: 30px;
+  padding: 0 13px;
+  border: 1px solid var(--biss-border);
+  border-radius: 999px;
+  background: var(--biss-card);
+  color: var(--biss-muted);
+  font: 500 13px var(--biss-font-family);
+}
+.biss-feedback-field {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.biss-feedback-field .biss-textarea {
+  min-height: 112px;
+  resize: vertical;
+}
+.biss-feedback-problem,
+.biss-feedback-error {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin: 6px 0 0;
+  font-size: 12.5px;
+  color: var(--biss-danger);
+}
+.biss-feedback-error {
+  margin: 0;
+  padding: 9px 12px;
+  border: 1px solid var(--biss-danger-border);
+  border-radius: var(--biss-radius-sm);
+  background: var(--biss-danger-bg);
+  font-size: 13px;
+}
+.biss-feedback-error .biss-icon {
+  width: 15px;
+  height: 15px;
+  margin-top: 2px;
+}
+.biss-feedback-context {
+  font-size: 13.5px;
+}
+.biss-feedback-context small {
+  display: block;
+  font-size: 12.5px;
+  color: var(--biss-muted);
+  overflow-wrap: anywhere;
+}
+.biss-feedback-shortcut {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  margin-inline-end: auto;
+  font-size: 12px;
+  color: var(--biss-muted);
+}
+.biss-feedback-shortcut kbd {
+  font: 500 11px/1 var(--biss-font-family);
+  padding: 3px 5px;
+  border: 1px solid var(--biss-border);
+  border-bottom-width: 2px;
+  border-radius: 5px;
+  background: var(--biss-surface-subtle);
+  color: var(--biss-muted);
+}
+.biss-feedback-sent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 8px 8px;
+  text-align: center;
+}
+.biss-feedback-sent-icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--biss-success-bg);
+  color: var(--biss-success);
+}
+.biss-feedback-sent-icon .biss-icon {
+  width: 20px;
+  height: 20px;
+  stroke-width: 2.2;
+}
+.biss-feedback-sent p {
+  margin: 0;
+  max-width: 40ch;
+  font-size: 14px;
+  color: var(--biss-muted);
+}
+@media (max-width: 640px) {
+  .biss-feedback-shortcut {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .biss-feedback-scale span {
+    transition: none;
+  }
+}

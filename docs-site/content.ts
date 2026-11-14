@@ -50,7 +50,12 @@ export const guides = [
       },
       {
         title: 'State colors',
-        body: 'Blue marks primary actions, green success, red errors and amber attention. Keep a written label alongside state colors. A complete dark theme needs a complete semantic palette; there is no prebuilt dark theme in this release.',
+        body: 'Blue marks primary actions, green success, red errors and amber attention. Keep a written label alongside state colors.',
+      },
+      {
+        title: 'Light, dark and system themes',
+        body: 'Set data-biss-theme on the html element, or on any wrapper to theme one region. "dark" and "light" force a palette and can be nested inside each other; "system" follows the operating system. A themed element paints its own background and text color, and sets color-scheme so native controls and scrollbars match. Custom brand colors need a dark value too: override them inside the dark selector.',
+        code: "<html data-biss-theme=\"system\">\n\n/* Brand colors per theme */\n:root { --biss-primary: #005ca9; --biss-on-primary: #fff; }\n[data-biss-theme='dark'] { --biss-primary: #5aa5ec; --biss-on-primary: #0a1726; }\n\n// TypeScript: the generated palettes\nimport { bissCssTokens, bissThemes } from 'biss-ui/tokens';",
       },
     ],
   },

@@ -1,10 +1,10 @@
 # Component API reference
 
-All 130 components are available in Vue and Svelte with one Bizzy design language. This file is generated from the same source-derived contracts as the documentation site. Import components and their `BissNameProps` types from the matching framework entry point. Native attributes supported by the framework also apply; tables list authored component props.
+All 154 components are available in Vue and Svelte with one Bizzy design language. This file is generated from the same source-derived contracts as the documentation site. Import components and their `BissNameProps` types from the matching framework entry point. Native attributes supported by the framework also apply; tables list authored component props.
 
 ## BissAccessList
 
-Access List for the team’s everyday work.
+Who can open a record, with their role and how they got access.
 
 [Vue source](../src/vue/BissAccessList.vue) · [Svelte source](../src/svelte/BissAccessList.svelte)
 
@@ -42,6 +42,44 @@ Callbacks:
 - `onrole`: `(value: { id: string; role: string }) => void`
 - `onremove`: `(id: string) => void`
 
+## BissAccordion
+
+Stacked sections that open one at a time or several at once, with keyboard navigation.
+
+[Vue source](../src/vue/BissAccordion.vue) · [Svelte source](../src/svelte/BissAccordion.svelte)
+
+### Vue
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `items` | `BissAccordionItem[]` | Yes | — |
+| `type` | `'single' \| 'multiple'` | No | `'single'` |
+| `collapsible` | `boolean` | No | `true` |
+| `disabled` | `boolean` | No | `false` |
+| `headingLevel` | `2 \| 3 \| 4 \| 5 \| 6` | No | `3` |
+| `modelValue` | `string \| string[]` | No | — |
+
+Slots: `default`.
+
+### Svelte
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `items` | `BissAccordionItem[]` | Yes | — |
+| `type` | `'single' \| 'multiple'` | No | `'single'` |
+| `value` | `string \| string[]` | No | `$bindable()` |
+| `collapsible` | `boolean` | No | `true` |
+| `disabled` | `boolean` | No | `false` |
+| `headingLevel` | `2 \| 3 \| 4 \| 5 \| 6` | No | `3` |
+| `onchange` | `(value: string \| string[]) => void` | No | — |
+| `children` | `Snippet<[BissAccordionItem]>` | No | — |
+
+Callbacks:
+
+- `onchange`: `(value: string \| string[]) => void`
+
+Snippets: `children`.
+
 ## BissActionCard
 
 A linked surface for choosing a destination, available in both frameworks.
@@ -74,7 +112,7 @@ Snippets: `icon`, `children`.
 
 ## BissActivityList
 
-Activity List for the team’s everyday work.
+A chronological list of who changed what, with optional detail.
 
 [Vue source](../src/vue/BissActivityList.vue) · [Svelte source](../src/svelte/BissActivityList.svelte)
 
@@ -94,7 +132,7 @@ Activity List for the team’s everyday work.
 
 ## BissAgenda
 
-Agenda for the team’s everyday work.
+A meeting agenda: timed items to add, reorder and tick off.
 
 [Vue source](../src/vue/BissAgenda.vue) · [Svelte source](../src/svelte/BissAgenda.svelte)
 
@@ -153,7 +191,7 @@ Slots: `default`, `actions`.
 
 | Prop | Type | Required | Default |
 |---|---|---|---|
-| `tone` | `string` | No | `'info'` |
+| `tone` | `'danger' \| 'warning' \| 'info'` | No | `'info'` |
 | `label` | `string \| undefined` | No | `undefined` |
 | `children` | `import('svelte').Snippet` | No | — |
 | `actions` | `import('svelte').Snippet` | No | — |
@@ -209,7 +247,7 @@ Snippets: `children`, `sidebar`, `sidebarFooter`, `topbarActions`, `footerConten
 
 ## BissAttachmentList
 
-Attachment List for the team’s everyday work.
+Files attached to a record, with links and a remove action.
 
 [Vue source](../src/vue/BissAttachmentList.vue) · [Svelte source](../src/svelte/BissAttachmentList.svelte)
 
@@ -307,11 +345,11 @@ A compact request-style bar chart with an optional highlighted sub-series.
 |---|---|---|---|
 | `points` | `BissChartPoint[]` | Yes | — |
 | `seriesLabel` | `string` | No | `'Requests'` |
-| `compareLabel` | `string` | No | `'Flagged'` |
+| `compareLabel` | `string` | No | — |
 
 ## BissBookmark
 
-Bookmark for the team’s everyday work.
+A rich link preview with title, description and source.
 
 [Vue source](../src/vue/BissBookmark.vue) · [Svelte source](../src/svelte/BissBookmark.svelte)
 
@@ -360,7 +398,7 @@ Snippets: `children`.
 
 ## BissBreadcrumbs
 
-Breadcrumbs for the team’s everyday work.
+Show where a page sits in the hierarchy and link back up.
 
 [Vue source](../src/vue/BissBreadcrumbs.vue) · [Svelte source](../src/svelte/BissBreadcrumbs.svelte)
 
@@ -456,7 +494,7 @@ Callbacks:
 
 ## BissCallout
 
-Callout for the team’s everyday work.
+A highlighted note that explains context or a consequence.
 
 [Vue source](../src/vue/BissCallout.vue) · [Svelte source](../src/svelte/BissCallout.svelte)
 
@@ -549,7 +587,7 @@ Name the colors and line treatments used by a chart.
 
 ## BissCheckbox
 
-Checkbox for the team’s everyday work.
+A labelled checkbox with optional description text.
 
 [Vue source](../src/vue/BissCheckbox.vue) · [Svelte source](../src/svelte/BissCheckbox.svelte)
 
@@ -655,7 +693,7 @@ Keep related language samples together and copy the active one.
 
 ## BissColumnManager
 
-Column Manager for the team’s everyday work.
+Show, hide, pin, reorder and resize the columns of a table.
 
 [Vue source](../src/vue/BissColumnManager.vue) · [Svelte source](../src/svelte/BissColumnManager.svelte)
 
@@ -692,9 +730,71 @@ Callbacks:
 
 - `onchange`: `(columns: BissColumn[]) => void`
 
+## BissCommandMenu
+
+A filterable, keyboard-driven command list for slash commands and mention pickers.
+
+[Vue source](../src/vue/BissCommandMenu.vue) · [Svelte source](../src/svelte/BissCommandMenu.svelte)
+
+### Vue
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `items` | `BissCommand[]` | Yes | — |
+| `label` | `string` | No | `'Commands'` |
+| `searchable` | `boolean` | No | `false` |
+| `searchLabel` | `string` | No | `'Search commands'` |
+| `emptyLabel` | `string` | No | `'Nothing matches “{query}”'` |
+| `grouped` | `boolean` | No | `true` |
+| `hint` | `boolean` | No | `true` |
+| `moveLabel` | `string` | No | `'to move'` |
+| `chooseLabel` | `string` | No | `'to choose'` |
+| `closeLabel` | `string` | No | `'to close'` |
+| `checkedLabel` | `string` | No | `'Current'` |
+| `autofocus` | `boolean` | No | `false` |
+| `query` | `string` | No | `''` |
+
+Events:
+
+- `pick`: `[item: BissCommand]`
+- `close`: `[]`
+
+Slots: `leading`, `empty`.
+
+### Svelte
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `listId` | `inferred` | No | `uid + '-list'` |
+| `items` | `BissCommand[]` | Yes | — |
+| `query` | `string` | No | `$bindable('')` |
+| `label` | `string` | No | `'Commands'` |
+| `searchable` | `boolean` | No | `false` |
+| `searchLabel` | `string` | No | `'Search commands'` |
+| `emptyLabel` | `string` | No | `'Nothing matches “{query}”'` |
+| `grouped` | `boolean` | No | `true` |
+| `hint` | `boolean` | No | `true` |
+| `moveLabel` | `string` | No | `'to move'` |
+| `chooseLabel` | `string` | No | `'to choose'` |
+| `closeLabel` | `string` | No | `'to close'` |
+| `checkedLabel` | `string` | No | `'Current'` |
+| `autofocus` | `boolean` | No | `false` |
+| `activeId` | `string` | No | `$bindable()` |
+| `onpick` | `(item: BissCommand) => void` | No | — |
+| `onclose` | `() => void` | No | — |
+| `leading` | `Snippet<[BissCommand]>` | No | — |
+| `empty` | `Snippet<[string]>` | No | — |
+
+Callbacks:
+
+- `onpick`: `(item: BissCommand) => void`
+- `onclose`: `() => void`
+
+Snippets: `leading`, `empty`.
+
 ## BissCommentComposer
 
-Comment Composer for the team’s everyday work.
+Write a comment, mention people and submit with the keyboard.
 
 [Vue source](../src/vue/BissCommentComposer.vue) · [Svelte source](../src/svelte/BissCommentComposer.svelte)
 
@@ -727,7 +827,7 @@ Callbacks:
 
 ## BissCommentThread
 
-Comment Thread for the team’s everyday work.
+A discussion on a record, with a composer and resolve state.
 
 [Vue source](../src/vue/BissCommentThread.vue) · [Svelte source](../src/svelte/BissCommentThread.svelte)
 
@@ -947,7 +1047,7 @@ A value that can be read, selected and copied without changing it.
 
 ## BissDataGrid
 
-Data Grid for the team’s everyday work.
+A spreadsheet-like table with selection, pinning, sorting and resizable columns.
 
 [Vue source](../src/vue/BissDataGrid.vue) · [Svelte source](../src/svelte/BissDataGrid.svelte)
 
@@ -1031,12 +1131,18 @@ Slots: `empty`, `default`.
 | Prop | Type | Required | Default |
 |---|---|---|---|
 | `columns` | `BissTableColumn[]` | Yes | — |
-| `rows` | `Record<string, unknown>[]` | Yes | — |
+| `rows` | `Record<string, any>[]` | Yes | — |
 | `empty` | `string` | No | `'No rows'` |
+| `loading` | `boolean` | No | `false` |
+| `loadingRows` | `number` | No | `4` |
+| `pageSize` | `number` | No | `0` |
+| `cell` | `Snippet<[{ row: Record<string, any>; column: BissTableColumn; value: any }]>` | No | — |
+
+Snippets: `cell`.
 
 ## BissDataTile
 
-Data Tile for the team’s everyday work.
+A dashboard tile that frames a figure, a chart or a list.
 
 [Vue source](../src/vue/BissDataTile.vue) · [Svelte source](../src/svelte/BissDataTile.svelte)
 
@@ -1168,7 +1274,7 @@ Callbacks:
 
 ## BissDeadlineList
 
-Deadline List for the team’s everyday work.
+Dated items ordered by urgency, with overdue items called out.
 
 [Vue source](../src/vue/BissDeadlineList.vue) · [Svelte source](../src/svelte/BissDeadlineList.svelte)
 
@@ -1251,7 +1357,7 @@ Snippets: `children`, `actions`.
 
 ## BissDisclosure
 
-Disclosure for the team’s everyday work.
+Hide secondary detail behind a labelled toggle.
 
 [Vue source](../src/vue/BissDisclosure.vue) · [Svelte source](../src/svelte/BissDisclosure.svelte)
 
@@ -1285,7 +1391,7 @@ Snippets: `children`.
 
 ## BissDocumentCallout
 
-Document Callout for the team’s everyday work.
+A tinted note block inside a document.
 
 [Vue source](../src/vue/BissDocumentCallout.vue) · [Svelte source](../src/svelte/BissDocumentCallout.svelte)
 
@@ -1312,7 +1418,7 @@ Snippets: `children`.
 
 ## BissDocumentToc
 
-Document Toc for the team’s everyday work.
+A document outline that tracks the heading in view.
 
 [Vue source](../src/vue/BissDocumentToc.vue) · [Svelte source](../src/svelte/BissDocumentToc.svelte)
 
@@ -1417,6 +1523,237 @@ Slots: `default`.
 
 Snippets: `children`.
 
+## BissFeed
+
+A stream of updates with a composer, for project news and team announcements.
+
+[Vue source](../src/vue/BissFeed.vue) · [Svelte source](../src/svelte/BissFeed.svelte)
+
+### Vue
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `items` | `BissFeedUpdate[]` | Yes | — |
+| `actions` | `BissMenuItem[]` | No | — |
+| `composer` | `boolean` | No | `true` |
+| `posting` | `boolean` | No | `false` |
+| `loading` | `boolean` | No | `false` |
+| `error` | `string` | No | — |
+| `hasMore` | `boolean` | No | `false` |
+| `loadingMore` | `boolean` | No | `false` |
+| `label` | `string` | No | `'Updates'` |
+| `composerLabel` | `string` | No | `'Write an update'` |
+| `placeholder` | `string` | No | `'Share progress, a decision or news with the team…'` |
+| `postLabel` | `string` | No | `'Post'` |
+| `shortcutLabel` | `string` | No | `'⌘ or Ctrl + Enter to post'` |
+| `emptyTitle` | `string` | No | `'No updates yet'` |
+| `emptyCopy` | `string` | No | `'Updates about progress, decisions and news appear here.'` |
+| `loadingLabel` | `string` | No | `'Loading updates…'` |
+| `retryLabel` | `string` | No | `'Try again'` |
+| `moreLabel` | `string` | No | `'Load more updates'` |
+| `draft` | `string` | No | `''` |
+
+Events:
+
+- `post`: `[text: string]`
+- `react`: `[value: { id: string; emoji: string }]`
+- `comment`: `[id: string]`
+- `action`: `[value: { id: string; key: string }]`
+- `more`: `[]`
+- `retry`: `[]`
+
+Slots: `item`.
+
+### Svelte
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `items` | `BissFeedUpdate[]` | Yes | — |
+| `actions` | `BissMenuItem[]` | No | — |
+| `composer` | `boolean` | No | `true` |
+| `draft` | `string` | No | `$bindable('')` |
+| `posting` | `boolean` | No | `false` |
+| `loading` | `boolean` | No | `false` |
+| `error` | `string` | No | — |
+| `hasMore` | `boolean` | No | `false` |
+| `loadingMore` | `boolean` | No | `false` |
+| `label` | `string` | No | `'Updates'` |
+| `composerLabel` | `string` | No | `'Write an update'` |
+| `placeholder` | `string` | No | `'Share progress, a decision or news with the team…'` |
+| `postLabel` | `string` | No | `'Post'` |
+| `shortcutLabel` | `string` | No | `'⌘ or Ctrl + Enter to post'` |
+| `emptyTitle` | `string` | No | `'No updates yet'` |
+| `emptyCopy` | `string` | No | `'Updates about progress, decisions and news appear here.'` |
+| `loadingLabel` | `string` | No | `'Loading updates…'` |
+| `retryLabel` | `string` | No | `'Try again'` |
+| `moreLabel` | `string` | No | `'Load more updates'` |
+| `onpost` | `(text: string) => void` | No | — |
+| `onreact` | `(value: { id: string; emoji: string }) => void` | No | — |
+| `oncomment` | `(id: string) => void` | No | — |
+| `onaction` | `(value: { id: string; key: string }) => void` | No | — |
+| `onmore` | `() => void` | No | — |
+| `onretry` | `() => void` | No | — |
+| `item` | `Snippet<[BissFeedUpdate]>` | No | — |
+
+Callbacks:
+
+- `onpost`: `(text: string) => void`
+- `onreact`: `(value: { id: string; emoji: string }) => void`
+- `oncomment`: `(id: string) => void`
+- `onaction`: `(value: { id: string; key: string }) => void`
+- `onmore`: `() => void`
+- `onretry`: `() => void`
+
+Snippets: `item`.
+
+## BissFeedItem
+
+One update: author, time, body, attachments, link previews, reactions and replies.
+
+[Vue source](../src/vue/BissFeedItem.vue) · [Svelte source](../src/svelte/BissFeedItem.svelte)
+
+### Vue
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `item` | `BissFeedUpdate` | Yes | — |
+| `actions` | `BissMenuItem[]` | No | — |
+| `emojis` | `string[]` | No | `() => ['👍', '🎉', '❤️', '👀', '🙏']` |
+| `level` | `2 \| 3 \| 4` | No | `3` |
+| `editedLabel` | `string` | No | `'edited'` |
+| `pinnedLabel` | `string` | No | `'Pinned'` |
+| `addReactionLabel` | `string` | No | `'Add reaction'` |
+| `reactionLabel` | `string` | No | `'{emoji} {count}: {people}'` |
+| `commentsLabel` | `string` | No | `'{count} replies'` |
+| `replyLabel` | `string` | No | `'Reply'` |
+| `actionsLabel` | `string` | No | `'More'` |
+| `attachmentsLabel` | `string` | No | `'Attachments'` |
+| `articleLabel` | `string` | No | `'Update by {author}, {time}'` |
+
+Events:
+
+- `react`: `[value: { id: string; emoji: string }]`
+- `comment`: `[id: string]`
+- `action`: `[value: { id: string; key: string }]`
+
+Slots: `default`.
+
+### Svelte
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `item` | `BissFeedUpdate` | Yes | — |
+| `actions` | `BissMenuItem[]` | No | — |
+| `emojis` | `string[]` | No | `['👍', '🎉', '❤️', '👀', '🙏']` |
+| `level` | `2 \| 3 \| 4` | No | `3` |
+| `editedLabel` | `string` | No | `'edited'` |
+| `pinnedLabel` | `string` | No | `'Pinned'` |
+| `addReactionLabel` | `string` | No | `'Add reaction'` |
+| `reactionLabel` | `string` | No | `'{emoji} {count}: {people}'` |
+| `commentsLabel` | `string` | No | `'{count} replies'` |
+| `replyLabel` | `string` | No | `'Reply'` |
+| `actionsLabel` | `string` | No | `'More'` |
+| `attachmentsLabel` | `string` | No | `'Attachments'` |
+| `articleLabel` | `string` | No | `'Update by {author}, {time}'` |
+| `onreact` | `(value: { id: string; emoji: string }) => void` | No | — |
+| `oncomment` | `(id: string) => void` | No | — |
+| `onaction` | `(value: { id: string; key: string }) => void` | No | — |
+| `children` | `Snippet<[BissFeedUpdate]>` | No | — |
+
+Callbacks:
+
+- `onreact`: `(value: { id: string; emoji: string }) => void`
+- `oncomment`: `(id: string) => void`
+- `onaction`: `(value: { id: string; key: string }) => void`
+
+Snippets: `children`.
+
+## BissFeedbackDialog
+
+Collect a rating, a category and a message in a focused dialog.
+
+[Vue source](../src/vue/BissFeedbackDialog.vue) · [Svelte source](../src/svelte/BissFeedbackDialog.svelte)
+
+### Vue
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `ratings` | `BissPickOption[]` | No | `() => [ { value: '1', label: 'Very poor' }, { value: '2', label: 'Poor' }, { value: '3', label: 'Okay' }, { value: '4', label: 'Good' }, { value: '5', label: 'Great' }, ]` |
+| `categories` | `BissPickOption[]` | No | `() => [ { value: 'idea', label: 'Idea' }, { value: 'problem', label: 'Problem' }, { value: 'question', label: 'Question' }, { value: 'praise', label: 'Praise' }, ]` |
+| `context` | `string` | No | — |
+| `askEmail` | `boolean` | No | `false` |
+| `minLength` | `number` | No | `10` |
+| `sending` | `boolean` | No | `false` |
+| `sent` | `boolean` | No | `false` |
+| `error` | `string` | No | — |
+| `title` | `string` | No | `'Send feedback'` |
+| `description` | `string` | No | `'Tell us what works and what gets in the way. We read every message.'` |
+| `ratingLabel` | `string` | No | `'How is it going?'` |
+| `ratingLowLabel` | `string` | No | `'Very poor'` |
+| `ratingHighLabel` | `string` | No | `'Great'` |
+| `categoryLabel` | `string` | No | `'Kind of feedback'` |
+| `messageLabel` | `string` | No | `'Your feedback'` |
+| `messagePlaceholder` | `string` | No | `'What happened, and what did you expect?'` |
+| `requiredLabel` | `string` | No | `'Describe your feedback before sending.'` |
+| `tooShortLabel` | `string` | No | `'Write at least {min} characters.'` |
+| `contextLabel` | `string` | No | `'Include page and browser details'` |
+| `emailLabel` | `string` | No | `'Email for a reply (optional)'` |
+| `submitLabel` | `string` | No | `'Send feedback'` |
+| `cancelLabel` | `string` | No | `'Cancel'` |
+| `closeLabel` | `string` | No | `'Close'` |
+| `sentTitle` | `string` | No | `'Thanks for your feedback'` |
+| `sentCopy` | `string` | No | `'It reaches the team straight away. We reply when we need more detail.'` |
+| `shortcutLabel` | `string` | No | `'to send'` |
+| `open` | `boolean` | No | `false` |
+| `message` | `string` | No | `''` |
+
+Events:
+
+- `submit`: `[feedback: BissFeedbackPayload]`
+- `close`: `[]`
+
+### Svelte
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `open` | `boolean` | No | `$bindable(false)` |
+| `message` | `string` | No | `$bindable('')` |
+| `ratings` | `BissPickOption[]` | No | `[ { value: '1', label: 'Very poor' }, { value: '2', label: 'Poor' }, { value: '3', label: 'Okay' }, { value: '4', label: 'Good' }, { value: '5', label: 'Great' }, ]` |
+| `categories` | `BissPickOption[]` | No | `[ { value: 'idea', label: 'Idea' }, { value: 'problem', label: 'Problem' }, { value: 'question', label: 'Question' }, { value: 'praise', label: 'Praise' }, ]` |
+| `context` | `string` | No | — |
+| `askEmail` | `boolean` | No | `false` |
+| `minLength` | `number` | No | `10` |
+| `sending` | `boolean` | No | `false` |
+| `sent` | `boolean` | No | `false` |
+| `error` | `string` | No | — |
+| `title` | `string` | No | `'Send feedback'` |
+| `description` | `string` | No | `'Tell us what works and what gets in the way. We read every message.'` |
+| `ratingLabel` | `string` | No | `'How is it going?'` |
+| `ratingLowLabel` | `string` | No | `'Very poor'` |
+| `ratingHighLabel` | `string` | No | `'Great'` |
+| `categoryLabel` | `string` | No | `'Kind of feedback'` |
+| `messageLabel` | `string` | No | `'Your feedback'` |
+| `messagePlaceholder` | `string` | No | `'What happened, and what did you expect?'` |
+| `requiredLabel` | `string` | No | `'Describe your feedback before sending.'` |
+| `tooShortLabel` | `string` | No | `'Write at least {min} characters.'` |
+| `contextLabel` | `string` | No | `'Include page and browser details'` |
+| `emailLabel` | `string` | No | `'Email for a reply (optional)'` |
+| `submitLabel` | `string` | No | `'Send feedback'` |
+| `cancelLabel` | `string` | No | `'Cancel'` |
+| `closeLabel` | `string` | No | `'Close'` |
+| `sentTitle` | `string` | No | `'Thanks for your feedback'` |
+| `sentCopy` | `string` | No | `'It reaches the team straight away. We reply when we need more detail.'` |
+| `shortcutLabel` | `string` | No | `'to send'` |
+| `onsubmit` | `(feedback: BissFeedbackPayload) => void` | No | — |
+| `onclose` | `() => void` | No | — |
+| `onOpenChange` | `(open: boolean) => void` | No | — |
+
+Callbacks:
+
+- `onsubmit`: `(feedback: BissFeedbackPayload) => void`
+- `onclose`: `() => void`
+- `onOpenChange`: `(open: boolean) => void`
+
 ## BissField
 
 A label, hint or error around a control, with a scoped identifier.
@@ -1456,7 +1793,7 @@ Snippets: `children`.
 
 ## BissFigureHelp
 
-Figure Help for the team’s everyday work.
+Explain how a figure is calculated, next to the figure.
 
 [Vue source](../src/vue/BissFigureHelp.vue) · [Svelte source](../src/svelte/BissFigureHelp.svelte)
 
@@ -1480,7 +1817,7 @@ Figure Help for the team’s everyday work.
 
 ## BissFilePicker
 
-File Picker for the team’s everyday work.
+Choose files or drop them onto the field.
 
 [Vue source](../src/vue/BissFilePicker.vue) · [Svelte source](../src/svelte/BissFilePicker.svelte)
 
@@ -1515,7 +1852,7 @@ Callbacks:
 
 ## BissFilterBuilder
 
-Filter Builder for the team’s everyday work.
+Compose filter rules with fields, operators and values.
 
 [Vue source](../src/vue/BissFilterBuilder.vue) · [Svelte source](../src/svelte/BissFilterBuilder.svelte)
 
@@ -1557,6 +1894,45 @@ Callbacks:
 - `onchange`: `(rules: BissFilterRule[]) => void`
 - `onmatch`: `(value: 'all' \| 'any') => void`
 
+## BissFunnelChart
+
+Stages of a pipeline as narrowing bars, with counts and conversion between stages.
+
+[Vue source](../src/vue/BissFunnelChart.vue) · [Svelte source](../src/svelte/BissFunnelChart.svelte)
+
+### Vue
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `stages` | `BissFunnelStage[]` | Yes | — |
+| `label` | `string` | Yes | — |
+| `locale` | `string` | No | `'en-GB'` |
+| `interactive` | `boolean` | No | `false` |
+| `conversionLabel` | `string` | No | `'{percent} of previous'` |
+| `overallLabel` | `string` | No | `'{percent} of {first} reach {last}'` |
+| `emptyLabel` | `string` | No | `'No stages to show yet.'` |
+
+Events:
+
+- `pick`: `[stage: BissFunnelStage]`
+
+### Svelte
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `stages` | `BissFunnelStage[]` | Yes | — |
+| `label` | `string` | Yes | — |
+| `locale` | `string` | No | `'en-GB'` |
+| `interactive` | `boolean` | No | `false` |
+| `conversionLabel` | `string` | No | `'{percent} of previous'` |
+| `overallLabel` | `string` | No | `'{percent} of {first} reach {last}'` |
+| `emptyLabel` | `string` | No | `'No stages to show yet.'` |
+| `onpick` | `(stage: BissFunnelStage) => void` | No | — |
+
+Callbacks:
+
+- `onpick`: `(stage: BissFunnelStage) => void`
+
 ## BissGoalBar
 
 A progress track with an optional expected-progress marker.
@@ -1585,7 +1961,7 @@ A progress track with an optional expected-progress marker.
 
 ## BissGoalCard
 
-Goal Card for the team’s everyday work.
+A goal with its progress, expected pace and owner.
 
 [Vue source](../src/vue/BissGoalCard.vue) · [Svelte source](../src/svelte/BissGoalCard.svelte)
 
@@ -1862,6 +2238,82 @@ Bizzy’s authored SVG vocabulary, sized and stroked consistently.
 |---|---|---|---|
 | `name` | `BissIconName` | Yes | — |
 
+## BissImportMapper
+
+Match imported columns to fields, with sample values, automatic matching and required checks.
+
+[Vue source](../src/vue/BissImportMapper.vue) · [Svelte source](../src/svelte/BissImportMapper.svelte)
+
+### Vue
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `columns` | `BissImportColumn[]` | Yes | — |
+| `fields` | `BissImportField[]` | Yes | — |
+| `autoMatchOnStart` | `boolean` | No | `true` |
+| `steps` | `string[]` | No | — |
+| `step` | `number` | No | — |
+| `title` | `string` | No | `'Match columns'` |
+| `description` | `string` | No | — |
+| `busy` | `boolean` | No | `false` |
+| `columnLabel` | `string` | No | `'Column in file'` |
+| `samplesLabel` | `string` | No | `'Sample values'` |
+| `fieldLabel` | `string` | No | `'Imports to'` |
+| `skipLabel` | `string` | No | `'Don’t import'` |
+| `autoMatchLabel` | `string` | No | `'Auto-match'` |
+| `suggestedLabel` | `string` | No | `'Suggested'` |
+| `requiredLabel` | `string` | No | `'required'` |
+| `selectLabel` | `string` | No | `'Field for {column}'` |
+| `missingLabel` | `string` | No | `'Choose a column for {fields}.'` |
+| `conflictLabel` | `string` | No | `'{field} is chosen for {columns}.'` |
+| `summaryLabel` | `string` | No | `'{count} of {total} columns will be imported.'` |
+| `movedLabel` | `string` | No | `'{field} moved to {column}.'` |
+| `stepsLabel` | `string` | No | `'Import steps'` |
+| `noSamplesLabel` | `string` | No | `'No values'` |
+| `submitLabel` | `string` | No | `'Continue'` |
+| `mapping` | `BissImportMapping` | No | `() => ({})` |
+
+Events:
+
+- `change`: `[mapping: BissImportMapping]`
+- `submit`: `[mapping: BissImportMapping]`
+
+### Svelte
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `columns` | `BissImportColumn[]` | Yes | — |
+| `fields` | `BissImportField[]` | Yes | — |
+| `mapping` | `BissImportMapping` | No | `$bindable({})` |
+| `autoMatchOnStart` | `boolean` | No | `true` |
+| `steps` | `string[]` | No | — |
+| `step` | `number` | No | — |
+| `title` | `string` | No | `'Match columns'` |
+| `description` | `string` | No | — |
+| `busy` | `boolean` | No | `false` |
+| `columnLabel` | `string` | No | `'Column in file'` |
+| `samplesLabel` | `string` | No | `'Sample values'` |
+| `fieldLabel` | `string` | No | `'Imports to'` |
+| `skipLabel` | `string` | No | `'Don’t import'` |
+| `autoMatchLabel` | `string` | No | `'Auto-match'` |
+| `suggestedLabel` | `string` | No | `'Suggested'` |
+| `requiredLabel` | `string` | No | `'required'` |
+| `selectLabel` | `string` | No | `'Field for {column}'` |
+| `missingLabel` | `string` | No | `'Choose a column for {fields}.'` |
+| `conflictLabel` | `string` | No | `'{field} is chosen for {columns}.'` |
+| `summaryLabel` | `string` | No | `'{count} of {total} columns will be imported.'` |
+| `movedLabel` | `string` | No | `'{field} moved to {column}.'` |
+| `stepsLabel` | `string` | No | `'Import steps'` |
+| `noSamplesLabel` | `string` | No | `'No values'` |
+| `submitLabel` | `string` | No | `'Continue'` |
+| `onchange` | `(mapping: BissImportMapping) => void` | No | — |
+| `onsubmit` | `(mapping: BissImportMapping) => void` | No | — |
+
+Callbacks:
+
+- `onchange`: `(mapping: BissImportMapping) => void`
+- `onsubmit`: `(mapping: BissImportMapping) => void`
+
 ## BissInput
 
 A single-line value with normal form attributes and validation styling.
@@ -1940,6 +2392,131 @@ Callbacks:
 - `onmove`: `(value: { id: string; lane: string }) => void`
 - `onadd`: `(lane: string) => void`
 
+## BissKbd
+
+Show a key or shortcut, such as ⌘ K, with a readable name for screen readers.
+
+[Vue source](../src/vue/BissKbd.vue) · [Svelte source](../src/svelte/BissKbd.svelte)
+
+### Vue
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `keys` | `string \| string[]` | No | — |
+| `label` | `string` | No | — |
+| `separator` | `string` | No | `''` |
+| `size` | `'sm' \| 'md'` | No | `'md'` |
+
+Slots: `default`.
+
+### Svelte
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `keys` | `string \| string[]` | No | — |
+| `label` | `string` | No | — |
+| `separator` | `string` | No | `''` |
+| `size` | `'sm' \| 'md'` | No | `'md'` |
+| `children` | `Snippet` | No | — |
+
+Snippets: `children`.
+
+## BissKeyResult
+
+A key result with start, current and target values, progress, confidence and a check-in.
+
+[Vue source](../src/vue/BissKeyResult.vue) · [Svelte source](../src/svelte/BissKeyResult.svelte)
+
+### Vue
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `title` | `string` | Yes | — |
+| `owner` | `string` | No | — |
+| `start` | `number` | Yes | — |
+| `current` | `number` | Yes | — |
+| `target` | `number` | Yes | — |
+| `format` | `BissKeyResultFormat` | No | `'number'` |
+| `unit` | `string` | No | — |
+| `currency` | `string` | No | `'EUR'` |
+| `locale` | `string` | No | — |
+| `formatValue` | `(value: number) => string` | No | — |
+| `expected` | `number` | No | — |
+| `confidence` | `BissConfidence` | No | — |
+| `lastCheckin` | `BissKeyResultLastCheckin` | No | — |
+| `canCheckIn` | `boolean` | No | `true` |
+| `busy` | `boolean` | No | `false` |
+| `level` | `2 \| 3 \| 4` | No | `3` |
+| `confidenceLabels` | `Record<BissConfidence, string>` | No | `() => ({ 'on-track': 'On track', 'at-risk': 'At risk', 'off-track': 'Off track', })` |
+| `progressLabel` | `string` | No | `'Progress of {title}'` |
+| `ownerLabel` | `string` | No | `'Owner'` |
+| `startLabel` | `string` | No | `'Start'` |
+| `targetLabel` | `string` | No | `'Target'` |
+| `checkInLabel` | `string` | No | `'Check in'` |
+| `formTitle` | `string` | No | `'New check-in'` |
+| `valueLabel` | `string` | No | `'Current value'` |
+| `confidenceLabel` | `string` | No | `'Confidence'` |
+| `noteLabel` | `string` | No | `'Note'` |
+| `notePlaceholder` | `string` | No | `'What changed since the last check-in?'` |
+| `saveLabel` | `string` | No | `'Save check-in'` |
+| `cancelLabel` | `string` | No | `'Cancel'` |
+| `invalidLabel` | `string` | No | `'Enter a number, for example 12 or 12.5.'` |
+| `noCheckinLabel` | `string` | No | `'No check-ins yet'` |
+| `lastCheckinLabel` | `string` | No | `'{time} by {author}'` |
+| `open` | `boolean` | No | `false` |
+
+Events:
+
+- `checkin`: `[value: BissKeyResultCheckin]`
+- `cancel`: `[]`
+
+### Svelte
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `title` | `string` | Yes | — |
+| `owner` | `string` | No | — |
+| `start` | `number` | Yes | — |
+| `current` | `number` | Yes | — |
+| `target` | `number` | Yes | — |
+| `format` | `BissKeyResultFormat` | No | `'number'` |
+| `unit` | `string` | No | — |
+| `currency` | `string` | No | `'EUR'` |
+| `locale` | `string` | No | — |
+| `formatValue` | `(value: number) => string` | No | — |
+| `expected` | `number` | No | — |
+| `confidence` | `BissConfidence` | No | — |
+| `lastCheckin` | `BissKeyResultLastCheckin` | No | — |
+| `canCheckIn` | `boolean` | No | `true` |
+| `open` | `boolean` | No | `$bindable(false)` |
+| `busy` | `boolean` | No | `false` |
+| `level` | `2 \| 3 \| 4` | No | `3` |
+| `confidenceLabels` | `Record<BissConfidence, string>` | No | `{ 'on-track': 'On track', 'at-risk': 'At risk', 'off-track': 'Off track' }` |
+| `progressLabel` | `string` | No | `'Progress of {title}'` |
+| `ownerLabel` | `string` | No | `'Owner'` |
+| `startLabel` | `string` | No | `'Start'` |
+| `targetLabel` | `string` | No | `'Target'` |
+| `checkInLabel` | `string` | No | `'Check in'` |
+| `formTitle` | `string` | No | `'New check-in'` |
+| `valueLabel` | `string` | No | `'Current value'` |
+| `confidenceLabel` | `string` | No | `'Confidence'` |
+| `noteLabel` | `string` | No | `'Note'` |
+| `notePlaceholder` | `string` | No | `'What changed since the last check-in?'` |
+| `saveLabel` | `string` | No | `'Save check-in'` |
+| `cancelLabel` | `string` | No | `'Cancel'` |
+| `invalidLabel` | `string` | No | `'Enter a number, for example 12 or 12.5.'` |
+| `noCheckinLabel` | `string` | No | `'No check-ins yet'` |
+| `lastCheckinLabel` | `string` | No | `'{time} by {author}'` |
+| `oncheckin` | `(value: BissKeyResultCheckin) => void` | No | — |
+| `oncancel` | `() => void` | No | — |
+| `onOpenChange` | `(open: boolean) => void` | No | — |
+
+Callbacks:
+
+- `oncheckin`: `(value: BissKeyResultCheckin) => void`
+- `oncancel`: `() => void`
+- `onOpenChange`: `(open: boolean) => void`
+
 ## BissKpiCard
 
 One headline figure with the label and note needed to interpret it.
@@ -1964,7 +2541,7 @@ One headline figure with the label and note needed to interpret it.
 
 ## BissLabelEditor
 
-Label Editor for the team’s everyday work.
+Create, rename, recolor and remove the labels of a field.
 
 [Vue source](../src/vue/BissLabelEditor.vue) · [Svelte source](../src/svelte/BissLabelEditor.svelte)
 
@@ -2008,6 +2585,68 @@ Events:
 Callbacks:
 
 - `onchange`: `(items: BissLabel[]) => void`
+
+## BissLightbox
+
+View images full screen with captions and keyboard navigation.
+
+[Vue source](../src/vue/BissLightbox.vue) · [Svelte source](../src/svelte/BissLightbox.svelte)
+
+### Vue
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `images` | `BissLightboxImage[]` | Yes | — |
+| `loop` | `boolean` | No | `true` |
+| `thumbnails` | `boolean` | No | `true` |
+| `portal` | `boolean` | No | `false` |
+| `label` | `string` | No | `'Image viewer'` |
+| `closeLabel` | `string` | No | `'Close'` |
+| `previousLabel` | `string` | No | `'Previous image'` |
+| `nextLabel` | `string` | No | `'Next image'` |
+| `counterLabel` | `string` | No | `'{index} of {count}'` |
+| `thumbnailLabel` | `string` | No | `'Show image {index}'` |
+| `thumbnailsLabel` | `string` | No | `'Images'` |
+| `emptyLabel` | `string` | No | `'No images to show.'` |
+| `open` | `boolean` | No | `false` |
+| `index` | `number` | No | `0` |
+
+Events:
+
+- `close`: `[]`
+
+Slots: `actions`.
+
+### Svelte
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `images` | `BissLightboxImage[]` | Yes | — |
+| `open` | `boolean` | No | `$bindable(false)` |
+| `index` | `number` | No | `$bindable(0)` |
+| `loop` | `boolean` | No | `true` |
+| `thumbnails` | `boolean` | No | `true` |
+| `portal` | `boolean` | No | `false` |
+| `label` | `string` | No | `'Image viewer'` |
+| `closeLabel` | `string` | No | `'Close'` |
+| `previousLabel` | `string` | No | `'Previous image'` |
+| `nextLabel` | `string` | No | `'Next image'` |
+| `counterLabel` | `string` | No | `'{index} of {count}'` |
+| `thumbnailLabel` | `string` | No | `'Show image {index}'` |
+| `thumbnailsLabel` | `string` | No | `'Images'` |
+| `emptyLabel` | `string` | No | `'No images to show.'` |
+| `onclose` | `() => void` | No | — |
+| `onOpenChange` | `(open: boolean) => void` | No | — |
+| `onindex` | `(index: number) => void` | No | — |
+| `actions` | `Snippet<[{ image: BissLightboxImage \| undefined; index: number }]>` | No | — |
+
+Callbacks:
+
+- `onclose`: `() => void`
+- `onOpenChange`: `(open: boolean) => void`
+- `onindex`: `(index: number) => void`
+
+Snippets: `actions`.
 
 ## BissLineChart
 
@@ -2057,7 +2696,7 @@ Quiet connection feedback only when the application is reconnecting or offline.
 
 ## BissMediaFigure
 
-Media Figure for the team’s everyday work.
+An image or video with caption and credit.
 
 [Vue source](../src/vue/BissMediaFigure.vue) · [Svelte source](../src/svelte/BissMediaFigure.svelte)
 
@@ -2315,6 +2954,136 @@ Callbacks:
 
 Snippets: `icon`.
 
+## BissNotificationCenter
+
+A bell with the unread count that opens the latest notifications, with mark-all-read.
+
+[Vue source](../src/vue/BissNotificationCenter.vue) · [Svelte source](../src/svelte/BissNotificationCenter.svelte)
+
+### Vue
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `items` | `BissNotice[]` | Yes | — |
+| `unread` | `number` | No | — |
+| `max` | `number` | No | `8` |
+| `loading` | `boolean` | No | `false` |
+| `error` | `string` | No | — |
+| `label` | `string` | No | `'Notifications'` |
+| `unreadLabel` | `string` | No | `'Notifications, {count} unread'` |
+| `markAllLabel` | `string` | No | `'Mark all as read'` |
+| `emptyTitle` | `string` | No | `'You’re all caught up'` |
+| `emptyCopy` | `string` | No | `'Mentions, assignments and deadlines appear here.'` |
+| `loadingLabel` | `string` | No | `'Loading notifications…'` |
+| `retryLabel` | `string` | No | `'Try again'` |
+| `seeAllLabel` | `string` | No | `'See all notifications'` |
+| `seeAllHref` | `string` | No | — |
+| `width` | `number` | No | `380` |
+| `align` | `'start' \| 'center' \| 'end'` | No | `'end'` |
+| `portal` | `boolean` | No | `false` |
+| `open` | `boolean` | No | `false` |
+
+Events:
+
+- `pick`: `[item: BissNotice]`
+- `read-all`: `[]`
+- `more`: `[]`
+- `retry`: `[]`
+
+Slots: `footer`.
+
+### Svelte
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `items` | `BissNotice[]` | Yes | — |
+| `unread` | `number` | No | — |
+| `max` | `number` | No | `8` |
+| `loading` | `boolean` | No | `false` |
+| `error` | `string` | No | — |
+| `open` | `boolean` | No | `$bindable(false)` |
+| `label` | `string` | No | `'Notifications'` |
+| `unreadLabel` | `string` | No | `'Notifications, {count} unread'` |
+| `markAllLabel` | `string` | No | `'Mark all as read'` |
+| `emptyTitle` | `string` | No | `'You’re all caught up'` |
+| `emptyCopy` | `string` | No | `'Mentions, assignments and deadlines appear here.'` |
+| `loadingLabel` | `string` | No | `'Loading notifications…'` |
+| `retryLabel` | `string` | No | `'Try again'` |
+| `seeAllLabel` | `string` | No | `'See all notifications'` |
+| `seeAllHref` | `string` | No | — |
+| `width` | `number` | No | `380` |
+| `align` | `'start' \| 'center' \| 'end'` | No | `'end'` |
+| `portal` | `boolean` | No | `false` |
+| `onpick` | `(item: BissNotice) => void` | No | — |
+| `onreadall` | `() => void` | No | — |
+| `onmore` | `() => void` | No | — |
+| `onretry` | `() => void` | No | — |
+| `onOpenChange` | `(open: boolean) => void` | No | — |
+| `footer` | `Snippet` | No | — |
+
+Callbacks:
+
+- `onpick`: `(item: BissNotice) => void`
+- `onreadall`: `() => void`
+- `onmore`: `() => void`
+- `onretry`: `() => void`
+- `onOpenChange`: `(open: boolean) => void`
+
+Snippets: `footer`.
+
+## BissNumberField
+
+Type or step a number within limits, formatted for the locale.
+
+[Vue source](../src/vue/BissNumberField.vue) · [Svelte source](../src/svelte/BissNumberField.svelte)
+
+### Vue
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `min` | `number` | No | — |
+| `max` | `number` | No | — |
+| `step` | `number` | No | `1` |
+| `largeStep` | `number` | No | — |
+| `label` | `string` | No | — |
+| `placeholder` | `string` | No | — |
+| `disabled` | `boolean` | No | `false` |
+| `required` | `boolean` | No | `false` |
+| `invalid` | `boolean` | No | `false` |
+| `locale` | `string` | No | — |
+| `format` | `Intl.NumberFormatOptions` | No | — |
+| `incrementLabel` | `string` | No | `'Increase'` |
+| `decrementLabel` | `string` | No | `'Decrease'` |
+| `size` | `'sm' \| 'md'` | No | `'md'` |
+| `name` | `string` | No | — |
+| `modelValue` | `number \| null` | No | `null` |
+
+### Svelte
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `value` | `number \| null` | No | `$bindable(null)` |
+| `min` | `number` | No | — |
+| `max` | `number` | No | — |
+| `step` | `number` | No | `1` |
+| `largeStep` | `number` | No | — |
+| `label` | `string` | No | — |
+| `placeholder` | `string` | No | — |
+| `disabled` | `boolean` | No | `false` |
+| `required` | `boolean` | No | `false` |
+| `invalid` | `boolean` | No | `false` |
+| `locale` | `string` | No | — |
+| `format` | `Intl.NumberFormatOptions` | No | — |
+| `incrementLabel` | `string` | No | `'Increase'` |
+| `decrementLabel` | `string` | No | `'Decrease'` |
+| `size` | `'sm' \| 'md'` | No | `'md'` |
+| `name` | `string` | No | — |
+| `onchange` | `(value: number \| null) => void` | No | — |
+
+Callbacks:
+
+- `onchange`: `(value: number \| null) => void`
+
 ## BissOnboardingChips
 
 Choose several interests or areas during workspace setup.
@@ -2460,6 +3229,57 @@ Slots: `default`.
 
 Snippets: `children`.
 
+## BissPagination
+
+Numbered page navigation with ellipses, previous and next, and an optional page size.
+
+[Vue source](../src/vue/BissPagination.vue) · [Svelte source](../src/svelte/BissPagination.svelte)
+
+### Vue
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `total` | `number` | No | — |
+| `pages` | `number` | No | — |
+| `pageSizes` | `number[]` | No | — |
+| `siblings` | `number` | No | `1` |
+| `boundaries` | `number` | No | `1` |
+| `label` | `string` | No | `'Pagination'` |
+| `previousLabel` | `string` | No | `'Previous page'` |
+| `nextLabel` | `string` | No | `'Next page'` |
+| `pageLabel` | `string` | No | `'Page {page}'` |
+| `pageSizeLabel` | `string` | No | `'Rows per page'` |
+| `rangeLabel` | `string` | No | `'{start}–{end} of {total}'` |
+| `disabled` | `boolean` | No | `false` |
+| `page` | `number` | No | `1` |
+| `pageSize` | `number` | No | `25` |
+
+### Svelte
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `page` | `number` | No | `$bindable(1)` |
+| `pageSize` | `number` | No | `$bindable(25)` |
+| `total` | `number` | No | — |
+| `pages` | `number` | No | — |
+| `pageSizes` | `number[]` | No | — |
+| `siblings` | `number` | No | `1` |
+| `boundaries` | `number` | No | `1` |
+| `label` | `string` | No | `'Pagination'` |
+| `previousLabel` | `string` | No | `'Previous page'` |
+| `nextLabel` | `string` | No | `'Next page'` |
+| `pageLabel` | `string` | No | `'Page {page}'` |
+| `pageSizeLabel` | `string` | No | `'Rows per page'` |
+| `rangeLabel` | `string` | No | `'{start}–{end} of {total}'` |
+| `disabled` | `boolean` | No | `false` |
+| `onchange` | `(page: number) => void` | No | — |
+| `onpagesize` | `(size: number) => void` | No | — |
+
+Callbacks:
+
+- `onchange`: `(page: number) => void`
+- `onpagesize`: `(size: number) => void`
+
 ## BissPeopleCell
 
 Show a small set of assigned people, with overflow summarized by count.
@@ -2511,7 +3331,7 @@ Snippets: `children`.
 
 ## BissPresenceCursor
 
-Presence Cursor for the team’s everyday work.
+Another person’s cursor, labelled with their name and color.
 
 [Vue source](../src/vue/BissPresenceCursor.vue) · [Svelte source](../src/svelte/BissPresenceCursor.svelte)
 
@@ -2566,6 +3386,40 @@ Slots: `default`.
 
 Snippets: `children`.
 
+## BissProgress
+
+A labelled progress bar for known amounts, or an indeterminate one while waiting.
+
+[Vue source](../src/vue/BissProgress.vue) · [Svelte source](../src/svelte/BissProgress.svelte)
+
+### Vue
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `value` | `number \| null` | No | `null` |
+| `max` | `number` | No | `100` |
+| `label` | `string` | Yes | — |
+| `showLabel` | `boolean` | No | `false` |
+| `showValue` | `boolean` | No | `false` |
+| `valueText` | `string` | No | — |
+| `tone` | `BissProgressTone` | No | `'primary'` |
+| `size` | `'sm' \| 'md'` | No | `'md'` |
+| `locale` | `string` | No | — |
+
+### Svelte
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `value` | `number \| null` | No | `null` |
+| `max` | `number` | No | `100` |
+| `label` | `string` | Yes | — |
+| `showLabel` | `boolean` | No | `false` |
+| `showValue` | `boolean` | No | `false` |
+| `valueText` | `string` | No | — |
+| `tone` | `BissProgressTone` | No | `'primary'` |
+| `size` | `'sm' \| 'md'` | No | `'md'` |
+| `locale` | `string` | No | — |
+
 ## BissPropertyList
 
 Display a record’s labelled properties in a compact description list.
@@ -2590,7 +3444,7 @@ Slots: `default`.
 
 ## BissProposalCard
 
-Proposal Card for the team’s everyday work.
+A suggested change that someone can review before applying.
 
 [Vue source](../src/vue/BissProposalCard.vue) · [Svelte source](../src/svelte/BissProposalCard.svelte)
 
@@ -2632,7 +3486,7 @@ Callbacks:
 
 ## BissQuickLinks
 
-Quick Links for the team’s everyday work.
+A compact grid of frequent destinations.
 
 [Vue source](../src/vue/BissQuickLinks.vue) · [Svelte source](../src/svelte/BissQuickLinks.svelte)
 
@@ -2652,7 +3506,7 @@ Quick Links for the team’s everyday work.
 
 ## BissRadioGroup
 
-Radio Group for the team’s everyday work.
+Choose one option from a short, visible list.
 
 [Vue source](../src/vue/BissRadioGroup.vue) · [Svelte source](../src/svelte/BissRadioGroup.svelte)
 
@@ -2709,7 +3563,7 @@ A small labelled reference to a record, optionally linked.
 
 ## BissRecordPreview
 
-Record Preview for the team’s everyday work.
+A compact preview of a linked record, or a notice when it is restricted.
 
 [Vue source](../src/vue/BissRecordPreview.vue) · [Svelte source](../src/svelte/BissRecordPreview.svelte)
 
@@ -2737,9 +3591,56 @@ Record Preview for the team’s everyday work.
 | `restrictedLabel` | `string` | No | `'A record you cannot access'` |
 | `icon` | `BissIconName` | No | `'file'` |
 
+## BissRingGauge
+
+One rate or share as a ring, with the figure and its context in the middle.
+
+[Vue source](../src/vue/BissRingGauge.vue) · [Svelte source](../src/svelte/BissRingGauge.svelte)
+
+### Vue
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `value` | `number \| null` | Yes | — |
+| `max` | `number` | No | `1` |
+| `label` | `string` | Yes | — |
+| `display` | `string` | No | — |
+| `caption` | `string` | No | — |
+| `target` | `number \| null` | No | `null` |
+| `targetLabel` | `string` | No | `'Target {percent}'` |
+| `tone` | `'primary' \| 'success' \| 'warning' \| 'danger' \| 'neutral'` | No | `'primary'` |
+| `color` | `string` | No | — |
+| `size` | `number` | No | `120` |
+| `thickness` | `number` | No | `10` |
+| `locale` | `string` | No | `'en-GB'` |
+| `missingLabel` | `string` | No | `'–'` |
+
+Slots: `default`.
+
+### Svelte
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `value` | `number \| null` | Yes | — |
+| `max` | `number` | No | `1` |
+| `label` | `string` | Yes | — |
+| `display` | `string` | No | — |
+| `caption` | `string` | No | — |
+| `target` | `number \| null` | No | `null` |
+| `targetLabel` | `string` | No | `'Target {percent}'` |
+| `tone` | `'primary' \| 'success' \| 'warning' \| 'danger' \| 'neutral'` | No | `'primary'` |
+| `color` | `string` | No | — |
+| `size` | `number` | No | `120` |
+| `thickness` | `number` | No | `10` |
+| `locale` | `string` | No | `'en-GB'` |
+| `missingLabel` | `string` | No | `'–'` |
+| `children` | `Snippet` | No | — |
+
+Snippets: `children`.
+
 ## BissRoleEditor
 
-Role Editor for the team’s everyday work.
+Define roles and the permissions each one grants.
 
 [Vue source](../src/vue/BissRoleEditor.vue) · [Svelte source](../src/svelte/BissRoleEditor.svelte)
 
@@ -2908,7 +3809,7 @@ Snippets: `actions`.
 
 ## BissSegmentedControl
 
-Segmented Control for the team’s everyday work.
+Switch between a few mutually exclusive views or modes.
 
 [Vue source](../src/vue/BissSegmentedControl.vue) · [Svelte source](../src/svelte/BissSegmentedControl.svelte)
 
@@ -2963,6 +3864,8 @@ Slots: `default`.
 | `value` | `string \| number` | No | `$bindable<string \| number \| undefined>(undefined)` |
 | `modelValue` | `string \| number` | No | `$bindable<string \| number \| undefined>(undefined)` |
 | `options` | `BissOption[]` | Yes | — |
+| `placeholder` | `string` | No | — |
+| `invalid` | `boolean` | No | `false` |
 | `onchange` | `(value: string \| number) => void` | No | — |
 
 Callbacks:
@@ -3011,6 +3914,28 @@ Events:
 Callbacks:
 
 - `onchange`: `(value: string) => void`
+
+## BissSeparator
+
+A quiet horizontal or vertical divider, optionally labelled.
+
+[Vue source](../src/vue/BissSeparator.vue) · [Svelte source](../src/svelte/BissSeparator.svelte)
+
+### Vue
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `orientation` | `'horizontal' \| 'vertical'` | No | `'horizontal'` |
+| `label` | `string` | No | — |
+| `decorative` | `boolean` | No | `false` |
+
+### Svelte
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `orientation` | `'horizontal' \| 'vertical'` | No | `'horizontal'` |
+| `label` | `string` | No | — |
+| `decorative` | `boolean` | No | `false` |
 
 ## BissServiceIcon
 
@@ -3063,7 +3988,7 @@ Snippets: `children`.
 
 ## BissSharePanel
 
-Share Panel for the team’s everyday work.
+Invite people, set their role and manage a public link.
 
 [Vue source](../src/vue/BissSharePanel.vue) · [Svelte source](../src/svelte/BissSharePanel.svelte)
 
@@ -3161,6 +4086,55 @@ Callbacks:
 
 Snippets: `children`, `actions`.
 
+## BissSidebar
+
+A collapsible application sidebar with workspace, sections, pinned items and an account footer.
+
+[Vue source](../src/vue/BissSidebar.vue) · [Svelte source](../src/svelte/BissSidebar.svelte)
+
+### Vue
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `label` | `string` | No | `'Main navigation'` |
+| `pinnedLabel` | `string` | No | `'Pinned'` |
+| `collapseLabel` | `string` | No | `'Collapse sidebar'` |
+| `expandLabel` | `string` | No | `'Expand sidebar'` |
+| `closeLabel` | `string` | No | `'Close navigation'` |
+| `collapsible` | `boolean` | No | `true` |
+| `portal` | `boolean` | No | `true` |
+| `collapsed` | `boolean` | No | `false` |
+| `mobileOpen` | `boolean` | No | `false` |
+
+Slots: `brand`, `default`, `pinned`, `footer`.
+
+### Svelte
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `collapsed` | `boolean` | No | `$bindable(false)` |
+| `mobileOpen` | `boolean` | No | `$bindable(false)` |
+| `label` | `string` | No | `'Main navigation'` |
+| `pinnedLabel` | `string` | No | `'Pinned'` |
+| `collapseLabel` | `string` | No | `'Collapse sidebar'` |
+| `expandLabel` | `string` | No | `'Expand sidebar'` |
+| `closeLabel` | `string` | No | `'Close navigation'` |
+| `collapsible` | `boolean` | No | `true` |
+| `portal` | `boolean` | No | `true` |
+| `oncollapse` | `(collapsed: boolean) => void` | No | — |
+| `onMobileOpenChange` | `(open: boolean) => void` | No | — |
+| `brand` | `Snippet<[boolean]>` | No | — |
+| `children` | `Snippet<[boolean]>` | No | — |
+| `pinned` | `Snippet<[boolean]>` | No | — |
+| `footer` | `Snippet<[boolean]>` | No | — |
+
+Callbacks:
+
+- `oncollapse`: `(collapsed: boolean) => void`
+- `onMobileOpenChange`: `(open: boolean) => void`
+
+Snippets: `brand`, `children`, `pinned`, `footer`.
+
 ## BissSidebarUser
 
 The signed-in identity with account navigation and sign-out actions.
@@ -3237,9 +4211,76 @@ Simple content-shaped bars for loading layouts.
 | `width` | `string` | No | `'100%'` |
 | `gap` | `string` | No | `'10px'` |
 
+## BissSlider
+
+Choose a value or a range by dragging or with arrow keys, inside or outside a Field.
+
+[Vue source](../src/vue/BissSlider.vue) · [Svelte source](../src/svelte/BissSlider.svelte)
+
+### Vue
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `label` | `string` | No | — |
+| `min` | `number` | No | `0` |
+| `max` | `number` | No | `100` |
+| `step` | `number` | No | `1` |
+| `disabled` | `boolean` | No | `false` |
+| `showValue` | `boolean` | No | `false` |
+| `thumbLabels` | `[string, string]` | No | `() => ['Minimum', 'Maximum']` |
+| `minStepsBetweenThumbs` | `number` | No | `0` |
+| `locale` | `string` | No | — |
+| `format` | `Intl.NumberFormatOptions` | No | — |
+| `name` | `string` | No | — |
+| `modelValue` | `number \| number[]` | No | — |
+
+### Svelte
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `value` | `number \| number[]` | No | `$bindable()` |
+| `label` | `string` | No | — |
+| `min` | `number` | No | `0` |
+| `max` | `number` | No | `100` |
+| `step` | `number` | No | `1` |
+| `disabled` | `boolean` | No | `false` |
+| `showValue` | `boolean` | No | `false` |
+| `thumbLabels` | `[string, string]` | No | `['Minimum', 'Maximum']` |
+| `minStepsBetweenThumbs` | `number` | No | `0` |
+| `locale` | `string` | No | — |
+| `format` | `Intl.NumberFormatOptions` | No | — |
+| `name` | `string` | No | — |
+| `onchange` | `(value: number \| number[]) => void` | No | — |
+
+Callbacks:
+
+- `onchange`: `(value: number \| number[]) => void`
+
+## BissSpinner
+
+A small activity indicator for short waits, announced and slowed for reduced motion.
+
+[Vue source](../src/vue/BissSpinner.vue) · [Svelte source](../src/svelte/BissSpinner.svelte)
+
+### Vue
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `label` | `string` | No | `'Loading'` |
+| `size` | `'sm' \| 'md'` | No | `'md'` |
+| `decorative` | `boolean` | No | `false` |
+
+### Svelte
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `label` | `string` | No | `'Loading'` |
+| `size` | `'sm' \| 'md'` | No | `'md'` |
+| `decorative` | `boolean` | No | `false` |
+
 ## BissSplitPane
 
-Split Pane for the team’s everyday work.
+Two resizable panes, such as a list beside its detail.
 
 [Vue source](../src/vue/BissSplitPane.vue) · [Svelte source](../src/svelte/BissSplitPane.svelte)
 
@@ -3278,7 +4319,7 @@ Snippets: `start`, `end`.
 
 ## BissStackedBar
 
-Stacked Bar for the team’s everyday work.
+Parts of a whole in one horizontal bar, with a legend.
 
 [Vue source](../src/vue/BissStackedBar.vue) · [Svelte source](../src/svelte/BissStackedBar.svelte)
 
@@ -3671,6 +4712,46 @@ A compact label and formatted total for a table footer or group summary.
 | `value` | `string \| number` | Yes | — |
 | `note` | `string \| undefined` | No | `undefined` |
 
+## BissTabs
+
+Connected tab parts with arrow-key navigation, plus a wrapper that takes items and panels.
+
+[Vue source](../src/vue/BissTabs.vue) · [Svelte source](../src/svelte/BissTabs.svelte)
+
+### Vue
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `items` | `BissTabsItem[]` | Yes | — |
+| `label` | `string` | Yes | — |
+| `variant` | `BissTabsVariant` | No | `'line'` |
+| `size` | `BissTabsSize` | No | `'md'` |
+| `activationMode` | `'automatic' \| 'manual'` | No | `'automatic'` |
+| `ui` | `BissTabsUi` | No | — |
+| `modelValue` | `string` | No | — |
+
+Slots: `default`.
+
+### Svelte
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `items` | `BissTabsItem[]` | Yes | — |
+| `label` | `string` | Yes | — |
+| `value` | `string` | No | `$bindable()` |
+| `variant` | `BissTabsVariant` | No | `'line'` |
+| `size` | `BissTabsSize` | No | `'md'` |
+| `activationMode` | `'automatic' \| 'manual'` | No | `'automatic'` |
+| `ui` | `BissTabsUi` | No | — |
+| `onchange` | `(value: string) => void` | No | — |
+| `children` | `Snippet<[BissTabsItem]>` | No | — |
+
+Callbacks:
+
+- `onchange`: `(value: string) => void`
+
+Snippets: `children`.
+
 ## BissTagInput
 
 Add and remove short labels using the model contract.
@@ -3705,7 +4786,7 @@ Callbacks:
 
 ## BissTaskList
 
-Task List for the team’s everyday work.
+Tasks with completion, owner, due date and status.
 
 [Vue source](../src/vue/BissTaskList.vue) · [Svelte source](../src/svelte/BissTaskList.svelte)
 
@@ -3736,6 +4817,75 @@ Callbacks:
 
 - `oncomplete`: `(value: { id: string; done: boolean }) => void`
 - `onopen`: `(id: string) => void`
+
+## BissTemplateGallery
+
+Choose a starting template by category or search, with a preview before using it.
+
+[Vue source](../src/vue/BissTemplateGallery.vue) · [Svelte source](../src/svelte/BissTemplateGallery.svelte)
+
+### Vue
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `templates` | `BissTemplate[]` | Yes | — |
+| `categories` | `BissTemplateCategory[]` | No | — |
+| `blank` | `boolean` | No | `false` |
+| `busy` | `boolean` | No | `false` |
+| `label` | `string` | No | `'Templates'` |
+| `searchLabel` | `string` | No | `'Search templates'` |
+| `allLabel` | `string` | No | `'All'` |
+| `categoryLabel` | `string` | No | `'Category'` |
+| `useLabel` | `string` | No | `'Use template'` |
+| `blankLabel` | `string` | No | `'Start blank'` |
+| `includesLabel` | `string` | No | `'Includes'` |
+| `emptyTitle` | `string` | No | `'No templates match “{query}”'` |
+| `emptyCopy` | `string` | No | `'Try another word, or look in all categories.'` |
+| `clearLabel` | `string` | No | `'Clear search'` |
+| `previewEmpty` | `string` | No | `'Choose a template to see what it sets up.'` |
+| `selected` | `string \| null` | No | `null` |
+| `category` | `string` | No | `BISS_ALL_TEMPLATES` |
+
+Events:
+
+- `use`: `[template: BissTemplate]`
+- `blank`: `[]`
+
+Slots: `preview`.
+
+### Svelte
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `templates` | `BissTemplate[]` | Yes | — |
+| `categories` | `BissTemplateCategory[]` | No | — |
+| `selected` | `string \| null` | No | `$bindable(null)` |
+| `category` | `string` | No | `$bindable(BISS_ALL_TEMPLATES)` |
+| `blank` | `boolean` | No | `false` |
+| `busy` | `boolean` | No | `false` |
+| `label` | `string` | No | `'Templates'` |
+| `searchLabel` | `string` | No | `'Search templates'` |
+| `allLabel` | `string` | No | `'All'` |
+| `categoryLabel` | `string` | No | `'Category'` |
+| `useLabel` | `string` | No | `'Use template'` |
+| `blankLabel` | `string` | No | `'Start blank'` |
+| `includesLabel` | `string` | No | `'Includes'` |
+| `emptyTitle` | `string` | No | `'No templates match “{query}”'` |
+| `emptyCopy` | `string` | No | `'Try another word, or look in all categories.'` |
+| `clearLabel` | `string` | No | `'Clear search'` |
+| `previewEmpty` | `string` | No | `'Choose a template to see what it sets up.'` |
+| `onuse` | `(template: BissTemplate) => void` | No | — |
+| `onblank` | `() => void` | No | — |
+| `onselect` | `(id: string) => void` | No | — |
+| `preview` | `Snippet<[BissTemplate]>` | No | — |
+
+Callbacks:
+
+- `onuse`: `(template: BissTemplate) => void`
+- `onblank`: `() => void`
+- `onselect`: `(id: string) => void`
+
+Snippets: `preview`.
 
 ## BissTextarea
 
@@ -3817,6 +4967,43 @@ Render the application-wide toast queue after an action.
 | `queue` | `BissToastQueue` | Yes | — |
 | `label` | `string` | No | `'Notifications'` |
 | `dismissLabel` | `string` | No | `'Dismiss'` |
+
+## BissToggleGroup
+
+Pressable options, with icons, for one choice or several independent ones.
+
+[Vue source](../src/vue/BissToggleGroup.vue) · [Svelte source](../src/svelte/BissToggleGroup.svelte)
+
+### Vue
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `items` | `BissToggleItem[]` | Yes | — |
+| `label` | `string` | Yes | — |
+| `type` | `'single' \| 'multiple'` | No | `'single'` |
+| `iconOnly` | `boolean` | No | `false` |
+| `size` | `'sm' \| 'md'` | No | `'md'` |
+| `disabled` | `boolean` | No | `false` |
+| `orientation` | `'horizontal' \| 'vertical'` | No | `'horizontal'` |
+| `modelValue` | `string \| string[]` | No | — |
+
+### Svelte
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `items` | `BissToggleItem[]` | Yes | — |
+| `label` | `string` | Yes | — |
+| `value` | `string \| string[]` | No | `$bindable()` |
+| `type` | `'single' \| 'multiple'` | No | `'single'` |
+| `iconOnly` | `boolean` | No | `false` |
+| `size` | `'sm' \| 'md'` | No | `'md'` |
+| `disabled` | `boolean` | No | `false` |
+| `orientation` | `'horizontal' \| 'vertical'` | No | `'horizontal'` |
+| `onchange` | `(value: string \| string[]) => void` | No | — |
+
+Callbacks:
+
+- `onchange`: `(value: string \| string[]) => void`
 
 ## BissToolButton
 
@@ -3957,7 +5144,7 @@ Snippets: `children`, `end`.
 
 ## BissTooltip
 
-Tooltip for the team’s everyday work.
+A short label for a control, shown on hover and focus.
 
 [Vue source](../src/vue/BissTooltip.vue) · [Svelte source](../src/svelte/BissTooltip.svelte)
 
@@ -4014,6 +5201,70 @@ Slots: `icon`, `actions`, `default`.
 | `children` | `Snippet` | No | — |
 
 Snippets: `iconContent`, `actions`, `children`.
+
+## BissTour
+
+A step-by-step spotlight tour anchored to elements, with progress and keyboard controls.
+
+[Vue source](../src/vue/BissTour.vue) · [Svelte source](../src/svelte/BissTour.svelte)
+
+### Vue
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `steps` | `BissTourStep[]` | Yes | — |
+| `label` | `string` | No | `'Product tour'` |
+| `progressLabel` | `string` | No | `'Step {current} of {total}'` |
+| `backLabel` | `string` | No | `'Back'` |
+| `nextLabel` | `string` | No | `'Next'` |
+| `doneLabel` | `string` | No | `'Done'` |
+| `skipLabel` | `string` | No | `'Skip tour'` |
+| `padding` | `number` | No | `6` |
+| `width` | `number` | No | `320` |
+| `dim` | `boolean` | No | `true` |
+| `portal` | `boolean` | No | `true` |
+| `open` | `boolean` | No | `false` |
+| `step` | `number` | No | `0` |
+
+Events:
+
+- `change`: `[index: number]`
+- `finish`: `[]`
+- `skip`: `[index: number]`
+
+Slots: `step`.
+
+### Svelte
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `steps` | `BissTourStep[]` | Yes | — |
+| `open` | `boolean` | No | `$bindable(false)` |
+| `step` | `number` | No | `$bindable(0)` |
+| `label` | `string` | No | `'Product tour'` |
+| `progressLabel` | `string` | No | `'Step {current} of {total}'` |
+| `backLabel` | `string` | No | `'Back'` |
+| `nextLabel` | `string` | No | `'Next'` |
+| `doneLabel` | `string` | No | `'Done'` |
+| `skipLabel` | `string` | No | `'Skip tour'` |
+| `padding` | `number` | No | `6` |
+| `width` | `number` | No | `320` |
+| `dim` | `boolean` | No | `true` |
+| `portal` | `boolean` | No | `true` |
+| `onchange` | `(index: number) => void` | No | — |
+| `onfinish` | `() => void` | No | — |
+| `onskip` | `(index: number) => void` | No | — |
+| `onOpenChange` | `(open: boolean) => void` | No | — |
+| `children` | `Snippet<[{ step: BissTourStep; index: number }]>` | No | — |
+
+Callbacks:
+
+- `onchange`: `(index: number) => void`
+- `onfinish`: `() => void`
+- `onskip`: `(index: number) => void`
+- `onOpenChange`: `(open: boolean) => void`
+
+Snippets: `children`.
 
 ## BissValuePicker
 
@@ -4101,7 +5352,7 @@ Snippets: `end`.
 
 ## BissWidgetGrid
 
-Widget Grid for the team’s everyday work.
+Arrange dashboard widgets in a grid that people can reorder by drag or keyboard.
 
 [Vue source](../src/vue/BissWidgetGrid.vue) · [Svelte source](../src/svelte/BissWidgetGrid.svelte)
 
@@ -4138,3 +5389,65 @@ Callbacks:
 - `onchange`: `(items: { id: string; title: string; span?: number }[]) => void`
 
 Snippets: `children`.
+
+## BissWorkspaceSwitcher
+
+Show the current workspace and switch to, search for or create another.
+
+[Vue source](../src/vue/BissWorkspaceSwitcher.vue) · [Svelte source](../src/svelte/BissWorkspaceSwitcher.svelte)
+
+### Vue
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `workspaces` | `BissWorkspace[]` | Yes | — |
+| `current` | `string` | No | — |
+| `collapsed` | `boolean` | No | `false` |
+| `searchThreshold` | `number` | No | `6` |
+| `canCreate` | `boolean` | No | `true` |
+| `label` | `string` | No | `'Switch workspace'` |
+| `heading` | `string` | No | `'Your workspaces'` |
+| `searchLabel` | `string` | No | `'Find a workspace'` |
+| `emptyLabel` | `string` | No | `'No workspace matches “{query}”'` |
+| `createLabel` | `string` | No | `'New workspace'` |
+| `currentLabel` | `string` | No | `'Current workspace'` |
+| `placeholder` | `string` | No | `'Choose a workspace'` |
+| `width` | `number` | No | `260` |
+| `align` | `'start' \| 'center' \| 'end'` | No | `'start'` |
+| `portal` | `boolean` | No | `false` |
+| `open` | `boolean` | No | `false` |
+
+Events:
+
+- `select`: `[workspace: BissWorkspace]`
+- `create`: `[]`
+
+### Svelte
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `workspaces` | `BissWorkspace[]` | Yes | — |
+| `current` | `string` | No | — |
+| `collapsed` | `boolean` | No | `false` |
+| `searchThreshold` | `number` | No | `6` |
+| `canCreate` | `boolean` | No | `true` |
+| `open` | `boolean` | No | `$bindable(false)` |
+| `label` | `string` | No | `'Switch workspace'` |
+| `heading` | `string` | No | `'Your workspaces'` |
+| `searchLabel` | `string` | No | `'Find a workspace'` |
+| `emptyLabel` | `string` | No | `'No workspace matches “{query}”'` |
+| `createLabel` | `string` | No | `'New workspace'` |
+| `currentLabel` | `string` | No | `'Current workspace'` |
+| `placeholder` | `string` | No | `'Choose a workspace'` |
+| `width` | `number` | No | `260` |
+| `align` | `'start' \| 'center' \| 'end'` | No | `'start'` |
+| `portal` | `boolean` | No | `false` |
+| `onselect` | `(workspace: BissWorkspace) => void` | No | — |
+| `oncreate` | `() => void` | No | — |
+| `onOpenChange` | `(open: boolean) => void` | No | — |
+
+Callbacks:
+
+- `onselect`: `(workspace: BissWorkspace) => void`
+- `oncreate`: `() => void`
+- `onOpenChange`: `(open: boolean) => void`

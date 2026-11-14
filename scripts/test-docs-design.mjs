@@ -18,7 +18,7 @@ export async function testDocsDesign(page, base, width) {
     await browse.click();
   }
   await page.getByRole('searchbox', { name: 'Find a component', exact: true }).fill('');
-  const overlays = navigation.getByRole('button', { name: /Overlays and search/ });
+  const overlays = navigation.getByRole('button', { name: /^Overlays/ });
   await expect(overlays).toHaveAttribute('aria-expanded', 'true');
   await overlays.click();
   await expect(overlays).toHaveAttribute('aria-expanded', 'false');
