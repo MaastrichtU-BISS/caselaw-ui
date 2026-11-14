@@ -951,8 +951,8 @@ const principles = [
             <h2 id="lp-principles-title">Made for applications that last</h2>
           </header>
           <ul class="lp-principle-grid">
-            <li v-for="(p, i) in principles" :key="p.title" class="lp-principle">
-              <span class="lp-principle-num" aria-hidden="true">{{ String(i + 1).padStart(2, '0') }}</span>
+            <li v-for="p in principles" :key="p.title" class="lp-principle">
+              <span class="lp-principle-icon"><BissIcon :name="p.icon as never" /></span>
               <h3>{{ p.title }}</h3>
               <p>{{ p.body }}</p>
               <code>{{ p.detail }}</code>
