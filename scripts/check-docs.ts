@@ -132,15 +132,23 @@ try {
     };
     for (const item of examples)
       for (const framework of ['vue', 'svelte']) {
-        await page.goto(
-          `http://127.0.0.1:4189/preview.html?example=${dir.name}/${item.id}&framework=${framework}`,
-        );
         // preview.ts marks the document ready after the example module has loaded and mounted.
-        await expect(page.locator('html'), `${dir.name}/${item.id} (${framework})`).toHaveAttribute(
-          'data-ready',
-          'true',
-          { timeout: 20000 },
-        );
+        // A stalled module request on a busy CI runner leaves the page without even its first
+        // attributes; retry the navigation then, rather than failing on infrastructure.
+        const url = `http://127.0.0.1:4189/preview.html?example=${dir.name}/${item.id}&framework=${framework}`;
+        for (let attempt = 1; ; attempt++) {
+          await page.goto(url);
+          const ready = await page
+            .waitForFunction(() => document.documentElement.dataset.ready === 'true', null, {
+              timeout: 15000,
+            })
+            .then(() => true)
+            .catch(() => false);
+          if (ready) break;
+          const started = await page.evaluate(() => 'example' in document.documentElement.dataset);
+          if (started || attempt === 3)
+            throw Error(`${dir.name}/${item.id} (${framework}) did not finish rendering`);
+        }
         const root = page.locator('.authored-example');
         await expect(root).toHaveAttribute('data-framework', framework);
         await expect(root).not.toHaveText('Example not found.');
