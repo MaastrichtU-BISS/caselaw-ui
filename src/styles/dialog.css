@@ -3,7 +3,7 @@
   position: fixed;
   inset: 0;
   z-index: var(--biss-z-dialog, 50);
-  background: rgba(29, 28, 26, 0.32);
+  background: var(--biss-overlay);
 }
 .biss-dialog-content {
   position: fixed;

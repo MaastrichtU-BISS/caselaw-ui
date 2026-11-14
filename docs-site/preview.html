@@ -23,6 +23,24 @@
         padding: 32px;
         background: var(--biss-card);
       }
+      .authored-example {
+        box-sizing: border-box;
+        padding: 32px;
+        background: var(--biss-card);
+      }
+      .authored-example[data-layout='center'] {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        min-height: 220px;
+      }
+      @media (max-width: 480px) {
+        .authored-example {
+          padding: 16px;
+        }
+      }
     </style>
   </head>
   <body>

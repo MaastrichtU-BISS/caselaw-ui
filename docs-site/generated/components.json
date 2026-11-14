@@ -1,23 +1,51 @@
 {
+  "tiers": {
+    "Components": [
+      "Actions",
+      "Forms",
+      "Overlays",
+      "Navigation",
+      "Data display",
+      "Charts",
+      "Feedback"
+    ],
+    "Blocks": [
+      "Application shells",
+      "Page headers",
+      "Data views",
+      "Sharing and collaboration",
+      "Dashboards",
+      "Documents",
+      "Onboarding",
+      "Marketing"
+    ]
+  },
   "groups": [
-    "Getting things done",
-    "Forms and selection",
-    "Overlays and search",
-    "Pages and navigation",
-    "People and records",
-    "Tables and boards",
-    "Widgets and charts",
-    "Content and feedback",
-    "Onboarding"
+    "Actions",
+    "Forms",
+    "Overlays",
+    "Navigation",
+    "Data display",
+    "Charts",
+    "Feedback",
+    "Application shells",
+    "Page headers",
+    "Data views",
+    "Sharing and collaboration",
+    "Dashboards",
+    "Documents",
+    "Onboarding",
+    "Marketing"
   ],
   "components": [
     {
       "name": "BissAccessList",
+      "tier": "Blocks",
       "slug": "access-list",
       "short": "AccessList",
-      "category": "People and records",
-      "description": "Access List for the team’s everyday work.",
-      "guidance": "Use display-ready names and values. Identity components do not fetch accounts or decide who may see a record.",
+      "category": "Sharing and collaboration",
+      "description": "Who can open a record, with their role and how they got access.",
+      "guidance": "These blocks show and edit who can do what. The host resolves identities, checks permissions and persists every change.",
       "vue": {
         "props": [
           {
@@ -152,11 +180,12 @@
     },
     {
       "name": "BissActionCard",
+      "tier": "Blocks",
       "slug": "action-card",
       "short": "ActionCard",
-      "category": "Content and feedback",
+      "category": "Marketing",
       "description": "A linked surface for choosing a destination, available in both frameworks.",
-      "guidance": "Keep messages calm, specific and actionable. Distinguish loading, empty, error and access states instead of presenting a generic blank panel.",
+      "guidance": "Public-page compositions: keep copy short and specific, and give each section one clear action.",
       "vue": {
         "props": [
           {
@@ -243,11 +272,12 @@
     },
     {
       "name": "BissActivityList",
+      "tier": "Blocks",
       "slug": "activity-list",
       "short": "ActivityList",
-      "category": "People and records",
-      "description": "Activity List for the team’s everyday work.",
-      "guidance": "Use display-ready names and values. Identity components do not fetch accounts or decide who may see a record.",
+      "category": "Sharing and collaboration",
+      "description": "A chronological list of who changed what, with optional detail.",
+      "guidance": "These blocks show and edit who can do what. The host resolves identities, checks permissions and persists every change.",
       "vue": {
         "props": [
           {
@@ -288,11 +318,12 @@
     },
     {
       "name": "BissAgenda",
+      "tier": "Blocks",
       "slug": "agenda",
       "short": "Agenda",
-      "category": "Tables and boards",
-      "description": "Agenda for the team’s everyday work.",
-      "guidance": "Pass only the records the person may see. The host owns persistence, permissions and domain calculations; these components render data and emit intent.",
+      "category": "Data views",
+      "description": "A meeting agenda: timed items to add, reorder and tick off.",
+      "guidance": "Pass only the records the person may see. The host owns persistence, permissions and domain calculations; these blocks render data and emit intent.",
       "vue": {
         "props": [
           {
@@ -443,9 +474,10 @@
     },
     {
       "name": "BissAlertLine",
+      "tier": "Components",
       "slug": "alert-line",
       "short": "AlertLine",
-      "category": "Content and feedback",
+      "category": "Feedback",
       "description": "One quiet line that names a concern and points toward a useful action.",
       "guidance": "Keep messages calm, specific and actionable. Distinguish loading, empty, error and access states instead of presenting a generic blank panel.",
       "vue": {
@@ -509,11 +541,12 @@
     },
     {
       "name": "BissAppShell",
+      "tier": "Blocks",
       "slug": "app-shell",
       "short": "AppShell",
-      "category": "Pages and navigation",
+      "category": "Application shells",
       "description": "An application frame with navigation, a working area and optional account furniture.",
-      "guidance": "Keep the page title, view navigation and toolbar in a predictable order. Let the host router own navigation and permissions.",
+      "guidance": "The shell frames the page; the host router owns navigation, the signed-in account and permissions.",
       "vue": {
         "props": [
           {
@@ -722,11 +755,12 @@
     },
     {
       "name": "BissAttachmentList",
+      "tier": "Blocks",
       "slug": "attachment-list",
       "short": "AttachmentList",
-      "category": "Content and feedback",
-      "description": "Attachment List for the team’s everyday work.",
-      "guidance": "Keep messages calm, specific and actionable. Distinguish loading, empty, error and access states instead of presenting a generic blank panel.",
+      "category": "Documents",
+      "description": "Files attached to a record, with links and a remove action.",
+      "guidance": "Document blocks render host-provided content. Sanitize rich text before passing it in and keep links explicit.",
       "vue": {
         "props": [
           {
@@ -803,11 +837,12 @@
     },
     {
       "name": "BissAvatar",
+      "tier": "Components",
       "slug": "avatar",
       "short": "Avatar",
-      "category": "People and records",
+      "category": "Data display",
       "description": "Initials on a stable color derived from a person’s name.",
-      "guidance": "Use display-ready names and values. Identity components do not fetch accounts or decide who may see a record.",
+      "guidance": "Use display-ready names and values. Display components do not fetch records or decide who may see them.",
       "vue": {
         "props": [
           {
@@ -863,11 +898,12 @@
     },
     {
       "name": "BissBadge",
+      "tier": "Components",
       "slug": "badge",
       "short": "Badge",
-      "category": "Content and feedback",
+      "category": "Data display",
       "description": "A compact status or category label with optional dot and tone.",
-      "guidance": "Keep messages calm, specific and actionable. Distinguish loading, empty, error and access states instead of presenting a generic blank panel.",
+      "guidance": "Use display-ready names and values. Display components do not fetch records or decide who may see them.",
       "vue": {
         "props": [
           {
@@ -936,9 +972,10 @@
     },
     {
       "name": "BissBarChart",
+      "tier": "Components",
       "slug": "bar-chart",
       "short": "BarChart",
-      "category": "Widgets and charts",
+      "category": "Charts",
       "description": "A compact request-style bar chart with an optional highlighted sub-series.",
       "guidance": "State what a figure means. Include labels and units in nearby copy, and use color as reinforcement rather than the only signal.",
       "vue": {
@@ -996,11 +1033,12 @@
     },
     {
       "name": "BissBookmark",
+      "tier": "Blocks",
       "slug": "bookmark",
       "short": "Bookmark",
-      "category": "Content and feedback",
-      "description": "Bookmark for the team’s everyday work.",
-      "guidance": "Keep messages calm, specific and actionable. Distinguish loading, empty, error and access states instead of presenting a generic blank panel.",
+      "category": "Documents",
+      "description": "A rich link preview with title, description and source.",
+      "guidance": "Document blocks render host-provided content. Sanitize rich text before passing it in and keep links explicit.",
       "vue": {
         "props": [
           {
@@ -1069,11 +1107,12 @@
     },
     {
       "name": "BissBottomBar",
+      "tier": "Blocks",
       "slug": "bottom-bar",
       "short": "BottomBar",
-      "category": "Pages and navigation",
+      "category": "Application shells",
       "description": "A shared footer for ownership, help and policy links.",
-      "guidance": "Keep the page title, view navigation and toolbar in a predictable order. Let the host router own navigation and permissions.",
+      "guidance": "The shell frames the page; the host router owns navigation, the signed-in account and permissions.",
       "vue": {
         "props": [
           {
@@ -1128,11 +1167,12 @@
     },
     {
       "name": "BissBreadcrumbs",
+      "tier": "Components",
       "slug": "breadcrumbs",
       "short": "Breadcrumbs",
-      "category": "Pages and navigation",
-      "description": "Breadcrumbs for the team’s everyday work.",
-      "guidance": "Keep the page title, view navigation and toolbar in a predictable order. Let the host router own navigation and permissions.",
+      "category": "Navigation",
+      "description": "Show where a page sits in the hierarchy and link back up.",
+      "guidance": "Keep navigation in a predictable order and let the host router own destinations and permissions.",
       "vue": {
         "props": [
           {
@@ -1175,9 +1215,10 @@
     },
     {
       "name": "BissButton",
+      "tier": "Components",
       "slug": "button",
       "short": "Button",
-      "category": "Getting things done",
+      "category": "Actions",
       "description": "A clear action with an explicit visual priority.",
       "guidance": "Keep one primary action per task. Use quiet controls for secondary work, and provide a specific accessible name for every icon-only action.",
       "vue": {
@@ -1309,11 +1350,12 @@
     },
     {
       "name": "BissCalendar",
+      "tier": "Blocks",
       "slug": "calendar",
       "short": "Calendar",
-      "category": "Tables and boards",
+      "category": "Data views",
       "description": "Dates and deadlines in a month grid, with an agenda on phones.",
-      "guidance": "Pass only the records the person may see. The host owns persistence, permissions and domain calculations; these components render data and emit intent.",
+      "guidance": "Pass only the records the person may see. The host owns persistence, permissions and domain calculations; these blocks render data and emit intent.",
       "vue": {
         "props": [
           {
@@ -1446,10 +1488,11 @@
     },
     {
       "name": "BissCallout",
+      "tier": "Components",
       "slug": "callout",
       "short": "Callout",
-      "category": "Content and feedback",
-      "description": "Callout for the team’s everyday work.",
+      "category": "Feedback",
+      "description": "A highlighted note that explains context or a consequence.",
       "guidance": "Keep messages calm, specific and actionable. Distinguish loading, empty, error and access states instead of presenting a generic blank panel.",
       "vue": {
         "props": [
@@ -1511,9 +1554,10 @@
     },
     {
       "name": "BissCapacityBar",
+      "tier": "Components",
       "slug": "capacity-bar",
       "short": "CapacityBar",
-      "category": "Widgets and charts",
+      "category": "Charts",
       "description": "Allocated capacity against availability, with explicit overload feedback.",
       "guidance": "State what a figure means. Include labels and units in nearby copy, and use color as reinforcement rather than the only signal.",
       "vue": {
@@ -1582,11 +1626,12 @@
     },
     {
       "name": "BissCard",
+      "tier": "Components",
       "slug": "card",
       "short": "Card",
-      "category": "Content and feedback",
+      "category": "Data display",
       "description": "A quiet surface that groups one related set of content.",
-      "guidance": "Keep messages calm, specific and actionable. Distinguish loading, empty, error and access states instead of presenting a generic blank panel.",
+      "guidance": "Use display-ready names and values. Display components do not fetch records or decide who may see them.",
       "vue": {
         "props": [
           {
@@ -1627,9 +1672,10 @@
     },
     {
       "name": "BissChartLegend",
+      "tier": "Components",
       "slug": "chart-legend",
       "short": "ChartLegend",
-      "category": "Widgets and charts",
+      "category": "Charts",
       "description": "Name the colors and line treatments used by a chart.",
       "guidance": "State what a figure means. Include labels and units in nearby copy, and use color as reinforcement rather than the only signal.",
       "vue": {
@@ -1672,10 +1718,11 @@
     },
     {
       "name": "BissCheckbox",
+      "tier": "Components",
       "slug": "checkbox",
       "short": "Checkbox",
-      "category": "Forms and selection",
-      "description": "Checkbox for the team’s everyday work.",
+      "category": "Forms",
+      "description": "A labelled checkbox with optional description text.",
       "guidance": "Give every control a visible label. Keep values in host state, validate before saving, and put recovery text beside the field.",
       "vue": {
         "props": [
@@ -1767,6 +1814,7 @@
     },
     {
       "name": "BissChecklist",
+      "tier": "Blocks",
       "slug": "checklist",
       "short": "Checklist",
       "category": "Onboarding",
@@ -1832,11 +1880,12 @@
     },
     {
       "name": "BissCodeBlock",
+      "tier": "Components",
       "slug": "code-block",
       "short": "CodeBlock",
-      "category": "Content and feedback",
+      "category": "Data display",
       "description": "Readable highlighted code with a copy action.",
-      "guidance": "Keep messages calm, specific and actionable. Distinguish loading, empty, error and access states instead of presenting a generic blank panel.",
+      "guidance": "Use display-ready names and values. Display components do not fetch records or decide who may see them.",
       "vue": {
         "props": [
           {
@@ -1905,11 +1954,12 @@
     },
     {
       "name": "BissCodeTabs",
+      "tier": "Components",
       "slug": "code-tabs",
       "short": "CodeTabs",
-      "category": "Content and feedback",
+      "category": "Data display",
       "description": "Keep related language samples together and copy the active one.",
-      "guidance": "Keep messages calm, specific and actionable. Distinguish loading, empty, error and access states instead of presenting a generic blank panel.",
+      "guidance": "Use display-ready names and values. Display components do not fetch records or decide who may see them.",
       "vue": {
         "props": [
           {
@@ -1953,11 +2003,12 @@
     },
     {
       "name": "BissColumnManager",
+      "tier": "Blocks",
       "slug": "column-manager",
       "short": "ColumnManager",
-      "category": "Tables and boards",
-      "description": "Column Manager for the team’s everyday work.",
-      "guidance": "Pass only the records the person may see. The host owns persistence, permissions and domain calculations; these components render data and emit intent.",
+      "category": "Data views",
+      "description": "Show, hide, pin, reorder and resize the columns of a table.",
+      "guidance": "Pass only the records the person may see. The host owns persistence, permissions and domain calculations; these blocks render data and emit intent.",
       "vue": {
         "props": [
           {
@@ -2090,11 +2141,12 @@
     },
     {
       "name": "BissCommentComposer",
+      "tier": "Blocks",
       "slug": "comment-composer",
       "short": "CommentComposer",
-      "category": "People and records",
-      "description": "Comment Composer for the team’s everyday work.",
-      "guidance": "Use display-ready names and values. Identity components do not fetch accounts or decide who may see a record.",
+      "category": "Sharing and collaboration",
+      "description": "Write a comment, mention people and submit with the keyboard.",
+      "guidance": "These blocks show and edit who can do what. The host resolves identities, checks permissions and persists every change.",
       "vue": {
         "props": [
           {
@@ -2187,11 +2239,12 @@
     },
     {
       "name": "BissCommentThread",
+      "tier": "Blocks",
       "slug": "comment-thread",
       "short": "CommentThread",
-      "category": "People and records",
-      "description": "Comment Thread for the team’s everyday work.",
-      "guidance": "Use display-ready names and values. Identity components do not fetch accounts or decide who may see a record.",
+      "category": "Sharing and collaboration",
+      "description": "A discussion on a record, with a composer and resolve state.",
+      "guidance": "These blocks show and edit who can do what. The host resolves identities, checks permissions and persists every change.",
       "vue": {
         "props": [
           {
@@ -2356,9 +2409,10 @@
     },
     {
       "name": "BissConfirmDialog",
+      "tier": "Components",
       "slug": "confirm-dialog",
       "short": "ConfirmDialog",
-      "category": "Overlays and search",
+      "category": "Overlays",
       "description": "An explicit confirmation before a consequential action.",
       "guidance": "Use an overlay for a focused choice or task. Provide a clear title, preserve keyboard focus and return focus when the task ends.",
       "vue": {
@@ -2489,11 +2543,12 @@
     },
     {
       "name": "BissConsoleHeader",
+      "tier": "Blocks",
       "slug": "console-header",
       "short": "ConsoleHeader",
-      "category": "Pages and navigation",
+      "category": "Page headers",
       "description": "A compact console heading with breadcrumbs, context and actions.",
-      "guidance": "Keep the page title, view navigation and toolbar in a predictable order. Let the host router own navigation and permissions.",
+      "guidance": "Keep the page title, context, view navigation and actions in a predictable order across pages.",
       "vue": {
         "props": [
           {
@@ -2565,11 +2620,12 @@
     },
     {
       "name": "BissConsoleLayout",
+      "tier": "Blocks",
       "slug": "console-layout",
       "short": "ConsoleLayout",
-      "category": "Pages and navigation",
+      "category": "Application shells",
       "description": "A ready-made console frame with sidebar, page heading and account area.",
-      "guidance": "Keep the page title, view navigation and toolbar in a predictable order. Let the host router own navigation and permissions.",
+      "guidance": "The shell frames the page; the host router owns navigation, the signed-in account and permissions.",
       "vue": {
         "props": [
           {
@@ -2959,9 +3015,10 @@
     },
     {
       "name": "BissCopyField",
+      "tier": "Components",
       "slug": "copy-field",
       "short": "CopyField",
-      "category": "Forms and selection",
+      "category": "Forms",
       "description": "A value that can be read, selected and copied without changing it.",
       "guidance": "Give every control a visible label. Keep values in host state, validate before saving, and put recovery text beside the field.",
       "vue": {
@@ -3047,11 +3104,12 @@
     },
     {
       "name": "BissDataGrid",
+      "tier": "Blocks",
       "slug": "data-grid",
       "short": "DataGrid",
-      "category": "Tables and boards",
-      "description": "Data Grid for the team’s everyday work.",
-      "guidance": "Pass only the records the person may see. The host owns persistence, permissions and domain calculations; these components render data and emit intent.",
+      "category": "Data views",
+      "description": "A spreadsheet-like table with selection, pinning, sorting and resizable columns.",
+      "guidance": "Pass only the records the person may see. The host owns persistence, permissions and domain calculations; these blocks render data and emit intent.",
       "vue": {
         "props": [
           {
@@ -3310,11 +3368,12 @@
     },
     {
       "name": "BissDataTable",
+      "tier": "Components",
       "slug": "data-table",
       "short": "DataTable",
-      "category": "Tables and boards",
+      "category": "Data display",
       "description": "Sortable columns, pagination and explicit loading and empty states.",
-      "guidance": "Pass only the records the person may see. The host owns persistence, permissions and domain calculations; these components render data and emit intent.",
+      "guidance": "Use display-ready names and values. Display components do not fetch records or decide who may see them.",
       "vue": {
         "props": [
           {
@@ -3392,11 +3451,12 @@
     },
     {
       "name": "BissDataTile",
+      "tier": "Blocks",
       "slug": "data-tile",
       "short": "DataTile",
-      "category": "Widgets and charts",
-      "description": "Data Tile for the team’s everyday work.",
-      "guidance": "State what a figure means. Include labels and units in nearby copy, and use color as reinforcement rather than the only signal.",
+      "category": "Dashboards",
+      "description": "A dashboard tile that frames a figure, a chart or a list.",
+      "guidance": "Each widget answers one question. Name the figure, explain it in a line, and offer one next action.",
       "vue": {
         "props": [
           {
@@ -3507,9 +3567,10 @@
     },
     {
       "name": "BissDateField",
+      "tier": "Components",
       "slug": "date-field",
       "short": "DateField",
-      "category": "Forms and selection",
+      "category": "Forms",
       "description": "A compact date trigger with a calendar in a floating panel.",
       "guidance": "Give every control a visible label. Keep values in host state, validate before saving, and put recovery text beside the field.",
       "vue": {
@@ -3658,9 +3719,10 @@
     },
     {
       "name": "BissDatePicker",
+      "tier": "Components",
       "slug": "date-picker",
       "short": "DatePicker",
-      "category": "Forms and selection",
+      "category": "Forms",
       "description": "Select a day or a range, type a date, or navigate the calendar by keyboard.",
       "guidance": "Give every control a visible label. Keep values in host state, validate before saving, and put recovery text beside the field.",
       "vue": {
@@ -3927,11 +3989,12 @@
     },
     {
       "name": "BissDeadlineList",
+      "tier": "Blocks",
       "slug": "deadline-list",
       "short": "DeadlineList",
-      "category": "Widgets and charts",
-      "description": "Deadline List for the team’s everyday work.",
-      "guidance": "State what a figure means. Include labels and units in nearby copy, and use color as reinforcement rather than the only signal.",
+      "category": "Dashboards",
+      "description": "Dated items ordered by urgency, with overdue items called out.",
+      "guidance": "Each widget answers one question. Name the figure, explain it in a line, and offer one next action.",
       "vue": {
         "props": [
           {
@@ -4008,9 +4071,10 @@
     },
     {
       "name": "BissDialog",
+      "tier": "Components",
       "slug": "dialog",
       "short": "Dialog",
-      "category": "Overlays and search",
+      "category": "Overlays",
       "description": "Connected dialog parts with managed focus, nested layers and a shared visual recipe.",
       "guidance": "Use an overlay for a focused choice or task. Provide a clear title, preserve keyboard focus and return focus when the task ends.",
       "vue": {
@@ -4203,11 +4267,12 @@
     },
     {
       "name": "BissDisclosure",
+      "tier": "Components",
       "slug": "disclosure",
       "short": "Disclosure",
-      "category": "Pages and navigation",
-      "description": "Disclosure for the team’s everyday work.",
-      "guidance": "Keep the page title, view navigation and toolbar in a predictable order. Let the host router own navigation and permissions.",
+      "category": "Navigation",
+      "description": "Hide secondary detail behind a labelled toggle.",
+      "guidance": "Keep navigation in a predictable order and let the host router own destinations and permissions.",
       "vue": {
         "props": [
           {
@@ -4280,11 +4345,12 @@
     },
     {
       "name": "BissDocumentCallout",
+      "tier": "Blocks",
       "slug": "document-callout",
       "short": "DocumentCallout",
-      "category": "Content and feedback",
-      "description": "Document Callout for the team’s everyday work.",
-      "guidance": "Keep messages calm, specific and actionable. Distinguish loading, empty, error and access states instead of presenting a generic blank panel.",
+      "category": "Documents",
+      "description": "A tinted note block inside a document.",
+      "guidance": "Document blocks render host-provided content. Sanitize rich text before passing it in and keep links explicit.",
       "vue": {
         "props": [
           {
@@ -4353,11 +4419,12 @@
     },
     {
       "name": "BissDocumentToc",
+      "tier": "Blocks",
       "slug": "document-toc",
       "short": "DocumentToc",
-      "category": "Pages and navigation",
-      "description": "Document Toc for the team’s everyday work.",
-      "guidance": "Keep the page title, view navigation and toolbar in a predictable order. Let the host router own navigation and permissions.",
+      "category": "Documents",
+      "description": "A document outline that tracks the heading in view.",
+      "guidance": "Document blocks render host-provided content. Sanitize rich text before passing it in and keep links explicit.",
       "vue": {
         "props": [
           {
@@ -4400,9 +4467,10 @@
     },
     {
       "name": "BissEditableText",
+      "tier": "Components",
       "slug": "editable-text",
       "short": "EditableText",
-      "category": "Getting things done",
+      "category": "Actions",
       "description": "Edit a value where it stands, with Enter to save and Escape to cancel.",
       "guidance": "Keep one primary action per task. Use quiet controls for secondary work, and provide a specific accessible name for every icon-only action.",
       "vue": {
@@ -4509,9 +4577,10 @@
     },
     {
       "name": "BissEmptyState",
+      "tier": "Components",
       "slug": "empty-state",
       "short": "EmptyState",
-      "category": "Content and feedback",
+      "category": "Feedback",
       "description": "Explain why the area is empty and what someone can do next.",
       "guidance": "Keep messages calm, specific and actionable. Distinguish loading, empty, error and access states instead of presenting a generic blank panel.",
       "vue": {
@@ -4564,11 +4633,12 @@
     },
     {
       "name": "BissFeatureCard",
+      "tier": "Blocks",
       "slug": "feature-card",
       "short": "FeatureCard",
-      "category": "Content and feedback",
+      "category": "Marketing",
       "description": "Describe one capability, using the service mark and supporting copy.",
-      "guidance": "Keep messages calm, specific and actionable. Distinguish loading, empty, error and access states instead of presenting a generic blank panel.",
+      "guidance": "Public-page compositions: keep copy short and specific, and give each section one clear action.",
       "vue": {
         "props": [
           {
@@ -4633,9 +4703,10 @@
     },
     {
       "name": "BissField",
+      "tier": "Components",
       "slug": "field",
       "short": "Field",
-      "category": "Forms and selection",
+      "category": "Forms",
       "description": "A label, hint or error around a control, with a scoped identifier.",
       "guidance": "Give every control a visible label. Keep values in host state, validate before saving, and put recovery text beside the field.",
       "vue": {
@@ -4768,10 +4839,11 @@
     },
     {
       "name": "BissFigureHelp",
+      "tier": "Components",
       "slug": "figure-help",
       "short": "FigureHelp",
-      "category": "Overlays and search",
-      "description": "Figure Help for the team’s everyday work.",
+      "category": "Overlays",
+      "description": "Explain how a figure is calculated, next to the figure.",
       "guidance": "Use an overlay for a focused choice or task. Provide a clear title, preserve keyboard focus and return focus when the task ends.",
       "vue": {
         "props": [
@@ -4841,10 +4913,11 @@
     },
     {
       "name": "BissFilePicker",
+      "tier": "Components",
       "slug": "file-picker",
       "short": "FilePicker",
-      "category": "Forms and selection",
-      "description": "File Picker for the team’s everyday work.",
+      "category": "Forms",
+      "description": "Choose files or drop them onto the field.",
       "guidance": "Give every control a visible label. Keep values in host state, validate before saving, and put recovery text beside the field.",
       "vue": {
         "props": [
@@ -4952,11 +5025,12 @@
     },
     {
       "name": "BissFilterBuilder",
+      "tier": "Blocks",
       "slug": "filter-builder",
       "short": "FilterBuilder",
-      "category": "Tables and boards",
-      "description": "Filter Builder for the team’s everyday work.",
-      "guidance": "Pass only the records the person may see. The host owns persistence, permissions and domain calculations; these components render data and emit intent.",
+      "category": "Data views",
+      "description": "Compose filter rules with fields, operators and values.",
+      "guidance": "Pass only the records the person may see. The host owns persistence, permissions and domain calculations; these blocks render data and emit intent.",
       "vue": {
         "props": [
           {
@@ -5121,9 +5195,10 @@
     },
     {
       "name": "BissGoalBar",
+      "tier": "Components",
       "slug": "goal-bar",
       "short": "GoalBar",
-      "category": "Widgets and charts",
+      "category": "Charts",
       "description": "A progress track with an optional expected-progress marker.",
       "guidance": "State what a figure means. Include labels and units in nearby copy, and use color as reinforcement rather than the only signal.",
       "vue": {
@@ -5207,11 +5282,12 @@
     },
     {
       "name": "BissGoalCard",
+      "tier": "Blocks",
       "slug": "goal-card",
       "short": "GoalCard",
-      "category": "Widgets and charts",
-      "description": "Goal Card for the team’s everyday work.",
-      "guidance": "State what a figure means. Include labels and units in nearby copy, and use color as reinforcement rather than the only signal.",
+      "category": "Dashboards",
+      "description": "A goal with its progress, expected pace and owner.",
+      "guidance": "Each widget answers one question. Name the figure, explain it in a line, and offer one next action.",
       "vue": {
         "props": [
           {
@@ -5338,11 +5414,12 @@
     },
     {
       "name": "BissGridShell",
+      "tier": "Blocks",
       "slug": "grid-shell",
       "short": "GridShell",
-      "category": "Pages and navigation",
+      "category": "Application shells",
       "description": "The public-page frame with a shared top bar and footer.",
-      "guidance": "Keep the page title, view navigation and toolbar in a predictable order. Let the host router own navigation and permissions.",
+      "guidance": "The shell frames the page; the host router owns navigation, the signed-in account and permissions.",
       "vue": {
         "props": [
           {
@@ -5501,9 +5578,10 @@
     },
     {
       "name": "BissGroupedBars",
+      "tier": "Components",
       "slug": "grouped-bars",
       "short": "GroupedBars",
-      "category": "Widgets and charts",
+      "category": "Charts",
       "description": "Compare series within categories and open the records behind each bar.",
       "guidance": "State what a figure means. Include labels and units in nearby copy, and use color as reinforcement rather than the only signal.",
       "vue": {
@@ -5606,9 +5684,10 @@
     },
     {
       "name": "BissHeaderAction",
+      "tier": "Components",
       "slug": "header-action",
       "short": "HeaderAction",
-      "category": "Getting things done",
+      "category": "Actions",
       "description": "One labelled icon action in a page header.",
       "guidance": "Keep one primary action per task. Use quiet controls for secondary work, and provide a specific accessible name for every icon-only action.",
       "vue": {
@@ -5739,11 +5818,12 @@
     },
     {
       "name": "BissHero",
+      "tier": "Blocks",
       "slug": "hero",
       "short": "Hero",
-      "category": "Content and feedback",
+      "category": "Marketing",
       "description": "The public-page heading with supporting copy and optional actions.",
-      "guidance": "Keep messages calm, specific and actionable. Distinguish loading, empty, error and access states instead of presenting a generic blank panel.",
+      "guidance": "Public-page compositions: keep copy short and specific, and give each section one clear action.",
       "vue": {
         "props": [
           {
@@ -5849,11 +5929,12 @@
     },
     {
       "name": "BissHeroPill",
+      "tier": "Blocks",
       "slug": "hero-pill",
       "short": "HeroPill",
-      "category": "Content and feedback",
+      "category": "Marketing",
       "description": "A small piece of supporting context in a public-page heading.",
-      "guidance": "Keep messages calm, specific and actionable. Distinguish loading, empty, error and access states instead of presenting a generic blank panel.",
+      "guidance": "Public-page compositions: keep copy short and specific, and give each section one clear action.",
       "vue": {
         "props": [],
         "events": [],
@@ -5879,11 +5960,12 @@
     },
     {
       "name": "BissHomeCard",
+      "tier": "Blocks",
       "slug": "home-card",
       "short": "HomeCard",
-      "category": "Widgets and charts",
+      "category": "Dashboards",
       "description": "The shared widget anatomy: name, explanation, content and one action.",
-      "guidance": "State what a figure means. Include labels and units in nearby copy, and use color as reinforcement rather than the only signal.",
+      "guidance": "Each widget answers one question. Name the figure, explain it in a line, and offer one next action.",
       "vue": {
         "props": [
           {
@@ -6008,9 +6090,10 @@
     },
     {
       "name": "BissHomeSkel",
+      "tier": "Components",
       "slug": "home-skel",
       "short": "HomeSkel",
-      "category": "Content and feedback",
+      "category": "Feedback",
       "description": "Quiet loading placeholders shaped like the content that is coming.",
       "guidance": "Keep messages calm, specific and actionable. Distinguish loading, empty, error and access states instead of presenting a generic blank panel.",
       "vue": {
@@ -6071,11 +6154,12 @@
     },
     {
       "name": "BissIcon",
+      "tier": "Components",
       "slug": "icon",
       "short": "Icon",
-      "category": "People and records",
+      "category": "Data display",
       "description": "Bizzy’s authored SVG vocabulary, sized and stroked consistently.",
-      "guidance": "Use display-ready names and values. Identity components do not fetch accounts or decide who may see a record.",
+      "guidance": "Use display-ready names and values. Display components do not fetch records or decide who may see them.",
       "vue": {
         "props": [
           {
@@ -6104,9 +6188,10 @@
     },
     {
       "name": "BissInput",
+      "tier": "Components",
       "slug": "input",
       "short": "Input",
-      "category": "Forms and selection",
+      "category": "Forms",
       "description": "A single-line value with normal form attributes and validation styling.",
       "guidance": "Give every control a visible label. Keep values in host state, validate before saving, and put recovery text beside the field.",
       "vue": {
@@ -6231,11 +6316,12 @@
     },
     {
       "name": "BissKanban",
+      "tier": "Blocks",
       "slug": "kanban",
       "short": "Kanban",
-      "category": "Tables and boards",
+      "category": "Data views",
       "description": "Group cards into lanes and move them by dragging or keyboard selection.",
-      "guidance": "Pass only the records the person may see. The host owns persistence, permissions and domain calculations; these components render data and emit intent.",
+      "guidance": "Pass only the records the person may see. The host owns persistence, permissions and domain calculations; these blocks render data and emit intent.",
       "vue": {
         "props": [
           {
@@ -6386,11 +6472,12 @@
     },
     {
       "name": "BissKpiCard",
+      "tier": "Blocks",
       "slug": "kpi-card",
       "short": "KpiCard",
-      "category": "Widgets and charts",
+      "category": "Dashboards",
       "description": "One headline figure with the label and note needed to interpret it.",
-      "guidance": "State what a figure means. Include labels and units in nearby copy, and use color as reinforcement rather than the only signal.",
+      "guidance": "Each widget answers one question. Name the figure, explain it in a line, and offer one next action.",
       "vue": {
         "props": [
           {
@@ -6443,11 +6530,12 @@
     },
     {
       "name": "BissLabelEditor",
+      "tier": "Blocks",
       "slug": "label-editor",
       "short": "LabelEditor",
-      "category": "Tables and boards",
-      "description": "Label Editor for the team’s everyday work.",
-      "guidance": "Pass only the records the person may see. The host owns persistence, permissions and domain calculations; these components render data and emit intent.",
+      "category": "Data views",
+      "description": "Create, rename, recolor and remove the labels of a field.",
+      "guidance": "Pass only the records the person may see. The host owns persistence, permissions and domain calculations; these blocks render data and emit intent.",
       "vue": {
         "props": [
           {
@@ -6636,9 +6724,10 @@
     },
     {
       "name": "BissLineChart",
+      "tier": "Components",
       "slug": "line-chart",
       "short": "LineChart",
-      "category": "Widgets and charts",
+      "category": "Charts",
       "description": "A compact trend from host-provided numeric values.",
       "guidance": "State what a figure means. Include labels and units in nearby copy, and use color as reinforcement rather than the only signal.",
       "vue": {
@@ -6709,9 +6798,10 @@
     },
     {
       "name": "BissLiveStatus",
+      "tier": "Components",
       "slug": "live-status",
       "short": "LiveStatus",
-      "category": "Content and feedback",
+      "category": "Feedback",
       "description": "Quiet connection feedback only when the application is reconnecting or offline.",
       "guidance": "Keep messages calm, specific and actionable. Distinguish loading, empty, error and access states instead of presenting a generic blank panel.",
       "vue": {
@@ -6772,11 +6862,12 @@
     },
     {
       "name": "BissMediaFigure",
+      "tier": "Blocks",
       "slug": "media-figure",
       "short": "MediaFigure",
-      "category": "Content and feedback",
-      "description": "Media Figure for the team’s everyday work.",
-      "guidance": "Keep messages calm, specific and actionable. Distinguish loading, empty, error and access states instead of presenting a generic blank panel.",
+      "category": "Documents",
+      "description": "An image or video with caption and credit.",
+      "guidance": "Document blocks render host-provided content. Sanitize rich text before passing it in and keep links explicit.",
       "vue": {
         "props": [
           {
@@ -6859,9 +6950,10 @@
     },
     {
       "name": "BissMenu",
+      "tier": "Components",
       "slug": "menu",
       "short": "Menu",
-      "category": "Overlays and search",
+      "category": "Overlays",
       "description": "Searchable actions, checked choices and nested groups in a floating panel.",
       "guidance": "Use an overlay for a focused choice or task. Provide a clear title, preserve keyboard focus and return focus when the task ends.",
       "vue": {
@@ -7008,9 +7100,10 @@
     },
     {
       "name": "BissMeterList",
+      "tier": "Components",
       "slug": "meter-list",
       "short": "MeterList",
-      "category": "Widgets and charts",
+      "category": "Charts",
       "description": "Compare labelled values on a shared horizontal scale.",
       "guidance": "State what a figure means. Include labels and units in nearby copy, and use color as reinforcement rather than the only signal.",
       "vue": {
@@ -7041,9 +7134,10 @@
     },
     {
       "name": "BissMiniChart",
+      "tier": "Components",
       "slug": "mini-chart",
       "short": "MiniChart",
-      "category": "Widgets and charts",
+      "category": "Charts",
       "description": "A decorative schematic for choosing a chart type.",
       "guidance": "State what a figure means. Include labels and units in nearby copy, and use color as reinforcement rather than the only signal.",
       "vue": {
@@ -7076,9 +7170,10 @@
     },
     {
       "name": "BissModal",
+      "tier": "Components",
       "slug": "modal",
       "short": "Modal",
-      "category": "Overlays and search",
+      "category": "Overlays",
       "description": "The modal API, for consumers migrating an existing dialog.",
       "guidance": "Use an overlay for a focused choice or task. Provide a clear title, preserve keyboard focus and return focus when the task ends.",
       "vue": {
@@ -7194,11 +7289,12 @@
     },
     {
       "name": "BissNavItem",
+      "tier": "Components",
       "slug": "nav-item",
       "short": "NavItem",
-      "category": "Pages and navigation",
+      "category": "Navigation",
       "description": "A navigation destination with optional active state and metadata.",
-      "guidance": "Keep the page title, view navigation and toolbar in a predictable order. Let the host router own navigation and permissions.",
+      "guidance": "Keep navigation in a predictable order and let the host router own destinations and permissions.",
       "vue": {
         "props": [
           {
@@ -7285,11 +7381,12 @@
     },
     {
       "name": "BissNavSection",
+      "tier": "Components",
       "slug": "nav-section",
       "short": "NavSection",
-      "category": "Pages and navigation",
+      "category": "Navigation",
       "description": "Group related navigation destinations under a small heading.",
-      "guidance": "Keep the page title, view navigation and toolbar in a predictable order. Let the host router own navigation and permissions.",
+      "guidance": "Keep navigation in a predictable order and let the host router own destinations and permissions.",
       "vue": {
         "props": [
           {
@@ -7350,9 +7447,10 @@
     },
     {
       "name": "BissNoAccess",
+      "tier": "Components",
       "slug": "no-access",
       "short": "NoAccess",
-      "category": "Content and feedback",
+      "category": "Feedback",
       "description": "Explain restricted access and provide a useful next step.",
       "guidance": "Keep messages calm, specific and actionable. Distinguish loading, empty, error and access states instead of presenting a generic blank panel.",
       "vue": {
@@ -7409,11 +7507,12 @@
     },
     {
       "name": "BissNoticeRow",
+      "tier": "Blocks",
       "slug": "notice-row",
       "short": "NoticeRow",
-      "category": "People and records",
+      "category": "Sharing and collaboration",
       "description": "A notification row with unread state, context and a host-owned action.",
-      "guidance": "Use display-ready names and values. Identity components do not fetch accounts or decide who may see a record.",
+      "guidance": "These blocks show and edit who can do what. The host resolves identities, checks permissions and persists every change.",
       "vue": {
         "props": [
           {
@@ -7517,6 +7616,7 @@
     },
     {
       "name": "BissOnboardingChips",
+      "tier": "Blocks",
       "slug": "onboarding-chips",
       "short": "OnboardingChips",
       "category": "Onboarding",
@@ -7596,6 +7696,7 @@
     },
     {
       "name": "BissOnboardingFrame",
+      "tier": "Blocks",
       "slug": "onboarding-frame",
       "short": "OnboardingFrame",
       "category": "Onboarding",
@@ -7689,11 +7790,12 @@
     },
     {
       "name": "BissPageBar",
+      "tier": "Blocks",
       "slug": "page-bar",
       "short": "PageBar",
-      "category": "Pages and navigation",
+      "category": "Page headers",
       "description": "A page title, context, actions and view navigation in one compact header.",
-      "guidance": "Keep the page title, view navigation and toolbar in a predictable order. Let the host router own navigation and permissions.",
+      "guidance": "Keep the page title, context, view navigation and actions in a predictable order across pages.",
       "vue": {
         "props": [
           {
@@ -7788,11 +7890,12 @@
     },
     {
       "name": "BissPageHeader",
+      "tier": "Blocks",
       "slug": "page-header",
       "short": "PageHeader",
-      "category": "Pages and navigation",
+      "category": "Page headers",
       "description": "The page title and subtitle, with an actions slot.",
-      "guidance": "Keep the page title, view navigation and toolbar in a predictable order. Let the host router own navigation and permissions.",
+      "guidance": "Keep the page title, context, view navigation and actions in a predictable order across pages.",
       "vue": {
         "props": [
           {
@@ -7863,11 +7966,12 @@
     },
     {
       "name": "BissPageHint",
+      "tier": "Components",
       "slug": "page-hint",
       "short": "PageHint",
-      "category": "Pages and navigation",
+      "category": "Feedback",
       "description": "A keyboard-accessible explanation that stays out of the page’s main reading path.",
-      "guidance": "Keep the page title, view navigation and toolbar in a predictable order. Let the host router own navigation and permissions.",
+      "guidance": "Keep messages calm, specific and actionable. Distinguish loading, empty, error and access states instead of presenting a generic blank panel.",
       "vue": {
         "props": [
           {
@@ -7918,11 +8022,12 @@
     },
     {
       "name": "BissPeopleCell",
+      "tier": "Components",
       "slug": "people-cell",
       "short": "PeopleCell",
-      "category": "People and records",
+      "category": "Data display",
       "description": "Show a small set of assigned people, with overflow summarized by count.",
-      "guidance": "Use display-ready names and values. Identity components do not fetch accounts or decide who may see a record.",
+      "guidance": "Use display-ready names and values. Display components do not fetch records or decide who may see them.",
       "vue": {
         "props": [
           {
@@ -7979,9 +8084,10 @@
     },
     {
       "name": "BissPopover",
+      "tier": "Components",
       "slug": "popover",
       "short": "Popover",
-      "category": "Overlays and search",
+      "category": "Overlays",
       "description": "A small panel for a choice that needs more room than a menu.",
       "guidance": "Use an overlay for a focused choice or task. Provide a clear title, preserve keyboard focus and return focus when the task ends.",
       "vue": {
@@ -8050,11 +8156,12 @@
     },
     {
       "name": "BissPresenceCursor",
+      "tier": "Blocks",
       "slug": "presence-cursor",
       "short": "PresenceCursor",
-      "category": "People and records",
-      "description": "Presence Cursor for the team’s everyday work.",
-      "guidance": "Use display-ready names and values. Identity components do not fetch accounts or decide who may see a record.",
+      "category": "Sharing and collaboration",
+      "description": "Another person’s cursor, labelled with their name and color.",
+      "guidance": "These blocks show and edit who can do what. The host resolves identities, checks permissions and persists every change.",
       "vue": {
         "props": [
           {
@@ -8139,11 +8246,12 @@
     },
     {
       "name": "BissPresenceStack",
+      "tier": "Components",
       "slug": "presence-stack",
       "short": "PresenceStack",
-      "category": "People and records",
+      "category": "Data display",
       "description": "A quiet, overlapping group of people currently on a page.",
-      "guidance": "Use display-ready names and values. Identity components do not fetch accounts or decide who may see a record.",
+      "guidance": "Use display-ready names and values. Display components do not fetch records or decide who may see them.",
       "vue": {
         "props": [
           {
@@ -8238,11 +8346,12 @@
     },
     {
       "name": "BissPropertyList",
+      "tier": "Components",
       "slug": "property-list",
       "short": "PropertyList",
-      "category": "People and records",
+      "category": "Data display",
       "description": "Display a record’s labelled properties in a compact description list.",
-      "guidance": "Use display-ready names and values. Identity components do not fetch accounts or decide who may see a record.",
+      "guidance": "Use display-ready names and values. Display components do not fetch records or decide who may see them.",
       "vue": {
         "props": [
           {
@@ -8285,11 +8394,12 @@
     },
     {
       "name": "BissProposalCard",
+      "tier": "Blocks",
       "slug": "proposal-card",
       "short": "ProposalCard",
-      "category": "Content and feedback",
-      "description": "Proposal Card for the team’s everyday work.",
-      "guidance": "Keep messages calm, specific and actionable. Distinguish loading, empty, error and access states instead of presenting a generic blank panel.",
+      "category": "Documents",
+      "description": "A suggested change that someone can review before applying.",
+      "guidance": "Document blocks render host-provided content. Sanitize rich text before passing it in and keep links explicit.",
       "vue": {
         "props": [
           {
@@ -8438,11 +8548,12 @@
     },
     {
       "name": "BissQuickLinks",
+      "tier": "Blocks",
       "slug": "quick-links",
       "short": "QuickLinks",
-      "category": "Widgets and charts",
-      "description": "Quick Links for the team’s everyday work.",
-      "guidance": "State what a figure means. Include labels and units in nearby copy, and use color as reinforcement rather than the only signal.",
+      "category": "Dashboards",
+      "description": "A compact grid of frequent destinations.",
+      "guidance": "Each widget answers one question. Name the figure, explain it in a line, and offer one next action.",
       "vue": {
         "props": [
           {
@@ -8485,10 +8596,11 @@
     },
     {
       "name": "BissRadioGroup",
+      "tier": "Components",
       "slug": "radio-group",
       "short": "RadioGroup",
-      "category": "Forms and selection",
-      "description": "Radio Group for the team’s everyday work.",
+      "category": "Forms",
+      "description": "Choose one option from a short, visible list.",
       "guidance": "Give every control a visible label. Keep values in host state, validate before saving, and put recovery text beside the field.",
       "vue": {
         "props": [
@@ -8578,11 +8690,12 @@
     },
     {
       "name": "BissRecordChip",
+      "tier": "Components",
       "slug": "record-chip",
       "short": "RecordChip",
-      "category": "People and records",
+      "category": "Data display",
       "description": "A small labelled reference to a record, optionally linked.",
-      "guidance": "Use display-ready names and values. Identity components do not fetch accounts or decide who may see a record.",
+      "guidance": "Use display-ready names and values. Display components do not fetch records or decide who may see them.",
       "vue": {
         "props": [
           {
@@ -8653,11 +8766,12 @@
     },
     {
       "name": "BissRecordPreview",
+      "tier": "Blocks",
       "slug": "record-preview",
       "short": "RecordPreview",
-      "category": "People and records",
-      "description": "Record Preview for the team’s everyday work.",
-      "guidance": "Use display-ready names and values. Identity components do not fetch accounts or decide who may see a record.",
+      "category": "Sharing and collaboration",
+      "description": "A compact preview of a linked record, or a notice when it is restricted.",
+      "guidance": "These blocks show and edit who can do what. The host resolves identities, checks permissions and persists every change.",
       "vue": {
         "props": [
           {
@@ -8768,11 +8882,12 @@
     },
     {
       "name": "BissRoleEditor",
+      "tier": "Blocks",
       "slug": "role-editor",
       "short": "RoleEditor",
-      "category": "People and records",
-      "description": "Role Editor for the team’s everyday work.",
-      "guidance": "Use display-ready names and values. Identity components do not fetch accounts or decide who may see a record.",
+      "category": "Sharing and collaboration",
+      "description": "Define roles and the permissions each one grants.",
+      "guidance": "These blocks show and edit who can do what. The host resolves identities, checks permissions and persists every change.",
       "vue": {
         "props": [
           {
@@ -8863,11 +8978,12 @@
     },
     {
       "name": "BissSaveBar",
+      "tier": "Components",
       "slug": "save-bar",
       "short": "SaveBar",
-      "category": "Getting things done",
+      "category": "Feedback",
       "description": "Bring unsaved changes, recovery and save actions into one place.",
-      "guidance": "Keep one primary action per task. Use quiet controls for secondary work, and provide a specific accessible name for every icon-only action.",
+      "guidance": "Keep messages calm, specific and actionable. Distinguish loading, empty, error and access states instead of presenting a generic blank panel.",
       "vue": {
         "props": [
           {
@@ -9002,9 +9118,10 @@
     },
     {
       "name": "BissSearchInput",
+      "tier": "Components",
       "slug": "search-input",
       "short": "SearchInput",
-      "category": "Forms and selection",
+      "category": "Forms",
       "description": "A search field with the input contract and search treatment.",
       "guidance": "Give every control a visible label. Keep values in host state, validate before saving, and put recovery text beside the field.",
       "vue": {
@@ -9071,9 +9188,10 @@
     },
     {
       "name": "BissSearchPalette",
+      "tier": "Components",
       "slug": "search-palette",
       "short": "SearchPalette",
-      "category": "Overlays and search",
+      "category": "Overlays",
       "description": "Find a record or action in a focused, searchable dialog.",
       "guidance": "Use an overlay for a focused choice or task. Provide a clear title, preserve keyboard focus and return focus when the task ends.",
       "vue": {
@@ -9244,11 +9362,12 @@
     },
     {
       "name": "BissSectionHeader",
+      "tier": "Blocks",
       "slug": "section-header",
       "short": "SectionHeader",
-      "category": "Pages and navigation",
+      "category": "Page headers",
       "description": "Introduce a content section and place its actions alongside the title.",
-      "guidance": "Keep the page title, view navigation and toolbar in a predictable order. Let the host router own navigation and permissions.",
+      "guidance": "Keep the page title, context, view navigation and actions in a predictable order across pages.",
       "vue": {
         "props": [
           {
@@ -9299,10 +9418,11 @@
     },
     {
       "name": "BissSegmentedControl",
+      "tier": "Components",
       "slug": "segmented-control",
       "short": "SegmentedControl",
-      "category": "Forms and selection",
-      "description": "Segmented Control for the team’s everyday work.",
+      "category": "Forms",
+      "description": "Switch between a few mutually exclusive views or modes.",
       "guidance": "Give every control a visible label. Keep values in host state, validate before saving, and put recovery text beside the field.",
       "vue": {
         "props": [
@@ -9378,9 +9498,10 @@
     },
     {
       "name": "BissSelect",
+      "tier": "Components",
       "slug": "select",
       "short": "Select",
-      "category": "Forms and selection",
+      "category": "Forms",
       "description": "The native select for simple browser-driven choice.",
       "guidance": "Give every control a visible label. Keep values in host state, validate before saving, and put recovery text beside the field.",
       "vue": {
@@ -9473,9 +9594,10 @@
     },
     {
       "name": "BissSelectPicker",
+      "tier": "Components",
       "slug": "select-picker",
       "short": "SelectPicker",
-      "category": "Forms and selection",
+      "category": "Forms",
       "description": "A searchable dropdown with groups, disabled choices and keyboard navigation.",
       "guidance": "Give every control a visible label. Keep values in host state, validate before saving, and put recovery text beside the field.",
       "vue": {
@@ -9636,11 +9758,12 @@
     },
     {
       "name": "BissServiceIcon",
+      "tier": "Components",
       "slug": "service-icon",
       "short": "ServiceIcon",
-      "category": "People and records",
+      "category": "Data display",
       "description": "The product marks, or a short text mark supplied by the host.",
-      "guidance": "Use display-ready names and values. Identity components do not fetch accounts or decide who may see a record.",
+      "guidance": "Use display-ready names and values. Display components do not fetch records or decide who may see them.",
       "vue": {
         "props": [
           {
@@ -9697,11 +9820,12 @@
     },
     {
       "name": "BissSettingsHead",
+      "tier": "Blocks",
       "slug": "settings-head",
       "short": "SettingsHead",
-      "category": "Pages and navigation",
+      "category": "Page headers",
       "description": "A settings section’s title, one-line explanation and optional extra detail.",
-      "guidance": "Keep the page title, view navigation and toolbar in a predictable order. Let the host router own navigation and permissions.",
+      "guidance": "Keep the page title, context, view navigation and actions in a predictable order across pages.",
       "vue": {
         "props": [
           {
@@ -9766,11 +9890,12 @@
     },
     {
       "name": "BissSharePanel",
+      "tier": "Blocks",
       "slug": "share-panel",
       "short": "SharePanel",
-      "category": "People and records",
-      "description": "Share Panel for the team’s everyday work.",
-      "guidance": "Use display-ready names and values. Identity components do not fetch accounts or decide who may see a record.",
+      "category": "Sharing and collaboration",
+      "description": "Invite people, set their role and manage a public link.",
+      "guidance": "These blocks show and edit who can do what. The host resolves identities, checks permissions and persists every change.",
       "vue": {
         "props": [
           {
@@ -10021,9 +10146,10 @@
     },
     {
       "name": "BissSidePanel",
+      "tier": "Components",
       "slug": "side-panel",
       "short": "SidePanel",
-      "category": "Overlays and search",
+      "category": "Overlays",
       "description": "Keep a record’s details in view without leaving the surrounding work.",
       "guidance": "Use an overlay for a focused choice or task. Provide a clear title, preserve keyboard focus and return focus when the task ends.",
       "vue": {
@@ -10162,11 +10288,12 @@
     },
     {
       "name": "BissSidebarUser",
+      "tier": "Blocks",
       "slug": "sidebar-user",
       "short": "SidebarUser",
-      "category": "Pages and navigation",
+      "category": "Application shells",
       "description": "The signed-in identity with account navigation and sign-out actions.",
-      "guidance": "Keep the page title, view navigation and toolbar in a predictable order. Let the host router own navigation and permissions.",
+      "guidance": "The shell frames the page; the host router owns navigation, the signed-in account and permissions.",
       "vue": {
         "props": [
           {
@@ -10356,9 +10483,10 @@
     },
     {
       "name": "BissSkeleton",
+      "tier": "Components",
       "slug": "skeleton",
       "short": "Skeleton",
-      "category": "Content and feedback",
+      "category": "Feedback",
       "description": "Simple content-shaped bars for loading layouts.",
       "guidance": "Keep messages calm, specific and actionable. Distinguish loading, empty, error and access states instead of presenting a generic blank panel.",
       "vue": {
@@ -10433,11 +10561,12 @@
     },
     {
       "name": "BissSplitPane",
+      "tier": "Blocks",
       "slug": "split-pane",
       "short": "SplitPane",
-      "category": "Pages and navigation",
-      "description": "Split Pane for the team’s everyday work.",
-      "guidance": "Keep the page title, view navigation and toolbar in a predictable order. Let the host router own navigation and permissions.",
+      "category": "Application shells",
+      "description": "Two resizable panes, such as a list beside its detail.",
+      "guidance": "The shell frames the page; the host router owns navigation, the signed-in account and permissions.",
       "vue": {
         "props": [
           {
@@ -10548,10 +10677,11 @@
     },
     {
       "name": "BissStackedBar",
+      "tier": "Components",
       "slug": "stacked-bar",
       "short": "StackedBar",
-      "category": "Widgets and charts",
-      "description": "Stacked Bar for the team’s everyday work.",
+      "category": "Charts",
+      "description": "Parts of a whole in one horizontal bar, with a legend.",
       "guidance": "State what a figure means. Include labels and units in nearby copy, and use color as reinforcement rather than the only signal.",
       "vue": {
         "props": [
@@ -10613,11 +10743,12 @@
     },
     {
       "name": "BissStatList",
+      "tier": "Blocks",
       "slug": "stat-list",
       "short": "StatList",
-      "category": "Widgets and charts",
+      "category": "Dashboards",
       "description": "A compact list of labelled counts or formatted values.",
-      "guidance": "State what a figure means. Include labels and units in nearby copy, and use color as reinforcement rather than the only signal.",
+      "guidance": "Each widget answers one question. Name the figure, explain it in a line, and offer one next action.",
       "vue": {
         "props": [
           {
@@ -10646,11 +10777,12 @@
     },
     {
       "name": "BissStatusCell",
+      "tier": "Components",
       "slug": "status-cell",
       "short": "StatusCell",
-      "category": "People and records",
+      "category": "Data display",
       "description": "A written status reinforced by a colored dot or soft tint.",
-      "guidance": "Use display-ready names and values. Identity components do not fetch accounts or decide who may see a record.",
+      "guidance": "Use display-ready names and values. Display components do not fetch records or decide who may see them.",
       "vue": {
         "props": [
           {
@@ -10707,6 +10839,7 @@
     },
     {
       "name": "BissStep",
+      "tier": "Blocks",
       "slug": "step",
       "short": "Step",
       "category": "Onboarding",
@@ -10811,6 +10944,7 @@
     },
     {
       "name": "BissSteps",
+      "tier": "Blocks",
       "slug": "steps",
       "short": "Steps",
       "category": "Onboarding",
@@ -10841,11 +10975,12 @@
     },
     {
       "name": "BissSummaryStrip",
+      "tier": "Blocks",
       "slug": "summary-strip",
       "short": "SummaryStrip",
-      "category": "Widgets and charts",
+      "category": "Dashboards",
       "description": "A row of labelled figures, with supporting notes and optional color markers.",
-      "guidance": "State what a figure means. Include labels and units in nearby copy, and use color as reinforcement rather than the only signal.",
+      "guidance": "Each widget answers one question. Name the figure, explain it in a line, and offer one next action.",
       "vue": {
         "props": [
           {
@@ -10886,9 +11021,10 @@
     },
     {
       "name": "BissSwatchPicker",
+      "tier": "Components",
       "slug": "swatch-picker",
       "short": "SwatchPicker",
-      "category": "Forms and selection",
+      "category": "Forms",
       "description": "Choose a named color from the workspace palette.",
       "guidance": "Give every control a visible label. Keep values in host state, validate before saving, and put recovery text beside the field.",
       "vue": {
@@ -10995,9 +11131,10 @@
     },
     {
       "name": "BissSwitch",
+      "tier": "Components",
       "slug": "switch",
       "short": "Switch",
-      "category": "Forms and selection",
+      "category": "Forms",
       "description": "A labelled on/off setting using the model contract.",
       "guidance": "Give every control a visible label. Keep values in host state, validate before saving, and put recovery text beside the field.",
       "vue": {
@@ -11079,11 +11216,12 @@
     },
     {
       "name": "BissTab",
+      "tier": "Components",
       "slug": "tab",
       "short": "Tab",
-      "category": "Pages and navigation",
+      "category": "Navigation",
       "description": "A navigation tab that can render as a native button or a router link.",
-      "guidance": "Keep the page title, view navigation and toolbar in a predictable order. Let the host router own navigation and permissions.",
+      "guidance": "Keep navigation in a predictable order and let the host router own destinations and permissions.",
       "vue": {
         "props": [
           {
@@ -11140,11 +11278,12 @@
     },
     {
       "name": "BissTableAddRow",
+      "tier": "Components",
       "slug": "table-add-row",
       "short": "TableAddRow",
-      "category": "Tables and boards",
+      "category": "Data display",
       "description": "A quiet row-level action for adding a record to the current group.",
-      "guidance": "Pass only the records the person may see. The host owns persistence, permissions and domain calculations; these components render data and emit intent.",
+      "guidance": "Use display-ready names and values. Display components do not fetch records or decide who may see them.",
       "vue": {
         "props": [
           {
@@ -11207,11 +11346,12 @@
     },
     {
       "name": "BissTableGroup",
+      "tier": "Components",
       "slug": "table-group",
       "short": "TableGroup",
-      "category": "Tables and boards",
+      "category": "Data display",
       "description": "A collapsible group with a name, count and actions around table content.",
-      "guidance": "Pass only the records the person may see. The host owns persistence, permissions and domain calculations; these components render data and emit intent.",
+      "guidance": "Use display-ready names and values. Display components do not fetch records or decide who may see them.",
       "vue": {
         "props": [
           {
@@ -11320,11 +11460,12 @@
     },
     {
       "name": "BissTableHead",
+      "tier": "Components",
       "slug": "table-head",
       "short": "TableHead",
-      "category": "Tables and boards",
+      "category": "Data display",
       "description": "A column heading with a host-owned three-state sort action.",
-      "guidance": "Pass only the records the person may see. The host owns persistence, permissions and domain calculations; these components render data and emit intent.",
+      "guidance": "Use display-ready names and values. Display components do not fetch records or decide who may see them.",
       "vue": {
         "props": [
           {
@@ -11425,11 +11566,12 @@
     },
     {
       "name": "BissTablePager",
+      "tier": "Components",
       "slug": "table-pager",
       "short": "TablePager",
-      "category": "Tables and boards",
+      "category": "Navigation",
       "description": "Previous and next page controls with a live range announcement.",
-      "guidance": "Pass only the records the person may see. The host owns persistence, permissions and domain calculations; these components render data and emit intent.",
+      "guidance": "Keep navigation in a predictable order and let the host router own destinations and permissions.",
       "vue": {
         "props": [
           {
@@ -11557,11 +11699,12 @@
     },
     {
       "name": "BissTableTotal",
+      "tier": "Components",
       "slug": "table-total",
       "short": "TableTotal",
-      "category": "Tables and boards",
+      "category": "Data display",
       "description": "A compact label and formatted total for a table footer or group summary.",
-      "guidance": "Pass only the records the person may see. The host owns persistence, permissions and domain calculations; these components render data and emit intent.",
+      "guidance": "Use display-ready names and values. Display components do not fetch records or decide who may see them.",
       "vue": {
         "props": [
           {
@@ -11616,9 +11759,10 @@
     },
     {
       "name": "BissTagInput",
+      "tier": "Components",
       "slug": "tag-input",
       "short": "TagInput",
-      "category": "Forms and selection",
+      "category": "Forms",
       "description": "Add and remove short labels using the model contract.",
       "guidance": "Give every control a visible label. Keep values in host state, validate before saving, and put recovery text beside the field.",
       "vue": {
@@ -11725,11 +11869,12 @@
     },
     {
       "name": "BissTaskList",
+      "tier": "Blocks",
       "slug": "task-list",
       "short": "TaskList",
-      "category": "Tables and boards",
-      "description": "Task List for the team’s everyday work.",
-      "guidance": "Pass only the records the person may see. The host owns persistence, permissions and domain calculations; these components render data and emit intent.",
+      "category": "Data views",
+      "description": "Tasks with completion, owner, due date and status.",
+      "guidance": "Pass only the records the person may see. The host owns persistence, permissions and domain calculations; these blocks render data and emit intent.",
       "vue": {
         "props": [
           {
@@ -11824,9 +11969,10 @@
     },
     {
       "name": "BissTextarea",
+      "tier": "Components",
       "slug": "textarea",
       "short": "Textarea",
-      "category": "Forms and selection",
+      "category": "Forms",
       "description": "A multiline form value with normal field attributes and validation styling.",
       "guidance": "Give every control a visible label. Keep values in host state, validate before saving, and put recovery text beside the field.",
       "vue": {
@@ -11933,11 +12079,12 @@
     },
     {
       "name": "BissTimeline",
+      "tier": "Blocks",
       "slug": "timeline",
       "short": "Timeline",
-      "category": "Tables and boards",
+      "category": "Data views",
       "description": "Show inclusive date spans clipped to the visible time window.",
-      "guidance": "Pass only the records the person may see. The host owns persistence, permissions and domain calculations; these components render data and emit intent.",
+      "guidance": "Pass only the records the person may see. The host owns persistence, permissions and domain calculations; these blocks render data and emit intent.",
       "vue": {
         "props": [
           {
@@ -12022,9 +12169,10 @@
     },
     {
       "name": "BissToastStack",
+      "tier": "Components",
       "slug": "toast-stack",
       "short": "ToastStack",
-      "category": "Content and feedback",
+      "category": "Feedback",
       "description": "Render the application-wide toast queue after an action.",
       "guidance": "Keep messages calm, specific and actionable. Distinguish loading, empty, error and access states instead of presenting a generic blank panel.",
       "vue": {
@@ -12062,9 +12210,10 @@
     },
     {
       "name": "BissToolButton",
+      "tier": "Components",
       "slug": "tool-button",
       "short": "ToolButton",
-      "category": "Getting things done",
+      "category": "Actions",
       "description": "A quiet toolbar control with active state, count and a separate clear action.",
       "guidance": "Keep one primary action per task. Use quiet controls for secondary work, and provide a specific accessible name for every icon-only action.",
       "vue": {
@@ -12217,9 +12366,10 @@
     },
     {
       "name": "BissToolNew",
+      "tier": "Components",
       "slug": "tool-new",
       "short": "ToolNew",
-      "category": "Getting things done",
+      "category": "Actions",
       "description": "A primary create action with a menu for other ways to add.",
       "guidance": "Keep one primary action per task. Use quiet controls for secondary work, and provide a specific accessible name for every icon-only action.",
       "vue": {
@@ -12330,9 +12480,10 @@
     },
     {
       "name": "BissToolSearch",
+      "tier": "Components",
       "slug": "tool-search",
       "short": "ToolSearch",
-      "category": "Getting things done",
+      "category": "Actions",
       "description": "A compact toolbar search that expands into an editable query.",
       "guidance": "Keep one primary action per task. Use quiet controls for secondary work, and provide a specific accessible name for every icon-only action.",
       "vue": {
@@ -12441,9 +12592,10 @@
     },
     {
       "name": "BissToolbar",
+      "tier": "Components",
       "slug": "toolbar",
       "short": "Toolbar",
-      "category": "Getting things done",
+      "category": "Actions",
       "description": "A wrapping row for related page tools and trailing controls.",
       "guidance": "Keep one primary action per task. Use quiet controls for secondary work, and provide a specific accessible name for every icon-only action.",
       "vue": {
@@ -12492,10 +12644,11 @@
     },
     {
       "name": "BissTooltip",
+      "tier": "Components",
       "slug": "tooltip",
       "short": "Tooltip",
-      "category": "Overlays and search",
-      "description": "Tooltip for the team’s everyday work.",
+      "category": "Overlays",
+      "description": "A short label for a control, shown on hover and focus.",
       "guidance": "Use an overlay for a focused choice or task. Provide a clear title, preserve keyboard focus and return focus when the task ends.",
       "vue": {
         "props": [
@@ -12547,11 +12700,12 @@
     },
     {
       "name": "BissTopBar",
+      "tier": "Blocks",
       "slug": "top-bar",
       "short": "TopBar",
-      "category": "Pages and navigation",
+      "category": "Application shells",
       "description": "The shared brand and primary navigation bar.",
-      "guidance": "Keep the page title, view navigation and toolbar in a predictable order. Let the host router own navigation and permissions.",
+      "guidance": "The shell frames the page; the host router owns navigation, the signed-in account and permissions.",
       "vue": {
         "props": [
           {
@@ -12674,9 +12828,10 @@
     },
     {
       "name": "BissValuePicker",
+      "tier": "Components",
       "slug": "value-picker",
       "short": "ValuePicker",
-      "category": "Forms and selection",
+      "category": "Forms",
       "description": "Search and select multiple filter values, with optional negation.",
       "guidance": "Give every control a visible label. Keep values in host state, validate before saving, and put recovery text beside the field.",
       "vue": {
@@ -12869,11 +13024,12 @@
     },
     {
       "name": "BissViewTabs",
+      "tier": "Components",
       "slug": "view-tabs",
       "short": "ViewTabs",
-      "category": "Pages and navigation",
+      "category": "Navigation",
       "description": "Switch a page’s view while keeping labels, counts and disabled states consistent.",
-      "guidance": "Keep the page title, view navigation and toolbar in a predictable order. Let the host router own navigation and permissions.",
+      "guidance": "Keep navigation in a predictable order and let the host router own destinations and permissions.",
       "vue": {
         "props": [
           {
@@ -12957,11 +13113,12 @@
     },
     {
       "name": "BissWidgetGrid",
+      "tier": "Blocks",
       "slug": "widget-grid",
       "short": "WidgetGrid",
-      "category": "Widgets and charts",
-      "description": "Widget Grid for the team’s everyday work.",
-      "guidance": "State what a figure means. Include labels and units in nearby copy, and use color as reinforcement rather than the only signal.",
+      "category": "Dashboards",
+      "description": "Arrange dashboard widgets in a grid that people can reorder by drag or keyboard.",
+      "guidance": "Each widget answers one question. Name the figure, explain it in a line, and offer one next action.",
       "vue": {
         "props": [
           {

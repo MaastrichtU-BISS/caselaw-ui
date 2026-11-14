@@ -8,6 +8,8 @@ import { guides } from './content';
 import { example } from './examples';
 import Workbench from './Workbench.vue';
 import DialogDocumentation from './DialogDocumentation.vue';
+import ExampleCard from './ExampleCard.vue';
+import { examplesBySlug } from './examples/registry';
 import { fixtures } from './fixtures';
 const route = ref(location.hash.slice(1).split('?')[0] || '/getting-started'),
   query = ref(''),
@@ -20,6 +22,30 @@ const route = ref(location.hash.slice(1).split('?')[0] || '/getting-started'),
   previewKey = ref(0),
   copied = ref(false);
 const searchInput = ref<HTMLInputElement>();
+type ThemeChoice = 'light' | 'dark' | 'system';
+const themeChoice = ref<ThemeChoice>(
+  (document.documentElement.dataset.bissTheme as ThemeChoice | undefined) ?? 'system',
+);
+const systemDark = ref(window.matchMedia('(prefers-color-scheme: dark)').matches);
+const resolvedTheme = computed(() =>
+  themeChoice.value === 'system' ? (systemDark.value ? 'dark' : 'light') : themeChoice.value,
+);
+function toggleTheme() {
+  themeChoice.value = resolvedTheme.value === 'dark' ? 'light' : 'dark';
+  document.documentElement.dataset.bissTheme = themeChoice.value;
+  try {
+    localStorage.setItem('biss-docs-theme', themeChoice.value);
+  } catch {
+    /* Storage can be unavailable; the choice still applies to this visit. */
+  }
+}
+const tierIntro: Record<string, string> = {
+  Components:
+    'Controls and displays with no application state. Compose them freely; they render props and report changes.',
+  Blocks:
+    'Compositions for recurring application tasks such as sharing, filtering and dashboards. Your application supplies the data and handles each action.',
+};
+const tierGroups = (tier: string) => (catalog.tiers as Record<string, string[]>)[tier] ?? [];
 const mobileNavButton = ref<HTMLButtonElement>();
 const collapsedGroups = ref(new Set(catalog.groups.slice(1)));
 const activeSection = ref('');
@@ -94,7 +120,7 @@ const states = computed(() => {
 });
 const previewUrl = computed(
   () =>
-    `./preview.html?component=${encodeURIComponent(current.value?.name ?? 'BissButton')}&state=${encodeURIComponent(state.value)}&framework=${framework.value}&density=${density.value}`,
+    `./preview.html?component=${encodeURIComponent(current.value?.name ?? 'BissButton')}&state=${encodeURIComponent(state.value)}&framework=${framework.value}&density=${density.value}&theme=${resolvedTheme.value}`,
 );
 let previewObserver: ResizeObserver | undefined;
 onBeforeUnmount(() => previewObserver?.disconnect());
@@ -115,11 +141,14 @@ function resizePreview(event: Event) {
   observer.observe(doc.body);
   frame.addEventListener('load', () => observer.disconnect(), { once: true });
 }
+const authored = computed(() => (current.value ? (examplesBySlug[current.value.slug] ?? []) : []));
 const sections = computed(() =>
   current.value
     ? current.value.name === 'BissDialog'
       ? ['Preview', 'Installation', 'Anatomy', 'State', 'Customization', 'API', 'Accessibility']
-      : ['Preview', 'Usage', 'Props', 'Events and composition', 'Guidance']
+      : authored.value.length
+        ? ['Examples', 'Import', 'Props', 'Events and composition', 'Guidance']
+        : ['Preview', 'Usage', 'Props', 'Events and composition', 'Guidance']
     : (guide.value?.sections.map((s) => s.title) ?? []),
 );
 const anchor = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-');
@@ -245,13 +274,17 @@ async function copy() {
     copied.value = false;
   }
 }
+const colorScheme = window.matchMedia('(prefers-color-scheme: dark)');
+const onScheme = (event: MediaQueryListEvent) => (systemDark.value = event.matches);
 onMounted(() => {
+  colorScheme.addEventListener('change', onScheme);
   onHash();
   window.addEventListener('hashchange', onHash);
   window.addEventListener('keydown', key);
   window.addEventListener('scroll', trackSection, { passive: true });
 });
 onBeforeUnmount(() => {
+  colorScheme.removeEventListener('change', onScheme);
   window.removeEventListener('hashchange', onHash);
   window.removeEventListener('keydown', key);
   window.removeEventListener('scroll', trackSection);
@@ -281,6 +314,15 @@ onBeforeUnmount(() => {
         href="https://github.com/MaastrichtU-BISS/caselaw-ui/tree/feature/biss-ui"
         aria-label="BISS UI on GitHub"
         ><BissIcon name="code" /><span>GitHub</span></a
+      ><button
+        type="button"
+        class="theme-toggle"
+        :aria-label="resolvedTheme === 'dark' ? 'Use light theme' : 'Use dark theme'"
+        :title="resolvedTheme === 'dark' ? 'Use light theme' : 'Use dark theme'"
+        @click="toggleTheme"
+      >
+        <svg v-if="resolvedTheme === 'dark'" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" /></svg>
+        <svg v-else viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5Z" /></svg></button
       ><span class="version">v0.1.0-next.0</span
       ><button
         type="button"
@@ -321,31 +363,39 @@ onBeforeUnmount(() => {
           >All components <small>{{ catalog.components.length }}</small></a
         >
       </div>
-      <template v-for="group in catalog.groups" :key="group"
-        ><div v-if="matches.some((c) => c.category === group)" class="nav-group">
-          <button
-            type="button"
-            class="nav-group-toggle"
-            :aria-expanded="groupExpanded(group)"
-            :aria-controls="'group-' + anchor(group)"
-            @click="toggleGroup(group)"
-          >
-            <span>{{ group }}</span><small>{{
-              catalog.components.filter((c) => c.category === group).length
-            }}</small
-            ><BissIcon name="chev" />
-          </button>
-          <div v-show="groupExpanded(group)" :id="'group-' + anchor(group)" class="nav-group-links">
-            <a
-              v-for="c in matches.filter((c) => c.category === group)"
-              :key="c.name"
-              :href="`#/components/${c.slug}`"
-              :aria-current="current?.name === c.name ? 'page' : undefined"
-              >{{ label(c.short) }}<span v-if="!c.vue" class="framework-note">Svelte</span></a
+      <template v-for="tier in Object.keys(catalog.tiers)" :key="tier"
+        ><p
+          v-if="matches.some((c) => c.tier === tier)"
+          class="nav-tier"
+        >
+          {{ tier }}
+        </p>
+        <template v-for="group in tierGroups(tier)" :key="group"
+          ><div v-if="matches.some((c) => c.category === group)" class="nav-group">
+            <button
+              type="button"
+              class="nav-group-toggle"
+              :aria-expanded="groupExpanded(group)"
+              :aria-controls="'group-' + anchor(group)"
+              @click="toggleGroup(group)"
             >
-          </div>
-        </div></template
-      >
+              <span>{{ group }}</span><small>{{
+                catalog.components.filter((c) => c.category === group).length
+              }}</small
+              ><BissIcon name="chev" />
+            </button>
+            <div v-show="groupExpanded(group)" :id="'group-' + anchor(group)" class="nav-group-links">
+              <a
+                v-for="c in matches.filter((c) => c.category === group)"
+                :key="c.name"
+                :href="`#/components/${c.slug}`"
+                :aria-current="current?.name === c.name ? 'page' : undefined"
+                >{{ label(c.short) }}<span v-if="!c.vue" class="framework-note">Svelte</span></a
+              >
+            </div>
+          </div></template
+        >
+      </template>
       <p v-if="!matches.length" class="nav-empty">
         No matching components. Try “date”, “table” or “menu”.
       </p>
@@ -405,6 +455,44 @@ onBeforeUnmount(() => {
         </div>
         <DialogDocumentation v-if="current.name === 'BissDialog'" :framework="framework" />
         <template v-else>
+          <template v-if="authored.length">
+            <section id="examples" class="docs-section">
+              <h2>Examples</h2>
+              <div class="density-inline">
+                <label class="state-control"
+                  >Density
+                  <select v-model="density" aria-label="Example density">
+                    <option value="standard">Standard</option>
+                    <option value="compact">Compact</option>
+                    <option value="comfortable">Comfortable</option>
+                  </select></label
+                >
+              </div>
+              <div class="example-stack">
+                <ExampleCard
+                  v-for="(item, index) in authored"
+                  :key="current.slug + item.id"
+                  :slug="current.slug"
+                  :example="item"
+                  :framework="framework"
+                  :density="density"
+                  :theme="resolvedTheme"
+                  :lead="index === 0"
+                />
+              </div>
+            </section>
+            <section id="import" class="docs-section">
+              <h2>Import</h2>
+              <pre
+                class="guide-code"
+                tabindex="0"
+                aria-label="Import code"
+              ><code>{{ framework === 'vue'
+  ? `import { ${current.name} } from 'biss-ui/vue';\nimport 'biss-ui/styles.css';`
+  : `import { ${current.name} } from 'biss-ui/svelte';\nimport 'biss-ui/styles.css';` }}</code></pre>
+            </section>
+          </template>
+          <template v-else>
           <section id="preview" class="docs-section">
             <h2>Preview</h2>
             <div class="preview-toolbar">
@@ -481,6 +569,7 @@ onBeforeUnmount(() => {
               <code>onchange</code> where the component exposes a change event.
             </p>
           </section>
+          </template>
           <section id="props" class="docs-section">
             <h2>Props</h2>
             <p>
@@ -642,15 +731,27 @@ onBeforeUnmount(() => {
           “dialog”.
         </p>
         <nav class="category-index" aria-label="Component categories">
-          <a
-            v-for="group in catalog.groups"
-            :key="group"
-            :href="'#/components?section=' + anchor(group)"
-            >{{ group }}</a
+          <template v-for="tier in Object.keys(catalog.tiers)" :key="tier"
+            ><span>{{ tier }}</span
+            ><a
+              v-for="group in tierGroups(tier)"
+              :key="group"
+              :href="'#/components?section=' + anchor(group)"
+              >{{ group }}</a
+            ></template
           >
         </nav>
+        <template v-for="tier in Object.keys(catalog.tiers)" :key="tier">
+        <header
+          v-if="catalogueMatches.some((c) => c.tier === tier)"
+          :id="anchor(tier)"
+          class="catalogue-tier"
+        >
+          <h2>{{ tier }}</h2>
+          <p>{{ tierIntro[tier] }}</p>
+        </header>
         <section
-          v-for="group in catalog.groups.filter((group) =>
+          v-for="group in tierGroups(tier).filter((group) =>
             catalogueMatches.some((c) => c.category === group),
           )"
           :id="anchor(group)"
@@ -673,6 +774,7 @@ onBeforeUnmount(() => {
               }}</small><BissIcon name="chev"
             /></a>
           </div></section
+        ></template
       ></template>
       <template v-else
         ><h1>Page not found</h1>

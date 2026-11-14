@@ -8,6 +8,13 @@
       content="BISS UI: live components, practical examples and API documentation for Vue and Svelte."
     />
     <title>BISS UI · Documentation</title>
+    <script>
+      try {
+        document.documentElement.dataset.bissTheme = localStorage.getItem('biss-docs-theme') || 'system';
+      } catch {
+        document.documentElement.dataset.bissTheme = 'system';
+      }
+    </script>
   </head>
   <body>
     <div id="app"></div>

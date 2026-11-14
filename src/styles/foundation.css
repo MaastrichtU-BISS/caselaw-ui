@@ -24,7 +24,7 @@
   border: 1px solid var(--biss-primary);
   border-radius: var(--biss-radius-sm);
   background: var(--biss-primary);
-  color: #fff;
+  color: var(--biss-on-primary);
   font: 500 13.5px/1.2 var(--biss-font-family);
   text-decoration: none;
   white-space: nowrap;
@@ -456,4 +456,12 @@
     animation: none;
     border-style: dotted;
   }
+}
+
+/* A themed region paints its own surface so nested light/dark areas read correctly. */
+[data-biss-theme='light'],
+[data-biss-theme='dark'],
+[data-biss-theme='system'] {
+  background-color: var(--biss-bg);
+  color: var(--biss-text);
 }

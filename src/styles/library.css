@@ -240,7 +240,7 @@
   overflow: auto;
 }
 .biss-native-dialog::backdrop {
-  background: rgba(29, 28, 26, 0.32);
+  background: var(--biss-overlay);
 }
 .biss-native-dialog > header {
   display: flex;
@@ -780,7 +780,7 @@ a.biss-record-chip:hover {
 }
 .biss-date-picker td button[data-selected='true'] {
   background: var(--biss-primary);
-  color: white;
+  color: var(--biss-on-primary);
 }
 .biss-date-picker td button[aria-current='date'] {
   box-shadow: inset 0 0 0 1px var(--biss-primary);
