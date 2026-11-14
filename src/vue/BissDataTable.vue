@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue';
 import type { BissTableColumn } from '../core/types';
+import BissIcon from './BissIcon.vue';
 
 const props = withDefaults(
   defineProps<{
@@ -157,23 +158,18 @@ const rangeEnd = computed(() => Math.min(page.value * props.pageSize, sortedRows
       <span class="biss-table-pager-range">
         {{ rangeStart }}–{{ rangeEnd }} of {{ sortedRows.length }}
       </span>
+      <span class="biss-table-pager-page" aria-live="polite">{{ page }} / {{ pageCount }}</span>
       <div class="biss-table-pager-buttons">
-        <button
-          type="button"
-          class="biss-button biss-button-secondary biss-button-sm"
-          :disabled="page <= 1"
-          @click="page -= 1"
-        >
-          Previous
+        <button type="button" aria-label="Previous page" :disabled="page <= 1" @click="page -= 1">
+          <BissIcon name="chevLeft" />
         </button>
-        <span class="biss-table-pager-page">{{ page }} / {{ pageCount }}</span>
         <button
           type="button"
-          class="biss-button biss-button-secondary biss-button-sm"
+          aria-label="Next page"
           :disabled="page >= pageCount"
           @click="page += 1"
         >
-          Next
+          <BissIcon name="chev" />
         </button>
       </div>
     </div>

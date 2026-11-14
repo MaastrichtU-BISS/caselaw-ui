@@ -1,6 +1,6 @@
 <script lang="ts">
   interface Props {
-    tone?: string;
+    tone?: 'danger' | 'warning' | 'info';
     label?: string | undefined;
     children?: import('svelte').Snippet;
     actions?: import('svelte').Snippet;

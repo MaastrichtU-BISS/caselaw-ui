@@ -191,7 +191,7 @@ Slots: `default`, `actions`.
 
 | Prop | Type | Required | Default |
 |---|---|---|---|
-| `tone` | `string` | No | `'info'` |
+| `tone` | `'danger' \| 'warning' \| 'info'` | No | `'info'` |
 | `label` | `string \| undefined` | No | `undefined` |
 | `children` | `import('svelte').Snippet` | No | — |
 | `actions` | `import('svelte').Snippet` | No | — |
@@ -345,7 +345,7 @@ A compact request-style bar chart with an optional highlighted sub-series.
 |---|---|---|---|
 | `points` | `BissChartPoint[]` | Yes | — |
 | `seriesLabel` | `string` | No | `'Requests'` |
-| `compareLabel` | `string` | No | `'Flagged'` |
+| `compareLabel` | `string` | No | — |
 
 ## BissBookmark
 
@@ -1069,8 +1069,14 @@ Slots: `empty`, `default`.
 | Prop | Type | Required | Default |
 |---|---|---|---|
 | `columns` | `BissTableColumn[]` | Yes | — |
-| `rows` | `Record<string, unknown>[]` | Yes | — |
+| `rows` | `Record<string, any>[]` | Yes | — |
 | `empty` | `string` | No | `'No rows'` |
+| `loading` | `boolean` | No | `false` |
+| `loadingRows` | `number` | No | `4` |
+| `pageSize` | `number` | No | `0` |
+| `cell` | `Snippet<[{ row: Record<string, any>; column: BissTableColumn; value: any }]>` | No | — |
+
+Snippets: `cell`.
 
 ## BissDataTile
 
@@ -3168,6 +3174,8 @@ Slots: `default`.
 | `value` | `string \| number` | No | `$bindable<string \| number \| undefined>(undefined)` |
 | `modelValue` | `string \| number` | No | `$bindable<string \| number \| undefined>(undefined)` |
 | `options` | `BissOption[]` | Yes | — |
+| `placeholder` | `string` | No | — |
+| `invalid` | `boolean` | No | `false` |
 | `onchange` | `(value: string \| number) => void` | No | — |
 
 Callbacks:

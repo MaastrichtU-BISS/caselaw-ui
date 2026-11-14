@@ -14,8 +14,8 @@ export interface ExampleMeta {
   description: string;
   /** Minimum preview height in pixels; the frame grows with its content. */
   height?: number;
-  /** Center small examples; let wide blocks fill the frame. */
-  layout?: 'center' | 'fill';
+  /** Center small examples; let wide blocks fill the frame; give full-page shells the whole frame. */
+  layout?: 'center' | 'fill' | 'page';
 }
 
 const manifests = import.meta.glob<{ examples: readonly ExampleMeta[] }>('./*/manifest.ts', {

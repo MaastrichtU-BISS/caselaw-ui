@@ -10,12 +10,16 @@
     value = $bindable<string | number | undefined>(undefined),
     modelValue = $bindable<string | number | undefined>(undefined),
     options,
+    placeholder,
+    invalid = false,
     onchange,
     ...rest
   }: Omit<HTMLSelectAttributes, 'onchange' | 'value'> & {
     value?: string | number;
     modelValue?: string | number;
     options: BissOption[];
+    placeholder?: string;
+    invalid?: boolean;
     onchange?: (value: string | number) => void;
   } = $props();
 </script>
@@ -24,6 +28,8 @@
   {...rest}
   {...fieldControl(field, rest)}
   class={['biss-select', className].filter(Boolean).join(' ')}
+  class:biss-input-invalid={invalid}
+  aria-invalid={invalid || field?.invalid || undefined}
   value={value !== undefined ? value : (modelValue ?? '')}
   onchange={(e) => {
     const next =
@@ -33,5 +39,5 @@
     else modelValue = next;
     onchange?.(next);
   }}
-  >{#each options as option}<option value={option.value}>{option.label}</option>{/each}</select
+  >{#if placeholder}<option disabled value="">{placeholder}</option>{/if}{#each options as option}<option value={option.value}>{option.label}</option>{/each}</select
 >

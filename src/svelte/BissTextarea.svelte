@@ -25,6 +25,8 @@
   {...rest}
   {...fieldControl(field, rest)}
   class={['biss-textarea', className].filter(Boolean).join(' ')}
+  class:biss-input-invalid={invalid}
+  class:biss-input-mono={mono}
   aria-invalid={invalid || field?.invalid || undefined}
   value={value !== undefined ? value : (modelValue ?? '')}
   oninput={(e) => {

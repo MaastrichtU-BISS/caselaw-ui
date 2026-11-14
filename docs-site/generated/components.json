@@ -632,7 +632,7 @@
         "props": [
           {
             "name": "tone",
-            "type": "string",
+            "type": "'danger' | 'warning' | 'info'",
             "required": false,
             "description": "",
             "default": "'info'"
@@ -1141,15 +1141,14 @@
             "name": "seriesLabel",
             "type": "string",
             "required": false,
-            "description": "",
+            "description": "Legend label for the main series.",
             "default": "'Requests'"
           },
           {
             "name": "compareLabel",
             "type": "string",
             "required": false,
-            "description": "",
-            "default": "'Flagged'"
+            "description": "Legend label for the highlighted sub-series (drawn at the base of each bar)."
           }
         ],
         "events": [],
@@ -3558,7 +3557,7 @@
           },
           {
             "name": "rows",
-            "type": "Record<string, unknown>[]",
+            "type": "Record<string, any>[]",
             "required": true,
             "description": ""
           },
@@ -3568,10 +3567,39 @@
             "required": false,
             "description": "",
             "default": "'No rows'"
+          },
+          {
+            "name": "loading",
+            "type": "boolean",
+            "required": false,
+            "description": "",
+            "default": "false"
+          },
+          {
+            "name": "loadingRows",
+            "type": "number",
+            "required": false,
+            "description": "Skeleton rows drawn while loading.",
+            "default": "4"
+          },
+          {
+            "name": "pageSize",
+            "type": "number",
+            "required": false,
+            "description": "Rows per page. 0 shows everything.",
+            "default": "0"
+          },
+          {
+            "name": "cell",
+            "type": "Snippet<[{ row: Record<string, any>; column: BissTableColumn; value: any }]>",
+            "required": false,
+            "description": "Custom cell content; the Vue component's `cell-<key>` slots."
           }
         ],
         "events": [],
-        "slots": []
+        "slots": [
+          "cell"
+        ]
       },
       "modern": true
     },
@@ -10404,6 +10432,19 @@
             "type": "BissOption[]",
             "required": true,
             "description": ""
+          },
+          {
+            "name": "placeholder",
+            "type": "string",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "invalid",
+            "type": "boolean",
+            "required": false,
+            "description": "",
+            "default": "false"
           },
           {
             "name": "onchange",
