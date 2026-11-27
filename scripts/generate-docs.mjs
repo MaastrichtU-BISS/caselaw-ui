@@ -66,6 +66,7 @@ const groups = {
     'Badge',
     'Card',
     'PropertyList',
+    'FactStrip',
     'Icon',
     'ServiceIcon',
     'DataTable',
@@ -112,7 +113,14 @@ const groups = {
     'Sidebar',
     'WorkspaceSwitcher',
   ],
-  'Page headers': ['PageBar', 'PageHeader', 'ConsoleHeader', 'SectionHeader', 'SettingsHead'],
+  'Page headers': [
+    'PageBar',
+    'PageHeader',
+    'EntityHeader',
+    'ConsoleHeader',
+    'SectionHeader',
+    'SettingsHead',
+  ],
   'Data views': [
     'DataGrid',
     'ColumnManager',
@@ -313,6 +321,10 @@ Object.assign(descriptions, {
   TemplateGallery: 'Choose a starting template by category or search, with a preview before using it.',
   FeedbackDialog: 'Collect a rating, a category and a message in a focused dialog.',
   Lightbox: 'View images full screen with captions and keyboard navigation.',
+  EntityHeader:
+    'A warm linen header band for detail, profile, document and reference pages, with optional avatar, facts, actions and tabs.',
+  FactStrip:
+    'A hairlined horizontal strip of labelled facts and status indicators, replacing badge clouds on dense records.',
 });
 Object.assign(descriptions, {
   Tabs: 'Connected tab parts with arrow-key navigation, plus a wrapper that takes items and panels.',

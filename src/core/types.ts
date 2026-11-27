@@ -165,6 +165,15 @@ export type BissStat = {
   value: string | number;
 };
 
+/** One labelled fact in BissFactStrip: concise key-value metadata without badge clutter. */
+export interface BissFactItem {
+  label: string;
+  value: string | number;
+  href?: string;
+  mono?: boolean;
+  tone?: BissTone;
+}
+
 export type BissChartPoint = {
   label: string;
   value: number;

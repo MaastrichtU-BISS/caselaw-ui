@@ -3,6 +3,8 @@ import { computed, onBeforeUnmount, onMounted, ref, useSlots, watch } from 'vue'
 import { setBissFavicon, type BissServiceIconName } from '../core/service-icons';
 import type { BissLink } from '../tokens';
 import BissBottomBar from './BissBottomBar.vue';
+import BissIcon from './BissIcon.vue';
+import BissServiceIcon from './BissServiceIcon.vue';
 import BissTopBar from './BissTopBar.vue';
 
 const props = withDefaults(
@@ -14,6 +16,8 @@ const props = withDefaults(
     favicon?: boolean;
     href?: string;
     topLinks?: BissLink[];
+    /** Shell chrome: `topbar` (classic fixed top bar) or `rail` (Bizzy full-height sidebar). */
+    chrome?: 'topbar' | 'rail';
     /** Close the console with the shared site footer. */
     footer?: boolean;
     footerText?: string;
@@ -28,6 +32,7 @@ const props = withDefaults(
     fluid?: boolean;
   }>(),
   {
+    chrome: 'topbar',
     fluid: false,
     brand: 'Workspace',
     mark: 'B',
@@ -61,12 +66,20 @@ function setCollapsed(next: boolean) {
   }
 }
 
+function onShellKeydown(event: KeyboardEvent) {
+  if ((event.metaKey || event.ctrlKey) && event.key === '\\' && Boolean(slots.sidebar)) {
+    event.preventDefault();
+    setCollapsed(!sidebarCollapsed.value);
+  }
+}
+
 onMounted(() => {
   try {
     sidebarCollapsed.value = localStorage.getItem(COLLAPSED_KEY) === '1';
   } catch {
     sidebarCollapsed.value = false;
   }
+  window.addEventListener('keydown', onShellKeydown);
 });
 const slots = useSlots();
 const showFooter = computed(() => props.footer || Boolean(slots.footer));
@@ -143,6 +156,7 @@ function onResizeKey(event: KeyboardEvent) {
 }
 
 onBeforeUnmount(() => {
+  window.removeEventListener('keydown', onShellKeydown);
   window.removeEventListener('pointermove', onPointerMove);
   window.removeEventListener('pointerup', onPointerUp);
   document.body.style.userSelect = '';
@@ -162,6 +176,7 @@ defineExpose({ closeSidebar: () => (sidebarOpen.value = false) });
   <div
     class="biss-app-shell"
     :class="{
+      'is-rail': chrome === 'rail' && Boolean($slots.sidebar),
       'has-footer': showFooter,
       'is-sidebar-collapsed': Boolean($slots.sidebar) && sidebarCollapsed,
     }"
@@ -203,9 +218,28 @@ defineExpose({ closeSidebar: () => (sidebarOpen.value = false) });
           @click="sidebarOpen = false"
         />
         <aside class="biss-app-sidebar" :class="{ 'is-open': sidebarOpen }">
-          <!-- Sits on the rail's border so it is still there, and in the same
-               place, once the rail has folded down to a strip. -->
+          <!-- Bizzy rail chrome keeps the collapse control inline beside the brand;
+               classic topbar shells keep the border toggle for compatibility. -->
+          <div v-if="chrome === 'rail'" class="biss-sidebar-brand-row">
+            <a class="biss-brand" :href="href" :aria-label="brand" :title="sidebarCollapsed ? brand : undefined">
+              <slot name="icon">
+                <BissServiceIcon :icon="icon" :mark="mark" :label="iconLabel" />
+              </slot>
+              <span class="biss-brand-text">{{ brand }}</span>
+            </a>
+            <button
+              type="button"
+              class="biss-sidebar-rail-toggle"
+              :aria-expanded="!sidebarCollapsed"
+              :aria-label="sidebarCollapsed ? 'Expand the sidebar' : 'Collapse the sidebar'"
+              :title="sidebarCollapsed ? 'Expand the sidebar (⌘\\)' : 'Collapse the sidebar (⌘\\)'"
+              @click="setCollapsed(!sidebarCollapsed)"
+            >
+              <BissIcon name="panel" />
+            </button>
+          </div>
           <button
+            v-else
             type="button"
             class="biss-sidebar-collapse"
             :aria-expanded="!sidebarCollapsed"
@@ -258,6 +292,25 @@ defineExpose({ closeSidebar: () => (sidebarOpen.value = false) });
       </template>
       <main class="biss-app-main" :class="{ 'is-fluid': fluid }">
         <div class="biss-app-main-inner">
+          <div
+            v-if="chrome === 'rail' && (topLinks.length || $slots['topbar-actions'])"
+            class="biss-rail-bar"
+          >
+            <nav v-if="topLinks.length" class="biss-link-row" aria-label="Related links">
+              <a
+                v-for="link in topLinks"
+                :key="link.href"
+                :href="link.href"
+                :rel="link.external ? 'noopener noreferrer' : undefined"
+                :target="link.newTab ? '_blank' : undefined"
+              >
+                {{ link.label }}
+              </a>
+            </nav>
+            <div v-if="$slots['topbar-actions']" class="biss-rail-bar-end">
+              <slot name="topbar-actions" />
+            </div>
+          </div>
           <slot />
         </div>
       </main>

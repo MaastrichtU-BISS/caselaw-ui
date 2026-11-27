@@ -723,6 +723,13 @@
             "default": "() => []"
           },
           {
+            "name": "chrome",
+            "type": "'topbar' | 'rail'",
+            "required": false,
+            "description": "Shell chrome: `topbar` (classic fixed top bar) or `rail` (Bizzy full-height sidebar).",
+            "default": "'topbar'"
+          },
+          {
             "name": "footer",
             "type": "boolean",
             "required": false,
@@ -808,6 +815,13 @@
             "required": false,
             "description": "",
             "default": "[]"
+          },
+          {
+            "name": "chrome",
+            "type": "'topbar' | 'rail'",
+            "required": false,
+            "description": "",
+            "default": "'topbar'"
           },
           {
             "name": "footer",
@@ -1052,6 +1066,13 @@
             "required": false,
             "description": "",
             "default": "false"
+          },
+          {
+            "name": "quiet",
+            "type": "boolean",
+            "required": false,
+            "description": "",
+            "default": "false"
           }
         ],
         "events": [],
@@ -1077,6 +1098,13 @@
           },
           {
             "name": "mono",
+            "type": "boolean",
+            "required": false,
+            "description": "",
+            "default": "false"
+          },
+          {
+            "name": "quiet",
             "type": "boolean",
             "required": false,
             "description": "",
@@ -3073,6 +3101,13 @@
             "default": "() => []"
           },
           {
+            "name": "chrome",
+            "type": "'topbar' | 'rail'",
+            "required": false,
+            "description": "Shell chrome: `topbar` (fixed top bar) or `rail` (Bizzy full-height sidebar).",
+            "default": "'topbar'"
+          },
+          {
             "name": "footer",
             "type": "boolean",
             "required": false,
@@ -3240,6 +3275,13 @@
             "required": false,
             "description": "",
             "default": "[]"
+          },
+          {
+            "name": "chrome",
+            "type": "'topbar' | 'rail'",
+            "required": false,
+            "description": "",
+            "default": "'topbar'"
           },
           {
             "name": "footer",
@@ -5054,6 +5096,218 @@
         "slots": [
           "children"
         ]
+      },
+      "modern": true
+    },
+    {
+      "name": "BissEntityHeader",
+      "tier": "Blocks",
+      "slug": "entity-header",
+      "short": "EntityHeader",
+      "category": "Page headers",
+      "description": "A warm linen header band for detail, profile, document and reference pages, with optional avatar, facts, actions and tabs.",
+      "guidance": "Keep the page title, context, view navigation and actions in a predictable order across pages.",
+      "vue": {
+        "props": [
+          {
+            "name": "title",
+            "type": "string",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "subtitle",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "undefined"
+          },
+          {
+            "name": "facts",
+            "type": "BissFactItem[]",
+            "required": false,
+            "description": "",
+            "default": "undefined"
+          },
+          {
+            "name": "factsLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Details'"
+          },
+          {
+            "name": "variant",
+            "type": "'plain' | 'band'",
+            "required": false,
+            "description": "`plain` sits open on a white panel with a bottom hairline; `band` adds a warm linen surface band.",
+            "default": "'plain'"
+          },
+          {
+            "name": "flush",
+            "type": "boolean",
+            "required": false,
+            "description": "",
+            "default": "false"
+          }
+        ],
+        "events": [],
+        "slots": [
+          "meta",
+          "leading",
+          "actions",
+          "facts",
+          "default",
+          "tabs"
+        ]
+      },
+      "svelte": {
+        "props": [
+          {
+            "name": "title",
+            "type": "string",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "subtitle",
+            "type": "string",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "facts",
+            "type": "BissFactItem[]",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "factsLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "'Details'"
+          },
+          {
+            "name": "variant",
+            "type": "'plain' | 'band'",
+            "required": false,
+            "description": "",
+            "default": "'plain'"
+          },
+          {
+            "name": "flush",
+            "type": "boolean",
+            "required": false,
+            "description": "",
+            "default": "false"
+          },
+          {
+            "name": "meta",
+            "type": "Snippet",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "leading",
+            "type": "Snippet",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "actions",
+            "type": "Snippet",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "factsSlot",
+            "type": "Snippet",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "tabs",
+            "type": "Snippet",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "children",
+            "type": "Snippet",
+            "required": false,
+            "description": ""
+          }
+        ],
+        "events": [],
+        "slots": [
+          "meta",
+          "leading",
+          "actions",
+          "factsSlot",
+          "tabs",
+          "children"
+        ]
+      },
+      "modern": true
+    },
+    {
+      "name": "BissFactStrip",
+      "tier": "Components",
+      "slug": "fact-strip",
+      "short": "FactStrip",
+      "category": "Data display",
+      "description": "A hairlined horizontal strip of labelled facts and status indicators, replacing badge clouds on dense records.",
+      "guidance": "Use display-ready names and values. Display components do not fetch records or decide who may see them.",
+      "vue": {
+        "props": [
+          {
+            "name": "items",
+            "type": "BissFactItem[]",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "label",
+            "type": "string",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "compact",
+            "type": "boolean",
+            "required": false,
+            "description": "",
+            "default": "false"
+          }
+        ],
+        "events": [],
+        "slots": []
+      },
+      "svelte": {
+        "props": [
+          {
+            "name": "items",
+            "type": "BissFactItem[]",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "label",
+            "type": "string",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "compact",
+            "type": "boolean",
+            "required": false,
+            "description": "",
+            "default": "false"
+          }
+        ],
+        "events": [],
+        "slots": []
       },
       "modern": true
     },
@@ -10264,6 +10518,13 @@
             "required": false,
             "description": "",
             "default": "false"
+          },
+          {
+            "name": "iconName",
+            "type": "BissIconName",
+            "required": false,
+            "description": "",
+            "default": "undefined"
           }
         ],
         "events": [],
@@ -10299,6 +10560,13 @@
             "required": false,
             "description": "",
             "default": "false"
+          },
+          {
+            "name": "iconName",
+            "type": "BissIconName",
+            "required": false,
+            "description": "",
+            "default": "undefined"
           },
           {
             "name": "icon",

@@ -266,9 +266,11 @@
   display: flex;
   flex: none;
 }
+svg.biss-search-icon,
 .biss-search-icon svg {
   width: 15px;
   height: 15px;
+  flex: none;
 }
 .biss-search .biss-input {
   border: 0;

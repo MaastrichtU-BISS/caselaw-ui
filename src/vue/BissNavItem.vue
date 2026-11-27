@@ -4,6 +4,8 @@
  * (for example Nuxt's NuxtLink) — remaining attributes are forwarded to it.
  */
 import type { Component } from 'vue';
+import type { BissIconName } from '../core/icon-names';
+import BissIcon from './BissIcon.vue';
 
 withDefaults(
   defineProps<{
@@ -11,10 +13,12 @@ withDefaults(
     label: string;
     meta?: string | number;
     active?: boolean;
+    iconName?: BissIconName;
   }>(),
   {
     as: 'a',
     active: false,
+    iconName: undefined,
   },
 );
 
@@ -22,8 +26,18 @@ defineOptions({ inheritAttrs: false });
 </script>
 
 <template>
-  <component :is="as" class="biss-nav-item" :class="{ 'is-active': active }" v-bind="$attrs">
-    <span v-if="$slots.icon" class="biss-nav-item-icon"><slot name="icon" /></span>
+  <component
+    :is="as"
+    class="biss-nav-item"
+    :class="{ 'is-active': active }"
+    :title="($attrs.title as string | undefined) ?? label"
+    v-bind="$attrs"
+  >
+    <span v-if="$slots.icon || iconName" class="biss-nav-item-icon">
+      <slot name="icon">
+        <BissIcon v-if="iconName" :name="iconName" />
+      </slot>
+    </span>
     <span class="biss-nav-item-label">{{ label }}</span>
     <span v-if="meta !== undefined && meta !== ''" class="biss-nav-item-meta">{{ meta }}</span>
   </component>

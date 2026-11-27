@@ -505,12 +505,32 @@
   margin-top: 10px;
 }
 .biss-code {
+  position: relative;
   border: 1px solid var(--biss-border);
   border-radius: 10px;
   overflow: hidden;
   background: var(--biss-surface-subtle);
   font: 12px/1.65 var(--biss-mono);
   color: var(--biss-text);
+}
+.biss-code-copy-float {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  border: 1px solid var(--biss-border);
+  border-radius: 6px;
+  background: var(--biss-card);
+  color: var(--biss-muted);
+  font: 500 12px var(--biss-font-family);
+  padding: 3px 8px;
+  cursor: pointer;
+}
+.biss-code-copy-float:hover {
+  color: var(--biss-primary);
+  border-color: var(--biss-border-strong);
+}
+.biss-code-bare .biss-code-body {
+  padding-right: 68px;
 }
 .biss-code-header {
   display: flex;

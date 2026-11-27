@@ -33,7 +33,7 @@ No router, account store, server connection or Nuxt globals are required.
 
 ## Components and customization
 
-154 components are available in **each framework**, with one Bizzy design language,
+156 components are available in **each framework**, with one Bizzy design language,
 in two tiers:
 
 - **Components** (Actions, Forms, Overlays, Navigation, Data display, Charts,
@@ -111,7 +111,7 @@ Try the [composed playground](https://bissui.wicker.life/#/playground), or read 
 Browse the library at [bissui.wicker.life](https://bissui.wicker.life).
 
 Run `npm run docs:dev` for the documentation site: a landing page with a live
-workspace and theming playground, all 154 components, and source-derived API
+workspace and theming playground, all 156 components, and source-derived API
 tables. Component pages render authored examples: each is a real `.vue` and
 `.svelte` file under `docs-site/examples/<component>/`, and the page shows the
 exact source of the file it runs. Add an example by adding the file pair and an

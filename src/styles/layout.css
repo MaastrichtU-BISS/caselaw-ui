@@ -5,6 +5,7 @@
   background: var(--biss-surface-muted);
   color: var(--biss-text);
   font: 14px/1.55 var(--biss-font-family);
+  scrollbar-color: var(--biss-border-strong) transparent;
 }
 .biss-fixed-topbar,
 .biss-fixed-bottombar {
@@ -70,7 +71,8 @@
   height: 28px;
   border: 1px solid var(--biss-border);
   border-radius: 7px;
-  background: var(--biss-surface-subtle);
+  background: var(--biss-card);
+  box-shadow: var(--biss-shadow);
   font: 600 12px var(--biss-font-family);
   color: var(--biss-primary);
 }
@@ -105,6 +107,18 @@
 .biss-link-row a:hover {
   color: var(--biss-text);
 }
+@media (max-width: 720px) {
+  .biss-bar-inner {
+    padding: 0 14px;
+    gap: 10px;
+  }
+  .biss-fixed-topbar .biss-link-row {
+    display: none;
+  }
+  .biss-topbar-actions {
+    gap: 8px;
+  }
+}
 .biss-page {
   max-width: var(--biss-page-max);
   margin: auto;
@@ -133,6 +147,8 @@
   flex: 1;
   min-height: 0;
   padding: 18px 12px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--biss-border-strong) transparent;
 }
 .biss-sidebar-footer {
   padding: 12px;
@@ -173,10 +189,14 @@
   margin-bottom: 20px;
 }
 .biss-nav-heading {
-  font: 500 11.5px/1.5 var(--biss-font-family);
-  color: var(--biss-muted);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  font: 500 12px/1.5 var(--biss-font-family);
+  color: var(--biss-muted-subtle);
   padding: 0 10px;
-  margin: 0 0 6px;
+  margin: 0 0 4px;
   text-transform: none;
   letter-spacing: normal;
 }
@@ -186,19 +206,29 @@
   gap: 8px;
   min-height: 32px;
   padding: 5px 10px;
+  border: 1px solid transparent;
   border-radius: 7px;
   color: var(--biss-muted);
   font: 400 13px/1.5 var(--biss-font-family);
   text-decoration: none;
+  transition:
+    background 0.14s,
+    color 0.14s,
+    border-color 0.14s;
 }
 .biss-nav-item:hover {
   background: var(--biss-hover);
   color: var(--biss-text);
 }
 .biss-nav-item.is-active {
-  background: var(--biss-info-bg);
-  color: var(--biss-primary);
+  background: var(--biss-nav-active-bg);
+  border-color: var(--biss-nav-active-border);
+  box-shadow: var(--biss-nav-active-shadow);
+  color: var(--biss-nav-active-color);
   font-weight: 500;
+}
+.biss-nav-item.is-active .biss-nav-item-icon {
+  color: var(--biss-nav-active-icon);
 }
 .biss-nav-item-icon {
   display: flex;
@@ -435,22 +465,169 @@
 .biss-dock-scrim {
   display: none;
 }
+.biss-sidebar-brand-row {
+  display: none;
+}
+.biss-sidebar-rail-toggle {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--biss-radius-sm);
+  background: transparent;
+  color: var(--biss-muted-subtle);
+  cursor: pointer;
+  transition: background-color 0.14s, color 0.14s;
+}
+.biss-sidebar-rail-toggle:hover {
+  background: var(--biss-hover);
+  color: var(--biss-text);
+}
+.biss-sidebar-rail-toggle svg {
+  width: 16px;
+  height: 16px;
+}
+.biss-rail-bar {
+  display: none;
+}
+/* Bizzy rail chrome: full-height warm stone sidebar + one crisp white panel, no desktop top bar. */
 @media (min-width: 961px) {
-  .biss-app-shell.is-sidebar-collapsed .biss-app-sidebar {
+  .biss-app-shell.is-rail > .biss-fixed-topbar {
+    display: none;
+  }
+  .biss-app-shell.is-rail .biss-app-body {
+    padding-top: 0;
+  }
+  .biss-app-shell.is-rail .biss-app-sidebar {
+    top: 0;
+    height: 100dvh;
+    border-right: 0;
+    background: var(--biss-surface-muted);
+    overflow: hidden;
+  }
+  .biss-app-shell.is-rail .biss-sidebar-brand-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    padding: 14px 12px 6px;
+    flex: none;
+  }
+  .biss-app-shell.is-rail .biss-sidebar-body {
+    padding: 10px 12px 14px;
+  }
+  .biss-app-shell.is-rail .biss-app-main {
+    padding: 8px 8px 8px 0;
+  }
+  .biss-app-shell.is-rail .biss-app-main-inner {
+    max-width: none;
+    min-height: calc(100dvh - 16px);
+    padding: 24px clamp(22px, 3vw, 40px) 32px;
+    border-radius: var(--biss-radius-lg);
+    box-shadow: 0 1px 2px rgba(29, 28, 26, 0.03);
+  }
+  .biss-app-shell.is-rail .biss-rail-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin: -10px 0 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--biss-border-subtle);
+  }
+  .biss-app-shell.is-rail .biss-rail-bar-end {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  /* Collapsed Bizzy rail: 60px icon rail (never a floating edge chevron). */
+  .biss-app-shell.is-rail.is-sidebar-collapsed .biss-app-sidebar {
+    flex-basis: 60px;
+    width: 60px;
+  }
+  .biss-app-shell.is-rail.is-sidebar-collapsed .biss-sidebar-brand-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 14px 8px 6px;
+  }
+  .biss-app-shell.is-rail.is-sidebar-collapsed .biss-brand {
+    justify-content: center;
+  }
+  .biss-app-shell.is-rail.is-sidebar-collapsed .biss-brand-text {
+    display: none;
+  }
+  .biss-app-shell.is-rail.is-sidebar-collapsed .biss-sidebar-body {
+    display: block;
+    padding: 8px 8px 14px;
+  }
+  .biss-app-shell.is-rail.is-sidebar-collapsed .biss-nav-section {
+    margin-bottom: 10px;
+  }
+  .biss-app-shell.is-rail.is-sidebar-collapsed .biss-nav-heading {
+    position: relative;
+    justify-content: center;
+    padding: 10px 0 6px;
+    margin: 0;
+  }
+  .biss-app-shell.is-rail.is-sidebar-collapsed .biss-nav-heading > * {
+    display: none;
+  }
+  .biss-app-shell.is-rail.is-sidebar-collapsed .biss-nav-heading::before {
+    content: '';
+    width: 18px;
+    height: 1px;
+    background: var(--biss-border-strong);
+  }
+  .biss-app-shell.is-rail.is-sidebar-collapsed .biss-nav-item {
+    justify-content: center;
+    width: 40px;
+    height: 36px;
+    padding: 0;
+    margin: 0 auto 2px;
+  }
+  .biss-app-shell.is-rail.is-sidebar-collapsed .biss-nav-item-label,
+  .biss-app-shell.is-rail.is-sidebar-collapsed .biss-nav-item-meta,
+  .biss-app-shell.is-rail.is-sidebar-collapsed .biss-nav-empty,
+  .biss-app-shell.is-rail.is-sidebar-collapsed .biss-sidebar-body > p {
+    display: none;
+  }
+  .biss-app-shell.is-rail.is-sidebar-collapsed .biss-sidebar-footer {
+    display: block;
+    padding: 10px 8px;
+  }
+  .biss-app-shell.is-rail.is-sidebar-collapsed .biss-sidebar-user-identity {
+    justify-content: center;
+    padding: 4px 0;
+  }
+  .biss-app-shell.is-rail.is-sidebar-collapsed .biss-sidebar-user-text,
+  .biss-app-shell.is-rail.is-sidebar-collapsed .biss-sidebar-user-chevron {
+    display: none;
+  }
+  .biss-app-shell.is-rail.is-sidebar-collapsed .biss-sidebar-resizer {
+    display: none;
+  }
+}
+@media (min-width: 961px) {
+  .biss-app-shell:not(.is-rail).is-sidebar-collapsed .biss-app-sidebar {
     flex-basis: 0;
     width: 0;
     border: 0;
   }
-  .biss-app-shell.is-sidebar-collapsed .biss-sidebar-body,
-  .biss-app-shell.is-sidebar-collapsed .biss-sidebar-footer,
-  .biss-app-shell.is-sidebar-collapsed .biss-sidebar-resizer {
+  .biss-app-shell:not(.is-rail).is-sidebar-collapsed .biss-sidebar-body,
+  .biss-app-shell:not(.is-rail).is-sidebar-collapsed .biss-sidebar-footer,
+  .biss-app-shell:not(.is-rail).is-sidebar-collapsed .biss-sidebar-resizer {
     display: none;
   }
-  .biss-app-shell.is-sidebar-collapsed .biss-sidebar-collapse {
+  .biss-app-shell:not(.is-rail).is-sidebar-collapsed .biss-sidebar-collapse {
     left: 0;
     right: auto;
   }
-  .biss-app-shell.is-sidebar-collapsed .biss-sidebar-collapse svg {
+  .biss-app-shell:not(.is-rail).is-sidebar-collapsed .biss-sidebar-collapse svg {
     transform: rotate(180deg);
   }
 }
@@ -478,7 +655,8 @@
     background: rgba(29, 28, 26, 0.24);
   }
   .biss-sidebar-resizer,
-  .biss-sidebar-collapse {
+  .biss-sidebar-collapse,
+  .biss-sidebar-rail-toggle {
     display: none;
   }
   .biss-app-main {

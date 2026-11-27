@@ -359,6 +359,32 @@ export const newFixtures: Record<string, Fixture> = {
     },
     states: ['default', 'disabled'],
   },
+  EntityHeader: {
+    props: {
+      title: 'Regulation (EU) 2016/679',
+      subtitle: 'General Data Protection Regulation — consolidated instrument with 99 articles.',
+      factsLabel: 'Instrument metadata',
+      facts: [
+        { label: 'Identifier', value: '32016R0679', mono: true },
+        { label: 'Status', value: 'In force', tone: 'success' },
+        { label: 'Jurisdiction', value: 'European Union' },
+        { label: 'Cited by', value: '1,428 cases' },
+      ],
+    },
+    wide: true,
+  },
+  FactStrip: {
+    props: {
+      label: 'Case metadata',
+      items: [
+        { label: 'Court', value: 'Court of Justice (Grand Chamber)' },
+        { label: 'Decided', value: '2024-03-14', mono: true },
+        { label: 'Status', value: 'Published', tone: 'success' },
+        { label: 'Citations', value: 38 },
+      ],
+    },
+    wide: true,
+  },
 };
 /** Panel copy for the Tabs preview, shared by the Vue and Svelte renderers. */
 export const tabPanels: Record<string, string> = {
