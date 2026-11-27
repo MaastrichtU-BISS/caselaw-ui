@@ -38,6 +38,7 @@
   class="biss-nav-item"
   class:is-active={active}
   {href}
+  title={rest.title ?? label}
   {...rest}
   onclick={rest.onclick}
   onkeydown={rest.onkeydown}

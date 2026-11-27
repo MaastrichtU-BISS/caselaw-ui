@@ -7,6 +7,7 @@
   import { resizeHandle } from '../core/dom';
   import BissTopBar from './BissTopBar.svelte';
   import BissBottomBar from './BissBottomBar.svelte';
+  import BissIcon from './BissIcon.svelte';
   import BissServiceIcon from './BissServiceIcon.svelte';
   let {
     brand = 'Workspace',
@@ -50,6 +51,14 @@
     width = $state(240);
   onMount(() => {
     if (favicon && icon) setBissFavicon(icon);
+    const onKey = (event: KeyboardEvent) => {
+      if ((event.metaKey || event.ctrlKey) && event.key === '\\' && sidebar) {
+        event.preventDefault();
+        collapsed = !collapsed;
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
   });
 </script>
 
@@ -76,23 +85,30 @@
           onclick={() => (open = false)}
         ></button>{/if}
       <aside class="biss-app-sidebar" class:is-open={open}>
-        <button
-          type="button"
-          class="biss-sidebar-collapse"
-          aria-label={collapsed ? 'Expand the sidebar' : 'Collapse the sidebar'}
-          aria-expanded={!collapsed}
-          onclick={() => (collapsed = !collapsed)}
-          ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"
-            ><path d="m15 18-6-6 6-6" /></svg
-          ></button
-        >
         {#if chrome === 'rail'}<div class="biss-sidebar-brand-row">
-            <a class="biss-brand" {href} aria-label={brand}
+            <a class="biss-brand" {href} aria-label={brand} title={collapsed ? brand : undefined}
               ><BissServiceIcon {icon} {mark} label={iconLabel} /><span class="biss-brand-text"
                 >{brand}</span
               ></a
             >
-          </div>{/if}
+            <button
+              type="button"
+              class="biss-sidebar-rail-toggle"
+              aria-label={collapsed ? 'Expand the sidebar' : 'Collapse the sidebar'}
+              aria-expanded={!collapsed}
+              title={collapsed ? 'Expand the sidebar (⌘\\)' : 'Collapse the sidebar (⌘\\)'}
+              onclick={() => (collapsed = !collapsed)}><BissIcon name="panel" /></button
+            >
+          </div>{:else}<button
+            type="button"
+            class="biss-sidebar-collapse"
+            aria-label={collapsed ? 'Expand the sidebar' : 'Collapse the sidebar'}
+            aria-expanded={!collapsed}
+            onclick={() => (collapsed = !collapsed)}
+            ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"
+              ><path d="m15 18-6-6 6-6" /></svg
+            ></button
+          >{/if}
         <div class="biss-sidebar-body">{@render sidebar()}</div>
         {#if sidebarFooter}<div class="biss-sidebar-footer">
             {@render sidebarFooter()}

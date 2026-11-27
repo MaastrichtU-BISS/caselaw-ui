@@ -3,6 +3,7 @@ import { computed, onBeforeUnmount, onMounted, ref, useSlots, watch } from 'vue'
 import { setBissFavicon, type BissServiceIconName } from '../core/service-icons';
 import type { BissLink } from '../tokens';
 import BissBottomBar from './BissBottomBar.vue';
+import BissIcon from './BissIcon.vue';
 import BissServiceIcon from './BissServiceIcon.vue';
 import BissTopBar from './BissTopBar.vue';
 
@@ -65,12 +66,20 @@ function setCollapsed(next: boolean) {
   }
 }
 
+function onShellKeydown(event: KeyboardEvent) {
+  if ((event.metaKey || event.ctrlKey) && event.key === '\\' && Boolean(slots.sidebar)) {
+    event.preventDefault();
+    setCollapsed(!sidebarCollapsed.value);
+  }
+}
+
 onMounted(() => {
   try {
     sidebarCollapsed.value = localStorage.getItem(COLLAPSED_KEY) === '1';
   } catch {
     sidebarCollapsed.value = false;
   }
+  window.addEventListener('keydown', onShellKeydown);
 });
 const slots = useSlots();
 const showFooter = computed(() => props.footer || Boolean(slots.footer));
@@ -147,6 +156,7 @@ function onResizeKey(event: KeyboardEvent) {
 }
 
 onBeforeUnmount(() => {
+  window.removeEventListener('keydown', onShellKeydown);
   window.removeEventListener('pointermove', onPointerMove);
   window.removeEventListener('pointerup', onPointerUp);
   document.body.style.userSelect = '';
@@ -208,9 +218,28 @@ defineExpose({ closeSidebar: () => (sidebarOpen.value = false) });
           @click="sidebarOpen = false"
         />
         <aside class="biss-app-sidebar" :class="{ 'is-open': sidebarOpen }">
-          <!-- Sits on the rail's border so it is still there, and in the same
-               place, once the rail has folded down to a strip. -->
+          <!-- Bizzy rail chrome keeps the collapse control inline beside the brand;
+               classic topbar shells keep the border toggle for compatibility. -->
+          <div v-if="chrome === 'rail'" class="biss-sidebar-brand-row">
+            <a class="biss-brand" :href="href" :aria-label="brand" :title="sidebarCollapsed ? brand : undefined">
+              <slot name="icon">
+                <BissServiceIcon :icon="icon" :mark="mark" :label="iconLabel" />
+              </slot>
+              <span class="biss-brand-text">{{ brand }}</span>
+            </a>
+            <button
+              type="button"
+              class="biss-sidebar-rail-toggle"
+              :aria-expanded="!sidebarCollapsed"
+              :aria-label="sidebarCollapsed ? 'Expand the sidebar' : 'Collapse the sidebar'"
+              :title="sidebarCollapsed ? 'Expand the sidebar (⌘\\)' : 'Collapse the sidebar (⌘\\)'"
+              @click="setCollapsed(!sidebarCollapsed)"
+            >
+              <BissIcon name="panel" />
+            </button>
+          </div>
           <button
+            v-else
             type="button"
             class="biss-sidebar-collapse"
             :aria-expanded="!sidebarCollapsed"
@@ -230,14 +259,6 @@ defineExpose({ closeSidebar: () => (sidebarOpen.value = false) });
               <path d="m15 18-6-6 6-6" />
             </svg>
           </button>
-          <div v-if="chrome === 'rail'" class="biss-sidebar-brand-row">
-            <a class="biss-brand" :href="href" :aria-label="brand">
-              <slot name="icon">
-                <BissServiceIcon :icon="icon" :mark="mark" :label="iconLabel" />
-              </slot>
-              <span class="biss-brand-text">{{ brand }}</span>
-            </a>
-          </div>
           <!-- Closing on click is what dismisses the mobile drawer after a nav
                link is followed. Scoped to the scrolling body so the account
                block's own buttons do not inherit it. -->

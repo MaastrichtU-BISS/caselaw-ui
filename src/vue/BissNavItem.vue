@@ -26,7 +26,13 @@ defineOptions({ inheritAttrs: false });
 </script>
 
 <template>
-  <component :is="as" class="biss-nav-item" :class="{ 'is-active': active }" v-bind="$attrs">
+  <component
+    :is="as"
+    class="biss-nav-item"
+    :class="{ 'is-active': active }"
+    :title="($attrs.title as string | undefined) ?? label"
+    v-bind="$attrs"
+  >
     <span v-if="$slots.icon || iconName" class="biss-nav-item-icon">
       <slot name="icon">
         <BissIcon v-if="iconName" :name="iconName" />

@@ -27,6 +27,10 @@ export const bissCssTokens = {
   "--biss-bar-max": "100%",
   "--biss-page-max": "1180px",
   "--biss-font-family": "\"Inter Variable\", \"Inter\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
+  "--biss-font-display": "\"Overpass Variable\", \"Overpass\", \"Inter\", system-ui, sans-serif",
+  "--biss-navy": "#0B2340",
+  "--biss-yellow": "#FFC917",
+  "--biss-stage-lid": "#2F7BC4",
   "--biss-text-eyebrow": "0.74rem",
   "--biss-text-body": "14px",
   "--biss-text-lead": "15px",
@@ -129,7 +133,9 @@ export const bissThemes = {
     "--biss-nav-active-icon": "#5AA5EC",
     "--biss-nav-active-shadow": "0 1px 2px rgba(0, 0, 0, 0.35)",
     "--biss-header-band-bg": "#1A1916",
-    "--biss-header-band-border": "#353330"
+    "--biss-header-band-border": "#353330",
+    "--biss-navy": "#EBF3FC",
+    "--biss-stage-lid": "#2464A3"
   }
 } as const;
 export type BissThemeName = "light" | keyof typeof bissThemes | "system";
