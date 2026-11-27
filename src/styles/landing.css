@@ -612,6 +612,9 @@
   }
 }
 @media (max-width: 560px) {
+  .biss-lp-phead-badge {
+    display: none;
+  }
   .biss-lp-pstrip {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
