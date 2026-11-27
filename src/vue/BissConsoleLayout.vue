@@ -42,6 +42,8 @@ const props = withDefaults(
     favicon?: boolean;
     href?: string;
     topLinks?: BissLink[];
+    /** Shell chrome: `topbar` (fixed top bar) or `rail` (Bizzy full-height sidebar). */
+    chrome?: 'topbar' | 'rail';
     /** Close the console with the shared site footer. */
     footer?: boolean;
     footerText?: string;
@@ -79,6 +81,7 @@ const props = withDefaults(
     favicon: true,
     href: '/',
     topLinks: () => [],
+    chrome: 'topbar',
     footer: false,
     footerText: 'Managed by BISS Institute.',
     footerLinks: () => [],
@@ -101,6 +104,7 @@ const showHeader = computed(() => Boolean(props.title || props.crumbs?.length ||
     :favicon="favicon"
     :href="href"
     :top-links="topLinks"
+    :chrome="chrome"
     :footer="footer"
     :footer-text="footerText"
     :footer-links="footerLinks"

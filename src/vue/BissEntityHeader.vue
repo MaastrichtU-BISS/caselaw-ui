@@ -9,12 +9,15 @@ withDefaults(
     subtitle?: string;
     facts?: BissFactItem[];
     factsLabel?: string;
+    /** `plain` sits open on a white panel with a bottom hairline; `band` adds a warm linen surface band. */
+    variant?: 'plain' | 'band';
     flush?: boolean;
   }>(),
   {
     subtitle: undefined,
     facts: undefined,
     factsLabel: 'Details',
+    variant: 'plain',
     flush: false,
   },
 );
@@ -26,6 +29,7 @@ const slots = useSlots();
   <header
     class="biss-entity-header"
     :class="{
+      'biss-entity-header-band': variant === 'band',
       'biss-entity-header-flush': flush,
       'biss-entity-header-has-tabs': Boolean(slots.tabs),
     }"

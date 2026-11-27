@@ -723,6 +723,13 @@
             "default": "() => []"
           },
           {
+            "name": "chrome",
+            "type": "'topbar' | 'rail'",
+            "required": false,
+            "description": "Shell chrome: `topbar` (classic fixed top bar) or `rail` (Bizzy full-height sidebar).",
+            "default": "'topbar'"
+          },
+          {
             "name": "footer",
             "type": "boolean",
             "required": false,
@@ -808,6 +815,13 @@
             "required": false,
             "description": "",
             "default": "[]"
+          },
+          {
+            "name": "chrome",
+            "type": "'topbar' | 'rail'",
+            "required": false,
+            "description": "",
+            "default": "'topbar'"
           },
           {
             "name": "footer",
@@ -3087,6 +3101,13 @@
             "default": "() => []"
           },
           {
+            "name": "chrome",
+            "type": "'topbar' | 'rail'",
+            "required": false,
+            "description": "Shell chrome: `topbar` (fixed top bar) or `rail` (Bizzy full-height sidebar).",
+            "default": "'topbar'"
+          },
+          {
             "name": "footer",
             "type": "boolean",
             "required": false,
@@ -3254,6 +3275,13 @@
             "required": false,
             "description": "",
             "default": "[]"
+          },
+          {
+            "name": "chrome",
+            "type": "'topbar' | 'rail'",
+            "required": false,
+            "description": "",
+            "default": "'topbar'"
           },
           {
             "name": "footer",
@@ -5109,6 +5137,13 @@
             "default": "'Details'"
           },
           {
+            "name": "variant",
+            "type": "'plain' | 'band'",
+            "required": false,
+            "description": "`plain` sits open on a white panel with a bottom hairline; `band` adds a warm linen surface band.",
+            "default": "'plain'"
+          },
+          {
             "name": "flush",
             "type": "boolean",
             "required": false,
@@ -5152,6 +5187,13 @@
             "required": false,
             "description": "",
             "default": "'Details'"
+          },
+          {
+            "name": "variant",
+            "type": "'plain' | 'band'",
+            "required": false,
+            "description": "",
+            "default": "'plain'"
           },
           {
             "name": "flush",
@@ -10476,6 +10518,13 @@
             "required": false,
             "description": "",
             "default": "false"
+          },
+          {
+            "name": "iconName",
+            "type": "BissIconName",
+            "required": false,
+            "description": "",
+            "default": "undefined"
           }
         ],
         "events": [],
@@ -10511,6 +10560,13 @@
             "required": false,
             "description": "",
             "default": "false"
+          },
+          {
+            "name": "iconName",
+            "type": "BissIconName",
+            "required": false,
+            "description": "",
+            "default": "undefined"
           },
           {
             "name": "icon",

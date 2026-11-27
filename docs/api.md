@@ -215,6 +215,7 @@ An application frame with navigation, a working area and optional account furnit
 | `favicon` | `boolean` | No | `true` |
 | `href` | `string` | No | `'/'` |
 | `topLinks` | `BissLink[]` | No | `() => []` |
+| `chrome` | `'topbar' \| 'rail'` | No | `'topbar'` |
 | `footer` | `boolean` | No | `false` |
 | `footerText` | `string` | No | `'Managed by BISS Institute.'` |
 | `footerLinks` | `BissLink[]` | No | `() => []` |
@@ -233,6 +234,7 @@ Slots: `icon`, `topbar-actions`, `sidebar`, `sidebar-footer`, `default`.
 | `href` | `string` | No | `'/'` |
 | `favicon` | `boolean` | No | `true` |
 | `topLinks` | `BissLink[]` | No | `[]` |
+| `chrome` | `'topbar' \| 'rail'` | No | `'topbar'` |
 | `footer` | `boolean` | No | `false` |
 | `footerText` | `string` | No | `'Managed by BISS Institute.'` |
 | `footerLinks` | `BissLink[]` | No | `[]` |
@@ -958,6 +960,7 @@ A ready-made console frame with sidebar, page heading and account area.
 | `favicon` | `boolean` | No | `true` |
 | `href` | `string` | No | `'/'` |
 | `topLinks` | `BissLink[]` | No | `() => []` |
+| `chrome` | `'topbar' \| 'rail'` | No | `'topbar'` |
 | `footer` | `boolean` | No | `false` |
 | `footerText` | `string` | No | `'Managed by BISS Institute.'` |
 | `footerLinks` | `BissLink[]` | No | `() => []` |
@@ -991,6 +994,7 @@ Slots: `icon`, `topbar-actions`, `default`, `nav`, `nav-footer`, `user-actions`,
 | `favicon` | `boolean` | No | `true` |
 | `href` | `string` | No | `'/'` |
 | `topLinks` | `BissLink[]` | No | `[]` |
+| `chrome` | `'topbar' \| 'rail'` | No | `'topbar'` |
 | `footer` | `boolean` | No | `false` |
 | `footerText` | `string` | No | `'Managed by BISS Institute.'` |
 | `footerLinks` | `BissLink[]` | No | `[]` |
@@ -1512,6 +1516,7 @@ A warm linen header band for detail, profile, document and reference pages, with
 | `subtitle` | `string` | No | `undefined` |
 | `facts` | `BissFactItem[]` | No | `undefined` |
 | `factsLabel` | `string` | No | `'Details'` |
+| `variant` | `'plain' \| 'band'` | No | `'plain'` |
 | `flush` | `boolean` | No | `false` |
 
 Slots: `meta`, `leading`, `actions`, `facts`, `default`, `tabs`.
@@ -1524,6 +1529,7 @@ Slots: `meta`, `leading`, `actions`, `facts`, `default`, `tabs`.
 | `subtitle` | `string` | No | — |
 | `facts` | `BissFactItem[]` | No | — |
 | `factsLabel` | `string` | No | `'Details'` |
+| `variant` | `'plain' \| 'band'` | No | `'plain'` |
 | `flush` | `boolean` | No | `false` |
 | `meta` | `Snippet` | No | — |
 | `leading` | `Snippet` | No | — |
@@ -2908,6 +2914,7 @@ A navigation destination with optional active state and metadata.
 | `label` | `string` | Yes | — |
 | `meta` | `string \| number` | No | — |
 | `active` | `boolean` | No | `false` |
+| `iconName` | `BissIconName` | No | `undefined` |
 
 Slots: `icon`.
 
@@ -2919,6 +2926,7 @@ Slots: `icon`.
 | `label` | `string` | Yes | — |
 | `meta` | `string \| number \| undefined` | No | `undefined` |
 | `active` | `boolean` | No | `false` |
+| `iconName` | `BissIconName` | No | `undefined` |
 | `icon` | `import('svelte').Snippet` | No | — |
 
 Callbacks:

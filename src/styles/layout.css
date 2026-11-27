@@ -177,10 +177,14 @@
   margin-bottom: 20px;
 }
 .biss-nav-heading {
-  font: 500 11.5px/1.5 var(--biss-font-family);
-  color: var(--biss-muted);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  font: 500 12px/1.5 var(--biss-font-family);
+  color: var(--biss-muted-subtle);
   padding: 0 10px;
-  margin: 0 0 6px;
+  margin: 0 0 4px;
   text-transform: none;
   letter-spacing: normal;
 }
@@ -448,6 +452,73 @@
 }
 .biss-dock-scrim {
   display: none;
+}
+.biss-sidebar-brand-row {
+  display: none;
+}
+.biss-rail-bar {
+  display: none;
+}
+/* Bizzy rail chrome: full-height warm stone sidebar + one crisp white panel, no desktop top bar. */
+@media (min-width: 961px) {
+  .biss-app-shell.is-rail > .biss-fixed-topbar {
+    display: none;
+  }
+  .biss-app-shell.is-rail .biss-app-body {
+    padding-top: 0;
+  }
+  .biss-app-shell.is-rail .biss-app-sidebar {
+    top: 0;
+    height: 100dvh;
+    border-right: 0;
+    background: var(--biss-surface-muted);
+  }
+  .biss-app-shell.is-rail .biss-sidebar-brand-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 14px 12px 6px;
+    flex: none;
+  }
+  .biss-app-shell.is-rail .biss-sidebar-body {
+    padding: 10px 12px 14px;
+  }
+  .biss-app-shell.is-rail .biss-sidebar-collapse {
+    top: 16px;
+    right: -6px;
+  }
+  .biss-app-shell.is-rail .biss-app-main {
+    padding: 8px 8px 8px 0;
+  }
+  .biss-app-shell.is-rail .biss-app-main-inner {
+    max-width: none;
+    min-height: calc(100dvh - 16px);
+    padding: 24px clamp(22px, 3vw, 40px) 32px;
+    border-radius: var(--biss-radius-lg);
+    box-shadow: 0 1px 2px rgba(29, 28, 26, 0.03);
+  }
+  .biss-app-shell.is-rail .biss-rail-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin: -10px 0 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--biss-border-subtle);
+  }
+  .biss-app-shell.is-rail .biss-rail-bar-end {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .biss-app-shell.is-rail.is-sidebar-collapsed .biss-sidebar-brand-row {
+    display: none;
+  }
+  .biss-app-shell.is-rail.is-sidebar-collapsed .biss-app-main {
+    padding-left: 8px;
+  }
 }
 @media (min-width: 961px) {
   .biss-app-shell.is-sidebar-collapsed .biss-app-sidebar {

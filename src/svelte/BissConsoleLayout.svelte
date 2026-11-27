@@ -14,6 +14,7 @@
     favicon = true,
     href = '/',
     topLinks = [],
+    chrome = 'topbar',
     footer = false,
     footerText = 'Managed by BISS Institute.',
     footerLinks = [],
@@ -45,6 +46,7 @@
     favicon?: boolean;
     href?: string;
     topLinks?: BissLink[];
+    chrome?: 'topbar' | 'rail';
     footer?: boolean;
     footerText?: string;
     footerLinks?: BissLink[];
@@ -93,6 +95,7 @@
   {favicon}
   {href}
   {topLinks}
+  {chrome}
   {footer}
   {footerText}
   {footerLinks}

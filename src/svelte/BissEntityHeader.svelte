@@ -8,6 +8,7 @@
     subtitle,
     facts,
     factsLabel = 'Details',
+    variant = 'plain',
     flush = false,
     meta,
     leading,
@@ -20,6 +21,7 @@
     subtitle?: string;
     facts?: BissFactItem[];
     factsLabel?: string;
+    variant?: 'plain' | 'band';
     flush?: boolean;
     meta?: Snippet;
     leading?: Snippet;
@@ -32,6 +34,7 @@
 
 <header
   class="biss-entity-header"
+  class:biss-entity-header-band={variant === 'band'}
   class:biss-entity-header-flush={flush}
   class:biss-entity-header-has-tabs={Boolean(tabs)}
 >

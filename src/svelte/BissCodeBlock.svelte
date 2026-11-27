@@ -36,16 +36,20 @@
   }
 </script>
 
-<div class="biss-code">
-  {#if label || copyable}
+<div class="biss-code" class:biss-code-bare={!label}>
+  {#if label}
     <div class="biss-code-header">
-      <span class="biss-code-label">{label ?? ''}</span>
+      <span class="biss-code-label">{label}</span>
       {#if copyable}
         <button type="button" class="biss-code-copy" onclick={copy}>
           {copied ? 'Copied' : 'Copy'}
         </button>
       {/if}
     </div>
+  {:else if copyable}
+    <button type="button" class="biss-code-copy-float" onclick={copy}>
+      {copied ? 'Copied' : 'Copy'}
+    </button>
   {/if}
   <pre class="biss-code-body">{#each tokens as token}<span class="biss-tok-{token.kind}"
         >{token.text}</span

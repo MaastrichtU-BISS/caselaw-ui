@@ -43,13 +43,16 @@ async function copy() {
 </script>
 
 <template>
-  <div class="biss-code">
-    <div v-if="label || copyable" class="biss-code-header">
+  <div class="biss-code" :class="{ 'biss-code-bare': !label }">
+    <div v-if="label" class="biss-code-header">
       <span class="biss-code-label">{{ label }}</span>
       <button v-if="copyable" type="button" class="biss-code-copy" @click="copy">
         {{ copied ? 'Copied' : 'Copy' }}
       </button>
     </div>
+    <button v-else-if="copyable" type="button" class="biss-code-copy-float" @click="copy">
+      {{ copied ? 'Copied' : 'Copy' }}
+    </button>
     <pre class="biss-code-body"><span
       v-for="(token, index) in tokens"
       :key="index"

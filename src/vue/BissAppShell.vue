@@ -3,6 +3,7 @@ import { computed, onBeforeUnmount, onMounted, ref, useSlots, watch } from 'vue'
 import { setBissFavicon, type BissServiceIconName } from '../core/service-icons';
 import type { BissLink } from '../tokens';
 import BissBottomBar from './BissBottomBar.vue';
+import BissServiceIcon from './BissServiceIcon.vue';
 import BissTopBar from './BissTopBar.vue';
 
 const props = withDefaults(
@@ -14,6 +15,8 @@ const props = withDefaults(
     favicon?: boolean;
     href?: string;
     topLinks?: BissLink[];
+    /** Shell chrome: `topbar` (classic fixed top bar) or `rail` (Bizzy full-height sidebar). */
+    chrome?: 'topbar' | 'rail';
     /** Close the console with the shared site footer. */
     footer?: boolean;
     footerText?: string;
@@ -28,6 +31,7 @@ const props = withDefaults(
     fluid?: boolean;
   }>(),
   {
+    chrome: 'topbar',
     fluid: false,
     brand: 'Workspace',
     mark: 'B',
@@ -162,6 +166,7 @@ defineExpose({ closeSidebar: () => (sidebarOpen.value = false) });
   <div
     class="biss-app-shell"
     :class="{
+      'is-rail': chrome === 'rail' && Boolean($slots.sidebar),
       'has-footer': showFooter,
       'is-sidebar-collapsed': Boolean($slots.sidebar) && sidebarCollapsed,
     }"
@@ -225,6 +230,14 @@ defineExpose({ closeSidebar: () => (sidebarOpen.value = false) });
               <path d="m15 18-6-6 6-6" />
             </svg>
           </button>
+          <div v-if="chrome === 'rail'" class="biss-sidebar-brand-row">
+            <a class="biss-brand" :href="href" :aria-label="brand">
+              <slot name="icon">
+                <BissServiceIcon :icon="icon" :mark="mark" :label="iconLabel" />
+              </slot>
+              <span class="biss-brand-text">{{ brand }}</span>
+            </a>
+          </div>
           <!-- Closing on click is what dismisses the mobile drawer after a nav
                link is followed. Scoped to the scrolling body so the account
                block's own buttons do not inherit it. -->
@@ -258,6 +271,25 @@ defineExpose({ closeSidebar: () => (sidebarOpen.value = false) });
       </template>
       <main class="biss-app-main" :class="{ 'is-fluid': fluid }">
         <div class="biss-app-main-inner">
+          <div
+            v-if="chrome === 'rail' && (topLinks.length || $slots['topbar-actions'])"
+            class="biss-rail-bar"
+          >
+            <nav v-if="topLinks.length" class="biss-link-row" aria-label="Related links">
+              <a
+                v-for="link in topLinks"
+                :key="link.href"
+                :href="link.href"
+                :rel="link.external ? 'noopener noreferrer' : undefined"
+                :target="link.newTab ? '_blank' : undefined"
+              >
+                {{ link.label }}
+              </a>
+            </nav>
+            <div v-if="$slots['topbar-actions']" class="biss-rail-bar-end">
+              <slot name="topbar-actions" />
+            </div>
+          </div>
           <slot />
         </div>
       </main>

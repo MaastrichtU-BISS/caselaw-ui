@@ -1,4 +1,7 @@
 <script lang="ts">
+  import type { BissIconName } from '../core/icon-names';
+  import BissIcon from './BissIcon.svelte';
+
   interface Props {
     /**
      * Renders as an <a> by default. Pass `as` to use a framework link component;
@@ -8,6 +11,7 @@
     label: string;
     meta?: string | number | undefined;
     active?: boolean;
+    iconName?: BissIconName;
     icon?: import('svelte').Snippet;
     [key: string]: any;
   }
@@ -17,6 +21,7 @@
     label,
     meta = undefined,
     active = false,
+    iconName = undefined,
     icon,
     ...rest
   }: Props = $props();
@@ -39,8 +44,10 @@
   onfocus={rest.onfocus}
   onblur={rest.onblur}
 >
-  {#if icon}
-    <span class="biss-nav-item-icon">{@render icon?.()}</span>
+  {#if icon || iconName}
+    <span class="biss-nav-item-icon"
+      >{#if icon}{@render icon()}{:else if iconName}<BissIcon name={iconName} />{/if}</span
+    >
   {/if}
   <span class="biss-nav-item-label">{label}</span>
   {#if meta !== undefined && meta !== ''}

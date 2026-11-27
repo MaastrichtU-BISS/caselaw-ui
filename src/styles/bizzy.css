@@ -206,12 +206,13 @@
 .biss-summary-strip {
   display: flex;
   flex-wrap: wrap;
-  gap: 0;
+  gap: 8px 0;
   margin: 0;
-  padding: 12px 0;
+  padding: 14px 0;
   border-block: 1px solid var(--biss-border);
 }
 .biss-summary-strip > div {
+  flex: 1 1 150px;
   padding: 4px 20px;
   border-inline-end: 1px solid var(--biss-border);
 }
@@ -381,14 +382,23 @@
   color: var(--biss-muted);
   cursor: help;
 }
-/* Warm entity header band for detail, profile, document and reference pages. */
+/* Entity header for detail, profile, document and reference pages.
+   Plain by default (sits cleanly on the white working panel without nested card chrome);
+   pass variant="band" for a standalone warm linen surface band. */
 .biss-entity-header {
+  padding: var(--biss-entity-header-padding, 0 0 18px);
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--biss-border);
+  border-radius: 0;
+  color: var(--biss-text);
+  font: 14px/1.55 var(--biss-font-family);
+}
+.biss-entity-header-band {
   padding: var(--biss-entity-header-padding, 20px 24px);
   background: var(--biss-header-band-bg);
   border: 1px solid var(--biss-header-band-border);
   border-radius: var(--biss-radius-md);
-  color: var(--biss-text);
-  font: 14px/1.55 var(--biss-font-family);
 }
 .biss-entity-header-flush {
   border-width: 0 0 1px;
@@ -534,7 +544,7 @@
   background: var(--biss-primary);
 }
 @media (max-width: 640px) {
-  .biss-entity-header {
+  .biss-entity-header-band {
     padding: 16px;
   }
   .biss-entity-header-has-tabs {
