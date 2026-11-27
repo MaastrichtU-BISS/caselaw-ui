@@ -107,6 +107,18 @@
 .biss-link-row a:hover {
   color: var(--biss-text);
 }
+@media (max-width: 720px) {
+  .biss-bar-inner {
+    padding: 0 14px;
+    gap: 10px;
+  }
+  .biss-fixed-topbar .biss-link-row {
+    display: none;
+  }
+  .biss-topbar-actions {
+    gap: 8px;
+  }
+}
 .biss-page {
   max-width: var(--biss-page-max);
   margin: auto;
