@@ -417,7 +417,7 @@
   display: flex;
   align-items: flex-start;
   gap: 14px;
-  min-width: 0;
+  min-width: min(220px, 100%);
   flex: 1;
 }
 .biss-entity-header-leading {
@@ -433,7 +433,7 @@
   font: 600 var(--biss-text-h1)/1.25 var(--biss-font-family);
   letter-spacing: -0.015em;
   color: var(--biss-text);
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 .biss-entity-header-subtitle {
   margin: 5px 0 0;
@@ -539,6 +539,10 @@
   }
   .biss-entity-header-has-tabs {
     padding-bottom: 0;
+  }
+  .biss-entity-header-row {
+    flex-direction: column;
+    align-items: stretch;
   }
   .biss-entity-header-title {
     font-size: 20px;
