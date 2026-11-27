@@ -1,6 +1,6 @@
 # Component API reference
 
-All 154 components are available in Vue and Svelte with one Bizzy design language. This file is generated from the same source-derived contracts as the documentation site. Import components and their `BissNameProps` types from the matching framework entry point. Native attributes supported by the framework also apply; tables list authored component props.
+All 156 components are available in Vue and Svelte with one Bizzy design language. This file is generated from the same source-derived contracts as the documentation site. Import components and their `BissNameProps` types from the matching framework entry point. Native attributes supported by the framework also apply; tables list authored component props.
 
 ## BissAccessList
 
@@ -311,6 +311,7 @@ A compact status or category label with optional dot and tone.
 | `tone` | `BissTone` | No | `'neutral'` |
 | `dot` | `boolean` | No | `false` |
 | `mono` | `boolean` | No | `false` |
+| `quiet` | `boolean` | No | `false` |
 
 Slots: `default`.
 
@@ -321,6 +322,7 @@ Slots: `default`.
 | `tone` | `BissTone` | No | `'neutral'` |
 | `dot` | `boolean` | No | `false` |
 | `mono` | `boolean` | No | `false` |
+| `quiet` | `boolean` | No | `false` |
 | `children` | `Snippet` | No | — |
 
 Snippets: `children`.
@@ -1495,6 +1497,64 @@ Slots: `default`.
 | `children` | `Snippet` | No | — |
 
 Snippets: `children`.
+
+## BissEntityHeader
+
+A warm linen header band for detail, profile, document and reference pages, with optional avatar, facts, actions and tabs.
+
+[Vue source](../src/vue/BissEntityHeader.vue) · [Svelte source](../src/svelte/BissEntityHeader.svelte)
+
+### Vue
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `title` | `string` | Yes | — |
+| `subtitle` | `string` | No | `undefined` |
+| `facts` | `BissFactItem[]` | No | `undefined` |
+| `factsLabel` | `string` | No | `'Details'` |
+| `flush` | `boolean` | No | `false` |
+
+Slots: `meta`, `leading`, `actions`, `facts`, `default`, `tabs`.
+
+### Svelte
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `title` | `string` | Yes | — |
+| `subtitle` | `string` | No | — |
+| `facts` | `BissFactItem[]` | No | — |
+| `factsLabel` | `string` | No | `'Details'` |
+| `flush` | `boolean` | No | `false` |
+| `meta` | `Snippet` | No | — |
+| `leading` | `Snippet` | No | — |
+| `actions` | `Snippet` | No | — |
+| `factsSlot` | `Snippet` | No | — |
+| `tabs` | `Snippet` | No | — |
+| `children` | `Snippet` | No | — |
+
+Snippets: `meta`, `leading`, `actions`, `factsSlot`, `tabs`, `children`.
+
+## BissFactStrip
+
+A hairlined horizontal strip of labelled facts and status indicators, replacing badge clouds on dense records.
+
+[Vue source](../src/vue/BissFactStrip.vue) · [Svelte source](../src/svelte/BissFactStrip.svelte)
+
+### Vue
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `items` | `BissFactItem[]` | Yes | — |
+| `label` | `string` | Yes | — |
+| `compact` | `boolean` | No | `false` |
+
+### Svelte
+
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `items` | `BissFactItem[]` | Yes | — |
+| `label` | `string` | Yes | — |
+| `compact` | `boolean` | No | `false` |
 
 ## BissFeatureCard
 

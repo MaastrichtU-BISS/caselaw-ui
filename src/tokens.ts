@@ -14,6 +14,7 @@ export const bissCssTokens = {
   "--biss-border": "#E7E5E0",
   "--biss-text": "#1D1C1A",
   "--biss-muted": "#5E5C57",
+  "--biss-muted-subtle": "#726F68",
   "--biss-primary": "#005CA9",
   "--biss-primary-hover": "#004A8A",
   "--biss-danger": "#C2412F",
@@ -71,7 +72,14 @@ export const bissCssTokens = {
   "--biss-code-keyword": "#5E2B95",
   "--biss-code-builtin": "#005CA9",
   "--biss-code-number": "#94450F",
-  "--biss-code-key": "#004A8A"
+  "--biss-code-key": "#004A8A",
+  "--biss-nav-active-bg": "#FFFFFF",
+  "--biss-nav-active-border": "#E7E5E0",
+  "--biss-nav-active-color": "#1D1C1A",
+  "--biss-nav-active-icon": "#005CA9",
+  "--biss-nav-active-shadow": "0 1px 2px rgba(29, 28, 26, 0.05)",
+  "--biss-header-band-bg": "#FAF9F7",
+  "--biss-header-band-border": "#E7E5E0"
 } as const;
 export const bissThemes = {
   "dark": {
@@ -86,6 +94,7 @@ export const bissThemes = {
     "--biss-border": "#353330",
     "--biss-text": "#EDEBE6",
     "--biss-muted": "#A9A59D",
+    "--biss-muted-subtle": "#8F8B83",
     "--biss-primary": "#5AA5EC",
     "--biss-primary-hover": "#7AB7F0",
     "--biss-on-primary": "#0A1726",
@@ -113,7 +122,14 @@ export const bissThemes = {
     "--biss-code-keyword": "#C8A2F5",
     "--biss-code-builtin": "#7AB7F0",
     "--biss-code-number": "#F0B27A",
-    "--biss-code-key": "#9CC8F3"
+    "--biss-code-key": "#9CC8F3",
+    "--biss-nav-active-bg": "#262420",
+    "--biss-nav-active-border": "#353330",
+    "--biss-nav-active-color": "#EDEBE6",
+    "--biss-nav-active-icon": "#5AA5EC",
+    "--biss-nav-active-shadow": "0 1px 2px rgba(0, 0, 0, 0.35)",
+    "--biss-header-band-bg": "#1A1916",
+    "--biss-header-band-border": "#353330"
   }
 } as const;
 export type BissThemeName = "light" | keyof typeof bissThemes | "system";

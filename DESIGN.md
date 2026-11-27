@@ -60,7 +60,7 @@ Source authority is Bizzy's DESIGN.md and app/assets/css/theme.css. BISS UI
 extends that established visual language for research and administration. Operate
 mode uses warm surfaces, white panels, compact controls and restrained blue actions.
 
-All 154 Vue and 154 Svelte components share this system, including the renamed
+All 156 Vue and 156 Svelte components share this system, including the renamed
 caselaw APIs and public-page compositions. There is no separate legacy visual
 foundation; the old Caselaw stylesheet has been removed.
 
@@ -125,8 +125,12 @@ foundation for a component family.
 
 Buttons use one primary action per task, with secondary, ghost and danger variants
 for supporting actions. Inputs share the compact control geometry, visible focus
-outlines, textual errors and a clear disabled state. Navigation uses the same
-rhythm with blue selected states; cards group related information on white panels.
+outlines, textual errors and a clear disabled state. Active navigation items sit as
+crisp elevated white tabs on the warm rail (customizable through `--biss-nav-active-*`
+tokens) with primary blue icons; entity and detail views can anchor their title,
+actions, facts and tabs inside a warm linen `BissEntityHeader` band (`--biss-header-band-*`),
+and pair structured metadata in a hairlined `BissFactStrip` or `quiet` badges rather
+than dense badge clouds. Cards group related information on white panels.
 
 New shared components require both Vue and Svelte implementations, typed props,
 localizable labels, composition slots or snippets, keyboard and focus behavior,

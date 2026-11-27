@@ -5,6 +5,7 @@
   background: var(--biss-surface-muted);
   color: var(--biss-text);
   font: 14px/1.55 var(--biss-font-family);
+  scrollbar-color: var(--biss-border-strong) transparent;
 }
 .biss-fixed-topbar,
 .biss-fixed-bottombar {
@@ -70,7 +71,8 @@
   height: 28px;
   border: 1px solid var(--biss-border);
   border-radius: 7px;
-  background: var(--biss-surface-subtle);
+  background: var(--biss-card);
+  box-shadow: var(--biss-shadow);
   font: 600 12px var(--biss-font-family);
   color: var(--biss-primary);
 }
@@ -133,6 +135,8 @@
   flex: 1;
   min-height: 0;
   padding: 18px 12px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--biss-border-strong) transparent;
 }
 .biss-sidebar-footer {
   padding: 12px;
@@ -186,19 +190,29 @@
   gap: 8px;
   min-height: 32px;
   padding: 5px 10px;
+  border: 1px solid transparent;
   border-radius: 7px;
   color: var(--biss-muted);
   font: 400 13px/1.5 var(--biss-font-family);
   text-decoration: none;
+  transition:
+    background 0.14s,
+    color 0.14s,
+    border-color 0.14s;
 }
 .biss-nav-item:hover {
   background: var(--biss-hover);
   color: var(--biss-text);
 }
 .biss-nav-item.is-active {
-  background: var(--biss-info-bg);
-  color: var(--biss-primary);
+  background: var(--biss-nav-active-bg);
+  border-color: var(--biss-nav-active-border);
+  box-shadow: var(--biss-nav-active-shadow);
+  color: var(--biss-nav-active-color);
   font-weight: 500;
+}
+.biss-nav-item.is-active .biss-nav-item-icon {
+  color: var(--biss-nav-active-icon);
 }
 .biss-nav-item-icon {
   display: flex;

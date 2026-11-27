@@ -5,13 +5,16 @@
     tone = 'neutral',
     dot = false,
     mono = false,
+    quiet = false,
     children,
-  }: { tone?: BissTone; dot?: boolean; mono?: boolean; children?: Snippet } = $props();
+  }: { tone?: BissTone; dot?: boolean; mono?: boolean; quiet?: boolean; children?: Snippet } =
+    $props();
 </script>
 
 <span
   class="biss-badge"
   class:biss-badge-mono={mono}
+  class:biss-badge-quiet={quiet}
   class:biss-badge-success={tone === 'success'}
   class:biss-badge-danger={tone === 'danger'}
   class:biss-badge-warning={tone === 'warning'}

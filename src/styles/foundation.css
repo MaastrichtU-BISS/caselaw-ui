@@ -7,6 +7,7 @@
 :where([class^='biss-'], [class*=' biss-']) :where(button, input, select, textarea) {
   font-family: var(--biss-font-family);
   box-sizing: border-box;
+  caret-color: var(--biss-primary);
 }
 :where([class^='biss-'], [class*=' biss-']):focus-visible {
   outline: 2px solid var(--biss-primary);
@@ -168,6 +169,13 @@
 .biss-badge-mono {
   font-family: var(--biss-mono);
 }
+.biss-badge-quiet {
+  min-height: 0;
+  padding: 0;
+  border-color: transparent;
+  background: transparent;
+  border-radius: 0;
+}
 .biss-page-header,
 .biss-console-header {
   margin-bottom: 20px;
@@ -300,7 +308,10 @@
   text-decoration: none;
   color: var(--biss-text);
 }
-.biss-action-card:hover,
+.biss-action-card:hover {
+  border-color: var(--biss-border-strong);
+  background: var(--biss-row-hover);
+}
 .biss-action-card.is-active {
   border-color: var(--biss-info-border);
   background: var(--biss-info-bg);

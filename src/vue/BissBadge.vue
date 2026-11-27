@@ -7,11 +7,13 @@ const props = withDefaults(
     tone?: BissTone;
     dot?: boolean;
     mono?: boolean;
+    quiet?: boolean;
   }>(),
   {
     tone: 'neutral',
     dot: false,
     mono: false,
+    quiet: false,
   },
 );
 
@@ -20,6 +22,7 @@ const classes = computed(() =>
     'biss-badge',
     props.tone === 'neutral' ? '' : `biss-badge-${props.tone}`,
     props.mono ? 'biss-badge-mono' : '',
+    props.quiet ? 'biss-badge-quiet' : '',
   ].filter(Boolean),
 );
 </script>
